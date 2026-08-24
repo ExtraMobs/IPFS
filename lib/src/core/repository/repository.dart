@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart' as fixnum;
 
 import '../../proto/generated/bitswap/bitswap.pb.dart' as proto;
+import '../block_proto_codec.dart';
 import '../data_structures/block.dart';
 import '../data_structures/merkle_dag_node.dart';
 import '../data_structures/node.dart';
@@ -36,7 +37,7 @@ class Repository {
   Future<void> processProtoBlock(proto.Message_Block protoBlock) async {
     try {
       // Convert protobuf block to our Block type
-      final block = await Block.fromBitswapProto(protoBlock);
+      final block = await blockFromBitswapProto(protoBlock);
 
       // Store the block data
       final key = Key('/blocks/${block.cid.toString()}');

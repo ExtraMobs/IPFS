@@ -1,7 +1,7 @@
 ---
 module: storage
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.533727
+generated: 2026-08-24T09:15:13.438635
 ---
 
 # Module `storage` (`lib/src/storage/`)

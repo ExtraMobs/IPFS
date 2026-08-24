@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dart_ipfs/dart_ipfs.dart' hide CID, Block, IBlockStore;
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
 import 'package:dart_ipfs/src/core/responses/block_response_factory.dart';
 import 'package:dart_ipfs/src/core/unixfs/unixfs_directory.dart';
@@ -361,7 +362,7 @@ void main() {
       Future<Block?> _resolveBlock(String cidStr) async {
         final response = await store.getBlock(cidStr);
         if (!response.found) return null;
-        return Block.fromProto(response.block);
+        return blockFromProto(response.block);
       }
 
       test('findChildCid resolves entry in HAMT-sharded directory', () async {

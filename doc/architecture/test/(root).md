@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-24T08:08:30.611720
+generated: 2026-08-24T09:15:13.511653
 ---
 
 # `test/(root)/`
@@ -33,4 +33,5 @@ generated: 2026-08-24T08:08:30.611720
 - Block API is available from umbrella and core
 - InMemoryBlockStore is available from umbrella
 - CryptoUtils is available from umbrella and core
+- CarHeader.roots exposes the same CID type the barrel exports 
 

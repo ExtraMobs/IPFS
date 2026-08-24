@@ -5,6 +5,7 @@ import 'package:mockito/annotations.dart';
 import 'package:dart_ipfs/src/services/gateway/gateway_handler.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
 import 'package:multibase/multibase.dart';

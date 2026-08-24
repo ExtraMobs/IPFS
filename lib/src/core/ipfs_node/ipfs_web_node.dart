@@ -5,6 +5,7 @@
 
 import 'dart:typed_data';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
@@ -192,7 +193,7 @@ class IPFSWebNode {
     // 1. Try local storage via BlockStore
     final response = await _blockStore.getBlock(cidString);
     if (response.found && response.hasBlock()) {
-      return Block.fromProto(response.block).data;
+      return blockFromProto(response.block).data;
     }
 
     // 2. Fallback to Bitswap

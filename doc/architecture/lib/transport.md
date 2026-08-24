@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.535785
+generated: 2026-08-24T09:15:13.439162
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -205,7 +205,6 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -499,7 +498,6 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1099,7 +1097,6 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1866,14 +1863,11 @@ A wrapper for raw bytes sent over the network.
 
 - **data** (field) — The raw data of the message.
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -1925,7 +1919,6 @@ A wrapper for raw bytes sent over the network.
   - calls: NetworkMessage
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
@@ -2181,14 +2174,11 @@ Data from a DHT operation.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The payload data returned by the DHT.
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2416,14 +2406,11 @@ Lifecycle or data event for a multi-stream.
 - **streamId** (field) — The unique identifier for the stream.
 - **data** (field) — Optional data payload for 'data' events.
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2903,7 +2890,6 @@ A generic WebRTC ICE server configuration.
 - **hashCode** (method)
   - calls: hash
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -3681,14 +3667,11 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The message data (SDP or ICE candidate string).
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3739,9 +3722,6 @@ A message exchanged over the WebRTC signaling protocol.
 - **encode** (method) — Encodes this message into a protobuf-compatible byte array.
   - calls: encode, index, add, addAll, _encodeVarint, length, fromList
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toString)
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -3749,9 +3729,6 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -3866,8 +3843,7 @@ A message exchanged over the WebRTC signaling protocol.
   - calls: length, _decodeVarint, values, value, newOffset, decode, sublist, Exception, SignalingMessage
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
@@ -4729,7 +4705,6 @@ Statistics for WebTransport datagram I/O.
 - **reset** (method) — Resets all counters to zero.
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4863,14 +4838,11 @@ A received WebTransport datagram with optional metadata.
 
 - **data** (field) — The datagram payload.
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -4932,8 +4904,6 @@ A received WebTransport datagram with optional metadata.
 - **size** (method) — Size of the datagram payload in bytes.
   - calls: length
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/data_structures/merkle_dag_node.dart';
 import 'package:dart_ipfs/src/core/data_structures/link.dart';
 import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
@@ -65,7 +66,7 @@ void main() {
     test('proto roundtrip', () async {
       final block = await Block.fromData(Uint8List.fromList([1, 2, 3]));
       final proto = block.toProto();
-      final fromProto = Block.fromProto(proto);
+      final fromProto = blockFromProto(proto);
 
       expect(fromProto.cid, equals(block.cid));
       expect(fromProto.data, equals(block.data));
@@ -79,7 +80,7 @@ void main() {
       final bitswapProto = block.toBitswapProto();
       expect(bitswapProto.data, equals(data));
 
-      final fromBitswap = await Block.fromBitswapProto(bitswapProto);
+      final fromBitswap = await blockFromBitswapProto(bitswapProto);
       expect(fromBitswap.data, equals(data));
 
       expect(block.toBytes(), equals(data));

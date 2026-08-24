@@ -1,6 +1,7 @@
 // src/core/unixfs/unixfs_node.dart
 import 'dart:typed_data';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
@@ -103,7 +104,7 @@ class UnixFSNode {
 Future<UnixFSNode?> unixfsGetNode(IBlockStore store, CID cid) async {
   final response = await store.getBlock(cid.encode());
   if (!response.found) return null;
-  final block = Block.fromProto(response.block);
+  final block = blockFromProto(response.block);
   return UnixFSNode.fromBlock(block);
 }
 

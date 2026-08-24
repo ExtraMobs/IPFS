@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart' as core;
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/errors/graphsync_errors.dart';
 import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';

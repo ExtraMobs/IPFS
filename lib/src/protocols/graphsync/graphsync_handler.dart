@@ -4,6 +4,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart' as core;
@@ -495,7 +496,7 @@ class GraphsyncHandler {
     if (!response.found) {
       return null;
     }
-    final core.Block block = core.Block.fromProto(response.block);
+    final core.Block block = blockFromProto(response.block);
     budget.checkBlock(block.data.length);
 
     return Block(prefix: block.cid.toPrefixBytes(), data: block.data);

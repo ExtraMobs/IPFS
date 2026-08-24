@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.530636
+generated: 2026-08-24T09:15:13.435533
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -21,7 +21,7 @@ _Directly tested._
 gRPC service implementation for block storage operations.
 
 - **addBlock** (method)
-  - calls: fromProto, putBlock
+  - calls: blockFromProto, putBlock
   - referenced by (by name):
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -73,7 +73,7 @@ _Directly tested._
 High-level service for content storage and retrieval.
 
 - **storeContent** (method) — Stores content and returns its CID
-  - calls: IPFSCIDProto, version, IPFS_CID_VERSION_1, IPFSCIDVersion, multihash, computeHash, codec, multibasePrefix, fromProto, fromData, fromList, Key, encode, put, data
+  - calls: IPFSCIDProto, version, IPFS_CID_VERSION_1, IPFSCIDVersion, multihash, computeHash, codec, multibasePrefix, cidFromProto, fromData, fromList, Key, encode, put, data
 - **getContent** (method) — Retrieves content by CID
   - calls: Key, encode, get, error
   - referenced by (by name):
@@ -258,7 +258,6 @@ Exception thrown for ACME protocol errors.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -625,8 +624,6 @@ Represents a single directory entry with metadata.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (field) — The size in bytes.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -744,7 +741,6 @@ Result of a domain validation check.
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -900,7 +896,7 @@ Serves content paths for the IPFS gateway.
 - **serveContent** (method) — Serves content for the requested CID and optional sub-path.
   - calls: _getBlockByCid, notFound, fromBuffer, data, hasData, type, Directory, isEmpty, findIndexHtml, serveContent, encode, renderDirectory, navigateDirectory, HAMTShard, File, _serveFile, _serveRawBlock
 - **getBlockByCid** (method) — Returns the block for [cidStr] from the block store, or null if not found
-  - calls: getBlock, found, fromProto, block
+  - calls: getBlock, found, blockFromProto, block
   - referenced by (by name):
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.resolveSubPath)
 - **resolveSubPath** (method) — Resolves [subPath] under [rootCid] and returns the resulting CID and block.
@@ -1256,9 +1252,6 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readByte)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readBytes)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.readVarint)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.toBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.fromBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
@@ -1275,9 +1268,6 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.size)
-    - `lib/src/core/data_structures/block.dart` (Block.size)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
@@ -2094,7 +2084,6 @@ Replication factor for a cluster pin.
 - **toString** (method)
   - calls: toString
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2267,9 +2256,7 @@ A pin tracked by the IPFS Cluster.
 
 - **cid** (field) — The CID of the pinned content.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -2647,9 +2634,7 @@ Information about a cluster peer.
 - **rpcAddress** (field) — RPC address.
 - **version** (field) — Cluster version.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2917,9 +2902,7 @@ Client for the IPFS Cluster REST API.
 - **version** (method) — Gets the cluster version.
   - calls: debug, timeout, get, parse, statusCode, jsonDecode, body, Exception
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2954,9 +2937,7 @@ A pin request object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the content to pin.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3232,9 +3213,7 @@ A pin object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the pinned content.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3325,9 +3304,7 @@ Filters for listing pins.
 
 - **cid** (field) — Filter by CID.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3458,7 +3435,6 @@ Error returned by the pinning service API.
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3671,9 +3647,7 @@ A remote pin tracked by the [RemotePinningService].
 
 - **cid** (field) — The CID of the pinned content.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)

@@ -1,6 +1,7 @@
 // src/core/ipfs_node/web_block_store.dart
 import '../../platform/platform.dart';
 import '../../proto/generated/core/blockstore.pb.dart';
+import '../block_proto_codec.dart';
 import '../cid.dart';
 import '../data_structures/block.dart';
 import '../interfaces/i_block_store.dart';

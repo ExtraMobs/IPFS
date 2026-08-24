@@ -8,6 +8,7 @@ import '../../proto/generated/core/pin.pb.dart';
 import '../../protocols/bitswap/bitswap_handler.dart';
 import '../../transport/http_gateway_client.dart';
 import '../../utils/logger.dart';
+import '../block_proto_codec.dart';
 import '../cid.dart';
 import '../data_structures/block.dart';
 import '../data_structures/blockstore.dart';
@@ -166,7 +167,7 @@ class ContentManager implements ILifecycle {
       final blockResult = await _blockStore?.getBlock(cid);
       if (blockResult != null && blockResult.found) {
         return await _extractBlockData(
-          Block.fromProto(blockResult.block),
+          blockFromProto(blockResult.block),
           path,
         );
       }
@@ -265,7 +266,7 @@ class ContentManager implements ILifecycle {
       if (block == null) {
         final blockResult = await _blockStore?.getBlock(cid);
         if (blockResult != null && blockResult.found) {
-          block = Block.fromProto(blockResult.block);
+          block = blockFromProto(blockResult.block);
         }
       }
 

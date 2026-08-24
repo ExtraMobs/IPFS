@@ -2,6 +2,7 @@ import 'package:test/test.dart';
 import 'package:dart_ipfs/src/core/responses/response_handler.dart';
 import 'package:dart_ipfs/src/core/responses/block_operation_response.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'dart:typed_data';

@@ -5,6 +5,7 @@ import 'package:cbor/cbor.dart';
 import 'package:dart_ipfs/dart_ipfs.dart' hide CID, Block;
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/config/security_config.dart';
 import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';

@@ -2,7 +2,7 @@
 import 'package:grpc/grpc.dart';
 import 'package:protobuf/well_known_types/google/protobuf/empty.pb.dart';
 
-import '../core/data_structures/block.dart';
+import '../core/block_proto_codec.dart';
 import '../core/data_structures/blockstore.dart';
 import '../proto/generated/core/block.pb.dart';
 // import '../proto/generated/core/block.pbgrpc.dart';
@@ -19,7 +19,7 @@ class BlockStoreService extends BlockStoreServiceBase {
 
   @override
   Future<AddBlockResponse> addBlock(ServiceCall ctx, BlockProto request) async {
-    final block = Block.fromProto(request);
+    final block = blockFromProto(request);
     return _blockStore.putBlock(block);
   }
 

@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/data_structures/car.dart';
@@ -375,7 +376,7 @@ class RPCHandlers {
     if (!response.found) {
       throw StateError('Block not found: $key');
     }
-    final block = Block.fromProto(response.block);
+    final block = blockFromProto(response.block);
     await writer.write(cid, block.data);
 
     if (block.format == 'dag-pb') {

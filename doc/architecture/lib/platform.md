@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.391263
+generated: 2026-08-24T09:15:13.317684
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -418,9 +418,7 @@ IO implementation of the IPFS platform interface.
 - **version** (method)
   - calls: version
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
@@ -630,9 +628,7 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method) — Returns the version of the platform/runtime.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -688,9 +684,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)

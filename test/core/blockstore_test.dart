@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:test/test.dart';
 
@@ -23,7 +24,7 @@ void main() {
       expect(proto.data, equals(data));
       expect(proto.format, 'raw');
 
-      final reconstructed = Block.fromProto(proto);
+      final reconstructed = blockFromProto(proto);
       expect(reconstructed.data, equals(data));
       // CID equality check might need comparing encoded strings or hash bytes
       expect(reconstructed.cid.toString(), equals(block.cid.toString()));
@@ -37,7 +38,7 @@ void main() {
       expect(bsProto.data, equals(data));
 
       // Note: fromBitswapProto is async and might re-compute CID
-      final reconstructed = await Block.fromBitswapProto(bsProto);
+      final reconstructed = await blockFromBitswapProto(bsProto);
       expect(reconstructed.data, equals(data));
     });
   });

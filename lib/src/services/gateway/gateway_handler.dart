@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
@@ -1244,7 +1245,7 @@ class GatewayHandler {
     try {
       final response = await blockStore.getBlock(cidStr);
       if (response.found) {
-        return Block.fromProto(response.block);
+        return blockFromProto(response.block);
       }
     } catch (e, stackTrace) {
       _logger.error('Error getting block $cidStr', e, stackTrace);
@@ -1259,7 +1260,7 @@ class GatewayHandler {
           // BitswapHandler stores received blocks in the blockstore; verify.
           final stored = await blockStore.getBlock(cidStr);
           if (stored.found) {
-            return Block.fromProto(stored.block);
+            return blockFromProto(stored.block);
           }
           return networkBlock;
         }

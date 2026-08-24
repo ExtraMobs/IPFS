@@ -1,4 +1,5 @@
 import '../../proto/generated/core/blockstore.pb.dart';
+import '../block_proto_codec.dart';
 import '../data_structures/block.dart';
 import 'block_operation_response.dart';
 
@@ -47,7 +48,7 @@ class ResponseHandler {
       return BlockOperationResponse(
         success: protoResponse.found,
         message: protoResponse.found ? 'Block found' : 'Block not found',
-        data: Block.fromProto(protoResponse.block),
+        data: blockFromProto(protoResponse.block),
       );
     }
     throw ArgumentError('Unsupported proto response type');

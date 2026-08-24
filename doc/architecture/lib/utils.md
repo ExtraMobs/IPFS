@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.540705
+generated: 2026-08-24T09:15:13.446185
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -23,9 +23,6 @@ Base58 encoding/decoding for IPFS identifiers.
 - **encode** (method) — Encodes a [bytes] array to a Base58 string.
   - calls: isEmpty, from, toInt
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toString)
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -33,9 +30,6 @@ Base58 encoding/decoding for IPFS identifiers.
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -245,16 +239,12 @@ Utility class for encoding and decoding IPFS data
     - `lib/src/utils/encoding.dart` (EncodingUtils.fromBase58)
 - **getCodecFromCode** (method) — Get codec string from code number
   - calls: key, firstWhere, entries, value, ArgumentError, toRadixString
-  - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromBytes)
 - **base32LowerEncode** (method) — Encodes [data] to a lowercase, unpadded RFC 4648 base32 string.
   - calls: isEmpty, StringBuffer, length, write, toString
 - **base32LowerDecode** (method) — Decodes a lowercase, unpadded RFC 4648 base32 string to bytes.
   - calls: isEmpty, Uint8List, length, indexOf, FormatException, add, fromList
 - **getCodeFromCodec** (method) — Get code number from codec string
   - calls: ArgumentError
-  - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toBytes)
 - **supportedCodecs** (method) — Add public getter
   - calls: toList, keys
 
@@ -291,9 +281,6 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readByte)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readBytes)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.readVarint)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.toBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.fromBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
@@ -310,9 +297,6 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.size)
-    - `lib/src/core/data_structures/block.dart` (Block.size)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
@@ -560,13 +544,10 @@ Generic LRU cache with O(1) get/put operations.
 - **isEmpty** (method) — Whether the cache is empty.
   - calls: isEmpty
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.unlock)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.fromMultiaddr)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
@@ -2132,7 +2113,6 @@ ECDSA private key for IPFS cryptographic operations.
   - calls: parse, encode, ECCurve_secp256k1, G, ECPublicKey, ECPrivateKey, IPFSPrivateKey, AsymmetricKeyPair, UnsupportedError
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)

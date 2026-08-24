@@ -1,50 +1,12 @@
-import 'dart:typed_data';
-
-import '../../proto/generated/bitswap/bitswap.pb.dart' as bitswap_pb;
-import '../../proto/generated/core/block.pb.dart';
-import '../cid.dart';
-
-/// Interface for content-addressed data blocks.
-///
-/// A block is the fundamental unit of data in IPFS, identified by its CID.
-/// Implementations must provide data access, serialization, and validation.
-abstract class IBlock {
-  /// The raw binary data of this block.
-  Uint8List get data;
-
-  /// The content identifier for this block.
-  CID get cid;
-
-  /// The size of this block in bytes.
-  int get size;
-
-  /// Converts to protobuf format for storage.
-  BlockProto toProto();
-
-  /// Converts to Bitswap protocol format.
-  bitswap_pb.Message_Block toBitswapProto();
-
-  /// Serializes the block to bytes.
-  Uint8List toBytes();
-
-  /// Validates the block's content hash matches its CID.
-  ///
-  /// This is an async operation as it may require computing the cryptographic hash.
-  /// Returns `true` if the hash matches, `false` otherwise.
-  Future<bool> validate();
-}
-
-/// Factory interface for creating blocks from various sources.
-abstract class IBlockFactory<T extends IBlock> {
-  /// Creates a block from protobuf format.
-  T fromProto(BlockProto proto);
-
-  /// Creates a block from Bitswap protocol format.
-  T fromBitswapProto(bitswap_pb.Message_Block proto);
-
-  /// Creates a block from serialized bytes.
-  T fromBytes(Uint8List bytes);
-
-  /// Creates a block from raw data and its CID.
-  T fromData(Uint8List data, CID cid);
-}
+// src/core/interfaces/block.dart
+//
+// Re-export shim: IBlock moved to dart_ipfs_core (protobuf-free) -- see
+// ../data_structures/block.dart for the Block shim and
+// ../block_proto_codec.dart for the protobuf-specific extension this
+// interface used to require (toProto/toBitswapProto), which don't belong
+// on a protocol-agnostic interface.
+//
+// IBlockFactory (the sibling interface that used to live here) had zero
+// implementors anywhere in lib/src/ or test/ and was removed rather than
+// adapted -- same precedent as the Phase 0 dead-code cleanup.
+export 'package:dart_ipfs_core/dart_ipfs_core.dart' show IBlock;

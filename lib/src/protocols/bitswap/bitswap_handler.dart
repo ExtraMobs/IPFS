@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dart_ipfs/src/core/block_proto_codec.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
@@ -234,7 +235,7 @@ class BitswapHandler implements ILifecycle {
         _blockPresenceCache.put(cidStr, response.found); // Update cache
 
         if (response.found) {
-          outgoingMessage.addBlock(Block.fromProto(response.block));
+          outgoingMessage.addBlock(blockFromProto(response.block));
           hasContent = true;
         } else if (wantEntry.sendDontHave) {
           outgoingMessage.addBlockPresence(
@@ -558,7 +559,7 @@ class BitswapHandler implements ILifecycle {
     final localResponse = await _blockStore.getBlock(cidStr);
     if (localResponse.found && localResponse.hasBlock()) {
       try {
-        return Block.fromProto(localResponse.block);
+        return blockFromProto(localResponse.block);
       } catch (e, st) {
         _logger.warning(
           'Failed to deserialize cached block for $cidStr',

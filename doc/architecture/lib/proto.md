@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.412615
+generated: 2026-08-24T09:15:13.322363
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -25,15 +25,7 @@ Base class for protobuf message types with serialization helpers.
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.encodeWithBase)
-    - `lib/src/core/cid.dart` (CID.toBytes)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.hashCode)
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarWriter.close)
@@ -65,7 +57,6 @@ Base class for protobuf message types with serialization helpers.
   - calls: factory, mergeFromBuffer
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
@@ -1318,14 +1309,11 @@ Network events
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -1376,14 +1364,11 @@ Network events
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3123,7 +3108,6 @@ _Directly tested._
 - **prefix** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -3132,7 +3116,6 @@ _Directly tested._
 - **prefix** (method)
   - calls: $_setBytes
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -3145,14 +3128,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3203,14 +3183,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3707,9 +3684,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3751,9 +3726,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_setBytes
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -4426,8 +4399,7 @@ _Directly tested._
 - **Block** (static field)
   - calls: _
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.fromData)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.add)
@@ -7322,14 +7294,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_getI64
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -7380,14 +7349,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_setInt64
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -12956,8 +12922,6 @@ Response message for bit value
 - **size** (method)
   - calls: $_getIZ
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -12981,8 +12945,6 @@ Response message for bit value
 - **size** (method)
   - calls: $_setSignedInt32
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -13487,14 +13449,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13545,14 +13504,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13611,9 +13567,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -13655,9 +13609,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_setField
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -13705,14 +13657,12 @@ _Directly tested._
 - **format** (method)
   - calls: $_getSZ
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **format** (method)
   - calls: $_setString
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **hasFormat** (method)
   - calls: $_has
@@ -16033,9 +15983,7 @@ _Directly tested._
 - **version** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -16044,9 +15992,7 @@ _Directly tested._
 - **version** (method)
   - calls: $_setField
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -16060,10 +16006,7 @@ _Directly tested._
   - calls: $_getN
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -16084,10 +16027,7 @@ _Directly tested._
   - calls: $_setBytes
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -16112,9 +16052,7 @@ _Directly tested._
   - calls: $_getSZ
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -16131,9 +16069,7 @@ _Directly tested._
   - calls: $_setString
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -16153,12 +16089,10 @@ _Directly tested._
 - **multibasePrefix** (method)
   - calls: $_getSZ
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **multibasePrefix** (method)
   - calls: $_setString
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **hasMultibasePrefix** (method)
   - calls: $_has
@@ -16186,13 +16120,11 @@ _No known direct test._
 - **IPFS_CID_VERSION_0** (static field)
   - calls: _
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
 - **IPFS_CID_VERSION_1** (static field)
   - calls: _
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
 - **values** (static field)
@@ -16727,7 +16659,6 @@ PBLink represents a link between two DAG nodes
 - **hash** (method) — multihash of the target object
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.hashCode)
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -16759,7 +16690,6 @@ PBLink represents a link between two DAG nodes
 - **hash** (method)
   - calls: $_setBytes
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.hashCode)
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -16855,8 +16785,6 @@ PBLink represents a link between two DAG nodes
 - **size** (method) — cumulative size of target object
   - calls: $_getI64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -16880,8 +16808,6 @@ PBLink represents a link between two DAG nodes
 - **size** (method)
   - calls: $_setInt64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -17367,14 +17293,11 @@ PBNode represents a DAG node
 - **data** (method) — opaque user data content
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17425,14 +17348,11 @@ PBNode represents a DAG node
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18697,9 +18617,7 @@ _No known direct test._
 - **cid** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -18741,9 +18659,7 @@ _No known direct test._
 - **cid** (method)
   - calls: $_setField
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -18809,14 +18725,11 @@ _No known direct test._
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18867,14 +18780,11 @@ _No known direct test._
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -19055,8 +18965,6 @@ _No known direct test._
 - **size** (method)
   - calls: $_getI64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -19080,8 +18988,6 @@ _No known direct test._
 - **size** (method)
   - calls: $_setInt64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -20294,9 +20200,7 @@ Represents a log entry for an operation performed on the IPFS node.
 - **cid** (method) — The CID involved in the operation (optional).
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -20338,9 +20242,7 @@ Represents a log entry for an operation performed on the IPFS node.
 - **cid** (method)
   - calls: $_setField
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -21955,9 +21857,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -21999,9 +21899,7 @@ _Directly tested._
 - **cid** (method)
   - calls: $_setField
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -26878,14 +26776,11 @@ Defines a message representing a node in a data structure.
 - **data** (method) — Arbitrary data associated with this node, represented as bytes.
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -26936,14 +26831,11 @@ Defines a message representing a node in a data structure.
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -43242,9 +43134,7 @@ Event message definitions:
 - **cid** (method)
   - calls: $_getSZ
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43286,9 +43176,7 @@ Event message definitions:
 - **cid** (method)
   - calls: $_setString
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43850,9 +43738,7 @@ Event message definitions:
 - **cid** (method)
   - calls: $_getSZ
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43894,9 +43780,7 @@ Event message definitions:
 - **cid** (method)
   - calls: $_setString
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -68646,9 +68530,7 @@ Api is a light-weight descriptor for an API Interface.
 - **version** (method) — A version string for this interface. If specified, must have the form
   - calls: $_getSZ
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -68657,9 +68539,7 @@ Api is a light-weight descriptor for an API Interface.
 - **version** (method)
   - calls: $_setString
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -104429,7 +104309,6 @@ Block data with prefix
 - **prefix** (method)
   - calls: $_getN
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -104438,7 +104317,6 @@ Block data with prefix
 - **prefix** (method)
   - calls: $_setBytes
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -104451,14 +104329,11 @@ Block data with prefix
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -104509,14 +104384,11 @@ Block data with prefix
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -107579,9 +107451,7 @@ Represents a CID link
 - **version** (method) — CID version (0 or 1)
   - calls: $_getIZ
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -107590,9 +107460,7 @@ Represents a CID link
 - **version** (method)
   - calls: $_setUnsignedInt32
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -107606,9 +107474,7 @@ Represents a CID link
   - calls: $_getSZ
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -107625,9 +107491,7 @@ Represents a CID link
   - calls: $_setString
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -107648,10 +107512,7 @@ Represents a CID link
   - calls: $_getN
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -107672,10 +107533,7 @@ Represents a CID link
   - calls: $_setBytes
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.toProto)
-    - `lib/src/core/cid.dart` (CID.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -108635,14 +108493,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -108693,14 +108548,11 @@ _Directly tested._
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110964,14 +110816,11 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
 - **data** (method) — The raw data contained within this node (if any)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -111022,14 +110871,11 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -111627,8 +111473,6 @@ Metadata represents metadata about a UnixFS node
 - **size** (method) — Size is the size of the file in bytes
   - calls: $_getI64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -111652,8 +111496,6 @@ Metadata represents metadata about a UnixFS node
 - **size** (method)
   - calls: $_setInt64
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)

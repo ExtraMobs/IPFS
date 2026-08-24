@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-24T08:08:30.520459
+generated: 2026-08-24T09:15:13.422501
 ---
 
 # Module `protocols` (`lib/src/protocols/`)
@@ -27,9 +27,6 @@ AutoNAT dial request message.
 - **encode** (method) — Encodes this request to protobuf bytes.
   - calls: addAll, _encodeVarint, length, fromList
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toString)
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -37,9 +34,6 @@ AutoNAT dial request message.
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -155,8 +149,7 @@ AutoNAT dial request message.
   - calls: length, _decodeVarint, add, sublist, DialRequest
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
@@ -232,9 +225,6 @@ AutoNAT dial response message.
 - **encode** (method) — Encodes this response to protobuf bytes.
   - calls: addAll, _encodeVarint, index, _encodeUtf8, length, fromList
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toString)
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -242,9 +232,6 @@ AutoNAT dial response message.
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -360,8 +347,7 @@ AutoNAT dial response message.
   - calls: length, _decodeVarint, values, _decodeUtf8, sublist, DialResponse, dialError
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
@@ -1079,7 +1065,6 @@ Tracks bandwidth exchange (sent vs received bytes) with a peer.
 - **toString** (method)
   - calls: getDebt
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1260,7 +1245,6 @@ Represents a Bitswap protocol message.
   - calls: fromBuffer, Message, pendingBytes, hasWantlist, entries, wantlist, fromBytes, fromList, block, encode, wantType, Have, Message_Wantlist_WantType, have, addWantlistEntry, priority, cancel, sendDontHave, error, payload, data, prefix, isNotEmpty, _cidFromPrefixAndData, addBlock, Block, codec, fromData, blocks, blockPresences, cid, type, DontHave, Message_BlockPresence_Type, dontHave, addBlockPresence
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
@@ -1283,15 +1267,7 @@ Represents a Bitswap protocol message.
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.encodeWithBase)
-    - `lib/src/core/cid.dart` (CID.toBytes)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.hashCode)
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarWriter.close)
@@ -1325,9 +1301,7 @@ An entry in a Bitswap wantlist.
 
 - **cid** (field) — The CID being requested.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -1529,9 +1503,7 @@ A block presence notification (HAVE or DONT_HAVE).
 
 - **cid** (field) — The CID this presence is for.
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -1643,7 +1615,6 @@ A priority-ordered list of blocks that a peer wants to receive.
   - calls: ArgumentError, WantlistEntry
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.addBytes)
-    - `lib/src/core/cid.dart` (CID.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.add)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
@@ -1957,9 +1928,6 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readByte)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readBytes)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.readVarint)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.toBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.fromBytes)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
@@ -1976,9 +1944,6 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.size)
-    - `lib/src/core/data_structures/block.dart` (Block.size)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
@@ -2271,7 +2236,6 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2462,7 +2426,6 @@ A tagged connection with priority and metadata for the Cuttlefish
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionsByTag)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3212,13 +3175,10 @@ Sorted queue of peers by XOR distance to a target.
 - **isEmpty** (method)
   - calls: isEmpty
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.unlock)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.fromMultiaddr)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
@@ -3359,7 +3319,6 @@ Sorted queue of peers by XOR distance to a target.
   - calls: contains, add, sort, compareTo, calculateDistance
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.addBytes)
-    - `lib/src/core/cid.dart` (CID.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.add)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
@@ -3572,15 +3531,7 @@ Thin framing envelope for DHT request/response correlation.
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.encodeWithBase)
-    - `lib/src/core/cid.dart` (CID.toBytes)
-    - `lib/src/core/cid.dart` (CID.==)
-    - `lib/src/core/cid.dart` (CID.hashCode)
-    - `lib/src/core/cid.dart` (CID.toProto)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
-    - `lib/src/core/data_structures/block.dart` (Block.validate)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarWriter.close)
@@ -4058,8 +4009,6 @@ Represents a key in the DHT
 
 - **bytes** (field) — The raw byte content of this key.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
@@ -4083,7 +4032,6 @@ Represents a key in the DHT
 - **toString** (method)
   - calls: encode, Base58
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4199,8 +4147,6 @@ Represents a value stored in the DHT
 
 - **bytes** (field) — The raw byte content of this value.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
@@ -4224,7 +4170,6 @@ Represents a value stored in the DHT
 - **toString** (method)
   - calls: decode
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6222,7 +6167,6 @@ Represents a peer in the DHT network
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **toString** (method) — Creates a string representation of the peer
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6542,7 +6486,6 @@ Represents a peer in the DHT network
 - **hashCode** (method) — Generates a hash code for the peer
   - calls: hashCode
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -6637,7 +6580,6 @@ Exception thrown when a rate-limited operation is evicted because the
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -7012,8 +6954,6 @@ Self-balancing Red-Black tree for efficient peer lookup.
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **size** (field) — Number of nodes in the tree.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toPrefixBytes)
-    - `lib/src/core/cid.dart` (CID.validate)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -7036,13 +6976,10 @@ Self-balancing Red-Black tree for efficient peer lookup.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **isEmpty** (field) — Whether the tree is empty.
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.decode)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.unlock)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.fromMultiaddr)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
@@ -8321,9 +8258,6 @@ The libp2p Identify message.
 - **encode** (method) — Encodes this Identify message to protobuf bytes.
   - calls: addAll, _encodeBytes, _encodeString, fromList
   - referenced by (by name):
-    - `lib/src/core/cid.dart` (CID.toString)
-    - `lib/src/core/cid.dart` (CID.fromContent)
-    - `lib/src/core/cid.dart` (CID.computeForDataSync)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -8331,9 +8265,6 @@ The libp2p Identify message.
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.validateSync)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -8449,8 +8380,7 @@ The libp2p Identify message.
   - calls: length, decodeVarint, sublist, fromList, add, decode, FormatException, IdentifyPb
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
@@ -8511,7 +8441,6 @@ The libp2p Identify message.
 - **toString** (method)
   - calls: length
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -8625,7 +8554,6 @@ The libp2p Identify message.
 - **hashCode** (method)
   - calls: hash, hashAll, length
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -8681,7 +8609,6 @@ Event emitted when a remote peer pushes updated identify info.
 - **toString** (method)
   - calls: agentVersion
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9187,7 +9114,6 @@ Error thrown when an IPNS name cannot be resolved.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9322,7 +9248,6 @@ Error thrown when an IPNS record fails validation.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9875,8 +9800,7 @@ IPNS V2 Record with Ed25519 signature.
   - calls: fromIpnsEntry, fromCBOR
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
-    - `lib/src/core/cid.dart` (CID.fromBytes)
-    - `lib/src/core/cid.dart` (CID.fromProto)
+    - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
@@ -9942,7 +9866,6 @@ IPNS V2 Record with Ed25519 signature.
 - **toString** (method) — Human-readable representation.
   - calls: decode, toIso8601String
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -10330,7 +10253,6 @@ Result of a ping operation.
 - **toString** (method)
   - calls: inMilliseconds
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -11979,14 +11901,11 @@ PubSub message.
 - **data** (method)
   - calls: $_getN
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -12037,14 +11956,11 @@ PubSub message.
 - **data** (method)
   - calls: $_setBytes
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -15173,14 +15089,11 @@ A message received on a Gossipsub topic.
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **data** (field) — The message payload bytes.
   - referenced by (by name):
+    - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
-    - `lib/src/core/data_structures/block.dart` (Block.toProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromProto)
-    - `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.toBitswapProto)
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -15243,7 +15156,6 @@ A message received on a Gossipsub topic.
 - **toString** (method)
   - calls: length
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15569,7 +15481,6 @@ Cache of recently seen Gossipsub messages per topic.
   - calls: topic, isEmpty, messageId, contains, add, putIfAbsent, _CachedMessage, length, removeAt, remove, id
   - referenced by (by name):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.addBytes)
-    - `lib/src/core/cid.dart` (CID.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.add)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
@@ -16241,7 +16152,6 @@ Represents a message published on a PubSub topic.
 - **sender** (field) — The sender's peer ID.
 - **toString** (method)
   - referenced by (by name):
-    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

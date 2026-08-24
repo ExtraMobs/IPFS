@@ -1,4 +1,5 @@
 import '../../proto/generated/bitswap/bitswap.pb.dart' as proto;
+import '../block_proto_codec.dart';
 import '../data_structures/block.dart';
 
 /// Service for converting blocks to and from Bitswap protocol format.
@@ -29,6 +30,6 @@ class BitswapService {
 
   /// Converts a Bitswap protocol buffer block to an internal [Block].
   Future<Block> convertFromProtoBlock(proto.Message_Block protoBlock) async {
-    return await Block.fromBitswapProto(protoBlock);
+    return await blockFromBitswapProto(protoBlock);
   }
 }

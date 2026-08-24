@@ -1,6 +1,6 @@
 ---
 test-group: platform
-generated: 2026-08-24T08:08:30.616006
+generated: 2026-08-24T09:15:13.516680
 ---
 
 # `test/platform/`
