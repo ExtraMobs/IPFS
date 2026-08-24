@@ -82,6 +82,20 @@ String? _resolveTarget(String target, String fileDir) {
   return null;
 }
 
+final _docLine = RegExp(r'^///\s?(.*)$', multiLine: true);
+final _typeDecl = RegExp(
+  r'^(?:abstract\s+)?(?:class|mixin|enum)\s+(\w+)',
+  multiLine: true,
+);
+
+/// First `///` line in [content] (the file's own doc comment), or '' if
+/// none. Pulled verbatim from source, never authored by this tool.
+String _docSummary(String content) => _docLine.firstMatch(content)?.group(1)?.trim() ?? '';
+
+/// Top-level class/mixin/enum names declared in [content].
+List<String> _declaredTypes(String content) =>
+    _typeDecl.allMatches(content).map((m) => m.group(1)!).toList();
+
 void main() {
   final libSrc = Directory('lib/src');
   final testDir = Directory('test');
@@ -108,9 +122,11 @@ void main() {
     multiLine: true,
   );
 
-  // --- lib/src module-to-module dependency graph (unchanged from before) ---
+  // --- lib/src module-to-module dependency graph, and per-file audit info ---
   final fileCount = <String, int>{};
   final edges = <String, Set<String>>{};
+  // path -> (doc summary, declared types), for the per-file audit section.
+  final fileInfo = <String, (String, List<String>)>{};
 
   for (final file in libFiles) {
     final mod = _moduleOf(file.path);
@@ -119,6 +135,11 @@ void main() {
 
     final content = file.readAsStringSync();
     final fileDir = _toForwardSlashes(file.parent.path);
+    final rel = _toForwardSlashes(file.path);
+    fileInfo[rel.substring(rel.indexOf('lib/src/'))] = (
+      _docSummary(content),
+      _declaredTypes(content),
+    );
 
     for (final match in importPattern.allMatches(content)) {
       final target = match.group(1)!;
@@ -247,14 +268,24 @@ void main() {
     'zero, é um sinal de onde checar com mais atenção antes de mexer._\n',
   );
 
-  buf.writeln('## Arquivos sem teste direto, por módulo\n');
+  buf.writeln('## Auditoria por arquivo (`lib/src/*`)\n');
+  buf.writeln(
+    '_Resumo extraído do primeiro comentário `///` de cada arquivo -- não '
+    'escrito por esta ferramenta, é o que o próprio código já documenta._\n',
+  );
   for (final m in modules) {
-    final list = untestedByModule[m] ?? [];
-    if (list.isEmpty) continue;
-    buf.writeln('<details><summary><code>$m</code> (${list.length})</summary>\n');
-    list.sort();
-    for (final f in list) {
-      buf.writeln('- `$f`');
+    final files = fileInfo.keys.where((f) => _moduleOf(f) == m).toList()
+      ..sort();
+    if (files.isEmpty) continue;
+    buf.writeln('<details><summary><code>$m</code> (${files.length})</summary>\n');
+    buf.writeln('| Arquivo | Resumo | Declara | Testado |');
+    buf.writeln('|---|---|---|---|');
+    for (final f in files) {
+      final (doc, types) = fileInfo[f]!;
+      final tested = directlyTested.contains(f) ? '✓' : '—';
+      final typesCell = types.isEmpty ? '—' : types.join(', ');
+      final docCell = doc.isEmpty ? '—' : doc.replaceAll('|', r'\|');
+      buf.writeln('| `$f` | $docCell | $typesCell | $tested |');
     }
     buf.writeln('\n</details>\n');
   }
