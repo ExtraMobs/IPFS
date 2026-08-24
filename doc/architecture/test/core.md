@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-24T07:56:46.032051
+generated: 2026-08-24T08:08:30.612694
 ---
 
 # `test/core/`

@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T07:56:45.956183
+generated: 2026-08-24T08:08:30.530636
 ---
 
 # Module `services` (`lib/src/services/`)

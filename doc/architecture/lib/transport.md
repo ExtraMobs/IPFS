@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-24T07:56:45.960205
+generated: 2026-08-24T08:08:30.535785
 ---
 
 # Module `transport` (`lib/src/transport/`)
