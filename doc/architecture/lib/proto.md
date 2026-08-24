@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-24T09:25:26.222379
+generated: 2026-08-24T09:47:50.817885
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -3109,18 +3109,18 @@ _Directly tested._
   - calls: $_getN
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **prefix** (method)
   - calls: $_setBytes
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **hasPrefix** (method)
   - calls: $_has
 - **clearPrefix** (method)
@@ -3683,7 +3683,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3725,7 +3725,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -9749,7 +9749,7 @@ _Directly tested._
   - calls: $_ensure
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -12921,7 +12921,7 @@ Response message for bit value
   - calls: $_clearField
 - **size** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -12944,7 +12944,7 @@ Response message for bit value
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -13566,7 +13566,7 @@ _Directly tested._
   - calls: $_clearField
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -13608,7 +13608,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -16116,17 +16116,17 @@ _No known direct test._
 - **IPFS_CID_VERSION_UNSPECIFIED** (static field)
   - calls: _
   - referenced by (by name):
-    - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
+    - `lib/src/core/cid_proto_codec.dart` (cidVersionFromIndex)
 - **IPFS_CID_VERSION_0** (static field)
   - calls: _
   - referenced by (by name):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
-    - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
+    - `lib/src/core/cid_proto_codec.dart` (cidVersionFromIndex)
 - **IPFS_CID_VERSION_1** (static field)
   - calls: _
   - referenced by (by name):
+    - `lib/src/core/cid_proto_codec.dart` (cidVersionFromIndex)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
-    - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
 - **values** (static field)
   - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -16784,7 +16784,7 @@ PBLink represents a link between two DAG nodes
   - calls: $_clearField
 - **size** (method) — cumulative size of target object
   - calls: $_getI64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -16807,7 +16807,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -17274,7 +17274,7 @@ PBNode represents a DAG node
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **links** (method) — refs to other objects
   - calls: $_getList
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17920,7 +17920,7 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: $_clearField
 - **metadata** (method) — Custom metadata or additional fields
   - calls: $_getMap
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -18616,7 +18616,7 @@ _No known direct test._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -18658,7 +18658,7 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -18706,7 +18706,7 @@ _No known direct test._
   - calls: $_ensure
 - **links** (method)
   - calls: $_getList
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18964,7 +18964,7 @@ _No known direct test._
   - calls: $_clearField
 - **size** (method)
   - calls: $_getI64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -18987,7 +18987,7 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -19040,7 +19040,7 @@ _No known direct test._
   - calls: $_clearField
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -20199,7 +20199,7 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **cid** (method) — The CID involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20241,7 +20241,7 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20289,11 +20289,11 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_ensure
 - **nodeType** (method) — The type of node involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **nodeType** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **hasNodeType** (method)
   - calls: $_has
@@ -21856,7 +21856,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -21898,7 +21898,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -39078,6 +39078,7 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -39179,7 +39180,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -39274,6 +39274,7 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -39375,7 +39376,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -43133,7 +43133,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43175,7 +43175,7 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43737,7 +43737,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43779,7 +43779,7 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -103860,7 +103860,7 @@ Response to graph request
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -104310,18 +104310,18 @@ Block data with prefix
   - calls: $_getN
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **prefix** (method)
   - calls: $_setBytes
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **hasPrefix** (method)
   - calls: $_has
 - **clearPrefix** (method)
@@ -111472,7 +111472,7 @@ Metadata represents metadata about a UnixFS node
   - calls: $_clearField
 - **size** (method) — Size is the size of the file in bytes
   - calls: $_getI64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -111495,7 +111495,7 @@ Metadata represents metadata about a UnixFS node
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)

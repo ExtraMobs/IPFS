@@ -1,6 +1,6 @@
 ---
 test-group: fuzz
-generated: 2026-08-24T09:25:26.415875
+generated: 2026-08-24T09:47:51.020472
 ---
 
 # `test/fuzz/`

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../core/storage/datastore.dart';
-import '../../core/types/p2p_types.dart';
 import '../../proto/generated/dht/dht.pb.dart' as dht_pb;
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
 import '../../transport/router_interface.dart';
@@ -46,7 +45,7 @@ class DHTProtocolHandler {
   /// This method decodes the incoming [packet] and dispatches it to the
   /// appropriate handler based on the message type. If a rate limiter is
   /// configured, acquiring a permit may delay or drop the request.
-  Future<void> _handleDHTMessage(LibP2PPacket packet) async {
+  Future<void> _handleDHTMessage(NetworkPacket packet) async {
     final rateLimiter = _rateLimiter;
     if (rateLimiter != null) {
       try {

@@ -2,8 +2,6 @@
 import 'dart:typed_data';
 
 import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart'
-    show IPFSCIDVersion;
 import 'package:dart_ipfs/src/utils/base58.dart';
 import 'package:dart_ipfs/src/utils/varint.dart';
 
@@ -148,20 +146,6 @@ class EncodingUtils {
   /// Check if the hash function is supported
   static bool _isSupportedHashFunction(int hashFunction) {
     return _supportedHashFunctions.containsKey(hashFunction);
-  }
-
-  /// Convert CID version index to enum
-  static IPFSCIDVersion indexToCidVersion(int index) {
-    switch (index) {
-      case 0:
-        return IPFSCIDVersion.IPFS_CID_VERSION_UNSPECIFIED;
-      case 1:
-        return IPFSCIDVersion.IPFS_CID_VERSION_0;
-      case 2:
-        return IPFSCIDVersion.IPFS_CID_VERSION_1;
-      default:
-        throw UnsupportedError('Unsupported CID version index: $index');
-    }
   }
 
   /// Validates if a multibase prefix is supported according to the multibase spec

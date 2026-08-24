@@ -153,4 +153,19 @@ void main() {
       );
     });
   });
+
+  group('cidVersionFromIndex', () {
+    test('maps known indices to the CID version enum', () {
+      expect(
+        cidVersionFromIndex(0),
+        equals(IPFSCIDVersion.IPFS_CID_VERSION_UNSPECIFIED),
+      );
+      expect(cidVersionFromIndex(1), equals(IPFSCIDVersion.IPFS_CID_VERSION_0));
+      expect(cidVersionFromIndex(2), equals(IPFSCIDVersion.IPFS_CID_VERSION_1));
+    });
+
+    test('throws for an unsupported index', () {
+      expect(() => cidVersionFromIndex(3), throwsUnsupportedError);
+    });
+  });
 }

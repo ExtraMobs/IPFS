@@ -2,7 +2,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import '../protocols/dht/dht_routing_table_interface.dart' show DHTRoutingTable;
+import '../core/interfaces/routing_table.dart' show DHTRoutingTable;
 import 'router_events.dart';
 
 // Re-export NetworkPacket and event types for convenience

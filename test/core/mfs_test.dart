@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/mfs/mfs_manager.dart';
+import 'package:dart_ipfs/src/core/storage/hive_datastore.dart';
 import 'package:dart_ipfs/src/platform/platform.dart';
-import 'package:dart_ipfs/src/storage/hive_datastore.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-24T09:25:26.210801
+generated: 2026-08-24T09:47:50.804357
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -26,7 +26,6 @@ Abstract interface for a running HTTP server instance.
 
 - **close** (method) — Closes the server.
   - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -39,6 +38,7 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
@@ -59,7 +59,6 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close)
@@ -128,7 +127,6 @@ IO implementation of HTTP server instance.
 - **close** (method)
   - calls: close
   - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -141,6 +139,7 @@ IO implementation of HTTP server instance.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -160,7 +159,6 @@ IO implementation of HTTP server instance.
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close)
@@ -264,7 +262,6 @@ Web stub implementation of HTTP server instance.
 
 - **close** (method)
   - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -277,6 +274,7 @@ Web stub implementation of HTTP server instance.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
@@ -297,7 +295,6 @@ Web stub implementation of HTTP server instance.
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close)
@@ -483,6 +480,7 @@ IO implementation of the IPFS platform interface.
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.delete)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
     - `lib/src/services/content_service.dart` (ContentService.unpinContent)
@@ -490,7 +488,6 @@ IO implementation of the IPFS platform interface.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.unpin)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method)
   - calls: create, Directory
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
@@ -601,6 +598,7 @@ Abstract class representing platform-specific operations.
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.delete)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.delete)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
@@ -609,7 +607,6 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.unpin)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method) — Returns a [Future] that completes when a directory is created at [path].
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)
@@ -751,6 +748,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.delete)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.delete)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
     - `lib/src/services/content_service.dart` (ContentService.unpinContent)
@@ -758,7 +756,6 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.unpin)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method)
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)

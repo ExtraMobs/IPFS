@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-24T09:25:26.414319
+generated: 2026-08-24T09:47:51.018387
 ---
 
 # `test/core/`
@@ -207,6 +207,9 @@ generated: 2026-08-24T09:25:26.414319
 - CIDv0 full coverage
 - codec with multi-byte varint
 - error paths
+- cidVersionFromIndex
+- maps known indices to the CID version enum
+- throws for an unsupported index
 
 ## `test/core/cid_test.dart`
 

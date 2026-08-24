@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart';
 import 'package:dart_ipfs/src/utils/encoding.dart';
 import 'package:test/test.dart';
 
@@ -51,22 +50,6 @@ void main() {
         EncodingUtils.isValidCIDBytes(Uint8List.fromList([0x02, 0x01])),
         isFalse,
       );
-    });
-
-    test('indexToCidVersion', () {
-      expect(
-        EncodingUtils.indexToCidVersion(0),
-        equals(IPFSCIDVersion.IPFS_CID_VERSION_UNSPECIFIED),
-      );
-      expect(
-        EncodingUtils.indexToCidVersion(1),
-        equals(IPFSCIDVersion.IPFS_CID_VERSION_0),
-      );
-      expect(
-        EncodingUtils.indexToCidVersion(2),
-        equals(IPFSCIDVersion.IPFS_CID_VERSION_1),
-      );
-      expect(() => EncodingUtils.indexToCidVersion(3), throwsUnsupportedError);
     });
 
     test('isValidMultibasePrefix', () {

@@ -1,12 +1,21 @@
 ---
 test-group: (root)
-generated: 2026-08-24T09:25:26.413563
+generated: 2026-08-24T09:47:51.017680
 ---
 
 # `test/(root)/`
 
 ## `test/advanced_coverage_analyzer.dart`
 
+
+## `test/architecture_boundary_test.dart`
+
+- architecture boundaries (foundation layer, Phase 2)
+- platform has no lib/src dependencies
+- utils only depends on core and platform
+- core (outside the ipfs_node/ and builders/ composition root) 
+- transport does not depend on the protocol/routing/service layers
+- network does not depend on the protocol/routing/service layers
 
 ## `test/coverage_analyzer.dart`
 

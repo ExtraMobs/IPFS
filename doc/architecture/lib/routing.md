@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-24T09:25:26.327998
+generated: 2026-08-24T09:47:50.924062
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -184,6 +184,7 @@ Response from a routing request.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -285,7 +286,6 @@ Response from a routing request.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -323,7 +323,7 @@ Handles delegated routing operations following the IPFS Delegated Routing V1 HTT
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **dispose** (method) — Closes the HTTP client
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -354,7 +354,7 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -417,7 +417,7 @@ A single provider entry returned from an IPNI query.
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
 - **metadata** (field) — Optional metadata entries (e.g. transport protocols supported).
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -548,6 +548,7 @@ The result of an IPNI provider query.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -649,7 +650,6 @@ The result of an IPNI provider query.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -691,7 +691,7 @@ Client for the Reframe delegated routing protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -858,6 +858,7 @@ The result of a Reframe provider query.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -959,7 +960,6 @@ The result of a Reframe provider query.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)

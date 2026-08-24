@@ -388,7 +388,14 @@ void main() {
 
   for (final mod in modules) {
     final files = audits.keys.where((f) => _moduleOf(f) == mod).toList()..sort();
-    if (files.isEmpty) continue;
+    if (files.isEmpty) {
+      // A module that used to have files (e.g. everything moved out of it)
+      // must not leave a stale doc describing content that no longer
+      // exists -- the index is meant to show what's actually live.
+      final stale = File('${outLibDir.path}/$mod.md');
+      if (stale.existsSync()) stale.deleteSync();
+      continue;
+    }
     final buf = StringBuffer();
     buf.writeln('---');
     buf.writeln('module: $mod');
@@ -468,6 +475,15 @@ void main() {
       buf.writeln('');
     }
     File('${outTestDir.path}/${entry.key.replaceAll('/', '_')}.md').writeAsStringSync(buf.toString());
+  }
+  // A group whose last file moved/disappeared must not leave a stale doc
+  // behind -- same reasoning as the lib/ module cleanup above.
+  final currentTestFiles = testGroups.keys.map((g) => '${g.replaceAll('/', '_')}.md').toSet();
+  for (final f in outTestDir.listSync().whereType<File>()) {
+    final name = _toForwardSlashes(f.path).split('/').last;
+    if (name.endsWith('.md') && !currentTestFiles.contains(name)) {
+      f.deleteSync();
+    }
   }
 
   // --- overview / entry point ---

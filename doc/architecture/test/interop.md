@@ -1,6 +1,6 @@
 ---
 test-group: interop
-generated: 2026-08-24T09:25:26.416924
+generated: 2026-08-24T09:47:51.021101
 ---
 
 # `test/interop/`

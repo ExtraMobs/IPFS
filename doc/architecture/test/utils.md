@@ -1,6 +1,6 @@
 ---
 test-group: utils
-generated: 2026-08-24T09:25:26.421491
+generated: 2026-08-24T09:47:51.026631
 ---
 
 # `test/utils/`
@@ -48,7 +48,6 @@ generated: 2026-08-24T09:25:26.421491
 - isValidCIDBytes - CIDv0
 - isValidCIDBytes - CIDv1
 - isValidCIDBytes - invalid bytes
-- indexToCidVersion
 - isValidMultibasePrefix
 - getEncodingFromPrefix
 - codec conversion

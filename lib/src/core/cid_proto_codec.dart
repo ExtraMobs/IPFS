@@ -40,3 +40,20 @@ CID cidFromProto(IPFSCIDProto proto) {
     MultihashUtils.decode(Uint8List.fromList(proto.multihash)),
   );
 }
+
+/// Converts a CID version index to the [IPFSCIDVersion] enum.
+///
+/// Moved from utils/encoding.dart: utils/ must not depend on generated
+/// protobuf code (see test/architecture_boundary_test.dart).
+IPFSCIDVersion cidVersionFromIndex(int index) {
+  switch (index) {
+    case 0:
+      return IPFSCIDVersion.IPFS_CID_VERSION_UNSPECIFIED;
+    case 1:
+      return IPFSCIDVersion.IPFS_CID_VERSION_0;
+    case 2:
+      return IPFSCIDVersion.IPFS_CID_VERSION_1;
+    default:
+      throw UnsupportedError('Unsupported CID version index: $index');
+  }
+}

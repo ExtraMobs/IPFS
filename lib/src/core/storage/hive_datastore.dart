@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:hive/hive.dart';
 
-import '../core/storage/datastore.dart';
-import '../utils/logger.dart';
+import '../../utils/logger.dart';
+import 'datastore.dart';
 
 /// Hive-based implementation of the [Datastore] interface.
 ///

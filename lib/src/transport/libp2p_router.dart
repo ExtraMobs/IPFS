@@ -14,7 +14,7 @@ import 'package:pointycastle/export.dart';
 import '../core/config/ipfs_config.dart';
 import '../core/crypto/ecdsa_signer.dart';
 import '../core/crypto/rsa_signer.dart';
-import '../protocols/dht/dht_routing_table_interface.dart';
+import '../core/interfaces/routing_table.dart';
 import '../utils/logger.dart';
 import 'pnet/pnet_transport_wrapper.dart';
 import 'pnet/swarm_key_loader.dart';

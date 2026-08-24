@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-24T09:25:26.206089
+generated: 2026-08-24T09:47:50.797898
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -458,7 +458,7 @@ High-level network router for IPFS peer communication.
 
 - **peerID** (method) — The peer ID of this node
   - calls: peerID
-  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)

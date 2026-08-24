@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T09:25:26.329036
+generated: 2026-08-24T09:47:50.925652
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -174,7 +174,7 @@ A functional ACME v2 (RFC 8555) client that performs HTTP-01 challenges.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 - **dispose** (method) — Releases the HTTP client and clears cached state.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -378,7 +378,7 @@ _Directly tested._
 Manages persistent storage for ACME account keys and certificates.
 
 - **config** (field) — Gateway configuration containing storage path settings.
-  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **loadAccountKey** (method) — Loads the ACME account key from storage.
@@ -623,7 +623,7 @@ Represents a single directory entry with metadata.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (field) — The size in bytes.
-  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -659,7 +659,7 @@ Represents a single directory entry with metadata.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **metadata** (field) — Optional additional metadata.
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -1042,6 +1042,8 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
     - `lib/src/core/repository/repository.dart` (Repository.getBlock)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.get)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS)
@@ -1059,8 +1061,6 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.getPin)
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.get)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock)
     - `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrCompute)
@@ -1074,6 +1074,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
     - `lib/src/core/repository/repository.dart` (Repository.addFile)
     - `lib/src/core/repository/repository.dart` (Repository.processProtoBlock)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.put)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.writeBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue)
@@ -1081,7 +1082,6 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/services/content_service.dart` (ContentService.pinContent)
     - `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getPreview)
     - `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.cachePreview)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.put)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrCompute)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
@@ -1214,6 +1214,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/events/event_bus.dart` (EventBus.subscribe)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.addPeer)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.has)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.has)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.getBlockData)
@@ -1237,7 +1238,6 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.hasService)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.has)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.registerSession)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.put)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.containsKey)
@@ -1521,12 +1521,12 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getStatus)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.getStatus)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.peeredPeerIds)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.put)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.serviceNames)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
     - `lib/src/utils/encoding.dart` (EncodingUtils.supportedCodecs)
     - `lib/src/utils/keystore.dart` (Keystore.listKeyPairs)
 - **values** (method) — Returns an iterable of all values in the cache, ordered from oldest to newest.
@@ -1745,7 +1745,7 @@ Provider interface for automatic TLS certificate issuance via ACME.
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.certificateExpiry)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
 - **dispose** (method) — Releases any resources held by the provider.
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -1774,7 +1774,7 @@ Production-ready ACME provider for Let's Encrypt / ZeroSSL.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
 - **dispose** (method)
   - calls: clear, dispose, idle
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -1787,7 +1787,7 @@ Production-ready ACME provider for Let's Encrypt / ZeroSSL.
 Manages TLS configuration, certificate loading, and AutoTLS orchestration
 
 - **config** (field) — Gateway configuration including TLS settings.
-  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **isContextLoaded** (method) — Whether a TLS [SecurityContext] has been successfully loaded.
@@ -1820,7 +1820,7 @@ Manages TLS configuration, certificate loading, and AutoTLS orchestration
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
 - **dispose** (method) — Releases the provider and clears internal state.
   - calls: dispose
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -2255,7 +2255,7 @@ Options for a cluster pin operation.
 A pin tracked by the IPFS Cluster.
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -2440,6 +2440,7 @@ Pin status for a single peer in the cluster.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -2541,7 +2542,6 @@ Pin status for a single peer in the cluster.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -2742,6 +2742,7 @@ Cluster health status.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
@@ -2843,7 +2844,6 @@ Cluster health status.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -2916,7 +2916,7 @@ Client for the IPFS Cluster REST API.
   - calls: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
 - **dispose** (method) — Releases HTTP resources.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -2936,7 +2936,7 @@ _Directly tested._
 A pin request object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the content to pin.
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3101,6 +3101,8 @@ A pin status response from the pinning service.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.start)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.init)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort)
     - `lib/src/network/nat_traversal_service.dart` (NatTraversalService.unmapPort)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
@@ -3178,8 +3180,6 @@ A pin status response from the pinning service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.init)
-    - `lib/src/storage/hive_datastore.dart` (HiveDatastore.close)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
@@ -3212,7 +3212,7 @@ A pin status response from the pinning service.
 A pin object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3303,7 +3303,7 @@ A pin object as defined by the Pinning Service API spec.
 Filters for listing pins.
 
 - **cid** (field) — Filter by CID.
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3571,7 +3571,7 @@ Client for the IPFS Pinning Service API v1.
   - calls: debug, cid, replace, parse, _pinsUrl, timeout, post, jsonEncode, toJson, _handlePinResponse
 - **dispose** (method) — Releases HTTP resources.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -3646,7 +3646,7 @@ Configuration for a registered pinning service.
 A remote pin tracked by the [RemotePinningService].
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3806,7 +3806,7 @@ Manages multiple remote pinning services and coordinates pin operations.
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
 - **dispose** (method) — Disposes all resources.
   - calls: values, dispose, clear
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
