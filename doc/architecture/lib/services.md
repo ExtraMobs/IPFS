@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T09:58:20.655654
+generated: 2026-08-24T10:18:28.810980
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -1636,7 +1636,7 @@ IPFS HTTP Gateway Server
 - **tlsManager** (field) — TLS certificate and AutoTLS manager.
 - **start** (method) — Starts the gateway server.
   - calls: StateError, addHandler, addMiddleware, Pipeline, _subdomainMiddleware, _corsMiddleware, _rateLimitMiddleware, _metricsMiddleware, _loggingMiddleware, call, enableTls, autoTls, tlsPort, loadSecurityContext, serveSecure, markActive, info, host, port, redirectHttpToHttps, serve, _redirectToHttpsHandler, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -1649,7 +1649,6 @@ IPFS HTTP Gateway Server
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -1666,7 +1665,7 @@ IPFS HTTP Gateway Server
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the gateway server and any TLS or redirect listeners.
   - calls: close, markInactive, dispose, clear, info
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -1678,7 +1677,6 @@ IPFS HTTP Gateway Server
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -2022,7 +2020,6 @@ Replication factor for a cluster pin.
     - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue)
@@ -2590,7 +2587,6 @@ Information about a cluster peer.
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -3933,7 +3929,7 @@ IPFS HTTP RPC API Server
 - **metricsConfig** (field) — Optional metrics configuration controlling the Prometheus endpoint.
 - **start** (method) — Starts the RPC server.
   - calls: StateError, addHandler, addMiddleware, Pipeline, _corsMiddleware, _authMiddleware, _metricsMiddleware, _loggingMiddleware, call, serve, createHttpServerAdapter, info, host, port, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -3946,7 +3942,6 @@ IPFS HTTP RPC API Server
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -3963,7 +3958,7 @@ IPFS HTTP RPC API Server
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the RPC server.
   - calls: close, info
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -3975,7 +3970,6 @@ IPFS HTTP RPC API Server
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)

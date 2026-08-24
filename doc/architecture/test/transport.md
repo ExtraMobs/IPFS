@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-24T09:58:20.733476
+generated: 2026-08-24T10:18:28.894936
 ---
 
 # `test/transport/`
@@ -209,6 +209,10 @@ generated: 2026-08-24T09:58:20.733476
 - opened event
 - data event with payload
 - closed event
+
+## `test/transport/router_polymorphism_test.dart`
+
+- PingHandler succeeds with a valid RTT against a 
 
 ## `test/transport/stream_controller_lifecycle_test.dart`
 

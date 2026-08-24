@@ -1,6 +1,6 @@
 ---
 test-group: integration
-generated: 2026-08-24T09:58:20.729063
+generated: 2026-08-24T10:18:28.889788
 ---
 
 # `test/integration/`

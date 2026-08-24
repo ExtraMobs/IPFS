@@ -112,6 +112,9 @@ class _FakeRouter implements RouterInterface {
   DHTRoutingTable? get dhtRoutingTable => null;
 
   @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
+
+  @override
   Future<void> broadcastMessage(String protocolId, Uint8List message) async {
     for (final peer in _peers) {
       await sendMessage(peer, message, protocolId: protocolId);

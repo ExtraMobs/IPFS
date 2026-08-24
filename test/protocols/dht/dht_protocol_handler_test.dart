@@ -108,6 +108,9 @@ class _FakeRouter implements RouterInterface {
   DHTRoutingTable? get dhtRoutingTable => null;
 
   @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
+
+  @override
   Future<void> broadcastMessage(String protocolId, Uint8List message) async {}
 
   @override

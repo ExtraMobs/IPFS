@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-24T09:58:20.520945
+generated: 2026-08-24T10:18:28.692892
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -39,7 +39,6 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -140,7 +139,6 @@ IO implementation of HTTP server instance.
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop)
@@ -275,7 +273,6 @@ Web stub implementation of HTTP server instance.
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)

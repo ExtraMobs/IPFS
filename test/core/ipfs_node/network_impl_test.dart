@@ -228,10 +228,6 @@ void main() {
       expect(await stream.isEmpty, isTrue);
     });
 
-    test('dhtRouter getter', () {
-      expect(handler.dhtRouter, isNotNull);
-    });
-
     test('circuitRelayClient getter', () {
       expect(handler.circuitRelayClient, isNotNull);
     });

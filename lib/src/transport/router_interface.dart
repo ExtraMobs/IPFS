@@ -200,4 +200,10 @@ abstract class RouterInterface {
   /// to perform true distance-based peer selection. Returns null if the router
   /// does not support DHT routing operations.
   DHTRoutingTable? get dhtRoutingTable;
+
+  /// Sets the DHT routing table, making it available via [dhtRoutingTable].
+  ///
+  /// Called once by the DHT client during initialization. Routers that don't
+  /// support DHT routing operations may implement this as a no-op.
+  void setDHTRoutingTable(DHTRoutingTable routingTable);
 }

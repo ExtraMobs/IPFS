@@ -154,6 +154,9 @@ class MockRouter implements RouterInterface {
 
   @override
   DHTRoutingTable? get dhtRoutingTable => null;
+
+  @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
 }
 
 void main() {

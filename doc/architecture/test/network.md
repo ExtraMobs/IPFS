@@ -1,6 +1,6 @@
 ---
 test-group: network
-generated: 2026-08-24T09:58:20.730111
+generated: 2026-08-24T10:18:28.890837
 ---
 
 # `test/network/`
@@ -90,17 +90,6 @@ generated: 2026-08-24T09:58:20.730111
 - custom lease duration is respected
 - NatTraversalService Gateway Discovery
 - lazy discovery on first mapPort call
-
-## `test/network/router_test.dart`
-
-- Router
-- start and stop
-- peerID and isInitialized delegating
-- sendMessage delegating
-- onPeerDiscovered and connectedPeers
-- connect and disconnect delegating
-- broadcast sends message to all connected peers
-- broadcast with peers calls sendMessage for each
 
 ## `test/network/router_test.mocks.dart`
 

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
-import '../../network/router.dart';
 import '../../proto/generated/dht/ipfs_node_network_events.pb.dart';
 import '../../transport/circuit_relay_client.dart';
 import '../../transport/libp2p_router.dart';
@@ -226,9 +225,6 @@ class NetworkHandler {
     );
     _subscriptions.add(sub);
   }
-
-  /// Returns a high-level Router instance (for DHT operations).
-  Router get dhtRouter => Router(_config);
 
   /// Sets the parent IPFS node reference.
   void setIpfsNode(IPFSNode node) {

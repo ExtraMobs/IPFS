@@ -18,7 +18,6 @@ import '../../proto/generated/dht/dht.pb.dart' as dht_proto;
 import '../../proto/generated/dht/ipfs_node_network_events.pb.dart'
     as ipfs_node_network_events;
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
-import '../../transport/libp2p_router.dart';
 import '../../transport/router_interface.dart';
 import '../../utils/base58.dart';
 import '../../utils/logger.dart';
@@ -110,9 +109,7 @@ class DHTClient {
 
     // Expose the routing table via the router interface for DHT protocol handlers
     final routingAdapter = KademliaRoutingAdapter(_kademliaRoutingTable);
-    if (_router is Libp2pRouter) {
-      (_router).setDHTRoutingTable(routingAdapter);
-    }
+    _router.setDHTRoutingTable(routingAdapter);
 
     // Register protocols and handlers
     _registerProtocols();

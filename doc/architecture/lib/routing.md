@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-24T09:58:20.654613
+generated: 2026-08-24T10:18:28.809936
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -22,7 +22,7 @@ Handles content routing operations for an IPFS node.
 
 - **start** (method) — Starts the content routing services.
   - calls: initialize, start, info, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -35,7 +35,6 @@ Handles content routing operations for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -51,7 +50,7 @@ Handles content routing operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the content routing services.
   - calls: stop, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -63,7 +62,6 @@ Handles content routing operations for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)

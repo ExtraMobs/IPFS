@@ -147,6 +147,9 @@ class MockPingRouter implements RouterInterface {
   @override
   DHTRoutingTable? get dhtRoutingTable => null;
 
+  @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
+
   // --- Test helpers ---
 
   void setEchoResponse(String peerId, Uint8List? response) {
@@ -511,6 +514,9 @@ class _EchoRouter implements RouterInterface {
 
   @override
   DHTRoutingTable? get dhtRoutingTable => null;
+
+  @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
 }
 
 /// A router that delays responses to simulate timeout.
@@ -629,4 +635,7 @@ class _SlowRouter implements RouterInterface {
 
   @override
   DHTRoutingTable? get dhtRoutingTable => null;
+
+  @override
+  void setDHTRoutingTable(DHTRoutingTable routingTable) {}
 }

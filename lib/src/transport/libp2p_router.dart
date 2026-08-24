@@ -136,10 +136,7 @@ class Libp2pRouter implements RouterInterface {
   @override
   DHTRoutingTable? get dhtRoutingTable => _dhtRoutingTable;
 
-  /// Sets the DHT routing table for distance-based peer selection.
-  ///
-  /// This should be called by the DHT protocol handler when it initializes
-  /// its routing table, allowing the router to expose it via the interface.
+  @override
   void setDHTRoutingTable(DHTRoutingTable routingTable) {
     _dhtRoutingTable = routingTable;
     _logger.debug('DHT routing table set on router');

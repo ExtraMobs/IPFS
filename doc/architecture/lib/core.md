@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-24T09:58:20.475966
+generated: 2026-08-24T10:18:28.654716
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -2009,7 +2009,7 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/core/data_structures/pin.dart` (Pin.isPinned)
 - **start** (method) — Returns a [Future] that completes when the [BlockStore] and its pin manager have started.
   - calls: debug, _initializeStorage, join, load, length, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2022,7 +2022,6 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -2039,7 +2038,7 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the [BlockStore] has stopped and its state is saved.
   - calls: debug, join, save, _cleanup, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2051,7 +2050,6 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -2984,7 +2982,6 @@ Append-only writer for CAR v1 and v2 archives.
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -4509,7 +4506,6 @@ Represents a peer node in the IPFS network.
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -6738,7 +6734,7 @@ _Directly tested._
 Interface for services that require explicit startup and shutdown.
 
 - **start** (method) — Starts the service.
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -6751,7 +6747,6 @@ Interface for services that require explicit startup and shutdown.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -6767,7 +6762,7 @@ Interface for services that require explicit startup and shutdown.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service.
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -6779,7 +6774,6 @@ Interface for services that require explicit startup and shutdown.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -6794,7 +6788,7 @@ Interface for services that require explicit startup and shutdown.
 
 Interface for calculating distance between peers in the DHT.
 
-_No known direct test._
+_Directly tested._
 
 ### abstract class `DistanceMetric`
 
@@ -6915,7 +6909,7 @@ Handles NAT detection and traversal for an IPFS node.
 
 - **start** (method) — Starts the AutoNAT service
   - calls: warning, debug, router, AutoNATService, AutoNATServer, start, _detectNATType, none, enableNatTraversal, network, _attemptPortMapping, info, _startDialbackTests, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
@@ -6927,7 +6921,6 @@ Handles NAT detection and traversal for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -6944,7 +6937,7 @@ Handles NAT detection and traversal for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the AutoNAT service
   - calls: warning, debug, cancel, stop, unmapPort, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
@@ -6955,7 +6948,6 @@ Handles NAT detection and traversal for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -6983,7 +6975,7 @@ Handles bootstrap peer connections for an IPFS node.
 
 - **start** (method) — Starts the bootstrap handler
   - calls: warning, debug, _connectToBootstrapPeers, _setupReconnectionTimer, info, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -6996,7 +6988,6 @@ Handles bootstrap peer connections for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -7013,7 +7004,7 @@ Handles bootstrap peer connections for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the bootstrap handler
   - calls: warning, debug, cancel, clear, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7025,7 +7016,6 @@ Handles bootstrap peer connections for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -7053,7 +7043,7 @@ Manages content-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7066,7 +7056,6 @@ Manages content-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -7083,7 +7072,7 @@ Manages content-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7095,7 +7084,6 @@ Manages content-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -7210,7 +7198,7 @@ Handles content routing operations with fallback strategies.
 
 - **start** (method) — Starts the content routing services
   - calls: debug, start, verbose, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
@@ -7222,7 +7210,6 @@ Handles content routing operations with fallback strategies.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -7239,7 +7226,7 @@ Handles content routing operations with fallback strategies.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the content routing services
   - calls: debug, stop, verbose, dispose, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
@@ -7250,7 +7237,6 @@ Handles content routing operations with fallback strategies.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -7296,7 +7282,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.datastore)
 - **start** (method) — Initializes and starts the datastore.
   - calls: init, debug, error, ComponentError
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7309,7 +7295,6 @@ Handles datastore operations for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -7326,7 +7311,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Closes the datastore and releases all resources.
   - calls: close, debug, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7338,7 +7323,6 @@ Handles datastore operations for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -7438,7 +7422,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
 
 - **start** (method) — Starts the DNSLink handler
   - calls: debug, clear, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7451,7 +7435,6 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -7468,7 +7451,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the DNSLink handler
   - calls: debug, clear, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7480,7 +7463,6 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -7898,7 +7880,7 @@ The main IPFS node implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
 - **connectedPeers** (method) — Returns a [Future] that resolves to a [List] of currently connected peer IDs.
   - calls: connectedPeers
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want)
@@ -7940,12 +7922,12 @@ The main IPFS node implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat)
 - **connectToPeer** (method) — Returns a [Future] that completes when the node manually connects to a peer using its [multiaddr].
   - calls: connectToPeer
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Returns a [Future] that completes when the node gracefully disconnects from a peer identified by [peerIdOrAddr].
   - calls: disconnectFromPeer
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **resolveIPNS** (method) — Returns a [Future] that resolves to the CID corresponding to the IPNS [name].
@@ -7978,7 +7960,7 @@ The main IPFS node implementation.
   - calls: pubsubMessages
 - **start** (method) — Returns a [Future] that completes when the IPFS node and all its subsystems have started.
   - calls: running, starting, NodeStateError, name, info, startAll, init, initAll, error, NodeStartupError
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7991,7 +7973,6 @@ The main IPFS node implementation.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8008,7 +7989,7 @@ The main IPFS node implementation.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the IPFS node has stopped gracefully, releasing all resources.
   - calls: stopped, stopping, warning, name, info, stopAll, close, error, NodeShutdownError
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8020,7 +8001,6 @@ The main IPFS node implementation.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -8180,14 +8160,13 @@ The main IPFS node implementation.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **peerID** (method) — Returns the peer ID of this node.
   - calls: peerId
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-    - `lib/src/network/router.dart` (Router.peerID)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
@@ -8210,7 +8189,7 @@ Handles network events for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **start** (method) — Starts listening for and emitting network events.
   - calls: _listenForRouterEvents, _listenForCircuitRelayEvents
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8223,7 +8202,6 @@ Handles network events for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8265,13 +8243,12 @@ A minimal IPFS node for web browsers.
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
 - **peerID** (method) — The node's peer ID.
   - calls: peerID
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-    - `lib/src/network/router.dart` (Router.peerID)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
@@ -8285,7 +8262,7 @@ A minimal IPFS node for web browsers.
 - **securityManager** (method) — Access to security manager.
 - **start** (method) — Starts the web node.
   - calls: initialize, BitswapHandler, PubSubClient, peerID, SecurityManagerWeb, security, MetricsCollector, delegatedRoutingEndpoint, network, DelegateDHTHandler, IPNSHandler, offline, start, connect
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8297,7 +8274,6 @@ A minimal IPFS node for web browsers.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8314,7 +8290,7 @@ A minimal IPFS node for web browsers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the web node.
   - calls: stop
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8325,7 +8301,6 @@ A minimal IPFS node for web browsers.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -8672,7 +8647,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
   - calls: ComponentError, isEmpty, get, toString, normalizePath, isNotEmpty, split, join, sublist, _resolveSegment, IPLDResolutionError
 - **start** (method) — Starts the IPLD handler
   - calls: debug, verbose, join, keys, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8685,7 +8660,6 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8702,7 +8676,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the IPLD handler
   - calls: debug, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8714,7 +8688,6 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -8784,7 +8757,7 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
 
 - **start** (method) — Starts the mDNS discovery service
   - calls: enableMDNS, network, debug, warning, isWindows, verbose, start, _getPort, startServer, nodeId, _startDiscovery, _startAdvertising, info, error, stop
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8796,7 +8769,6 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8813,7 +8785,7 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the mDNS discovery service
   - calls: warning, debug, cancel, stop, close, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8824,7 +8796,6 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -8871,7 +8842,7 @@ Handles network operations for an IPFS node.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **start** (method) — Starts the network services.
   - calls: debug, verbose, start, _registerDialbackHandler, info, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8883,7 +8854,6 @@ Handles network operations for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -8900,7 +8870,7 @@ Handles network operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the network services.
   - calls: debug, stop, verbose, cancel, clear, close, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8911,7 +8881,6 @@ Handles network operations for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -8927,13 +8896,13 @@ Handles network operations for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **connectToPeer** (method) — Connects to a peer using its multiaddress.
   - calls: connect
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Disconnects from a peer using its multiaddress.
   - calls: disconnect
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
@@ -8945,9 +8914,7 @@ Handles network operations for an IPFS node.
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **sendMessage** (method) — Sends a message to a specific peer.
   - calls: fromList, encode, sendMessage
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/network/router.dart` (Router.sendMessage)
-    - `lib/src/network/router.dart` (Router.broadcast)
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest)
@@ -8962,8 +8929,6 @@ Handles network operations for an IPFS node.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **receiveMessages** (method) — Receives messages from a specific peer.
   - calls: map, receiveMessages, decode, Stream.empty
-- **dhtRouter** (method) — Returns a high-level Router instance (for DHT operations).
-  - calls: Router
 - **setIpfsNode** (method) — Sets the parent IPFS node reference.
 - **sendRequest** (method) — Sends a request to a peer and waits for a response
   - calls: sendRequest
@@ -8993,13 +8958,12 @@ Handles network operations for an IPFS node.
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **peerID** (method) — Gets the peer ID of this node
   - calls: peerID
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-    - `lib/src/network/router.dart` (Router.peerID)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
@@ -9018,7 +8982,7 @@ Web stub for NetworkHandler.
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.node)
 - **start** (method) — Starts the network handler (stub).
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9031,7 +8995,6 @@ Web stub for NetworkHandler.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9047,7 +9010,7 @@ Web stub for NetworkHandler.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the network handler (stub).
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9059,7 +9022,6 @@ Web stub for NetworkHandler.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9074,12 +9036,12 @@ Web stub for NetworkHandler.
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **connectToPeer** (method) — Connects to a peer (stub).
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Disconnects from a peer (stub).
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
@@ -9090,10 +9052,8 @@ Web stub for NetworkHandler.
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **sendMessage** (method) — Sends a message to a peer (stub).
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
-    - `lib/src/network/router.dart` (Router.sendMessage)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest)
@@ -9137,13 +9097,12 @@ Web stub for NetworkHandler.
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **peerID** (method) — Returns the peer ID (stub).
   - calls: peerID
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-    - `lib/src/network/router.dart` (Router.peerID)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
@@ -9172,7 +9131,7 @@ Manages network-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug, start
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9184,7 +9143,6 @@ Manages network-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9201,7 +9159,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9213,7 +9171,6 @@ Manages network-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9262,7 +9219,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **connectedPeers** (method) — Returns a list of currently connected peer IDs.
   - calls: listConnectedPeers, error
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -9273,12 +9230,12 @@ Manages network-related operations for the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **connectToPeer** (method) — Manually connects to a peer using its [multiaddr].
   - calls: ComponentError, connectToPeer, info, error
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Gracefully disconnects from a peer identified by [peerIdOrAddr].
   - calls: disconnectFromPeer, info, error
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **resolvePeerId** (method) — Resolves a peer ID to its known addresses from the routing table.
@@ -9314,7 +9271,7 @@ Manages protocol-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9327,7 +9284,6 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9344,7 +9300,7 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9356,7 +9312,6 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9424,7 +9379,7 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **start** (method) — Starts the PubSub client and listens for incoming messages.
   - calls: start, listen, networkEvents, hasPubsubMessageReceived, _handlePubsubMessage, pubsubMessageReceived
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9436,7 +9391,6 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9453,7 +9407,7 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the PubSub client.
   - calls: stop, close
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9464,7 +9418,6 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9526,7 +9479,7 @@ Handles routing operations for an IPFS node.
 
 - **start** (method) — Starts the routing services.
   - calls: start
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9538,7 +9491,6 @@ Handles routing operations for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9555,7 +9507,7 @@ Handles routing operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the routing services.
   - calls: stop
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9566,7 +9518,6 @@ Handles routing operations for an IPFS node.
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9635,7 +9586,7 @@ _Directly tested._
 Web-compatible implementation of IBlockStore using IpfsPlatform storage.
 
 - **start** (method)
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9648,7 +9599,6 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9664,7 +9614,7 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9676,7 +9626,6 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -9864,7 +9813,6 @@ Codec for 'dag-jose'.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -10091,7 +10039,6 @@ Interface for all IPLD codecs in dart_ipfs.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -10319,7 +10266,6 @@ Codec for 'raw' data.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -10542,7 +10488,6 @@ Codec for 'dag-pb' (Protobuf).
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -10765,7 +10710,6 @@ Codec for 'dag-cbor' (CBOR).
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -10987,7 +10931,6 @@ Codec for 'dag-json' (JSON).
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -11464,7 +11407,6 @@ Handles spec-compliant DAG-JSON encoding and decoding for IPLD nodes.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -12160,7 +12102,7 @@ ExploreIndex: traverse a single list index.
 ExploreRange: traverse a half-open range of list indices `[start, end)`.
 
 - **start** (field)
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12173,7 +12115,6 @@ ExploreRange: traverse a half-open range of list indices `[start, end)`.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -12744,7 +12685,7 @@ Collects and manages metrics about IPFS node operations.
   - calls: metrics
 - **start** (method)
   - calls: debug, enabled, metrics, unawaited, _collect, periodic, Duration, collectionIntervalSeconds
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12757,7 +12698,6 @@ Collects and manages metrics about IPFS node operations.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -12774,7 +12714,7 @@ Collects and manages metrics about IPFS node operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug, cancel, close
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12786,7 +12726,6 @@ Collects and manages metrics about IPFS node operations.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -13453,7 +13392,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **start** (method)
   - calls: init
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -13466,7 +13405,6 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -13483,7 +13421,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: sync
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -13495,7 +13433,6 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -14046,7 +13983,6 @@ A field read from a protobuf message.
     - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue)
@@ -14276,7 +14212,6 @@ A field read from a protobuf message.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -14646,7 +14581,6 @@ A field read from a protobuf message.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -14994,7 +14928,6 @@ A field read from a protobuf message.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -15326,7 +15259,7 @@ Maintains persistent connections to a configured set of peers.
   - calls: stream
 - **start** (method)
   - calls: warning, enabled, info, debug, peers, _extractPeerId, _PeerState, now, length, _checkAllPeers, periodic, checkInterval, error
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -15339,7 +15272,6 @@ Maintains persistent connections to a configured set of peers.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -15356,7 +15288,7 @@ Maintains persistent connections to a configured set of peers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: warning, debug, cancel, clear, close, info, error
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -15368,7 +15300,6 @@ Maintains persistent connections to a configured set of peers.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -15853,7 +15784,6 @@ Base class for all IPFS plugins.
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -16374,7 +16304,6 @@ A parsed and validated plugin manifest.
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -17869,7 +17798,7 @@ Operator-controlled content denylist service.
   - calls: contains, denylistDefaultAction
 - **start** (method) — Starts the service, loads the initial denylist, and schedules refreshes.
   - calls: enableDenylist, info, _loadInitial, _scheduleRefreshTimer
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -17882,7 +17811,6 @@ Operator-controlled content denylist service.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -17899,7 +17827,7 @@ Operator-controlled content denylist service.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service and cancels the refresh timer.
   - calls: cancel, close
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -17911,7 +17839,6 @@ Operator-controlled content denylist service.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -18083,7 +18010,7 @@ Manages security aspects of the IPFS node.
   - calls: remove, maxAuthAttempts, _recordSecurityMetric, recordSecurityEvent
 - **start** (method) — Returns a [Future] that completes when the [SecurityManager] has started.
   - calls: info, _initializeSecurity
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18096,7 +18023,6 @@ Manages security aspects of the IPFS node.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -18113,7 +18039,7 @@ Manages security aspects of the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the [SecurityManager] has stopped.
   - calls: info, cancel, lockKeystore
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18125,7 +18051,6 @@ Manages security aspects of the IPFS node.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -18210,7 +18135,7 @@ Web-compatible implementation of SecurityManager.
 - **getSecurePublicKey** (method)
   - calls: getPublicKey
 - **start** (method)
-  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18223,7 +18148,6 @@ Web-compatible implementation of SecurityManager.
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start)
-    - `lib/src/network/router.dart` (Router.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -18240,7 +18164,7 @@ Web-compatible implementation of SecurityManager.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: lockKeystore
-  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18252,7 +18176,6 @@ Web-compatible implementation of SecurityManager.
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide)
@@ -18725,7 +18648,6 @@ The entry returned by a query.
     - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue)
@@ -18921,7 +18843,6 @@ Abstract interface for a key-value datastore.
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -19124,7 +19045,6 @@ A file-system based implementation of [Datastore].
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -19314,7 +19234,6 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read)
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -19506,7 +19425,6 @@ An in-memory implementation of [Datastore].
     - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
     - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
-    - `lib/src/network/router.dart` (Router.stop)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
@@ -19602,7 +19520,6 @@ Represents a peer identifier in the IPFS network.
     - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue)
@@ -19816,7 +19733,6 @@ Core peer representation used throughout the application.
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)

@@ -1,6 +1,6 @@
 ---
 test-group: mocks
-generated: 2026-08-24T09:58:20.729596
+generated: 2026-08-24T10:18:28.890302
 ---
 
 # `test/mocks/`

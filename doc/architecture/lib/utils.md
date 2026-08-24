@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-24T09:58:20.664757
+generated: 2026-08-24T10:18:28.826683
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -74,7 +74,6 @@ Base58 encoding/decoding for IPFS identifiers.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
@@ -987,7 +986,6 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
-    - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue)

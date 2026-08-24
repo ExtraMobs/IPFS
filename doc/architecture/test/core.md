@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-24T09:58:20.726961
+generated: 2026-08-24T10:18:28.887515
 ---
 
 # `test/core/`
@@ -1201,7 +1201,6 @@ generated: 2026-08-24T09:58:20.726961
 - canConnectDirectly failure
 - sendMessage error handling
 - receiveMessages error handling
-- dhtRouter getter
 - circuitRelayClient getter
 - config getter
 - peerID getter
