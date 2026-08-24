@@ -1,21 +1,39 @@
 // tool/generate_module_index.dart
 //
-// Walks lib/src/<module>/**/*.dart AND test/**/*.dart, extracts import
-// directives, maps each import target back to the top-level module that
-// owns it, and writes a markdown+mermaid report to
-// doc/architecture/module-index.md.
+// AST-based (unresolved parse, package:analyzer) audit index. Per top-level
+// module under lib/src/ and test/, writes a markdown file to
+// doc/architecture/{lib,test}/<module>.md listing every file, its doc
+// comment (extracted from source, not authored here), and every declared
+// class/mixin/function/method/field with:
+//   - what it extends/implements
+//   - "calls" -- names invoked/instantiated inside it (by name, NOT
+//     resolved to a specific declaration -- see caveat below)
+//   - "referenced by" -- other declared members elsewhere whose body
+//     mentions this exact name (same by-name caveat)
 //
-// This is a reporting aid, not a CI gate (see test/architecture_boundary_test.dart
-// for the enforced version). Regenerate before/after each refactor phase per
-// the "índice vivo" methodology in the approved plan.
+// CAVEAT: this uses parseString (syntax only, no cross-file type
+// resolution), so "calls"/"referenced by" match on identifier text, not
+// resolved declarations. `handler.start()` is recorded as a call to
+// "start" -- it does NOT know which of the 21+ classes with a start()
+// method it resolves to. This is intentionally the lighter of two tiers:
+// full resolution (AnalysisContextCollection over the whole package graph)
+// would be accurate but slow to run across 470+ files. Treat "referenced
+// by" as "other places this name appears as a call/access", a lead to
+// check, not a proven reference -- common names (start, stop, encode...)
+// will have long, mostly-irrelevant lists; this tool caps and flags those.
 //
-// Known simplification: only the first URI in a conditional import
-// (`import 'x' if (...) 'y'`) is followed; export directives are counted as
-// edges but a file is not considered "tested" via export-only reachability.
+// The module-to-module import graph (mermaid) is unchanged from the prior
+// version of this tool and stays regex-based -- import statements are
+// simple string literals, a real parser buys nothing there.
 //
 // Usage: dart run tool/generate_module_index.dart
 
 import 'dart:io';
+
+import 'package:analyzer/dart/analysis/results.dart' show ParseStringResult;
+import 'package:analyzer/dart/analysis/utilities.dart' show parseString;
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart' show RecursiveAstVisitor;
 
 const List<String> modules = [
   'core',
@@ -43,15 +61,13 @@ String? _moduleOf(String path) {
   return modules.contains(top) ? top : null;
 }
 
-/// Top-level directory under test/ that [path] lives in, e.g. "protocols"
-/// for "test/protocols/dht/foo_test.dart", or null if directly under test/.
 String? _testGroupOf(String path) {
   final normalized = path.replaceAll('\\', '/');
   final idx = normalized.indexOf('test/');
   if (idx == -1) return null;
   final rest = normalized.substring(idx + 'test/'.length);
   final parts = rest.split('/');
-  if (parts.length < 2) return null; // file directly under test/
+  if (parts.length < 2) return null;
   return parts.first;
 }
 
@@ -69,9 +85,6 @@ String _normalizePath(String path) {
   return result.join('/');
 }
 
-/// Resolves an import/export [target] found inside a file at [fileDir] to a
-/// repo-relative path, or null if it's an external package / dart: import
-/// this tool doesn't track path-wise.
 String? _resolveTarget(String target, String fileDir) {
   if (target.startsWith('package:dart_ipfs/src/')) {
     return 'lib/src/${target.substring('package:dart_ipfs/src/'.length)}';
@@ -83,18 +96,147 @@ String? _resolveTarget(String target, String fileDir) {
 }
 
 final _docLine = RegExp(r'^///\s?(.*)$', multiLine: true);
-final _typeDecl = RegExp(
-  r'^(?:abstract\s+)?(?:class|mixin|enum)\s+(\w+)',
-  multiLine: true,
-);
+String _docSummary(String content) =>
+    _docLine.firstMatch(content)?.group(1)?.trim() ?? '';
 
-/// First `///` line in [content] (the file's own doc comment), or '' if
-/// none. Pulled verbatim from source, never authored by this tool.
-String _docSummary(String content) => _docLine.firstMatch(content)?.group(1)?.trim() ?? '';
+/// A declared member (method or public field) inside a type, or a
+/// top-level function/variable.
+class Member {
+  Member(this.kind, this.name, {this.extendsName, this.implementsNames = const []});
+  final String kind; // method, field, function, variable
+  final String name;
+  final String? extendsName;
+  final List<String> implementsNames;
+  final Set<String> calls = {};
+  /// Populated in a second pass: (file, ownerLabel) pairs elsewhere whose
+  /// body calls/mentions this member's exact name.
+  final List<(String file, String owner)> referencedBy = [];
+}
 
-/// Top-level class/mixin/enum names declared in [content].
-List<String> _declaredTypes(String content) =>
-    _typeDecl.allMatches(content).map((m) => m.group(1)!).toList();
+/// A declared type (class/mixin) with its members, or a bare top-level
+/// function/variable wrapped as a single-member pseudo-type.
+class TypeDecl {
+  TypeDecl(this.kind, this.name, {this.extendsName, this.implementsNames = const []});
+  final String kind; // class, abstract class, mixin
+  final String name;
+  final String? extendsName;
+  final List<String> implementsNames;
+  final List<Member> members = [];
+}
+
+class FileAudit {
+  FileAudit(this.doc);
+  final String doc;
+  final List<TypeDecl> types = [];
+  final List<Member> topLevel = []; // top-level functions/variables
+}
+
+/// Collects identifier-like names invoked/instantiated/read within an AST
+/// subtree. Used for both "calls" (method bodies) and field initializers.
+class _NameCollector extends RecursiveAstVisitor<void> {
+  final Set<String> names = {};
+
+  @override
+  void visitMethodInvocation(MethodInvocation node) {
+    names.add(node.methodName.name);
+    super.visitMethodInvocation(node);
+  }
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    names.add(node.constructorName.type.toSource().split('<').first);
+    super.visitInstanceCreationExpression(node);
+  }
+
+  @override
+  void visitPropertyAccess(PropertyAccess node) {
+    names.add(node.propertyName.name);
+    super.visitPropertyAccess(node);
+  }
+
+  @override
+  void visitPrefixedIdentifier(PrefixedIdentifier node) {
+    names.add(node.identifier.name);
+    super.visitPrefixedIdentifier(node);
+  }
+}
+
+Set<String> _namesIn(AstNode? node) {
+  if (node == null) return {};
+  final collector = _NameCollector();
+  node.accept(collector);
+  return collector.names;
+}
+
+bool _isPublic(String name) => !name.startsWith('_');
+
+FileAudit _auditFile(String content, String path) {
+  final audit = FileAudit(_docSummary(content));
+  final ParseStringResult parsed;
+  try {
+    parsed = parseString(content: content, path: path, throwIfDiagnostics: false);
+  } catch (_) {
+    return audit; // unparsable (shouldn't happen for code that compiles)
+  }
+
+  for (final decl in parsed.unit.declarations) {
+    if (decl is ClassDeclaration) {
+      final kind = decl.abstractKeyword != null ? 'abstract class' : 'class';
+      final type = TypeDecl(
+        kind,
+        decl.namePart.typeName.lexeme,
+        extendsName: decl.extendsClause?.superclass.toSource(),
+        implementsNames:
+            decl.implementsClause?.interfaces.map((NamedType t) => t.toSource()).toList() ??
+                const [],
+      );
+      for (final m in decl.body.members) {
+        if (m is MethodDeclaration && _isPublic(m.name.lexeme)) {
+          final member = Member('method', m.name.lexeme);
+          member.calls.addAll(_namesIn(m.body));
+          type.members.add(member);
+        } else if (m is FieldDeclaration) {
+          final kind = m.isStatic ? 'static field' : 'field';
+          for (final v in m.fields.variables) {
+            if (!_isPublic(v.name.lexeme)) continue;
+            final member = Member(kind, v.name.lexeme);
+            member.calls.addAll(_namesIn(v.initializer));
+            type.members.add(member);
+          }
+        }
+      }
+      audit.types.add(type);
+    } else if (decl is MixinDeclaration) {
+      final type = TypeDecl(
+        'mixin',
+        decl.name.lexeme,
+        implementsNames:
+            decl.implementsClause?.interfaces.map((NamedType t) => t.toSource()).toList() ??
+                const [],
+      );
+      for (final m in decl.body.members) {
+        if (m is MethodDeclaration && _isPublic(m.name.lexeme)) {
+          final member = Member('method', m.name.lexeme);
+          member.calls.addAll(_namesIn(m.body));
+          type.members.add(member);
+        }
+      }
+      audit.types.add(type);
+    } else if (decl is FunctionDeclaration && _isPublic(decl.name.lexeme)) {
+      final member = Member('function', decl.name.lexeme);
+      member.calls.addAll(_namesIn(decl.functionExpression.body));
+      audit.topLevel.add(member);
+    } else if (decl is TopLevelVariableDeclaration) {
+      for (final v in decl.variables.variables) {
+        if (!_isPublic(v.name.lexeme)) continue;
+        final member = Member('variable', v.name.lexeme);
+        member.calls.addAll(_namesIn(v.initializer));
+        audit.topLevel.add(member);
+      }
+    }
+  }
+  return audit;
+}
 
 void main() {
   final libSrc = Directory('lib/src');
@@ -122,28 +264,19 @@ void main() {
     multiLine: true,
   );
 
-  // --- lib/src module-to-module dependency graph, and per-file audit info ---
+  // --- module-to-module import graph (regex, unchanged approach) ---
   final fileCount = <String, int>{};
   final edges = <String, Set<String>>{};
-  // path -> (doc summary, declared types), for the per-file audit section.
-  final fileInfo = <String, (String, List<String>)>{};
+  final directlyTested = <String>{};
 
   for (final file in libFiles) {
     final mod = _moduleOf(file.path);
     if (mod == null) continue;
     fileCount[mod] = (fileCount[mod] ?? 0) + 1;
-
     final content = file.readAsStringSync();
     final fileDir = _toForwardSlashes(file.parent.path);
-    final rel = _toForwardSlashes(file.path);
-    fileInfo[rel.substring(rel.indexOf('lib/src/'))] = (
-      _docSummary(content),
-      _declaredTypes(content),
-    );
-
     for (final match in importPattern.allMatches(content)) {
       final target = match.group(1)!;
-      String? targetPath;
       if (target.startsWith('package:dart_ipfs_core')) {
         edges.putIfAbsent(mod, () => {}).add('dart_ipfs_core[pkg]');
         continue;
@@ -151,7 +284,7 @@ void main() {
         edges.putIfAbsent(mod, () => {}).add('dart_ipfs_quic[pkg]');
         continue;
       }
-      targetPath = _resolveTarget(target, fileDir);
+      final targetPath = _resolveTarget(target, fileDir);
       if (targetPath == null) continue;
       final targetMod = _moduleOf(targetPath);
       if (targetMod != null && targetMod != mod) {
@@ -159,23 +292,7 @@ void main() {
       }
     }
   }
-
-  final reverseEdges = <String, Set<String>>{};
-  for (final entry in edges.entries) {
-    for (final target in entry.value) {
-      reverseEdges.putIfAbsent(target, () => {}).add(entry.key);
-    }
-  }
-
-  // --- test/ coverage: file counts per group + which lib/src files are
-  // directly imported by at least one test file ---
-  final testGroupCount = <String, int>{};
-  final directlyTested = <String>{}; // repo-relative lib/src/... paths
-
   for (final file in testFiles) {
-    final group = _testGroupOf(file.path) ?? '(raiz)';
-    testGroupCount[group] = (testGroupCount[group] ?? 0) + 1;
-
     final content = file.readAsStringSync();
     final fileDir = _toForwardSlashes(file.parent.path);
     for (final match in importPattern.allMatches(content)) {
@@ -186,113 +303,175 @@ void main() {
     }
   }
 
-  final untestedByModule = <String, List<String>>{};
+  // --- AST audit per lib/src file ---
+  stderr.writeln('Parsing ${libFiles.length} lib/src files...');
+  final audits = <String, FileAudit>{}; // relPath -> audit
   for (final file in libFiles) {
     final mod = _moduleOf(file.path);
     if (mod == null) continue;
     final rel = _toForwardSlashes(file.path);
     final relFromLib = rel.substring(rel.indexOf('lib/src/'));
-    if (!directlyTested.contains(relFromLib)) {
-      untestedByModule.putIfAbsent(mod, () => []).add(relFromLib);
+    audits[relFromLib] = _auditFile(file.readAsStringSync(), relFromLib);
+  }
+
+  // Global declared-name -> Set<(file, ownerLabel)> for by-name reverse refs.
+  final declaredBy = <String, List<(String, String)>>{};
+  for (final entry in audits.entries) {
+    for (final t in entry.value.types) {
+      for (final m in t.members) {
+        declaredBy.putIfAbsent(m.name, () => []).add((entry.key, '${t.name}.${m.name}'));
+      }
+    }
+    for (final m in entry.value.topLevel) {
+      declaredBy.putIfAbsent(m.name, () => []).add((entry.key, m.name));
     }
   }
 
-  // --- write report ---
-  final buf = StringBuffer();
-  buf.writeln('# Índice de módulos e testes — estado atual do repositório\n');
-  buf.writeln(
-    'Gerado automaticamente por `tool/generate_module_index.dart` em ${DateTime.now().toIso8601String()}. '
-    'Não editar à mão — regenerar com `dart run tool/generate_module_index.dart`.\n',
-  );
-
-  buf.writeln('## Tamanho por módulo (`lib/src/*`)\n');
-  buf.writeln('| Módulo | Arquivos .dart | Sem teste direto |');
-  buf.writeln('|---|---|---|');
-  for (final m in modules) {
-    final untested = untestedByModule[m]?.length ?? 0;
-    buf.writeln('| $m | ${fileCount[m] ?? 0} | $untested |');
-  }
-
-  buf.writeln('\n## Grafo de dependências real entre módulos (mermaid)\n');
-  buf.writeln('```mermaid');
-  buf.writeln('graph LR');
-  final drawn = <String>{};
-  for (final m in modules) {
-    if ((fileCount[m] ?? 0) > 0) {
-      buf.writeln('    $m["$m (${fileCount[m]})"]');
+  // Build reverse index: declared name -> list of (callerFile, callerOwner).
+  final referencesOf = <String, List<(String, String)>>{};
+  for (final entry in audits.entries) {
+    for (final t in entry.value.types) {
+      for (final m in t.members) {
+        for (final call in m.calls) {
+          if (!declaredBy.containsKey(call)) continue;
+          referencesOf.putIfAbsent(call, () => []).add((entry.key, '${t.name}.${m.name}'));
+        }
+      }
     }
-  }
-  for (final entry in edges.entries) {
-    for (final target in entry.value) {
-      final safeTarget = target.replaceAll('[', '_').replaceAll(']', '');
-      final edgeKey = '${entry.key}->$safeTarget';
-      if (drawn.add(edgeKey)) {
-        buf.writeln('    ${entry.key} --> $safeTarget');
+    for (final m in entry.value.topLevel) {
+      for (final call in m.calls) {
+        if (!declaredBy.containsKey(call)) continue;
+        referencesOf.putIfAbsent(call, () => []).add((entry.key, m.name));
       }
     }
   }
-  buf.writeln('```\n');
 
-  buf.writeln('## Módulo → depende de\n');
-  buf.writeln('| Módulo | Depende de |');
-  buf.writeln('|---|---|');
-  for (final m in modules) {
-    final deps = (edges[m]?.toList() ?? [])..sort();
-    buf.writeln('| $m | ${deps.isEmpty ? "—" : deps.join(", ")} |');
-  }
+  // --- write per-module lib/ audit files ---
+  final outLibDir = Directory('doc/architecture/lib');
+  outLibDir.createSync(recursive: true);
 
-  buf.writeln('\n## Módulo → é usado por\n');
-  buf.writeln('| Módulo | Usado por |');
-  buf.writeln('|---|---|');
-  for (final m in modules) {
-    final users = (reverseEdges[m]?.toList() ?? [])..sort();
-    buf.writeln('| $m | ${users.isEmpty ? "—" : users.join(", ")} |');
-  }
-
-  buf.writeln('\n## Arquivos de teste por grupo (`test/*`)\n');
-  buf.writeln('| Grupo | Arquivos .dart |');
-  buf.writeln('|---|---|');
-  final sortedGroups = testGroupCount.keys.toList()..sort();
-  for (final g in sortedGroups) {
-    buf.writeln('| test/$g | ${testGroupCount[g]} |');
-  }
-  buf.writeln(
-    '\nTotal de arquivos em `lib/src/` importados diretamente por algum '
-    'teste: ${directlyTested.length} de ${libFiles.length}.\n',
-  );
-  buf.writeln(
-    '_Nota: "sem teste direto" conta arquivos que nenhum arquivo em `test/` '
-    'importa pelo caminho `package:dart_ipfs/src/...` -- um arquivo pode '
-    'estar coberto indiretamente (via um arquivo que o importa e que é '
-    'testado) sem aparecer aqui como testado. Não é prova de cobertura '
-    'zero, é um sinal de onde checar com mais atenção antes de mexer._\n',
-  );
-
-  buf.writeln('## Auditoria por arquivo (`lib/src/*`)\n');
-  buf.writeln(
-    '_Resumo extraído do primeiro comentário `///` de cada arquivo -- não '
-    'escrito por esta ferramenta, é o que o próprio código já documenta._\n',
-  );
-  for (final m in modules) {
-    final files = fileInfo.keys.where((f) => _moduleOf(f) == m).toList()
-      ..sort();
-    if (files.isEmpty) continue;
-    buf.writeln('<details><summary><code>$m</code> (${files.length})</summary>\n');
-    buf.writeln('| Arquivo | Resumo | Declara | Testado |');
-    buf.writeln('|---|---|---|---|');
-    for (final f in files) {
-      final (doc, types) = fileInfo[f]!;
-      final tested = directlyTested.contains(f) ? '✓' : '—';
-      final typesCell = types.isEmpty ? '—' : types.join(', ');
-      final docCell = doc.isEmpty ? '—' : doc.replaceAll('|', r'\|');
-      buf.writeln('| `$f` | $docCell | $typesCell | $tested |');
+  String memberLine(String file, TypeDecl? owner, Member m) {
+    final refs = referencesOf[m.name] ?? const [];
+    final selfLabel = owner == null ? m.name : '${owner.name}.${m.name}';
+    final externalRefs = refs.where((r) => !(r.$1 == file && r.$2 == selfLabel)).toList();
+    final buf = StringBuffer('- **${m.name}** (${m.kind})');
+    if (m.calls.isNotEmpty) {
+      buf.write(' — chama: ${m.calls.join(", ")}');
     }
-    buf.writeln('\n</details>\n');
+    if (externalRefs.isNotEmpty) {
+      final shown = externalRefs.map((r) => '`${r.$1}` (${r.$2})').join(', ');
+      const more = '';
+      buf.write('\n  - referenciado por (por nome): $shown$more');
+    }
+    return buf.toString();
   }
 
-  final outDir = Directory('doc/architecture');
-  if (!outDir.existsSync()) outDir.createSync(recursive: true);
-  final outFile = File('doc/architecture/module-index.md');
-  outFile.writeAsStringSync(buf.toString());
-  stdout.writeln('Escrito em ${outFile.path}');
+  for (final mod in modules) {
+    final files = audits.keys.where((f) => _moduleOf(f) == mod).toList()..sort();
+    if (files.isEmpty) continue;
+    final buf = StringBuffer();
+    buf.writeln('---');
+    buf.writeln('module: $mod');
+    buf.writeln('kind: lib/src audit');
+    buf.writeln('generated: ${DateTime.now().toIso8601String()}');
+    buf.writeln('---\n');
+    buf.writeln('# Módulo `$mod` (`lib/src/$mod/`)\n');
+    buf.writeln(
+      '_Gerado por `tool/generate_module_index.dart` via AST não-resolvida '
+      '(`package:analyzer`). "Chama"/"referenciado por" casam por nome de '
+      'identificador, não por tipo resolvido -- ver aviso no topo do script. '
+      'Não editar à mão._\n',
+    );
+    final deps = (edges[mod]?.toList() ?? [])..sort();
+    final depsCell = deps.isEmpty
+        ? '—'
+        : deps
+            .map((d) => '[$d](${d.endsWith("[pkg]") ? "" : "$d.md"})')
+            .join(', ');
+    buf.writeln('Depende de: $depsCell\n');
+
+    for (final f in files) {
+      final audit = audits[f]!;
+      buf.writeln('## `$f`\n');
+      if (audit.doc.isNotEmpty) buf.writeln('${audit.doc}\n');
+      buf.writeln(directlyTested.contains(f) ? '_Testado diretamente._\n' : '_Sem teste direto conhecido._\n');
+
+      for (final t in audit.types) {
+        final ext = t.extendsName != null ? ' extends ${t.extendsName}' : '';
+        final impl = t.implementsNames.isNotEmpty ? ' implements ${t.implementsNames.join(", ")}' : '';
+        buf.writeln('### ${t.kind} `${t.name}`$ext$impl\n');
+        if (t.members.isEmpty) {
+          buf.writeln('_(sem membros públicos)_\n');
+        } else {
+          for (final m in t.members) {
+            buf.writeln(memberLine(f, t, m));
+          }
+          buf.writeln('');
+        }
+      }
+      for (final m in audit.topLevel) {
+        buf.writeln('### top-level `${m.name}` (${m.kind})\n');
+        buf.writeln(memberLine(f, null, m));
+        buf.writeln('');
+      }
+    }
+    File('${outLibDir.path}/$mod.md').writeAsStringSync(buf.toString());
+  }
+
+  // --- write per-group test/ files (test()/group() descriptions) ---
+  final outTestDir = Directory('doc/architecture/test');
+  outTestDir.createSync(recursive: true);
+  final testCallPattern = RegExp(
+    r'''(?:test|group)\(\s*['"]([^'"]+)['"]''',
+  );
+  final testGroups = <String, List<(String, List<String>)>>{};
+  for (final file in testFiles) {
+    final group = _testGroupOf(file.path) ?? '(raiz)';
+    final content = file.readAsStringSync();
+    final descriptions = testCallPattern.allMatches(content).map((m) => m.group(1)!).toList();
+    final rel = _toForwardSlashes(file.path);
+    testGroups.putIfAbsent(group, () => []).add((rel.substring(rel.indexOf('test/')), descriptions));
+  }
+  for (final entry in testGroups.entries) {
+    final buf = StringBuffer();
+    buf.writeln('---');
+    buf.writeln('test-group: ${entry.key}');
+    buf.writeln('generated: ${DateTime.now().toIso8601String()}');
+    buf.writeln('---\n');
+    buf.writeln('# `test/${entry.key}/`\n');
+    for (final (file, descriptions) in entry.value..sort((a, b) => a.$1.compareTo(b.$1))) {
+      buf.writeln('## `$file`\n');
+      for (final d in descriptions) {
+        buf.writeln('- $d');
+      }
+      buf.writeln('');
+    }
+    File('${outTestDir.path}/${entry.key.replaceAll('/', '_')}.md').writeAsStringSync(buf.toString());
+  }
+
+  // --- overview / entry point ---
+  final overview = StringBuffer();
+  overview.writeln('# Índice de arquitetura — visão geral\n');
+  overview.writeln(
+    'Gerado por `tool/generate_module_index.dart` em ${DateTime.now().toIso8601String()}. '
+    'Um arquivo por módulo em [lib/](lib/) e [test/](test/), espelhando a estrutura real do repositório.\n',
+  );
+  overview.writeln('## Módulos (`lib/src/*`)\n');
+  overview.writeln('| Módulo | Arquivos | Depende de |');
+  overview.writeln('|---|---|---|');
+  for (final m in modules) {
+    if ((fileCount[m] ?? 0) == 0) continue;
+    final deps = (edges[m]?.toList() ?? [])..sort();
+    overview.writeln('| [$m](lib/$m.md) | ${fileCount[m]} | ${deps.isEmpty ? "—" : deps.join(", ")} |');
+  }
+  overview.writeln('\n## Grupos de teste (`test/*`)\n');
+  for (final g in (testGroups.keys.toList()..sort())) {
+    overview.writeln('- [test/$g](test/${g.replaceAll('/', '_')}.md) (${testGroups[g]!.length} arquivos)');
+  }
+  File('doc/architecture/README.md').writeAsStringSync(overview.toString());
+
+  stdout.writeln(
+    'Escrito: doc/architecture/README.md + ${modules.where((m) => (fileCount[m] ?? 0) > 0).length} '
+    'módulos lib/ + ${testGroups.length} grupos test/',
+  );
 }

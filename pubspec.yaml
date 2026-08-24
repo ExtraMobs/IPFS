@@ -76,6 +76,7 @@ dependencies:
   base32: ^2.2.0
 
 dev_dependencies:
+  analyzer: ^14.1.0 # AST parsing for tool/generate_module_index.dart
   test: ^1.28.0 # For unit and integration tests
   lints: ^6.1.0 # For code style analysis
   coverage: ^1.15.0
