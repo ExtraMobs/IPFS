@@ -95,6 +95,64 @@ void main() {
     });
   });
 
+  group('CID gap-closing additions (Phase 1)', () {
+    test('fromContent with version:0 produces a CIDv0', () async {
+      final data = Uint8List.fromList(utf8.encode('cidv0-content'));
+      final cid = await CID.fromContent(data, version: 0);
+      expect(cid.version, equals(0));
+      expect(cid.codec, equals('dag-pb'));
+      expect(cid.encode(), startsWith('Qm'));
+    });
+
+    test('fromContent rejects unsupported hashType', () async {
+      final data = Uint8List.fromList(utf8.encode('x'));
+      expect(
+        () => CID.fromContent(data, hashType: 'sha3-256'),
+        throwsUnsupportedError,
+      );
+    });
+
+    test('computeForData matches fromContent for the same input', () async {
+      final data = Uint8List.fromList(utf8.encode('compute-for-data'));
+      final a = await CID.computeForData(data, format: 'dag-cbor');
+      final b = await CID.fromContent(data, codec: 'dag-cbor');
+      expect(a, equals(b));
+    });
+
+    test('computeForDataSync matches the async fromContent digest', () async {
+      final data = Uint8List.fromList(utf8.encode('sync-vs-async'));
+      final sync = CID.computeForDataSync(data);
+      final async = await CID.fromContent(data);
+      expect(sync, equals(async));
+    });
+
+    test('fromPrefixBytes reconstructs the same CID given matching data', () async {
+      final data = Uint8List.fromList(utf8.encode('prefix-reconstruction'));
+      final original = await CID.fromContent(data, codec: 'dag-cbor');
+      final rebuilt = await CID.fromPrefixBytes(
+        original.toPrefixBytes(),
+        data,
+      );
+      expect(rebuilt, equals(original));
+    });
+
+    test('validate accepts a well-formed CIDv1', () async {
+      final data = Uint8List.fromList(utf8.encode('valid'));
+      final cid = await CID.fromContent(data);
+      expect(cid.validate(), isTrue);
+    });
+
+    test('validate rejects a CIDv0 with a non-dag-pb codec', () {
+      final hash = Uint8List(32);
+      final malformed = CID(
+        version: 0,
+        multihash: MultihashUtils.sha256(hash),
+        codec: 'raw',
+      );
+      expect(malformed.validate(), isFalse);
+    });
+  });
+
   group('MultihashUtils', () {
     test('encodes SHA2-256 digest', () {
       final digest = Uint8List(32);

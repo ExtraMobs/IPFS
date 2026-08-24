@@ -14,7 +14,8 @@
 library;
 
 export 'src/block/block.dart' show Block, IBlock;
-export 'src/block/block_store.dart' show BlockStoreResult, IBlockStore;
+export 'src/block/block_store.dart'
+    show BlockStoreResult, IBlockStore, BlockStoreStatus;
 export 'src/block/memory_block_store.dart' show InMemoryBlockStore;
 
 export 'src/cid/cid.dart' show CID;

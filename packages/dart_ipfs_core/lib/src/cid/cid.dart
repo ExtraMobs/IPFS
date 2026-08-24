@@ -59,13 +59,71 @@ class CID {
     );
   }
 
-  /// Creates a CID by hashing [data] with SHA2-256.
+  /// Creates a CID by hashing [data].
   ///
-  /// The [codec] defaults to `raw`.
-  static Future<CID> fromContent(Uint8List data, {String codec = 'raw'}) async {
-    final digest = sha256.convert(data).bytes;
-    final mh = MultihashUtils.sha256(Uint8List.fromList(digest));
+  /// [codec] defaults to `raw` and is ignored when [version] is 0 (always
+  /// `dag-pb`, per the CIDv0 spec). [hashType] defaults to `sha2-256`; no
+  /// other hash function is currently supported.
+  static Future<CID> fromContent(
+    Uint8List data, {
+    String codec = 'raw',
+    String hashType = 'sha2-256',
+    int version = 1,
+  }) async {
+    if (hashType != 'sha2-256') {
+      throw UnsupportedError('Hash type $hashType not supported');
+    }
+    final digest = Uint8List.fromList(sha256.convert(data).bytes);
+    if (version == 0) {
+      return CID.v0(digest);
+    }
+    final mh = MultihashUtils.sha256(digest);
     return CID.v1(codec, mh);
+  }
+
+  /// Computes a CID for [data] (async convenience wrapper over
+  /// [fromContent], kept for API parity with call sites that expect this
+  /// name).
+  static Future<CID> computeForData(Uint8List data, {String format = 'raw'}) {
+    return fromContent(data, codec: format);
+  }
+
+  /// Computes a CID for [data] synchronously (SHA2-256, CIDv1 only).
+  ///
+  /// Prefer [fromContent] when `hashType`/`version` flexibility or async
+  /// hashing is needed; this exists for call sites that cannot await.
+  static CID computeForDataSync(Uint8List data, {String codec = 'raw'}) {
+    final digest = Uint8List.fromList(sha256.convert(data).bytes);
+    final mh = MultihashUtils.sha256(digest);
+    return CID.v1(codec, mh);
+  }
+
+  /// Reconstructs a CID from a [prefix] (version + codec + multihash
+  /// function + hash length) and the raw block [data].
+  ///
+  /// The digest is computed from [data] using [hashType]; the codec comes
+  /// from [prefix], not from [data]'s content. Used by Bitswap/GraphSync to
+  /// let a receiver reconstruct a CID from [Block.toPrefixBytes] plus the
+  /// block bytes.
+  static Future<CID> fromPrefixBytes(
+    Uint8List prefix,
+    Uint8List data, {
+    String hashType = 'sha2-256',
+  }) async {
+    final codec = _codecFromPrefixBytes(prefix);
+    return fromContent(data, codec: codec, hashType: hashType);
+  }
+
+  static String _codecFromPrefixBytes(Uint8List prefix) {
+    if (prefix.isEmpty) return 'raw';
+    if (prefix[0] == 0x01) {
+      final (codecCode, _) = readVarint(prefix, 1);
+      return Multicodec.supportsByCode(codecCode)
+          ? Multicodec.name(codecCode)
+          : 'unknown';
+    }
+    // CIDv0 is always dag-pb.
+    return 'dag-pb';
   }
 
   /// Parses a CID from its raw binary representation.
@@ -192,6 +250,17 @@ class CID {
       return bytes;
     }
     return Uint8List.fromList(bytes.sublist(0, bytes.length - digestLength));
+  }
+
+  /// Validates the CID's structural invariants (version, codec, multihash
+  /// size). Does not verify the multihash against any content -- for that,
+  /// hash the content and compare, e.g. via [Block.validate] on the
+  /// consuming side.
+  bool validate() {
+    if (version != 0 && version != 1) return false;
+    if (version == 0 && codec != 'dag-pb') return false;
+    if (multihash.size <= 0) return false;
+    return true;
   }
 
   /// Returns the encoded CID string.

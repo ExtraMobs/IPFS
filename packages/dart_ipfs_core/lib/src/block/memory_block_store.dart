@@ -64,6 +64,24 @@ class InMemoryBlockStore implements IBlockStore {
   @override
   Future<List<Block>> getAllBlocks() async => List.unmodifiable(_blocks.values);
 
+  @override
+  Future<BlockStoreStatus> getStatus() async {
+    var totalSize = 0;
+    for (final block in _blocks.values) {
+      totalSize += block.size;
+    }
+    return BlockStoreStatus(blockCount: _blocks.length, totalSize: totalSize);
+  }
+
+  @override
+  Future<int> gc() async {
+    // No pin tracking at this layer -- an in-memory store used for testing
+    // or ephemeral caching has no way to know what's still reachable, so
+    // gc() is intentionally a no-op rather than guessing. Callers that need
+    // real GC semantics should do so at a layer that has pin information.
+    return 0;
+  }
+
   /// Returns the number of blocks currently in memory.
   int get length => _blocks.length;
 

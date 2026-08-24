@@ -1,10 +1,45 @@
 import 'dart:typed_data';
 
 import 'package:dart_ipfs_core/dart_ipfs_core.dart';
+import 'package:multibase/multibase.dart' as mb;
 import 'package:test/test.dart';
 
 void main() {
   group('Block', () {
+    test(
+      'equality is by CID object identity (structural), not by encoded '
+      'string -- two CIDs for the same content in different bases must '
+      'still make their Blocks equal',
+      () async {
+        final data = Uint8List.fromList([1, 2, 3, 4]);
+        final block = await Block.fromData(data);
+
+        // Same version/codec/multihash as block.cid, but a different
+        // multibaseType -- under string (cid.encode()) equality these
+        // would look different; under CID's own object equality (which
+        // ignores multibaseType) they're the same content address.
+        final sameContentDifferentBase = CID(
+          version: block.cid.version,
+          multihash: block.cid.multihash,
+          codec: block.cid.codec,
+          multibaseType: block.cid.multibaseType == mb.Multibase.base32
+              ? mb.Multibase.base64
+              : mb.Multibase.base32,
+        );
+
+        expect(
+          sameContentDifferentBase.encode(),
+          isNot(equals(block.cid.encode())),
+          reason: 'sanity check: the two CIDs must actually encode '
+              'differently for this test to prove anything',
+        );
+        expect(sameContentDifferentBase, equals(block.cid));
+
+        final otherBlock = Block(cid: sameContentDifferentBase, data: data);
+        expect(otherBlock, equals(block));
+      },
+    );
+
     test('creates block from data and computes CID', () async {
       final data = Uint8List.fromList([1, 2, 3, 4]);
       final block = await Block.fromData(data);
@@ -98,6 +133,32 @@ void main() {
 
       final all = await store.getAllBlocks();
       expect(all.length, equals(2));
+      await store.stop();
+    });
+
+    test('getStatus reports block count and total size', () async {
+      final store = InMemoryBlockStore();
+      await store.start();
+      final a = await Block.fromData(Uint8List.fromList([1, 2, 3]));
+      final b = await Block.fromData(Uint8List.fromList([4, 5]));
+      await store.putBlock(a);
+      await store.putBlock(b);
+
+      final status = await store.getStatus();
+      expect(status.blockCount, equals(2));
+      expect(status.totalSize, equals(5));
+      await store.stop();
+    });
+
+    test('gc is a documented no-op without pin information', () async {
+      final store = InMemoryBlockStore();
+      await store.start();
+      final block = await Block.fromData(Uint8List.fromList([1]));
+      await store.putBlock(block);
+
+      final removed = await store.gc();
+      expect(removed, equals(0));
+      expect(await store.hasBlock(block.cid), isTrue);
       await store.stop();
     });
   });

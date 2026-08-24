@@ -2,8 +2,21 @@
 import 'dart:async';
 
 import '../cid/cid.dart';
+import '../lifecycle.dart';
 
 import 'block.dart';
+
+/// Point-in-time statistics for a block store.
+class BlockStoreStatus {
+  /// Creates a status snapshot.
+  const BlockStoreStatus({required this.blockCount, required this.totalSize});
+
+  /// Number of blocks currently held.
+  final int blockCount;
+
+  /// Combined size in bytes of all held blocks.
+  final int totalSize;
+}
 
 /// A generic result returned by block store operations.
 ///
@@ -36,13 +49,10 @@ class BlockStoreResult<T> {
 }
 
 /// Interface for block storage operations.
-abstract class IBlockStore {
-  /// Starts the block store.
-  Future<void> start();
-
-  /// Stops the block store and releases resources.
-  Future<void> stop();
-
+///
+/// Extends [ILifecycle] for `start()`/`stop()` rather than redeclaring them,
+/// matching the rest of dart_ipfs's Manager/Handler pattern.
+abstract class IBlockStore extends ILifecycle {
   /// Retrieves a block by its CID.
   Future<BlockStoreResult<Block?>> getBlock(CID cid);
 
@@ -57,4 +67,14 @@ abstract class IBlockStore {
 
   /// Returns all stored blocks.
   Future<List<Block>> getAllBlocks();
+
+  /// Returns a point-in-time snapshot of block count and total size.
+  Future<BlockStoreStatus> getStatus();
+
+  /// Removes unreachable blocks and returns the number removed.
+  ///
+  /// What counts as "unreachable" (e.g. unpinned) is left to the
+  /// implementation -- this interface is pin-agnostic by design, since
+  /// pinning is a higher-level, protocol-data concern.
+  Future<int> gc();
 }
