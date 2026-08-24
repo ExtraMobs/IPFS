@@ -8,7 +8,7 @@ import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';
 import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart';
 import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
 import 'package:dart_ipfs/src/protocols/graphsync/graphsync_handler.dart';
 import 'package:dart_ipfs/src/utils/logger.dart';
 
@@ -21,7 +21,7 @@ class ProtocolCoordinator {
   ProtocolCoordinator(this._bitswap, this._graphsync, this._ipld)
     : _logger = Logger('ProtocolCoordinator');
 
-  final BitswapHandler _bitswap;
+  final IBitswapHandler _bitswap;
   final GraphsyncHandler _graphsync;
   final IPLDHandler _ipld;
   final Logger _logger;

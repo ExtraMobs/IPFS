@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.797898
+generated: 2026-08-24T09:58:20.517251
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -190,7 +190,7 @@ Query class for mDNS resource records.
 Abstract client for multicast DNS operations.
 
 - **start** (method) — Starts the mDNS client.
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -219,7 +219,7 @@ Abstract client for multicast DNS operations.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the mDNS client.
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -265,7 +265,7 @@ IO implementation of the mDNS client.
 
 - **start** (method)
   - calls: MDnsClient, start
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -294,7 +294,7 @@ IO implementation of the mDNS client.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: stop
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -350,7 +350,7 @@ _No known direct test._
 Stub implementation of the mDNS client for platforms where it's not supported.
 
 - **start** (method)
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -379,7 +379,7 @@ Stub implementation of the mDNS client for platforms where it's not supported.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -487,7 +487,7 @@ High-level network router for IPFS peer communication.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
 - **start** (method) — Starts the router
   - calls: start
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -516,7 +516,7 @@ High-level network router for IPFS peer communication.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the router
   - calls: stop, close
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)

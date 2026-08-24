@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.931576
+generated: 2026-08-24T09:58:20.659998
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -26,7 +26,7 @@ Handles circuit relay operations for an IPFS node.
 
 - **start** (method) — Starts the circuit relay client.
   - calls: debug, hasStarted, start, registerProtocol, registerProtocolHandler, cancel, listen, connectionEvents, type, disconnected, _onPeerDisconnected, peerId, error
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -55,7 +55,7 @@ Handles circuit relay operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the circuit relay client.
   - calls: debug, cancel, values, clear, isCompleted, completeError, completer, close, info, error
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -325,7 +325,7 @@ _No known direct test._
 Handles circuit relay operations for an IPFS node (web stub).
 
 - **start** (method) — Starts the circuit relay client.
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -355,7 +355,7 @@ Handles circuit relay operations for an IPFS node (web stub).
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the circuit relay client.
   - calls: close
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -622,7 +622,7 @@ Implements the Circuit Relay v2 Server (Relay Service).
 - **transportProtocolId** (static field) — The transport protocol ID for relayed data.
 - **start** (method) — Starts the service and registers protocol handlers.
   - calls: enableCircuitRelay, debug, registerProtocolHandler, periodic, Duration, _cleanupExpired, info, error
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -652,7 +652,7 @@ Implements the Circuit Relay v2 Server (Relay Service).
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service and cleans up resources.
   - calls: debug, cancel, clear, info
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -691,15 +691,81 @@ Internal context for an active relayed circuit.
 
 ## `lib/src/transport/http_gateway_client.dart`
 
-Client for interacting with public IPFS HTTP Gateways.
+Fetches raw blocks from public IPFS HTTP gateways as a Bitswap fallback.
 
 _Directly tested._
 
-### class `HttpGatewayClient`
+### abstract class `HttpGatewayClientInterface`
+
+Fetches raw blocks from public IPFS HTTP gateways as a Bitswap fallback.
+
+- **fetchRawBlock** (method) — Fetches a raw block for a CID from a specific trustless gateway.
+- **close** (method) — Releases any resources held by this client (e.g. an internally
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
+    - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
+    - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
+    - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop)
+    - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read)
+    - `lib/src/core/peering/peering_service.dart` (PeeringService.stop)
+    - `lib/src/core/security/denylist_service.dart` (DenylistService.stop)
+    - `lib/src/core/storage/hive_datastore.dart` (HiveDatastore.close)
+    - `lib/src/network/router.dart` (Router.stop)
+    - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
+    - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
+    - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop)
+    - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete)
+    - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error)
+    - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
+    - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop)
+    - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop)
+    - `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose)
+    - `lib/src/routing/ipni_client.dart` (IPNIClient.dispose)
+    - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose)
+    - `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose)
+    - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp)
+    - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
+    - `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose)
+    - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose)
+    - `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
+    - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop)
+    - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close)
+    - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close)
+    - `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite)
+    - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close)
+    - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close)
+    - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close)
+    - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite)
+    - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close)
+    - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
+    - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
+
+### class `HttpGatewayClient` implements HttpGatewayClientInterface
 
 Client for interacting with public IPFS HTTP Gateways.
 
-- **fetchRawBlock** (method) — Fetches a raw block for a CID from a specific trustless gateway.
+- **fetchRawBlock** (method)
   - calls: endsWith, substring, length, parse, debug, timeout, get, Duration, statusCode, bodyBytes, warning, info, error
 - **get** (method) — Fetches raw data for a CID from available gateways.
   - calls: _fetchFromGateway, warning
@@ -758,9 +824,9 @@ Client for interacting with public IPFS HTTP Gateways.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **isReachable** (method) — Checks if the public network is reachable via gateways.
   - calls: timeout, head, parse, Duration, statusCode, debug
-- **close** (method) — Closes the underlying HTTP client if it was created internally.
+- **close** (method)
   - calls: close, debug
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -899,7 +965,7 @@ Native libp2p router implementation.
   - calls: EcdsaSigner, derivePeerId
 - **start** (method)
   - calls: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -928,7 +994,7 @@ Native libp2p router implementation.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **stop** (method)
   - calls: warning, debug, timeout, close, Duration, clear, values, isClosed, info, error
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -1239,7 +1305,7 @@ A [Listener] that wraps an underlying listener and applies the PNET
   - calls: accept, create
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -1573,7 +1639,7 @@ A [TransportConn] that wraps an underlying transport connection and
   - calls: notifyActivity
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -2509,7 +2575,7 @@ Abstract interface for P2P network routers.
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method) — Starts the router and begins accepting connections.
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2538,7 +2604,7 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the router and disconnects all peers.
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2741,7 +2807,7 @@ Base class for WebRTC DataChannel-backed streams.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write)
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method)
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -2937,7 +3003,7 @@ Abstract interface for WebRTC PeerConnections.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method) — Closes the peer connection.
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -3182,7 +3248,7 @@ IO implementation of [PeerConnection] (stub for now).
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: UnimplementedError
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -3314,7 +3380,7 @@ Stub implementation of [PeerConnection] for non-supported platforms.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: UnimplementedError
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -3439,7 +3505,7 @@ Web implementation of [PeerConnection] using `package:web`.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -3519,7 +3585,7 @@ Web implementation of [PeerConnection] using `package:web`.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -4226,7 +4292,7 @@ WebRTC connection implementation for libp2p.
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.streams)
 - **close** (method)
   - calls: unawaited, close, clear
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -4379,7 +4445,7 @@ WebRTC listener implementation for libp2p.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -4964,7 +5030,7 @@ Provides unreliable, unordered datagram send/receive for a WebTransport
   - calls: isEmpty, length, droppedCount, maxQueueSize, sendFn, sentCount, bytesSent
 - **close** (method) — Closes the datagram channel.
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -5141,7 +5207,7 @@ Web implementation of a WebTransport connection.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -5316,7 +5382,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
 - **close** (method)
   - calls: toDart, close, writable
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -5510,7 +5576,7 @@ WebTransport listener implementation (stub for now, as browsers only dial).
 
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -5754,7 +5820,7 @@ Represents a bidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **close** (method) — Closes the stream gracefully (sends FIN).
   - calls: _closeFn
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -5890,7 +5956,7 @@ Represents a unidirectional WebTransport stream.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method) — Closes the stream gracefully (sends FIN).
   - calls: _closeFn
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -6034,7 +6100,7 @@ Represents an established WebTransport session over HTTP/3 (RFC 9220).
   - calls: StateError, length, maxDatagramSize, ArgumentError, sendDatagram, datagramsSent, bytesSent
 - **close** (method) — Initiates a graceful close of this session.
   - calls: closedAt, now, values, close, clear, closeSession, _closeControllers
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)

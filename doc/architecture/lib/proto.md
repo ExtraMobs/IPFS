@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.817885
+generated: 2026-08-24T09:58:20.535366
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -15355,7 +15355,7 @@ The BlockStore service definition
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15405,7 +15405,7 @@ The BlockStore service definition
 - **getBlock_Pre** (method)
   - calls: getBlock
 - **getBlock** (method)
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15498,7 +15498,7 @@ _No known direct test._
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -19553,11 +19553,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **bandwidthSent** (method) — The total bandwidth used for sending data (in bytes).
   - calls: $_getI64
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthSent** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasBandwidthSent** (method)
   - calls: $_has
@@ -19565,11 +19565,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **bandwidthReceived** (method) — The total bandwidth used for receiving data (in bytes).
   - calls: $_getI64
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasBandwidthReceived** (method)
   - calls: $_has
@@ -71696,7 +71696,7 @@ Describes a complete .proto file.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -71726,7 +71726,7 @@ Describes a complete .proto file.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72222,7 +72222,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72252,7 +72252,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -75526,7 +75526,7 @@ Range of reserved numeric values. Reserved values may not be used by
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -75556,7 +75556,7 @@ Range of reserved numeric values. Reserved values may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)

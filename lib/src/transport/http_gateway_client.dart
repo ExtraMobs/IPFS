@@ -5,13 +5,38 @@ import 'package:http/http.dart' as http;
 
 import '../utils/logger.dart';
 
+/// Fetches raw blocks from public IPFS HTTP gateways as a Bitswap fallback.
+///
+/// Lets protocol code (e.g. [BitswapHandler]) depend on this abstraction
+/// instead of the concrete [HttpGatewayClient], the same way it already
+/// depends on [RouterInterface] rather than a concrete router.
+abstract class HttpGatewayClientInterface {
+  /// Fetches a raw block for a CID from a specific trustless gateway.
+  ///
+  /// The request is sent to `$gatewayUrl/ipfs/$cidStr?format=raw`.
+  ///
+  /// Returns the raw block bytes if the response is valid, or `null` on
+  /// failure. If [maxBlockSize] is provided and the response exceeds it,
+  /// the block is discarded and `null` is returned.
+  Future<Uint8List?> fetchRawBlock(
+    String gatewayUrl,
+    String cidStr, {
+    Duration? timeout,
+    int? maxBlockSize,
+  });
+
+  /// Releases any resources held by this client (e.g. an internally
+  /// created HTTP client).
+  void close();
+}
+
 /// Client for interacting with public IPFS HTTP Gateways.
 ///
 /// This allows the node to retrieve content from the public IPFS network
 /// even if the P2P layer is incompatible or disconnected.
 ///
 /// It implements a round-robin fallback mechanism across multiple public gateways.
-class HttpGatewayClient {
+class HttpGatewayClient implements HttpGatewayClientInterface {
   /// Creates a new [HttpGatewayClient].
   ///
   /// If [client] is not provided, a default [http.Client] is created.
@@ -32,13 +57,7 @@ class HttpGatewayClient {
     'https://cloudflare-ipfs.com/ipfs/',
   ];
 
-  /// Fetches a raw block for a CID from a specific trustless gateway.
-  ///
-  /// The request is sent to `$gatewayUrl/ipfs/$cidStr?format=raw`.
-  ///
-  /// Returns the raw block bytes if the response is valid, or `null` on failure.
-  /// If [maxBlockSize] is provided and the response exceeds it, the block is
-  /// discarded and `null` is returned.
+  @override
   Future<Uint8List?> fetchRawBlock(
     String gatewayUrl,
     String cidStr, {
@@ -168,7 +187,7 @@ class HttpGatewayClient {
     }
   }
 
-  /// Closes the underlying HTTP client if it was created internally.
+  @override
   void close() {
     if (_internalClient) {
       _client.close();

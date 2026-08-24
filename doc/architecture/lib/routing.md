@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.924062
+generated: 2026-08-24T09:58:20.654613
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -22,7 +22,7 @@ Handles content routing operations for an IPFS node.
 
 - **start** (method) — Starts the content routing services.
   - calls: initialize, start, info, error
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -51,7 +51,7 @@ Handles content routing operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the content routing services.
   - calls: stop, info, error
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)

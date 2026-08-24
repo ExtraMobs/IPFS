@@ -15,7 +15,7 @@ import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';
 import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart' as ipld;
 import 'package:dart_ipfs/src/core/ipld/selectors/selector_ast.dart';
 import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
 import 'package:dart_ipfs/src/protocols/graphsync/graphsync_budget.dart';
 import 'package:dart_ipfs/src/protocols/graphsync/graphsync_protocol.dart';
 import 'package:dart_ipfs/src/protocols/graphsync/graphsync_types.dart';
@@ -54,7 +54,7 @@ class GraphsyncHandler {
       _graphsyncConfig = config.graphsync,
       _maxConcurrentRequests = 64;
 
-  final BitswapHandler _bitswap;
+  final IBitswapHandler _bitswap;
   final IPLDHandler _ipld;
   final RouterInterface _router;
   final BlockStore _blockStore;

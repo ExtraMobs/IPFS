@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.925652
+generated: 2026-08-24T09:58:20.655654
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -28,7 +28,7 @@ gRPC service implementation for block storage operations.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
   - calls: getBlock, toString
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -1636,7 +1636,7 @@ IPFS HTTP Gateway Server
 - **tlsManager** (field) — TLS certificate and AutoTLS manager.
 - **start** (method) — Starts the gateway server.
   - calls: StateError, addHandler, addMiddleware, Pipeline, _subdomainMiddleware, _corsMiddleware, _rateLimitMiddleware, _metricsMiddleware, _loggingMiddleware, call, enableTls, autoTls, tlsPort, loadSecurityContext, serveSecure, markActive, info, host, port, redirectHttpToHttps, serve, _redirectToHttpsHandler, error
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -1666,7 +1666,7 @@ IPFS HTTP Gateway Server
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the gateway server and any TLS or redirect listeners.
   - calls: close, markInactive, dispose, clear, info
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -3933,7 +3933,7 @@ IPFS HTTP RPC API Server
 - **metricsConfig** (field) — Optional metrics configuration controlling the Prometheus endpoint.
 - **start** (method) — Starts the RPC server.
   - calls: StateError, addHandler, addMiddleware, Pipeline, _corsMiddleware, _authMiddleware, _metricsMiddleware, _loggingMiddleware, call, serve, createHttpServerAdapter, info, host, port, error
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -3963,7 +3963,7 @@ IPFS HTTP RPC API Server
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the RPC server.
   - calls: close, info
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)

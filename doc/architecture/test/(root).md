@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-24T09:47:51.017680
+generated: 2026-08-24T09:58:20.725609
 ---
 
 # `test/(root)/`
@@ -16,6 +16,8 @@ generated: 2026-08-24T09:47:51.017680
 - core (outside the ipfs_node/ and builders/ composition root) 
 - transport does not depend on the protocol/routing/service layers
 - network does not depend on the protocol/routing/service layers
+- architecture boundaries (protocol layer, Phase 3)
+- protocols/* only cross-import each other via the documented pairs 
 
 ## `test/coverage_analyzer.dart`
 

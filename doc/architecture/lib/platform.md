@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-24T09:47:50.804357
+generated: 2026-08-24T09:58:20.520945
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -25,7 +25,7 @@ _No known direct test._
 Abstract interface for a running HTTP server instance.
 
 - **close** (method) — Closes the server.
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -126,7 +126,7 @@ IO implementation of HTTP server instance.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -261,7 +261,7 @@ _No known direct test._
 Web stub implementation of HTTP server instance.
 
 - **close** (method)
-  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)

@@ -7,6 +7,7 @@ import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
 import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
 import 'package:dart_ipfs/src/core/security/denylist_service.dart';
+import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
 import 'package:dart_ipfs/src/protocols/bitswap/ledger.dart';
 import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as message;
 import 'package:dart_ipfs/src/protocols/bitswap/wantlist.dart';
@@ -17,7 +18,7 @@ import 'package:dart_ipfs/src/utils/logger.dart';
 import 'package:meta/meta.dart';
 
 /// Handles Bitswap protocol operations for an IPFS node following the Bitswap 1.2.0 specification
-class BitswapHandler implements ILifecycle {
+class BitswapHandler implements IBitswapHandler, ILifecycle {
   /// Creates a new [BitswapHandler] with the given [config], [_blockStore], and [_router].
   ///
   /// An optional [httpGatewayClient] can be injected for testing or to share a
@@ -27,7 +28,7 @@ class BitswapHandler implements ILifecycle {
     IPFSConfig config,
     this._blockStore,
     this._router, {
-    HttpGatewayClient? httpGatewayClient,
+    HttpGatewayClientInterface? httpGatewayClient,
     DenylistService? denylistService,
   }) : _maxConcurrentRequests = config.maxConcurrentBitswapRequests,
        _bitswapConfig = config.bitswap,
@@ -48,7 +49,7 @@ class BitswapHandler implements ILifecycle {
   final IBlockStore _blockStore;
   final RouterInterface _router;
   final BitswapConfig _bitswapConfig;
-  final HttpGatewayClient? _httpGatewayClient;
+  final HttpGatewayClientInterface? _httpGatewayClient;
   final bool _internalHttpClient;
   final DenylistService? _denylistService;
   final Wantlist _wantlist = Wantlist();
@@ -290,6 +291,7 @@ class BitswapHandler implements ILifecycle {
   }
 
   /// Exposes internal block handling for testing.
+  @override
   @visibleForTesting
   Future<void> handleBlocks(List<Block> blocks) => _handleBlocks(blocks);
 
@@ -321,6 +323,7 @@ class BitswapHandler implements ILifecycle {
   }
 
   /// Requests blocks from the network with proper Bitswap session handling
+  @override
   Future<List<Block>> want(
     List<String> cids, {
     int priority = 1,
@@ -494,6 +497,7 @@ class BitswapHandler implements ILifecycle {
   }
 
   /// Handles an incoming want request for a CID.
+  @override
   Future<void> handleWantRequest(String cidStr) async {
     try {
       final customMessage = message.Message();
@@ -524,6 +528,7 @@ class BitswapHandler implements ILifecycle {
 
   /// Requests a single block by CID, checking the local blockstore, P2P
   /// Bitswap, and finally configured HTTP gateways.
+  @override
   Future<Block?> wantBlock(String cid) async =>
       getBlock(cid, useHttpFallback: true);
 
@@ -532,6 +537,7 @@ class BitswapHandler implements ILifecycle {
   ///
   /// If [useHttpFallback] is `false`, the HTTP gateway fallback is skipped even
   /// if it is enabled in the configuration.
+  @override
   Future<Block?> getBlock(String cidStr, {bool useHttpFallback = true}) async {
     if (!_running) {
       throw StateError('BitswapHandler is not running');
@@ -681,9 +687,11 @@ class BitswapHandler implements ILifecycle {
   }
 
   /// Total bytes sent.
+  @override
   int get bandwidthSent => _bandwidthSent;
 
   /// Total bytes received.
+  @override
   int get bandwidthReceived => _bandwidthReceived;
 
   void _updateBandwidthStats() {
@@ -693,6 +701,7 @@ class BitswapHandler implements ILifecycle {
   }
 
   /// Returns the current status of the Bitswap handler.
+  @override
   Future<Map<String, dynamic>> getStatus() async {
     return {
       'active_sessions': _sessions.length,
