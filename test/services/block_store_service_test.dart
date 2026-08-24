@@ -8,6 +8,7 @@ import 'package:dart_ipfs/src/services/block_store_service.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/proto/generated/core/block.pb.dart';
 import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
 import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart';

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart';
 import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
     as unixfs_proto;
@@ -29,7 +30,7 @@ void main() {
       expect(proto, isA<IPFSCIDProto>());
       expect(proto.version, equals(IPFSCIDVersion.IPFS_CID_VERSION_1));
 
-      final fromProto = CID.fromProto(proto);
+      final fromProto = cidFromProto(proto);
       expect(fromProto, equals(cid));
       expect(fromProto.codec, equals('dag-pb'));
     });
@@ -129,7 +130,7 @@ void main() {
       // fromProto CIDv0
       final proto = cid.toProto();
       expect(proto.version, equals(IPFSCIDVersion.IPFS_CID_VERSION_0));
-      final fromProto = CID.fromProto(proto);
+      final fromProto = cidFromProto(proto);
       expect(fromProto, equals(cid));
 
       // Invalid v0 length

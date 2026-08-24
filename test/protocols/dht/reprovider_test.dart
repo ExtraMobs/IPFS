@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:test/test.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/core/config/dht_config.dart';
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';

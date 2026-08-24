@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:test/test.dart';
 
 /// Comprehensive CID tests using VERIFIED APIs from actual source code.
@@ -269,7 +270,7 @@ void main() {
         final original = CID.computeForDataSync(utf8.encode('proto rt'));
 
         final proto = original.toProto();
-        final restored = CID.fromProto(proto);
+        final restored = cidFromProto(proto);
 
         expect(restored.version, equals(original.version));
       });

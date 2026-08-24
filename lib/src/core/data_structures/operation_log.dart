@@ -7,6 +7,7 @@ import '../../proto/generated/core/cid.pb.dart';
 import '../../proto/generated/core/node_type.pbenum.dart';
 import '../../proto/generated/core/operation_log.pb.dart';
 import '../cid.dart';
+import '../cid_proto_codec.dart';
 
 /// A single entry in the operation log.
 ///
@@ -27,7 +28,7 @@ class OperationLogEntry {
       timestamp: DateTime.fromMillisecondsSinceEpoch(pbEntry.timestamp.toInt()),
       operation: pbEntry.operation,
       details: pbEntry.details,
-      cid: pbEntry.hasCid() ? CID.fromProto(pbEntry.cid) : null,
+      cid: pbEntry.hasCid() ? cidFromProto(pbEntry.cid) : null,
       nodeType: pbEntry.hasNodeType() ? pbEntry.nodeType : null,
     );
   }

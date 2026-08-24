@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
 
 import '../core/cid.dart';
+import '../core/cid_proto_codec.dart';
 import '../core/data_structures/block.dart';
 import '../core/storage/datastore.dart';
 import '../proto/generated/core/cid.pb.dart' as pb_cid;
@@ -45,7 +46,7 @@ class ContentService {
       ..codec = codec
       ..multibasePrefix = 'base58btc';
 
-    final cid = CID.fromProto(proto);
+    final cid = cidFromProto(proto);
 
     // Create block and store raw data
     final block = await Block.fromData(

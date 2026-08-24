@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:cbor/cbor.dart';
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/core/data_structures/block.dart';
 import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
 import 'package:dart_ipfs/src/core/data_structures/link.dart';
@@ -239,7 +240,7 @@ void main() {
       await manager.pinBlock(c1.toProto(), PinTypeProto.PIN_TYPE_RECURSIVE);
       final blocks = manager.getPinnedBlocks();
       expect(blocks.length, equals(1));
-      expect(CID.fromProto(blocks.first).encode(), equals(c1.encode()));
+      expect(cidFromProto(blocks.first).encode(), equals(c1.encode()));
     });
   });
 }

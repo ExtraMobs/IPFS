@@ -233,9 +233,15 @@ class CID {
 
     final builder = BytesBuilder();
     builder.addByte(0x01);
-    final codecCode = codec == null
-        ? Multicodec.code('raw')
-        : Multicodec.code(codec!);
+    int codecCode;
+    try {
+      codecCode = Multicodec.code(codec ?? 'raw');
+    } catch (_) {
+      // Multicodec.code throws ArgumentError; callers of this API expect
+      // FormatException for CID-encoding-shaped failures (matches the
+      // umbrella CID's pre-Phase-2 behavior).
+      throw FormatException('Unsupported codec during CID encoding: $codec');
+    }
     builder.add(encodeVarint(codecCode));
     builder.add(multihash.toBytes());
     return builder.toBytes();
@@ -278,7 +284,7 @@ class CID {
 
   @override
   int get hashCode =>
-      version.hashCode ^ codec.hashCode ^ multihash.toBytes().hashCode;
+      Object.hash(version, codec, Object.hashAll(multihash.toBytes()));
 
   static bool _bytesEqual(Uint8List a, Uint8List b) {
     if (a.length != b.length) return false;

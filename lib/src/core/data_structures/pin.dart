@@ -2,6 +2,7 @@ import 'package:fixnum/fixnum.dart' as fixnum;
 
 import '../../proto/generated/core/pin.pb.dart';
 import '../cid.dart';
+import '../cid_proto_codec.dart';
 import 'blockstore.dart';
 import 'pin_manager.dart';
 
@@ -43,7 +44,7 @@ class Pin {
   /// Creates a [Pin] from its Protobuf representation.
   factory Pin.fromProto(PinProto pbPin, BlockStore blockStore) {
     return Pin(
-      cid: CID.fromProto(pbPin.cid),
+      cid: cidFromProto(pbPin.cid),
       type: pbPin.type,
       timestamp: DateTime.fromMillisecondsSinceEpoch(pbPin.timestamp.toInt()),
       blockStore: blockStore,

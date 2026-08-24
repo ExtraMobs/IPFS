@@ -801,7 +801,7 @@ class GraphsyncHandler {
   String _codecFromPrefix(Uint8List prefix) {
     if (prefix.isEmpty) return 'raw';
     if (prefix[0] == 0x01) {
-      final (codecLen, codecCode) = CID.readVarint(prefix, 1);
+      final (_, codecCode) = _readVarintAt(prefix, 1);
       try {
         return EncodingUtils.getCodecFromCode(codecCode);
       } catch (_) {
@@ -809,6 +809,29 @@ class GraphsyncHandler {
       }
     }
     return 'dag-pb';
+  }
+
+  /// Reads a protobuf-style varint from [bytes] starting at [offset].
+  ///
+  /// Returns `(length, value)`: the number of bytes consumed and the
+  /// decoded integer. CID used to expose this as a static method; it moved
+  /// out when CID became a dart_ipfs_core re-export shim (Phase 2), and
+  /// this is the only call site, so it's inlined here rather than shared.
+  static (int, int) _readVarintAt(Uint8List bytes, int offset) {
+    var value = 0;
+    var shift = 0;
+    for (var i = 0; i < 10; i++) {
+      if (offset + i >= bytes.length) {
+        throw const FormatException('Truncated varint');
+      }
+      final b = bytes[offset + i];
+      value |= (b & 0x7f) << shift;
+      if ((b & 0x80) == 0) {
+        return (i + 1, value);
+      }
+      shift += 7;
+    }
+    throw const FormatException('Varint too long');
   }
 
   bool _prefixMatches(List<int> computed, List<int> received) {

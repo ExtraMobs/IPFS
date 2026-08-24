@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/core/interfaces/block.dart';
 import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as proto;
 import 'package:dart_ipfs/src/proto/generated/core/block.pb.dart';
@@ -101,7 +102,7 @@ class Block implements IBlock {
   /// @return A new [Block] instance.
   static Block fromProto(BlockProto proto) {
     return Block(
-      cid: CID.fromProto(proto.cid),
+      cid: cidFromProto(proto.cid),
       data: Uint8List.fromList(proto.data),
       format: proto.format,
     );

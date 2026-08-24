@@ -46,5 +46,24 @@ void main() {
         equals(core.CryptoUtils.saltSize),
       );
     });
+
+    test(
+      'CarHeader.roots exposes the same CID type the barrel exports '
+      '(Phase 2 regression: these used to be two different classes '
+      'sharing a name)',
+      () async {
+        final data = Uint8List.fromList([10, 11, 12]);
+        // Constructed via the umbrella's own CAR API -- lib/src/core/data_structures/car.dart.
+        final cid = await umbrella.CID.fromContent(data);
+        final header = umbrella.CarHeader(version: 1, roots: [cid]);
+
+        // If lib/src/core/cid.dart were still its own independent class
+        // (pre-shim), this line wouldn't even compile: header.roots'
+        // element type and the barrel's `CID` would be unrelated types.
+        final umbrella.CID rootFromHeader = header.roots.first;
+        expect(rootFromHeader, equals(cid));
+        expect(rootFromHeader, isA<core.CID>());
+      },
+    );
   });
 }

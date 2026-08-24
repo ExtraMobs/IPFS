@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
 import 'package:dart_ipfs/src/core/ipld/codecs/standard_codecs.dart';
 import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart'
     show IPFSCIDProto, IPFSCIDVersion;
@@ -154,7 +155,7 @@ class CarHeader {
         ..codec = link.codec.isNotEmpty
             ? link.codec
             : (link.version == 0 ? 'dag-pb' : 'raw');
-      return CID.fromProto(proto);
+      return cidFromProto(proto);
     }).toList();
 
     final versionEntry = map.entries.firstWhere(
