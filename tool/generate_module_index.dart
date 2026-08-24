@@ -99,26 +99,30 @@ final _docLine = RegExp(r'^///\s?(.*)$', multiLine: true);
 String _docSummary(String content) =>
     _docLine.firstMatch(content)?.group(1)?.trim() ?? '';
 
+/// First line of [node]'s own `///` doc comment (declaration-level, via the
+/// AST -- not the file-level [_docSummary]), or '' if it has none.
+String _docOf(AnnotatedNode node) {
+  final tokens = node.documentationComment?.tokens;
+  if (tokens == null || tokens.isEmpty) return '';
+  return tokens.first.lexeme.replaceFirst(RegExp(r'^///\s?'), '').trim();
+}
+
 /// A declared member (method or public field) inside a type, or a
 /// top-level function/variable.
 class Member {
-  Member(this.kind, this.name, {this.extendsName, this.implementsNames = const []});
-  final String kind; // method, field, function, variable
+  Member(this.kind, this.name, {this.doc = ''});
+  final String kind; // method, field, static field, function, variable
   final String name;
-  final String? extendsName;
-  final List<String> implementsNames;
+  final String doc;
   final Set<String> calls = {};
-  /// Populated in a second pass: (file, ownerLabel) pairs elsewhere whose
-  /// body calls/mentions this member's exact name.
-  final List<(String file, String owner)> referencedBy = [];
 }
 
-/// A declared type (class/mixin) with its members, or a bare top-level
-/// function/variable wrapped as a single-member pseudo-type.
+/// A declared type (class/mixin) with its members.
 class TypeDecl {
-  TypeDecl(this.kind, this.name, {this.extendsName, this.implementsNames = const []});
+  TypeDecl(this.kind, this.name, {this.doc = '', this.extendsName, this.implementsNames = const []});
   final String kind; // class, abstract class, mixin
   final String name;
+  final String doc;
   final String? extendsName;
   final List<String> implementsNames;
   final List<Member> members = [];
@@ -185,6 +189,7 @@ FileAudit _auditFile(String content, String path) {
       final type = TypeDecl(
         kind,
         decl.namePart.typeName.lexeme,
+        doc: _docOf(decl),
         extendsName: decl.extendsClause?.superclass.toSource(),
         implementsNames:
             decl.implementsClause?.interfaces.map((NamedType t) => t.toSource()).toList() ??
@@ -192,14 +197,15 @@ FileAudit _auditFile(String content, String path) {
       );
       for (final m in decl.body.members) {
         if (m is MethodDeclaration && _isPublic(m.name.lexeme)) {
-          final member = Member('method', m.name.lexeme);
+          final member = Member('method', m.name.lexeme, doc: _docOf(m));
           member.calls.addAll(_namesIn(m.body));
           type.members.add(member);
         } else if (m is FieldDeclaration) {
           final kind = m.isStatic ? 'static field' : 'field';
+          final doc = _docOf(m);
           for (final v in m.fields.variables) {
             if (!_isPublic(v.name.lexeme)) continue;
-            final member = Member(kind, v.name.lexeme);
+            final member = Member(kind, v.name.lexeme, doc: doc);
             member.calls.addAll(_namesIn(v.initializer));
             type.members.add(member);
           }
@@ -210,26 +216,28 @@ FileAudit _auditFile(String content, String path) {
       final type = TypeDecl(
         'mixin',
         decl.name.lexeme,
+        doc: _docOf(decl),
         implementsNames:
             decl.implementsClause?.interfaces.map((NamedType t) => t.toSource()).toList() ??
                 const [],
       );
       for (final m in decl.body.members) {
         if (m is MethodDeclaration && _isPublic(m.name.lexeme)) {
-          final member = Member('method', m.name.lexeme);
+          final member = Member('method', m.name.lexeme, doc: _docOf(m));
           member.calls.addAll(_namesIn(m.body));
           type.members.add(member);
         }
       }
       audit.types.add(type);
     } else if (decl is FunctionDeclaration && _isPublic(decl.name.lexeme)) {
-      final member = Member('function', decl.name.lexeme);
+      final member = Member('function', decl.name.lexeme, doc: _docOf(decl));
       member.calls.addAll(_namesIn(decl.functionExpression.body));
       audit.topLevel.add(member);
     } else if (decl is TopLevelVariableDeclaration) {
+      final doc = _docOf(decl);
       for (final v in decl.variables.variables) {
         if (!_isPublic(v.name.lexeme)) continue;
-        final member = Member('variable', v.name.lexeme);
+        final member = Member('variable', v.name.lexeme, doc: doc);
         member.calls.addAll(_namesIn(v.initializer));
         audit.topLevel.add(member);
       }
@@ -355,13 +363,13 @@ void main() {
     final selfLabel = owner == null ? m.name : '${owner.name}.${m.name}';
     final externalRefs = refs.where((r) => !(r.$1 == file && r.$2 == selfLabel)).toList();
     final buf = StringBuffer('- **${m.name}** (${m.kind})');
+    if (m.doc.isNotEmpty) buf.write(' — ${m.doc}');
     if (m.calls.isNotEmpty) {
-      buf.write(' — chama: ${m.calls.join(", ")}');
+      buf.write('\n  - chama: ${m.calls.join(", ")}');
     }
     if (externalRefs.isNotEmpty) {
       final shown = externalRefs.map((r) => '`${r.$1}` (${r.$2})').join(', ');
-      const more = '';
-      buf.write('\n  - referenciado por (por nome): $shown$more');
+      buf.write('\n  - referenciado por (por nome): $shown');
     }
     return buf.toString();
   }
@@ -400,6 +408,7 @@ void main() {
         final ext = t.extendsName != null ? ' extends ${t.extendsName}' : '';
         final impl = t.implementsNames.isNotEmpty ? ' implements ${t.implementsNames.join(", ")}' : '';
         buf.writeln('### ${t.kind} `${t.name}`$ext$impl\n');
+        if (t.doc.isNotEmpty) buf.writeln('${t.doc}\n');
         if (t.members.isEmpty) {
           buf.writeln('_(sem membros públicos)_\n');
         } else {

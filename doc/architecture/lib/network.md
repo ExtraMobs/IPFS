@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-24T07:44:28.495387
+generated: 2026-08-24T07:49:40.101025
 ---
 
 # Módulo `network` (`lib/src/network/`)
@@ -18,50 +18,65 @@ _Testado diretamente._
 
 ### abstract class `ResourceRecord`
 
-- **name** (field)
+Base class for mDNS resource records.
+
+- **name** (field) — The domain name of this record.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **ttl** (field)
+- **ttl** (field) — Time-to-live for this record.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 
 ### class `PtrResourceRecord` extends ResourceRecord
 
-- **domainName** (field)
+PTR record containing service instance name.
+
+- **domainName** (field) — The domain name this pointer resolves to.
 
 ### class `SrvResourceRecord` extends ResourceRecord
 
-- **target** (field)
-- **port** (field)
+SRV record containing service location information.
+
+- **target** (field) — The target hostname.
+- **port** (field) — The port number.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.url), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **priority** (field)
+- **priority** (field) — Service priority (lower is higher priority).
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.untag), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
-- **weight** (field)
+- **weight** (field) — Server weight for load balancing.
 
 ### class `TxtResourceRecord` extends ResourceRecord
 
-- **text** (field)
+TXT record containing service metadata.
+
+- **text** (field) — The text entries in this record.
 
 ### class `ResourceRecordQuery`
 
-- **name** (field)
+Query class for mDNS resource records.
+
+- **name** (field) — The name to query.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **type** (field)
+- **type** (field) — The type of record to query.
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **serverPointer** (method) — chama: ResourceRecordQuery, ptr
-- **service** (method) — chama: ResourceRecordQuery, srv
-- **text** (method) — chama: ResourceRecordQuery, txt
+- **serverPointer** (method) — Creates a PTR query for the given [service].
+  - chama: ResourceRecordQuery, ptr
+- **service** (method) — Creates an SRV query for the given [name].
+  - chama: ResourceRecordQuery, srv
+- **text** (method) — Creates a TXT query for the given [name].
+  - chama: ResourceRecordQuery, txt
 
 ### abstract class `MDnsClient`
 
-- **start** (method)
+Abstract client for multicast DNS operations.
+
+- **start** (method) — Starts the mDNS client.
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method)
+- **stop** (method) — Stops the mDNS client.
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **lookup** (method)
+- **lookup** (method) — Performs a lookup for resource records matching [query].
   - referenciado por (por nome): `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
-- **startServer** (method)
+- **startServer** (method) — Starts an mDNS server to respond to queries.
   - referenciado por (por nome): `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
-- **announce** (method)
-- **isRunning** (method)
+- **announce** (method) — Announces a service via mDNS.
+- **isRunning** (method) — Returns true if the client is currently running.
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 
 ## `lib/src/network/mdns_client_io.dart`
@@ -72,17 +87,24 @@ _Sem teste direto conhecido._
 
 ### class `MDnsClientIO` implements MDnsClient
 
-- **start** (method) — chama: MDnsClient, start
+IO implementation of the mDNS client.
+
+- **start** (method)
+  - chama: MDnsClient, start
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: stop
+- **stop** (method)
+  - chama: stop
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **lookup** (method) — chama: ResourceRecordQuery, _getResourceRecordType, type, name, timeout, lookup, _transformRecord
+- **lookup** (method)
+  - chama: ResourceRecordQuery, _getResourceRecordType, type, name, timeout, lookup, _transformRecord
   - referenciado por (por nome): `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
 - **isRunning** (method)
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-- **startServer** (method) — chama: bind, anyIPv4, joinMulticast, listen, read, receive, _handlePacket
+- **startServer** (method)
+  - chama: bind, anyIPv4, joinMulticast, listen, read, receive, _handlePacket
   - referenciado por (por nome): `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
-- **announce** (method) — chama: _sendResponse
+- **announce** (method)
+  - chama: _sendResponse
 
 ### class `_Pair`
 
@@ -91,7 +113,8 @@ _Sem teste direto conhecido._
 
 ### top-level `createMDnsClient` (function)
 
-- **createMDnsClient** (function) — chama: MDnsClientIO
+- **createMDnsClient** (function) — Creates an mDNS client for the IO platform.
+  - chama: MDnsClientIO
 
 ## `lib/src/network/mdns_client_stub.dart`
 
@@ -100,6 +123,8 @@ Stub implementation of the mDNS client for platforms where it's not supported.
 _Sem teste direto conhecido._
 
 ### class `MDnsClientStub` implements MDnsClient
+
+Stub implementation of the mDNS client for platforms where it's not supported.
 
 - **start** (method)
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
@@ -115,7 +140,8 @@ _Sem teste direto conhecido._
 
 ### top-level `createMDnsClient` (function)
 
-- **createMDnsClient** (function) — chama: MDnsClientStub
+- **createMDnsClient** (function) — Creates an mDNS client stub.
+  - chama: MDnsClientStub
 
 ## `lib/src/network/mdns_client_web.dart`
 
@@ -125,7 +151,8 @@ _Sem teste direto conhecido._
 
 ### top-level `createMDnsClient` (function)
 
-- **createMDnsClient** (function) — chama: UnsupportedError
+- **createMDnsClient** (function) — Creates an mDNS client for the Web platform (throws UnsupportedError).
+  - chama: UnsupportedError
 
 ## `lib/src/network/nat_traversal_service.dart`
 
@@ -135,8 +162,12 @@ _Testado diretamente._
 
 ### class `NatTraversalService`
 
-- **mapPort** (method) — chama: info, debug, _gatewayDiscoverer, warning, openPort, tcp, inSeconds, add, udp, error
-- **unmapPort** (method) — chama: info, closePort, tcp, udp, warning
+Manages NAT traversal and port forwarding operations.
+
+- **mapPort** (method) — Attempts to map the specified [port] for both TCP and UDP.
+  - chama: info, debug, _gatewayDiscoverer, warning, openPort, tcp, inSeconds, add, udp, error
+- **unmapPort** (method) — Removes port mappings for the specified [port].
+  - chama: info, closePort, tcp, udp, warning
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
 
 ## `lib/src/network/router.dart`
@@ -147,22 +178,34 @@ _Testado diretamente._
 
 ### class `Router`
 
-- **peerID** (method) — chama: peerID
+High-level network router for IPFS peer communication.
+
+- **peerID** (method) — The peer ID of this node
+  - chama: peerID
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
-- **onPeerDiscovered** (method) — chama: stream
-- **connectedPeers** (method) — chama: unmodifiable
+- **onPeerDiscovered** (method) — Stream of discovered peers
+  - chama: stream
+- **connectedPeers** (method) — Currently connected peers
+  - chama: unmodifiable
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
-- **isInitialized** (method) — chama: isInitialized
+- **isInitialized** (method) — Whether the router has been initialized
+  - chama: isInitialized
   - referenciado por (por nome): `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
-- **start** (method) — chama: start
+- **start** (method) — Starts the router
+  - chama: start
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: stop, close
+- **stop** (method) — Stops the router
+  - chama: stop, close
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **sendMessage** (method) — chama: sendMessage
+- **sendMessage** (method) — Sends a message to a specific peer
+  - chama: sendMessage
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.resumeRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.cancelRequest), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushToPeer), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.broadcastMessage), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **broadcast** (method) — chama: sendMessage, encode, Base58, value, id
-- **connectToPeer** (method) — chama: connect
+- **broadcast** (method) — Broadcasts a message to all connected peers
+  - chama: sendMessage, encode, Base58, value, id
+- **connectToPeer** (method) — Connects to a peer
+  - chama: connect
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
-- **disconnectFromPeer** (method) — chama: disconnect
+- **disconnectFromPeer** (method) — Disconnects from a peer
+  - chama: disconnect
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 

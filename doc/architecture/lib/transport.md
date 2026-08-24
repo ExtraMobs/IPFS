@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-24T07:44:28.645532
+generated: 2026-08-24T07:49:40.240012
 ---
 
 # Módulo `transport` (`lib/src/transport/`)
@@ -22,22 +22,34 @@ _Testado diretamente._
 
 ### class `CircuitRelayClient`
 
-- **start** (method) — chama: debug, hasStarted, start, registerProtocol, registerProtocolHandler, cancel, listen, connectionEvents, type, disconnected, _onPeerDisconnected, peerId, error
+Handles circuit relay operations for an IPFS node.
+
+- **start** (method) — Starts the circuit relay client.
+  - chama: debug, hasStarted, start, registerProtocol, registerProtocolHandler, cancel, listen, connectionEvents, type, disconnected, _onPeerDisconnected, peerId, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: debug, cancel, values, clear, isCompleted, completeError, completer, close, info, error
+- **stop** (method) — Stops the circuit relay client.
+  - chama: debug, cancel, values, clear, isCompleted, completeError, completer, close, info, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **reserve** (method) — chama: enabled, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, HopMessage, type, RESERVE, HopMessage_Type, limit, Limit, duration, Int64, data, Completer, then, timeout, future, reservationTimeout, remove, TimeoutException, _scheduleReservationRefresh, add, CircuitRelayConnectionEvent, sendMessage, writeToBuffer, error
+- **reserve** (method) — Requests a reservation from a relay peer (Circuit Relay v2 HOP).
+  - chama: enabled, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, HopMessage, type, RESERVE, HopMessage_Type, limit, Limit, duration, Int64, data, Completer, then, timeout, future, reservationTimeout, remove, TimeoutException, _scheduleReservationRefresh, add, CircuitRelayConnectionEvent, sendMessage, writeToBuffer, error
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **connectThroughRelay** (method) — chama: enabled, CircuitRelayException, isEmpty, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, isExpired, reserve, _acquireCircuitSlot, HopMessage, type, CONNECT, HopMessage_Type, peer, Peer, id, base58Decode, Base58, limit, Limit, duration, limitDuration, data, limitData, Completer, _PendingConnect, timeout, future, reservationTimeout, remove, TimeoutException, sendMessage, writeToBuffer, OK, Status, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, _buildRelayedMultiaddr, connect, warning, registerRelayedConnection, RelayedConnection, error, toString
-- **activeRelayAddrs** (method) — chama: toList, map, where, values, isExpired, relayAddr
-- **connect** (method) — chama: debug, connect, add, CircuitRelayConnectionEvent, error, toString
+- **connectThroughRelay** (method) — Connects to [targetPeerId] through a circuit relay at [relayAddr].
+  - chama: enabled, CircuitRelayException, isEmpty, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, isExpired, reserve, _acquireCircuitSlot, HopMessage, type, CONNECT, HopMessage_Type, peer, Peer, id, base58Decode, Base58, limit, Limit, duration, limitDuration, data, limitData, Completer, _PendingConnect, timeout, future, reservationTimeout, remove, TimeoutException, sendMessage, writeToBuffer, OK, Status, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, _buildRelayedMultiaddr, connect, warning, registerRelayedConnection, RelayedConnection, error, toString
+- **activeRelayAddrs** (method) — List of relay addresses for which we hold an active reservation.
+  - chama: toList, map, where, values, isExpired, relayAddr
+- **connect** (method) — Connects to a peer using a circuit relay.
+  - chama: debug, connect, add, CircuitRelayConnectionEvent, error, toString
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.connectToPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **disconnect** (method) — chama: debug, disconnect, remove, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, error, toString
+- **disconnect** (method) — Disconnects from a peer using a circuit relay.
+  - chama: debug, disconnect, remove, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, error, toString
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.disconnectFromPeer)
-- **onCircuitRelayEvents** (method) — chama: stream
-- **connectionEvents** (method) — chama: stream
+- **onCircuitRelayEvents** (method) — Listens for incoming circuit relay events.
+  - chama: stream
+- **connectionEvents** (method) — Stream of circuit relay connection events (alias).
+  - chama: stream
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **emitCircuitRelayEvent** (method) — chama: isClosed, add
+- **emitCircuitRelayEvent** (method) — Emits a new circuit relay event.
+  - chama: isClosed, add
 
 ### class `_PendingConnect`
 
@@ -47,41 +59,51 @@ _Testado diretamente._
 
 ### class `CircuitRelayConnectionEvent`
 
-- **eventType** (field)
-- **relayAddress** (field)
-- **errorMessage** (field)
+Represents a circuit relay event.
+
+- **eventType** (field) — The type of relay event (e.g., 'circuit_relay_created').
+- **relayAddress** (field) — The multiaddress or peer ID of the relay.
+- **errorMessage** (field) — Error message if the event signifies a failure.
   - referenciado por (por nome): `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
-- **reason** (field)
+- **reason** (field) — Reason for the event or closure.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
-- **dataSize** (field)
+- **dataSize** (field) — Total data size transferred during the session.
 
 ### class `Reservation`
 
-- **relayPeerId** (field)
+Represents a Circuit Relay v2 reservation.
+
+- **relayPeerId** (field) — The relay peer ID.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **relayAddr** (field)
+- **relayAddr** (field) — The relay address (or peer ID) used to reach the relay.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
-- **expireTime** (field)
-- **limitData** (field)
+- **expireTime** (field) — When this reservation expires.
+- **limitData** (field) — Maximum data allowed in bytes.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **limitDuration** (field)
+- **limitDuration** (field) — Maximum duration allowed.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **isExpired** (method) — chama: isAfter, now
+- **isExpired** (method) — Returns true if this reservation has expired.
+  - chama: isAfter, now
   - referenciado por (por nome): `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 
 ### class `RelayedConnection`
 
-- **relayAddr** (field)
+Represents an active relayed connection.
+
+- **relayAddr** (field) — The relay address used for this connection.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
-- **relayPeerId** (field)
+- **relayPeerId** (field) — The relay peer ID.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **targetPeerId** (field)
-- **reservation** (field)
-- **connectedAt** (field) — chama: now
+- **targetPeerId** (field) — The target peer reached through the relay.
+- **reservation** (field) — The reservation that keeps this circuit alive.
+- **connectedAt** (field) — When the connection was established.
+  - chama: now
 
 ### class `CircuitRelayException` implements Exception
 
-- **message** (field)
+Exception thrown by [CircuitRelayClient] operations.
+
+- **message** (field) — The error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -94,60 +116,79 @@ _Sem teste direto conhecido._
 
 ### class `CircuitRelayClient`
 
-- **start** (method)
+Handles circuit relay operations for an IPFS node (web stub).
+
+- **start** (method) — Starts the circuit relay client.
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: close
+- **stop** (method) — Stops the circuit relay client.
+  - chama: close
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **reserve** (method) — chama: UnimplementedError
+- **reserve** (method) — Requests a reservation from a relay peer (Circuit Relay v2 HOP).
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **connectThroughRelay** (method) — chama: UnimplementedError
-- **activeRelayAddrs** (method)
-- **connect** (method) — chama: UnimplementedError
+- **connectThroughRelay** (method) — Connects to [targetPeerId] through a circuit relay at [relayAddr].
+  - chama: UnimplementedError
+- **activeRelayAddrs** (method) — List of relay addresses for which we hold an active reservation.
+- **connect** (method) — Connects to a peer using a circuit relay.
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.connectToPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **disconnect** (method)
+- **disconnect** (method) — Disconnects from a peer using a circuit relay.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.disconnectFromPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
-- **onCircuitRelayEvents** (method) — chama: stream
-- **connectionEvents** (method) — chama: stream
+- **onCircuitRelayEvents** (method) — Stream of circuit relay connection events.
+  - chama: stream
+- **connectionEvents** (method) — Stream of circuit relay connection events (alias).
+  - chama: stream
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **emitCircuitRelayEvent** (method) — chama: isClosed, add
+- **emitCircuitRelayEvent** (method) — Emits a new circuit relay event.
+  - chama: isClosed, add
 
 ### class `CircuitRelayConnectionEvent`
 
-- **eventType** (field)
-- **relayAddress** (field)
-- **errorMessage** (field)
+Represents a circuit relay event.
+
+- **eventType** (field) — The type of relay event.
+- **relayAddress** (field) — The relay address.
+- **errorMessage** (field) — Error message if applicable.
   - referenciado por (por nome): `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
-- **reason** (field)
+- **reason** (field) — Reason for the event.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
-- **dataSize** (field)
+- **dataSize** (field) — Data size transferred.
 
 ### class `Reservation`
 
-- **relayPeerId** (field)
+Represents a Circuit Relay v2 reservation.
+
+- **relayPeerId** (field) — The relay peer ID.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **relayAddr** (field)
+- **relayAddr** (field) — The relay address (or peer ID) used to reach the relay.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
-- **expireTime** (field)
-- **limitData** (field)
+- **expireTime** (field) — When this reservation expires.
+- **limitData** (field) — Maximum data allowed in bytes.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **limitDuration** (field)
+- **limitDuration** (field) — Maximum duration allowed.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **isExpired** (method) — chama: isAfter, now
+- **isExpired** (method) — Returns true if this reservation has expired.
+  - chama: isAfter, now
   - referenciado por (por nome): `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 
 ### class `RelayedConnection`
 
-- **relayAddr** (field)
+Represents an active relayed connection (web stub; never instantiated).
+
+- **relayAddr** (field) — The relay address used for this connection.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
-- **relayPeerId** (field)
+- **relayPeerId** (field) — The relay peer ID.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **targetPeerId** (field)
-- **reservation** (field)
-- **connectedAt** (field) — chama: now
+- **targetPeerId** (field) — The target peer reached through the relay.
+- **reservation** (field) — The reservation that keeps this circuit alive.
+- **connectedAt** (field) — When the connection was established.
+  - chama: now
 
 ### class `CircuitRelayException` implements Exception
 
-- **message** (field)
+Exception thrown by [CircuitRelayClient] operations.
+
+- **message** (field) — The error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -160,24 +201,30 @@ _Sem teste direto conhecido._
 
 ### class `CircuitRelayService`
 
-- **hopProtocolId** (static field)
-- **stopProtocolId** (static field)
-- **transportProtocolId** (static field)
-- **start** (method) — chama: enableCircuitRelay, debug, registerProtocolHandler, periodic, Duration, _cleanupExpired, info, error
+Implements the Circuit Relay v2 Server (Relay Service).
+
+- **hopProtocolId** (static field) — The HOP protocol ID for relay reservations.
+- **stopProtocolId** (static field) — The STOP protocol ID for incoming connections.
+- **transportProtocolId** (static field) — The transport protocol ID for relayed data.
+- **start** (method) — Starts the service and registers protocol handlers.
+  - chama: enableCircuitRelay, debug, registerProtocolHandler, periodic, Duration, _cleanupExpired, info, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: debug, cancel, clear, info
+- **stop** (method) — Stops the service and cleans up resources.
+  - chama: debug, cancel, clear, info
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 
 ### class `_CircuitContext`
 
-- **source** (field)
-- **sourcePeerId** (field)
-- **destination** (field)
-- **destinationPeerId** (field)
-- **expire** (field)
-- **limitData** (field)
+Internal context for an active relayed circuit.
+
+- **source** (field) — The source peer identifier (usually same as [sourcePeerId]).
+- **sourcePeerId** (field) — The source peer ID.
+- **destination** (field) — The destination peer identifier (usually same as [destinationPeerId]).
+- **destinationPeerId** (field) — The destination peer ID.
+- **expire** (field) — Unix timestamp when this circuit expires.
+- **limitData** (field) — Maximum number of bytes allowed to be transferred.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **bytesTransferred** (field)
+- **bytesTransferred** (field) — Total number of bytes transferred in this circuit.
 
 ## `lib/src/transport/http_gateway_client.dart`
 
@@ -187,11 +234,17 @@ _Testado diretamente._
 
 ### class `HttpGatewayClient`
 
-- **fetchRawBlock** (method) — chama: endsWith, substring, length, parse, debug, timeout, get, Duration, statusCode, bodyBytes, warning, info, error
-- **get** (method) — chama: _fetchFromGateway, warning
+Client for interacting with public IPFS HTTP Gateways.
+
+- **fetchRawBlock** (method) — Fetches a raw block for a CID from a specific trustless gateway.
+  - chama: endsWith, substring, length, parse, debug, timeout, get, Duration, statusCode, bodyBytes, warning, info, error
+- **get** (method) — Fetches raw data for a CID from available gateways.
+  - chama: _fetchFromGateway, warning
   - referenciado por (por nome): `lib/src/core/di/service_container.dart` (ServiceContainer.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.blockStore), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtClient), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pinnedCids), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.cat), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.get), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.datastore), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.router), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bitswap), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.ipns), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.metricsCollector), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtHandler), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.cat), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init), `lib/src/core/repository/repository.dart` (Repository.getBlock), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/content_service.dart` (ContentService.getContent), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getPreview), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.status), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPins), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPeers), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.health), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.version), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.getPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins), `lib/src/storage/hive_datastore.dart` (HiveDatastore.get), `lib/src/storage/hive_datastore.dart` (HiveDatastore.query), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrCompute), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
-- **isReachable** (method) — chama: timeout, head, parse, Duration, statusCode, debug
-- **close** (method) — chama: close, debug
+- **isReachable** (method) — Checks if the public network is reachable via gateways.
+  - chama: timeout, head, parse, Duration, statusCode, debug
+- **close** (method) — Closes the underlying HTTP client if it was created internally.
+  - chama: close, debug
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ## `lib/src/transport/libp2p_router.dart`
@@ -202,8 +255,11 @@ _Testado diretamente._
 
 ### class `Libp2pRouter` implements RouterInterface
 
-- **setQuicTransportFactoryForTesting** (method)
-- **peerID** (method) — chama: toString, id, fromPublicKey, PeerId, publicKey
+Native libp2p router implementation.
+
+- **setQuicTransportFactoryForTesting** (method) — Set the QUIC transport factory used for testing.
+- **peerID** (method)
+  - chama: toString, id, fromPublicKey, PeerId, publicKey
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/network/router.dart` (Router.peerID), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
 - **hasStarted** (method)
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
@@ -211,61 +267,92 @@ _Testado diretamente._
   - referenciado por (por nome): `lib/src/network/router.dart` (Router.isInitialized), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
 - **connectedPeers** (method)
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
-- **listeningAddresses** (method) — chama: toList, map, listenAddresses, network, toString, _buildListenAddresses
+- **listeningAddresses** (method)
+  - chama: toList, map, listenAddresses, network, toString, _buildListenAddresses
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
-- **supportsQuic** (method) — chama: enableQuic, network
-- **connectionEvents** (method) — chama: stream
+- **supportsQuic** (method) — True when the QUIC transport is enabled in config and available at runtime.
+  - chama: enableQuic, network
+- **connectionEvents** (method)
+  - chama: stream
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **messageEvents** (method) — chama: stream
+- **messageEvents** (method)
+  - chama: stream
 - **dhtRoutingTable** (method)
-- **setDHTRoutingTable** (method) — chama: debug
+- **setDHTRoutingTable** (method) — Sets the DHT routing table for distance-based peer selection.
+  - chama: debug
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-- **receiveMessages** (method) — chama: stream, putIfAbsent, StreamController
+- **receiveMessages** (method)
+  - chama: stream, putIfAbsent, StreamController
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
-- **initialize** (method) — chama: warning, debug, _generateKeyPairFromSeed, _generateKeyPair, _probeQuicTransport, error, StateError
+- **initialize** (method)
+  - chama: warning, debug, _generateKeyPairFromSeed, _generateKeyPair, _probeQuicTransport, error, StateError
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **derivePeerIdFromRSA** (method) — chama: RsaSigner, derivePeerId
-- **derivePeerIdFromECDSA** (method) — chama: EcdsaSigner, derivePeerId
-- **start** (method) — chama: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
+- **derivePeerIdFromRSA** (method) — Derives a peer ID from an RSA public key.
+  - chama: RsaSigner, derivePeerId
+- **derivePeerIdFromECDSA** (method) — Derives a peer ID from an ECDSA public key.
+  - chama: EcdsaSigner, derivePeerId
+- **start** (method)
+  - chama: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **stop** (method) — chama: warning, debug, timeout, close, Duration, clear, values, isClosed, info, error
+- **stop** (method)
+  - chama: warning, debug, timeout, close, Duration, clear, values, isClosed, info, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **connect** (method) — chama: _checkStarted, debug, _extractPeerIdFromMultiaddr, ArgumentError, split, MultiAddr, fromString, PeerId, addAddrs, addrBook, peerStore, Duration, AddrInfo, timeout, connect, TimeoutException, add, error
+- **connect** (method)
+  - chama: _checkStarted, debug, _extractPeerIdFromMultiaddr, ArgumentError, split, MultiAddr, fromString, PeerId, addAddrs, addrBook, peerStore, Duration, AddrInfo, timeout, connect, TimeoutException, add, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.connectToPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **disconnect** (method) — chama: _checkStarted, contains, _extractPeerIdFromMultiaddr, remove, close, debug, warning
+- **disconnect** (method)
+  - chama: _checkStarted, contains, _extractPeerIdFromMultiaddr, remove, close, debug, warning
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.disconnectFromPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
-- **listConnectedPeers** (method) — chama: toList
+- **listConnectedPeers** (method)
+  - chama: toList
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.listConnectedPeers), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
-- **isConnectedPeer** (method) — chama: contains
+- **isConnectedPeer** (method)
+  - chama: contains
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraphFromPeer)
-- **sendMessage** (method) — chama: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, close, error, NetworkException
+- **sendMessage** (method)
+  - chama: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, close, error, NetworkException
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage), `lib/src/network/router.dart` (Router.sendMessage), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.resumeRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.cancelRequest), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushToPeer), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.broadcastMessage), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **sendRequest** (method) — chama: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, close, error
+- **sendRequest** (method)
+  - chama: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, close, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendRequest), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
-- **sendMessageWithResponse** (method) — chama: _checkStarted, Duration, verbose, fromString, PeerId, Context, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, TimeoutException, close, error
+- **sendMessageWithResponse** (method)
+  - chama: _checkStarted, Duration, verbose, fromString, PeerId, Context, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, TimeoutException, close, error
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
-- **registerProtocolHandler** (method) — chama: add, setStreamHandler, toString, verbose, _readLengthPrefixedMessage, isEmpty, warning, NetworkPacket, _encodeLengthPrefix, length, write, fromList, error, handler, close, debug
+- **registerProtocolHandler** (method)
+  - chama: add, setStreamHandler, toString, verbose, _readLengthPrefixedMessage, isEmpty, warning, NetworkPacket, _encodeLengthPrefix, length, write, fromList, error, handler, close, debug
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.start), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.register)
-- **unregisterProtocolHandler** (method) — chama: remove, debug
+- **unregisterProtocolHandler** (method)
+  - chama: remove, debug
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.stop)
-- **removeMessageHandler** (method) — chama: remove, debug
+- **removeMessageHandler** (method)
+  - chama: remove, debug
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.stop), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.unsubscribe), `lib/src/transport/router_interface.dart` (RouterInterface.unregisterProtocolHandler)
-- **registerProtocol** (method) — chama: add, debug
+- **registerProtocol** (method)
+  - chama: add, debug
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.subscribe), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **broadcastMessage** (method) — chama: _checkStarted, sendMessage, warning
-- **emitEvent** (method) — chama: handler, NetworkMessage
+- **broadcastMessage** (method)
+  - chama: _checkStarted, sendMessage, warning
+- **emitEvent** (method)
+  - chama: handler, NetworkMessage
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
-- **onEvent** (method) — chama: add, putIfAbsent
-- **offEvent** (method) — chama: remove
-- **parseMultiaddr** (method) — chama: MultiAddr, warning
-- **resolvePeerId** (method) — chama: isNotEmpty, unmodifiable
+- **onEvent** (method)
+  - chama: add, putIfAbsent
+- **offEvent** (method)
+  - chama: remove
+- **parseMultiaddr** (method)
+  - chama: MultiAddr, warning
+- **resolvePeerId** (method)
+  - chama: isNotEmpty, unmodifiable
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolvePeerId), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
-- **registerRelayedConnection** (method) — chama: add, debug
+- **registerRelayedConnection** (method)
+  - chama: add, debug
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 
 ### class `NetworkException` implements Exception
 
-- **message** (field)
+Exception thrown when a network operation fails in the transport layer.
+
+- **message** (field) — The error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -278,16 +365,24 @@ _Sem teste direto conhecido._
 
 ### class `PnetListener` implements Listener
 
-- **inner** (field)
-- **psk** (field)
-- **addr** (method) — chama: addr
-- **isClosed** (method) — chama: isClosed
+A [Listener] that wraps an underlying listener and applies the PNET
+
+- **inner** (field) — The underlying listener.
+- **psk** (field) — The 32-byte pre-shared key.
+- **addr** (method)
+  - chama: addr
+- **isClosed** (method)
+  - chama: isClosed
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **connectionStream** (method) — chama: asyncMap, connectionStream, create
-- **accept** (method) — chama: accept, create
-- **close** (method) — chama: close
+- **connectionStream** (method)
+  - chama: asyncMap, connectionStream, create
+- **accept** (method)
+  - chama: accept, create
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **supportsAddr** (method) — chama: supportsAddr
+- **supportsAddr** (method)
+  - chama: supportsAddr
 
 ## `lib/src/transport/pnet/pnet_transport_conn.dart`
 
@@ -297,42 +392,67 @@ _Testado diretamente._
 
 ### class `_PnetCipher`
 
-- **process** (method) — chama: isEmpty, XSalsa20, int64, convert, Uint8List, length, setAll, sublist
+Stateful XSalsa20 keystream helper.
+
+- **process** (method)
+  - chama: isEmpty, XSalsa20, int64, convert, Uint8List, length, setAll, sublist
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.read), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write)
 
 ### class `PnetTransportConn` implements TransportConn
 
-- **create** (method) — chama: fromList, List, nextInt, write, read, length, StateError, _
+A [TransportConn] that wraps an underlying transport connection and
+
+- **create** (method) — Creates a new PNET-wrapped connection after performing the handshake.
+  - chama: fromList, List, nextInt, write, read, length, StateError, _
   - referenciado por (por nome): `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory), `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance), `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.createEmptyInstance), `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.createEmptyInstance), `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist.createEmptyInstance), `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Block.createEmptyInstance), `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_BlockPresence.createEmptyInstance), `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message.createEmptyInstance), `lib/src/proto/generated/circuit_relay.pb.dart` (HopMessage.createEmptyInstance), `lib/src/proto/generated/circuit_relay.pb.dart` (StopMessage.createEmptyInstance), `lib/src/proto/generated/circuit_relay.pb.dart` (Peer.createEmptyInstance), `lib/src/proto/generated/circuit_relay.pb.dart` (Reservation.createEmptyInstance), `lib/src/proto/generated/circuit_relay.pb.dart` (Limit.createEmptyInstance), `lib/src/proto/generated/config.pb.dart` (ProtocolConfig.createEmptyInstance), `lib/src/proto/generated/config.pb.dart` (RateLimitConfig.createEmptyInstance), `lib/src/proto/generated/config.pb.dart` (CircuitBreakerConfig.createEmptyInstance), `lib/src/proto/generated/connection.pb.dart` (ConnectionState.createEmptyInstance), `lib/src/proto/generated/connection.pb.dart` (ConnectionMetrics.createEmptyInstance), `lib/src/proto/generated/core/bitfield.pb.dart` (BitFieldProto_SetBitRequest.createEmptyInstance), `lib/src/proto/generated/core/bitfield.pb.dart` (BitFieldProto_ClearBitRequest.createEmptyInstance), `lib/src/proto/generated/core/bitfield.pb.dart` (BitFieldProto_GetBitRequest.createEmptyInstance), `lib/src/proto/generated/core/bitfield.pb.dart` (BitFieldProto_BitResponse.createEmptyInstance), `lib/src/proto/generated/core/bitfield.pb.dart` (BitFieldProto.createEmptyInstance), `lib/src/proto/generated/core/block.pb.dart` (BlockProto.createEmptyInstance), `lib/src/proto/generated/core/blockstore.pb.dart` (AddBlockResponse.createEmptyInstance), `lib/src/proto/generated/core/blockstore.pb.dart` (GetBlockResponse.createEmptyInstance), `lib/src/proto/generated/core/blockstore.pb.dart` (RemoveBlockResponse.createEmptyInstance), `lib/src/proto/generated/core/cid.pb.dart` (IPFSCIDProto.createEmptyInstance), `lib/src/proto/generated/core/dag.pb.dart` (PBLink.createEmptyInstance), `lib/src/proto/generated/core/dag.pb.dart` (PBNode.createEmptyInstance), `lib/src/proto/generated/core/link.pb.dart` (LinkMetadata.createEmptyInstance), `lib/src/proto/generated/core/node.pb.dart` (NodeProto.createEmptyInstance), `lib/src/proto/generated/core/node_stats.pb.dart` (NodeStats.createEmptyInstance), `lib/src/proto/generated/core/operation_log.pb.dart` (OperationLogEntryProto.createEmptyInstance), `lib/src/proto/generated/core/operation_log.pb.dart` (OperationLogProto.createEmptyInstance), `lib/src/proto/generated/core/peer.pb.dart` (PeerProto.createEmptyInstance), `lib/src/proto/generated/core/pin.pb.dart` (PinProto.createEmptyInstance), `lib/src/proto/generated/dht/add_peer.pb.dart` (AddPeerRequest.createEmptyInstance), `lib/src/proto/generated/dht/add_peer.pb.dart` (AddPeerResponse.createEmptyInstance), `lib/src/proto/generated/dht/bucket_management.pb.dart` (SplitBucketRequest.createEmptyInstance), `lib/src/proto/generated/dht/bucket_management.pb.dart` (SplitBucketResponse.createEmptyInstance), `lib/src/proto/generated/dht/bucket_management.pb.dart` (MergeBucketsRequest.createEmptyInstance), `lib/src/proto/generated/dht/bucket_management.pb.dart` (MergeBucketsResponse.createEmptyInstance), `lib/src/proto/generated/dht/common_kademlia.pb.dart` (KademliaId.createEmptyInstance), `lib/src/proto/generated/dht/common_red_black_tree.pb.dart` (RBTreePeerId.createEmptyInstance), `lib/src/proto/generated/dht/common_red_black_tree.pb.dart` (Node.createEmptyInstance), `lib/src/proto/generated/dht/common_red_black_tree.pb.dart` (K_PeerId.createEmptyInstance), `lib/src/proto/generated/dht/common_red_black_tree.pb.dart` (V_PeerInfo.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (DHTPeer.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (Record.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindProvidersRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindProvidersResponse.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (ProvideRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (ProvideResponse.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindValueRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindValueResponse.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (PutValueRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (PutValueResponse.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindNodeRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht.pb.dart` (FindNodeResponse.createEmptyInstance), `lib/src/proto/generated/dht/dht_messages.pb.dart` (PingRequest.createEmptyInstance), `lib/src/proto/generated/dht/dht_messages.pb.dart` (PingResponse.createEmptyInstance), `lib/src/proto/generated/dht/find_closest_peers.pb.dart` (FindClosestPeersRequest.createEmptyInstance), `lib/src/proto/generated/dht/find_closest_peers.pb.dart` (FindClosestPeersResponse.createEmptyInstance), `lib/src/proto/generated/dht/helpers.pb.dart` (CalculateDistanceRequest.createEmptyInstance), `lib/src/proto/generated/dht/helpers.pb.dart` (CalculateDistanceResponse.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (NetworkEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PeerConnectedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PeerDisconnectedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (ConnectionAttemptedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (ConnectionFailedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (MessageReceivedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (MessageSentEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (BlockReceivedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (BlockSentEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTQueryStartedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTQueryCompletedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTValueFoundEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTValueNotFoundEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTValueProvidedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTProviderAddedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (DHTProviderQueriedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PubsubMessagePublishedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PubsubMessageReceivedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PubsubSubscriptionCreatedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PubsubSubscriptionCancelledEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayCreatedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayClosedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayTrafficEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayDataReceivedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayDataSentEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (CircuitRelayFailedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (StreamStartedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (StreamEndedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (PeerDiscoveredEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (NodeStartedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (NodeStoppedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (NodeErrorEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (NetworkStatusChangedEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (ResourceLimitExceededEvent.createEmptyInstance), `lib/src/proto/generated/dht/ipfs_node_network_events.pb.dart` (SystemAlertEvent.createEmptyInstance), `lib/src/proto/generated/dht/kademlia.pb.dart` (Message.createEmptyInstance), `lib/src/proto/generated/dht/kademlia.pb.dart` (Peer.createEmptyInstance), `lib/src/proto/generated/dht/kademlia_node.pb.dart` (KademliaNode.createEmptyInstance), `lib/src/proto/generated/dht/kademlia_tree.pb.dart` (KademliaTree.createEmptyInstance), `lib/src/proto/generated/dht/kademlia_tree.pb.dart` (KademliaBucket.createEmptyInstance), `lib/src/proto/generated/dht/node_lookup.pb.dart` (NodeLookupRequest.createEmptyInstance), `lib/src/proto/generated/dht/node_lookup.pb.dart` (NodeLookupResponse.createEmptyInstance), `lib/src/proto/generated/dht/red_black_tree.pb.dart` (RedBlackTreeNode.createEmptyInstance), `lib/src/proto/generated/dht/refresh.pb.dart` (RefreshRequest.createEmptyInstance), `lib/src/proto/generated/dht/refresh.pb.dart` (RefreshResponse.createEmptyInstance), `lib/src/proto/generated/dht/remove_peer.pb.dart` (RemovePeerRequest.createEmptyInstance), `lib/src/proto/generated/dht/remove_peer.pb.dart` (RemovePeerResponse.createEmptyInstance), `lib/src/proto/generated/dht/routing_table.pb.dart` (RoutingTableProto.createEmptyInstance), `lib/src/proto/generated/dht/store_provider.pb.dart` (StoreProviderRequest.createEmptyInstance), `lib/src/proto/generated/dht/store_provider.pb.dart` (StoreProviderResponse.createEmptyInstance), `lib/src/proto/generated/dht/store_provider.pb.dart` (GetProvidersRequest.createEmptyInstance), `lib/src/proto/generated/dht/store_provider.pb.dart` (GetProvidersResponse.createEmptyInstance), `lib/src/proto/generated/google/protobuf/any.pb.dart` (Any.createEmptyInstance), `lib/src/proto/generated/google/protobuf/any.pb.dart` (Any.pack), `lib/src/proto/generated/google/protobuf/api.pb.dart` (Api.createEmptyInstance), `lib/src/proto/generated/google/protobuf/api.pb.dart` (Method.createEmptyInstance), `lib/src/proto/generated/google/protobuf/api.pb.dart` (Mixin.createEmptyInstance), `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (CppFeatures.createEmptyInstance), `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FileDescriptorSet.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FileDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (DescriptorProto_ExtensionRange.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (DescriptorProto_ReservedRange.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (DescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (ExtensionRangeOptions_Declaration.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (ExtensionRangeOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FieldDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (OneofDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (EnumDescriptorProto_EnumReservedRange.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (EnumDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (EnumValueDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (ServiceDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (MethodDescriptorProto.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FileOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (MessageOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FieldOptions_EditionDefault.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FieldOptions_FeatureSupport.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FieldOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (OneofOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (EnumOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (EnumValueOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (ServiceOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (MethodOptions.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (UninterpretedOption_NamePart.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (UninterpretedOption.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FeatureSet.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FeatureSetDefaults_FeatureSetEditionDefault.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (FeatureSetDefaults.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (SourceCodeInfo_Location.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (SourceCodeInfo.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (GeneratedCodeInfo_Annotation.createEmptyInstance), `lib/src/proto/generated/google/protobuf/descriptor.pb.dart` (GeneratedCodeInfo.createEmptyInstance), `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.createEmptyInstance), `lib/src/proto/generated/google/protobuf/empty.pb.dart` (Empty.createEmptyInstance), `lib/src/proto/generated/google/protobuf/field_mask.pb.dart` (FieldMask.createEmptyInstance), `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (JavaFeatures.createEmptyInstance), `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java), `lib/src/proto/generated/google/protobuf/source_context.pb.dart` (SourceContext.createEmptyInstance), `lib/src/proto/generated/google/protobuf/struct.pb.dart` (Struct.createEmptyInstance), `lib/src/proto/generated/google/protobuf/struct.pb.dart` (Value.createEmptyInstance), `lib/src/proto/generated/google/protobuf/struct.pb.dart` (ListValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/timestamp.pb.dart` (Timestamp.createEmptyInstance), `lib/src/proto/generated/google/protobuf/timestamp.pb.dart` (Timestamp.fromDateTime), `lib/src/proto/generated/google/protobuf/type.pb.dart` (Type.createEmptyInstance), `lib/src/proto/generated/google/protobuf/type.pb.dart` (Field.createEmptyInstance), `lib/src/proto/generated/google/protobuf/type.pb.dart` (Enum.createEmptyInstance), `lib/src/proto/generated/google/protobuf/type.pb.dart` (EnumValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/type.pb.dart` (Option.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (DoubleValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (FloatValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (Int64Value.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (UInt64Value.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (Int32Value.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (UInt32Value.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (BoolValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (StringValue.createEmptyInstance), `lib/src/proto/generated/google/protobuf/wrappers.pb.dart` (BytesValue.createEmptyInstance), `lib/src/proto/generated/graphsync/graphsync.pb.dart` (GraphsyncMessage.createEmptyInstance), `lib/src/proto/generated/graphsync/graphsync.pb.dart` (GraphsyncRequest.createEmptyInstance), `lib/src/proto/generated/graphsync/graphsync.pb.dart` (GraphsyncResponse.createEmptyInstance), `lib/src/proto/generated/graphsync/graphsync.pb.dart` (Block.createEmptyInstance), `lib/src/proto/generated/ipld/data_model.pb.dart` (IPLDNode.createEmptyInstance), `lib/src/proto/generated/ipld/data_model.pb.dart` (IPLDList.createEmptyInstance), `lib/src/proto/generated/ipld/data_model.pb.dart` (IPLDMap.createEmptyInstance), `lib/src/proto/generated/ipld/data_model.pb.dart` (MapEntry.createEmptyInstance), `lib/src/proto/generated/ipld/data_model.pb.dart` (IPLDLink.createEmptyInstance), `lib/src/proto/generated/ipns.pb.dart` (IpnsEntry.createEmptyInstance), `lib/src/proto/generated/metrics.pb.dart` (NetworkMetrics.createEmptyInstance), `lib/src/proto/generated/metrics.pb.dart` (PeerMetrics.createEmptyInstance), `lib/src/proto/generated/metrics.pb.dart` (ProtocolMetrics.createEmptyInstance), `lib/src/proto/generated/unixfs/unixfs.pb.dart` (Data.createEmptyInstance), `lib/src/proto/generated/unixfs/unixfs.pb.dart` (Metadata.createEmptyInstance), `lib/src/proto/generated/validation.pb.dart` (ValidationResult.createEmptyInstance), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publishWithKeyPair), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (RPC.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (Subscription.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (Message.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (ControlMessage.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (ControlIHave.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (ControlIWant.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (ControlGraft.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (ControlPrune.createEmptyInstance), `lib/src/protocols/pubsub/gossipsub/gossipsub.pb.dart` (PeerInfo.createEmptyInstance), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.connectionStream), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.accept), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
-- **read** (method) — chama: read, process
+- **read** (method)
+  - chama: read, process
   - referenciado por (por nome): `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
-- **write** (method) — chama: process, write
+- **write** (method)
+  - chama: process, write
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
-- **socket** (method) — chama: socket
-- **setReadTimeout** (method) — chama: setReadTimeout
-- **setWriteTimeout** (method) — chama: setWriteTimeout
-- **notifyActivity** (method) — chama: notifyActivity
-- **close** (method) — chama: close
+- **socket** (method)
+  - chama: socket
+- **setReadTimeout** (method)
+  - chama: setReadTimeout
+- **setWriteTimeout** (method)
+  - chama: setWriteTimeout
+- **notifyActivity** (method)
+  - chama: notifyActivity
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **id** (method) — chama: id
+- **id** (method)
+  - chama: id
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **newStream** (method) — chama: newStream
+- **newStream** (method)
+  - chama: newStream
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **streams** (method) — chama: streams
-- **isClosed** (method) — chama: isClosed
+- **streams** (method)
+  - chama: streams
+- **isClosed** (method)
+  - chama: isClosed
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **localPeer** (method) — chama: localPeer
-- **remotePeer** (method) — chama: remotePeer
+- **localPeer** (method)
+  - chama: localPeer
+- **remotePeer** (method)
+  - chama: remotePeer
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **remotePublicKey** (method) — chama: remotePublicKey
-- **state** (method) — chama: state
+- **remotePublicKey** (method)
+  - chama: remotePublicKey
+- **state** (method)
+  - chama: state
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
-- **localMultiaddr** (method) — chama: localMultiaddr
-- **remoteMultiaddr** (method) — chama: remoteMultiaddr
+- **localMultiaddr** (method)
+  - chama: localMultiaddr
+- **remoteMultiaddr** (method)
+  - chama: remoteMultiaddr
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stat** (method) — chama: stat
+- **stat** (method)
+  - chama: stat
   - referenciado por (por nome): `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
-- **scope** (method) — chama: scope
+- **scope** (method)
+  - chama: scope
 
 ## `lib/src/transport/pnet/pnet_transport_wrapper.dart`
 
@@ -342,20 +462,29 @@ _Testado diretamente._
 
 ### class `PnetTransportWrapper` implements Transport
 
-- **inner** (field)
-- **psk** (field)
-- **config** (method) — chama: config
+A [Transport] wrapper that upgrades every TCP connection with the libp2p
+
+- **inner** (field) — The underlying transport (typically TCP).
+- **psk** (field) — The 32-byte pre-shared key.
+- **config** (method)
+  - chama: config
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-- **dial** (method) — chama: dial, StateError, create
+- **dial** (method)
+  - chama: dial, StateError, create
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
-- **listen** (method) — chama: listen, PnetListener
+- **listen** (method)
+  - chama: listen, PnetListener
   - referenciado por (por nome): `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **protocols** (method) — chama: protocols
+- **protocols** (method)
+  - chama: protocols
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
-- **canDial** (method) — chama: canDial
+- **canDial** (method)
+  - chama: canDial
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
-- **canListen** (method) — chama: canListen
-- **dispose** (method) — chama: dispose
+- **canListen** (method)
+  - chama: canListen
+- **dispose** (method)
+  - chama: dispose
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose)
 
 ## `lib/src/transport/pnet/swarm_key_loader.dart`
@@ -366,11 +495,13 @@ _Testado diretamente._
 
 ### top-level `loadSwarmKey` (function)
 
-- **loadSwarmKey** (function) — chama: readString, getPlatform, decodeV1Psk, fromList, codeUnits
+- **loadSwarmKey** (function) — Loads and decodes a libp2p PNET swarm key from [path].
+  - chama: readString, getPlatform, decodeV1Psk, fromList, codeUnits
 
 ### top-level `decodeV1Psk` (function)
 
-- **decodeV1Psk** (function) — chama: fromCharCodes, toList, where, map, split, RegExp, trim, isNotEmpty, length, FormatException, decode, hex, fromList
+- **decodeV1Psk** (function) — Decodes a v1 swarm key from raw file bytes.
+  - chama: fromCharCodes, toList, where, map, split, RegExp, trim, isNotEmpty, length, FormatException, decode, hex, fromList
   - referenciado por (por nome): `lib/src/transport/pnet/swarm_key_loader.dart` (loadSwarmKey)
 
 ## `lib/src/transport/quic_stub_public.dart`
@@ -381,13 +512,19 @@ _Sem teste direto conhecido._
 
 ### class `QuicTransport`
 
+Stub [QuicTransport] for web builds.
+
 _(sem membros públicos)_
 
 ### class `QuicConnection`
 
+Stub [QuicConnection] for web builds.
+
 _(sem membros públicos)_
 
 ### class `QuicListener`
+
+Stub [QuicListener] for web builds.
 
 _(sem membros públicos)_
 
@@ -399,7 +536,8 @@ _Sem teste direto conhecido._
 
 ### top-level `probeQuicTransport` (function)
 
-- **probeQuicTransport** (function) — chama: factory, QuicTransport
+- **probeQuicTransport** (function) — Probes for the pure-Dart QUIC transport on non-web platforms.
+  - chama: factory, QuicTransport
 
 ## `lib/src/transport/quic_transport_probe_web.dart`
 
@@ -409,7 +547,7 @@ _Sem teste direto conhecido._
 
 ### top-level `probeQuicTransport` (function)
 
-- **probeQuicTransport** (function)
+- **probeQuicTransport** (function) — Web stub for QUIC transport probing.
 
 ## `lib/src/transport/router_events.dart`
 
@@ -419,67 +557,86 @@ _Testado diretamente._
 
 ### mixin `MultiAddressHandler`
 
-- **multiaddr** (method)
-- **setMultiaddr** (method)
+Interface for router implementations to handle multiaddresses.
+
+- **multiaddr** (method) — Gets the multiaddress of the router.
+- **setMultiaddr** (method) — Sets the multiaddress of the router.
 
 ### class `NetworkMessage`
 
-- **data** (field)
+A wrapper for raw bytes sent over the network.
+
+- **data** (field) — The raw data of the message.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto), `lib/src/core/data_structures/block.dart` (Block.toBitswapProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.processContent), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **fromBytes** (method) — chama: NetworkMessage
+- **fromBytes** (method) — Creates a network message from a byte array.
+  - chama: NetworkMessage
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink), `lib/src/core/cid.dart` (CID.decode), `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipld/codecs/standard_codecs.dart` (DagPbCodec.decode), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey), `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 
 ### class `NetworkPacket`
 
-- **srcPeerId** (field)
+Represents a network packet with source/destination info.
+
+- **srcPeerId** (field) — The source peer ID.
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start)
-- **datagram** (field)
+- **datagram** (field) — The raw datagram bytes.
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start)
-- **responder** (field)
+- **responder** (field) — Optional responder function for synchronous request/response.
 
 ### class `ConnectionEvent`
 
-- **type** (field)
+Represents a change in peer connection state.
+
+- **type** (field) — The type of connection event (connected/disconnected).
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **peerId** (field)
+- **peerId** (field) — The unique identifier of the peer.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==), `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleRoutingTableUpdate), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeerToBucket), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addKeyProvider), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/routing/content_routing.dart` (ContentRouting.provide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 
 ### class `MessageEvent`
 
-- **peerId** (field)
+Represents an incoming message from a peer.
+
+- **peerId** (field) — The unique identifier of the sender.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==), `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleRoutingTableUpdate), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeerToBucket), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addKeyProvider), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/routing/content_routing.dart` (ContentRouting.provide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **message** (field)
+- **message** (field) — The raw message payload.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 
 ### class `DHTEvent`
 
-- **type** (field)
+Data from a DHT operation.
+
+- **type** (field) — The type of DHT event.
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **data** (field)
+- **data** (field) — The payload data returned by the DHT.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto), `lib/src/core/data_structures/block.dart` (Block.toBitswapProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.processContent), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ### class `PubSubEvent`
 
-- **topic** (field)
+Content or metadata from a PubSub subscription.
+
+- **topic** (field) — The subscription topic.
   - referenciado por (por nome): `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
-- **message** (field)
+- **message** (field) — The raw message payload.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
-- **publisher** (field)
-- **eventType** (field)
+- **publisher** (field) — The identifier of the publisher.
+- **eventType** (field) — The type of event (e.g., 'message', 'join', 'leave').
 
 ### class `ErrorEvent`
 
-- **type** (field)
+Represents a protocol or network error.
+
+- **type** (field) — The classification of the error.
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **message** (field)
+- **message** (field) — A human-readable error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 
 ### class `StreamEvent`
 
-- **type** (field)
+Lifecycle or data event for a multi-stream.
+
+- **type** (field) — The type of stream event.
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **streamId** (field)
-- **data** (field)
+- **streamId** (field) — The unique identifier for the stream.
+- **data** (field) — Optional data payload for 'data' events.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto), `lib/src/core/data_structures/block.dart` (Block.toBitswapProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.processContent), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ## `lib/src/transport/router_interface.dart`
@@ -490,60 +647,63 @@ _Testado diretamente._
 
 ### abstract class `RouterInterface`
 
-- **peerID** (method)
+Abstract interface for P2P network routers.
+
+- **peerID** (method) — The local peer ID string of this node.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.peerId), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/network/router.dart` (Router.peerID), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
-- **hasStarted** (method)
+- **hasStarted** (method) — Whether the router has been started.
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **isInitialized** (method)
+- **isInitialized** (method) — Whether the router has been initialized.
   - referenciado por (por nome): `lib/src/network/router.dart` (Router.isInitialized), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
-- **connectedPeers** (method)
+- **connectedPeers** (method) — Set of currently connected peer IDs.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
-- **connectionEvents** (method)
+- **connectionEvents** (method) — Stream of connection events (peer connected/disconnected).
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **messageEvents** (method)
-- **initialize** (method)
+- **messageEvents** (method) — Stream of message events from peers.
+- **initialize** (method) — Initializes the router with configuration.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **start** (method)
+- **start** (method) — Starts the router and begins accepting connections.
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method)
+- **stop** (method) — Stops the router and disconnects all peers.
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **connect** (method)
+- **connect** (method) — Connects to a peer using its multiaddress.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.connectToPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **disconnect** (method)
+- **disconnect** (method) — Disconnects from a peer.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/network/router.dart` (Router.disconnectFromPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
-- **listeningAddresses** (method)
+- **listeningAddresses** (method) — Returns list of addresses the router is listening on.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
-- **listConnectedPeers** (method)
+- **listConnectedPeers** (method) — Returns a list of connected peer IDs.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.listConnectedPeers), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
-- **isConnectedPeer** (method)
+- **isConnectedPeer** (method) — Checks if a peer is currently connected.
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraphFromPeer)
-- **sendMessage** (method)
+- **sendMessage** (method) — Sends a message to a specific peer.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage), `lib/src/network/router.dart` (Router.sendMessage), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.resumeRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.cancelRequest), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushToPeer), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.broadcastMessage), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **sendRequest** (method)
+- **sendRequest** (method) — Sends a request and waits for a response.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendRequest), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
-- **receiveMessages** (method)
+- **receiveMessages** (method) — Receives messages from a specific peer.
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
-- **registerProtocolHandler** (method)
+- **registerProtocolHandler** (method) — Registers a handler for a specific protocol.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.start), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.register)
-- **removeMessageHandler** (method)
+- **removeMessageHandler** (method) — Removes the handler for a specific protocol.
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.stop), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.unsubscribe), `lib/src/transport/router_interface.dart` (RouterInterface.unregisterProtocolHandler)
-- **unregisterProtocolHandler** (method) — chama: removeMessageHandler
+- **unregisterProtocolHandler** (method) — Unregisters a protocol handler.
+  - chama: removeMessageHandler
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.stop)
-- **sendMessageWithResponse** (method)
+- **sendMessageWithResponse** (method) — Sends a message and waits for a response with timeout.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
-- **registerProtocol** (method)
+- **registerProtocol** (method) — Registers a protocol without a handler.
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.subscribe), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
-- **broadcastMessage** (method)
-- **emitEvent** (method)
+- **broadcastMessage** (method) — Broadcasts a message to all connected peers.
+- **emitEvent** (method) — Emits a network event.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
-- **onEvent** (method)
-- **offEvent** (method)
-- **parseMultiaddr** (method)
-- **resolvePeerId** (method)
+- **onEvent** (method) — Registers a handler for network events.
+- **offEvent** (method) — Removes a handler for network events.
+- **parseMultiaddr** (method) — Parses a multiaddress string into address components.
+- **resolvePeerId** (method) — Resolves a peer ID to available addresses.
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolvePeerId), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
-- **registerRelayedConnection** (method)
+- **registerRelayedConnection** (method) — Registers a virtual relayed connection so that higher-level protocols
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **dhtRoutingTable** (method)
+- **dhtRoutingTable** (method) — Returns the DHT routing table for distance-based peer selection.
 
 ## `lib/src/transport/webrtc/data_channel_stream.dart`
 
@@ -553,19 +713,25 @@ _Testado diretamente._
 
 ### abstract class `DataChannelStream` implements libp2p.P2PStream<Uint8List>
 
+Base class for WebRTC DataChannel-backed streams.
+
 - **incoming** (method)
 - **isWritable** (method)
 - **protocol** (method)
 - **setProtocol** (method)
 - **isClosed** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **conn** (method) — chama: UnimplementedError
-- **label** (method)
+- **conn** (method)
+  - chama: UnimplementedError
+- **label** (method) — The label of the data channel.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.label)
-- **onMessage** (method) — chama: addAll, isCompleted, complete
+- **onMessage** (method) — Called when a message is received on the data channel.
+  - chama: addAll, isCompleted, complete
   - referenciado por (por nome): `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.onMessage), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
-- **onClosed** (method) — chama: isCompleted, complete
-- **read** (method) — chama: length, isEmpty, Uint8List, Completer, future, removeFirst
+- **onClosed** (method) — Called when the data channel is closed.
+  - chama: isCompleted, complete
+- **read** (method)
+  - chama: length, isEmpty, Uint8List, Completer, future, removeFirst
   - referenciado por (por nome): `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.read), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **write** (method)
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -574,11 +740,14 @@ _Testado diretamente._
 - **reset** (method)
 - **id** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **scope** (method) — chama: NullScope
+- **scope** (method)
+  - chama: NullScope
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **closeRead** (method)
-- **closeWrite** (method) — chama: close
-- **stat** (method) — chama: StreamStats, outbound, Direction, now
+- **closeWrite** (method)
+  - chama: close
+- **stat** (method)
+  - chama: StreamStats, outbound, Direction, now
   - referenciado por (por nome): `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
 - **setDeadline** (method)
 - **setReadDeadline** (method)
@@ -592,19 +761,24 @@ _Testado diretamente._
 
 ### class `IceServer`
 
-- **urls** (field)
+A generic WebRTC ICE server configuration.
+
+- **urls** (field) — The ICE server URL, e.g. `stun:stun.example.com:19302` or
   - referenciado por (por nome): `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
-- **username** (field)
+- **username** (field) — Optional username for TURN authentication.
   - referenciado por (por nome): `lib/src/core/config/network_config.dart` (TurnServer.==), `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
-- **credential** (field)
+- **credential** (field) — Optional credential (password) for TURN authentication.
   - referenciado por (por nome): `lib/src/core/config/network_config.dart` (TurnServer.==), `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
-- **==** (method) — chama: identical, urls, username, credential
-- **hashCode** (method) — chama: hash
+- **==** (method)
+  - chama: identical, urls, username, credential
+- **hashCode** (method)
+  - chama: hash
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.hashCode), `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode), `lib/src/core/storage/datastore.dart` (Key.hashCode), `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 
 ### top-level `buildIceServersFromNetworkConfig` (function)
 
-- **buildIceServersFromNetworkConfig** (function) — chama: stunServers, add, fromStun, turnServers, fromTurn
+- **buildIceServersFromNetworkConfig** (function) — Builds a list of [IceServer] entries from a [NetworkConfig].
+  - chama: stunServers, add, fromStun, turnServers, fromTurn
 
 ## `lib/src/transport/webrtc/peer_connection.dart`
 
@@ -614,52 +788,59 @@ _Testado diretamente._
 
 ### abstract class `PeerConnection`
 
-- **setRemoteDescription** (method)
+Abstract interface for WebRTC PeerConnections.
+
+- **setRemoteDescription** (method) — Sets the remote description for this connection.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createOffer** (method)
+- **createOffer** (method) — Creates an SDP offer.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createAnswer** (method)
+- **createAnswer** (method) — Creates an SDP answer.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
-- **setLocalDescription** (method)
+- **setLocalDescription** (method) — Sets the local description for this connection.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **addIceCandidate** (method)
+- **addIceCandidate** (method) — Adds an ICE candidate to the connection.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **onIceCandidate** (method)
+- **onIceCandidate** (method) — Stream of ICE candidates generated by the local peer.
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **onDataChannel** (method)
+- **onDataChannel** (method) — Stream of incoming data channels.
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createDataChannel** (method)
+- **createDataChannel** (method) — Creates a new data channel with the given label.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
-- **close** (method)
+- **close** (method) — Closes the peer connection.
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **localDescriptionSdp** (method)
-- **remoteDescriptionSdp** (method)
-- **iceConnectionState** (method)
+- **localDescriptionSdp** (method) — The local SDP description.
+- **remoteDescriptionSdp** (method) — The remote SDP description.
+- **iceConnectionState** (method) — The ICE connection state, if available.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
-- **signalingState** (method)
+- **signalingState** (method) — The signaling state, if available.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
 
 ### class `RTCSessionDescriptionInit`
 
-- **type** (field)
+Initialization parameters for an [RTCSessionDescription].
+
+- **type** (field) — The type of the session description (offer, answer, etc.).
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **sdp** (field)
+- **sdp** (field) — The SDP string.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.localDescriptionSdp), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.remoteDescriptionSdp), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ### class `RTCIceCandidateInit`
 
-- **candidate** (field)
+Initialization parameters for an [RTCIceCandidate].
+
+- **candidate** (field) — The ICE candidate string.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **sdpMid** (field)
+- **sdpMid** (field) — The SDP mid.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
-- **sdpMLineIndex** (field)
+- **sdpMLineIndex** (field) — The SDP m-line index.
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
-- **toJson** (method)
+- **toJson** (method) — Converts this candidate to a JSON-compatible map.
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### top-level `createPeerConnection` (function)
 
-- **createPeerConnection** (function) — chama: createPC
+- **createPeerConnection** (function) — Factory for creating a platform-specific [PeerConnection].
+  - chama: createPC
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ## `lib/src/transport/webrtc/peer_connection_io.dart`
@@ -670,34 +851,48 @@ _Sem teste direto conhecido._
 
 ### class `PeerConnectionIO` implements PeerConnection
 
-- **onIceCandidate** (method) — chama: Stream.empty
+IO implementation of [PeerConnection] (stub for now).
+
+- **onIceCandidate** (method)
+  - chama: Stream.empty
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **onDataChannel** (method) — chama: Stream.empty
+- **onDataChannel** (method)
+  - chama: Stream.empty
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **localDescriptionSdp** (method) — chama: UnimplementedError
-- **remoteDescriptionSdp** (method) — chama: UnimplementedError
+- **localDescriptionSdp** (method)
+  - chama: UnimplementedError
+- **remoteDescriptionSdp** (method)
+  - chama: UnimplementedError
 - **iceConnectionState** (method)
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method)
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
-- **createOffer** (method) — chama: UnimplementedError
+- **createOffer** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createAnswer** (method) — chama: UnimplementedError
+- **createAnswer** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
-- **setLocalDescription** (method) — chama: UnimplementedError
+- **setLocalDescription** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **setRemoteDescription** (method) — chama: UnimplementedError
+- **setRemoteDescription** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **addIceCandidate** (method) — chama: UnimplementedError
+- **addIceCandidate** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createDataChannel** (method) — chama: UnimplementedError
+- **createDataChannel** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
-- **close** (method) — chama: UnimplementedError
+- **close** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ### top-level `createPC` (function)
 
-- **createPC** (function) — chama: PeerConnectionIO
+- **createPC** (function) — Factory for creating a [PeerConnectionIO].
+  - chama: PeerConnectionIO
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/peer_connection_stub.dart`
@@ -708,34 +903,48 @@ _Sem teste direto conhecido._
 
 ### class `PeerConnectionStub` implements PeerConnection
 
-- **onIceCandidate** (method) — chama: UnimplementedError
+Stub implementation of [PeerConnection] for non-supported platforms.
+
+- **onIceCandidate** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **onDataChannel** (method) — chama: UnimplementedError
+- **onDataChannel** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **localDescriptionSdp** (method) — chama: UnimplementedError
-- **remoteDescriptionSdp** (method) — chama: UnimplementedError
+- **localDescriptionSdp** (method)
+  - chama: UnimplementedError
+- **remoteDescriptionSdp** (method)
+  - chama: UnimplementedError
 - **iceConnectionState** (method)
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method)
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
-- **createOffer** (method) — chama: UnimplementedError
+- **createOffer** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createAnswer** (method) — chama: UnimplementedError
+- **createAnswer** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
-- **setLocalDescription** (method) — chama: UnimplementedError
+- **setLocalDescription** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **setRemoteDescription** (method) — chama: UnimplementedError
+- **setRemoteDescription** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **addIceCandidate** (method) — chama: UnimplementedError
+- **addIceCandidate** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createDataChannel** (method) — chama: UnimplementedError
+- **createDataChannel** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
-- **close** (method) — chama: UnimplementedError
+- **close** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ### top-level `createPC` (function)
 
-- **createPC** (function) — chama: PeerConnectionStub
+- **createPC** (function) — Factory for creating a [PeerConnectionStub].
+  - chama: PeerConnectionStub
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/peer_connection_web.dart`
@@ -746,41 +955,60 @@ _Sem teste direto conhecido._
 
 ### class `PeerConnectionWeb` implements PeerConnection
 
-- **onIceCandidate** (method) — chama: stream
+Web implementation of [PeerConnection] using `package:web`.
+
+- **onIceCandidate** (method)
+  - chama: stream
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **onDataChannel** (method) — chama: stream
+- **onDataChannel** (method)
+  - chama: stream
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **localDescriptionSdp** (method) — chama: sdp, localDescription
-- **remoteDescriptionSdp** (method) — chama: sdp, remoteDescription
-- **iceConnectionState** (method) — chama: iceConnectionState
+- **localDescriptionSdp** (method)
+  - chama: sdp, localDescription
+- **remoteDescriptionSdp** (method)
+  - chama: sdp, remoteDescription
+- **iceConnectionState** (method)
+  - chama: iceConnectionState
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
-- **signalingState** (method) — chama: signalingState
+- **signalingState** (method)
+  - chama: signalingState
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
-- **createOffer** (method) — chama: toDart, createOffer, Exception, RTCSessionDescriptionInit, type, sdp
+- **createOffer** (method)
+  - chama: toDart, createOffer, Exception, RTCSessionDescriptionInit, type, sdp
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createAnswer** (method) — chama: toDart, createAnswer, Exception, RTCSessionDescriptionInit, type, sdp
-- **setLocalDescription** (method) — chama: toDart, setLocalDescription, RTCLocalSessionDescriptionInit, type, sdp
+- **createAnswer** (method)
+  - chama: toDart, createAnswer, Exception, RTCSessionDescriptionInit, type, sdp
+- **setLocalDescription** (method)
+  - chama: toDart, setLocalDescription, RTCLocalSessionDescriptionInit, type, sdp
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **setRemoteDescription** (method) — chama: toDart, setRemoteDescription, RTCSessionDescriptionInit
+- **setRemoteDescription** (method)
+  - chama: toDart, setRemoteDescription, RTCSessionDescriptionInit
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **addIceCandidate** (method) — chama: toDart, addIceCandidate, RTCIceCandidateInit, candidate, sdpMid, sdpMLineIndex
+- **addIceCandidate** (method)
+  - chama: toDart, addIceCandidate, RTCIceCandidateInit, candidate, sdpMid, sdpMLineIndex
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **createDataChannel** (method) — chama: createDataChannel, _WebDataChannelStream
+- **createDataChannel** (method)
+  - chama: createDataChannel, _WebDataChannelStream
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
-- **close** (method) — chama: close
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ### class `_WebDataChannelStream` extends DataChannelStream
 
-- **label** (method) — chama: label
-- **write** (method) — chama: send, toJS
+- **label** (method)
+  - chama: label
+- **write** (method)
+  - chama: send, toJS
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
-- **close** (method) — chama: close
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ### top-level `createPC` (function)
 
-- **createPC** (function) — chama: PeerConnectionWeb
+- **createPC** (function) — Factory for creating a [PeerConnectionWeb].
+  - chama: PeerConnectionWeb
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/signaling_protocol.dart`
@@ -791,13 +1019,17 @@ _Testado diretamente._
 
 ### class `SignalingMessage`
 
-- **type** (field)
+A message exchanged over the WebRTC signaling protocol.
+
+- **type** (field) — The type of message.
   - referenciado por (por nome): `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isDirectory), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isSymlink), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isHAMTShard), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.delete), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindValueMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **data** (field)
+- **data** (field) — The message data (SDP or ICE candidate string).
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto), `lib/src/core/data_structures/block.dart` (Block.toBitswapProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.processContent), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **encode** (method) — chama: encode, index, add, addAll, _encodeVarint, length, fromList
+- **encode** (method) — Encodes this message into a protobuf-compatible byte array.
+  - chama: encode, index, add, addAll, _encodeVarint, length, fromList
   - referenciado por (por nome): `lib/src/core/cid.dart` (CID.toString), `lib/src/core/cid.dart` (CID.fromContent), `lib/src/core/cid.dart` (CID.computeForDataSync), `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.encodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePublicKey), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.serializePrivateKey), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.validateSync), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/block.dart` (Block.hashCode), `lib/src/core/data_structures/car.dart` (CarReader.sections), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.isBlockPinned), `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.cat), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.unpin), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/ipfs_node/utils.dart` (IPFSUtils.encodeBase64), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/codecs/standard_codecs.dart` (DagJsonCodec.encode), `lib/src/core/ipld/dag_json_handler.dart` (encodeDagJson), `lib/src/core/ipld/dag_json_handler.dart` (computeCidDagJson), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWS), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWE), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWS), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseSigner.kid), `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.kid), `lib/src/core/ipld/selectors/selector_ast.dart` (encodeSelectorDagCbor), `lib/src/core/ipld/selectors/selector_ast.dart` (encodeSelectorDagJson), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.envelopeBytes), `lib/src/core/peer/peer_record.dart` (PeerRecordSigner.create), `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.encode), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/security/denylist_service.dart` (DenylistService.isBlocked), `lib/src/core/security/denylist_service.dart` (DenylistService.isBlockedByCidString), `lib/src/core/security/denylist_service.dart` (DenylistService.block), `lib/src/core/security/denylist_service.dart` (DenylistService.unblock), `lib/src/core/types/peer_id.dart` (PeerId.toBase58), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleCancel), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findProviders), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.provide), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_envelope.dart` (DHTEnvelope.toBytes), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/interface_dht_handler.dart` (Key.toString), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushToPeer), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.resolve), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publishWithKeyPair), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.create), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.sign), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.verify), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.publish), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signMessage), `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.encodeSubscribeRequest), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.encodeUnsubscribeRequest), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.encodePublishRequest), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/content_service.dart` (ContentService.getContent), `lib/src/services/content_service.dart` (ContentService.removeContent), `lib/src/services/content_service.dart` (ContentService.pinContent), `lib/src/services/content_service.dart` (ContentService.unpinContent), `lib/src/services/content_service.dart` (ContentService.hasContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.resolveSubPath), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/utils/encoding.dart` (EncodingUtils.toBase58), `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration), `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
-- **decode** (method) — chama: length, _decodeVarint, values, value, newOffset, decode, sublist, Exception, SignalingMessage
+- **decode** (method) — Decodes a signaling message from a protobuf-compatible byte array.
+  - chama: length, _decodeVarint, values, value, newOffset, decode, sublist, Exception, SignalingMessage
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink), `lib/src/core/cid.dart` (CID.fromBytes), `lib/src/core/cid.dart` (CID.fromProto), `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/ipfs_node/utils.dart` (IPFSUtils.decodeBase64), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks), `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode), `lib/src/core/ipld/codecs/standard_codecs.dart` (DagJsonCodec.decode), `lib/src/core/ipld/dag_json_handler.dart` (decodeDagJson), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWS), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWS), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE), `lib/src/core/ipld/path/ipld_path_handler.dart` (IPLDPathHandler.parsePath), `lib/src/core/ipld/selectors/selector_ast.dart` (decodeSelectorDagCbor), `lib/src/core/ipld/selectors/selector_ast.dart` (decodeSelectorDagJson), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verify), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.toString), `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.decode), `lib/src/core/security/denylist_service.dart` (DenylistService.isBlockedByCidString), `lib/src/core/security/denylist_service.dart` (DenylistService.blockCidString), `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/interface_dht_handler.dart` (Value.toString), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.decode), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.valueCID), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toString), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.decodeMessage), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration), `lib/src/utils/private_key.dart` (IPFSPrivateKey.sign), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 
 ### class `_VarintResult`
@@ -809,15 +1041,21 @@ _Testado diretamente._
 
 ### class `SignalingProtocol`
 
-- **id** (static field)
+Implementation of the WebRTC signaling protocol for libp2p.
+
+- **id** (static field) — The protocol identifier.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **register** (method) — chama: registerProtocolHandler
+- **register** (method) — Registers the protocol handler with the given router.
+  - chama: registerProtocolHandler
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **messages** (method) — chama: stream
+- **messages** (method) — Stream of signaling messages received.
+  - chama: stream
   - referenciado por (por nome): `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.pubsubMessages), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **handleStream** (method) — chama: isClosed, _readVarint, read, decode, add, unawaited, close
+- **handleStream** (method) — Handles an incoming signaling stream.
+  - chama: isClosed, _readVarint, read, decode, add, unawaited, close
   - referenciado por (por nome): `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **sendMessage** (method) — chama: encode, _encodeVarint, length, write, fromList
+- **sendMessage** (method) — Sends a signaling message over the given stream.
+  - chama: encode, _encodeVarint, length, write, fromList
   - referenciado por (por nome): `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage), `lib/src/network/router.dart` (Router.sendMessage), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.pauseRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.resumeRequest), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.cancelRequest), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushToPeer), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.broadcastMessage), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ## `lib/src/transport/webrtc/webrtc_direct_transport.dart`
@@ -828,15 +1066,21 @@ _Testado diretamente._
 
 ### class `WebRTCDirectTransport` implements libp2p_trans.Transport
 
-- **config** (method) — chama: libp2p_config.TransportConfig
+WebRTC Direct transport implementation for libp2p.
+
+- **config** (method)
+  - chama: libp2p_config.TransportConfig
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **canDial** (method) — chama: contains, toString
+- **canDial** (method)
+  - chama: contains, toString
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
 - **canListen** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
-- **dial** (method) — chama: toString, split, indexOf, last, fromString, PeerId, createPeerConnection, createOffer, setLocalDescription, parse, post, sdp, statusCode, Exception, body, setRemoteDescription, Completer, listen, onDataChannel, isCompleted, complete, WebRTCConnection, random, Duration, timeout, future
+- **dial** (method)
+  - chama: toString, split, indexOf, last, fromString, PeerId, createPeerConnection, createOffer, setLocalDescription, parse, post, sdp, statusCode, Exception, body, setRemoteDescription, Completer, listen, onDataChannel, isCompleted, complete, WebRTCConnection, random, Duration, timeout, future
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
-- **listen** (method) — chama: UnimplementedError
+- **listen** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.listen), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
@@ -851,17 +1095,24 @@ _Testado diretamente._
 
 ### class `WebRTCTransport` implements libp2p_trans.Transport
 
-- **host** (field)
+WebRTC transport implementation for libp2p.
+
+- **host** (field) — The libp2p host associated with this transport.
   - referenciado por (por nome): `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.url), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **config** (method) — chama: libp2p_config.TransportConfig
+- **config** (method)
+  - chama: libp2p_config.TransportConfig
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **canDial** (method) — chama: toString, contains
+- **canDial** (method)
+  - chama: toString, contains
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
-- **canListen** (method) — chama: canDial
+- **canListen** (method)
+  - chama: canDial
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
-- **dial** (method) — chama: Exception, toString, indexOf, MultiAddr, substring, last, split, fromString, PeerId, Duration, timeout, connect, AddrInfo, random, Context, newStream, id, SignalingProtocol, handleStream, createPeerConnection, Completer, listen, onIceCandidate, sendMessage, SignalingMessage, candidate, messages, type, answer, setRemoteDescription, data, addIceCandidate, RTCIceCandidateInit, createOffer, setLocalDescription, offer, sdp, onDataChannel, isCompleted, complete, WebRTCConnection, future
+- **dial** (method)
+  - chama: Exception, toString, indexOf, MultiAddr, substring, last, split, fromString, PeerId, Duration, timeout, connect, AddrInfo, random, Context, newStream, id, SignalingProtocol, handleStream, createPeerConnection, Completer, listen, onIceCandidate, sendMessage, SignalingMessage, candidate, messages, type, answer, setRemoteDescription, data, addIceCandidate, RTCIceCandidateInit, createOffer, setLocalDescription, offer, sdp, onDataChannel, isCompleted, complete, WebRTCConnection, future
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
-- **listen** (method) — chama: WebRTCListener
+- **listen** (method)
+  - chama: WebRTCListener
   - referenciado por (por nome): `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.listen), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
@@ -870,55 +1121,76 @@ _Testado diretamente._
 
 ### class `WebRTCConnection` implements libp2p.Conn
 
+WebRTC connection implementation for libp2p.
+
 - **localPeer** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localPeer)
 - **remotePeer** (method)
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePeer)
-- **localMultiaddr** (method) — chama: MultiAddr
+- **localMultiaddr** (method)
+  - chama: MultiAddr
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localMultiaddr)
 - **remoteMultiaddr** (method)
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remoteMultiaddr)
-- **newStream** (method) — chama: Exception, createDataChannel, add
+- **newStream** (method)
+  - chama: Exception, createDataChannel, add
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.newStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **streams** (method) — chama: value, unmodifiable
+- **streams** (method)
+  - chama: value, unmodifiable
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.streams)
-- **close** (method) — chama: unawaited, close, clear
+- **close** (method)
+  - chama: unawaited, close, clear
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **isClosed** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **stat** (method) — chama: _WebRTCConnStats, Stats, outbound, Direction, length
+- **stat** (method)
+  - chama: _WebRTCConnStats, Stats, outbound, Direction, length
   - referenciado por (por nome): `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
-- **scope** (method) — chama: NullScope
+- **scope** (method)
+  - chama: NullScope
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
-- **id** (method) — chama: toString
+- **id** (method)
+  - chama: toString
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **remotePublicKey** (method) — chama: value
+- **remotePublicKey** (method)
+  - chama: value
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePublicKey)
-- **state** (method) — chama: libp2p.ConnState
+- **state** (method)
+  - chama: libp2p.ConnState
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
-- **iceConnectionState** (method) — chama: iceConnectionState
+- **iceConnectionState** (method) — The ICE connection state reported by the underlying peer connection, if any.
+  - chama: iceConnectionState
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState)
-- **signalingState** (method) — chama: signalingState
+- **signalingState** (method) — The signaling state reported by the underlying peer connection, if any.
+  - chama: signalingState
   - referenciado por (por nome): `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState)
 
 ### class `_WebRTCConnStats` implements libp2p.ConnStats
+
+Simple implementation of [libp2p.ConnStats] for WebRTC connections.
 
 - **stats** (field)
 - **numStreams** (field)
 
 ### class `WebRTCListener` implements libp2p_listener.Listener
 
-- **close** (method) — chama: close
+WebRTC listener implementation for libp2p.
+
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **addr** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.addr)
-- **connectionStream** (method) — chama: stream
+- **connectionStream** (method)
+  - chama: stream
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.connectionStream)
 - **accept** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.accept)
-- **isClosed** (method) — chama: isClosed
+- **isClosed** (method)
+  - chama: isClosed
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **supportsAddr** (method) — chama: contains, toString
+- **supportsAddr** (method)
+  - chama: contains, toString
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.supportsAddr)
 
 ## `lib/src/transport/webtransport/certhash.dart`
@@ -929,9 +1201,11 @@ _Sem teste direto conhecido._
 
 ### class `WebTransportCertHash`
 
-- **algorithm** (field)
+Represents a certificate hash for WebTransport.
+
+- **algorithm** (field) — The hash algorithm (e.g. 'sha-256').
   - referenciado por (por nome): `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **value** (field)
+- **value** (field) — The hash value.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getPinnedBlocks), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getRecursivePins), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getRecursivePinRoots), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode), `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode), `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRoutingTableSize), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordBlockstoreStats), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.encode), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.decode), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.decode), `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.decode), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus), `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_id.dart` (PeerId.==), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (calculateDistance), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.get), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode), `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search), `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance), `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistanceToKey), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.encodePublishRequest), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.getOptimalCompression), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.analyzeCompression), `lib/src/services/pinning/cluster_client.dart` (ClusterPinOptions.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.decode), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.streams), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.remotePublicKey), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.remotePublicKey), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.streams), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read), `lib/src/utils/encoding.dart` (EncodingUtils.getEncodingFromPrefix), `lib/src/utils/encoding.dart` (EncodingUtils.getCodecFromCode), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.put), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.get), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.remove), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.clear), `lib/src/utils/keystore.dart` (Keystore.deserialize), `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 
 ## `lib/src/transport/webtransport/multiaddr_parser.dart`
@@ -942,16 +1216,21 @@ _Testado diretamente._
 
 ### class `WebTransportMultiaddrInfo`
 
-- **ip** (field)
+Information parsed from a WebTransport multiaddr.
+
+- **ip** (field) — The IP address.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **port** (field)
+- **port** (field) — The port.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.url), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **certHashes** (field)
+- **certHashes** (field) — The certificate hashes.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 
 ### class `WebTransportMultiaddrParser`
 
-- **parse** (method) — chama: toString, split, length, tryParse, multibaseDecode, fromList, codeUnits, decode, add, WebTransportCertHash, digest, WebTransportMultiaddrInfo
+Parser for WebTransport multiaddrs.
+
+- **parse** (method) — Parses a WebTransport multiaddr.
+  - chama: toString, split, length, tryParse, multibaseDecode, fromList, codeUnits, decode, add, WebTransportCertHash, digest, WebTransportMultiaddrInfo
   - referenciado por (por nome): `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeyEntry.fromJson), `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.decode), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findProviders), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.hasValidCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.needsRenewal), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.unpin), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.status), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPins), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.recover), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPeers), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.health), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.version), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.sync), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.getPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.isReachable), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings), `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve), `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 
 ## `lib/src/transport/webtransport/webtransport_datagram.dart`
@@ -962,73 +1241,93 @@ _Testado diretamente._
 
 ### class `WebTransportDatagramStats`
 
-- **sentCount** (field)
+Statistics for WebTransport datagram I/O.
+
+- **sentCount** (field) — Number of datagrams successfully sent.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
-- **receivedCount** (field)
-- **bytesSent** (field)
+- **receivedCount** (field) — Number of datagrams received.
+- **bytesSent** (field) — Total bytes sent via datagrams.
   - referenciado por (por nome): `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics), `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **bytesReceived** (field)
+- **bytesReceived** (field) — Total bytes received via datagrams.
   - referenciado por (por nome): `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics), `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
-- **droppedCount** (field)
+- **droppedCount** (field) — Number of datagrams dropped (e.g., exceeded max size or session closed).
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
-- **reset** (method)
+- **reset** (method) — Resets all counters to zero.
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 
 ### class `WebTransportDatagramConfig`
 
-- **maxDatagramSize** (field)
+Configuration for WebTransport datagram I/O.
+
+- **maxDatagramSize** (field) — Maximum datagram size in bytes.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.maxDatagramSize), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **maxQueueSize** (field)
+- **maxQueueSize** (field) — Maximum number of outgoing datagrams to queue before applying backpressure.
   - referenciado por (por nome): `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
-- **outgoingMaxAge** (field)
-- **incomingMaxAge** (field)
-- **defaultConfig** (static field) — chama: WebTransportDatagramConfig
+- **outgoingMaxAge** (field) — Maximum age for outgoing datagrams in milliseconds before they are
+- **incomingMaxAge** (field) — Maximum age for incoming datagrams in milliseconds before they are
+- **defaultConfig** (static field) — Default configuration.
+  - chama: WebTransportDatagramConfig
 
 ### class `WebTransportDatagramEvent`
 
-- **data** (field)
+A received WebTransport datagram with optional metadata.
+
+- **data** (field) — The datagram payload.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb), `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb), `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.fromBitswapProto), `lib/src/core/data_structures/block.dart` (Block.toBitswapProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWE), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.==), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/repository/repository.dart` (Repository.createNode), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.processContent), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **receivedAt** (field)
-- **timestamp** (field)
+- **receivedAt** (field) — When the datagram was received locally.
+- **timestamp** (field) — Optional timestamp from the sender (if provided by the transport).
   - referenciado por (por nome): `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
-- **size** (method) — chama: length
+- **size** (method) — Size of the datagram payload in bytes.
+  - chama: length
   - referenciado por (por nome): `lib/src/core/cid.dart` (CID.toPrefixBytes), `lib/src/core/cid.dart` (CID.validate), `lib/src/core/data_structures/bitfield.dart` (BitField.toProto), `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeerToBucket), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket), `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode), `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode), `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 
 ### abstract class `WebTransportDatagramBackend`
 
-- **sendFn** (method)
+Callbacks that a platform-specific backend must provide for datagram I/O.
+
+- **sendFn** (method) — Sends a datagram. Returns true if the datagram was accepted for
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
-- **receiveStream** (method)
-- **maxDatagramSizeFn** (method)
+- **receiveStream** (method) — Stream of incoming datagrams from the peer.
+- **maxDatagramSizeFn** (method) — Returns the current maximum datagram size in bytes, as negotiated with
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.maxDatagramSize)
 
 ### class `WebTransportDatagram`
 
-- **datagramStream** (method) — chama: stream
-- **stats** (method)
-- **config** (method)
+Provides unreliable, unordered datagram send/receive for a WebTransport
+
+- **datagramStream** (method) — Stream of received datagrams.
+  - chama: stream
+- **stats** (method) — Statistics for datagram I/O.
+- **config** (method) — The configured datagram limits.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **isClosed** (method)
+- **isClosed** (method) — Whether datagram I/O has been closed.
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **maxDatagramSize** (method) — chama: call, maxDatagramSizeFn, maxDatagramSize
+- **maxDatagramSize** (method) — The effective maximum datagram size in bytes.
+  - chama: call, maxDatagramSizeFn, maxDatagramSize
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **pendingQueueLength** (method)
-- **send** (method) — chama: StateError, length, droppedCount, ArgumentError, isEmpty, maxQueueSize, sendFn, sentCount, bytesSent
+- **pendingQueueLength** (method) — Number of datagrams currently queued for transmission.
+- **send** (method) — Sends a datagram.
+  - chama: StateError, length, droppedCount, ArgumentError, isEmpty, maxQueueSize, sendFn, sentCount, bytesSent
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendBlock), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.write)
-- **trySend** (method) — chama: isEmpty, length, droppedCount, maxQueueSize, sendFn, sentCount, bytesSent
-- **close** (method) — chama: close
+- **trySend** (method) — Sends a datagram, dropping it silently if it cannot be sent.
+  - chama: isEmpty, length, droppedCount, maxQueueSize, sendFn, sentCount, bytesSent
+- **close** (method) — Closes the datagram channel.
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ### class `DatagramSizeNegotiator`
 
-- **localMaxSize** (method)
-- **remoteMaxSize** (method)
-- **negotiatedMaxSize** (method)
-- **isNegotiated** (method)
-- **updateRemoteMaxSize** (method)
-- **updateLocalMaxSize** (method)
-- **validate** (method) — chama: length
+Negotiates the maximum datagram size between client and server.
+
+- **localMaxSize** (method) — The locally configured maximum datagram size.
+- **remoteMaxSize** (method) — The maximum datagram size advertised by the peer, or null if not yet
+- **negotiatedMaxSize** (method) — The negotiated maximum datagram size.
+- **isNegotiated** (method) — Whether datagrams can be sent (both sides must support them).
+- **updateRemoteMaxSize** (method) — Updates the remote maximum datagram size after receiving the peer's
+- **updateLocalMaxSize** (method) — Updates the local maximum datagram size.
+- **validate** (method) — Validates that [data] does not exceed the negotiated maximum size.
+  - chama: length
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
 
 ## `lib/src/transport/webtransport/webtransport_dialer.dart`
@@ -1039,12 +1338,15 @@ _Sem teste direto conhecido._
 
 ### abstract class `WebTransportDialer`
 
-- **dial** (method)
+Abstract interface for a WebTransport dialer.
+
+- **dial** (method) — Dials a WebTransport multiaddr.
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
 ### top-level `createWebTransportDialer` (function)
 
-- **createWebTransportDialer** (function) — chama: createDialer
+- **createWebTransportDialer** (function) — Factory for creating a platform-specific [WebTransportDialer].
+  - chama: createDialer
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
 ## `lib/src/transport/webtransport/webtransport_dialer_io.dart`
@@ -1055,12 +1357,16 @@ _Sem teste direto conhecido._
 
 ### class `WebTransportDialerIO` implements WebTransportDialer
 
-- **dial** (method) — chama: UnimplementedError
+IO-specific WebTransport dialer (placeholder).
+
+- **dial** (method)
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
 ### top-level `createDialer` (function)
 
-- **createDialer** (function) — chama: WebTransportDialerIO
+- **createDialer** (function) — Factory for IO-specific dialer.
+  - chama: WebTransportDialerIO
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_dialer_stub.dart`
@@ -1071,7 +1377,8 @@ _Sem teste direto conhecido._
 
 ### top-level `createDialer` (function)
 
-- **createDialer** (function) — chama: UnsupportedError
+- **createDialer** (function) — Factory for creating the platform-specific dialer.
+  - chama: UnsupportedError
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_dialer_web.dart`
@@ -1082,78 +1389,107 @@ _Sem teste direto conhecido._
 
 ### class `WebTransportDialerWeb` implements WebTransportDialer
 
-- **dial** (method) — chama: parse, ArgumentError, ip, port, WebTransportOptions, toJS, toList, map, certHashes, WebTransportHash, algorithm, value, WebTransport, toDart, ready, close, Exception, last, split, toString, fromString, PeerId, WebTransportConnectionWeb, random
+Web implementation of [WebTransportDialer] using the browser's WebTransport API.
+
+- **dial** (method)
+  - chama: parse, ArgumentError, ip, port, WebTransportOptions, toJS, toList, map, certHashes, WebTransportHash, algorithm, value, WebTransport, toDart, ready, close, Exception, last, split, toString, fromString, PeerId, WebTransportConnectionWeb, random
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
 ### class `WebTransportConnectionWeb` implements libp2p.Conn
+
+Web implementation of a WebTransport connection.
 
 - **localPeer** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localPeer)
 - **remotePeer** (method)
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePeer)
-- **localMultiaddr** (method) — chama: MultiAddr
+- **localMultiaddr** (method)
+  - chama: MultiAddr
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localMultiaddr)
 - **remoteMultiaddr** (method)
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remoteMultiaddr)
-- **newStream** (method) — chama: toDart, createBidirectionalStream, WebTransportStreamWeb
+- **newStream** (method)
+  - chama: toDart, createBidirectionalStream, WebTransportStreamWeb
   - referenciado por (por nome): `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.newStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
-- **close** (method) — chama: close
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **isClosed** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **stat** (method) — chama: _WebTransportConnStats, Stats, outbound, Direction
+- **stat** (method)
+  - chama: _WebTransportConnStats, Stats, outbound, Direction
   - referenciado por (por nome): `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
-- **scope** (method) — chama: NullScope
+- **scope** (method)
+  - chama: NullScope
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
-- **id** (method) — chama: toString
+- **id** (method)
+  - chama: toString
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **remotePublicKey** (method) — chama: value
+- **remotePublicKey** (method)
+  - chama: value
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePublicKey)
-- **state** (method) — chama: libp2p.ConnState
+- **state** (method)
+  - chama: libp2p.ConnState
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
-- **streams** (method) — chama: value
+- **streams** (method)
+  - chama: value
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.streams)
 
 ### class `_WebTransportConnStats` implements libp2p.ConnStats
+
+Simple implementation of [libp2p.ConnStats] for WebTransport connections.
 
 - **stats** (field)
 - **numStreams** (field)
 
 ### class `WebTransportStreamWeb` implements libp2p.P2PStream<Uint8List>
 
-- **write** (method) — chama: getWriter, writable, toDart, write, toJS, releaseLock
+Web implementation of a WebTransport stream.
+
+- **write** (method)
+  - chama: getWriter, writable, toDart, write, toJS, releaseLock
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
-- **read** (method) — chama: getReader, readable, toDart, read, releaseLock, value, asUint8List
+- **read** (method)
+  - chama: getReader, readable, toDart, read, releaseLock, value, asUint8List
   - referenciado por (por nome): `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.read), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
-- **close** (method) — chama: toDart, close, writable
+- **close** (method)
+  - chama: toDart, close, writable
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **reset** (method) — chama: toDart, abort, writable
+- **reset** (method)
+  - chama: toDart, abort, writable
 - **protocol** (method)
 - **conn** (method)
-- **isClosed** (method) — chama: isClosed
+- **isClosed** (method)
+  - chama: isClosed
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **id** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **scope** (method) — chama: NullScope
+- **scope** (method)
+  - chama: NullScope
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **closeRead** (method)
-- **closeWrite** (method) — chama: close
-- **stream** (method) — chama: UnimplementedError
+- **closeWrite** (method)
+  - chama: close
+- **stream** (method) — Gets the stream.
+  - chama: UnimplementedError
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.onNewContent), `lib/src/core/events/event_bus.dart` (EventBus.subscribe), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.onNewContent), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.networkEvents), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.peerDiscovery), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.networkEvents), `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.networkEvents), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.messages), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.metricsStream), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.events), `lib/src/network/router.dart` (Router.onPeerDiscovered), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.prunedConnections), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.responses), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushEvents), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.messagesStream), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.onCircuitRelayEvents), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectionEvents), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.onCircuitRelayEvents), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.connectionEvents), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectionEvents), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.messageEvents), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.receiveMessages), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.onIceCandidate), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.onDataChannel), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.messages), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.connectionStream), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.datagramStream), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.connectionStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.incomingBidiStreams), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.incomingUniStreams), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.incomingDatagrams)
-- **flush** (method)
+- **flush** (method) — Flushes the stream.
   - referenciado por (por nome): `lib/src/core/mfs/mfs_manager.dart` (MFSManager.flushAll), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush)
 - **setDeadline** (method)
 - **setReadDeadline** (method)
 - **setWriteDeadline** (method)
 - **setProtocol** (method)
-- **stat** (method) — chama: StreamStats, outbound, Direction
+- **stat** (method)
+  - chama: StreamStats, outbound, Direction
   - referenciado por (por nome): `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
 - **incoming** (method)
-- **isWritable** (method) — chama: isClosed
+- **isWritable** (method)
+  - chama: isClosed
 
 ### top-level `createDialer` (function)
 
-- **createDialer** (function) — chama: WebTransportDialerWeb
+- **createDialer** (function) — Creates a web-specific WebTransport dialer.
+  - chama: WebTransportDialerWeb
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_listener.dart`
@@ -1164,17 +1500,23 @@ _Sem teste direto conhecido._
 
 ### class `WebTransportListener` implements libp2p_listener.Listener
 
-- **close** (method) — chama: close
+WebTransport listener implementation (stub for now, as browsers only dial).
+
+- **close** (method)
+  - chama: close
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **addr** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.addr)
-- **connectionStream** (method) — chama: stream
+- **connectionStream** (method)
+  - chama: stream
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.connectionStream)
 - **accept** (method)
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.accept)
-- **isClosed** (method) — chama: isClosed
+- **isClosed** (method)
+  - chama: isClosed
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **supportsAddr** (method) — chama: contains, toString
+- **supportsAddr** (method)
+  - chama: contains, toString
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.supportsAddr)
 
 ## `lib/src/transport/webtransport/webtransport_session.dart`
@@ -1185,162 +1527,211 @@ _Testado diretamente._
 
 ### class `WebTransportSessionConfig`
 
-- **maxSessions** (field)
+Configuration for a [WebTransportSession].
+
+- **maxSessions** (field) — Maximum number of concurrent WebTransport sessions per connection.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.maxSessions)
-- **maxDatagramSize** (field)
+- **maxDatagramSize** (field) — Maximum datagram size in bytes negotiated for this session.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.maxDatagramSize), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **initialMaxData** (field)
+- **initialMaxData** (field) — Initial session-level flow-control credit (bytes).
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildServerSettings)
-- **initialMaxStreamsBidi** (field)
+- **initialMaxStreamsBidi** (field) — Initial maximum number of bidirectional streams.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildServerSettings)
-- **initialMaxStreamsUni** (field)
+- **initialMaxStreamsUni** (field) — Initial maximum number of unidirectional streams.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildServerSettings)
-- **sessionTimeout** (field)
-- **defaultConfig** (static field) — chama: WebTransportSessionConfig
+- **sessionTimeout** (field) — Timeout for session establishment.
+- **defaultConfig** (static field) — Default configuration.
+  - chama: WebTransportSessionConfig
 
 ### class `WebTransportSessionStats`
 
-- **openedAt** (field)
-- **closedAt** (field)
+Statistics for a [WebTransportSession].
+
+- **openedAt** (field) — When the session was opened.
+- **closedAt** (field) — When the session was closed, or null if still open.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.onPeerClose)
-- **bytesSent** (field)
+- **bytesSent** (field) — Total bytes sent over all streams and datagrams.
   - referenciado por (por nome): `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics), `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **bytesReceived** (field)
+- **bytesReceived** (field) — Total bytes received over all streams and datagrams.
   - referenciado por (por nome): `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics), `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
-- **datagramsSent** (field)
+- **datagramsSent** (field) — Number of datagrams sent.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **datagramsReceived** (field)
-- **bidiStreamsOpened** (field)
+- **datagramsReceived** (field) — Number of datagrams received.
+- **bidiStreamsOpened** (field) — Number of bidirectional streams opened.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
-- **uniStreamsOpened** (field)
+- **uniStreamsOpened** (field) — Number of unidirectional streams opened.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **duration** (method) — chama: difference, now
+- **duration** (method) — Duration the session has been (or was) open.
+  - chama: difference, now
   - referenciado por (por nome): `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 
 ### class `WebTransportBidiStream`
 
-- **id** (field)
+Represents a bidirectional WebTransport stream.
+
+- **id** (field) — The stream identifier (QUIC stream ID within the session).
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **isClosed** (method)
+- **isClosed** (method) — Whether this stream has been closed.
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **write** (method) — chama: StateError, _writeFn
+- **write** (method) — Writes [data] to the stream.
+  - chama: StateError, _writeFn
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
-- **read** (method) — chama: _readFn
+- **read** (method) — Reads data from the stream.
+  - chama: _readFn
   - referenciado por (por nome): `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.read), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
-- **close** (method) — chama: _closeFn
+- **close** (method) — Closes the stream gracefully (sends FIN).
+  - chama: _closeFn
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **reset** (method) — chama: _resetFn
+- **reset** (method) — Resets the stream abruptly (sends RST_STREAM).
+  - chama: _resetFn
 
 ### class `WebTransportUniStream`
 
-- **id** (field)
+Represents a unidirectional WebTransport stream.
+
+- **id** (field) — The stream identifier (QUIC stream ID within the session).
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **isClosed** (method)
+- **isClosed** (method) — Whether this stream has been closed.
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **write** (method) — chama: StateError, _writeFn
+- **write** (method) — Writes [data] to the stream.
+  - chama: StateError, _writeFn
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.write), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
-- **close** (method) — chama: _closeFn
+- **close** (method) — Closes the stream gracefully (sends FIN).
+  - chama: _closeFn
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **reset** (method) — chama: _resetFn
+- **reset** (method) — Resets the stream abruptly (sends RESET_STREAM).
+  - chama: _resetFn
 
 ### abstract class `WebTransportSessionBackend`
 
-- **openBidirectionalStream** (method)
+Callbacks that a platform-specific backend must provide to create a
+
+- **openBidirectionalStream** (method) — Opens a bidirectional stream within the session.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
-- **openUnidirectionalStream** (method)
+- **openUnidirectionalStream** (method) — Opens a unidirectional stream within the session.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **sendDatagram** (method)
+- **sendDatagram** (method) — Sends an unreliable datagram.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
-- **closeSession** (method)
+- **closeSession** (method) — Closes the session with [errorCode] and optional [reasonPhrase].
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
-- **sendDrain** (method)
+- **sendDrain** (method) — Sends a DRAIN capsule to the peer.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.initiateDrain)
-- **incomingBidiStreams** (method)
-- **incomingUniStreams** (method)
-- **incomingDatagrams** (method)
+- **incomingBidiStreams** (method) — Stream of incoming bidirectional streams from the peer.
+- **incomingUniStreams** (method) — Stream of incoming unidirectional streams from the peer.
+- **incomingDatagrams** (method) — Stream of incoming datagrams from the peer.
 
 ### class `WebTransportSession`
 
-- **sessionId** (field)
+Represents an established WebTransport session over HTTP/3 (RFC 9220).
+
+- **sessionId** (field) — The session identifier (QUIC stream ID of the Extended CONNECT stream).
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.registerSession)
-- **stats** (method)
-- **config** (method)
+- **stats** (method) — Statistics for this session.
+- **config** (method) — The session configuration.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **isClosed** (method)
+- **isClosed** (method) — Whether the session has been closed (locally or by the peer).
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.isClosed), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.isClosed), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isClosed), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.isWritable), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **isDraining** (method)
+- **isDraining** (method) — Whether the peer has initiated a drain.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
-- **isActive** (method)
+- **isActive** (method) — Whether the session is still active (not draining and not closed).
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessions), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.sessionsInterestedIn), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.isTlsActive), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **receivedGoaway** (method)
-- **openBidiStreamCount** (method) — chama: length
-- **openUniStreamCount** (method) — chama: length
-- **incomingBidiStreams** (method) — chama: stream
-- **incomingUniStreams** (method) — chama: stream
-- **incomingDatagrams** (method) — chama: stream
-- **bidiStreams** (method) — chama: unmodifiable, values
-- **uniStreams** (method) — chama: unmodifiable, values
-- **openBidirectionalStream** (method) — chama: _checkActive, length, initialMaxStreamsBidi, StateError, openBidirectionalStream, id, bidiStreamsOpened
-- **openUnidirectionalStream** (method) — chama: _checkActive, length, initialMaxStreamsUni, StateError, openUnidirectionalStream, id, uniStreamsOpened
-- **sendDatagram** (method) — chama: StateError, length, maxDatagramSize, ArgumentError, sendDatagram, datagramsSent, bytesSent
-- **close** (method) — chama: closedAt, now, values, close, clear, closeSession, _closeControllers
+- **receivedGoaway** (method) — Whether a GOAWAY capsule has been received from the peer.
+- **openBidiStreamCount** (method) — Number of currently open bidirectional streams.
+  - chama: length
+- **openUniStreamCount** (method) — Number of currently open unidirectional streams.
+  - chama: length
+- **incomingBidiStreams** (method) — Stream of incoming bidirectional streams opened by the peer.
+  - chama: stream
+- **incomingUniStreams** (method) — Stream of incoming unidirectional streams opened by the peer.
+  - chama: stream
+- **incomingDatagrams** (method) — Stream of incoming datagrams from the peer.
+  - chama: stream
+- **bidiStreams** (method) — All currently open bidirectional streams.
+  - chama: unmodifiable, values
+- **uniStreams** (method) — All currently open unidirectional streams.
+  - chama: unmodifiable, values
+- **openBidirectionalStream** (method) — Opens a bidirectional stream within this session.
+  - chama: _checkActive, length, initialMaxStreamsBidi, StateError, openBidirectionalStream, id, bidiStreamsOpened
+- **openUnidirectionalStream** (method) — Opens a unidirectional stream within this session.
+  - chama: _checkActive, length, initialMaxStreamsUni, StateError, openUnidirectionalStream, id, uniStreamsOpened
+- **sendDatagram** (method) — Sends an unreliable datagram via this session.
+  - chama: StateError, length, maxDatagramSize, ArgumentError, sendDatagram, datagramsSent, bytesSent
+- **close** (method) — Initiates a graceful close of this session.
+  - chama: closedAt, now, values, close, clear, closeSession, _closeControllers
   - referenciado por (por nome): `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.stop), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.read), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/denylist_service.dart` (DenylistService.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.close), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete), `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.dispose), `lib/src/routing/ipni_client.dart` (IPNIClient.dispose), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.dispose), `lib/src/services/gateway/acme_client.dart` (AcmeClient.dispose), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.dispose), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.dispose), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.close), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite), `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close), `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.close), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.close), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.closeWrite), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **initiateDrain** (method) — chama: StateError, sendDrain
-- **onPeerClose** (method) — chama: closedAt, now, _closeControllers
-- **onPeerDrain** (method)
-- **onGoawayReceived** (method)
-- **removeStream** (method) — chama: remove
+- **initiateDrain** (method) — Initiates a drain of this session.
+  - chama: StateError, sendDrain
+- **onPeerClose** (method) — Marks the session as closed after receiving a CLOSE capsule from the peer.
+  - chama: closedAt, now, _closeControllers
+- **onPeerDrain** (method) — Marks the session as draining after receiving a DRAIN capsule from the
+- **onGoawayReceived** (method) — Marks that a GOAWAY capsule has been received from the peer.
+- **removeStream** (method) — Removes a closed stream from the session's tracking.
+  - chama: remove
 
 ### class `WebTransportSessionManager`
 
-- **maxSessions** (method)
+Manages multiple WebTransport sessions over a single connection.
+
+- **maxSessions** (method) — Maximum number of concurrent sessions allowed.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.maxSessions)
-- **sessionCount** (method) — chama: length
+- **sessionCount** (method) — Number of currently active sessions.
+  - chama: length
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.activeSessionCount)
-- **sessions** (method) — chama: unmodifiable, values
-- **isFull** (method) — chama: length
+- **sessions** (method) — All currently active sessions.
+  - chama: unmodifiable, values
+- **isFull** (method) — Whether the maximum session limit has been reached.
+  - chama: length
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.isSessionLimitReached)
-- **registerSession** (method) — chama: length, StateError, sessionId, containsKey
+- **registerSession** (method) — Registers a new session with the manager.
+  - chama: length, StateError, sessionId, containsKey
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.registerSession)
-- **getSession** (method)
+- **getSession** (method) — Retrieves a session by its session ID, or null if not found.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.getSession)
-- **removeSession** (method) — chama: remove
+- **removeSession** (method) — Removes a session from the manager.
+  - chama: remove
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.removeSession)
-- **closeAll** (method) — chama: values, isActive, add, close, wait, clear
+- **closeAll** (method) — Closes all active sessions and clears the registry.
+  - chama: values, isActive, add, close, wait, clear
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dispose)
-- **cleanupInactive** (method) — chama: removeWhere, isClosed, isDraining
+- **cleanupInactive** (method) — Removes all closed or draining sessions from the registry.
+  - chama: removeWhere, isClosed, isDraining
 
 ### class `WebTransportSettings`
 
-- **enableConnectProtocol** (static field)
-- **h3Datagram** (static field)
-- **wtEnabled** (static field)
+HTTP/3 SETTINGS identifiers for WebTransport (draft-ietf-webtrans-http3).
+
+- **enableConnectProtocol** (static field) — SETTINGS_ENABLE_CONNECT_PROTOCOL (0x08) per RFC 9220.
+- **h3Datagram** (static field) — SETTINGS_H3_DATAGRAM (0x33) per RFC 9297.
+- **wtEnabled** (static field) — SETTINGS_WEBTRANSPORT_ENABLED (0x2c7cf000) per
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
-- **wtInitialMaxData** (static field)
-- **wtInitialMaxStreamsUni** (static field)
-- **wtInitialMaxStreamsBidi** (static field)
-- **wtMaxSessions** (static field)
-- **parse** (method) — chama: WebTransportSettingsParsed
+- **wtInitialMaxData** (static field) — SETTINGS_WEBTRANSPORT_INITIAL_MAX_DATA (0x2b61) per
+- **wtInitialMaxStreamsUni** (static field) — SETTINGS_WEBTRANSPORT_INITIAL_MAX_STREAMS_UNI (0x2b64) per
+- **wtInitialMaxStreamsBidi** (static field) — SETTINGS_WEBTRANSPORT_INITIAL_MAX_STREAMS_BIDI (0x2b65) per
+- **wtMaxSessions** (static field) — SETTINGS_WT_MAX_SESSIONS — maximum concurrent WebTransport sessions.
+- **parse** (method) — Parses WebTransport-related settings from a raw settings map.
+  - chama: WebTransportSettingsParsed
   - referenciado por (por nome): `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeyEntry.fromJson), `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.decode), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findProviders), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.hasValidCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.needsRenewal), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.unpin), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.status), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPins), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.recover), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPeers), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.health), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.version), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.sync), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.getPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.isReachable), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings), `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve), `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString), `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
-- **buildServerSettings** (method)
+- **buildServerSettings** (method) — Builds a settings map suitable for inclusion in an HTTP/3 SETTINGS frame.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildServerSettings)
-- **buildClientSettings** (method)
+- **buildClientSettings** (method) — Builds a settings map for a client connecting to a WebTransport server.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildClientSettings)
 
 ### class `WebTransportSettingsParsed`
 
-- **connectProtocolEnabled** (field)
+Parsed WebTransport settings from an HTTP/3 SETTINGS frame.
+
+- **connectProtocolEnabled** (field) — Whether Extended CONNECT (RFC 9220) is enabled by the peer.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
-- **h3DatagramEnabled** (field)
-- **wtEnabled** (field)
+- **h3DatagramEnabled** (field) — Whether HTTP/3 datagrams (RFC 9297) are enabled by the peer.
+- **wtEnabled** (field) — Whether WebTransport is enabled by the peer.
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
-- **wtInitialMaxData** (field)
-- **wtInitialMaxStreamsUni** (field)
-- **wtInitialMaxStreamsBidi** (field)
-- **wtMaxSessions** (field)
-- **isWebTransportSupported** (method)
+- **wtInitialMaxData** (field) — Initial session-level flow-control limit in bytes.
+- **wtInitialMaxStreamsUni** (field) — Initial maximum number of unidirectional streams per session.
+- **wtInitialMaxStreamsBidi** (field) — Initial maximum number of bidirectional streams per session.
+- **wtMaxSessions** (field) — Maximum concurrent WebTransport sessions.
+- **isWebTransportSupported** (method) — Whether WebTransport is fully supported (Extended CONNECT + WT enabled).
   - referenciado por (por nome): `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
-- **areDatagramsSupported** (method)
+- **areDatagramsSupported** (method) — Whether datagrams are supported (WT enabled + H3 datagram enabled).
 
 ## `lib/src/transport/webtransport/webtransport_transport.dart`
 
@@ -1350,29 +1741,46 @@ _Testado diretamente._
 
 ### class `WebTransportTransport` implements libp2p_trans.Transport
 
-- **maxSessions** (method) — chama: maxSessions
-- **activeSessionCount** (method) — chama: sessionCount
-- **isSessionLimitReached** (method) — chama: isFull
-- **sessionManager** (method)
-- **defaultSessionConfig** (method)
-- **registerSession** (method) — chama: registerSession
-- **getSession** (method) — chama: getSession
-- **removeSession** (method) — chama: removeSession
-- **buildServerSettings** (method) — chama: buildServerSettings, initialMaxData, initialMaxStreamsBidi, initialMaxStreamsUni
-- **buildClientSettings** (method) — chama: buildClientSettings
-- **validatePeerSettings** (method) — chama: parse, wtEnabled, StateError, connectProtocolEnabled, isWebTransportSupported
-- **config** (method) — chama: libp2p_config.TransportConfig
+WebTransport transport implementation for libp2p.
+
+- **maxSessions** (method) — Maximum number of concurrently-registered sessions.
+  - chama: maxSessions
+- **activeSessionCount** (method) — Number of currently active (registered) sessions.
+  - chama: sessionCount
+- **isSessionLimitReached** (method) — Whether the maximum session limit has been reached.
+  - chama: isFull
+- **sessionManager** (method) — The underlying session manager.
+- **defaultSessionConfig** (method) — Default session configuration advertised to peers.
+- **registerSession** (method) — Registers an active session with the transport.
+  - chama: registerSession
+- **getSession** (method) — Retrieves a registered session by id, or `null` if not found.
+  - chama: getSession
+- **removeSession** (method) — Removes a session from the registry.
+  - chama: removeSession
+- **buildServerSettings** (method) — Builds the HTTP/3 SETTINGS map advertised by the server.
+  - chama: buildServerSettings, initialMaxData, initialMaxStreamsBidi, initialMaxStreamsUni
+- **buildClientSettings** (method) — Builds the HTTP/3 SETTINGS map sent by the client.
+  - chama: buildClientSettings
+- **validatePeerSettings** (method) — Validates and parses peer-supplied HTTP/3 SETTINGS.
+  - chama: parse, wtEnabled, StateError, connectProtocolEnabled, isWebTransportSupported
+- **config** (method)
+  - chama: libp2p_config.TransportConfig
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **canDial** (method) — chama: contains, toString
+- **canDial** (method)
+  - chama: contains, toString
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
-- **canListen** (method) — chama: canDial
+- **canListen** (method)
+  - chama: canDial
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
-- **dial** (method) — chama: createWebTransportDialer, Duration, timeout, dial
+- **dial** (method)
+  - chama: createWebTransportDialer, Duration, timeout, dial
   - referenciado por (por nome): `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
-- **listen** (method) — chama: WebTransportListener
+- **listen** (method)
+  - chama: WebTransportListener
   - referenciado por (por nome): `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.listen), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
   - referenciado por (por nome): `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
-- **dispose** (method) — chama: closeAll
+- **dispose** (method)
+  - chama: closeAll
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 

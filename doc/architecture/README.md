@@ -1,6 +1,6 @@
 # Índice de arquitetura — visão geral
 
-Gerado por `tool/generate_module_index.dart` em 2026-08-24T07:44:28.732468. Um arquivo por módulo em [lib/](lib/) e [test/](test/), espelhando a estrutura real do repositório.
+Gerado por `tool/generate_module_index.dart` em 2026-08-24T07:49:40.326144. Um arquivo por módulo em [lib/](lib/) e [test/](test/), espelhando a estrutura real do repositório.
 
 ## Módulos (`lib/src/*`)
 

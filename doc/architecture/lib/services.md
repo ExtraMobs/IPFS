@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T07:44:28.640629
+generated: 2026-08-24T07:49:40.235178
 ---
 
 # Módulo `services` (`lib/src/services/`)
@@ -18,13 +18,19 @@ _Testado diretamente._
 
 ### class `BlockStoreService` extends BlockStoreServiceBase
 
-- **addBlock** (method) — chama: fromProto, putBlock
+gRPC service implementation for block storage operations.
+
+- **addBlock** (method)
+  - chama: fromProto, putBlock
   - referenciado por (por nome): `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre), `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-- **getBlock** (method) — chama: getBlock, toString
+- **getBlock** (method)
+  - chama: getBlock, toString
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode), `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getBlock_Pre), `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.wantBlock), `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
-- **removeBlock** (method) — chama: removeBlock, toString
+- **removeBlock** (method)
+  - chama: removeBlock, toString
   - referenciado por (por nome): `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc), `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre), `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
-- **getAllBlocks** (method) — chama: getAllBlocks, toProto
+- **getAllBlocks** (method)
+  - chama: getAllBlocks, toProto
   - referenciado por (por nome): `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus), `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre), `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
 
 ## `lib/src/services/content_service.dart`
@@ -35,17 +41,28 @@ _Testado diretamente._
 
 ### class `ContentService`
 
-- **storeContent** (method) — chama: IPFSCIDProto, version, IPFS_CID_VERSION_1, IPFSCIDVersion, multihash, computeHash, codec, multibasePrefix, fromProto, fromData, fromList, Key, encode, put, data
-- **getContent** (method) — chama: Key, encode, get, error
+High-level service for content storage and retrieval.
+
+- **storeContent** (method) — Stores content and returns its CID
+  - chama: IPFSCIDProto, version, IPFS_CID_VERSION_1, IPFSCIDVersion, multihash, computeHash, codec, multibasePrefix, fromProto, fromData, fromList, Key, encode, put, data
+- **getContent** (method) — Retrieves content by CID
+  - chama: Key, encode, get, error
   - referenciado por (por nome): `lib/src/services/content_service.dart` (ContentService.getContentSize)
-- **removeContent** (method) — chama: Key, encode, has, delete, error
-- **pinContent** (method) — chama: Key, encode, has, put, fromList, error
-- **unpinContent** (method) — chama: Key, encode, delete, error
-- **computeHash** (method) — chama: convert, length, bytes
+- **removeContent** (method) — Removes content by CID
+  - chama: Key, encode, has, delete, error
+- **pinContent** (method) — Pins content to prevent garbage collection
+  - chama: Key, encode, has, put, fromList, error
+- **unpinContent** (method) — Unpins content, making it eligible for garbage collection
+  - chama: Key, encode, delete, error
+- **computeHash** (method) — Computes the multihash for content
+  - chama: convert, length, bytes
   - referenciado por (por nome): `lib/src/services/content_service.dart` (ContentService.storeContent)
-- **hasContent** (method) — chama: Key, encode, has
-- **listPinnedContent** (method) — chama: Query, query, substring, toString, key, length, add
-- **getContentSize** (method) — chama: getContent, length
+- **hasContent** (method) — Checks if content exists
+  - chama: Key, encode, has
+- **listPinnedContent** (method) — Lists all pinned content CIDs
+  - chama: Query, query, substring, toString, key, length, add
+- **getContentSize** (method) — Gets the size of stored content
+  - chama: getContent, length
 
 ## `lib/src/services/gateway/acme_client.dart`
 
@@ -55,64 +72,86 @@ _Testado diretamente._
 
 ### class `AcmeHttp01Challenge`
 
-- **token** (field)
+A pending HTTP-01 challenge that the gateway must serve.
+
+- **token** (field) — The challenge token provided by the ACME server.
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.submitChallenge), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **keyAuthorization** (field)
+- **keyAuthorization** (field) — The key authorization string to serve as the body of the challenge
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **challengeUrl** (field)
+- **challengeUrl** (field) — The ACME challenge URL to POST when ready for validation.
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.submitChallenge)
 
 ### class `AcmeCertificateResult`
 
-- **certificatePem** (field)
+Result of a successful ACME certificate issuance.
+
+- **certificatePem** (field) — PEM-encoded certificate chain (leaf + intermediates).
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **privateKeyPem** (field)
+- **privateKeyPem** (field) — PEM-encoded private key matching the certificate.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **notAfter** (field)
+- **notAfter** (field) — Expiry date of the leaf certificate.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 
 ### class `AcmeClient`
 
-- **directoryUrl** (field)
-- **accountKey** (method) — chama: _generateAccountKey
-- **accountPublicKey** (method) — chama: _generateAccountKey
-- **registerAccount** (method) — chama: _getDirectory, _post, statusCode, headers, info, AcmeException, body
+A functional ACME v2 (RFC 8555) client that performs HTTP-01 challenges.
+
+- **directoryUrl** (field) — The ACME directory URL (e.g. Let's Encrypt production or staging).
+- **accountKey** (method) — Returns the RSA account private key, generating one if needed.
+  - chama: _generateAccountKey
+- **accountPublicKey** (method) — Returns the RSA account public key.
+  - chama: _generateAccountKey
+- **registerAccount** (method) — Registers a new ACME account (or retrieves the existing account URL).
+  - chama: _getDirectory, _post, statusCode, headers, info, AcmeException, body
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **createOrder** (method) — chama: _getDirectory, toList, map, _post, statusCode, AcmeException, body, headers, jsonDecode, AcmeOrder, cast
+- **createOrder** (method) — Creates a new order for the given [domains].
+  - chama: _getDirectory, toList, map, _post, statusCode, AcmeException, body, headers, jsonDecode, AcmeOrder, cast
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **getHttp01Challenge** (method) — chama: _post, statusCode, AcmeException, body, jsonDecode, _jwkThumbprint, AcmeHttp01Challenge
+- **getHttp01Challenge** (method) — Fetches the authorization object at [authzUrl] and extracts the
+  - chama: _post, statusCode, AcmeException, body, jsonDecode, _jwkThumbprint, AcmeHttp01Challenge
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **submitChallenge** (method) — chama: _post, challengeUrl, statusCode, AcmeException, body, info, token
+- **submitChallenge** (method) — Submits the challenge for validation by the ACME server.
+  - chama: _post, challengeUrl, statusCode, AcmeException, body, info, token
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **awaitAuthorization** (method) — chama: add, now, isBefore, Future, _post, statusCode, warning, jsonDecode, body, error, AcmeException
+- **awaitAuthorization** (method) — Polls the authorization status until it is no longer pending.
+  - chama: add, now, isBefore, Future, _post, statusCode, warning, jsonDecode, body, error, AcmeException
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **finalizeOrder** (method) — chama: _generateCsr, _base64UrlNoPad, _post, finalize, statusCode, AcmeException, body, info
+- **finalizeOrder** (method) — Finalizes the order by submitting the CSR.
+  - chama: _generateCsr, _base64UrlNoPad, _post, finalize, statusCode, AcmeException, body, info
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **awaitOrderAndDownload** (method) — chama: add, now, certificate, isBefore, Future, _post, url, statusCode, warning, jsonDecode, body, AcmeException, _pemEncode, _rsaPrivateKeyToPem, _extractCertExpiry, AcmeCertificateResult
+- **awaitOrderAndDownload** (method) — Polls the order status until it is ready, then downloads the certificate.
+  - chama: add, now, certificate, isBefore, Future, _post, url, statusCode, warning, jsonDecode, body, AcmeException, _pemEncode, _rsaPrivateKeyToPem, _extractCertExpiry, AcmeCertificateResult
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **issueCertificate** (method) — chama: registerAccount, createOrder, authorizations, getHttp01Challenge, serveChallenge, submitChallenge, awaitAuthorization, AcmeException, removeChallenge, finalizeOrder, awaitOrderAndDownload, info
+- **issueCertificate** (method) — Runs the complete ACME HTTP-01 issuance flow for [domains].
+  - chama: registerAccount, createOrder, authorizations, getHttp01Challenge, serveChallenge, submitChallenge, awaitAuthorization, AcmeException, removeChallenge, finalizeOrder, awaitOrderAndDownload, info
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **dispose** (method) — chama: close
+- **dispose** (method) — Releases the HTTP client and clears cached state.
+  - chama: close
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
-- **exportAccountKeyPem** (method) — chama: _rsaPrivateKeyToPem
+- **exportAccountKeyPem** (method) — Exports the account key as PEM-encoded string.
+  - chama: _rsaPrivateKeyToPem
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 
 ### class `AcmeOrder`
 
-- **url** (field)
+An ACME order as returned by the server.
+
+- **url** (field) — The order URL.
   - referenciado por (por nome): `lib/src/core/config/network_config.dart` (TurnServer.==), `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitOrderAndDownload), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.detectTrustlessFormat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMkdir), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesChcid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
-- **status** (field)
+- **status** (field) — Current order status (e.g. `pending`, `ready`, `valid`).
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **authorizations** (field)
+- **authorizations** (field) — Authorization URLs for each identifier.
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate)
-- **finalize** (field)
+- **finalize** (field) — The finalize URL for submitting the CSR.
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.finalizeOrder)
-- **certificate** (field)
+- **certificate** (field) — The certificate download URL (available when status is `valid`).
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitOrderAndDownload)
 
 ### class `AcmeException` implements Exception
 
-- **message** (field)
+Exception thrown for ACME protocol errors.
+
+- **message** (field) — Human-readable error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -125,26 +164,38 @@ _Testado diretamente._
 
 ### class `AcmePersistence`
 
-- **config** (field)
+Manages persistent storage for ACME account keys and certificates.
+
+- **config** (field) — Gateway configuration containing storage path settings.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **loadAccountKey** (method)
-- **saveAccountKey** (method) — chama: UnimplementedError
-- **loadCertificate** (method) — chama: File, existsSync, info, readAsString, error
+- **loadAccountKey** (method) — Loads the ACME account key from storage.
+- **saveAccountKey** (method) — Saves the ACME account key to storage.
+  - chama: UnimplementedError
+- **loadCertificate** (method) — Loads the certificate chain from storage.
+  - chama: File, existsSync, info, readAsString, error
   - referenciado por (por nome): `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.hasValidCertificate), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **loadPrivateKey** (method) — chama: File, existsSync, info, readAsString, error
+- **loadPrivateKey** (method) — Loads the certificate private key from storage.
+  - chama: File, existsSync, info, readAsString, error
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **saveCertificate** (method) — chama: _ensureDirectory, File, writeAsString, info, toIso8601String, now, jsonEncode, error
+- **saveCertificate** (method) — Saves the certificate chain and private key to storage.
+  - chama: _ensureDirectory, File, writeAsString, info, toIso8601String, now, jsonEncode, error
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **loadMetadata** (method) — chama: File, existsSync, readAsString, jsonDecode, warning
+- **loadMetadata** (method) — Loads certificate metadata from storage.
+  - chama: File, existsSync, readAsString, jsonDecode, warning
   - referenciado por (por nome): `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.hasValidCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.needsRenewal), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **deleteAll** (method) — chama: File, existsSync, delete, info, path, Directory, deleteSync, error
-- **hasValidCertificate** (method) — chama: loadCertificate, loadMetadata, parse, isBefore, now
+- **deleteAll** (method) — Deletes all ACME files from storage.
+  - chama: File, existsSync, delete, info, path, Directory, deleteSync, error
+- **hasValidCertificate** (method) — Checks if a valid certificate exists and is not expired.
+  - chama: loadCertificate, loadMetadata, parse, isBefore, now
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **needsRenewal** (method) — chama: loadMetadata, parse, now, Duration, autoTlsRenewalThresholdDays, isAfter, subtract
+- **needsRenewal** (method) — Checks if a certificate needs renewal based on the configured threshold.
+  - chama: loadMetadata, parse, now, Duration, autoTlsRenewalThresholdDays, isAfter, subtract
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **saveAccountKeyPem** (method) — chama: _ensureDirectory, File, writeAsString, info, error
+- **saveAccountKeyPem** (method) — Saves the ACME account key to storage.
+  - chama: _ensureDirectory, File, writeAsString, info, error
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **loadAccountKeyPem** (method) — chama: File, existsSync, info, readAsString, warning
+- **loadAccountKeyPem** (method) — Loads the ACME account key as PEM string from storage.
+  - chama: File, existsSync, info, readAsString, warning
 
 ## `lib/src/services/gateway/adaptive_compression_handler.dart`
 
@@ -154,25 +205,34 @@ _Testado diretamente._
 
 ### class `CompressionConfig`
 
-- **enabled** (field)
+Configuration for adaptive compression.
+
+- **enabled** (field) — Whether compression is enabled.
   - referenciado por (por nome): `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordLatency), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordPeerConnected), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordPeerDisconnected), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRoutingTableSize), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordBlockstoreStats), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordDhtProvide), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordReprovide), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordSecurityEvent), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getStatus), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/peering/peering_service.dart` (PeeringService.start), `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus), `lib/src/core/plugins/plugin_host.dart` (PluginHost.initialize), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.getStatus), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **maxUncompressedSize** (field)
+- **maxUncompressedSize** (field) — Maximum size for uncompressed content.
   - referenciado por (por nome): `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock)
-- **contentTypeRules** (field)
+- **contentTypeRules** (field) — Compression type rules by content type prefix.
   - referenciado por (por nome): `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.getOptimalCompression)
 
 ### class `CompressionAnalysis`
 
-- **compressionRatios** (field)
+Analysis results for compression options.
+
+- **compressionRatios** (field) — Compression ratios by type.
   - referenciado por (por nome): `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData)
-- **recommendedType** (field)
+- **recommendedType** (field) — The recommended compression type.
 
 ### class `AdaptiveCompressionHandler`
 
-- **compressBlock** (method) — chama: enabled, size, maxUncompressedSize, getOptimalCompression, none, _compressData, data, length, fromData, putBlock, _storeCompressionMetadata, cid, toString, name, encode
-- **getOptimalCompression** (method) — chama: entries, contentTypeRules, startsWith, key, value, lz4, gzip
+Handles adaptive compression for gateway content.
+
+- **compressBlock** (method) — Compresses a block based on its content type.
+  - chama: enabled, size, maxUncompressedSize, getOptimalCompression, none, _compressData, data, length, fromData, putBlock, _storeCompressionMetadata, cid, toString, name, encode
+- **getOptimalCompression** (method) — Determines optimal compression for content type and size.
+  - chama: entries, contentTypeRules, startsWith, key, value, lz4, gzip
   - referenciado por (por nome): `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData)
-- **analyzeCompression** (method) — chama: entries, key, value, length, none, CompressionAnalysis
+- **analyzeCompression** (method) — Analyzes compression efficiency across algorithms.
+  - chama: entries, key, value, length, none, CompressionAnalysis
   - referenciado por (por nome): `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData)
 
 ## `lib/src/services/gateway/cached_preview_generator.dart`
@@ -183,9 +243,13 @@ _Testado diretamente._
 
 ### class `CachedPreviewGenerator`
 
-- **generatePreview** (method) — chama: getPreview, cid, generatePreview, fromList, encode, cachePreview
+Generates and caches content previews for gateway responses.
+
+- **generatePreview** (method) — Generates or retrieves a cached preview for a block.
+  - chama: getPreview, cid, generatePreview, fromList, encode, cachePreview
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.preloadPreviews), `lib/src/services/gateway/preview_api_handler.dart` (PreviewApiHandler.handlePreviewRequest)
-- **preloadPreviews** (method) — chama: _detectContentType, isSupportedType, generatePreview
+- **preloadPreviews** (method) — Preloads previews for multiple blocks.
+  - chama: _detectContentType, isSupportedType, generatePreview
 
 ## `lib/src/services/gateway/compressed_cache_store.dart`
 
@@ -195,21 +259,28 @@ _Testado diretamente._
 
 ### class `CompressedCacheStore`
 
-- **cachePath** (field)
-- **getCompressedData** (method) — chama: _getCacheFileName, exists, getPlatform, readBytes, _readMetadata, _parseCompressionType, _decompress, error
+Manages compressed cache storage with multiple compression algorithms.
+
+- **cachePath** (field) — The path to the cache directory.
+- **getCompressedData** (method) — Gets compressed data for a CID, decompressing before returning.
+  - chama: _getCacheFileName, exists, getPlatform, readBytes, _readMetadata, _parseCompressionType, _decompress, error
   - referenciado por (por nome): `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getPreview)
-- **storeCompressedData** (method) — chama: getOptimalCompression, length, none, _storeUncompressed, _compress, analyzeCompression, _storeWithMetadata, name, toString, compressionRatios, toIso8601String, now
+- **storeCompressedData** (method) — Stores data with optimal compression for the content type.
+  - chama: getOptimalCompression, length, none, _storeUncompressed, _compress, analyzeCompression, _storeWithMetadata, name, toString, compressionRatios, toIso8601String, now
   - referenciado por (por nome): `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.cachePreview)
-- **getCompressionStats** (method) — chama: CompressionStats, listDirectory, getPlatform, endsWith, _readMetadata, parse, addEntry
+- **getCompressionStats** (method) — Returns compression statistics for the cache.
+  - chama: CompressionStats, listDirectory, getPlatform, endsWith, _readMetadata, parse, addEntry
 
 ### class `CompressionStats`
 
-- **totalOriginalSize** (field)
-- **totalCompressedSize** (field)
-- **fileCount** (field)
-- **addEntry** (method)
+Tracks compression statistics across multiple entries.
+
+- **totalOriginalSize** (field) — Total original (uncompressed) size in bytes.
+- **totalCompressedSize** (field) — Total compressed size in bytes.
+- **fileCount** (field) — Number of entries tracked.
+- **addEntry** (method) — Adds an entry to the statistics.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
-- **compressionRatio** (method)
+- **compressionRatio** (method) — Returns the overall compression ratio.
 
 ## `lib/src/services/gateway/content_type_handler.dart`
 
@@ -219,9 +290,14 @@ _Testado diretamente._
 
 ### class `ContentTypeHandler`
 
-- **detectContentType** (method) — chama: _isDirectoryListing, lookup, _detectFromContent, data
-- **processContent** (method) — chama: _isDirectoryListing, _generateDirectoryListing, data, _processMarkdown
-- **cacheContentType** (method) — chama: error
+Handles content type detection and processing for IPFS gateway responses
+
+- **detectContentType** (method) — Detects the content type of a block based on its data and metadata
+  - chama: _isDirectoryListing, lookup, _detectFromContent, data
+- **processContent** (method) — Processes the block data based on content type
+  - chama: _isDirectoryListing, _generateDirectoryListing, data, _processMarkdown
+- **cacheContentType** (method) — Caches the content type mapping for a CID
+  - chama: error
 
 ## `lib/src/services/gateway/directory_parser.dart`
 
@@ -231,30 +307,40 @@ _Testado diretamente._
 
 ### class `DirectoryHandler`
 
-- **path** (field)
+Handles directory operations and metadata for IPFS directory listings.
+
+- **path** (field) — The directory path.
   - referenciado por (por nome): `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.listDirectory), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.deleteAll), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **addEntry** (method) — chama: add
+- **addEntry** (method) — Adds an entry to the directory
+  - chama: add
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
-- **listEntries** (method) — chama: unmodifiable
+- **listEntries** (method) — Lists all entries in the directory
+  - chama: unmodifiable
   - referenciado por (por nome): `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 
 ### class `DirectoryEntry`
 
-- **name** (field)
+Represents a single directory entry with metadata.
+
+- **name** (field) — The name of the entry.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **size** (field)
+- **size** (field) — The size in bytes.
   - referenciado por (por nome): `lib/src/core/cid.dart` (CID.toPrefixBytes), `lib/src/core/cid.dart` (CID.validate), `lib/src/core/data_structures/bitfield.dart` (BitField.toProto), `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeerToBucket), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket), `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode), `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode), `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **isDirectory** (field)
+- **isDirectory** (field) — Whether this entry is a directory.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
-- **timestamp** (field)
+- **timestamp** (field) — Modification timestamp as milliseconds since epoch.
   - referenciado por (por nome): `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
-- **metadata** (field)
+- **metadata** (field) — Optional additional metadata.
   - referenciado por (por nome): `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 
 ### class `DirectoryParser`
 
-- **parseDirectoryBlock** (method) — chama: codec, cid, FormatException, fromBuffer, data, hasData, type, Directory, HAMTShard, DirectoryHandler, encode, links, addEntry, DirectoryEntry, name, toInt, size
-- **generateHtmlListing** (method) — chama: StringBuffer, writeln, _generateStyles, generateLazyLoadStyles, _createEntryHtml, List, listEntries, sort, isDirectory, compareTo, name, _formatSize, toInt, size, _getFileType, timestamp, metadata, generateLazyLoadScript, toString
+Parses and formats IPFS directory listings with enhanced metadata
+
+- **parseDirectoryBlock** (method) — Parses a block containing a directory listing
+  - chama: codec, cid, FormatException, fromBuffer, data, hasData, type, Directory, HAMTShard, DirectoryHandler, encode, links, addEntry, DirectoryEntry, name, toInt, size
+- **generateHtmlListing** (method) — Generates an HTML representation of the directory listing with enhanced metadata
+  - chama: StringBuffer, writeln, _generateStyles, generateLazyLoadStyles, _createEntryHtml, List, listEntries, sort, isDirectory, compareTo, name, _formatSize, toInt, size, _getFileType, timestamp, metadata, generateLazyLoadScript, toString
 
 ## `lib/src/services/gateway/domain_validator.dart`
 
@@ -264,17 +350,23 @@ _Testado diretamente._
 
 ### class `DomainValidator`
 
-- **expectedIp** (field)
-- **validateDomain** (method) — chama: info, _checkDnsResolution, success, _checkHttpAccessibility, DomainValidationResult, details
-- **getPublicIp** (method) — chama: Client, timeout, get, parse, Duration, statusCode, trim, body, info, close, warning
+Validates domain ownership and accessibility for ACME HTTP-01 challenges.
+
+- **expectedIp** (field) — The expected IP address that the domain should resolve to.
+- **validateDomain** (method) — Validates that the domain is ready for ACME HTTP-01 challenge.
+  - chama: info, _checkDnsResolution, success, _checkHttpAccessibility, DomainValidationResult, details
+- **getPublicIp** (method) — Checks if the current machine's public IP matches the domain's DNS.
+  - chama: Client, timeout, get, parse, Duration, statusCode, trim, body, info, close, warning
 
 ### class `DomainValidationResult`
 
-- **success** (field)
+Result of a domain validation check.
+
+- **success** (field) — Whether the validation passed.
   - referenciado por (por nome): `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
-- **message** (field)
+- **message** (field) — Human-readable message describing the result.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
-- **details** (field)
+- **details** (field) — Additional details about the validation.
   - referenciado por (por nome): `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
@@ -287,9 +379,13 @@ _Testado diretamente._
 
 ### class `FilePreviewHandler`
 
-- **generatePreview** (method) — chama: length, data, contains, _generateImagePreview, _generateTextPreview
+Handles file preview generation for supported file types
+
+- **generatePreview** (method) — Generates a preview for the given block if supported
+  - chama: length, data, contains, _generateImagePreview, _generateTextPreview
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.preloadPreviews), `lib/src/services/gateway/preview_api_handler.dart` (PreviewApiHandler.handlePreviewRequest)
-- **isSupportedType** (method) — chama: contains
+- **isSupportedType** (method) — Checks if the given content type is supported for preview generation
+  - chama: contains
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.preloadPreviews)
 
 ## `lib/src/services/gateway/gateway_content_handler.dart`
@@ -300,13 +396,18 @@ _Testado diretamente._
 
 ### class `GatewayContentHandler`
 
-- **blockStore** (field)
+Serves content paths for the IPFS gateway.
+
+- **blockStore** (field) — The block store used to retrieve blocks.
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
-- **directoryHandler** (field)
-- **serveContent** (method) — chama: _getBlockByCid, notFound, fromBuffer, data, hasData, type, Directory, isEmpty, findIndexHtml, serveContent, encode, renderDirectory, navigateDirectory, HAMTShard, File, _serveFile, _serveRawBlock
-- **getBlockByCid** (method) — chama: getBlock, found, fromProto, block
+- **directoryHandler** (field) — The handler used to render and navigate directories.
+- **serveContent** (method) — Serves content for the requested CID and optional sub-path.
+  - chama: _getBlockByCid, notFound, fromBuffer, data, hasData, type, Directory, isEmpty, findIndexHtml, serveContent, encode, renderDirectory, navigateDirectory, HAMTShard, File, _serveFile, _serveRawBlock
+- **getBlockByCid** (method) — Returns the block for [cidStr] from the block store, or null if not found
+  - chama: getBlock, found, fromProto, block
   - referenciado por (por nome): `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.resolveSubPath)
-- **resolveSubPath** (method) — chama: getBlockByCid, encode, isEmpty, trim, toList, where, split, isNotEmpty, findChildCid
+- **resolveSubPath** (method) — Resolves [subPath] under [rootCid] and returns the resulting CID and block.
+  - chama: getBlockByCid, encode, isEmpty, trim, toList, where, split, isNotEmpty, findChildCid
 
 ## `lib/src/services/gateway/gateway_directory_handler.dart`
 
@@ -316,13 +417,19 @@ _Testado diretamente._
 
 ### class `GatewayDirectoryHandler`
 
-- **renderDirectory** (method) — chama: StringBuffer, writeln, isNotEmpty, convert, HtmlEscape, links, name, toInt, size, fromBytes, fromList, hash, encode, _formatSize, ok, toString
+Handles rendering and navigation of UnixFS directory nodes for the IPFS
+
+- **renderDirectory** (method) — Renders a directory listing as HTML.
+  - chama: StringBuffer, writeln, isNotEmpty, convert, HtmlEscape, links, name, toInt, size, fromBytes, fromList, hash, encode, _formatSize, ok, toString
   - referenciado por (por nome): `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory)
-- **findIndexHtml** (method) — chama: findLinkByName, links, fromBytes, fromList, hash
+- **findIndexHtml** (method) — Returns the CID of an `index.html` child link if one exists in [pbNode],
+  - chama: findLinkByName, links, fromBytes, fromList, hash
   - referenciado por (por nome): `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
-- **navigateDirectory** (method) — chama: toList, where, split, isNotEmpty, isEmpty, renderDirectory, Block, decode, writeToBuffer, findChildCid, first, notFound, length, join, sublist, serveContentCallback, encode
+- **navigateDirectory** (method) — Navigates to a sub-path within a directory and calls the provided
+  - chama: toList, where, split, isNotEmpty, isEmpty, renderDirectory, Block, decode, writeToBuffer, findChildCid, first, notFound, length, join, sublist, serveContentCallback, encode
   - referenciado por (por nome): `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
-- **findChildCid** (method) — chama: codec, cid, fromBlock, isHAMTShard, _resolveHAMTChild, findLinkByName, links, pbNode, fromBytes, fromList, hash
+- **findChildCid** (method) — Finds the child CID for a named link within a DAG-PB block.
+  - chama: codec, cid, fromBlock, isHAMTShard, _resolveHAMTChild, findLinkByName, links, pbNode, fromBytes, fromList, hash
   - referenciado por (por nome): `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.resolveSubPath), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory)
 
 ## `lib/src/services/gateway/gateway_handler.dart`
@@ -333,37 +440,46 @@ _Testado diretamente._
 
 ### class `DnsLinkResult`
 
-- **path** (field)
+Result of a DNSLink resolution.
+
+- **path** (field) — The resolved path, either `/ipfs/<cid>` or `/ipns/<name>`.
   - referenciado por (por nome): `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.listDirectory), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.deleteAll), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
-- **ttlSeconds** (field)
+- **ttlSeconds** (field) — The TTL in seconds to cache the result.
 
 ### class `SubdomainRequest`
 
-- **namespace** (field)
+A request parsed from a subdomain-style gateway host.
+
+- **namespace** (field) — The namespace, either `ipfs` or `ipns`.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
-- **identifier** (field)
+- **identifier** (field) — The identifier (CID for `ipfs`, PeerId/DNSLink/IPNS key for `ipns`).
   - referenciado por (por nome): `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
-- **subPath** (field)
+- **subPath** (field) — The remaining path inside the content root.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
-- **gatewayDomain** (field)
+- **gatewayDomain** (field) — The configured gateway domain that was matched.
 
 ### class `GatewayHandler`
 
-- **blockStore** (field)
+Handles IPFS Gateway HTTP requests following the IPFS Gateway specs.
+
+- **blockStore** (field) — The block store for retrieving content.
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
-- **ipnsResolver** (field)
-- **ipnsRecordResolver** (field)
-- **bitswapHandler** (field)
-- **denylistService** (field)
-- **metricsCollector** (field)
-- **gatewayDomain** (field)
-- **enableSubdomainGateway** (field)
-- **subdomainDNSLinkResolver** (field)
-- **subdomainTLSRedirect** (field)
-- **dnsLinkResolver** (field)
-- **handlePath** (method) — chama: path, url, startsWith, split, substring, length, join, sublist, _checkDenylist, decode, _detectTrustlessFormat, _serveTrustless, _serveContent, warning, badRequest, error, internalServerError, _recordGatewayRequest, method, statusCode, ipnsRecord, _serveIpnsRecord, Response, notFound
-- **isSubdomainRequest** (method) — chama: headers, _parseSubdomainHost
-- **handleSubdomain** (method) — chama: headers, _invalidSubdomainResponse, _parseSubdomainHost, _subdomainTlsRedirect, _recordGatewayRequest, method, path, url, statusCode, namespace, _validateSubdomainCid, identifier, _invalidCidResponse, encode, _checkDenylist, _detectTrustlessFormat, _serveTrustless, subPath, _serveContent, _resolveSubdomainIpns, _looksLikeDnsName, _badGatewayResponse, warning, error, toString, _applySubdomainResponseHeaders
+- **ipnsResolver** (field) — Optional resolver for IPNS names to CIDs.
+- **ipnsRecordResolver** (field) — Optional resolver for IPNS record bytes.
+- **bitswapHandler** (field) — Optional Bitswap handler for retrieving missing blocks from the network.
+- **denylistService** (field) — Optional denylist service for content blocking.
+- **metricsCollector** (field) — Optional metrics collector for gateway request telemetry.
+- **gatewayDomain** (field) — Configured gateway domain for subdomain requests (e.g. `ipfs.example.com`).
+- **enableSubdomainGateway** (field) — Whether subdomain gateway support is enabled.
+- **subdomainDNSLinkResolver** (field) — Whether DNSLink resolution is enabled for `.ipns` subdomains.
+- **subdomainTLSRedirect** (field) — Whether HTTP subdomain requests should be redirected to HTTPS.
+- **dnsLinkResolver** (field) — Optional resolver for DNSLink domains.
+- **handlePath** (method) — Handles path-based gateway requests (/ipfs/ and /ipns/)
+  - chama: path, url, startsWith, split, substring, length, join, sublist, _checkDenylist, decode, _detectTrustlessFormat, _serveTrustless, _serveContent, warning, badRequest, error, internalServerError, _recordGatewayRequest, method, statusCode, ipnsRecord, _serveIpnsRecord, Response, notFound
+- **isSubdomainRequest** (method) — Returns `true` if [request] is addressed to a subdomain-style gateway host.
+  - chama: headers, _parseSubdomainHost
+- **handleSubdomain** (method) — Handles subdomain-based gateway requests (`{cid}.ipfs.{gateway}` or
+  - chama: headers, _invalidSubdomainResponse, _parseSubdomainHost, _subdomainTlsRedirect, _recordGatewayRequest, method, path, url, statusCode, namespace, _validateSubdomainCid, identifier, _invalidCidResponse, encode, _checkDenylist, _detectTrustlessFormat, _serveTrustless, subPath, _serveContent, _resolveSubdomainIpns, _looksLikeDnsName, _badGatewayResponse, warning, error, toString, _applySubdomainResponseHeaders
 
 ## `lib/src/services/gateway/gateway_lru_cache.dart`
 
@@ -373,22 +489,32 @@ _Testado diretamente._
 
 ### class `GatewayLruCache`
 
-- **capacity** (field)
-- **get** (method) — chama: containsKey, remove
+LRU (Least Recently Used) cache for gateway responses.
+
+- **capacity** (field) — Maximum number of entries.
+- **get** (method) — Retrieves a value by key, or null if not found.
+  - chama: containsKey, remove
   - referenciado por (por nome): `lib/src/core/di/service_container.dart` (ServiceContainer.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.blockStore), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtClient), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pinnedCids), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.cat), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.get), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.datastore), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.router), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bitswap), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.ipns), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.metricsCollector), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtHandler), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.cat), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init), `lib/src/core/repository/repository.dart` (Repository.getBlock), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/content_service.dart` (ContentService.getContent), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getPreview), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.status), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPins), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPeers), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.health), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.version), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.getPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins), `lib/src/storage/hive_datastore.dart` (HiveDatastore.get), `lib/src/storage/hive_datastore.dart` (HiveDatastore.query), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrCompute), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
-- **put** (method) — chama: containsKey, remove, length, first, keys
+- **put** (method) — Inserts or updates a key-value pair.
+  - chama: containsKey, remove, length, first, keys
   - referenciado por (por nome): `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.writeBytes), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/content_service.dart` (ContentService.pinContent), `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getPreview), `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.cachePreview), `lib/src/storage/hive_datastore.dart` (HiveDatastore.put), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrCompute), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
-- **remove** (method) — chama: remove
+- **remove** (method) — Removes an entry by key.
+  - chama: remove
   - referenciado por (por nome): `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.removeKey), `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.unsubscribe), `lib/src/core/peering/peering_service.dart` (PeeringService.removePeer), `lib/src/core/security/denylist_service.dart` (DenylistService.unblock), `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString), `lib/src/core/security/security_manager.dart` (SecurityManager.trackAuthAttempt), `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.trackAuthAttempt), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.delete), `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.removePeer), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.removeInterest), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.removePeer), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.recordDontHave), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.unmarkPeerHasAll), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession), `lib/src/protocols/bitswap/ledger.dart` (LedgerManager.clearLedger), `lib/src/protocols/bitswap/message.dart` (Wantlist.removeEntry), `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.remove), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (TaggedConnection.removeTag), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.removeConnection), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleResponse), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/peer_store.dart` (PeerStore.removePeer), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.removeProtocol), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.unsubscribe), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.unsubscribe), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.unsubscribe), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.prunePeer), `lib/src/routing/ipni_client.dart` (IPNIClient.removeEndpoint), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.removeEndpoint), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.get), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.put), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.getPreviewBlock), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.unpin), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.unregisterProtocolHandler), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.removeMessageHandler), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.offEvent), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.removeStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.removeSession), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.remove), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.remove), `lib/src/utils/keystore.dart` (Keystore.removeKeyPair)
-- **clear** (method) — chama: clear
+- **clear** (method) — Clears all entries from the cache.
+  - chama: clear
   - referenciado por (por nome): `lib/src/core/data_structures/operation_log.dart` (OperationLog.clear), `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.start), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipld/selectors/selector_executor.dart` (SelectorExecutor.execute), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.reset), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.clear), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.close), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.updateObservedAddrs), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.close), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/bitswap/ledger.dart` (LedgerManager.clearAllLedgers), `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.clear), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop), `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.clear), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.clear), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.clear), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.clear), `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.clear), `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration)
-- **containsKey** (method) — chama: containsKey
+- **containsKey** (method) — Returns true if the cache contains the given key.
+  - chama: containsKey
   - referenciado por (por nome): `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.hasKey), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/data_structures/pin_manager.dart` (PinManager.isBlockPinned), `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount), `lib/src/core/events/event_bus.dart` (EventBus.subscribe), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/peering/peering_service.dart` (PeeringService.addPeer), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.has), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.getBlockData), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.hasBlock), `lib/src/protocols/bitswap/message.dart` (Wantlist.contains), `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.contains), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.hasConnection), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put), `lib/src/protocols/dht/peer_store.dart` (PeerStore.hasPeer), `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.get), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.put), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.getPreviewBlock), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.listPins), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.statusAll), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.addService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.hasService), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/storage/hive_datastore.dart` (HiveDatastore.has), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.registerSession), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.put), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.containsKey), `lib/src/utils/keystore.dart` (Keystore.hasKeyPair)
-- **length** (method) — chama: length
+- **length** (method) — The number of entries currently in the cache.
+  - chama: length
   - referenciado por (por nome): `lib/src/core/cbor/byte_reader.dart` (ByteReader.readByte), `lib/src/core/cbor/byte_reader.dart` (ByteReader.readBytes), `lib/src/core/cbor/byte_reader.dart` (ByteReader.isBreak), `lib/src/core/cbor/byte_reader.dart` (ByteReader.hasRemaining), `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor), `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readByte), `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readBytes), `lib/src/core/cid.dart` (CID.fromBytes), `lib/src/core/cid.dart` (CID.toPrefixBytes), `lib/src/core/cid.dart` (CID.readVarint), `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.toBytes), `lib/src/core/crypto/crypto_utils.dart` (EncryptedData.fromBytes), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.decrypt), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.zeroMemory), `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.constantTimeEquals), `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.generateKeyPair), `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed), `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify), `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.publicKeyFromBytes), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed), `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes), `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes), `lib/src/core/data_structures/bitfield.dart` (BitField.toProto), `lib/src/core/data_structures/bitfield.dart` (BitField.size), `lib/src/core/data_structures/block.dart` (Block.size), `lib/src/core/data_structures/block.dart` (Block.validate), `lib/src/core/data_structures/block.dart` (Block.hashCode), `lib/src/core/data_structures/blockstore.dart` (BlockStore.start), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/car.dart` (CarHeader.==), `lib/src/core/data_structures/car.dart` (CarSection.serializedSize), `lib/src/core/data_structures/car.dart` (CarSection.toString), `lib/src/core/data_structures/car.dart` (IndexBuilder.build), `lib/src/core/data_structures/car.dart` (CarReader.sections), `lib/src/core/data_structures/car.dart` (CarReader.findCID), `lib/src/core/data_structures/car.dart` (CarWriter.write), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toString), `lib/src/core/data_structures/peer.dart` (Peer.fromMultiaddr), `lib/src/core/data_structures/peer.dart` (parseMultiaddrString), `lib/src/core/data_structures/peer.dart` (multiaddrFromBytes), `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount), `lib/src/core/interfaces/block_data.dart` (BlockData.size), `lib/src/core/interfaces/block_data.dart` (BlockData.toBytes), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.getStatus), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.getStatus), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.getStatus), `lib/src/core/ipfs_node/utils.dart` (IPFSUtils.isValidCID), `lib/src/core/ipfs_node/utils.dart` (IPFSUtils.isValidPeerID), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus), `lib/src/core/ipld/dag_json_handler.dart` (_DagJsonParser.parse), `lib/src/core/ipld/path/ipld_path_handler.dart` (IPLDPathHandler.parsePath), `lib/src/core/ipld/path/ipld_path_handler.dart` (IPLDPathHandler.normalizePath), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toSpecSelector), `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString), `lib/src/core/peer/peer_record.dart` (PeerRecordSigner.create), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.toString), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.toString), `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.toString), `lib/src/core/peer/peer_record_pb.dart` (decodeVarint), `lib/src/core/peering/peering_service.dart` (PeeringService.start), `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus), `lib/src/core/plugins/plugin_host.dart` (PluginHost.initialize), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/security/denylist_service.dart` (_DenylistSnapshot.entryCount), `lib/src/core/security/denylist_service.dart` (DenylistService.isBlockedPath), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.shouldRateLimit), `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus), `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.shouldRateLimit), `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus), `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.buildAutoSharded), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.serializedSize), `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fileSize), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolveNode), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.getLength), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.getLength), `lib/src/proto/generated/base_messages.pbenum.dart` (IPFSMessage_MessageType.valueOf), `lib/src/proto/generated/bitswap/bitswap.pbenum.dart` (Message_Wantlist_WantType.valueOf), `lib/src/proto/generated/bitswap/bitswap.pbenum.dart` (Message_BlockPresence_Type.valueOf), `lib/src/proto/generated/circuit_relay.pbenum.dart` (HopMessage_Type.valueOf), `lib/src/proto/generated/circuit_relay.pbenum.dart` (StopMessage_Type.valueOf), `lib/src/proto/generated/connection.pbenum.dart` (ConnectionState_Status.valueOf), `lib/src/proto/generated/core/cid.pbenum.dart` (IPFSCIDVersion.valueOf), `lib/src/proto/generated/core/link.pbenum.dart` (LinkType.valueOf), `lib/src/proto/generated/core/node_type.pbenum.dart` (NodeTypeProto.valueOf), `lib/src/proto/generated/core/pin.pbenum.dart` (PinTypeProto.valueOf), `lib/src/proto/generated/dht/common_red_black_tree.pbenum.dart` (NodeColor.valueOf), `lib/src/proto/generated/dht/common_red_black_tree.pbenum.dart` (V_PeerInfo_ConnectionStatus.valueOf), `lib/src/proto/generated/dht/ipfs_node_network_events.pbenum.dart` (NodeErrorEvent_ErrorType.valueOf), `lib/src/proto/generated/dht/ipfs_node_network_events.pbenum.dart` (NetworkStatusChangedEvent_ChangeType.valueOf), `lib/src/proto/generated/dht/kademlia.pbenum.dart` (ConnectionType.valueOf), `lib/src/proto/generated/dht/kademlia.pbenum.dart` (Message_MessageType.valueOf), `lib/src/proto/generated/dht/store_provider.pbenum.dart` (StoreProviderResponse_Status.valueOf), `lib/src/proto/generated/google/protobuf/cpp_features.pbenum.dart` (CppFeatures_StringType.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (ExtensionRangeOptions_VerificationState.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldDescriptorProto_Type.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldDescriptorProto_Label.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FileOptions_OptimizeMode.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldOptions_CType.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldOptions_JSType.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldOptions_OptionRetention.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FieldOptions_OptionTargetType.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (MethodOptions_IdempotencyLevel.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_FieldPresence.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_EnumType.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_RepeatedFieldEncoding.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_Utf8Validation.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_MessageEncoding.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (FeatureSet_JsonFormat.valueOf), `lib/src/proto/generated/google/protobuf/descriptor.pbenum.dart` (GeneratedCodeInfo_Annotation_Semantic.valueOf), `lib/src/proto/generated/google/protobuf/java_features.pbenum.dart` (JavaFeatures_Utf8Validation.valueOf), `lib/src/proto/generated/google/protobuf/struct.pbenum.dart` (NullValue.valueOf), `lib/src/proto/generated/google/protobuf/type.pbenum.dart` (Syntax.valueOf), `lib/src/proto/generated/google/protobuf/type.pbenum.dart` (Field_Kind.valueOf), `lib/src/proto/generated/google/protobuf/type.pbenum.dart` (Field_Cardinality.valueOf), `lib/src/proto/generated/graphsync/graphsync.pbenum.dart` (ResponseStatus.valueOf), `lib/src/proto/generated/ipld/data_model.pbenum.dart` (Kind.valueOf), `lib/src/proto/generated/ipns.pbenum.dart` (IpnsEntry_ValidityType.valueOf), `lib/src/proto/generated/unixfs/unixfs.pbenum.dart` (Data_DataType.valueOf), `lib/src/proto/generated/validation.pbenum.dart` (ValidationResult_ValidationCode.valueOf), `lib/src/protocols/autonat/autonat_protocol.dart` (DialRequest.encode), `lib/src/protocols/autonat/autonat_protocol.dart` (DialRequest.decode), `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode), `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.decode), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.updateObservedAddrs), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.addPeer), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getStatus), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount), `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.length), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionCount), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.addConnection), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.pruneNow), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus), `lib/src/protocols/dht/connection_statistics.dart` (ConnectionStatistics.updateConnectionDuration), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.listsEqual), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_client.dart` (_SortedPeerQueue.takeUnqueried), `lib/src/protocols/dht/dht_envelope.dart` (DHTEnvelope.toBytes), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.findClosestPeers), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (calculateDistance), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc), `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.queueLength), `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.acquire), `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.getStatus), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.decode), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.toString), `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.hashCode), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.getStatus), `lib/src/protocols/ipns/ipns_record.dart` (deriveIpnsName), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubMessage.toString), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.publish), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signMessage), `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (_TopicScore.computeScore), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (_TopicScore.heartbeat), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/services/content_service.dart` (ContentService.computeHash), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/content_service.dart` (ContentService.getContentSize), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.analyzeCompression), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/file_preview_handler.dart` (FilePreviewHandler.generatePreview), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.put), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/gateway/preview_cache_manager.dart` (PreviewCacheManager.getCacheStats), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesCp), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMv), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/pnet/pnet_transport_conn.dart` (_PnetCipher.process), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create), `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk), `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.read), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.decode), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.stat), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagramEvent.size), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send), `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend), `lib/src/transport/webtransport/webtransport_datagram.dart` (DatagramSizeNegotiator.validate), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidiStreamCount), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUniStreamCount), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.sessionCount), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.isFull), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.registerSession), `lib/src/utils/base58.dart` (Base58.base58Decode), `lib/src/utils/dnslink_resolver.dart` (DNSLinkResolver.resolve), `lib/src/utils/encoding.dart` (EncodingUtils.isValidCIDBytes), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerDecode), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.length), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.isFull), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.put), `lib/src/utils/password_prompt.dart` (PasswordPrompt.isStrongEnough), `lib/src/utils/varint.dart` (decodeVarint)
-- **keys** (method) — chama: keys
+- **keys** (method) — Returns an iterable of all keys in the cache, ordered from oldest to newest.
+  - chama: keys
   - referenciado por (por nome): `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.keyNames), `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.start), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getStatus), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.getStatus), `lib/src/core/peering/peering_service.dart` (PeeringService.peeredPeerIds), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys), `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.put), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.serviceNames), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll), `lib/src/storage/hive_datastore.dart` (HiveDatastore.query), `lib/src/utils/encoding.dart` (EncodingUtils.supportedCodecs), `lib/src/utils/keystore.dart` (Keystore.listKeyPairs)
-- **values** (method) — chama: values
+- **values** (method) — Returns an iterable of all values in the cache, ordered from oldest to newest.
+  - chama: values
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount), `lib/src/core/events/event_bus.dart` (EventBus.dispose), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreUnion.toNode), `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.totalBytesSent), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.totalBytesReceived), `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus), `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.decode), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.removePeer), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessions), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.sessionsInterestedIn), `lib/src/protocols/bitswap/ledger.dart` (LedgerManager.getBandwidthStats), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionsByTag), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus), `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop), `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.decay), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.heartbeat), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScoreTable.decay), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScoreTable.heartbeat), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.services), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.remotePins), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.decode), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.bidiStreams), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.uniStreams), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.sessions), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 
 ## `lib/src/services/gateway/gateway_server.dart`
@@ -399,36 +525,43 @@ _Testado diretamente._
 
 ### class `GatewayServer` implements ILifecycle
 
-- **blockStore** (field)
+IPFS HTTP Gateway Server
+
+- **blockStore** (field) — The block store used for content retrieval.
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
-- **node** (field)
-- **httpAdapter** (field)
-- **address** (field)
+- **node** (field) — The IPFS node (optional, for health checks).
+- **httpAdapter** (field) — The adapter for starting the HTTP server.
+- **address** (field) — The address to listen on.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==)
-- **port** (field)
+- **port** (field) — The port to listen on.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.url), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **tlsPort** (field)
+- **tlsPort** (field) — The TLS port to listen on when TLS is enabled.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
-- **corsOrigins** (field)
-- **ipnsResolver** (field)
-- **ipnsRecordResolver** (field)
-- **maxRequestsPerIp** (field)
-- **rateLimitWindowSeconds** (field)
-- **metricsCollector** (field)
-- **metricsConfig** (field)
-- **denylistService** (field)
-- **gatewayConfig** (field)
-- **tlsManager** (field)
-- **start** (method) — chama: StateError, addHandler, addMiddleware, Pipeline, _subdomainMiddleware, _corsMiddleware, _rateLimitMiddleware, _metricsMiddleware, _loggingMiddleware, call, enableTls, autoTls, tlsPort, loadSecurityContext, serveSecure, markActive, info, host, port, redirectHttpToHttps, serve, _redirectToHttpsHandler, error
+- **corsOrigins** (field) — List of allowed CORS origins.
+- **ipnsResolver** (field) — Optional IPNS resolver for /ipns/ paths.
+- **ipnsRecordResolver** (field) — Optional resolver for signed IPNS record bytes.
+- **maxRequestsPerIp** (field) — Maximum requests per IP per time window (SEC-007)
+- **rateLimitWindowSeconds** (field) — Time window for rate limiting in seconds
+- **metricsCollector** (field) — Optional metrics collector for gateway instrumentation.
+- **metricsConfig** (field) — Optional metrics configuration controlling the Prometheus endpoint.
+- **denylistService** (field) — Optional denylist service for content blocking.
+- **gatewayConfig** (field) — Gateway configuration including subdomain gateway settings.
+- **tlsManager** (field) — TLS certificate and AutoTLS manager.
+- **start** (method) — Starts the gateway server.
+  - chama: StateError, addHandler, addMiddleware, Pipeline, _subdomainMiddleware, _corsMiddleware, _rateLimitMiddleware, _metricsMiddleware, _loggingMiddleware, call, enableTls, autoTls, tlsPort, loadSecurityContext, serveSecure, markActive, info, host, port, redirectHttpToHttps, serve, _redirectToHttpsHandler, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: close, markInactive, dispose, clear, info
+- **stop** (method) — Stops the gateway server and any TLS or redirect listeners.
+  - chama: close, markInactive, dispose, clear, info
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **isTlsActive** (method) — chama: isActive, isContextLoaded
-- **certificateExpiry** (method) — chama: certificateExpiry
+- **isTlsActive** (method) — Returns true if the TLS listener is active and a certificate is loaded.
+  - chama: isActive, isContextLoaded
+- **certificateExpiry** (method) — Returns the not-after expiry of the loaded TLS certificate, if known.
+  - chama: certificateExpiry
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
-- **isRunning** (method)
+- **isRunning** (method) — Returns true if the server is running
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-- **url** (method) — chama: host, port
+- **url** (method) — Returns the server URL.
+  - chama: host, port
   - referenciado por (por nome): `lib/src/core/config/network_config.dart` (TurnServer.==), `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitOrderAndDownload), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.detectTrustlessFormat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMkdir), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesChcid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 
 ## `lib/src/services/gateway/gateway_tls_manager.dart`
@@ -439,47 +572,59 @@ _Testado diretamente._
 
 ### abstract class `AutoTlsProvider`
 
-- **state** (method)
+Provider interface for automatic TLS certificate issuance via ACME.
+
+- **state** (method) — Current state of the certificate lifecycle.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
-- **obtainCertificate** (method)
+- **obtainCertificate** (method) — Obtains or renews a certificate for the configured domain and returns a
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
-- **certificateExpiry** (method)
+- **certificateExpiry** (method) — Returns the not-after expiry of the current certificate, if known.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.certificateExpiry), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
-- **dispose** (method)
+- **dispose** (method) — Releases any resources held by the provider.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ### class `LetsEncryptAutoTlsProvider` implements AutoTlsProvider
 
-- **staging** (field)
-- **pendingChallenges** (method)
+Production-ready ACME provider for Let's Encrypt / ZeroSSL.
+
+- **staging** (field) — Whether to use the ACME provider's staging endpoint.
+- **pendingChallenges** (method) — Pending HTTP-01 challenges keyed by token, mapping to the key
 - **state** (method)
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
-- **obtainCertificate** (method) — chama: autoTlsAcceptTos, StateError, autoTlsDomain, isEmpty, autoTlsEmail, AcmePersistence, hasValidCertificate, needsRenewal, info, loadCertificate, loadPrivateKey, loadMetadata, parse, SecurityContext, systemTemp, File, path, millisecondsSinceEpoch, now, writeAsString, useCertificateChain, usePrivateKey, active, existsSync, delete, acquiring, autoTlsProvider, _getDirectoryUrl, AcmeClient, autoTlsSANs, validating, issueCertificate, token, keyAuthorization, Future, Duration, remove, exportAccountKeyPem, saveAccountKeyPem, saveCertificate, certificatePem, privateKeyPem, notAfter, idle, error
+- **obtainCertificate** (method)
+  - chama: autoTlsAcceptTos, StateError, autoTlsDomain, isEmpty, autoTlsEmail, AcmePersistence, hasValidCertificate, needsRenewal, info, loadCertificate, loadPrivateKey, loadMetadata, parse, SecurityContext, systemTemp, File, path, millisecondsSinceEpoch, now, writeAsString, useCertificateChain, usePrivateKey, active, existsSync, delete, acquiring, autoTlsProvider, _getDirectoryUrl, AcmeClient, autoTlsSANs, validating, issueCertificate, token, keyAuthorization, Future, Duration, remove, exportAccountKeyPem, saveAccountKeyPem, saveCertificate, certificatePem, privateKeyPem, notAfter, idle, error
   - referenciado por (por nome): `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
 - **certificateExpiry** (method)
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.certificateExpiry), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
-- **dispose** (method) — chama: clear, dispose, idle
+- **dispose** (method)
+  - chama: clear, dispose, idle
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ### class `GatewayTlsManager`
 
-- **config** (field)
+Manages TLS configuration, certificate loading, and AutoTLS orchestration
+
+- **config** (field) — Gateway configuration including TLS settings.
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
-- **isContextLoaded** (method)
+- **isContextLoaded** (method) — Whether a TLS [SecurityContext] has been successfully loaded.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.isTlsActive)
-- **autoTlsState** (method) — chama: state, idle
-- **activeAutoTlsProvider** (method)
-- **loadSecurityContext** (method) — chama: autoTls, LetsEncryptAutoTlsProvider, _isStaging, obtainCertificate, certificateExpiry, enableTls, StateError, certificatePath, privateKeyPath, File, existsSync, SecurityContext, useCertificateChain, usePrivateKey, certificatePassword, _extractExpiry, readAsBytes, warning
+- **autoTlsState** (method) — Current AutoTLS state, or [AutoTlsState.idle] when no provider is used.
+  - chama: state, idle
+- **activeAutoTlsProvider** (method) — The active [LetsEncryptAutoTlsProvider] when one is configured, otherwise
+- **loadSecurityContext** (method) — Loads or obtains a [SecurityContext] based on [GatewayConfig].
+  - chama: autoTls, LetsEncryptAutoTlsProvider, _isStaging, obtainCertificate, certificateExpiry, enableTls, StateError, certificatePath, privateKeyPath, File, existsSync, SecurityContext, useCertificateChain, usePrivateKey, certificatePassword, _extractExpiry, readAsBytes, warning
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
-- **certificateExpiry** (method)
+- **certificateExpiry** (method) — Returns the not-after expiry of the loaded certificate, if known.
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.certificateExpiry), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
-- **isActive** (method)
+- **isActive** (method) — Returns true once the TLS context is loaded and the listener is active.
   - referenciado por (por nome): `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessions), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.sessionsInterestedIn), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.isTlsActive), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
-- **markActive** (method) — chama: StateError
+- **markActive** (method) — Marks the manager as active after the TLS listener has been bound.
+  - chama: StateError
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
-- **markInactive** (method)
+- **markInactive** (method) — Marks the manager as inactive (e.g. after the TLS listener is closed).
   - referenciado por (por nome): `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
-- **dispose** (method) — chama: dispose
+- **dispose** (method) — Releases the provider and clears internal state.
+  - chama: dispose
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ## `lib/src/services/gateway/gateway_trustless_handler.dart`
@@ -490,19 +635,28 @@ _Testado diretamente._
 
 ### class `GatewayTrustlessHandler`
 
-- **contentHandler** (field)
-- **ipnsRecordResolver** (field)
-- **denylistService** (field)
-- **detectTrustlessFormat** (method) — chama: queryParameters, url, _parseFormat, headers, _parseAcceptHeader
-- **serveRawBlock** (method) — chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
+Handles trustless gateway response formats (raw, car, dag-json, dag-cbor,
+
+- **contentHandler** (field) — Handler used for raw/dag content retrieval.
+- **ipnsRecordResolver** (field) — Optional resolver for IPNS record bytes.
+- **denylistService** (field) — Optional denylist service for blocking content.
+- **detectTrustlessFormat** (method) — Detects the requested trustless response format from the request.
+  - chama: queryParameters, url, _parseFormat, headers, _parseAcceptHeader
+- **serveRawBlock** (method) — Serves the raw block bytes for the requested CID.
+  - chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
   - referenciado por (por nome): `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveTrustless)
-- **serveDagJson** (method) — chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
+- **serveDagJson** (method) — Serves the requested node as canonical DAG-JSON.
+  - chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
   - referenciado por (por nome): `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveTrustless)
-- **serveDagCbor** (method) — chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
+- **serveDagCbor** (method) — Serves the requested node as canonical DAG-CBOR.
+  - chama: getBlock, blockStore, encode, found, notFound, toString, length, data, block, ok
   - referenciado por (por nome): `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveTrustless)
-- **serveIpnsRecord** (method) — chama: Response, isEmpty, notFound, toString, length, ok
-- **serveTrustless** (method) — chama: raw, serveRawBlock, car, notFound, dagJson, serveDagJson, dagCbor, serveDagCbor, ipnsRecord, Response
-- **checkDenylist** (method) — chama: configuredEnabled, isBlockedByCidString, isBlockedPath, Response
+- **serveIpnsRecord** (method) — Serves the signed IPNS record bytes for the requested name.
+  - chama: Response, isEmpty, notFound, toString, length, ok
+- **serveTrustless** (method) — Dispatches a trustless format request to the appropriate handler.
+  - chama: raw, serveRawBlock, car, notFound, dagJson, serveDagJson, dagCbor, serveDagCbor, ipnsRecord, Response
+- **checkDenylist** (method) — Returns a 451 response if the CID or path is blocked by the denylist,
+  - chama: configuredEnabled, isBlockedByCidString, isBlockedPath, Response
 
 ## `lib/src/services/gateway/gateway_wss_handler.dart`
 
@@ -516,7 +670,8 @@ _Sem teste direto conhecido._
 
 ### top-level `handleGatewayWebSocket` (function)
 
-- **handleGatewayWebSocket** (function) — chama: context, Response, isUpgradeRequest, upgrade, _serveWebSocket, ok, error, internalServerError
+- **handleGatewayWebSocket** (function) — Handles a WebSocket upgrade request on the IO platform.
+  - chama: context, Response, isUpgradeRequest, upgrade, _serveWebSocket, ok, error, internalServerError
 
 ## `lib/src/services/gateway/gateway_wss_handler_web.dart`
 
@@ -526,7 +681,8 @@ _Sem teste direto conhecido._
 
 ### top-level `handleGatewayWebSocket` (function)
 
-- **handleGatewayWebSocket** (function) — chama: Response
+- **handleGatewayWebSocket** (function) — Web stub for WebSocket upgrade requests.
+  - chama: Response
 
 ## `lib/src/services/gateway/lazy_preview_handler.dart`
 
@@ -536,12 +692,16 @@ _Testado diretamente._
 
 ### class `LazyPreviewHandler`
 
-- **generateLazyPreview** (method) — chama: _generatePreviewId, cid
-- **generateLazyLoadScript** (method)
+Handles lazy loading of file previews in the directory listing
+
+- **generateLazyPreview** (method) — Generates a lazy loading placeholder for a preview
+  - chama: _generatePreviewId, cid
+- **generateLazyLoadScript** (method) — Generates the JavaScript needed for lazy loading
   - referenciado por (por nome): `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
-- **generateLazyLoadStyles** (method)
+- **generateLazyLoadStyles** (method) — Generates CSS styles for lazy loading
   - referenciado por (por nome): `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
-- **getPreviewBlock** (method) — chama: isEmpty, ArgumentError, containsKey, warning, _isValidBlock, remove, _logCacheAccess, error
+- **getPreviewBlock** (method) — Retrieves a preview block from the cache using its preview ID.
+  - chama: isEmpty, ArgumentError, containsKey, warning, _isValidBlock, remove, _logCacheAccess, error
   - referenciado por (por nome): `lib/src/services/gateway/preview_api_handler.dart` (PreviewApiHandler.handlePreviewRequest)
 
 ## `lib/src/services/gateway/persistent_preview_cache.dart`
@@ -552,10 +712,14 @@ _Testado diretamente._
 
 ### class `PersistentPreviewCache`
 
-- **cachePath** (field)
-- **getPreview** (method) — chama: join, _getCacheFileName, exists, getPlatform, readBytes
+A persistent cache for preview data using the platform's storage.
+
+- **cachePath** (field) — The directory where preview data is stored.
+- **getPreview** (method) — Retrieves a cached preview for the given CID and content type.
+  - chama: join, _getCacheFileName, exists, getPlatform, readBytes
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview)
-- **cachePreview** (method) — chama: length, join, _getCacheFileName, _evictOldEntries, writeBytes, getPlatform, _writeCacheMetadata, encode, toString, toIso8601String, now
+- **cachePreview** (method) — Caches a preview for the given CID and content type.
+  - chama: length, join, _getCacheFileName, _evictOldEntries, writeBytes, getPlatform, _writeCacheMetadata, encode, toString, toIso8601String, now
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview)
 
 ## `lib/src/services/gateway/preview_api_handler.dart`
@@ -566,7 +730,10 @@ _Sem teste direto conhecido._
 
 ### class `PreviewApiHandler`
 
-- **handlePreviewRequest** (method) — chama: params, notFound, getPreviewBlock, _detectContentType, generatePreview, ok, jsonEncode, base64Encode
+HTTP API handler for preview requests.
+
+- **handlePreviewRequest** (method) — Handles an HTTP request to generate a preview.
+  - chama: params, notFound, getPreviewBlock, _detectContentType, generatePreview, ok, jsonEncode, base64Encode
 
 ## `lib/src/services/gateway/preview_cache_manager.dart`
 
@@ -576,11 +743,16 @@ _Testado diretamente._
 
 ### class `PreviewCacheManager`
 
-- **getPreview** (method) — chama: get, _generateCacheKey, getCompressedData, put
+Manages caching of file previews with multiple strategies.
+
+- **getPreview** (method) — Retrieves a cached preview, checking memory first then disk.
+  - chama: get, _generateCacheKey, getCompressedData, put
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview)
-- **cachePreview** (method) — chama: put, _generateCacheKey, storeCompressedData
+- **cachePreview** (method) — Caches a preview in both memory and compressed storage.
+  - chama: put, _generateCacheKey, storeCompressedData
   - referenciado por (por nome): `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview)
-- **getCacheStats** (method) — chama: length, round
+- **getCacheStats** (method) — Returns cache statistics.
+  - chama: length, round
 
 ## `lib/src/services/pinning/cluster_client.dart`
 
@@ -590,101 +762,133 @@ _Testado diretamente._
 
 ### class `ReplicationFactor`
 
-- **all** (static field) — chama: ReplicationFactor
+Replication factor for a cluster pin.
+
+- **all** (static field) — Pin on all available peers.
+  - chama: ReplicationFactor
   - referenciado por (por nome): `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toSpecSelector)
-- **defaultFactor** (static field) — chama: ReplicationFactor
-- **min** (method) — chama: ReplicationFactor
+- **defaultFactor** (static field) — Use the cluster default.
+  - chama: ReplicationFactor
+- **min** (method) — Pin on at least [n] peers.
+  - chama: ReplicationFactor
   - referenciado por (por nome): `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (_TopicScore.computeScore)
-- **value** (field)
+- **value** (field) — The numeric value of the replication factor.
   - referenciado por (por nome): `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode), `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getPinnedBlocks), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getRecursivePins), `lib/src/core/data_structures/pin_manager.dart` (PinManager.getRecursivePinRoots), `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode), `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode), `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRoutingTableSize), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordBlockstoreStats), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.encode), `lib/src/core/peer/peer_record_pb.dart` (PublicKeyPb.decode), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.decode), `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.decode), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus), `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_id.dart` (PeerId.==), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw), `lib/src/protocols/dht/dht_client.dart` (DHTClient.checkValueOnPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (calculateDistance), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.get), `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (StoreMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (FindNodeMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve), `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode), `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search), `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance), `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistanceToKey), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromCBOR), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry), `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry), `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.encodePublishRequest), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.getOptimalCompression), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.analyzeCompression), `lib/src/services/pinning/cluster_client.dart` (ClusterPinOptions.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.decode), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.streams), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.remotePublicKey), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.remotePublicKey), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.streams), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read), `lib/src/utils/encoding.dart` (EncodingUtils.getEncodingFromPrefix), `lib/src/utils/encoding.dart` (EncodingUtils.getCodecFromCode), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.put), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.get), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.remove), `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.clear), `lib/src/utils/keystore.dart` (Keystore.deserialize), `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
-- **toString** (method) — chama: toString
+- **toString** (method)
+  - chama: toString
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 
 ### class `ClusterPinOptions`
 
-- **name** (field)
+Options for a cluster pin operation.
+
+- **name** (field) — Optional human-readable name.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **replicationFactor** (field)
-- **allocations** (field)
-- **userAllocations** (field)
-- **origins** (field)
-- **meta** (field)
-- **mode** (field)
+- **replicationFactor** (field) — Replication factor (min peers to pin on).
+- **allocations** (field) — Specific peer IDs to allocate the pin to.
+- **userAllocations** (field) — User-specified allocations (overrides automatic allocation).
+- **origins** (field) — Origin multiaddrs for fetching content.
+- **meta** (field) — Vendor-specific metadata.
+- **mode** (field) — Pin mode (pin or recursive).
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
-- **toJson** (method) — chama: value, isNotEmpty
+- **toJson** (method) — Converts to a JSON-serializable map for the Cluster API.
+  - chama: value, isNotEmpty
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `ClusterPin`
 
-- **cid** (field)
+A pin tracked by the IPFS Cluster.
+
+- **cid** (field) — The CID of the pinned content.
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/car.dart` (CarSection.==), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.generateLazyPreview), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
-- **status** (field)
+- **status** (field) — Overall cluster pin status.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **name** (field)
+- **name** (field) — Optional name.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **allocations** (field)
-- **replicationFactorMin** (field)
-- **replicationFactorMax** (field)
-- **peerMap** (field)
-- **meta** (field)
-- **toJson** (method) — chama: toApiString, map, MapEntry, toJson
+- **allocations** (field) — Allocated peer IDs.
+- **replicationFactorMin** (field) — Minimum replication factor.
+- **replicationFactorMax** (field) — Maximum replication factor.
+- **peerMap** (field) — Per-peer pin status.
+- **meta** (field) — Additional metadata.
+- **toJson** (method) — Converts to a JSON-serializable map.
+  - chama: toApiString, map, MapEntry, toJson
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `ClusterPeerInfo`
 
-- **peerName** (field)
-- **status** (field)
+Pin status for a single peer in the cluster.
+
+- **peerName** (field) — The peer name in the cluster.
+- **status** (field) — Pin status on this peer.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **error** (field)
+- **error** (field) — Error message, if any.
   - referenciado por (por nome): `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build), `lib/src/core/data_structures/blockstore.dart` (BlockStore.start), `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.start), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.importCAR), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.exportCAR), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.start), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.start), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.start), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.unsubscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publish), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordError), `lib/src/core/peering/peering_service.dart` (PeeringService.start), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey), `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findProviders), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleRoutingTableUpdate), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.retrieveData), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/routing/content_routing.dart` (ContentRouting.stop), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/routing/content_routing.dart` (ContentRouting.provide), `lib/src/routing/content_routing.dart` (ContentRouting.resolveDNSLink), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders), `lib/src/services/content_service.dart` (ContentService.getContent), `lib/src/services/content_service.dart` (ContentService.removeContent), `lib/src/services/content_service.dart` (ContentService.pinContent), `lib/src/services/content_service.dart` (ContentService.unpinContent), `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitAuthorization), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadPrivateKey), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.deleteAll), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveAccountKeyPem), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.cacheContentType), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/gateway/gateway_wss_handler_io.dart` (handleGatewayWebSocket), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.getPreviewBlock), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMkdir), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesCp), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMv), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRm), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesChcid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/storage/hive_datastore.dart` (HiveDatastore.init), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.initialize), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
-- **ts** (field)
-- **toJson** (method) — chama: toApiString
+- **ts** (field) — Timestamp of last status update.
+- **toJson** (method) — Converts to a JSON-serializable map.
+  - chama: toApiString
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `ClusterPeer`
 
-- **id** (field)
+Information about a cluster peer.
+
+- **id** (field) — The peer ID.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor), `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer), `lib/src/network/router.dart` (Router.broadcast), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (sendRequest), `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode), `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==), `lib/src/protocols/dht/peer_store.dart` (PeerStore.addPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageIdsForTopic), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.recentMessageIds), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream), `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
-- **addresses** (field)
+- **addresses** (field) — Multiaddresses of the peer.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString), `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope), `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
-- **peerName** (field)
-- **rpcAddress** (field)
-- **version** (field)
+- **peerName** (field) — Human-readable peer name.
+- **rpcAddress** (field) — RPC address.
+- **version** (field) — Cluster version.
   - referenciado por (por nome): `lib/src/core/cid.dart` (CID.==), `lib/src/core/cid.dart` (CID.toProto), `lib/src/core/cid.dart` (CID.fromProto), `lib/src/core/data_structures/car.dart` (CarHeader.==), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
-- **commit** (field)
-- **rpcProtocolVersion** (field)
-- **toJson** (method)
+- **commit** (field) — Git commit.
+- **rpcProtocolVersion** (field) — RPC protocol version.
+- **toJson** (method) — Converts to a JSON-serializable map.
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `ClusterHealth`
 
-- **healthy** (field)
-- **peers** (field)
+Cluster health status.
+
+- **healthy** (field) — Whether the cluster is healthy.
+- **peers** (field) — List of cluster peers.
   - referenciado por (por nome): `lib/src/core/peering/peering_service.dart` (PeeringService.start)
-- **error** (field)
+- **error** (field) — Error message, if unhealthy.
   - referenciado por (por nome): `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build), `lib/src/core/data_structures/blockstore.dart` (BlockStore.start), `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks), `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/data_structures/pin_manager.dart` (PinManager.save), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.start), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.importCAR), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.exportCAR), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.start), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.start), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.start), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.unsubscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publish), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordError), `lib/src/core/peering/peering_service.dart` (PeeringService.start), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey), `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findProviders), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleRoutingTableUpdate), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.retrieveData), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.getNodeStats), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/routing/content_routing.dart` (ContentRouting.stop), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/routing/content_routing.dart` (ContentRouting.provide), `lib/src/routing/content_routing.dart` (ContentRouting.resolveDNSLink), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders), `lib/src/services/content_service.dart` (ContentService.getContent), `lib/src/services/content_service.dart` (ContentService.removeContent), `lib/src/services/content_service.dart` (ContentService.pinContent), `lib/src/services/content_service.dart` (ContentService.unpinContent), `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitAuthorization), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadPrivateKey), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.deleteAll), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveAccountKeyPem), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData), `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.cacheContentType), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/gateway/gateway_wss_handler_io.dart` (handleGatewayWebSocket), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.getPreviewBlock), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMkdir), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesCp), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMv), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRm), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesChcid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/storage/hive_datastore.dart` (HiveDatastore.init), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.initialize), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 
 ### class `IPFSClusterClient`
 
-- **endpoint** (method)
+Client for the IPFS Cluster REST API.
+
+- **endpoint** (method) — Returns the base endpoint URL.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **pin** (method) — chama: ClusterPinOptions, toJson, debug, timeout, post, parse, jsonEncode, _handleClusterPinResponse
+- **pin** (method) — Pins content in the cluster.
+  - chama: ClusterPinOptions, toJson, debug, timeout, post, parse, jsonEncode, _handleClusterPinResponse
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **unpin** (method) — chama: debug, timeout, delete, parse, statusCode, Exception, body
+- **unpin** (method) — Unpins content from the cluster.
+  - chama: debug, timeout, delete, parse, statusCode, Exception, body
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unpin)
-- **status** (method) — chama: debug, timeout, get, parse, _handleClusterPinResponse
+- **status** (method) — Gets the status of a pin across the cluster.
+  - chama: debug, timeout, get, parse, _handleClusterPinResponse
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **listPins** (method) — chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
+- **listPins** (method) — Lists all pins in the cluster.
+  - chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServicePins)
-- **recover** (method) — chama: debug, timeout, post, parse, _handleClusterPinResponse
-- **listPeers** (method) — chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, Exception
-- **health** (method) — chama: debug, timeout, get, parse, statusCode, jsonDecode, body, fromJson, Exception
-- **version** (method) — chama: debug, timeout, get, parse, statusCode, jsonDecode, body, Exception
+- **recover** (method) — Recovers a failed pin across the cluster.
+  - chama: debug, timeout, post, parse, _handleClusterPinResponse
+- **listPeers** (method) — Lists all peers in the cluster.
+  - chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, Exception
+- **health** (method) — Gets cluster health status.
+  - chama: debug, timeout, get, parse, statusCode, jsonDecode, body, fromJson, Exception
+- **version** (method) — Gets the cluster version.
+  - chama: debug, timeout, get, parse, statusCode, jsonDecode, body, Exception
   - referenciado por (por nome): `lib/src/core/cid.dart` (CID.==), `lib/src/core/cid.dart` (CID.toProto), `lib/src/core/cid.dart` (CID.fromProto), `lib/src/core/data_structures/car.dart` (CarHeader.==), `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/services/content_service.dart` (ContentService.storeContent), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
-- **sync** (method) — chama: debug, timeout, post, parse, _handleClusterPinResponse
+- **sync** (method) — Syncs the local state with the cluster state for a given CID.
+  - chama: debug, timeout, post, parse, _handleClusterPinResponse
   - referenciado por (por nome): `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stop)
-- **statusAll** (method) — chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
-- **dispose** (method) — chama: close
+- **statusAll** (method) — Status of all pins in the cluster.
+  - chama: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
+- **dispose** (method) — Releases HTTP resources.
+  - chama: close
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ## `lib/src/services/pinning/pinning_service_api.dart`
@@ -695,90 +899,114 @@ _Testado diretamente._
 
 ### class `PinRequest`
 
-- **cid** (field)
+A pin request object as defined by the Pinning Service API spec.
+
+- **cid** (field) — The CID of the content to pin.
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/car.dart` (CarSection.==), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.generateLazyPreview), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
-- **name** (field)
+- **name** (field) — Optional human-readable name for the pin.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **origins** (field)
-- **meta** (field)
-- **toJson** (method) — chama: isNotEmpty
+- **origins** (field) — Optional list of multiaddrs for the pinning service to fetch content from.
+- **meta** (field) — Optional vendor-specific metadata.
+- **toJson** (method) — Converts this request to a JSON-serializable map.
+  - chama: isNotEmpty
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `PinStatusResponse`
 
-- **requestId** (field)
+A pin status response from the pinning service.
+
+- **requestId** (field) — The unique request ID assigned by the pinning service.
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **status** (field)
+- **status** (field) — Current status of the pin.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **created** (field)
+- **created** (field) — ISO 8601 timestamp of when the pin was created.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **pin** (field)
+- **pin** (field) — The pin object.
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **delegates** (field)
-- **info** (field)
+- **delegates** (field) — Multiaddrs of peers delegated by the pinning service.
+- **info** (field) — Additional vendor-specific information.
   - referenciado por (por nome): `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build), `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc), `lib/src/core/data_structures/pin_manager.dart` (PinManager.load), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.start), `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.importCAR), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.exportCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.setGatewayMode), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.unsubscribe), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS), `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink), `lib/src/core/peering/peering_service.dart` (PeeringService.start), `lib/src/core/peering/peering_service.dart` (PeeringService.stop), `lib/src/core/peering/peering_service.dart` (PeeringService.addPeer), `lib/src/core/peering/peering_service.dart` (PeeringService.removePeer), `lib/src/core/plugins/plugin_host.dart` (PluginHost.initialize), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/security/denylist_service.dart` (DenylistService.start), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromPath), `lib/src/core/security/denylist_service.dart` (DenylistService.loadFromUrl), `lib/src/core/security/security_manager.dart` (SecurityManager.unlockKeystore), `lib/src/core/security/security_manager.dart` (SecurityManager.lockKeystore), `lib/src/core/security/security_manager.dart` (SecurityManager.generateSecureKey), `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext), `lib/src/core/security/security_manager.dart` (SecurityManager.start), `lib/src/core/security/security_manager.dart` (SecurityManager.stop), `lib/src/network/nat_traversal_service.dart` (NatTraversalService.mapPort), `lib/src/network/nat_traversal_service.dart` (NatTraversalService.unmapPort), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.start), `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.start), `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.start), `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop), `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer), `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.clear), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc), `lib/src/protocols/dht/reprovider.dart` (Reprovider.start), `lib/src/protocols/dht/reprovider.dart` (Reprovider.stop), `lib/src/protocols/dht/reprovider.dart` (Reprovider.setStrategy), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.start), `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.stop), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.start), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop), `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.stop), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publishWithKeyPair), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.stop), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start), `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.start), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.stop), `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.publish), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/routing/content_routing.dart` (ContentRouting.stop), `lib/src/routing/content_routing.dart` (ContentRouting.findProviders), `lib/src/routing/content_routing.dart` (ContentRouting.provide), `lib/src/routing/content_routing.dart` (ContentRouting.resolveDNSLink), `lib/src/services/gateway/acme_client.dart` (AcmeClient.registerAccount), `lib/src/services/gateway/acme_client.dart` (AcmeClient.submitChallenge), `lib/src/services/gateway/acme_client.dart` (AcmeClient.finalizeOrder), `lib/src/services/gateway/acme_client.dart` (AcmeClient.issueCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadPrivateKey), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveCertificate), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.deleteAll), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.saveAccountKeyPem), `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.loadAccountKeyPem), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.getPublicIp), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.addService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.unpin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.stop), `lib/src/storage/hive_datastore.dart` (HiveDatastore.init), `lib/src/storage/hive_datastore.dart` (HiveDatastore.close), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start), `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop), `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop), `lib/src/utils/keystore.dart` (Keystore.addKeyPair), `lib/src/utils/keystore.dart` (Keystore.removeKeyPair), `lib/src/utils/keystore.dart` (Keystore.deserialize), `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration), `lib/src/utils/logger.dart` (Logger.info)
-- **toJson** (method) — chama: toApiString, toJson
+- **toJson** (method) — Converts this response to a JSON-serializable map.
+  - chama: toApiString, toJson
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `PinObject`
 
-- **cid** (field)
+A pin object as defined by the Pinning Service API spec.
+
+- **cid** (field) — The CID of the pinned content.
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/car.dart` (CarSection.==), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.generateLazyPreview), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
-- **name** (field)
+- **name** (field) — Optional human-readable name.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **origins** (field)
-- **meta** (field)
-- **toJson** (method) — chama: isNotEmpty
+- **origins** (field) — Optional list of origin multiaddrs.
+- **meta** (field) — Optional vendor-specific metadata.
+- **toJson** (method) — Converts this pin to a JSON-serializable map.
+  - chama: isNotEmpty
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `PinListFilter`
 
-- **cid** (field)
+Filters for listing pins.
+
+- **cid** (field) — Filter by CID.
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/car.dart` (CarSection.==), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.generateLazyPreview), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
-- **name** (field)
+- **name** (field) — Filter by name (exact match).
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **status** (field)
+- **status** (field) — Filter by status.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **before** (field)
-- **after** (field)
-- **limit** (field)
+- **before** (field) — Return results created before this ISO 8601 timestamp.
+- **after** (field) — Return results created after this ISO 8601 timestamp.
+- **limit** (field) — Maximum number of results to return.
   - referenciado por (por nome): `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
-- **meta** (field)
-- **toQueryParams** (method) — chama: isNotEmpty, join, map, toApiString, toString, entries, key, value
+- **meta** (field) — Filter by metadata key-value pairs.
+- **toQueryParams** (method) — Converts this filter to query parameters.
+  - chama: isNotEmpty, join, map, toApiString, toString, entries, key, value
   - referenciado por (por nome): `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.listPins)
 
 ### class `PinListResponse`
 
-- **results** (field)
-- **count** (field)
+Response from a list pins request.
+
+- **results** (field) — The list of pin status results.
+- **count** (field) — Total count of results (if provided by the service).
   - referenciado por (por nome): `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
-- **nextPageToken** (field)
+- **nextPageToken** (field) — Token for the next page of results (if pagination is supported).
 
 ### class `PinningServiceError`
 
-- **message** (field)
+Error returned by the pinning service API.
+
+- **message** (field) — Human-readable error message.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto), `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove), `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed), `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse), `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant), `lib/src/utils/keystore.dart` (Keystore.verifySignature)
-- **reason** (field)
+- **reason** (field) — Machine-readable error reason.
   - referenciado por (por nome): `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
-- **details** (field)
+- **details** (field) — Additional error details.
   - referenciado por (por nome): `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString), `lib/src/core/data_structures/peer.dart` (Peer.toProto), `lib/src/core/data_structures/peer.dart` (Peer.toString), `lib/src/core/events/event_bus.dart` (EventBus.publish), `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock), `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync), `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest), `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics), `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson), `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query), `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto), `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete), `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue), `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue), `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders), `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys), `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink), `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue), `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue), `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider), `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders), `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus), `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId), `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders), `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders), `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock), `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock), `lib/src/services/content_service.dart` (ContentService.listPinnedContent), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord), `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview), `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString), `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial), `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id), `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr), `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id), `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr), `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial), `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 
 ### class `PinningServiceAPIClient`
 
-- **endpoint** (method)
+Client for the IPFS Pinning Service API v1.
+
+- **endpoint** (method) — Returns the base endpoint URL.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **addPin** (method) — chama: debug, cid, timeout, post, parse, _pinsUrl, jsonEncode, toJson, _handlePinResponse
+- **addPin** (method) — Adds a pin to the remote pinning service.
+  - chama: debug, cid, timeout, post, parse, _pinsUrl, jsonEncode, toJson, _handlePinResponse
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin)
-- **getPin** (method) — chama: debug, timeout, get, parse, _pinsUrl, _handlePinResponse
+- **getPin** (method) — Gets the status of a pin by its [requestId].
+  - chama: debug, timeout, get, parse, _pinsUrl, _handlePinResponse
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **listPins** (method) — chama: debug, parse, _pinsUrl, toQueryParams, replace, isEmpty, timeout, get, statusCode, jsonDecode, body, fromJson, PinningServiceError, _parseError
+- **listPins** (method) — Lists pins with optional [filter].
+  - chama: debug, parse, _pinsUrl, toQueryParams, replace, isEmpty, timeout, get, statusCode, jsonDecode, body, fromJson, PinningServiceError, _parseError
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServicePins)
-- **removePin** (method) — chama: debug, timeout, delete, parse, _pinsUrl, statusCode, _parseError
+- **removePin** (method) — Removes a pin by its [requestId].
+  - chama: debug, timeout, delete, parse, _pinsUrl, statusCode, _parseError
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.unpin)
-- **replacePin** (method) — chama: debug, cid, replace, parse, _pinsUrl, timeout, post, jsonEncode, toJson, _handlePinResponse
-- **dispose** (method) — chama: close
+- **replacePin** (method) — Replaces a pin by its [requestId] with a new [pin] request.
+  - chama: debug, cid, replace, parse, _pinsUrl, timeout, post, jsonEncode, toJson, _handlePinResponse
+- **dispose** (method) — Releases HTTP resources.
+  - chama: close
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ## `lib/src/services/pinning/remote_pinning_service.dart`
@@ -789,56 +1017,79 @@ _Testado diretamente._
 
 ### class `PinningServiceConfig`
 
-- **name** (field)
+Configuration for a registered pinning service.
+
+- **name** (field) — Human-readable name for the service (e.g. "pinata", "filebase").
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **endpoint** (field)
+- **endpoint** (field) — API endpoint URL.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **token** (field)
+- **token** (field) — Authentication token.
   - referenciado por (por nome): `lib/src/services/gateway/acme_client.dart` (AcmeClient.submitChallenge), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **toJson** (method)
+- **toJson** (method) — Converts to a JSON-serializable map.
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `RemotePin`
 
-- **cid** (field)
+A remote pin tracked by the [RemotePinningService].
+
+- **cid** (field) — The CID of the pinned content.
   - referenciado por (por nome): `lib/src/core/data_structures/block.dart` (Block.toProto), `lib/src/core/data_structures/block.dart` (Block.fromProto), `lib/src/core/data_structures/block.dart` (Block.==), `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock), `lib/src/core/data_structures/car.dart` (CarSection.==), `lib/src/core/data_structures/car.dart` (CarWriter.closeStream), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto), `lib/src/core/data_structures/pin.dart` (Pin.toProto), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile), `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR), `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR), `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata), `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.write), `lib/src/core/repository/repository.dart` (Repository.addFile), `lib/src/core/repository/repository.dart` (Repository.processProtoBlock), `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock), `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave), `lib/src/protocols/bitswap/message.dart` (Message.fromBytes), `lib/src/protocols/bitswap/message.dart` (Message.toBytes), `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/cached_preview_generator.dart` (CachedPreviewGenerator.generatePreview), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid), `lib/src/services/gateway/lazy_preview_handler.dart` (LazyPreviewHandler.generateLazyPreview), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
-- **serviceName** (field)
+- **serviceName** (field) — The name of the pinning service.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **requestId** (field)
+- **requestId** (field) — The request ID from the pinning service.
   - referenciado por (por nome): `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
-- **status** (field)
+- **status** (field) — Current status of the remote pin.
   - referenciado por (por nome): `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback), `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer), `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
-- **name** (field)
+- **name** (field) — Optional name for the pin.
   - referenciado por (por nome): `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink), `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build), `lib/src/core/data_structures/link.dart` (Link.toProto), `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop), `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.registerSchema), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.rm), `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls), `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml), `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build), `lib/src/core/unixfs/unixfs_directory.dart` (createDirectory), `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory), `lib/src/core/unixfs/unixfs_hamt.dart` (UnixFSHAMTBuilder.build), `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment), `lib/src/core/unixfs/unixfs_node.dart` (findLinkByName), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup), `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock), `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock), `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing), `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-- **created** (field)
+- **created** (field) — Creation timestamp.
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **toJson** (method) — chama: toApiString
+- **toJson** (method) — Converts to a JSON-serializable map.
+  - chama: toApiString
   - referenciado por (por nome): `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson), `lib/src/core/config/network_config.dart` (NetworkConfig.toJson), `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize), `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson), `lib/src/routing/ipni_client.dart` (IPNIProvider.toJson), `lib/src/services/pinning/cluster_client.dart` (ClusterPin.toJson), `lib/src/services/pinning/cluster_client.dart` (IPFSClusterClient.pin), `lib/src/services/pinning/pinning_service_api.dart` (PinStatusResponse.toJson), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.addPin), `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.replacePin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServices), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 
 ### class `RemotePinningService`
 
-- **services** (method) — chama: toList, values
-- **serviceNames** (method) — chama: toList, keys
-- **remotePins** (method) — chama: toList, values
-- **pinManager** (method)
+Manages multiple remote pinning services and coordinates pin operations.
+
+- **services** (method) — Returns the list of registered service configurations.
+  - chama: toList, values
+- **serviceNames** (method) — Returns the list of registered service names.
+  - chama: toList, keys
+- **remotePins** (method) — Returns all tracked remote pins.
+  - chama: toList, values
+- **pinManager** (method) — Returns the local pin manager, if available.
   - referenciado por (por nome): `lib/src/core/data_structures/pin.dart` (Pin.pin), `lib/src/core/data_structures/pin.dart` (Pin.unpin), `lib/src/core/data_structures/pin.dart` (Pin.isPinned)
-- **addService** (method) — chama: containsKey, ArgumentError, PinningServiceConfig, PinningServiceAPIClient, info, unawaited, _saveConfig
-- **removeService** (method) — chama: containsKey, ArgumentError, dispose, remove, info, unawaited, _saveConfig
-- **listServices** (method) — chama: toList, map, values, toJson
-- **pin** (method) — chama: _getClient, debug, PinRequest, addPin, RemotePin, requestId, status, created, _saveConfig, info
+- **addService** (method) — Registers a pinning service.
+  - chama: containsKey, ArgumentError, PinningServiceConfig, PinningServiceAPIClient, info, unawaited, _saveConfig
+- **removeService** (method) — Removes a registered pinning service by [name].
+  - chama: containsKey, ArgumentError, dispose, remove, info, unawaited, _saveConfig
+- **listServices** (method) — Lists registered services.
+  - chama: toList, map, values, toJson
+- **pin** (method) — Pins content on a remote pinning service.
+  - chama: _getClient, debug, PinRequest, addPin, RemotePin, requestId, status, created, _saveConfig, info
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
-- **unpin** (method) — chama: _getClient, debug, removePin, remove, _saveConfig, info
+- **unpin** (method) — Unpins content from a remote pinning service.
+  - chama: _getClient, debug, removePin, remove, _saveConfig, info
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unpin)
-- **syncPin** (method) — chama: _getClient, getPin, RemotePin, cid, pin, requestId, status, name, created, _saveConfig
+- **syncPin** (method) — Syncs the status of a remote pin from the pinning service.
+  - chama: _getClient, getPin, RemotePin, cid, pin, requestId, status, name, created, _saveConfig
   - referenciado por (por nome): `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncAll)
-- **syncAll** (method) — chama: toList, keys, syncPin, serviceName, requestId, add, warning
-- **listRemotePins** (method) — chama: toList, where, values, serviceName, status
-- **listServicePins** (method) — chama: _getClient, listPins
-- **hasService** (method) — chama: containsKey
-- **getClient** (method) — chama: _getClient
-- **load** (method) — chama: File, exists, readAsString, jsonDecode, fromJson, name, PinningServiceAPIClient, endpoint, token, RemotePin, fromString, serviceName, requestId, info, length, error
+- **syncAll** (method) — Syncs all tracked remote pins.
+  - chama: toList, keys, syncPin, serviceName, requestId, add, warning
+- **listRemotePins** (method) — Lists remote pins, optionally filtered by service name or status.
+  - chama: toList, where, values, serviceName, status
+- **listServicePins** (method) — Lists pins from the remote service (queries the service directly).
+  - chama: _getClient, listPins
+- **hasService** (method) — Returns true if a service with [name] is registered.
+  - chama: containsKey
+- **getClient** (method) — Returns the [PinningServiceAPIClient] for [serviceName].
+  - chama: _getClient
+- **load** (method) — Loads service configurations and tracked pins from the config path.
+  - chama: File, exists, readAsString, jsonDecode, fromJson, name, PinningServiceAPIClient, endpoint, token, RemotePin, fromString, serviceName, requestId, info, length, error
   - referenciado por (por nome): `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
-- **dispose** (method) — chama: values, dispose, clear
+- **dispose** (method) — Disposes all resources.
+  - chama: values, dispose, clear
   - referenciado por (por nome): `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop), `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose), `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose), `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService), `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 
 ## `lib/src/services/rpc/mfs_handlers.dart`
@@ -849,17 +1100,29 @@ _Testado diretamente._
 
 ### class `MFSHandlers`
 
-- **node** (field)
-- **handleFilesLs** (method) — chama: _singleArg, _boolParam, ls, mfs, stat, _jsonResponse, toList, map, toJson, hash, error, _errorResponse
-- **handleFilesStat** (method) — chama: _singleArg, _boolParam, queryParameters, url, stat, mfs, _jsonResponse, toJson, error, _errorResponse
-- **handleFilesRead** (method) — chama: _singleArg, _errorResponse, _intParam, _validateOffsetCount, read, mfs, ok, error
-- **handleFilesWrite** (method) — chama: _singleArg, _errorResponse, _boolParam, _intParam, queryParameters, url, _validateOffsetCount, containsKey, headers, _getBoundary, MimeMultipartTransformer, bind, read, toList, isEmpty, BytesBuilder, length, add, write, mfs, fromIterable, toBytes, ok, error
-- **handleFilesMkdir** (method) — chama: _singleArg, _errorResponse, _boolParam, _intParam, queryParameters, url, mkdir, mfs, ok, error
-- **handleFilesCp** (method) — chama: _allArgs, length, _errorResponse, _checkDenylistForPath, cp, mfs, ok, error
-- **handleFilesMv** (method) — chama: _allArgs, length, _errorResponse, _checkDenylistForPath, mv, mfs, ok, error
-- **handleFilesRm** (method) — chama: _singleArg, _errorResponse, _boolParam, rm, mfs, ok, error
-- **handleFilesFlush** (method) — chama: _singleArg, flush, mfs, _jsonResponse, encode, error, _errorResponse
-- **handleFilesChcid** (method) — chama: _singleArg, _errorResponse, _intParam, queryParameters, url, chcid, mfs, ok, error
+RPC handlers for the `/api/v0/files/*` MFS endpoint surface.
+
+- **node** (field) — The IPFS node whose MFS manager is used for operations.
+- **handleFilesLs** (method) — POST /api/v0/files/ls
+  - chama: _singleArg, _boolParam, ls, mfs, stat, _jsonResponse, toList, map, toJson, hash, error, _errorResponse
+- **handleFilesStat** (method) — POST /api/v0/files/stat
+  - chama: _singleArg, _boolParam, queryParameters, url, stat, mfs, _jsonResponse, toJson, error, _errorResponse
+- **handleFilesRead** (method) — POST /api/v0/files/read
+  - chama: _singleArg, _errorResponse, _intParam, _validateOffsetCount, read, mfs, ok, error
+- **handleFilesWrite** (method) — POST /api/v0/files/write
+  - chama: _singleArg, _errorResponse, _boolParam, _intParam, queryParameters, url, _validateOffsetCount, containsKey, headers, _getBoundary, MimeMultipartTransformer, bind, read, toList, isEmpty, BytesBuilder, length, add, write, mfs, fromIterable, toBytes, ok, error
+- **handleFilesMkdir** (method) — POST /api/v0/files/mkdir
+  - chama: _singleArg, _errorResponse, _boolParam, _intParam, queryParameters, url, mkdir, mfs, ok, error
+- **handleFilesCp** (method) — POST /api/v0/files/cp
+  - chama: _allArgs, length, _errorResponse, _checkDenylistForPath, cp, mfs, ok, error
+- **handleFilesMv** (method) — POST /api/v0/files/mv
+  - chama: _allArgs, length, _errorResponse, _checkDenylistForPath, mv, mfs, ok, error
+- **handleFilesRm** (method) — POST /api/v0/files/rm
+  - chama: _singleArg, _errorResponse, _boolParam, rm, mfs, ok, error
+- **handleFilesFlush** (method) — POST /api/v0/files/flush
+  - chama: _singleArg, flush, mfs, _jsonResponse, encode, error, _errorResponse
+- **handleFilesChcid** (method) — POST /api/v0/files/chcid
+  - chama: _singleArg, _errorResponse, _intParam, queryParameters, url, chcid, mfs, ok, error
 
 ## `lib/src/services/rpc/rpc_handlers.dart`
 
@@ -869,29 +1132,52 @@ _Testado diretamente._
 
 ### class `RPCHandlers`
 
-- **node** (field)
-- **mfsHandlers** (field)
-- **handleVersion** (method) — chama: operatingSystem, getPlatform, version, _jsonResponse
-- **handleId** (method) — chama: peerId, addresses, publicKey, _jsonResponse, error, _errorResponse
-- **handleAdd** (method) — chama: containsKey, headers, _errorResponse, _getBoundary, MimeMultipartTransformer, bind, read, fold, BytesBuilder, length, ArgumentError, add, addFile, takeBytes, firstMatch, RegExp, group, toString, isEmpty, join, map, encode, ok, error
-- **handleCat** (method) — chama: queryParameters, url, isEmpty, _errorResponse, _checkDenylist, cat, ok, error
-- **handleGet** (method) — chama: Response
-- **handleLs** (method) — chama: queryParameters, url, isEmpty, _errorResponse, ls, toList, map, name, encode, cid, toInt, size, _jsonResponse, error
-- **handleDagGet** (method) — chama: queryParameters, url, _errorResponse, _checkDenylist, getBlock, blockStore, found, ok, data, block, error
-- **handleDagPut** (method) — chama: Response
-- **handleDagExport** (method) — chama: queryParameters, url, _errorResponse, _checkDenylist, _exportCar, ok, toString, length, error
-- **handleDagImport** (method) — chama: BytesBuilder, read, add, toBytes, fromBytes, roots, header, sections, Block, cid, bytes, _codecToFormat, codec, putBlock, blockStore, _jsonResponse, isEmpty, toString, first, error, _errorResponse
-- **handleDhtFindProviders** (method) — chama: queryParameters, url, _errorResponse, print, findProviders, dhtClient, length, join, map, encode, toString, resolvePeerId, ok, error
-- **handleDhtFindPeer** (method) — chama: queryParameters, url, _errorResponse, findPeer, dhtClient, PeerId, base58Decode, Base58, _jsonResponse, toString, resolvePeerId, error
-- **handleDhtProvide** (method) — chama: queryParameters, url, _errorResponse, _checkDenylist, addProvider, dhtClient, peerId, _jsonResponse, print, error
-- **handleNamePublish** (method) — chama: queryParameters, url, _errorResponse, startsWith, substring, publishIPNS, _jsonResponse, print, error
-- **handleNameResolve** (method) — chama: queryParameters, url, _errorResponse, resolveIPNS, _jsonResponse, print, error
-- **handleSwarmPeers** (method) — chama: connectedPeers, toList, map, _jsonResponse, error, _errorResponse
-- **handleSwarmConnect** (method) — chama: queryParameters, url, _errorResponse, connectToPeer, _jsonResponse, error
-- **handleSwarmDisconnect** (method) — chama: queryParameters, url, _errorResponse, disconnectFromPeer, _jsonResponse, error
-- **handleBlockGet** (method) — chama: queryParameters, url, _errorResponse, _checkDenylist, getBlock, blockStore, found, bitswap, debug, wantBlock, putBlock, ok, data, block, error
-- **handleBlockPut** (method) — chama: toList, read, expand, fromList, fromContent, Block, putBlock, blockStore, _jsonResponse, encode, length, error, _errorResponse
-- **handleBlockStat** (method) — chama: queryParameters, url, _errorResponse, getBlock, blockStore, found, _jsonResponse, length, data, block, error
+Handlers for IPFS RPC API endpoints
+
+- **node** (field) — The IPFS node to control via RPC.
+- **mfsHandlers** (field) — Handlers for the `/api/v0/files/*` MFS endpoint surface.
+- **handleVersion** (method) — GET /api/v0/version - Get IPFS version
+  - chama: operatingSystem, getPlatform, version, _jsonResponse
+- **handleId** (method) — POST /api/v0/id - Get peer identity
+  - chama: peerId, addresses, publicKey, _jsonResponse, error, _errorResponse
+- **handleAdd** (method) — POST /api/v0/add - Add file(s)
+  - chama: containsKey, headers, _errorResponse, _getBoundary, MimeMultipartTransformer, bind, read, fold, BytesBuilder, length, ArgumentError, add, addFile, takeBytes, firstMatch, RegExp, group, toString, isEmpty, join, map, encode, ok, error
+- **handleCat** (method) — POST /api/v0/cat - Get file content
+  - chama: queryParameters, url, isEmpty, _errorResponse, _checkDenylist, cat, ok, error
+- **handleGet** (method) — POST /api/v0/get - Download file/directory
+  - chama: Response
+- **handleLs** (method) — POST /api/v0/ls - List directory
+  - chama: queryParameters, url, isEmpty, _errorResponse, ls, toList, map, name, encode, cid, toInt, size, _jsonResponse, error
+- **handleDagGet** (method) — POST /api/v0/dag/get - Get DAG node
+  - chama: queryParameters, url, _errorResponse, _checkDenylist, getBlock, blockStore, found, ok, data, block, error
+- **handleDagPut** (method) — POST /api/v0/dag/put - Add DAG node
+  - chama: Response
+- **handleDagExport** (method) — POST /api/v0/dag/export - Export the reachable DAG of [cid] as a CAR v1.
+  - chama: queryParameters, url, _errorResponse, _checkDenylist, _exportCar, ok, toString, length, error
+- **handleDagImport** (method) — POST /api/v0/dag/import - Import a CAR v1/v2 archive into the blockstore.
+  - chama: BytesBuilder, read, add, toBytes, fromBytes, roots, header, sections, Block, cid, bytes, _codecToFormat, codec, putBlock, blockStore, _jsonResponse, isEmpty, toString, first, error, _errorResponse
+- **handleDhtFindProviders** (method) — POST /api/v0/dht/findprovs - Find providers for CID
+  - chama: queryParameters, url, _errorResponse, print, findProviders, dhtClient, length, join, map, encode, toString, resolvePeerId, ok, error
+- **handleDhtFindPeer** (method) — POST /api/v0/dht/findpeer - Find peer by ID
+  - chama: queryParameters, url, _errorResponse, findPeer, dhtClient, PeerId, base58Decode, Base58, _jsonResponse, toString, resolvePeerId, error
+- **handleDhtProvide** (method) — POST /api/v0/dht/provide - Announce provider
+  - chama: queryParameters, url, _errorResponse, _checkDenylist, addProvider, dhtClient, peerId, _jsonResponse, print, error
+- **handleNamePublish** (method) — POST /api/v0/name/publish - Publish IPNS record
+  - chama: queryParameters, url, _errorResponse, startsWith, substring, publishIPNS, _jsonResponse, print, error
+- **handleNameResolve** (method) — POST /api/v0/name/resolve - Resolve IPNS name
+  - chama: queryParameters, url, _errorResponse, resolveIPNS, _jsonResponse, print, error
+- **handleSwarmPeers** (method) — POST /api/v0/swarm/peers - List connected peers
+  - chama: connectedPeers, toList, map, _jsonResponse, error, _errorResponse
+- **handleSwarmConnect** (method) — POST /api/v0/swarm/connect - Connect to peer
+  - chama: queryParameters, url, _errorResponse, connectToPeer, _jsonResponse, error
+- **handleSwarmDisconnect** (method) — POST /api/v0/swarm/disconnect - Disconnect from peer
+  - chama: queryParameters, url, _errorResponse, disconnectFromPeer, _jsonResponse, error
+- **handleBlockGet** (method) — POST /api/v0/block/get - Get raw block
+  - chama: queryParameters, url, _errorResponse, _checkDenylist, getBlock, blockStore, found, bitswap, debug, wantBlock, putBlock, ok, data, block, error
+- **handleBlockPut** (method) — POST /api/v0/block/put - Add raw block
+  - chama: toList, read, expand, fromList, fromContent, Block, putBlock, blockStore, _jsonResponse, encode, length, error, _errorResponse
+- **handleBlockStat** (method) — POST /api/v0/block/stat - Get block stats
+  - chama: queryParameters, url, _errorResponse, getBlock, blockStore, found, _jsonResponse, length, data, block, error
 
 ## `lib/src/services/rpc/rpc_server.dart`
 
@@ -901,21 +1187,26 @@ _Testado diretamente._
 
 ### class `RPCServer` implements ILifecycle
 
-- **node** (field)
-- **address** (field)
+IPFS HTTP RPC API Server
+
+- **node** (field) — The IPFS node to control via RPC.
+- **address** (field) — The address to listen on.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host), `lib/src/protocols/dht/peer.dart` (Peer.copyWith), `lib/src/protocols/dht/peer.dart` (Peer.==)
-- **port** (field)
+- **port** (field) — The port to listen on.
   - referenciado por (por nome): `lib/src/core/data_structures/peer.dart` (multiaddrToBytes), `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start), `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url), `lib/src/services/rpc/rpc_server.dart` (RPCServer.start), `lib/src/services/rpc/rpc_server.dart` (RPCServer.url), `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
-- **corsOrigins** (field)
-- **apiKey** (field)
-- **metricsCollector** (field)
-- **metricsConfig** (field)
-- **start** (method) — chama: StateError, addHandler, addMiddleware, Pipeline, _corsMiddleware, _authMiddleware, _metricsMiddleware, _loggingMiddleware, call, serve, createHttpServerAdapter, info, host, port, error
+- **corsOrigins** (field) — List of allowed CORS origins.
+- **apiKey** (field) — Optional API key for authentication.
+- **metricsCollector** (field) — Optional metrics collector for RPC instrumentation.
+- **metricsConfig** (field) — Optional metrics configuration controlling the Prometheus endpoint.
+- **start** (method) — Starts the RPC server.
+  - chama: StateError, addHandler, addMiddleware, Pipeline, _corsMiddleware, _authMiddleware, _metricsMiddleware, _loggingMiddleware, call, serve, createHttpServerAdapter, info, host, port, error
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.start), `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.start), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.start), `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.start), `lib/src/network/router.dart` (Router.start), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize), `lib/src/protocols/dht/dht_client.dart` (DHTClient.start), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.initialize), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.start), `lib/src/routing/content_routing.dart` (ContentRouting.start), `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start), `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
-- **stop** (method) — chama: close, info
+- **stop** (method) — Stops the RPC server.
+  - chama: close, info
   - referenciado por (por nome): `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop), `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop), `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart), `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop), `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start), `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop), `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop), `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop), `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop), `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop), `lib/src/network/router.dart` (Router.stop), `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop), `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop), `lib/src/protocols/dht/dht_client.dart` (DHTClient.reprovide), `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop), `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide), `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping), `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.stop), `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop), `lib/src/routing/content_routing.dart` (ContentRouting.stop)
-- **isRunning** (method)
+- **isRunning** (method) — Returns true if the server is running
   - referenciado por (por nome): `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
-- **url** (method) — chama: host, port
+- **url** (method) — Returns the server URL
+  - chama: host, port
   - referenciado por (por nome): `lib/src/core/config/network_config.dart` (TurnServer.==), `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitOrderAndDownload), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath), `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain), `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.detectTrustlessFormat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesMkdir), `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesChcid), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet), `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 
