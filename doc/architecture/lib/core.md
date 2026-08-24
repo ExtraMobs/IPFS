@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.274602
+generated: 2026-08-24T09:25:26.172870
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -64,7 +64,7 @@ Builder for constructing an [IPFSNode] with customized configuration.
 
 - **build** (method) — Builds and initializes an [IPFSNode].
   - calls: info, _registerCoreServices, _registerNetworkServices, _initializeServices, fromContainer, _registerServerLifecycleServices, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -88,11 +88,11 @@ A sequential reader for parsing bytes from a byte buffer.
 
 - **readByte** (method) — Reads and returns the next byte, advancing the position.
   - calls: length, StateError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readUint8)
 - **readBytes** (method) — Reads and returns the next [count] bytes, advancing the position.
   - calls: length, StateError, sublist
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
@@ -155,10 +155,10 @@ CBOR encoding/decoding for IPLD data structures.
 Configuration options for the DAG-CBOR encoder/decoder.
 
 - **maxBytes** (field) — Maximum input size in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
 - **maxDepth** (field) — Maximum recursion depth.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **maxMapSize** (field) — Maximum number of entries in a map.
 - **maxStringLength** (field) — Maximum decoded string length in bytes.
@@ -176,7 +176,7 @@ Simple byte accumulator for the encoder.
   - calls: add
 - **toBytes** (method)
   - calls: toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
@@ -212,7 +212,7 @@ Simple byte accumulator for the encoder.
 Byte reader for the decoder.
 
 - **bytes** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
@@ -234,14 +234,14 @@ Byte reader for the decoder.
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **offset** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
 - **readByte** (method)
   - calls: length, IPLDDecodingError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborReader.readUint8)
 - **readUint8** (method)
   - calls: readByte
@@ -257,7 +257,7 @@ Byte reader for the decoder.
   - calls: zero, from, readUint8
 - **readBytes** (method)
   - calls: IPLDDecodingError, length, sublist
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
@@ -310,7 +310,7 @@ Configuration for the Bitswap protocol, including the optional HTTP
 - **verifyHttpBlocks** (field) — Whether to verify HTTP-fetched blocks against their CID.
 - **toJson** (method) — Converts this configuration to a JSON map.
   - calls: inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -336,12 +336,12 @@ _Directly tested._
 Configuration options for the DHT (Distributed Hash Table)
 
 - **protocolId** (field) — Protocol identifier for DHT.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **alpha** (field) — Number of parallel lookups (alpha value in Kademlia).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
@@ -376,7 +376,7 @@ Configuration options for the DHT (Distributed Hash Table)
 - **reproviderSweepOptimization** (field) — Whether to enable XOR-ordered proximity grouping for reprovides.
 - **toJson** (method) — Converts the config to JSON.
   - calls: inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -402,7 +402,7 @@ _Directly tested._
 Configuration for the IPFS HTTP Gateway.
 
 - **enabled** (field) — Whether the gateway is enabled.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -427,7 +427,7 @@ Configuration for the IPFS HTTP Gateway.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **port** (field) — The port the gateway listens on.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -436,7 +436,7 @@ Configuration for the IPFS HTTP Gateway.
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **address** (field) — The address the gateway listens on.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
@@ -485,7 +485,7 @@ Configuration for the IPFS HTTP Gateway.
   - referenced by (by name):
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 - **tlsPort** (field) — The port the TLS server listens on.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
 - **redirectHttpToHttps** (field) — Whether the plain HTTP port should redirect all requests to HTTPS.
   - referenced by (by name):
@@ -498,7 +498,7 @@ Configuration for the IPFS HTTP Gateway.
   - referenced by (by name):
     - `lib/src/services/gateway/acme_persistence.dart` (AcmePersistence.needsRenewal)
 - **toJson** (method) — Converts this configuration to a JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -524,7 +524,7 @@ _No known direct test._
 Configuration for the Graphsync protocol handler.
 
 - **enabled** (field) — Whether Graphsync is enabled on this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -553,7 +553,7 @@ Configuration for the Graphsync protocol handler.
 - **defaultMaxBytes** (field) — Default maximum number of bytes returned for a single request.
 - **fallBackToBitswap** (field) — Whether to fall back to Bitswap when a requested block is not local.
 - **toJson** (method) — Converts this configuration to a JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -593,7 +593,7 @@ Configuration for an IPFS node.
   - referenced by (by name):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
 - **storage** (field) — Storage and datastore configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **security** (field) — Security and identity configuration.
@@ -601,11 +601,11 @@ Configuration for an IPFS node.
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
 - **gateway** (field) — HTTP Gateway configuration.
 - **bitswap** (field) — Bitswap protocol configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
 - **graphsync** (field) — Graphsync protocol configuration.
 - **debug** (field) — Enable debug mode.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
@@ -803,7 +803,7 @@ Configuration for an IPFS node.
 - **libp2pListenAddress** (field) — The listen address for the libp2p bridge.
 - **libp2pIdentitySeed** (field) — Optional seed for persistent libp2p identity.
 - **nodeId** (field) — The unique node identifier.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
 - **garbageCollectionInterval** (field) — Interval for garbage collection.
 - **garbageCollectionEnabled** (field) — Enable automatic garbage collection.
@@ -838,7 +838,7 @@ Configuration for an IPFS node.
   - calls: readString, getPlatform, Exception, toLowerCase, endsWith, loadYaml, decode, encode, fromJson
 - **toJson** (method) — Converts to JSON representation.
   - calls: toJson, inSeconds, base64Encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
     - `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson)
@@ -863,7 +863,7 @@ _Directly tested._
 Configuration options for telemetry and metrics collection.
 
 - **enabled** (field) — Whether metrics collection is enabled.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -898,7 +898,7 @@ Configuration options for telemetry and metrics collection.
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getStatus)
 - **prometheusEndpoint** (field) — The HTTP path for Prometheus metrics.
 - **toJson** (method) — Converts this configuration to a JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -931,7 +931,7 @@ Network configuration for the IPFS node.
   - referenced by (by name):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
 - **bootstrapPeers** (field) — Peers to connect to on startup.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.getStatus)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
 - **maxConnections** (field) — Maximum number of concurrent connections.
@@ -963,7 +963,7 @@ Network configuration for the IPFS node.
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
 - **circuitRelay** (field) — Circuit relay client configuration.
 - **nodeId** (field) — Unique identifier for this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
 - **delegatedRoutingEndpoint** (field) — Optional HTTP endpoint for delegated routing.
   - referenced by (by name):
@@ -979,7 +979,7 @@ Network configuration for the IPFS node.
 - **privateNetworkPsk** (field) — The 32-byte pre-shared key loaded from [swarmKeyPath].
 - **toJson** (method) — Converts the network configuration to a JSON map.
   - calls: inSeconds, toList, map, toJson
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
     - `lib/src/protocols/dht/reprovider.dart` (ReproviderStatus.toJson)
@@ -998,7 +998,7 @@ Network configuration for the IPFS node.
 Configuration for a specific protocol.
 
 - **protocolId** (field) — The protocol identifier.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -1010,7 +1010,7 @@ Configuration for a specific protocol.
 Configuration for the circuit relay client.
 
 - **enabled** (field) — Whether circuit relay support is enabled.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -1043,7 +1043,7 @@ Configuration for the circuit relay client.
 - **maxCircuits** (field) — Maximum number of concurrent relayed circuits.
 - **toJson** (method) — Converts this configuration to a JSON map.
   - calls: inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -1063,7 +1063,7 @@ Configuration for the circuit relay client.
 Configuration for a TURN server used by WebRTC ICE.
 
 - **url** (field) — TURN URL, e.g. `turn:turn.example.com:3478`.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.==)
     - `lib/src/services/gateway/acme_client.dart` (AcmeClient.awaitOrderAndDownload)
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath)
@@ -1087,15 +1087,15 @@ Configuration for a TURN server used by WebRTC ICE.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **username** (field) — Username for TURN authentication.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.==)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
 - **credential** (field) — Credential (password) for TURN authentication.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.==)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
 - **toJson** (method) — Converts this server to a JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -1113,7 +1113,7 @@ Configuration for a TURN server used by WebRTC ICE.
   - calls: identical, url, username, credential
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -1174,7 +1174,7 @@ Security-related configuration options for IPFS node
     - `lib/src/core/security/denylist_service.dart` (DenylistService.defaultAction)
 - **toJson** (method) — Converts this configuration to a JSON map.
   - calls: inDays, inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -1209,7 +1209,7 @@ Configuration options for IPFS storage.
 - **maxBlockSize** (field) — Maximum size for a single block
 - **toJson** (method) — Converts this configuration to a JSON map.
   - calls: inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -1243,14 +1243,14 @@ Result of AES-GCM encryption containing ciphertext and nonce.
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
 - **nonce** (field) — The 12-byte nonce/IV used for encryption.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.decrypt)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getKey)
 - **toBytes** (method) — Serializes to bytes: [nonce (12 bytes)] + [ciphertext].
   - calls: Uint8List, length, setAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -1283,7 +1283,7 @@ Result of AES-GCM encryption containing ciphertext and nonce.
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes from bytes.
   - calls: length, nonceSize, ArgumentError, EncryptedData, sublist
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -1361,14 +1361,14 @@ ECDSA signing service using the P-256 (secp256r1) curve.
   - calls: ECDomainParameters
 - **generateKeyPair** (method) — Generates a new ECDSA P-256 key pair.
   - calls: ECKeyGenerator, init, ParametersWithRandom, ECKeyGeneratorParameters, _createSecureRandom, generateKeyPair, EcdsaKeyPair, publicKey, privateKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **sign** (method) — Signs data using ECDSA with SHA-256 on P-256.
   - calls: ECDSASigner, SHA256Digest, init, ParametersWithRandom, PrivateKeyParameter, privateKey, _createSecureRandom, generateSignature, _encodeEcdsaSignature
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseSigner.sign)
@@ -1380,7 +1380,7 @@ ECDSA signing service using the P-256 (secp256r1) curve.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
 - **verify** (method) — Verifies an ECDSA signature.
   - calls: _decodeEcdsaSignature, ECDSASigner, SHA256Digest, init, PublicKeyParameter, verifySignature
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.verify)
@@ -1391,22 +1391,22 @@ ECDSA signing service using the P-256 (secp256r1) curve.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **serializePublicKey** (method) — Serializes an ECDSA public key to DER-encoded PKIX/SPKI format.
   - calls: getEncoded, Q, ASN1SubjectPublicKeyInfo, ASN1AlgorithmIdentifier, fromIdentifierString, ASN1BitString, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.encodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
 - **deserializePublicKey** (method) — Deserializes an ECDSA public key from DER-encoded PKIX/SPKI format.
   - calls: ASN1Parser, nextObject, fromSequence, fromList, stringValues, subjectPublicKey, decodePoint, curve, ECPublicKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
 - **derivePeerId** (method) — Derives a libp2p peer ID from an ECDSA public key.
   - calls: encodePublicKeyPb, _multihashToPeerId
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.derivePeerIdFromRSA)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.derivePeerIdFromECDSA)
 - **encodePublicKeyPb** (method) — Encodes a public key as a protobuf PublicKey message.
   - calls: serializePublicKey, PublicKeyPb, ecdsa, fromList, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.derivePeerId)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.derivePeerId)
 - **decodePublicKeyPb** (method) — Decodes a protobuf PublicKey message into an ECDSA public key.
@@ -1417,7 +1417,7 @@ ECDSA signing service using the P-256 (secp256r1) curve.
 An ECDSA key pair containing the public and private keys.
 
 - **publicKey** (field) — The ECDSA public key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1435,7 +1435,7 @@ An ECDSA key pair containing the public and private keys.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **privateKey** (field) — The ECDSA private key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1462,7 +1462,7 @@ Unified Ed25519 signing service.
 
 - **generateKeyPair** (method) — Generates a new Ed25519 key pair.
   - calls: length, ArgumentError, newKeyPairFromSeed, newKeyPair
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1475,7 +1475,7 @@ Unified Ed25519 signing service.
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getKey)
 - **sign** (method) — Signs data using an Ed25519 private key.
   - calls: sign, fromList, bytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseSigner.sign)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordSigner.create)
@@ -1486,7 +1486,7 @@ Unified Ed25519 signing service.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
 - **verify** (method) — Verifies an Ed25519 signature.
   - calls: length, Signature, verify
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.verify)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -1527,13 +1527,13 @@ Entry for an encrypted key in the keystore.
   - referenced by (by name):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getKey)
 - **nonce** (field) — The 12-byte nonce used for encryption.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.decrypt)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getKey)
 - **publicKey** (field) — The unencrypted public key (safe to store in plaintext).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1552,11 +1552,11 @@ Entry for an encrypted key in the keystore.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **createdAt** (field) — When the key was created.
 - **label** (field) — Optional human-readable name/label.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.label)
 - **toJson** (method) — Serializes this entry to a JSON map.
   - calls: base64Encode, toIso8601String
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -1572,7 +1572,7 @@ Entry for an encrypted key in the keystore.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **fromJson** (method) — Creates an [EncryptedKeyEntry] from a JSON map.
   - calls: EncryptedKeyEntry, base64Decode, parse, FormatException
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWS)
@@ -1634,7 +1634,7 @@ Encrypted keystore for secure private key storage.
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getSecurePublicKey)
 - **hasKey** (method) — Checks if a key exists in the keystore.
   - calls: containsKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -1644,7 +1644,7 @@ Encrypted keystore for secure private key storage.
   - calls: base64Encode, map, MapEntry, toJson, jsonEncode
 - **deserialize** (method) — Deserializes a keystore from encrypted JSON.
   - calls: jsonDecode, FormatException, EncryptedKeystore, _salt, base64Decode, entries, _keys, key, fromJson, value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.loadAndUnlock)
 - **loadAndUnlock** (method) — Loads from JSON and unlocks with password.
   - calls: deserialize, _salt, FormatException, unlock
@@ -1663,14 +1663,14 @@ RSA signing service.
 - **defaultKeySize** (static field) — Default RSA key size in bits.
 - **generateKeyPair** (method) — Generates a new RSA key pair.
   - calls: ArgumentError, RSAKeyGenerator, init, ParametersWithRandom, RSAKeyGeneratorParameters, from, _createSecureRandom, generateKeyPair, RsaKeyPair, publicKey, privateKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **sign** (method) — Signs data using RSASSA-PKCS1-v1.5 with SHA-256.
   - calls: modulus, privateKey, bitLength, convert, sha256, _derEncodeDigestInfo, bytes, _pkcs1Pad, _bytesToBigInt, _rsaSign, _bigIntToBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseSigner.sign)
@@ -1682,7 +1682,7 @@ RSA signing service.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
 - **verify** (method) — Verifies an RSA signature.
   - calls: modulus, bitLength, _bytesToBigInt, modPow, publicExponent, _bigIntToBytes, _pkcs1Unpad, convert, sha256, _derEncodeDigestInfo, bytes, _constantTimeEquals
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.verify)
@@ -1693,24 +1693,24 @@ RSA signing service.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **serializePublicKey** (method) — Serializes an RSA public key to DER-encoded PKIX/SPKI format.
   - calls: ASN1Sequence, ASN1Integer, modulus, publicExponent, encode, ASN1SubjectPublicKeyInfo, ASN1AlgorithmIdentifier, fromIdentifierString, ASN1BitString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.encodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.encodePublicKeyPb)
 - **deserializePublicKey** (method) — Deserializes an RSA public key from DER-encoded PKIX/SPKI format.
   - calls: ASN1Parser, nextObject, fromSequence, fromList, stringValues, subjectPublicKey, integer, elements, RSAPublicKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
 - **serializePrivateKey** (method) — Serializes an RSA private key to DER-encoded PKCS#1 format.
   - calls: ASN1Sequence, ASN1Integer, zero, modulus, publicExponent, privateExponent, p, q, one, modInverse, encode
 - **derivePeerId** (method) — Derives a libp2p peer ID from an RSA public key.
   - calls: encodePublicKeyPb, _multihashToPeerId
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.derivePeerIdFromRSA)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.derivePeerIdFromECDSA)
 - **encodePublicKeyPb** (method) — Encodes a public key as a protobuf PublicKey message.
   - calls: serializePublicKey, PublicKeyPb, rsa, fromList, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.derivePeerId)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.derivePeerId)
 - **decodePublicKeyPb** (method) — Decodes a protobuf PublicKey message into an RSA public key.
@@ -1721,7 +1721,7 @@ RSA signing service.
 An RSA key pair containing the public and private keys.
 
 - **publicKey** (field) — The RSA public key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1739,7 +1739,7 @@ An RSA key pair containing the public and private keys.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **privateKey** (field) — The RSA private key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1765,7 +1765,7 @@ _No known direct test._
 Abstract base class for content-addressed blocks.
 
 - **data** (field) — The raw data payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1819,7 +1819,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **cid** (field) — The content identifier.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -1861,7 +1861,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **toBytes** (method) — Serializes this block to a byte array.
   - calls: BytesBuilder, cidToBytes, addByte, length, add, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
@@ -1893,7 +1893,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes a block from bytes using the provided factory function.
   - calls: length, FormatException, sublist, isValidCIDBytes, fromBytes, factory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
@@ -1931,7 +1931,7 @@ A class representing a simple bit field, used to manage binary flags efficiently
   - calls: _validateIndex
 - **toProto** (method) — Serializes the BitField to a protobuf message for storage or transmission.
   - calls: BitFieldProto, size, length, bits
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -1951,7 +1951,7 @@ A class representing a simple bit field, used to manage binary flags efficiently
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
 - **size** (method) — Returns the total size of the BitField in bits.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -1988,7 +1988,7 @@ _Directly tested._
 Persistent storage for content-addressed blocks in IPFS.
 
 - **path** (field) — The filesystem path where blocks are stored.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -1998,13 +1998,13 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 - **pinManager** (method) — Returns the [PinManager] for this blockstore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin.dart` (Pin.pin)
     - `lib/src/core/data_structures/pin.dart` (Pin.unpin)
     - `lib/src/core/data_structures/pin.dart` (Pin.isPinned)
 - **start** (method) — Returns a [Future] that completes when the [BlockStore] and its pin manager have started.
   - calls: debug, _initializeStorage, join, load, length, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2034,7 +2034,7 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the [BlockStore] has stopped and its state is saved.
   - calls: debug, join, save, _cleanup, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2058,7 +2058,7 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getBlock** (method) — Returns a [Future] that resolves to a [GetBlockResponse] for the given [cid].
   - calls: successGet, toProto, join, exists, getPlatform, readBytes, fromData, debug, notFound, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -2082,7 +2082,7 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **putBlock** (method) — Returns a [Future] that resolves to an [AddBlockResponse] after storing the given [block].
   - calls: toString, cid, join, exists, getPlatform, containsKey, writeBytes, data, debug, successAdd, error, failureAdd
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
@@ -2104,28 +2104,28 @@ Persistent storage for content-addressed blocks in IPFS.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
 - **removeBlock** (method) — Returns a [Future] that resolves to a [RemoveBlockResponse] after removing the block with the given [cid].
   - calls: join, exists, getPlatform, containsKey, debug, failureRemove, delete, remove, successRemove, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **hasBlock** (method) — Returns a [Future] that resolves to `true` if a block with the given [cid] exists.
   - calls: containsKey, exists, getPlatform, join, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **getAllBlocks** (method) — Returns a [Future] that resolves to a [List] of all [Block]s in the store.
   - calls: debug, toList, values, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **getStatus** (method) — Returns a [Future] that resolves to a status map for the [BlockStore].
   - calls: values, size, length, pinnedBlockCount, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **gc** (method) — Returns a [Future] that resolves to the number of blocks removed during garbage collection.
@@ -2142,7 +2142,7 @@ _Directly tested._
 Base class for CAR parsing errors.
 
 - **message** (field) — Human-readable error description.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2161,7 +2161,7 @@ Base class for CAR parsing errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2300,7 +2300,7 @@ _(no public members)_
 Immutable CAR file header.
 
 - **version** (field) — The CAR format version (1 or 2).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -2308,7 +2308,7 @@ Immutable CAR file header.
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **roots** (field) — The root CIDs of the archive.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
@@ -2316,13 +2316,13 @@ Immutable CAR file header.
   - calls: identical, version, length, roots
 - **hashCode** (method)
   - calls: hash, hashAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2437,7 +2437,7 @@ Immutable CAR file header.
 A single CID/block section within a CAR archive.
 
 - **cid** (field) — The CID of this section.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -2478,7 +2478,7 @@ A single CID/block section within a CAR archive.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **bytes** (field) — The raw block bytes of this section.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
@@ -2501,20 +2501,20 @@ A single CID/block section within a CAR archive.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **serializedSize** (method) — The on-wire size of this section, including the varint length prefix.
   - calls: toBytes, length, _varintLength
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize)
 - **==** (method)
   - calls: identical, cid, _bytesEqual, bytes
 - **hashCode** (method)
   - calls: hash, hashAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2631,7 +2631,7 @@ Builder for CAR v2 index payloads.
 - **multihashSorted** (field) — Whether to build a `MultihashIndexSorted` index.
 - **add** (method) — Records a new section at [offset] with the given [cid].
   - calls: add, _IndexEntry
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.addBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
@@ -2772,7 +2772,7 @@ Builder for CAR v2 index payloads.
     - `lib/src/utils/varint.dart` (encodeVarint)
 - **build** (method) — Builds and returns the sorted index payload bytes.
   - calls: List, sort, _compareBytes, digest, BytesBuilder, add, _encodeUint32le, _encodeVarint, multihashCode, length, offset, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -2787,7 +2787,7 @@ Builder for CAR v2 index payloads.
 ### class `_IndexEntry`
 
 - **cid** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -2828,14 +2828,14 @@ Builder for CAR v2 index payloads.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **offset** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
 - **digest** (method)
   - calls: fromList, digest, multihash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -2843,7 +2843,7 @@ Builder for CAR v2 index payloads.
     - `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse)
 - **multihashCode** (method)
   - calls: code, multihash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
 
 ### class `CarReader`
@@ -2872,7 +2872,7 @@ Streaming/iterable reader for CAR v1 and v2 archives.
 ### class `_IndexedEntry` implements _IndexEntry
 
 - **digest** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
@@ -2880,17 +2880,17 @@ Streaming/iterable reader for CAR v1 and v2 archives.
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse)
 - **offset** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
 - **multihashCode** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
 - **cid** (method)
   - calls: UnsupportedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -2936,13 +2936,13 @@ Streaming/iterable reader for CAR v1 and v2 archives.
 Append-only writer for CAR v1 and v2 archives.
 
 - **roots** (field) — The root CIDs of the CAR.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/core/data_structures/car.dart` (CarReader.sections)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **v2** (field) — Whether to write a CAR v2 file.
 - **index** (field) — Whether to build an index (CAR v2 only).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -2950,7 +2950,7 @@ Append-only writer for CAR v1 and v2 archives.
 - **maxBlockSize** (field) — Maximum allowed block size in bytes.
 - **write** (method) — Writes a single section.
   - calls: length, CarSectionException, add, _PendingSection
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -2965,7 +2965,7 @@ Append-only writer for CAR v1 and v2 archives.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method) — Emits the complete file as bytes.
   - calls: BytesBuilder, closeStream, add, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3033,7 +3033,7 @@ Append-only writer for CAR v1 and v2 archives.
 ### class `_PendingSection`
 
 - **cid** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3074,7 +3074,7 @@ Append-only writer for CAR v1 and v2 archives.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **bytes** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.encrypt)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
@@ -3107,7 +3107,7 @@ _Directly tested._
 Represents a single entry within an IPFS directory for construction purposes.
 
 - **name** (field) — The name of this entry (file or subdirectory name).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -3134,7 +3134,7 @@ Represents a single entry within an IPFS directory for construction purposes.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **hash** (field) — The CID hash bytes of the linked content.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -3164,7 +3164,7 @@ Represents a single entry within an IPFS directory for construction purposes.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **size** (field) — The cumulative size of the linked content in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -3186,23 +3186,23 @@ Represents a single entry within an IPFS directory for construction purposes.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **isDirectory** (field) — Whether this entry is a directory (true) or file (false).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **mode** (field) — Unix file mode/permissions (e.g., 0o755 for directories, 0o644 for files).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **mtime** (field) — Modification time of the file/directory.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **toLink** (method) — Converts this entry to a PBLink for inclusion in a MerkleDAG node.
   - calls: PBLink, name, hash, size
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build)
 
@@ -3212,7 +3212,7 @@ Manages IPFS directory creation using standard UnixFS Data and DAG nodes
 
 - **addEntry** (method) — Adds an entry to the directory.
   - calls: add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats)
@@ -3223,7 +3223,7 @@ Manages IPFS directory creation using standard UnixFS Data and DAG nodes
   - calls: mode
 - **build** (method) — Builds the MerkleDAG node (PBNode) representing this directory.
   - calls: PBNode, data, writeToBuffer, sort, compareTo, name, add, links, toLink
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -3246,7 +3246,7 @@ _Directly tested._
 A directed link between nodes in the IPFS Merkle DAG.
 
 - **name** (field) — The name of this link within its parent node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -3273,7 +3273,7 @@ A directed link between nodes in the IPFS Merkle DAG.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **cid** (field) — The content identifier of the linked target node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3314,7 +3314,7 @@ A directed link between nodes in the IPFS Merkle DAG.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **size** (field) — The cumulative size of the linked subgraph in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -3337,7 +3337,7 @@ A directed link between nodes in the IPFS Merkle DAG.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **toProto** (method) — Converts the link to its protobuf representation.
   - calls: PBLink, name, hash, toBytes, size
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -3362,7 +3362,7 @@ _Directly tested._
 A node in the IPFS Merkle DAG (Directed Acyclic Graph).
 
 - **links** (field) — The list of links (edges) to child nodes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3379,7 +3379,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (field) — The raw data payload of this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3433,18 +3433,18 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **isDirectory** (field) — Whether this node represents a directory.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **mtime** (field) — Unix modification time in seconds, if available.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **cid** (method) — The content identifier for this node.
   - calls: computeForDataSync, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3486,7 +3486,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **fromBytes** (method) — Creates a [MerkleDAGNode] from its byte representation (DAG-PB).
   - calls: fromBuffer, PBNode, hasData, Data, data, type, Directory, Data_DataType, HAMTShard, hasMtime, toInt, mtime, MerkleDAGNode, toList, map, links, fromProto, fromList, FormatException
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -3508,7 +3508,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **toBytes** (method) — Converts the [MerkleDAGNode] to its byte representation.
   - calls: PBNode, data, addAll, links, map, toProto, writeToBuffer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -3541,7 +3541,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **toString** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3662,7 +3662,7 @@ _Directly tested._
 Metadata associated with IPLD nodes.
 
 - **size** (field) — Size of the content in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -3688,7 +3688,7 @@ Metadata associated with IPLD nodes.
 - **contentType** (field) — MIME type of the content.
 - **toJson** (method) — Converts this metadata to a JSON map.
   - calls: toIso8601String
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3714,7 +3714,7 @@ _No known direct test._
 Represents an IPFS data node with links and handlers.
 
 - **cid** (field) — The content identifier for this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3755,7 +3755,7 @@ Represents an IPFS data node with links and handlers.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **links** (field) — Links to child nodes in the DAG.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3772,17 +3772,17 @@ Represents an IPFS data node with links and handlers.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **nodeType** (field) — The type of this node (file, directory, etc).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **metadata** (field) — Custom metadata attached to this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **size** (field) — The cumulative size of this node and its children.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -3805,7 +3805,7 @@ Represents an IPFS data node with links and handlers.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **bitswapHandler** (field) — The Bitswap protocol handler for block exchange.
 - **dhtHandler** (field) — The DHT protocol handler for peer and content discovery.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
@@ -3815,17 +3815,17 @@ Represents an IPFS data node with links and handlers.
 - **datastoreHandler** (field) — The datastore handler for persistence operations.
 - **routingHandler** (field) — The routing handler for content routing.
 - **networkHandler** (field) — The network handler for peer communication.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
 - **pubSubHandler** (field) — The PubSub handler for topic-based messaging.
 - **datastore** (method) — Access to the datastore.
   - calls: datastore
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.datastore)
 - **router** (method) — Access to the network router.
   - calls: router
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.router)
@@ -3835,17 +3835,17 @@ Represents an IPFS data node with links and handlers.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **bitswap** (method) — Access to the Bitswap handler.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
 - **config** (method) — The node configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **onNewContent** (method) — Stream of new content CIDs.
   - calls: stream
 - **dispose** (method) — Disposes of the node's resources.
   - calls: isClosed, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -3854,7 +3854,7 @@ Represents an IPFS data node with links and handlers.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.dispose)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 - **peerID** (method) — This node's peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -3871,7 +3871,7 @@ Represents an IPFS data node with links and handlers.
 A named link to another node in the DAG.
 
 - **name** (field) — The link name (filename in directories).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -3898,7 +3898,7 @@ A named link to another node in the DAG.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **cid** (field) — The CID of the linked node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3939,7 +3939,7 @@ A named link to another node in the DAG.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **size** (field) — The size of the linked content.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -3961,7 +3961,7 @@ A named link to another node in the DAG.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **metadata** (field) — Custom metadata for this link.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -3979,23 +3979,23 @@ _Directly tested._
 Represents statistics about the IPFS node.
 
 - **numBlocks** (field) — The number of blocks stored in the datastore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **datastoreSize** (field) — The total size of the blocks stored in the datastore (in bytes).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **numConnectedPeers** (field) — The number of connected peers.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthSent** (field) — The total bandwidth used for sending data (in bytes).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthReceived** (field) — The total bandwidth used for receiving data (in bytes).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **toProto** (method) — Converts the [NodeStats] instance to its Protobuf representation.
   - calls: NodeStats, numBlocks, datastoreSize, Int64, numConnectedPeers, bandwidthSent, bandwidthReceived
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -4009,7 +4009,7 @@ Represents statistics about the IPFS node.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4120,7 +4120,7 @@ Represents statistics about the IPFS node.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **fromJson** (method) — Creates a [NodeStats] instance from a JSON map.
   - calls: NodeStats
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWS)
@@ -4152,7 +4152,7 @@ _No known direct test._
 A single entry in the operation log.
 
 - **timestamp** (field) — When the operation occurred.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -4162,14 +4162,14 @@ A single entry in the operation log.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **operation** (field) — The operation type (e.g., 'add', 'remove', 'pin').
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **details** (field) — Human-readable details about the operation.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **cid** (field) — The CID involved, if any.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -4210,11 +4210,11 @@ A single entry in the operation log.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **nodeType** (field) — The node type involved, if any.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **toProto** (method) — Converts this entry to its protobuf representation.
   - calls: OperationLogEntryProto, timestamp, Int64, millisecondsSinceEpoch, operation, details, cid, toProto, IPFSCIDProto, nodeType
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -4228,7 +4228,7 @@ A single entry in the operation log.
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
   - calls: toString, name
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -4343,7 +4343,7 @@ A circular log of operations performed on the datastore.
 
 - **addEntry** (method) — Records a new operation in the log.
   - calls: OperationLogEntry, now, add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats)
@@ -4352,7 +4352,7 @@ A circular log of operations performed on the datastore.
   - calls: unmodifiable
 - **clear** (method) — Clears all entries from the log.
   - calls: clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop)
@@ -4400,11 +4400,11 @@ A circular log of operations performed on the datastore.
   - calls: OperationLogProto, addAll, entries, map, toProto, writeToBuffer
 - **deserialize** (method) — Deserializes a log from a byte array, replacing all entries.
   - calls: fromBuffer, clear, addAll, map, entries, fromProto
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.loadAndUnlock)
 - **toString** (method)
   - calls: join, map, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -4524,13 +4524,13 @@ _Directly tested._
 Represents a network address (IP + Port).
 
 - **address** (field) — The IP address of the peer (string representation).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
 - **port** (field) — The port number of the peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -4539,7 +4539,7 @@ Represents a network address (IP + Port).
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4654,7 +4654,7 @@ Represents a network address (IP + Port).
 Represents a peer node in the IPFS network.
 
 - **id** (field) — The unique cryptographic identifier for this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -4693,7 +4693,7 @@ Represents a peer node in the IPFS network.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **addresses** (field) — Network addresses where this peer can be reached.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -4703,12 +4703,12 @@ Represents a peer node in the IPFS network.
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **latency** (field) — Network latency to this peer in milliseconds.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
 - **agentVersion** (field) — The IPFS client version string reported by this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -4717,7 +4717,7 @@ Represents a peer node in the IPFS network.
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushEvent.toString)
 - **toProto** (method) — Converts the [Peer] to its Protobuf representation.
   - calls: PeerProto, id, encode, Base58, value, addAll, addresses, map, toString, latency, Int64, agentVersion
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -4732,7 +4732,7 @@ Represents a peer node in the IPFS network.
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
   - calls: value, toList, map, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4873,7 +4873,7 @@ _Directly tested._
 A pin that prevents content from being garbage collected.
 
 - **cid** (field) — The content identifier being pinned.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -4914,7 +4914,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **type** (field) — The type of pin (direct, recursive, indirect).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -4972,7 +4972,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **timestamp** (field) — When this pin was created.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -4982,7 +4982,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **blockStore** (field) — The block store for storage operations.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
@@ -4994,7 +4994,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **toProto** (method) — Converts the [Pin] to its Protobuf representation.
   - calls: PinProto, cid, toProto, type, timestamp, Int64, millisecondsSinceEpoch
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -5007,7 +5007,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5118,13 +5118,13 @@ A pin that prevents content from being garbage collected.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **pin** (method) — Pins this block according to its type
   - calls: pinBlock, pinManager, toProto
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
 - **unpin** (method) — Unpins this block
   - calls: unpinBlock, pinManager, toProto
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unpin)
 - **isPinned** (method) — Checks if this block is pinned
@@ -5141,7 +5141,7 @@ _Directly tested._
 Manages pinning operations to prevent content from garbage collection.
 
 - **blockStore** (method) — Returns the underlying block store.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
@@ -5153,7 +5153,7 @@ Manages pinning operations to prevent content from garbage collection.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **load** (method) — Loads the pin state from a file.
   - calls: exists, getPlatform, readString, decode, containsKey, forEach, valueOf, PIN_TYPE_RECURSIVE, Set, info, length, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
 - **save** (method) — Saves the pin state to a file.
   - calls: map, MapEntry, value, toList, writeBytes, getPlatform, fromList, encode, debug, length, error
@@ -5203,7 +5203,7 @@ Service container for dependency injection.
   - calls: isRegistered, unregister, registerLazySingleton
 - **get** (method) — Retrieves a service from the container.
   - calls: get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
@@ -5287,7 +5287,7 @@ _Directly tested._
 Base class for Graphsync protocol errors
 
 - **message** (field) — The error message describing what went wrong.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5307,7 +5307,7 @@ Base class for Graphsync protocol errors
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **cause** (field) — The underlying cause of this error, if any.
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5470,7 +5470,7 @@ _Directly tested._
 Base class for IPLD (InterPlanetary Linked Data) errors.
 
 - **message** (field) — The error message describing what went wrong.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5489,7 +5489,7 @@ Base class for IPLD (InterPlanetary Linked Data) errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5664,7 +5664,7 @@ _No known direct test._
 Base class for network-related errors.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5683,7 +5683,7 @@ Base class for network-related errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **timestamp** (field) — When the error occurred.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -5698,7 +5698,7 @@ Base class for network-related errors.
 Error when connecting to a remote peer fails.
 
 - **peerId** (field) — The peer ID we failed to connect to.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -5739,7 +5739,7 @@ Error when connecting to a remote peer fails.
 Error in a P2P protocol (e.g., Bitswap, DHT).
 
 - **protocolId** (field) — The protocol that encountered the error.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -5755,11 +5755,11 @@ _Directly tested._
 Base class for all IPFS Node related errors.
 
 - **details** (field) — Optional details about the error.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5893,7 +5893,7 @@ Error thrown when a required component is missing or fails.
 
 - **component** (field) — The component that failed.
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6021,7 +6021,7 @@ A type-safe publish-subscribe event bus for IPFS network events.
 
 - **publish** (method) — Publishes an event to all subscribers
   - calls: add, debug, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publish)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.publishIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publish)
@@ -6030,7 +6030,7 @@ A type-safe publish-subscribe event bus for IPFS network events.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.publish)
 - **subscribe** (method) — Subscribes to events of type T
   - calls: containsKey, StreamController, stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.subscribe)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.subscribe)
@@ -6038,7 +6038,7 @@ A type-safe publish-subscribe event bus for IPFS network events.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.subscribe)
 - **dispose** (method) — Disposes all event streams
   - calls: values, close, clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -6053,7 +6053,7 @@ Base class for all network events.
 
 - **timestamp** (field) — The timestamp when the event occurred.
   - calls: now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -6068,7 +6068,7 @@ Base class for all network events.
 Event emitted when a peer connects.
 
 - **peerId** (field) — The newly connected peer's ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -6104,7 +6104,7 @@ Event emitted when a peer connects.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **address** (field) — The multiaddr of the peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
@@ -6115,7 +6115,7 @@ Event emitted when a peer connects.
 Event emitted when a block is transferred.
 
 - **cid** (field) — The CID of the transferred block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -6156,7 +6156,7 @@ Event emitted when a block is transferred.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **peerId** (field) — The peer involved in the transfer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -6192,7 +6192,7 @@ Event emitted when a block is transferred.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **type** (field) — Whether this was a send or receive.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -6250,7 +6250,7 @@ Event emitted when a block is transferred.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **size** (field) — The size of the block in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -6283,7 +6283,7 @@ _No known direct test._
 Base class for network-related events.
 
 - **timestamp** (field) — When this event occurred.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -6299,7 +6299,7 @@ Base class for network-related events.
 Events related to peer connection status.
 
 - **peerId** (field) — The peer this event relates to.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -6340,7 +6340,7 @@ Events related to peer connection status.
 Event for received network messages.
 
 - **message** (field) — The received message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -6375,11 +6375,11 @@ _No known direct test._
 Mixin providing clone and copyWith functionality for blocks.
 
 - **clone** (method) — Creates a deep clone of this block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method) — Creates a copy with modifications applied by [updates].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -6601,7 +6601,7 @@ _Directly tested._
 Abstract interface for block data access.
 
 - **data** (method) — The raw binary content of this block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -6655,7 +6655,7 @@ Abstract interface for block data access.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **cid** (method) — The content identifier for this block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -6697,7 +6697,7 @@ Abstract interface for block data access.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **size** (method) — The size of the data in bytes.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -6720,7 +6720,7 @@ Abstract interface for block data access.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **toBytes** (method) — Serializes the block to a byte array.
   - calls: BytesBuilder, cidToBytes, addByte, length, add, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -6762,12 +6762,12 @@ _Directly tested._
 Interface for BlockStore CRUD operations.
 
 - **addBlock** (method) — Adds a [block] to storage.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method) — Retrieves a block by [cid].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -6790,13 +6790,13 @@ Interface for BlockStore CRUD operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **removeBlock** (method) — Removes a block by [cid].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **getAllBlocks** (method) — Returns all stored blocks.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -6813,7 +6813,7 @@ _Directly tested._
 Interface for block storage operations.
 
 - **getBlock** (method) — Retrieves a block by its CID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -6836,7 +6836,7 @@ Interface for block storage operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **putBlock** (method) — Stores a block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
@@ -6857,25 +6857,25 @@ Interface for block storage operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
 - **removeBlock** (method) — Removes a block by its CID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **hasBlock** (method) — Returns true if the block exists.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **getAllBlocks** (method) — Returns all stored blocks.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **getStatus** (method) — Returns status of the blockstore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **gc** (method) — Performs garbage collection by removing unpinned blocks.
@@ -6891,7 +6891,7 @@ _Directly tested._
 Interface for services that require explicit startup and shutdown.
 
 - **start** (method) — Starts the service.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -6920,7 +6920,7 @@ Interface for services that require explicit startup and shutdown.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -6955,7 +6955,7 @@ Handles NAT detection and traversal for an IPFS node.
 
 - **start** (method) — Starts the AutoNAT service
   - calls: warning, debug, router, AutoNATService, AutoNATServer, start, _detectNATType, none, enableNatTraversal, network, _attemptPortMapping, info, _startDialbackTests, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
@@ -6984,7 +6984,7 @@ Handles NAT detection and traversal for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the AutoNAT service
   - calls: warning, debug, cancel, stop, unmapPort, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
@@ -7007,7 +7007,7 @@ Handles NAT detection and traversal for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getStatus** (method) — Gets the current status of the AutoNAT handler
   - calls: toString, toIso8601String, inMinutes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -7023,7 +7023,7 @@ Handles bootstrap peer connections for an IPFS node.
 
 - **start** (method) — Starts the bootstrap handler
   - calls: warning, debug, _connectToBootstrapPeers, _setupReconnectionTimer, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7053,7 +7053,7 @@ Handles bootstrap peer connections for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the bootstrap handler
   - calls: warning, debug, cancel, clear, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7077,7 +7077,7 @@ Handles bootstrap peer connections for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getStatus** (method) — Gets the current status of the bootstrap handler
   - calls: length, bootstrapPeers, network, inMinutes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -7093,7 +7093,7 @@ Manages content-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7123,7 +7123,7 @@ Manages content-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7147,22 +7147,22 @@ Manages content-related operations for the IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **addFile** (method) — Adds a raw file to IPFS and returns its CID.
   - calls: fromData, putBlock, add, toString, cid, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addFile)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
 - **addFileStream** (method) — Adds file content from a [dataStream].
   - calls: BytesBuilder, add, addFile, takeBytes, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addFileStream)
 - **addDirectory** (method) — Adds a directory to IPFS and returns its root CID.
   - calls: IPFSDirectoryManager, entries, key, value, addFile, addEntry, IPFSDirectoryEntry, toBytes, decode, Int64, length, addDirectory, warning, runtimeType, build, fromData, writeToBuffer, putBlock, info, cid, toString, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addDirectory)
 - **get** (method) — Gets the content associated with [cid].
   - calls: isBlockedByCidString, recordHit, StateError, internal, _getViaGateway, getBlock, _extractBlockData, found, blockFromProto, block, debug, wantBlock, putBlock, data, get, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
@@ -7216,26 +7216,26 @@ Manages content-related operations for the IPFS node.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **ls** (method) — Lists the links within a directory identified by [cid].
   - calls: getBlock, wantBlock, found, blockFromProto, block, warning, fromBytes, data, isDirectory, links, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.ls)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **pin** (method) — Recursively pins a [cid] to prevent garbage collection.
   - calls: ComponentError, Pin, decode, PIN_TYPE_RECURSIVE, pin, Exception, persistPinnedCIDs, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
 - **unpin** (method) — Unpins a [cid] from the node.
   - calls: ComponentError, Pin, decode, PIN_TYPE_RECURSIVE, unpin, Key, delete, datastore, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unpin)
 - **importCAR** (method) — Imports blocks from a [carFile] into the local datastore.
   - calls: importCAR, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.importCAR)
 - **exportCAR** (method) — Exports the DAG rooted at [cid] as a [Uint8List] in CAR format.
   - calls: exportCAR, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.exportCAR)
 
 ## `lib/src/core/ipfs_node/content_routing_handler.dart`
@@ -7250,7 +7250,7 @@ Handles content routing operations with fallback strategies.
 
 - **start** (method) — Starts the content routing services
   - calls: debug, start, verbose, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
@@ -7279,7 +7279,7 @@ Handles content routing operations with fallback strategies.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the content routing services
   - calls: debug, stop, verbose, dispose, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
@@ -7302,7 +7302,7 @@ Handles content routing operations with fallback strategies.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **findProviders** (method) — Finds providers for a given CID using multiple routing strategies
   - calls: debug, verbose, findProviders, isNotEmpty, length, decode, isSuccess, providers, toList, map, peerId, warning, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
@@ -7311,12 +7311,12 @@ Handles content routing operations with fallback strategies.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **resolveDNSLink** (method) — Resolves a DNSLink to its corresponding CID
   - calls: debug, verbose, resolve, resolveDNSLink, warning, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveDNSLink)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink)
 - **getStatus** (method) — Gets the current status of the content routing handler
   - calls: ipniEndpoints, network, reframeEndpoints, delegatedRoutingEndpoint
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -7331,13 +7331,13 @@ _Directly tested._
 Handles datastore operations for an IPFS node.
 
 - **datastore** (method) — Provides access to the underlying datastore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.datastore)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.datastore)
 - **start** (method) — Initializes and starts the datastore.
   - calls: init, debug, error, ComponentError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7367,7 +7367,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Closes the datastore and releases all resources.
   - calls: close, debug, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7391,7 +7391,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **putBlock** (method) — Stores a [block] in the datastore.
   - calls: Key, encode, cid, put, data, verbose, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
@@ -7413,7 +7413,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
 - **getBlock** (method) — Retrieves a block from the datastore by its [cid].
   - calls: Key, get, verbose, decode, Block, codec, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -7437,7 +7437,7 @@ Handles datastore operations for an IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method) — Checks if a block exists in the datastore by its [cid].
   - calls: Key, has, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
@@ -7453,17 +7453,17 @@ Handles datastore operations for an IPFS node.
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin)
 - **importCAR** (method) — Imports a CAR (Content Addressable Archive) [carFile] into the datastore.
   - calls: fromBytes, sections, Block, cid, bytes, codec, putBlock, verbose, info, error, ComponentError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.importCAR)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.importCAR)
 - **exportCAR** (method) — Exports the DAG rooted at [cid] as a CAR formatted [Uint8List].
   - calls: getBlock, ArgumentError, add, cid, codec, fromBytes, data, _recursiveGetBlocks, CarWriter, first, write, close, info, length, error, Uint8List
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.exportCAR)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.exportCAR)
 - **getStatus** (method) — Returns the current status of the datastore.
   - calls: length, loadPinnedCIDs, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -7479,7 +7479,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
 
 - **start** (method) — Starts the DNSLink handler
   - calls: debug, clear, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7509,7 +7509,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the DNSLink handler
   - calls: debug, clear, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -7533,7 +7533,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **resolve** (method) — Resolves a DNSLink to its corresponding CID using multiple strategies
   - calls: debug, containsKey, isExpired, verbose, cid, remove, _resolveWithPublicResolver, _cacheResult, warning, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.resolveIPNS)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.resolveDNSLink)
@@ -7544,7 +7544,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
     - `lib/src/routing/content_routing.dart` (ContentRouting.resolveDNSLink)
 - **getStatus** (method) — Gets the current status of the DNSLink handler
   - calls: length, inMinutes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -7553,7 +7553,7 @@ Handles DNSLink resolution with caching and multiple resolution strategies.
 Helper class for caching DNSLink resolutions
 
 - **cid** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -7594,7 +7594,7 @@ Helper class for caching DNSLink resolutions
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **timestamp** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -7605,7 +7605,7 @@ Helper class for caching DNSLink resolutions
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **isExpired** (method)
   - calls: difference, now, _cacheDuration
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
@@ -7621,7 +7621,7 @@ _Directly tested._
 The main IPFS node implementation.
 
 - **state** (method) — Returns the current state of the node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
 - **mfs** (method) — Returns the Mutable File System (MFS) manager.
@@ -7644,11 +7644,11 @@ The main IPFS node implementation.
   - calls: isRegistered, get
 - **isRunning** (method) — Whether the node is currently running.
   - calls: running
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 - **create** (method) — Returns a [Future] that resolves to an [IPFSNode] built from the [config].
   - calls: IPFSNodeBuilder, build
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -7865,7 +7865,7 @@ The main IPFS node implementation.
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
 - **peerId** (method) — Returns the peer ID of this node.
   - calls: peerId
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -7909,7 +7909,7 @@ The main IPFS node implementation.
   - calls: isRegistered, get, peerCount, kademliaRoutingTable, dhtClient, warning
 - **addresses** (method) — Returns a [List] of multiaddresses this node is listening on.
   - calls: isRegistered, get, router, listeningAddresses, warning
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -7920,7 +7920,7 @@ The main IPFS node implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **blockStore** (method) — Returns the underlying [BlockStore].
   - calls: get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
@@ -7932,14 +7932,14 @@ The main IPFS node implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **dhtClient** (method) — Returns the [DHTClient] for peer and content discovery.
   - calls: isRegistered, StateError, get, dhtClient
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
 - **connectedPeers** (method) — Returns a [Future] that resolves to a [List] of currently connected peer IDs.
   - calls: connectedPeers
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want)
@@ -7949,7 +7949,7 @@ The main IPFS node implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **publicKey** (method) — Returns a [Future] that resolves to the public key of this node as a base64 encoded protobuf.
   - calls: isRegistered, getPrivateKey, get, publicKeyBytes, isEmpty, length, encode, warning
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -7968,7 +7968,7 @@ The main IPFS node implementation.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **resolvePeerId** (method) — Resolves a [peerIdStr] to its known multiaddresses.
   - calls: resolvePeerId
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
@@ -7977,39 +7977,39 @@ The main IPFS node implementation.
   - calls: isRegistered, loadPinnedCIDs, get, toList, warning
 - **cat** (method) — Returns a [Future] that resolves to the raw content associated with the given [cid].
   - calls: get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat)
 - **connectToPeer** (method) — Returns a [Future] that completes when the node manually connects to a peer using its [multiaddr].
   - calls: connectToPeer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Returns a [Future] that completes when the node gracefully disconnects from a peer identified by [peerIdOrAddr].
   - calls: disconnectFromPeer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **resolveIPNS** (method) — Returns a [Future] that resolves to the CID corresponding to the IPNS [name].
   - calls: resolveIPNS
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve)
 - **subscribe** (method) — Returns a [Future] that completes when the node subscribes to a PubSub [topic].
   - calls: subscribe
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.subscribe)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.subscribe)
 - **unsubscribe** (method) — Returns a [Future] that completes when the node unsubscribes from a PubSub [topic].
   - calls: unsubscribe
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.unsubscribe)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.unsubscribe)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.unsubscribe)
 - **publish** (method) — Returns a [Future] that completes when the node publishes a [message] to a PubSub [topic].
   - calls: publish
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.publishIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publish)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS)
@@ -8019,7 +8019,7 @@ The main IPFS node implementation.
   - calls: pubsubMessages
 - **start** (method) — Returns a [Future] that completes when the IPFS node and all its subsystems have started.
   - calls: running, starting, NodeStateError, name, info, startAll, init, initAll, error, NodeStartupError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8049,7 +8049,7 @@ The main IPFS node implementation.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the IPFS node has stopped gracefully, releasing all resources.
   - calls: stopped, stopping, warning, name, info, stopAll, close, error, NodeShutdownError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8075,7 +8075,7 @@ The main IPFS node implementation.
   - calls: info, stop, start
 - **addFile** (method) — Returns a [Future] that resolves to the CID of the added file [data].
   - calls: addFile
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
@@ -8083,13 +8083,13 @@ The main IPFS node implementation.
   - calls: addFileStream
 - **addDirectory** (method) — Returns a [Future] that resolves to the CID of the added [directoryContent].
   - calls: addDirectory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
 - **setGatewayMode** (method) — Sets the mode for retrieving content.
   - calls: info
 - **get** (method) — Returns a [Future] that resolves to the content of a file or directory associated with the given [cid].
   - calls: get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -8143,34 +8143,34 @@ The main IPFS node implementation.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **ls** (method) — Returns a [Future] that resolves to a [List] of [Link]s representing the contents of an IPFS directory.
   - calls: ls
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **pin** (method) — Returns a [Future] that completes when the given [cid] is pinned to prevent it from being garbage collected.
   - calls: pin
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
 - **unpin** (method) — Returns a [Future] that resolves to `true` if the given [cid] was successfully unpinned from IPFS.
   - calls: unpin
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
 - **publishIPNS** (method) — Returns a [Future] that resolves to the IPNS name (base36-encoded peer ID)
   - calls: publishIPNS
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish)
 - **importCAR** (method) — Returns a [Future] that completes when the given CAR (Content Addressable Archive) file [carFile] is imported.
   - calls: importCAR
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.importCAR)
 - **exportCAR** (method) — Returns a [Future] that resolves to the CAR file bytes for the given [cid].
   - calls: exportCAR
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.exportCAR)
 - **findProviders** (method) — Returns a [Future] that resolves to a [List] of multiaddresses for providers of the given [cid].
   - calls: findProviders
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
@@ -8181,7 +8181,7 @@ The main IPFS node implementation.
   - calls: requestBlock
 - **resolveDNSLink** (method) — Returns a [Future] that resolves to the CID corresponding to the given [domainName] via DNSLink.
   - calls: resolveDNSLink
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink)
 - **getHealthStatus** (method) — Returns a [Future] that resolves to a health status map for all subsystems.
@@ -8190,12 +8190,12 @@ The main IPFS node implementation.
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 - **datastore** (method) — Returns the underlying [Datastore].
   - calls: datastore, get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.datastore)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
 - **router** (method) — Returns the [RouterInterface] used for networking, or `null` if not available.
   - calls: isRegistered, router, get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.router)
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -8206,7 +8206,7 @@ The main IPFS node implementation.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **bitswap** (method) — Returns the [BitswapHandler] instance, or `null` if not registered.
   - calls: isRegistered, get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
 - **ipns** (method) — Returns the [IPNSHandler] instance, or `null` if not registered.
   - calls: isRegistered, get
@@ -8214,7 +8214,7 @@ The main IPFS node implementation.
   - calls: isRegistered, get
 - **dhtHandler** (method) — Returns the [DHTHandler] instance, or `null` if not registered.
   - calls: isRegistered, get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
@@ -8223,7 +8223,7 @@ The main IPFS node implementation.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **peerID** (method) — Returns the peer ID of this node.
   - calls: peerId
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -8249,11 +8249,11 @@ Handles network events for an IPFS node.
 
 - **networkEvents** (method) — A stream of network events.
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **start** (method) — Starts listening for and emitting network events.
   - calls: _listenForRouterEvents, _listenForCircuitRelayEvents
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8283,7 +8283,7 @@ Handles network events for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **dispose** (method) — Stops listening for network events and closes the stream controller.
   - calls: isClosed, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -8303,12 +8303,12 @@ _Directly tested._
 A minimal IPFS node for web browsers.
 
 - **bootstrapPeers** (field) — List of bootstrap peers (WebSocket URLs) to connect to on startup.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.getStatus)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
 - **peerID** (method) — The node's peer ID.
   - calls: peerID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
     - `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID)
@@ -8319,16 +8319,16 @@ A minimal IPFS node for web browsers.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
 - **isRunning** (method) — Whether the node is running.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 - **bitswap** (method) — Access to Bitswap handler.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
 - **pubsub** (method) — Access to PubSub client.
 - **securityManager** (method) — Access to security manager.
 - **start** (method) — Starts the web node.
   - calls: initialize, BitswapHandler, PubSubClient, peerID, SecurityManagerWeb, security, MetricsCollector, delegatedRoutingEndpoint, network, DelegateDHTHandler, IPNSHandler, offline, start, connect
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8357,7 +8357,7 @@ A minimal IPFS node for web browsers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the web node.
   - calls: stop
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8380,7 +8380,7 @@ A minimal IPFS node for web browsers.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **add** (method) — Adds data and returns its CID.
   - calls: fromContent, Block, putBlock
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.addBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.add)
@@ -8526,14 +8526,14 @@ A minimal IPFS node for web browsers.
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addFile)
 - **addFile** (method) — Adds a file to IPFS using chunked streaming.
   - calls: isWeb, addStream, UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addFile)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
 - **get** (method) — Gets data by CID string.
   - calls: getBlock, found, hasBlock, data, blockFromProto, block, isNotEmpty, connectedPeers, wantBlock
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -8588,32 +8588,32 @@ A minimal IPFS node for web browsers.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **cat** (method) — Gets data by CID object.
   - calls: get, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleCat)
 - **pin** (method) — Pins a CID (marks it as persistent).
   - calls: writeBytes, encode, Uint8List
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
 - **unpin** (method) — Unpins a CID.
   - calls: delete, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unpin)
 - **listPins** (method) — Lists all pinned CIDs.
   - calls: listDirectory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listServicePins)
 - **publishIPNS** (method) — Publishes an IPNS record.
   - calls: StateError, publish
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publishIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish)
 - **resolveIPNS** (method) — Resolves an IPNS name.
   - calls: StateError, resolve
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve)
@@ -8629,7 +8629,7 @@ _Directly tested._
 Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern for codecs.
 
 - **isRunning** (method) — Whether the IPLD handler is currently running.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 - **registerCodec** (method) — Registers a codec for IPLD data.
   - calls: _registerCodec
@@ -8637,7 +8637,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
   - calls: name
 - **put** (method) — Puts a value into the blockstore
   - calls: ComponentError, _toIPLDNode, IPLDSchemaError, validate, _encodeData, fromData, putBlock, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -8656,7 +8656,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method) — Gets a value from the blockstore
   - calls: ComponentError, getBlock, toString, _decodeData, fromList, data, block, codec, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -8715,7 +8715,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
   - calls: ComponentError, isEmpty, get, toString, normalizePath, isNotEmpty, split, join, sublist, _resolveSegment, IPLDResolutionError
 - **start** (method) — Starts the IPLD handler
   - calls: debug, verbose, join, keys, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8745,7 +8745,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the IPLD handler
   - calls: debug, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8769,7 +8769,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getStatus** (method) — Gets the status of the IPLD handler
   - calls: toList, keys, enableIPLD
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **executeSelector** (method) — Executes a selector query on an IPLD node
@@ -8778,7 +8778,7 @@ Handles IPLD (InterPlanetary Linked Data) operations using a Strategy pattern fo
   - calls: ComponentError, SelectorExecutor, execute
 - **resolvePath** (method) — Resolves an IPFS/IPLD/IPNS path.
   - calls: ComponentError, normalizePath, parsePath, _resolveIPFSPath, _resolveIPLDPath, UnimplementedError, IPLDPathError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveIPNS)
 - **getMetadata** (method) — Returns metadata for a CID.
@@ -8800,19 +8800,19 @@ Orchestrates the startup and shutdown sequence of all node services.
 
 - **register** (method) — Registers a service for lifecycle management.
   - calls: warning, add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **startAll** (method) — Starts all registered services in order.
   - calls: info, debug, runtimeType, start, error, stopAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
 - **stopAll** (method) — Stops all registered services in reverse order.
   - calls: info, reversed, debug, runtimeType, stop, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
 - **isRunning** (method) — Returns true if all registered services are running.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 
 ## `lib/src/core/ipfs_node/mdns_handler.dart`
@@ -8827,7 +8827,7 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
 
 - **start** (method) — Starts the mDNS discovery service
   - calls: enableMDNS, network, debug, warning, isWindows, verbose, start, _getPort, startServer, nodeId, _startDiscovery, _startAdvertising, info, error, stop
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8856,7 +8856,7 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the mDNS discovery service
   - calls: warning, debug, cancel, stop, close, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8881,7 +8881,7 @@ Handles mDNS (multicast DNS) peer discovery for an IPFS node.
   - calls: stream
 - **getStatus** (method) — Gets the current status of the mDNS handler
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -8900,10 +8900,10 @@ _Directly tested._
 Handles network operations for an IPFS node.
 
 - **ipfsNode** (field) — Reference to the parent IPFS node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.node)
 - **router** (method) — Returns the router for protocol use.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.router)
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -8915,7 +8915,7 @@ Handles network operations for an IPFS node.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **start** (method) — Starts the network services.
   - calls: debug, verbose, start, _registerDialbackHandler, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8944,7 +8944,7 @@ Handles network operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the network services.
   - calls: debug, stop, verbose, cancel, clear, close, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -8967,29 +8967,29 @@ Handles network operations for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **networkEvents** (method) — Access network events stream
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **connectToPeer** (method) — Connects to a peer using its multiaddress.
   - calls: connect
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Disconnects from a peer using its multiaddress.
   - calls: disconnect
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **listConnectedPeers** (method) — Lists all connected peers.
   - calls: listConnectedPeers
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **sendMessage** (method) — Sends a message to a specific peer.
   - calls: fromList, encode, sendMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/router.dart` (Router.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send)
@@ -9011,7 +9011,7 @@ Handles network operations for an IPFS node.
 - **setIpfsNode** (method) — Sets the parent IPFS node reference.
 - **sendRequest** (method) — Sends a request to a peer and waits for a response
   - calls: sendRequest
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode)
@@ -9020,7 +9020,7 @@ Handles network operations for an IPFS node.
 - **circuitRelayClient** (method) — Returns the circuit relay client.
 - **initialize** (method) — Initializes the network handler.
   - calls: debug, initialize, verbose, _setupEventHandlers, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
@@ -9032,12 +9032,12 @@ Handles network operations for an IPFS node.
 - **testDialback** (method) — Tests if the node is reachable from the outside network through dialback
   - calls: verbose, isEmpty, bootstrapPeers, network, debug, nextInt, secure, length, connect, _sendDialbackRequest, disconnect, error
 - **config** (method) — Gets the IPFS configuration
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **peerID** (method) — Gets the peer ID of this node
   - calls: peerID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_web.dart` (NetworkHandler.peerID)
@@ -9059,10 +9059,10 @@ _Directly tested._
 Web stub for NetworkHandler.
 
 - **ipfsNode** (field) — The IPFS node reference.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.node)
 - **start** (method) — Starts the network handler (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9091,7 +9091,7 @@ Web stub for NetworkHandler.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the network handler (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9115,26 +9115,26 @@ Web stub for NetworkHandler.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **networkEvents** (method) — Stream of network events.
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **connectToPeer** (method) — Connects to a peer (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Disconnects from a peer (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **listConnectedPeers** (method) — Lists connected peers (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.listConnectedPeers)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **sendMessage** (method) — Sends a message to a peer (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
     - `lib/src/network/router.dart` (Router.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
@@ -9152,12 +9152,12 @@ Web stub for NetworkHandler.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **receiveMessages** (method) — Receives messages from a peer (stub).
   - calls: Stream.empty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
 - **setIpfsNode** (method) — Sets the IPFS node reference.
 - **sendRequest** (method) — Sends a request to a peer (stub).
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendRequest)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
@@ -9165,7 +9165,7 @@ Web stub for NetworkHandler.
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
 - **router** (method) — Returns the router (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.router)
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -9177,12 +9177,12 @@ Web stub for NetworkHandler.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **circuitRelayClient** (method) — Returns the circuit relay client.
 - **config** (method) — Returns the configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **peerID** (method) — Returns the peer ID (stub).
   - calls: peerID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -9196,7 +9196,7 @@ Web stub for NetworkHandler.
 - **testConnection** (method) — Tests connection (stub).
 - **testDialback** (method) — Tests dialback (stub).
 - **initialize** (method) — Initializes the handler (stub).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -9217,7 +9217,7 @@ Manages network-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug, start
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9246,7 +9246,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9270,7 +9270,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **peerId** (method) — Returns the peer ID of this node.
   - calls: peerID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -9307,7 +9307,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **connectedPeers** (method) — Returns a list of currently connected peer IDs.
   - calls: listConnectedPeers, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -9318,24 +9318,24 @@ Manages network-related operations for the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **connectToPeer** (method) — Manually connects to a peer using its [multiaddr].
   - calls: ComponentError, connectToPeer, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Gracefully disconnects from a peer identified by [peerIdOrAddr].
   - calls: disconnectFromPeer, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
 - **resolvePeerId** (method) — Resolves a peer ID to its known addresses from the routing table.
   - calls: resolvePeerId, router, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolvePeerId)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
 - **findProviders** (method) — Finds providers for a given [cid] in the network.
   - calls: hasBlock, decode, findProviders, add, encode, Base58, fromList, peerId, addAll, toList, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
@@ -9344,7 +9344,7 @@ Manages network-related operations for the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **requestBlock** (method) — Requests a specific [cid] from [peer] via Bitswap.
   - calls: ComponentError, wantBlock, Exception, id, putBlock, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.requestBlock)
 
 ## `lib/src/core/ipfs_node/protocol_manager.dart`
@@ -9359,7 +9359,7 @@ Manages protocol-related operations for the IPFS node.
 
 - **start** (method)
   - calls: debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9389,7 +9389,7 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9413,20 +9413,20 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **subscribe** (method) — Subscribes the node to a PubSub [topic].
   - calls: warning, subscribe, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.subscribe)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.subscribe)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.subscribe)
 - **unsubscribe** (method) — Unsubscribes the node from a PubSub [topic].
   - calls: unsubscribe, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unsubscribe)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.unsubscribe)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.unsubscribe)
 - **publish** (method) — Publishes a [message] to a PubSub [topic].
   - calls: ComponentError, publish, debug, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publish)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.publishIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publishIPNS)
@@ -9434,21 +9434,21 @@ Manages protocol-related operations for the IPFS node.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.publish)
 - **pubsubMessages** (method) — A stream of incoming PubSub messages for all subscribed topics.
   - calls: messages, Stream.empty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.pubsubMessages)
 - **resolveIPNS** (method) — Resolves an IPNS [name] to its corresponding content path.
   - calls: debug, resolvePath, info, ComponentError, resolveIPNS, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNameResolve)
 - **publishIPNS** (method) — Publishes an IPNS record for the given [cid] using the specified [keyName].
   - calls: info, publish, ComponentError, publishIPNS, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publishIPNS)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleNamePublish)
 - **resolveDNSLink** (method) — Resolves a [domainName] via DNSLink to its corresponding CID.
   - calls: debug, resolveDNSLink, info, NodeStateError, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveDNSLink)
 
@@ -9464,12 +9464,12 @@ Handles PubSub operations for an IPFS node.
 
 - **messages** (method) — Stream of incoming PubSub messages.
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.pubsubMessages)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **start** (method) — Starts the PubSub client and listens for incoming messages.
   - calls: start, listen, networkEvents, hasPubsubMessageReceived, _handlePubsubMessage, pubsubMessageReceived
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9498,7 +9498,7 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the PubSub client.
   - calls: stop, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9521,20 +9521,20 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **subscribe** (method) — Subscribes to a PubSub topic.
   - calls: subscribe
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.subscribe)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.subscribe)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.subscribe)
 - **unsubscribe** (method) — Unsubscribes from a PubSub topic.
   - calls: unsubscribe, remove
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.unsubscribe)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.unsubscribe)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.unsubscribe)
 - **publish** (method) — Publishes a message to a PubSub topic.
   - calls: publish
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publish)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.publishIPNS)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.publish)
@@ -9542,12 +9542,12 @@ Handles PubSub operations for an IPFS node.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.publish)
 - **onMessage** (method) — Handles incoming messages on a subscribed topic.
   - calls: onMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
 - **resolveDNSLink** (method) — Resolves a DNSLink to its corresponding CID.
   - calls: resolve, Exception
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveDNSLink)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink)
@@ -9555,7 +9555,7 @@ Handles PubSub operations for an IPFS node.
   - calls: getNodeStats, Exception
 - **getStatus** (method) — Returns the current status of the PubSub handler.
   - calls: toList, keys, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -9571,7 +9571,7 @@ Handles routing operations for an IPFS node.
 
 - **start** (method) — Starts the routing services.
   - calls: start
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9600,7 +9600,7 @@ Handles routing operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the routing services.
   - calls: stop
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9623,7 +9623,7 @@ Handles routing operations for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **findProviders** (method) — Finds providers for a given CID using content routing.
   - calls: findProviders, isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -9632,7 +9632,7 @@ Handles routing operations for an IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **resolveDNSLink** (method) — Resolves a DNSLink to its corresponding CID with comprehensive error handling.
   - calls: resolve, Exception, parse, get, statusCode, jsonDecode, body
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveDNSLink)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink)
@@ -9649,13 +9649,13 @@ Utility class for common IPFS operations.
 
 - **isValidCID** (method) — Validates if a given string is a valid CID.
   - calls: fromBase58, length, isValidCIDBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/utils.dart` (IPFSUtils.extractCIDFromResponse)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
 - **isValidPeerID** (method) — Validates if a given string is a valid peer ID.
   - calls: fromBase58, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS)
 - **encodeBase64** (method) — Encodes a message using Base64 encoding.
   - calls: encode
@@ -9665,7 +9665,7 @@ Utility class for common IPFS operations.
   - calls: convert, bytes
 - **extractCIDFromResponse** (method) — Extracts a CID from an HTTP response body.
   - calls: firstMatch, RegExp, group, isValidCID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink)
 
@@ -9680,7 +9680,7 @@ _Directly tested._
 Web-compatible implementation of IBlockStore using IpfsPlatform storage.
 
 - **start** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9709,7 +9709,7 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -9733,7 +9733,7 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getBlock** (method)
   - calls: readBytes, notFound, Block, decode, successGet, toProto
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -9757,7 +9757,7 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **putBlock** (method)
   - calls: encode, cid, writeBytes, data, successAdd, failureAdd, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
@@ -9779,28 +9779,28 @@ Web-compatible implementation of IBlockStore using IpfsPlatform storage.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
 - **removeBlock** (method)
   - calls: delete, successRemove, failureRemove, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **hasBlock** (method)
   - calls: readBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **getAllBlocks** (method)
   - calls: listDirectory, startsWith, substring, isEmpty, readBytes, add, Block, decode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **getStatus** (method)
   - calls: getAllBlocks, fold, size, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **gc** (method)
@@ -9822,7 +9822,7 @@ Codec for 'dag-jose'.
   - referenced by (by name):
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
 - **name** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -9849,15 +9849,15 @@ Codec for 'dag-jose'.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **identifier** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **code** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **encode** (method)
   - calls: kind, MAP, ArgumentError, firstWhere, entries, mapValue, key, stringValue, value, privateKeyProvider, encodeJWS, recipientKeyProvider, encodeJWE, encodeCOSE, UnsupportedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -9978,7 +9978,7 @@ Codec for 'dag-jose'.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method)
   - calls: decode, IPLDNode, kind, MAP, mapValue, IPLDMap, addAll, entries, MapEntry, key, value, STRING, stringValue, BYTES, bytesValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -10050,7 +10050,7 @@ _Directly tested._
 Interface for all IPLD codecs in dart_ipfs.
 
 - **name** (method) — Multicodec name and the registry key (e.g., 'dag-cbor').
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -10077,14 +10077,14 @@ Interface for all IPLD codecs in dart_ipfs.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **code** (method) — Multicodec integer code (e.g., `0x0129` for DAG-JSON).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **identifier** (method) — Backward-compatible alias that returns [name].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **encode** (method) — Encodes an [IPLDNode] into bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -10204,7 +10204,7 @@ Interface for all IPLD codecs in dart_ipfs.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes bytes into an [IPLDNode].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -10277,7 +10277,7 @@ _Directly tested._
 Codec for 'raw' data.
 
 - **name** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -10304,15 +10304,15 @@ Codec for 'raw' data.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **identifier** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **code** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **encode** (method)
   - calls: kind, BYTES, ArgumentError, fromList, bytesValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -10433,7 +10433,7 @@ Codec for 'raw' data.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method)
   - calls: IPLDNode, kind, BYTES, bytesValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -10500,7 +10500,7 @@ Codec for 'raw' data.
 Codec for 'dag-pb' (Protobuf).
 
 - **name** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -10527,15 +10527,15 @@ Codec for 'dag-pb' (Protobuf).
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **identifier** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **code** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **encode** (method)
   - calls: _convertToMerkleDAGNode, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -10656,7 +10656,7 @@ Codec for 'dag-pb' (Protobuf).
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method)
   - calls: fromBytes, convertFromMerkleDAGNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -10723,7 +10723,7 @@ Codec for 'dag-pb' (Protobuf).
 Codec for 'dag-cbor' (CBOR).
 
 - **name** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -10750,15 +10750,15 @@ Codec for 'dag-cbor' (CBOR).
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **identifier** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **code** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **encode** (method)
   - calls: encodeCbor
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -10879,7 +10879,7 @@ Codec for 'dag-cbor' (CBOR).
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method)
   - calls: decodeCborWithTags
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -10946,7 +10946,7 @@ Codec for 'dag-cbor' (CBOR).
 Codec for 'dag-json' (JSON).
 
 - **name** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -10973,15 +10973,15 @@ Codec for 'dag-json' (JSON).
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **identifier** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
 - **code** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **encode** (method)
   - calls: fromList, encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -11101,7 +11101,7 @@ Codec for 'dag-json' (JSON).
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method)
   - calls: decode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -11173,7 +11173,7 @@ _Directly tested._
 Errors thrown while encoding a value into DAG-JSON.
 
 - **message** (field) — Human-readable description of the failure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -11192,7 +11192,7 @@ Errors thrown while encoding a value into DAG-JSON.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -11313,7 +11313,7 @@ _(no public members)_
 Errors thrown while decoding a DAG-JSON string into an IPLD node.
 
 - **message** (field) — Human-readable description of the failure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -11332,7 +11332,7 @@ Errors thrown while decoding a DAG-JSON string into an IPLD node.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -11457,7 +11457,7 @@ Handles spec-compliant DAG-JSON encoding and decoding for IPLD nodes.
 
 - **encode** (method) — Encodes an [IPLDNode] to a spec-compliant DAG-JSON string.
   - calls: StringBuffer, _writeNode, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -11578,7 +11578,7 @@ Handles spec-compliant DAG-JSON encoding and decoding for IPLD nodes.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes a DAG-JSON string into an [IPLDNode].
   - calls: _DagJsonParser, DagJsonDecodeOptions, parse
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -11644,7 +11644,7 @@ Handles spec-compliant DAG-JSON encoding and decoding for IPLD nodes.
 
 - **parse** (method)
   - calls: _parseValue, _skipWhitespace, length, DagJsonDecodingError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeyEntry.fromJson)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink)
@@ -11750,13 +11750,13 @@ Adapter to use IPFSPrivateKey with catalyst_cose signing API.
 
 - **alg** (method)
   - calls: IntValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
 - **kid** (method)
   - calls: fromList, encode
 - **sign** (method)
   - calls: sign
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordSigner.create)
@@ -11772,13 +11772,13 @@ Adapter to use IPFSPrivateKey for verification with catalyst_cose API.
 
 - **alg** (method)
   - calls: IntValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
 - **kid** (method)
   - calls: fromList, encode
 - **verify** (method)
   - calls: verify
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -11825,7 +11825,7 @@ _Directly tested._
 IPLD schema validator for structured data validation.
 
 - **name** (field) — Schema name.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -11853,7 +11853,7 @@ IPLD schema validator for structured data validation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **validate** (method) — Validates an IPLD node against the schema type.
   - calls: IPLDSchemaError, _validateNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
 
 ## `lib/src/core/ipld/selectors/ipld_selector.dart`
@@ -11867,7 +11867,7 @@ _Directly tested._
 Result of a selector execution.
 
 - **cid** (field) — The CID of the matched node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -11909,7 +11909,7 @@ Result of a selector execution.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **node** (field) — The matched IPLD node.
 - **path** (field) — The path from the root to this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -11924,7 +11924,7 @@ Result of a selector execution.
 IPLD Selector for querying and traversing DAG structures.
 
 - **type** (field) — The selector type.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -11985,7 +11985,7 @@ IPLD Selector for querying and traversing DAG structures.
   - referenced by (by name):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **maxDepth** (field) — Maximum depth for recursive selectors.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **subSelectors** (field) — Child selectors for composite selectors.
   - referenced by (by name):
@@ -11998,7 +11998,7 @@ IPLD Selector for querying and traversing DAG structures.
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **toBytes** (method) — Converts the selector to IPLD bytes for Graphsync protocol
   - calls: IPLDNode, kind, MAP, mapValue, IPLDMap, addAll, entries, MapEntry, key, value, STRING, stringValue, toString, isNotEmpty, _encodeCriteria, INTEGER, intValue, Int64, LIST, listValue, IPLDList, values, wait, map, then, toBytes, decodeCborWithTags, BOOL, boolValue, encodeCbor
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -12050,7 +12050,7 @@ _Directly tested._
 Base class for all official IPLD selectors.
 
 - **toNode** (method) — Encode this selector as an [IPLDNode] using the official DAG-CBOR/DAG-JSON
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12063,7 +12063,7 @@ Base class for all official IPLD selectors.
     - `lib/src/core/ipld/selectors/selector_ast.dart` (encodeSelectorDagJson)
 - **==** (method)
 - **hashCode** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12075,7 +12075,7 @@ Matcher selector: selects the current node and causes it to be yielded.
 
 - **toNode** (method)
   - calls: _singleKeyMap, _emptyMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12089,7 +12089,7 @@ Matcher selector: selects the current node and causes it to be yielded.
 - **==** (method)
 - **hashCode** (method)
   - calls: hashCode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
@@ -12099,7 +12099,7 @@ Matcher selector: selects the current node and causes it to be yielded.
 ExploreAll: traverse every key/value pair of a map or every index of a list.
 
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -12110,7 +12110,7 @@ ExploreAll: traverse every key/value pair of a map or every index of a list.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **toNode** (method)
   - calls: _singleKeyMap, _mapNode, toNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.toNode)
@@ -12124,7 +12124,7 @@ ExploreAll: traverse every key/value pair of a map or every index of a list.
   - calls: next
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12135,11 +12135,11 @@ ExploreAll: traverse every key/value pair of a map or every index of a list.
 ExploreFields: traverse only a named set of fields of a map.
 
 - **fields** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.==)
 - **toNode** (method)
   - calls: entries, add, MapEntry, key, value, toNode, IPLDNode, kind, MAP, mapValue, IPLDMap, addAll, _singleKeyMap, _mapNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.toNode)
@@ -12153,7 +12153,7 @@ ExploreFields: traverse only a named set of fields of a map.
   - calls: _mapEquals, fields
 - **hashCode** (method)
   - calls: hash, _mapHash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12164,12 +12164,12 @@ ExploreFields: traverse only a named set of fields of a map.
 ExploreIndex: traverse a single list index.
 
 - **index** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -12180,7 +12180,7 @@ ExploreIndex: traverse a single list index.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **toNode** (method)
   - calls: _singleKeyMap, _mapNode, _intNode, toNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.toNode)
@@ -12194,7 +12194,7 @@ ExploreIndex: traverse a single list index.
   - calls: index, next
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12205,7 +12205,7 @@ ExploreIndex: traverse a single list index.
 ExploreRange: traverse a half-open range of list indices `[start, end)`.
 
 - **start** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12234,10 +12234,10 @@ ExploreRange: traverse a half-open range of list indices `[start, end)`.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **end** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -12248,7 +12248,7 @@ ExploreRange: traverse a half-open range of list indices `[start, end)`.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **toNode** (method)
   - calls: _singleKeyMap, _mapNode, _intNode, toNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12262,7 +12262,7 @@ ExploreRange: traverse a half-open range of list indices `[start, end)`.
   - calls: start, end, next
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12273,7 +12273,7 @@ ExploreRange: traverse a half-open range of list indices `[start, end)`.
 Recursion limit for [ExploreRecursive].
 
 - **toNode** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12290,11 +12290,11 @@ Recursion limit for [ExploreRecursive].
 Depth-based recursion limit.
 
 - **depth** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (DepthRecursionLimit.==)
 - **toNode** (method)
   - calls: _mapNode, _intNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12309,7 +12309,7 @@ Depth-based recursion limit.
   - calls: depth
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12320,12 +12320,12 @@ Depth-based recursion limit.
 Node-count-based recursion limit.
 
 - **count** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
 - **toNode** (method)
   - calls: _mapNode, _intNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12340,7 +12340,7 @@ Node-count-based recursion limit.
   - calls: count
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12351,13 +12351,13 @@ Node-count-based recursion limit.
 ExploreRecursive: recursive descent with a [limit] and a [sequence].
 
 - **limit** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **sequence** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
@@ -12367,7 +12367,7 @@ ExploreRecursive: recursive descent with a [limit] and a [sequence].
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
 - **toNode** (method)
   - calls: toNode, _singleKeyMap, _mapNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12381,7 +12381,7 @@ ExploreRecursive: recursive descent with a [limit] and a [sequence].
   - calls: limit, sequence, stopAt
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12393,7 +12393,7 @@ ExploreRecursiveEdge: marker that terminates the recursion pattern inside
 
 - **toNode** (method)
   - calls: _singleKeyMap, _emptyMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12407,7 +12407,7 @@ ExploreRecursiveEdge: marker that terminates the recursion pattern inside
 - **==** (method)
 - **hashCode** (method)
   - calls: hashCode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
@@ -12421,7 +12421,7 @@ ExploreUnion: apply a list of selectors to the same node.
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreUnion.==)
 - **toNode** (method)
   - calls: IPLDList, addAll, values, map, toNode, _singleKeyMap, _mapNode, IPLDNode, kind, LIST, listValue
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12435,7 +12435,7 @@ ExploreUnion: apply a list of selectors to the same node.
   - calls: _listEquals, members
 - **hashCode** (method)
   - calls: hash, _listHash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12449,7 +12449,7 @@ ExploreInterpretAs: traverse with an Advanced Data Layout (ADL) interpretation.
   - referenced by (by name):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreInterpretAs.==)
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -12460,7 +12460,7 @@ ExploreInterpretAs: traverse with an Advanced Data Layout (ADL) interpretation.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **toNode** (method)
   - calls: _singleKeyMap, _mapNode, _stringNode, toNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12474,7 +12474,7 @@ ExploreInterpretAs: traverse with an Advanced Data Layout (ADL) interpretation.
   - calls: adl, next
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12488,7 +12488,7 @@ ExploreConditional: include or exclude nodes based on a condition selector.
   - referenced by (by name):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreConditional.==)
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -12499,7 +12499,7 @@ ExploreConditional: include or exclude nodes based on a condition selector.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **toNode** (method)
   - calls: toNode, _singleKeyMap, _mapNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.toNode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.toNode)
@@ -12513,7 +12513,7 @@ ExploreConditional: include or exclude nodes based on a condition selector.
   - calls: condition, next
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -12524,7 +12524,7 @@ ExploreConditional: include or exclude nodes based on a condition selector.
 Result of a selector execution.
 
 - **cid** (field) — The CID of the block containing the selected node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -12566,7 +12566,7 @@ Result of a selector execution.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **node** (field) — The selected IPLD data-model node.
 - **path** (field) — The IPLD path from the root to the selected node, if requested.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -12625,7 +12625,7 @@ _No known direct test._
 Executes a [Selector] against an IPLD block store.
 
 - **maxDepth** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **maxNodes** (field)
 - **includePath** (field)
@@ -12670,7 +12670,7 @@ _No known direct test._
 Base class for all network messages.
 
 - **data** (field) — The message payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -12725,7 +12725,7 @@ Base class for all network messages.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocol** (field) — The protocol identifier.
 - **toBytes** (method) — Serializes the message to bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -12768,7 +12768,7 @@ DHT specific messages.
 BitSwap specific messages.
 
 - **operation** (field) — The BitSwap operation (e.g., 'WANT', 'HAVE').
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 
 ## `lib/src/core/metrics/metrics_collector.dart`
@@ -12789,7 +12789,7 @@ Collects and manages metrics about IPFS node operations.
   - calls: metrics
 - **start** (method)
   - calls: debug, enabled, metrics, unawaited, _collect, periodic, Duration, collectionIntervalSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12819,7 +12819,7 @@ Collects and manages metrics about IPFS node operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: debug, cancel, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -12907,7 +12907,7 @@ Collects and manages metrics about IPFS node operations.
   - calls: enabled, metrics, putIfAbsent, peerMetrics, new, _intValue, messagesSent, messagesReceived, bytesSent, bytesReceived, inMicroseconds, averageLatency, round, Duration
 - **getStatus** (method) — Returns the current status of the metrics collector.
   - calls: enabled, metrics, enablePrometheusExport
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **getPrometheusMetrics** (method) — Returns the metrics in Prometheus text format (version 0.0.4).
@@ -12926,7 +12926,7 @@ _No known direct test._
 Tracks network-level metrics for monitoring and analysis.
 
 - **peerMetrics** (field) — Metrics indexed by peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
@@ -12935,7 +12935,7 @@ Tracks network-level metrics for monitoring and analysis.
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.reset)
 - **protocolMetrics** (field) — Metrics indexed by protocol ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
@@ -12953,19 +12953,19 @@ Tracks network-level metrics for monitoring and analysis.
 Per-peer metrics for bandwidth and message tracking.
 
 - **messagesSent** (field) — Total messages sent to this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesReceived** (field) — Total messages received from this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **bytesSent** (field) — Total bytes sent to this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -12973,13 +12973,13 @@ Per-peer metrics for bandwidth and message tracking.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesReceived** (field) — Total bytes received from this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
 - **averageLatency** (field) — Average round-trip latency to this peer.
   - calls: zero
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getAverageLatency)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
@@ -12989,19 +12989,19 @@ Per-peer metrics for bandwidth and message tracking.
 Per-protocol metrics for bandwidth and message tracking.
 
 - **messagesSent** (field) — Total messages sent via this protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesReceived** (field) — Total messages received via this protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **bytesSent** (field) — Total bytes sent via this protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -13009,7 +13009,7 @@ Per-protocol metrics for bandwidth and message tracking.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesReceived** (field) — Total bytes received via this protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -13025,7 +13025,7 @@ _Directly tested._
 Kubo-compatible stat result for an MFS path.
 
 - **hash** (field) — CID string of the target node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -13055,7 +13055,7 @@ Kubo-compatible stat result for an MFS path.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **size** (field) — File size in bytes, or 0 for directories.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -13078,14 +13078,14 @@ Kubo-compatible stat result for an MFS path.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **cumulativeSize** (field) — Cumulative DAG size in bytes.
 - **blocks** (field) — Number of direct links (child blocks).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **type** (field) — Node type: 'file', 'directory', or 'raw'.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13145,12 +13145,12 @@ Kubo-compatible stat result for an MFS path.
 - **withLocal** (field) — Whether the `with-local` flag was requested.
 - **local** (field) — Whether all blocks are present locally.
 - **mode** (field) — Unix mode, when available.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **mtime** (field) — Modification time in seconds since epoch, when available.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
@@ -13158,7 +13158,7 @@ Kubo-compatible stat result for an MFS path.
 - **hashOnly** (field) — When true, only the hash field should be serialized.
 - **sizeOnly** (field) — When true, only the size field should be serialized.
 - **toJson** (method) — Converts this stat to a Kubo-compatible JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -13178,7 +13178,7 @@ Kubo-compatible stat result for an MFS path.
 Kubo-compatible entry in an MFS directory listing.
 
 - **name** (field) — Entry name.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -13205,7 +13205,7 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **type** (field) — Entry type: 0=raw, 1=directory, 2=file (Kubo convention).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13263,7 +13263,7 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **size** (field) — Cumulative entry size in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -13285,7 +13285,7 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **hash** (field) — CID string of the entry.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -13315,18 +13315,18 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **mode** (field) — Unix mode, when requested.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **mtime** (field) — Modification time in seconds since epoch, when requested.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **toJson** (method) — Converts this entry to a Kubo-compatible JSON map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -13346,7 +13346,7 @@ Kubo-compatible entry in an MFS directory listing.
 Error thrown when a path argument is invalid or escapes the MFS root.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -13365,7 +13365,7 @@ Error thrown when a path argument is invalid or escapes the MFS root.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -13483,7 +13483,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
 - **isStarted** (method) — Returns true if the MFS manager has been started.
 - **init** (method) — Initializes the MFS by loading the root CID from the datastore
   - calls: get, Key, fromBytes, IPFSDirectoryManager, build, writeToBuffer, fromContent, putBlock, Block, put, toBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
@@ -13498,7 +13498,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **start** (method)
   - calls: init
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -13528,7 +13528,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: sync
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -13570,19 +13570,19 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRm)
 - **ls** (method) — Lists the contents of the directory at the given [path].
   - calls: _splitPath, _resolvePath, Exception, getBlock, encode, found, fromBuffer, data, block, toList, links, sort, compareTo, name, fromBytes, fromList, hash, type, Directory, Raw, hasMode, toInt, mode, hasMtime, mtime, add, MFSListEntry, size
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.ls)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **stat** (method) — Gets Kubo-compatible information about a file or directory at [path].
   - calls: _splitPath, _resolvePath, Exception, getBlock, encode, found, fromBuffer, data, block, _typeName, type, _cumulativeSize, toInt, filesize, hasMode, mode, hasMtime, mtime, encodeWithBaseName, MFSStat, length, links
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
 - **write** (method) — Writes [data] to a file at the given [path].
   - calls: _splitPath, ArgumentError, synchronized, _resolvePath, Exception, toList, expand, fromList, take, BytesBuilder, add, Uint8List, toBytes, _readAllBytes, length, _patchBytes, UnixFSBuilder, build, fromIterable, isEmpty, last, putBlock, _modifyPath, cid
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -13597,7 +13597,7 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **read** (method) — Reads data from a file at the given [path], optionally starting at
   - calls: _splitPath, _resolvePath, Exception, StreamController, unawaited, catchError, then, _readRecursive, close, addError, stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -13610,14 +13610,14 @@ Manages the Mutable File System (MFS) for an IPFS node.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **flush** (method) — Flushes the current MFS state and returns the root CID.
   - calls: _splitPath, synchronized, _persistRoot
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.flushAll)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush)
 - **flushAll** (method) — Flushes the entire MFS and returns the root CID.
   - calls: flush
 - **sync** (method) — Waits for in-flight operations to complete and ensures the root CID is
   - calls: synchronized, _persistRoot
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stop)
 - **chcid** (method) — Changes the CID codec/hash for the DAG at [path].
   - calls: _splitPath, UnsupportedError, ArgumentError, synchronized, _resolvePath, Exception, _rehashNode, _modifyPath
@@ -13646,7 +13646,7 @@ _Directly tested._
 A signed peer record: a [PeerRecordPb] wrapped in a signed [EnvelopePb].
 
 - **record** (field) — The inner peer record (addresses, peer ID, timestamp, seq).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.require)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.recordLoadOutcome)
@@ -13665,7 +13665,7 @@ A signed peer record: a [PeerRecordPb] wrapped in a signed [EnvelopePb].
   - calls: encode
 - **toString** (method)
   - calls: length, peerId, addresses, seq
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -13780,13 +13780,13 @@ A signed peer record: a [PeerRecordPb] wrapped in a signed [EnvelopePb].
 Signs peer records using an Ed25519 key pair.
 
 - **seq** (method) — The current sequence number.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
 - **create** (method) — Creates and signs a peer record for the given [addresses].
   - calls: microsecondsSinceEpoch, now, PeerRecordPb, fromList, List, encode, _buildSigningBuffer, sign, bytes, PublicKeyPb, ed25519, EnvelopePb, debug, length, SignedPeerRecord
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -14012,7 +14012,7 @@ Verifies signed peer records received from remote peers.
 
 - **verify** (method) — Verifies a signed peer record from its serialized envelope bytes.
   - calls: decode, verifyEnvelope, warning
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.verify)
@@ -14058,7 +14058,7 @@ A field read from a protobuf message.
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.decode)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.decode)
 - **value** (field) — For varint: the integer value. For length-delimited: Uint8List.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -14156,7 +14156,7 @@ A field read from a protobuf message.
 ---------------------------------------------------------------------------
 
 - **type** (field) — The key type.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -14214,7 +14214,7 @@ A field read from a protobuf message.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The raw key bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -14269,7 +14269,7 @@ A field read from a protobuf message.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **encode** (method) — Encodes this public key to protobuf bytes.
   - calls: _encodeVarintField, value, _encodeLengthDelimited, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -14390,7 +14390,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes a public key from protobuf bytes.
   - calls: ed25519, Uint8List, _parseFields, fieldNumber, wireType, fromValue, value, PublicKeyPb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -14453,7 +14453,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -14566,7 +14566,7 @@ A field read from a protobuf message.
   - calls: type, _listEquals, data
 - **hashCode** (method)
   - calls: hash, hashAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -14577,7 +14577,7 @@ A field read from a protobuf message.
 ---------------------------------------------------------------------------
 
 - **peerId** (field) — The peer ID bytes (marshalled peer id).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -14613,7 +14613,7 @@ A field read from a protobuf message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **addresses** (field) — The list of multiaddr bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -14623,7 +14623,7 @@ A field read from a protobuf message.
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **timestamp** (field) — Unix timestamp in microseconds (per go-libp2p).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -14633,13 +14633,13 @@ A field read from a protobuf message.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **seq** (field) — Sequence number, incremented on each update.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
 - **encode** (method) — Encodes this peer record to protobuf bytes.
   - calls: addAll, _encodeLengthDelimited, _encodeVarintField, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -14760,7 +14760,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes a peer record from protobuf bytes.
   - calls: Uint8List, _parseFields, fieldNumber, wireType, value, add, PeerRecordPb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -14823,7 +14823,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: decode, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -14936,7 +14936,7 @@ A field read from a protobuf message.
   - calls: _listEquals, peerId, _listListEquals, addresses, timestamp, seq
 - **hashCode** (method)
   - calls: hash, hashAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -14947,7 +14947,7 @@ A field read from a protobuf message.
 ---------------------------------------------------------------------------
 
 - **publicKey** (field) — The public key of the signer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -14969,7 +14969,7 @@ A field read from a protobuf message.
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
 - **payload** (field) — The serialized PeerRecord payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -14979,7 +14979,7 @@ A field read from a protobuf message.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **signature** (field) — The Ed25519 signature over the signing buffer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -14988,7 +14988,7 @@ A field read from a protobuf message.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
 - **encode** (method) — Encodes this envelope to protobuf bytes.
   - calls: addAll, _encodeLengthDelimited, encode, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -15108,7 +15108,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes an envelope from protobuf bytes.
   - calls: PublicKeyPb, ed25519, Uint8List, _parseFields, fieldNumber, wireType, decode, value, EnvelopePb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -15170,7 +15170,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15283,7 +15283,7 @@ A field read from a protobuf message.
   - calls: publicKey, _listEquals, payloadType, payload, signature
 - **hashCode** (method)
   - calls: hash, hashAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -15298,7 +15298,7 @@ A field read from a protobuf message.
 
 - **decodeVarint** (function) — Decodes a varint starting at [offset] in [data].
   - calls: length, FormatException
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.decode)
     - `lib/src/utils/encoding.dart` (EncodingUtils.isValidCIDBytes)
 
@@ -15313,7 +15313,7 @@ _Directly tested._
 Configuration for the peering service.
 
 - **enabled** (field) — Whether the peering service is enabled.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -15338,7 +15338,7 @@ Configuration for the peering service.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **peers** (field) — List of peer multiaddresses to maintain persistent connections with.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peering/peering_service.dart` (PeeringService.start)
 - **checkInterval** (field) — Interval between connectivity checks.
   - referenced by (by name):
@@ -15348,7 +15348,7 @@ Configuration for the peering service.
 - **maxReconnectAttempts** (field) — Maximum number of reconnection attempts before giving up.
 - **toJson** (method) — Converts this configuration to a JSON map.
   - calls: inSeconds
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -15371,7 +15371,7 @@ Maintains persistent connections to a configured set of peers.
   - calls: stream
 - **start** (method)
   - calls: warning, enabled, info, debug, peers, _extractPeerId, _PeerState, now, length, _checkAllPeers, periodic, checkInterval, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -15401,7 +15401,7 @@ Maintains persistent connections to a configured set of peers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: warning, debug, cancel, clear, close, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -15425,13 +15425,13 @@ Maintains persistent connections to a configured set of peers.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **addPeer** (method) — Adds a peer to the peering set.
   - calls: _extractPeerId, warning, containsKey, debug, _PeerState, now, info, _connectPeer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
     - `lib/src/protocols/dht/routing_table.dart` (RoutingTable.addPeer)
 - **removePeer** (method) — Removes a peer from the peering set.
   - calls: remove, info, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.removePeer)
     - `lib/src/protocols/dht/routing_table.dart` (RoutingTable.removePeer)
 - **peeredPeerIds** (method) — Returns the list of peered peer IDs.
@@ -15440,7 +15440,7 @@ Maintains persistent connections to a configured set of peers.
   - calls: connected
 - **getStatus** (method) — Gets the current status of the peering service.
   - calls: length, where, values, connected, enabled, toList, map, peerId, reconnectAttempts
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -15449,7 +15449,7 @@ Maintains persistent connections to a configured set of peers.
 Internal state tracking for a peered peer.
 
 - **peerId** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -15501,7 +15501,7 @@ Internal state tracking for a peered peer.
 Event emitted by the peering service.
 
 - **peerId** (field) — The peer ID this event relates to.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -15537,7 +15537,7 @@ Event emitted by the peering service.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **type** (field) — The type of event.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -15595,7 +15595,7 @@ Event emitted by the peering service.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15716,21 +15716,21 @@ _Directly tested._
 Exception thrown when a plugin exercises (or attempts to exercise) a
 
 - **pluginId** (field) — The plugin that caused the violation.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.forPlugin)
 - **capability** (field) — The capability that was attempted.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.forCapability)
 - **outcome** (field) — The outcome/result of the attempted exercise (e.g. `denied`).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (field) — Optional human-readable reason.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15890,7 +15890,7 @@ _Directly tested._
 Base class for all IPFS plugins.
 
 - **id** (method) — The unique identifier of the plugin.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -15946,7 +15946,7 @@ Manages the lifecycle of plugins within an IPFS node.
 
 - **register** (method) — Registers a new [plugin].
   - calls: add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **initAll** (method) — Initializes all registered plugins.
   - calls: onInit
@@ -15954,11 +15954,11 @@ Manages the lifecycle of plugins within an IPFS node.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
 - **startAll** (method) — Starts all registered plugins.
   - calls: onStart
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
 - **stopAll** (method) — Stops all registered plugins.
   - calls: onStop
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
 
@@ -15973,15 +15973,15 @@ _No known direct test._
 A single audit entry recording a capability exercise attempt.
 
 - **pluginId** (field) — The plugin that attempted the exercise.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.forPlugin)
 - **capability** (field) — The capability that was exercised or attempted.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.forCapability)
 - **timestamp** (field) — UTC timestamp of the attempt.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -15991,14 +15991,14 @@ A single audit entry recording a capability exercise attempt.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.getAllKeys)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **outcome** (field) — Outcome: `allowed`, `denied`, `unsigned`, `disabled`, etc.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (field) — Optional reason or details.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **toJson** (method) — Returns this entry as a JSON-serializable map.
   - calls: toIso8601String
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -16019,7 +16019,7 @@ Audit log for plugin capability exercises.
 
 - **record** (method) — Records an audit entry.
   - calls: add, PluginAuditEntry, toUtc, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.require)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.recordLoadOutcome)
@@ -16039,7 +16039,7 @@ Audit log for plugin capability exercises.
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.require)
 - **entries** (method) — Returns all recorded entries.
   - calls: unmodifiable
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -16090,7 +16090,7 @@ Audit log for plugin capability exercises.
   - calls: toList, where, capability
 - **clear** (method) — Clears all entries. Intended for tests only.
   - calls: clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.clear)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
@@ -16146,7 +16146,7 @@ _Directly tested._
 Configuration for the optional plugin host.
 
 - **enabled** (field) — Whether the plugin host is enabled.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.start)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordMessageReceived)
@@ -16178,7 +16178,7 @@ Configuration for the optional plugin host.
   - referenced by (by name):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.initialize)
 - **toJson** (method) — Returns this configuration as a JSON-serializable map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -16198,7 +16198,7 @@ Configuration for the optional plugin host.
 State of a loaded plugin.
 
 - **manifest** (field) — The parsed plugin manifest.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
 - **grantedCapabilities** (field) — Capabilities granted to this plugin.
@@ -16222,7 +16222,7 @@ State of a loaded plugin.
 The plugin host validates, loads, and manages in-process plugins.
 
 - **config** (field) — The plugin host configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **loadedPlugins** (method) — Returns loaded plugins (including disabled ones).
@@ -16231,7 +16231,7 @@ The plugin host validates, loads, and manages in-process plugins.
 - **registry** (method) — Returns the capability registry.
 - **initialize** (method) — Initializes the host by loading trusted keys and scanning plugins.
   - calls: info, enabled, _loadTrustedKeys, length, pluginDirectories, _loadPluginsFromDirectory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -16241,11 +16241,11 @@ The plugin host validates, loads, and manages in-process plugins.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **startAll** (method) — Starts all loaded plugins.
   - calls: disabled, plugin, onStart, _NullIpfsNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
 - **stopAll** (method) — Stops all loaded plugins.
   - calls: disabled, plugin, onStop, _NullIpfsNode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
 - **loadPluginFromDirectory** (method) — Loads a plugin from a directory containing a `plugin.yaml` manifest.
@@ -16277,7 +16277,7 @@ _Directly tested._
 Exception thrown when a plugin manifest is invalid or cannot be parsed.
 
 - **message** (field) — Human-readable error description.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16296,7 +16296,7 @@ Exception thrown when a plugin manifest is invalid or cannot be parsed.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -16411,7 +16411,7 @@ Exception thrown when a plugin manifest is invalid or cannot be parsed.
 A parsed and validated plugin manifest.
 
 - **id** (field) — Reverse-DNS plugin identifier (e.g. `org.dart-ipfs.examples.metrics-emitter`).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -16450,7 +16450,7 @@ A parsed and validated plugin manifest.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **name** (field) — Human-readable plugin name.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -16477,7 +16477,7 @@ A parsed and validated plugin manifest.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **version** (field) — Plugin version in semantic versioning format.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -16492,7 +16492,7 @@ A parsed and validated plugin manifest.
 - **hooks** (field) — Lifecycle hooks the plugin wants to receive.
 - **entrypoint** (field) — Plugin entrypoint path inside the plugin package.
 - **signature** (field) — Optional Ed25519 signature block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -16502,12 +16502,12 @@ A parsed and validated plugin manifest.
 - **checksums** (field) — Optional content checksums.
 - **rawYaml** (field) — The raw YAML string used to create this manifest.
 - **isSigned** (method) — Returns `true` if the manifest contains a signature block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publishRecord)
 - **verifySignature** (method) — Verifies the manifest's Ed25519 signature against the manifest bytes.
   - calls: algorithm, base64Decode, publicKeyBase64, length, signatureBase64, Ed25519Signer, publicKeyFromBytes, fromList, any, type, _constantTimeListEquals, bytes, verify
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.verify)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
@@ -16519,7 +16519,7 @@ A parsed and validated plugin manifest.
 Ed25519 signature block attached to a manifest.
 
 - **algorithm** (field) — Signature algorithm (e.g. `ed25519`).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **publicKeyBase64** (field) — Base64-encoded public key used to verify the signature.
@@ -16541,7 +16541,7 @@ Repository handles the storage and retrieval of IPFS data structures
 
 - **addFile** (method) — Adds a file to the repository and returns its node link
   - calls: Key, toString, cid, put, data, NodeLink, last, split, Int64, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFileStream)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addFile)
@@ -16550,7 +16550,7 @@ Repository handles the storage and retrieval of IPFS data structures
   - calls: blockFromBitswapProto, Key, toString, cid, put, data
 - **getBlock** (method) — Retrieves a block from the repository by its CID
   - calls: Key, get, fromData, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -16574,14 +16574,14 @@ Repository handles the storage and retrieval of IPFS data structures
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method) — Checks if a block exists in the repository
   - calls: Key, has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **removeBlock** (method) — Removes a block from the repository
   - calls: hasBlock, Key, delete
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -16600,7 +16600,7 @@ _No known direct test._
 Base class for protobuf block responses with validation.
 
 - **success** (method) — Whether the operation succeeded.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -16621,7 +16621,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method) — Sets the success status.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -16642,7 +16642,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (method) — Human-readable message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16661,7 +16661,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method) — Sets the message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16681,7 +16681,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **validate** (method) — Validates the response.
   - calls: isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
 
 ## `lib/src/core/responses/base_response.dart`
@@ -16695,7 +16695,7 @@ _No known direct test._
 Base class for API responses with success status.
 
 - **success** (field) — Whether the operation succeeded.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -16716,7 +16716,7 @@ Base class for API responses with success status.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16735,7 +16735,7 @@ Base class for API responses with success status.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toJson** (method) — Converts to JSON representation.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -16750,7 +16750,7 @@ Base class for API responses with success status.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -16871,7 +16871,7 @@ _Directly tested._
 Generic response wrapper for block operations.
 
 - **success** (field) — Whether the operation succeeded.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -16892,7 +16892,7 @@ Generic response wrapper for block operations.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16911,7 +16911,7 @@ Generic response wrapper for block operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **data** (field) — The result data, if any.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -16992,7 +16992,7 @@ Factory for creating standard block operation responses.
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
 - **notFound** (method) — Creates a not found response.
   - calls: GetBlockResponse, found
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -17027,7 +17027,7 @@ Factory methods for creating block operation responses.
 
 - **success** (method) — Creates a success response for block addition.
   - calls: AddBlockResponse, success, message
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -17050,7 +17050,7 @@ Factory methods for creating block operation responses.
   - calls: AddBlockResponse, success, message
 - **found** (method) — Creates a response for a found block.
   - calls: GetBlockResponse, found, block
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -17074,7 +17074,7 @@ Factory methods for creating block operation responses.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **notFound** (method) — Creates a response for a not-found block.
   - calls: GetBlockResponse, found
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -17102,7 +17102,7 @@ _Directly tested._
 Base class for block operation responses.
 
 - **success** (field) — Whether the operation succeeded.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -17123,7 +17123,7 @@ Base class for block operation responses.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -17142,7 +17142,7 @@ Base class for block operation responses.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toJson** (method) — Converts to JSON representation.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17157,7 +17157,7 @@ Base class for block operation responses.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -17273,7 +17273,7 @@ Response for block add operations.
 
 - **toProto** (method) — Converts to protobuf.
   - calls: AddBlockResponse, success, message
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -17287,7 +17287,7 @@ Response for block add operations.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toJson** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17307,7 +17307,7 @@ Response for block add operations.
 Response for block get operations.
 
 - **block** (field) — The retrieved block, if found.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -17340,7 +17340,7 @@ Response for block get operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **toProto** (method) — Converts to protobuf.
   - calls: GetBlockResponse, found, block
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -17355,7 +17355,7 @@ Response for block get operations.
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toJson** (method)
   - calls: toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17376,7 +17376,7 @@ Response for block remove operations.
 
 - **toProto** (method) — Converts to protobuf.
   - calls: RemoveBlockResponse, success, message
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -17390,7 +17390,7 @@ Response for block remove operations.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toJson** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17439,7 +17439,7 @@ Statistics describing the current state of a denylist refresh.
 - **refreshErrors** (field) — Number of failed refresh attempts since the service started.
 - **toJson** (method) — Converts this snapshot to a JSON-compatible map.
   - calls: toIso8601String
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17459,7 +17459,7 @@ Statistics describing the current state of a denylist refresh.
 A single audit event recorded when content is matched by the denylist.
 
 - **timestamp** (field) — When the event occurred.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -17472,11 +17472,11 @@ A single audit event recorded when content is matched by the denylist.
 - **action** (field) — The action taken: `"blocked"`, `"logged"`, or `"allowed"`.
 - **source** (field) — The layer that triggered the event: `"gateway"`, `"rpc"`, or `"dht"`.
 - **reason** (field) — Optional operator-provided reason from list metadata.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **toJson** (method) — Converts this event to a JSON-compatible map.
   - calls: toIso8601String
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -17519,7 +17519,7 @@ Immutable snapshot of a loaded denylist used for O(1) lookups.
 - **totalBytes** (field)
 - **isEmpty** (method)
   - calls: isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.unlock)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
@@ -17637,7 +17637,7 @@ Operator-controlled content denylist service.
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.checkDenylist)
 - **length** (method) — Returns the number of loaded entries (CIDs + multihashes).
   - calls: entryCount
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.readByte)
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.readBytes)
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.isBreak)
@@ -17914,7 +17914,7 @@ Operator-controlled content denylist service.
   - calls: contains, denylistDefaultAction
 - **start** (method) — Starts the service, loads the initial denylist, and schedules refreshes.
   - calls: enableDenylist, info, _loadInitial, _scheduleRefreshTimer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -17944,7 +17944,7 @@ Operator-controlled content denylist service.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service and cancels the refresh timer.
   - calls: cancel, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -17968,7 +17968,7 @@ Operator-controlled content denylist service.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **refresh** (method) — Refreshes the denylist from the configured source.
   - calls: denylistPath, isEmpty, _isUrl, loadFromUrl, loadFromPath
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.refresh)
 - **loadFromPath** (method) — Loads the denylist from a local file path.
   - calls: info, File, exists, FileSystemException, readAsBytes, _loadCompactBytes, warning
@@ -18003,7 +18003,7 @@ Operator-controlled content denylist service.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest)
 - **block** (method) — Adds a single CID to the in-memory denylist.
   - calls: _copySnapshot, add, cidStrings, encode, multihashHexes, _multihashHex, multihash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -18042,7 +18042,7 @@ Operator-controlled content denylist service.
   - calls: _copySnapshot, remove, cidStrings, decode, multihashHexes, _multihashHex, multihash
 - **clear** (method) — Clears all in-memory denylist entries.
   - calls: _emptySnapshot
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.clear)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
@@ -18104,19 +18104,19 @@ Manages security aspects of the IPFS node.
   - calls: isEmpty, ArgumentError, debug, unlock, _recordSecurityMetric, info, error
 - **lockKeystore** (method) — Locks the encrypted keystore and zeros the master key from memory.
   - calls: lock, _recordSecurityMetric, info
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.stop)
 - **getSecureKey** (method) — Returns a [Future] that resolves to an Ed25519 [SimpleKeyPair] from the encrypted keystore by [keyName].
   - calls: isEmpty, ArgumentError, isUnlocked, StateError, getKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish)
 - **generateSecureKey** (method) — Returns a [Future] that resolves to the public key bytes of a newly generated Ed25519 key stored encrypted.
   - calls: isEmpty, ArgumentError, isUnlocked, StateError, generateKey, _recordSecurityMetric, info
 - **hasSecureKey** (method) — Returns `true` if a secure key with [keyName] exists.
   - calls: hasKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
 - **getSecurePublicKey** (method) — Returns the public key bytes for a stored secure key [keyName].
   - calls: getPublicKey
@@ -18128,7 +18128,7 @@ Manages security aspects of the IPFS node.
   - calls: remove, maxAuthAttempts, _recordSecurityMetric, recordSecurityEvent
 - **start** (method) — Returns a [Future] that completes when the [SecurityManager] has started.
   - calls: info, _initializeSecurity
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18158,7 +18158,7 @@ Manages security aspects of the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Returns a [Future] that completes when the [SecurityManager] has stopped.
   - calls: info, cancel, lockKeystore
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18182,7 +18182,7 @@ Manages security aspects of the IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **getStatus** (method) — Returns a [Future] that resolves to a status map for the [SecurityManager].
   - calls: enableTLS, enableKeyRotation, toIso8601String, length, where, entries, value, maxAuthAttempts
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 - **getPrivateKey** (method) — Compatibility method for existing Keystore users.
@@ -18203,22 +18203,22 @@ Interface for SecurityManager to allow platform-agnostic implementations.
 - **isKeystoreUnlocked** (method) — Whether the encrypted keystore is currently unlocked.
 - **unlockKeystore** (method) — Unlocks the encrypted keystore with a [password].
 - **lockKeystore** (method) — Locks the encrypted keystore and clears the master key from memory.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.stop)
 - **getSecureKey** (method) — Gets a secure Ed25519 key pair by [keyName].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish)
 - **generateSecureKey** (method) — Generates a new secure Ed25519 key and stores it encrypted.
 - **hasSecureKey** (method) — Checks if a secure key with [keyName] exists.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
 - **getSecurePublicKey** (method) — Gets the public key for a stored secure key.
 - **shouldRateLimit** (method) — Checks if a client should be rate limited.
 - **trackAuthAttempt** (method) — Tracks an authentication attempt and returns true if allowed.
 - **getStatus** (method) — Gets the security status of the node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -18238,24 +18238,24 @@ Web-compatible implementation of SecurityManager.
   - calls: isEmpty, ArgumentError, unlock
 - **lockKeystore** (method)
   - calls: lock
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.stop)
 - **getSecureKey** (method)
   - calls: isEmpty, ArgumentError, isUnlocked, StateError, getKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.publish)
 - **generateSecureKey** (method)
   - calls: isEmpty, ArgumentError, isUnlocked, StateError, generateKey
 - **hasSecureKey** (method)
   - calls: hasKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
 - **getSecurePublicKey** (method)
   - calls: getPublicKey
 - **start** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18285,7 +18285,7 @@ Web-compatible implementation of SecurityManager.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: lockKeystore
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -18313,7 +18313,7 @@ Web-compatible implementation of SecurityManager.
   - calls: remove, maxAuthAttempts, _recordSecurityMetric
 - **getStatus** (method)
   - calls: length, where, entries, value, maxAuthAttempts
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 23 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
     - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
 
@@ -18341,7 +18341,7 @@ _Directly tested._
 Error thrown when a datastore operation fails.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -18360,7 +18360,7 @@ Error thrown when a datastore operation fails.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -18479,7 +18479,7 @@ Represents a key in the datastore.
   - calls: Key, _string
 - **parent** (method) — Returns the parent key.
   - calls: lastIndexOf, Key, substring
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
@@ -18491,7 +18491,7 @@ Represents a key in the datastore.
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.rotateRight)
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -18604,7 +18604,7 @@ Represents a key in the datastore.
   - calls: _string
 - **hashCode** (method)
   - calls: hashCode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
@@ -18614,7 +18614,7 @@ Represents a key in the datastore.
 A Query object for the datastore.
 
 - **prefix** (field) — Optional key prefix to filter by.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -18629,13 +18629,13 @@ A Query object for the datastore.
   - referenced by (by name):
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
 - **limit** (field) — Maximum number of results.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **offset** (field) — Number of results to skip.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -18661,7 +18661,7 @@ Interface for filtering query results.
 Interface for ordering query results.
 
 - **compare** (method) — Compares two entries for ordering.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
@@ -18674,7 +18674,7 @@ Interface for ordering query results.
 The entry returned by a query.
 
 - **key** (field) — The key of this entry.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -18737,7 +18737,7 @@ The entry returned by a query.
     - `lib/src/utils/keystore.dart` (Keystore.deserialize)
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (field) — The value, null if keysOnly was true.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -18835,7 +18835,7 @@ The entry returned by a query.
 Abstract interface for a key-value datastore.
 
 - **init** (method) — Initialize the datastore (e.g. open database, create directory).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
@@ -18849,7 +18849,7 @@ Abstract interface for a key-value datastore.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **put** (method) — Store the given value at the given key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -18867,7 +18867,7 @@ Abstract interface for a key-value datastore.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method) — Get the value stored at the given key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -18921,14 +18921,14 @@ Abstract interface for a key-value datastore.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **has** (method) — Check if the given key exists.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock)
     - `lib/src/core/repository/repository.dart` (Repository.hasBlock)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
     - `lib/src/services/content_service.dart` (ContentService.pinContent)
     - `lib/src/services/content_service.dart` (ContentService.hasContent)
 - **delete** (method) — Delete the value at the given key.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -18946,13 +18946,13 @@ Abstract interface for a key-value datastore.
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **query** (method) — Query the datastore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
 - **close** (method) — Close the datastore.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -19024,7 +19024,7 @@ _Directly tested._
 A file-system based implementation of [Datastore].
 
 - **path** (field) — The root directory for stored data files.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -19035,7 +19035,7 @@ A file-system based implementation of [Datastore].
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 - **init** (method)
   - calls: exists, createDirectory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
@@ -19050,7 +19050,7 @@ A file-system based implementation of [Datastore].
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **put** (method)
   - calls: _getKeyPath, writeBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -19069,7 +19069,7 @@ A file-system based implementation of [Datastore].
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method)
   - calls: _getKeyPath, readBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -19124,7 +19124,7 @@ A file-system based implementation of [Datastore].
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **has** (method)
   - calls: _getKeyPath, exists
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock)
     - `lib/src/core/repository/repository.dart` (Repository.hasBlock)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
@@ -19132,7 +19132,7 @@ A file-system based implementation of [Datastore].
     - `lib/src/services/content_service.dart` (ContentService.hasContent)
 - **delete** (method)
   - calls: _getKeyPath, exists, delete
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -19150,13 +19150,13 @@ A file-system based implementation of [Datastore].
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **query** (method)
   - calls: isNotEmpty, removeLast, listDirectory, endsWith, relative, replaceAll, substring, length, Key, prefix, startsWith, keysOnly, filters, readBytes, MapEntry, filter, QueryEntry, add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
 - **close** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -19228,7 +19228,7 @@ _Directly tested._
 An in-memory implementation of [Datastore].
 
 - **init** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
@@ -19242,7 +19242,7 @@ An in-memory implementation of [Datastore].
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **put** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -19260,7 +19260,7 @@ An in-memory implementation of [Datastore].
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -19315,7 +19315,7 @@ An in-memory implementation of [Datastore].
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **has** (method)
   - calls: containsKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock)
     - `lib/src/core/repository/repository.dart` (Repository.hasBlock)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
@@ -19323,7 +19323,7 @@ An in-memory implementation of [Datastore].
     - `lib/src/services/content_service.dart` (ContentService.hasContent)
 - **delete** (method)
   - calls: remove
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -19342,14 +19342,14 @@ An in-memory implementation of [Datastore].
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **query** (method)
   - calls: toList, entries, prefix, where, startsWith, toString, key, filters, filter, orders, sort, compare, offset, skip, limit, take, QueryEntry, keysOnly, value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
 - **close** (method)
   - calls: clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -19427,7 +19427,7 @@ _Directly tested._
 Represents a peer identifier in the IPFS network.
 
 - **value** (field) — The raw bytes of the peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -19521,7 +19521,7 @@ Represents a peer identifier in the IPFS network.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **toBase58** (method) — Converts the peer ID to a Base58-encoded string.
   - calls: encode, Base58
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_id.dart` (PeerId.toString)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
@@ -19536,14 +19536,14 @@ Represents a peer identifier in the IPFS network.
   - calls: identical, runtimeType, _listsEqual, value
 - **hashCode** (method)
   - calls: _listHashCode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
   - calls: toBase58
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -19666,7 +19666,7 @@ _Directly tested._
 Core peer representation used throughout the application.
 
 - **id** (field) — The peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -19705,7 +19705,7 @@ Core peer representation used throughout the application.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **addresses** (field) — Known addresses for this peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -19715,12 +19715,12 @@ Core peer representation used throughout the application.
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **latency** (field) — Network latency in milliseconds.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
 - **agentVersion** (field) — The peer's agent version string.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -19729,7 +19729,7 @@ Core peer representation used throughout the application.
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushEvent.toString)
 - **toProto** (method) — Converts to PeerProto.
   - calls: PeerProto, id, encode, Base58, value, addAll, addresses, map, toString, latency, Int64, agentVersion
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -19755,7 +19755,7 @@ _No known direct test._
 
 - **murmur3X64Hash64** (function) — Computes the MurmurHash3 x64-64 digest of [bytes] and returns the first
   - calls: _murmur3X64Hash128
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
 
 ## `lib/src/core/unixfs/murmur_hash_web.dart`
@@ -19767,7 +19767,7 @@ _No known direct test._
 ### top-level `murmur3X64Hash64` (function)
 
 - **murmur3X64Hash64** (function) — Returns a deterministic fallback hash for web builds.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
 
 ## `lib/src/core/unixfs/unixfs_builder.dart`
@@ -19784,11 +19784,11 @@ Builds a UnixFS DAG from a stream of bytes.
 - **cidVersion** (field) — CID version to use for generated blocks (0 or 1).
 - **rawLeaves** (field) — Whether to store leaf nodes as raw blocks instead of UnixFS file nodes.
 - **hashType** (field) — Multihash function to use (currently only `sha2-256` is supported).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.hashType)
 - **build** (method) — Chunks a stream of bytes and yields Blocks for leaf nodes.
   - calls: ChunkedStreamReader, readChunk, isEmpty, _createLeaf, fromList, add, PBLink, toBytes, cid, Int64, length, data, cancel, Data, File, Data_DataType, PBNode, writeToBuffer, fromContent, Block
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -19811,7 +19811,7 @@ _Directly tested._
 An entry in a UnixFS directory, carrying the child CID and its cumulative
 
 - **name** (field) — The file or directory name (path segment, no slash).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -19838,7 +19838,7 @@ An entry in a UnixFS directory, carrying the child CID and its cumulative
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **cid** (field) — The CID of the child node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -19881,7 +19881,7 @@ An entry in a UnixFS directory, carrying the child CID and its cumulative
 - **tsize** (field) — The cumulative serialized size of the child subtree, including the child
 - **toLink** (method) — Converts this entry to a DAG-PB link.
   - calls: PBLink, fromList, toBytes, Int64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryBuilder.build)
 
@@ -19891,12 +19891,12 @@ Builds a UnixFS directory node with correctly-computed cumulative Tsize
 
 - **cidVersion** (field) — CID version to use for the resulting directory block.
 - **hashType** (field) — Multihash function to use for the directory block.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.hashType)
 - **shardThreshold** (field) — Threshold at which the directory should be sharded.
 - **build** (method) — Builds a directory from the provided [entries].
   - calls: List, sort, compareTo, name, add, toLink, Data, Directory, Data_DataType, PBNode, writeToBuffer, fromContent, Block, unixfsPutBlock, fromBlock
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -19931,7 +19931,7 @@ Builds a UnixFS directory node with correctly-computed cumulative Tsize
 
 - **createDirectory** (function) — Creates a UnixFS directory from child [entries] with correct cumulative Tsize
   - calls: computeTsize, cid, add, UnixFSDirectoryEntry, name, buildAutoSharded, UnixFSDirectoryBuilder
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.createTempDirectory)
 
@@ -19951,7 +19951,7 @@ _Directly tested._
 Thrown when UnixFS path resolution fails because of a malformed path,
 
 - **message** (field) — Human-readable description of the resolution failure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -19970,7 +19970,7 @@ Thrown when UnixFS path resolution fails because of a malformed path,
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20085,7 +20085,7 @@ Thrown when UnixFS path resolution fails because of a malformed path,
 Thrown when a cycle is detected while traversing a UnixFS DAG.
 
 - **message** (field) — Human-readable description of the cycle.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -20104,7 +20104,7 @@ Thrown when a cycle is detected while traversing a UnixFS DAG.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20219,7 +20219,7 @@ Thrown when a cycle is detected while traversing a UnixFS DAG.
 Thrown when a symlink cycle is detected during UnixFS path resolution.
 
 - **message** (field) — Human-readable description of the symlink cycle.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -20238,7 +20238,7 @@ Thrown when a symlink cycle is detected during UnixFS path resolution.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20359,7 +20359,7 @@ _Directly tested._
 A child entry of a HAMT shard while it is being built.
 
 - **name** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -20386,7 +20386,7 @@ A child entry of a HAMT shard while it is being built.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **cid** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20433,18 +20433,18 @@ A child entry of a HAMT shard while it is being built.
 Builds HAMT-sharded UnixFS directories compatible with Kubo/Helia layout.
 
 - **fanout** (field) — Number of buckets per shard (must be a power of two, multiple of 8).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fanout)
 - **shardThreshold** (field) — Number of entries above which a directory is encoded as a HAMT shard.
 - **maxBucketSize** (field) — Maximum entries allowed in a single bucket before it is pushed into a
 - **cidVersion** (field) — CID version for generated shard blocks.
 - **hashType** (field) — Multihash function for generated shard blocks.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.hashType)
 - **build** (method) — Builds a directory from [entries].
   - calls: length, build, UnixFSDirectoryBuilder, computeTsize, cid, add, _HAMTEntry, name, _buildShard
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.create)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addStream)
@@ -20484,7 +20484,7 @@ _Directly tested._
 Represents a decoded UnixFS node, including its outer DAG-PB container and
 
 - **cid** (field) — The CID that addresses this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20525,7 +20525,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **data** (field) — The serialized block bytes for this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -20589,7 +20589,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
   - calls: type, File, Data_DataType, codec
 - **isDirectory** (method) — True if this node is a plain directory.
   - calls: type, Directory, Data_DataType
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **isSymlink** (method) — True if this node is a symlink.
@@ -20604,7 +20604,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
 - **serializedSize** (method) — The serialized size of this node's block.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize)
 - **symlinkTarget** (method) — For symlinks, the target path stored in the UnixFS data field.
   - calls: fromCharCodes, data
@@ -20612,7 +20612,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
   - calls: codec, length, toInt, filesize
 - **fanout** (method) — The HAMT fanout for HAMT shard nodes.
   - calls: toInt, fanout
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
 - **hashType** (method) — The HAMT hash type for HAMT shard nodes.
   - calls: toInt, hashType
@@ -20652,13 +20652,13 @@ _Directly tested._
 Resolves UnixFS paths against a block store.
 
 - **maxDepth** (field) — Maximum recursion depth for a single resolution request.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
 - **maxPathLength** (field) — Maximum length of an input path string.
 - **maxNodes** (field) — Maximum number of nodes traversed for a single resolution request.
 - **resolve** (method) — Resolves [path] under [root] and returns the CID of the final node.
   - calls: resolveNode, cid
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.resolveIPNS)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.resolveDNSLink)

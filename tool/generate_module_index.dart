@@ -20,7 +20,13 @@
 // would be accurate but slow to run across 470+ files. Treat "referenced
 // by" as "other places this name appears as a call/access", a lead to
 // check, not a proven reference -- common names (start, stop, encode...)
-// will have long, mostly-irrelevant lists; this tool caps and flags those.
+// will have long, mostly-irrelevant lists. When a name is declared by more
+// than one type (e.g. several unrelated classes each with their own
+// toProto()), every one of those declarations shares the exact same
+// "referenced by" list in the output, tagged "(name shared by N
+// declarations)" -- the tool cannot tell which declaration a given call
+// site actually resolves to, so it shows all of them under all of them
+// rather than silently picking one.
 //
 // The module-to-module import graph (mermaid) is unchanged from the prior
 // version of this tool and stays regex-based -- import statements are
@@ -362,13 +368,17 @@ void main() {
     final refs = referencesOf[m.name] ?? const [];
     final selfLabel = owner == null ? m.name : '${owner.name}.${m.name}';
     final externalRefs = refs.where((r) => !(r.$1 == file && r.$2 == selfLabel)).toList();
+    final sharedByCount = declaredBy[m.name]?.length ?? 1;
     final buf = StringBuffer('- **${m.name}** (${m.kind})');
     if (m.doc.isNotEmpty) buf.write(' — ${m.doc}');
     if (m.calls.isNotEmpty) {
       buf.write('\n  - calls: ${m.calls.join(", ")}');
     }
     if (externalRefs.isNotEmpty) {
-      buf.write('\n  - referenced by (by name):');
+      final ambiguity = sharedByCount > 1
+          ? ' (name shared by $sharedByCount declarations -- not resolved to this one specifically, see caveat)'
+          : '';
+      buf.write('\n  - referenced by (by name)$ambiguity:');
       for (final r in externalRefs) {
         buf.write('\n    - `${r.$1}` (${r.$2})');
       }

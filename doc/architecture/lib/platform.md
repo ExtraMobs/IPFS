@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.317684
+generated: 2026-08-24T09:25:26.210801
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -25,7 +25,7 @@ _No known direct test._
 Abstract interface for a running HTTP server instance.
 
 - **close** (method) — Closes the server.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -86,7 +86,7 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **host** (method) — Returns the host address.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url)
@@ -94,7 +94,7 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **port** (method) — Returns the port number.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -108,11 +108,11 @@ Abstract interface for a running HTTP server instance.
 Abstract interface for starting an HTTP server.
 
 - **serve** (method) — Starts serving with the given handler at the specified address and port.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 - **serveSecure** (method) — Starts serving with the given handler over TLS at the specified address
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
 
 ## `lib/src/platform/http_server_adapter_io.dart`
@@ -127,7 +127,7 @@ IO implementation of HTTP server instance.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -188,7 +188,7 @@ IO implementation of HTTP server instance.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **host** (method)
   - calls: host, address
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
@@ -196,7 +196,7 @@ IO implementation of HTTP server instance.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **port** (method)
   - calls: port
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url)
@@ -210,19 +210,19 @@ IO implementation of HTTP server adapter.
 
 - **serve** (method)
   - calls: bind, serveRequests, IpfsHttpServerInstanceIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 - **serveSecure** (method)
   - calls: bindSecure, serveRequests, IpfsHttpServerInstanceIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
 
 ### top-level `createHttpServerAdapter` (function)
 
 - **createHttpServerAdapter** (function) — Factory for conditional imports.
   - calls: HttpServerAdapterIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 
 ## `lib/src/platform/http_server_adapter_stub.dart`
@@ -237,19 +237,19 @@ Stub implementation of HTTP server adapter for unsupported platforms.
 
 - **serve** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 - **serveSecure** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
 
 ### top-level `createHttpServerAdapter` (function)
 
 - **createHttpServerAdapter** (function) — Factory for conditional imports.
   - calls: HttpServerAdapterStub
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 
 ## `lib/src/platform/http_server_adapter_web.dart`
@@ -263,7 +263,7 @@ _No known direct test._
 Web stub implementation of HTTP server instance.
 
 - **close** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -324,7 +324,7 @@ Web stub implementation of HTTP server instance.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **host** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url)
@@ -332,7 +332,7 @@ Web stub implementation of HTTP server instance.
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **port** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -347,19 +347,19 @@ Web stub implementation of HTTP server adapter.
 
 - **serve** (method)
   - calls: IpfsHttpServerInstanceWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 - **serveSecure** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
 
 ### top-level `createHttpServerAdapter` (function)
 
 - **createHttpServerAdapter** (function) — Factory for conditional imports.
   - calls: HttpServerAdapterWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.start)
 
 ## `lib/src/platform/libsodium_setup.dart`
@@ -406,18 +406,18 @@ _Directly tested._
 IO implementation of the IPFS platform interface.
 
 - **isWeb** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addFile)
 - **isIO** (method)
 - **pathSeparator** (method)
   - calls: pathSeparator
 - **operatingSystem** (method)
   - calls: operatingSystem
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
   - calls: version
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -425,7 +425,7 @@ IO implementation of the IPFS platform interface.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **writeBytes** (method)
   - calls: File, create, parent, writeAsBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
@@ -437,7 +437,7 @@ IO implementation of the IPFS platform interface.
   - calls: File, create, parent, writeAsString
 - **readBytes** (method)
   - calls: File, exists, readAsBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
@@ -450,13 +450,13 @@ IO implementation of the IPFS platform interface.
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.getPreview)
 - **readString** (method)
   - calls: File, exists, readAsString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (loadSwarmKey)
 - **exists** (method)
   - calls: exists, File, Directory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
@@ -475,7 +475,7 @@ IO implementation of the IPFS platform interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
 - **delete** (method)
   - calls: type, file, delete, File, directory, Directory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -493,14 +493,14 @@ IO implementation of the IPFS platform interface.
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method)
   - calls: create, Directory
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.createTempDirectory)
 - **createTempDirectory** (method)
   - calls: createTemp, systemTemp, path
 - **listDirectory** (method)
   - calls: Directory, exists, toList, list, map, replaceAll, path
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.listPins)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
@@ -509,14 +509,14 @@ IO implementation of the IPFS platform interface.
   - calls: length, File
 - **promptPassword** (method)
   - calls: hasTerminal, write, echoMode, readLineSync, writeln
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/utils/password_prompt.dart` (PasswordPrompt.prompt)
 
 ### top-level `getPlatform` (function)
 
 - **getPlatform** (function) — Returns the IO platform implementation.
   - calls: IpfsPlatformIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
@@ -543,11 +543,11 @@ _Directly tested._
 Abstract class representing platform-specific operations.
 
 - **isWeb** (method) — Whether the current platform is Web.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addFile)
 - **isIO** (method) — Whether the current platform is Desktop/Mobile (supports dart:io).
 - **writeBytes** (method) — Returns a [Future] that completes when [bytes] are written to a file at [path].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
@@ -557,7 +557,7 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
 - **writeString** (method) — Returns a [Future] that completes when [content] is written to a file at [path].
 - **readBytes** (method) — Returns a [Future] that resolves to the [Uint8List] bytes from a file at [path],
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
@@ -569,12 +569,12 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData)
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.getPreview)
 - **readString** (method) — Returns a [Future] that resolves to the string content from a file at [path],
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (loadSwarmKey)
 - **exists** (method) — Returns a [Future] that resolves to `true` if a file or directory exists at [path].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
@@ -593,7 +593,7 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.getPreview)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
 - **delete** (method) — Returns a [Future] that completes when a file or directory at [path] is deleted.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -611,23 +611,23 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method) — Returns a [Future] that completes when a directory is created at [path].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.createTempDirectory)
 - **createTempDirectory** (method) — Returns a [Future] that resolves to the path of a newly created temporary directory
 - **listDirectory** (method) — Returns a [Future] that resolves to a [List] of filenames/paths in the directory at [path].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.listPins)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressionStats)
 - **getLength** (method) — Returns a [Future] that resolves to the size of a file at [path] in bytes.
 - **operatingSystem** (method) — Returns the name of the operating system.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.operatingSystem)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method) — Returns the version of the platform/runtime.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -635,17 +635,17 @@ Abstract class representing platform-specific operations.
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **promptPassword** (method) — Returns a [Future] that resolves to a password entered by the user.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/utils/password_prompt.dart` (PasswordPrompt.prompt)
 - **pathSeparator** (method) — Helper to get the path separator for the platform.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.pathSeparator)
 
 ### top-level `getPlatform` (function)
 
 - **getPlatform** (function) — Returns the platform-specific implementation of [IpfsPlatform].
   - calls: UnsupportedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
@@ -672,18 +672,18 @@ _No known direct test._
 Web implementation of the IPFS platform interface using IndexedDB.
 
 - **isWeb** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.addFile)
 - **isIO** (method)
 - **pathSeparator** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.pathSeparator)
 - **operatingSystem** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.operatingSystem)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -692,7 +692,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **writeBytes** (method)
   - calls: _getDb, transaction, objectStore, put, completed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
@@ -704,7 +704,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
   - calls: fromList, codeUnits, writeBytes
 - **readBytes** (method)
   - calls: _getDb, transaction, objectStore, getObject, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
@@ -717,13 +717,13 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.getPreview)
 - **readString** (method)
   - calls: readBytes, fromCharCodes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (loadSwarmKey)
 - **exists** (method)
   - calls: _getDb, transaction, objectStore, count, lowerBound, Completer, listen, openCursor, startsWith, toString, key, complete, isCompleted, future
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
@@ -743,7 +743,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
 - **delete** (method)
   - calls: _getDb, transaction, objectStore, delete, lowerBound, Completer, listen, openKeyCursor, startsWith, toString, key, next, complete, isCompleted, future, completed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -760,14 +760,14 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.delete)
 - **createDirectory** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.init)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.createTempDirectory)
 - **createTempDirectory** (method)
   - calls: millisecondsSinceEpoch, now, createDirectory
 - **listDirectory** (method)
   - calls: _getDb, transaction, objectStore, endsWith, Completer, lowerBound, listen, openKeyCursor, toString, key, startsWith, add, next, complete, isCompleted, future
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.listPins)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
@@ -775,14 +775,14 @@ Web implementation of the IPFS platform interface using IndexedDB.
 - **getLength** (method)
   - calls: readBytes, length
 - **promptPassword** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/utils/password_prompt.dart` (PasswordPrompt.prompt)
 
 ### top-level `getPlatform` (function)
 
 - **getPlatform** (function) — Returns the Web platform implementation.
   - calls: IpfsPlatformWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)

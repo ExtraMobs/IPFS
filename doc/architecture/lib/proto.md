@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.322363
+generated: 2026-08-24T09:25:26.222379
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -22,7 +22,7 @@ Base class for protobuf message types with serialization helpers.
 
 - **toBytes** (method) — Convert message to bytes
   - calls: writeToBuffer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
@@ -55,7 +55,7 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Create message from bytes
   - calls: factory, mergeFromBuffer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -77,7 +77,7 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **clone** (method) — Create a deep copy of the message
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **cloneAs** (method) — Type-safe clone method
@@ -95,12 +95,12 @@ Base message wrapper for all IPFS messages
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist.copyWith)
@@ -306,7 +306,7 @@ Base message wrapper for all IPFS messages
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -525,18 +525,18 @@ Base message wrapper for all IPFS messages
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **protocolId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **protocolId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -546,7 +546,7 @@ Base message wrapper for all IPFS messages
   - calls: $_clearField
 - **payload** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -557,7 +557,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **payload** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -572,7 +572,7 @@ Base message wrapper for all IPFS messages
   - calls: $_clearField
 - **timestamp** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -583,7 +583,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -600,11 +600,11 @@ Base message wrapper for all IPFS messages
   - calls: $_ensure
 - **senderId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
 - **senderId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
 - **hasSenderId** (method)
   - calls: $_has
@@ -612,7 +612,7 @@ Base message wrapper for all IPFS messages
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -671,7 +671,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -734,7 +734,7 @@ Base message wrapper for all IPFS messages
   - calls: $_clearField
 - **requestId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
@@ -742,7 +742,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
 - **requestId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.pin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
@@ -759,12 +759,12 @@ Network events
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist.copyWith)
@@ -970,7 +970,7 @@ Network events
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -1189,12 +1189,12 @@ Network events
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **timestamp** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -1205,7 +1205,7 @@ Network events
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -1230,7 +1230,7 @@ Network events
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -1267,7 +1267,7 @@ Network events
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -1308,7 +1308,7 @@ Network events
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1363,7 +1363,7 @@ Network events
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1418,7 +1418,7 @@ Network events
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -1447,13 +1447,13 @@ _Directly tested._
   - calls: _
 - **PING** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -1507,7 +1507,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/base_messages.pbjson.dart`
@@ -1546,12 +1546,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist.copyWith)
@@ -1757,7 +1757,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -1976,12 +1976,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **block** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -2014,7 +2014,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **block** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -2047,7 +2047,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
@@ -2056,7 +2056,7 @@ _Directly tested._
   - calls: $_clearField
 - **priority** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2065,7 +2065,7 @@ _Directly tested._
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **priority** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2078,7 +2078,7 @@ _Directly tested._
   - calls: $_clearField
 - **cancel** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
@@ -2105,7 +2105,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
 - **cancel** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
@@ -2136,13 +2136,13 @@ _Directly tested._
   - calls: $_clearField
 - **wantType** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **wantType** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2152,7 +2152,7 @@ _Directly tested._
   - calls: $_clearField
 - **sendDontHave** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
@@ -2160,7 +2160,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **sendDontHave** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
@@ -2175,12 +2175,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -2386,7 +2386,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -2605,12 +2605,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **entries** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -2657,11 +2657,11 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **full** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **full** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasFull** (method)
   - calls: $_has
@@ -2672,12 +2672,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -2883,7 +2883,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -3102,12 +3102,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **prefix** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -3115,7 +3115,7 @@ _Directly tested._
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **prefix** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -3127,7 +3127,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3182,7 +3182,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3237,7 +3237,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -3248,12 +3248,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -3459,7 +3459,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -3678,12 +3678,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3725,7 +3725,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -3771,7 +3771,7 @@ _Directly tested._
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3830,7 +3830,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3896,12 +3896,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -4107,7 +4107,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -4326,24 +4326,24 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **wantlist** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **wantlist** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasWantlist** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **clearWantlist** (method)
   - calls: $_clearField
@@ -4351,7 +4351,7 @@ _Directly tested._
   - calls: $_ensure
 - **blocks** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -4359,7 +4359,7 @@ _Directly tested._
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **payload** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -4377,12 +4377,12 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **pendingBytes** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **pendingBytes** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasPendingBytes** (method)
@@ -4419,12 +4419,12 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
 - **Have** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -4478,14 +4478,14 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `Message_BlockPresence_Type` extends $pb.ProtobufEnum
 
 - **Have** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -4496,7 +4496,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -4550,7 +4550,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/bitswap/bitswap.pbjson.dart`
@@ -4600,12 +4600,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -4811,7 +4811,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -5030,12 +5030,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5094,7 +5094,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5157,11 +5157,11 @@ _Directly tested._
   - calls: $_clearField
 - **peer** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **peer** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasPeer** (method)
   - calls: $_has
@@ -5181,14 +5181,14 @@ _Directly tested._
   - calls: $_ensure
 - **limit** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limit** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -5201,7 +5201,7 @@ _Directly tested._
   - calls: $_ensure
 - **status** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -5210,7 +5210,7 @@ _Directly tested._
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
 - **status** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -5226,12 +5226,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -5437,7 +5437,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -5656,12 +5656,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5720,7 +5720,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5783,11 +5783,11 @@ _Directly tested._
   - calls: $_clearField
 - **peer** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **peer** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasPeer** (method)
   - calls: $_has
@@ -5797,14 +5797,14 @@ _Directly tested._
   - calls: $_ensure
 - **limit** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limit** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
@@ -5817,7 +5817,7 @@ _Directly tested._
   - calls: $_ensure
 - **status** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -5826,7 +5826,7 @@ _Directly tested._
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
 - **status** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -5842,12 +5842,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -6053,7 +6053,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -6272,12 +6272,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -6317,7 +6317,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -6361,7 +6361,7 @@ _Directly tested._
   - calls: $_clearField
 - **addrs** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
 
@@ -6369,12 +6369,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -6580,7 +6580,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -6799,7 +6799,7 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **expire** (method)
@@ -6812,11 +6812,11 @@ _Directly tested._
   - calls: $_clearField
 - **limitDuration** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limitDuration** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasLimitDuration** (method)
   - calls: $_has
@@ -6824,11 +6824,11 @@ _Directly tested._
   - calls: $_clearField
 - **limitData** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limitData** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasLimitData** (method)
   - calls: $_has
@@ -6836,7 +6836,7 @@ _Directly tested._
   - calls: $_clearField
 - **addrs** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
 
@@ -6844,12 +6844,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -7055,7 +7055,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -7274,17 +7274,17 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **duration** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **duration** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasDuration** (method)
@@ -7293,7 +7293,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -7348,7 +7348,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -7403,7 +7403,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -7449,7 +7449,7 @@ _Directly tested._
 - **STOP_DST_MULTIADDR_INVALID** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -7502,7 +7502,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.sessions)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `HopMessage_Type` extends $pb.ProtobufEnum
@@ -7513,12 +7513,12 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
 - **CONNECT** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **STATUS** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -7572,19 +7572,19 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `StopMessage_Type` extends $pb.ProtobufEnum
 
 - **CONNECT** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **STATUS** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -7638,7 +7638,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/circuit_relay.pbjson.dart`
@@ -7717,12 +7717,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -7928,7 +7928,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -8147,18 +8147,18 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **protocolId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **protocolId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -8184,12 +8184,12 @@ _Directly tested._
   - calls: $_clearField
 - **maxMessageSize** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.publish)
 - **maxMessageSize** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.publish)
 - **hasMaxMessageSize** (method)
@@ -8221,12 +8221,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -8432,7 +8432,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -8651,16 +8651,16 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **maxRequestsPerWindow** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
 - **maxRequestsPerWindow** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
 - **hasMaxRequestsPerWindow** (method)
   - calls: $_has
@@ -8668,11 +8668,11 @@ _Directly tested._
   - calls: $_clearField
 - **windowSeconds** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
 - **windowSeconds** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
 - **hasWindowSeconds** (method)
   - calls: $_has
@@ -8680,13 +8680,13 @@ _Directly tested._
   - calls: $_clearField
 - **maxQueueSize** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
 - **maxQueueSize** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
@@ -8701,12 +8701,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -8912,7 +8912,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -9131,7 +9131,7 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **resetTimeoutSeconds** (method)
@@ -9204,12 +9204,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -9415,7 +9415,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -9634,12 +9634,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -9676,7 +9676,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -9717,7 +9717,7 @@ _Directly tested._
   - calls: $_clearField
 - **status** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -9726,7 +9726,7 @@ _Directly tested._
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
 - **status** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -9749,7 +9749,7 @@ _Directly tested._
   - calls: $_ensure
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -9760,12 +9760,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -9971,7 +9971,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -10190,12 +10190,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -10232,7 +10232,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -10273,14 +10273,14 @@ _Directly tested._
   - calls: $_clearField
 - **messagesSent** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -10291,14 +10291,14 @@ _Directly tested._
   - calls: $_clearField
 - **messagesReceived** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -10309,7 +10309,7 @@ _Directly tested._
   - calls: $_clearField
 - **bytesSent** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -10318,7 +10318,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -10331,13 +10331,13 @@ _Directly tested._
   - calls: $_clearField
 - **bytesReceived** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
 - **bytesReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -10373,7 +10373,7 @@ _Directly tested._
 - **ERROR** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -10427,7 +10427,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/connection.pbjson.dart`
@@ -10474,12 +10474,12 @@ Functionality to set a bit at a specific index
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -10685,7 +10685,7 @@ Functionality to set a bit at a specific index
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -10904,18 +10904,18 @@ Functionality to set a bit at a specific index
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **index** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
 - **index** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -10930,12 +10930,12 @@ Functionality to clear a bit at a specific index
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -11141,7 +11141,7 @@ Functionality to clear a bit at a specific index
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -11360,18 +11360,18 @@ Functionality to clear a bit at a specific index
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **index** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
 - **index** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -11386,12 +11386,12 @@ Functionality to get a bit at a specific index
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -11597,7 +11597,7 @@ Functionality to get a bit at a specific index
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -11816,18 +11816,18 @@ Functionality to get a bit at a specific index
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **index** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
 - **index** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (DialResponse.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -11842,12 +11842,12 @@ Response message for bit value
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -12053,7 +12053,7 @@ Response message for bit value
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -12272,12 +12272,12 @@ Response message for bit value
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -12371,7 +12371,7 @@ Response message for bit value
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -12472,12 +12472,12 @@ Response message for bit value
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -12683,7 +12683,7 @@ Response message for bit value
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -12902,17 +12902,17 @@ Response message for bit value
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **bits** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
 - **bits** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
 - **hasBits** (method)
@@ -12921,7 +12921,7 @@ Response message for bit value
   - calls: $_clearField
 - **size** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -12944,7 +12944,7 @@ Response message for bit value
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -13013,12 +13013,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -13224,7 +13224,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -13443,12 +13443,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -13503,7 +13503,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -13558,7 +13558,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -13566,7 +13566,7 @@ _Directly tested._
   - calls: $_clearField
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -13608,7 +13608,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -13656,12 +13656,12 @@ _Directly tested._
   - calls: $_ensure
 - **format** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **format** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **hasFormat** (method)
@@ -13702,12 +13702,12 @@ Response message for adding a block
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -13913,7 +13913,7 @@ Response message for adding a block
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -14132,12 +14132,12 @@ Response message for adding a block
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -14159,7 +14159,7 @@ Response message for adding a block
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -14185,7 +14185,7 @@ Response message for adding a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -14205,7 +14205,7 @@ Response message for adding a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -14234,12 +14234,12 @@ Response message for retrieving a block
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -14445,7 +14445,7 @@ Response message for retrieving a block
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -14664,12 +14664,12 @@ Response message for retrieving a block
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **block** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -14702,7 +14702,7 @@ Response message for retrieving a block
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **block** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -14735,7 +14735,7 @@ Response message for retrieving a block
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
@@ -14746,7 +14746,7 @@ Response message for retrieving a block
   - calls: $_ensure
 - **found** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -14771,7 +14771,7 @@ Response message for retrieving a block
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **found** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
@@ -14805,12 +14805,12 @@ Response message for removing a block
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -15016,7 +15016,7 @@ Response message for removing a block
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -15235,12 +15235,12 @@ Response message for removing a block
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -15262,7 +15262,7 @@ Response message for removing a block
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -15288,7 +15288,7 @@ Response message for removing a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15308,7 +15308,7 @@ Response message for removing a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15349,13 +15349,13 @@ The BlockStore service definition
 - **oauthScopes** (static field) — OAuth scopes needed for the client.
 - **addBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15379,14 +15379,14 @@ The BlockStore service definition
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **removeBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **getAllBlocks** (method)
   - calls: $createStreamingCall, fromIterable, Stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15398,14 +15398,14 @@ The BlockStore service definition
 - **addBlock_Pre** (method)
   - calls: addBlock
 - **addBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock_Pre** (method)
   - calls: getBlock
 - **getBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15430,7 +15430,7 @@ The BlockStore service definition
 - **removeBlock_Pre** (method)
   - calls: removeBlock
 - **removeBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15438,7 +15438,7 @@ The BlockStore service definition
 - **getAllBlocks_Pre** (method)
   - calls: getAllBlocks
 - **getAllBlocks** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15493,12 +15493,12 @@ _No known direct test._
 ### abstract class `BlockStoreServiceBase` extends $pb.GeneratedService
 
 - **addBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.addBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15521,13 +15521,13 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **removeBlock** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **getAllBlocks** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15547,12 +15547,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -15758,7 +15758,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -15977,12 +15977,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **version** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -15991,7 +15991,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -16004,7 +16004,7 @@ _Directly tested._
   - calls: $_clearField
 - **multihash** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
@@ -16025,7 +16025,7 @@ _Directly tested._
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **multihash** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
@@ -16050,7 +16050,7 @@ _Directly tested._
   - calls: $_clearField
 - **codec** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -16067,7 +16067,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **codec** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -16088,11 +16088,11 @@ _Directly tested._
   - calls: $_clearField
 - **multibasePrefix** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **multibasePrefix** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **hasMultibasePrefix** (method)
   - calls: $_has
@@ -16128,7 +16128,7 @@ _No known direct test._
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/utils/encoding.dart` (EncodingUtils.indexToCidVersion)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -16182,7 +16182,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/core/cid.pbjson.dart`
@@ -16223,12 +16223,12 @@ PBLink represents a link between two DAG nodes
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -16434,7 +16434,7 @@ PBLink represents a link between two DAG nodes
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -16653,12 +16653,12 @@ PBLink represents a link between two DAG nodes
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **hash** (method) — multihash of the target object
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -16689,7 +16689,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **hash** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarHeader.hashCode)
     - `lib/src/core/data_structures/car.dart` (CarSection.hashCode)
@@ -16724,7 +16724,7 @@ PBLink represents a link between two DAG nodes
   - calls: $_clearField
 - **name** (method) — utf string name. should be unique per object
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -16752,7 +16752,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -16784,7 +16784,7 @@ PBLink represents a link between two DAG nodes
   - calls: $_clearField
 - **size** (method) — cumulative size of target object
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -16807,7 +16807,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -16839,12 +16839,12 @@ PBNode represents a DAG node
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -17050,7 +17050,7 @@ PBNode represents a DAG node
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -17269,12 +17269,12 @@ PBNode represents a DAG node
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **links** (method) — refs to other objects
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17292,7 +17292,7 @@ PBNode represents a DAG node
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method) — opaque user data content
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -17347,7 +17347,7 @@ PBNode represents a DAG node
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -17402,7 +17402,7 @@ PBNode represents a DAG node
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -17449,12 +17449,12 @@ Extended link with additional metadata (uses standard PBLink)
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -17660,7 +17660,7 @@ Extended link with additional metadata (uses standard PBLink)
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -17879,7 +17879,7 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **link** (method) — Reference to the standard PBLink
@@ -17894,7 +17894,7 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: $_ensure
 - **timestamp** (method) — Unix timestamp of when the link was created
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -17905,7 +17905,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -17920,7 +17920,7 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: $_clearField
 - **metadata** (method) — Custom metadata or additional fields
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -17928,7 +17928,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **type** (method) — Link type for different DAG structures
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17987,7 +17987,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18058,11 +18058,11 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: $_clearField
 - **depth** (method) — For trickle-dag links
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (DepthRecursionLimit.==)
 - **depth** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (DepthRecursionLimit.==)
 - **hasDepth** (method)
   - calls: $_has
@@ -18088,7 +18088,7 @@ Link types for different DAG structures
 - **LINK_TYPE_TRICKLE** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -18142,7 +18142,7 @@ Link types for different DAG structures
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/core/link.pbjson.dart`
@@ -18181,12 +18181,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -18392,7 +18392,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -18611,12 +18611,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -18658,7 +18658,7 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -18706,7 +18706,7 @@ _No known direct test._
   - calls: $_ensure
 - **links** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18724,7 +18724,7 @@ _No known direct test._
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -18779,7 +18779,7 @@ _No known direct test._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -18834,7 +18834,7 @@ _No known direct test._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -18842,7 +18842,7 @@ _No known direct test._
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18901,7 +18901,7 @@ _No known direct test._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18964,7 +18964,7 @@ _No known direct test._
   - calls: $_clearField
 - **size** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -18987,7 +18987,7 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -19014,7 +19014,7 @@ _No known direct test._
   - calls: $_clearField
 - **timestamp** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -19025,7 +19025,7 @@ _No known direct test._
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -19040,7 +19040,7 @@ _No known direct test._
   - calls: $_clearField
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -19082,12 +19082,12 @@ Represents statistics about the IPFS node.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -19293,7 +19293,7 @@ Represents statistics about the IPFS node.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -19512,16 +19512,16 @@ Represents statistics about the IPFS node.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **numBlocks** (method) — The number of blocks stored in the datastore.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **numBlocks** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasNumBlocks** (method)
   - calls: $_has
@@ -19529,11 +19529,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **datastoreSize** (method) — The total size of the blocks stored in the datastore (in bytes).
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **datastoreSize** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasDatastoreSize** (method)
   - calls: $_has
@@ -19541,11 +19541,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **numConnectedPeers** (method) — The number of connected peers.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **numConnectedPeers** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasNumConnectedPeers** (method)
   - calls: $_has
@@ -19553,11 +19553,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **bandwidthSent** (method) — The total bandwidth used for sending data (in bytes).
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasBandwidthSent** (method)
   - calls: $_has
@@ -19565,11 +19565,11 @@ Represents statistics about the IPFS node.
   - calls: $_clearField
 - **bandwidthReceived** (method) — The total bandwidth used for receiving data (in bytes).
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **bandwidthReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node_stats.dart` (NodeStats.toProto)
 - **hasBandwidthReceived** (method)
   - calls: $_has
@@ -19628,7 +19628,7 @@ Enum representing the different types of nodes in the IPFS network.
 - **NODE_TYPE_ARCHIVAL** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -19682,7 +19682,7 @@ Enum representing the different types of nodes in the IPFS network.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/core/node_type.pbjson.dart`
@@ -19712,12 +19712,12 @@ Represents a log entry for an operation performed on the IPFS node.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -19923,7 +19923,7 @@ Represents a log entry for an operation performed on the IPFS node.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -20142,12 +20142,12 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **timestamp** (method) — The timestamp of when the operation was performed.
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -20158,7 +20158,7 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -20173,11 +20173,11 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **operation** (method) — A description of the operation performed.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **operation** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **hasOperation** (method)
   - calls: $_has
@@ -20185,12 +20185,12 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **details** (method) — Additional details about the operation.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **details** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **hasDetails** (method)
@@ -20199,7 +20199,7 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **cid** (method) — The CID involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20241,7 +20241,7 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -20289,11 +20289,11 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_ensure
 - **nodeType** (method) — The type of node involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **nodeType** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
 - **hasNodeType** (method)
   - calls: $_has
@@ -20306,12 +20306,12 @@ Represents a collection of operation log entries.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -20517,7 +20517,7 @@ Represents a collection of operation log entries.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -20736,12 +20736,12 @@ Represents a collection of operation log entries.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **entries** (method) — A list of log entries.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -20827,12 +20827,12 @@ Represents a peer in the IPFS network.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -21038,7 +21038,7 @@ Represents a peer in the IPFS network.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -21257,12 +21257,12 @@ Represents a peer in the IPFS network.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21302,7 +21302,7 @@ Represents a peer in the IPFS network.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21346,7 +21346,7 @@ Represents a peer in the IPFS network.
   - calls: $_clearField
 - **addresses** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -21357,13 +21357,13 @@ Represents a peer in the IPFS network.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **latency** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
 - **latency** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -21373,7 +21373,7 @@ Represents a peer in the IPFS network.
   - calls: $_clearField
 - **agentVersion** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -21382,7 +21382,7 @@ Represents a peer in the IPFS network.
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushEvent.toString)
 - **agentVersion** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -21421,12 +21421,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -21632,7 +21632,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -21851,12 +21851,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -21898,7 +21898,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -21946,7 +21946,7 @@ _Directly tested._
   - calls: $_ensure
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -22005,7 +22005,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -22068,7 +22068,7 @@ _Directly tested._
   - calls: $_clearField
 - **timestamp** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -22079,7 +22079,7 @@ _Directly tested._
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -22120,7 +22120,7 @@ _No known direct test._
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.pin)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -22174,7 +22174,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/core/pin.pbjson.dart`
@@ -22209,12 +22209,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -22420,7 +22420,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -22639,12 +22639,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -22681,7 +22681,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -22724,14 +22724,14 @@ _No known direct test._
   - calls: $_ensure
 - **associatedPeerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.getAssociatedPeer)
 - **associatedPeerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -22747,12 +22747,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -22958,7 +22958,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -23177,12 +23177,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -23204,7 +23204,7 @@ _No known direct test._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -23265,12 +23265,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -23476,7 +23476,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -23695,7 +23695,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **bucketIndex** (method)
@@ -23711,12 +23711,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -23922,7 +23922,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -24141,12 +24141,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -24168,7 +24168,7 @@ _No known direct test._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -24197,12 +24197,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -24408,7 +24408,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -24627,7 +24627,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **bucketIndex1** (method)
@@ -24651,12 +24651,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -24862,7 +24862,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -25081,12 +25081,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -25108,7 +25108,7 @@ _No known direct test._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -25187,12 +25187,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -25398,7 +25398,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -25617,12 +25617,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -25662,7 +25662,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -25736,12 +25736,12 @@ Defines a message representing a peer's unique identifier.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -25947,7 +25947,7 @@ Defines a message representing a peer's unique identifier.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -26166,12 +26166,12 @@ Defines a message representing a peer's unique identifier.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as a string.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26211,7 +26211,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26260,12 +26260,12 @@ Defines a message representing a node in a data structure.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -26471,7 +26471,7 @@ Defines a message representing a node in a data structure.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -26690,12 +26690,12 @@ Defines a message representing a node in a data structure.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — The unique identifier of the peer associated with this node.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -26732,7 +26732,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -26775,7 +26775,7 @@ Defines a message representing a node in a data structure.
   - calls: $_ensure
 - **data** (method) — Arbitrary data associated with this node, represented as bytes.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -26830,7 +26830,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -26885,7 +26885,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -26898,12 +26898,12 @@ Defines a message representing a PeerId specifically for keys.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -27109,7 +27109,7 @@ Defines a message representing a PeerId specifically for keys.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -27328,12 +27328,12 @@ Defines a message representing a PeerId specifically for keys.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as bytes.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -27373,7 +27373,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -27420,12 +27420,12 @@ Defines a message representing a PeerId specifically for keys.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -27631,7 +27631,7 @@ Defines a message representing a PeerId specifically for keys.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -27850,12 +27850,12 @@ Defines a message representing a PeerId specifically for keys.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — The unique identifier of the peer.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -27892,7 +27892,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -27941,7 +27941,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **port** (method) — The port number on which the peer is listening for connections.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -27951,7 +27951,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **port** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -27965,19 +27965,19 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **protocols** (method) — A list of protocols supported by the peer.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
 - **latency** (method) — The estimated latency to the peer, in milliseconds.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
 - **latency** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -27995,13 +27995,13 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **lastSeen** (method) — The timestamp when the peer was last seen or contacted.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
 - **lastSeen** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
@@ -28013,7 +28013,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_ensure
 - **agentVersion** (method) — The version of the IPFS agent or client running on the peer.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -28022,7 +28022,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushEvent.toString)
 - **agentVersion** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
@@ -28035,7 +28035,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **publicKey** (method) — The public key of the peer, used for authentication.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -28054,7 +28054,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **publicKey** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -28077,7 +28077,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **addresses** (method) — A list of multiaddresses for the peer.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
@@ -28088,11 +28088,11 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
 - **observedAddr** (method) — The address from which this peer was observed or learned about.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
 - **observedAddr** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
 - **hasObservedAddr** (method)
   - calls: $_has
@@ -28127,7 +28127,7 @@ Defines an enum representing the color of a node in a tree structure.
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateNodeColors)
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -28181,7 +28181,7 @@ Defines an enum representing the color of a node in a tree structure.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `V_PeerInfo_ConnectionStatus` extends $pb.ProtobufEnum
@@ -28195,7 +28195,7 @@ The current connection status of the peer.
 - **CONNECTED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -28249,7 +28249,7 @@ The current connection status of the peer.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/dht/common_red_black_tree.pbjson.dart`
@@ -28319,12 +28319,12 @@ Represents a peer participating in the DHT.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -28530,7 +28530,7 @@ Represents a peer participating in the DHT.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -28749,12 +28749,12 @@ Represents a peer participating in the DHT.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — Required: The ID of the peer.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -28794,7 +28794,7 @@ Represents a peer participating in the DHT.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -28838,7 +28838,7 @@ Represents a peer participating in the DHT.
   - calls: $_clearField
 - **addrs** (method) — Repeated: The multiaddresses of the peer.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
 
@@ -28848,12 +28848,12 @@ Represents a record stored in the DHT.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -29059,7 +29059,7 @@ Represents a record stored in the DHT.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -29278,12 +29278,12 @@ Represents a record stored in the DHT.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — Required: The key of the record.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -29347,7 +29347,7 @@ Represents a record stored in the DHT.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -29411,7 +29411,7 @@ Represents a record stored in the DHT.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -29419,7 +29419,7 @@ Represents a record stored in the DHT.
   - calls: $_clearField
 - **value** (method) — Required: The value of the record.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -29513,7 +29513,7 @@ Represents a record stored in the DHT.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -29621,14 +29621,14 @@ Represents a record stored in the DHT.
   - calls: $_ensure
 - **sequence** (method) — Optional: The sequence number of the record.
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **sequence** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
@@ -29644,12 +29644,12 @@ Represents a request to find providers for a key.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -29855,7 +29855,7 @@ Represents a request to find providers for a key.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -30074,12 +30074,12 @@ Represents a request to find providers for a key.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — Required: The key to find providers for.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -30143,7 +30143,7 @@ Represents a request to find providers for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -30207,7 +30207,7 @@ Represents a request to find providers for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -30215,12 +30215,12 @@ Represents a request to find providers for a key.
   - calls: $_clearField
 - **count** (method) — Optional: The maximum number of providers to return (default: unlimited).
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
 - **count** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
 - **hasCount** (method)
@@ -30234,12 +30234,12 @@ Represents a response to a FindProviders request.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -30445,7 +30445,7 @@ Represents a response to a FindProviders request.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -30664,16 +30664,16 @@ Represents a response to a FindProviders request.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **providers** (method) — Repeated: The providers found for the key.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 - **closerPeers** (method) — Optional: Whether or not closer peers were found during the search.
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -30682,7 +30682,7 @@ Represents a response to a FindProviders request.
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode)
 - **closerPeers** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -30700,12 +30700,12 @@ Represents a request to provide a record for a key.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -30911,7 +30911,7 @@ Represents a request to provide a record for a key.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -31130,12 +31130,12 @@ Represents a request to provide a record for a key.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — Required: The key for which the record is being provided.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -31199,7 +31199,7 @@ Represents a request to provide a record for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -31263,7 +31263,7 @@ Represents a request to provide a record for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -31286,12 +31286,12 @@ Represents a response to a Provide request.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -31497,7 +31497,7 @@ Represents a response to a Provide request.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -31716,12 +31716,12 @@ Represents a response to a Provide request.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method) — Required: Whether or not the record was successfully provided.
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -31743,7 +31743,7 @@ Represents a response to a Provide request.
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -31774,12 +31774,12 @@ Represents a request to find a value for a key.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -31985,7 +31985,7 @@ Represents a request to find a value for a key.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -32204,12 +32204,12 @@ Represents a request to find a value for a key.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — Required: The key to find the value for.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -32273,7 +32273,7 @@ Represents a request to find a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -32337,7 +32337,7 @@ Represents a request to find a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -32350,12 +32350,12 @@ Represents a response to a FindValue request.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -32561,7 +32561,7 @@ Represents a response to a FindValue request.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -32780,12 +32780,12 @@ Represents a response to a FindValue request.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — Optional: The value found for the key (if present).
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -32879,7 +32879,7 @@ Represents a response to a FindValue request.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -32977,7 +32977,7 @@ Represents a response to a FindValue request.
   - calls: $_clearField
 - **closerPeers** (method) — Optional: The peers that are closer to the key (if no direct value is found).
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -32991,12 +32991,12 @@ Represents a request to store a value for a key.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -33202,7 +33202,7 @@ Represents a request to store a value for a key.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -33421,12 +33421,12 @@ Represents a request to store a value for a key.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — Required: The key to store the value for.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -33490,7 +33490,7 @@ Represents a request to store a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -33554,7 +33554,7 @@ Represents a request to store a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -33562,7 +33562,7 @@ Represents a request to store a value for a key.
   - calls: $_clearField
 - **value** (method) — Required: The value to store.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -33656,7 +33656,7 @@ Represents a request to store a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -33759,12 +33759,12 @@ Represents a response to a PutValue request.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -33970,7 +33970,7 @@ Represents a response to a PutValue request.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -34189,12 +34189,12 @@ Represents a response to a PutValue request.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method) — Required: Whether or not the value was successfully stored.
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -34216,7 +34216,7 @@ Represents a response to a PutValue request.
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -34247,12 +34247,12 @@ Represents a request to find a peer in the DHT by their ID.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -34458,7 +34458,7 @@ Represents a request to find a peer in the DHT by their ID.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -34677,12 +34677,12 @@ Represents a request to find a peer in the DHT by their ID.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — Required: The ID of the peer to find.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -34719,7 +34719,7 @@ Represents a request to find a peer in the DHT by their ID.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -34765,12 +34765,12 @@ Represents a response to a FindNode request.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -34976,7 +34976,7 @@ Represents a response to a FindNode request.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -35195,12 +35195,12 @@ Represents a response to a FindNode request.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **closerPeers** (method) — Repeated: The peers that are closer to the requested peer ID.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -35334,12 +35334,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -35545,7 +35545,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -35764,12 +35764,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -35806,7 +35806,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -35852,12 +35852,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -36063,7 +36063,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -36282,12 +36282,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -36324,7 +36324,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -36367,7 +36367,7 @@ _Directly tested._
   - calls: $_ensure
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -36389,7 +36389,7 @@ _Directly tested._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -36450,12 +36450,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -36661,7 +36661,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -36880,7 +36880,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **target** (method)
@@ -36895,12 +36895,12 @@ _No known direct test._
   - calls: $_ensure
 - **count** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
 - **count** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (NodeCountRecursionLimit.==)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
 - **hasCount** (method)
@@ -36912,12 +36912,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -37123,7 +37123,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -37342,7 +37342,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerIds** (method)
@@ -37384,12 +37384,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -37595,7 +37595,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -37814,7 +37814,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id1** (method)
@@ -37842,12 +37842,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -38053,7 +38053,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -38272,16 +38272,16 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **distance** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
 - **distance** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
 - **hasDistance** (method)
   - calls: $_has
@@ -38328,12 +38328,12 @@ NetworkEvent represents different network events related to the IPFS node.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -38539,7 +38539,7 @@ NetworkEvent represents different network events related to the IPFS node.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -38758,7 +38758,7 @@ NetworkEvent represents different network events related to the IPFS node.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **whichEvent** (method)
@@ -38907,11 +38907,11 @@ NetworkEvent represents different network events related to the IPFS node.
   - calls: $_ensure
 - **pubsubMessageReceived** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **pubsubMessageReceived** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
 - **hasPubsubMessageReceived** (method)
   - calls: $_has
@@ -39003,7 +39003,7 @@ NetworkEvent represents different network events related to the IPFS node.
   - calls: $_ensure
 - **error** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -39199,7 +39199,7 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **error** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -39506,12 +39506,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -39717,7 +39717,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -39936,12 +39936,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -39978,7 +39978,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -40030,12 +40030,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -40241,7 +40241,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -40460,12 +40460,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -40502,7 +40502,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -40543,11 +40543,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -40558,12 +40558,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -40769,7 +40769,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -40988,12 +40988,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41030,7 +41030,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41071,7 +41071,7 @@ Event message definitions:
   - calls: $_clearField
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -41093,7 +41093,7 @@ Event message definitions:
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -41122,12 +41122,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -41333,7 +41333,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -41552,12 +41552,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41594,7 +41594,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41635,11 +41635,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -41650,12 +41650,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -41861,7 +41861,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -42080,12 +42080,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42122,7 +42122,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42174,12 +42174,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -42385,7 +42385,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -42604,12 +42604,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42646,7 +42646,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42698,12 +42698,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -42909,7 +42909,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -43128,12 +43128,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43175,7 +43175,7 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43221,7 +43221,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43258,7 +43258,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43302,12 +43302,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -43513,7 +43513,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -43732,12 +43732,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43779,7 +43779,7 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 40 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
@@ -43825,7 +43825,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43862,7 +43862,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43906,12 +43906,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -44117,7 +44117,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -44336,7 +44336,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **queryType** (method)
@@ -44360,12 +44360,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -44571,7 +44571,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -44790,7 +44790,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **queryType** (method)
@@ -44816,12 +44816,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -45027,7 +45027,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -45246,12 +45246,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -45315,7 +45315,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -45379,7 +45379,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -45387,7 +45387,7 @@ Event message definitions:
   - calls: $_clearField
 - **value** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -45481,7 +45481,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -45579,7 +45579,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -45616,7 +45616,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -45660,12 +45660,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -45871,7 +45871,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -46090,12 +46090,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -46159,7 +46159,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -46223,7 +46223,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -46234,12 +46234,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -46445,7 +46445,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -46664,12 +46664,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -46733,7 +46733,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -46797,7 +46797,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -46805,7 +46805,7 @@ Event message definitions:
   - calls: $_clearField
 - **value** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -46899,7 +46899,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -47000,12 +47000,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -47211,7 +47211,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -47430,12 +47430,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -47499,7 +47499,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -47563,7 +47563,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -47571,7 +47571,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -47608,7 +47608,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -47652,12 +47652,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -47863,7 +47863,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -48082,12 +48082,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -48151,7 +48151,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -48215,7 +48215,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -48223,19 +48223,19 @@ Event message definitions:
   - calls: $_clearField
 - **providers** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 
 ### class `PubsubMessagePublishedEvent` extends $pb.GeneratedMessage
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -48441,7 +48441,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -48660,19 +48660,19 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **topic** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **topic** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
@@ -48694,12 +48694,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -48905,7 +48905,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -49124,19 +49124,19 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **topic** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **topic** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
@@ -49155,7 +49155,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -49192,7 +49192,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -49236,12 +49236,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -49447,7 +49447,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -49666,19 +49666,19 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **topic** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **topic** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
@@ -49692,12 +49692,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -49903,7 +49903,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -50122,19 +50122,19 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **topic** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **topic** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
@@ -50148,12 +50148,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -50359,7 +50359,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -50578,7 +50578,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -50594,12 +50594,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -50805,7 +50805,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -51024,7 +51024,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -51037,11 +51037,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -51052,12 +51052,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -51263,7 +51263,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -51482,7 +51482,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -51506,12 +51506,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -51717,7 +51717,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -51936,7 +51936,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -51960,12 +51960,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -52171,7 +52171,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -52390,7 +52390,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -52414,12 +52414,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -52625,7 +52625,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -52844,7 +52844,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **relayAddress** (method)
@@ -52857,11 +52857,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -52872,12 +52872,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -53083,7 +53083,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -53302,7 +53302,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **streamId** (method)
@@ -53315,7 +53315,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53352,7 +53352,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53396,12 +53396,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -53607,7 +53607,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -53826,7 +53826,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **streamId** (method)
@@ -53839,7 +53839,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53876,7 +53876,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53917,11 +53917,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -53932,12 +53932,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -54143,7 +54143,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -54362,12 +54362,12 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -54404,7 +54404,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -54448,12 +54448,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -54659,7 +54659,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -54878,7 +54878,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 
@@ -54886,12 +54886,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -55097,7 +55097,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -55316,7 +55316,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 
@@ -55324,12 +55324,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -55535,7 +55535,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -55754,7 +55754,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **errorType** (method)
@@ -55767,7 +55767,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -55787,7 +55787,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -55830,12 +55830,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -56041,7 +56041,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -56260,7 +56260,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **changeType** (method)
@@ -56276,12 +56276,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -56487,7 +56487,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -56706,7 +56706,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **resourceType** (method)
@@ -56719,7 +56719,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56739,7 +56739,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56766,12 +56766,12 @@ Event message definitions:
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -56977,7 +56977,7 @@ Event message definitions:
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -57196,7 +57196,7 @@ Event message definitions:
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **alertType** (method)
@@ -57209,7 +57209,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57229,7 +57229,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57277,7 +57277,7 @@ _Directly tested._
 - **DATASTORE** (static field) — More specific errors (can be expanded)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -57331,7 +57331,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `NetworkStatusChangedEvent_ChangeType` extends $pb.ProtobufEnum
@@ -57405,7 +57405,7 @@ _Directly tested._
 - **PROTOCOL_UNAVAILABLE** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -57459,7 +57459,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/dht/ipfs_node_network_events.pbjson.dart`
@@ -57799,12 +57799,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -58010,7 +58010,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -58229,12 +58229,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -58293,7 +58293,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -58356,7 +58356,7 @@ _Directly tested._
   - calls: $_clearField
 - **key** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -58420,7 +58420,7 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -58484,7 +58484,7 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -58492,7 +58492,7 @@ _Directly tested._
   - calls: $_clearField
 - **record** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.require)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.recordLoadOutcome)
@@ -58508,7 +58508,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
 - **record** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.require)
     - `lib/src/core/plugins/capability_registry.dart` (CapabilityRegistry.recordLoadOutcome)
@@ -58535,7 +58535,7 @@ _Directly tested._
   - calls: $_ensure
 - **closerPeers** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -58553,11 +58553,11 @@ _Directly tested._
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
 - **clusterLevelRaw** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
 - **clusterLevelRaw** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
 - **hasClusterLevelRaw** (method)
   - calls: $_has
@@ -58568,12 +58568,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -58779,7 +58779,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -58998,12 +58998,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -59043,7 +59043,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -59087,7 +59087,7 @@ _Directly tested._
   - calls: $_clearField
 - **addrs** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
 - **connection** (method)
@@ -59114,7 +59114,7 @@ _Directly tested._
 - **CANNOT_CONNECT** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -59168,7 +59168,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `Message_MessageType` extends $pb.ProtobufEnum
@@ -59214,13 +59214,13 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage)
 - **PING** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (PingMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -59274,7 +59274,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/dht/kademlia.pbjson.dart`
@@ -59322,12 +59322,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -59533,7 +59533,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -59752,12 +59752,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -59794,7 +59794,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -59837,11 +59837,11 @@ _Directly tested._
   - calls: $_ensure
 - **distance** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
 - **distance** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
 - **hasDistance** (method)
   - calls: $_has
@@ -59849,14 +59849,14 @@ _Directly tested._
   - calls: $_clearField
 - **associatedPeerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.getAssociatedPeer)
 - **associatedPeerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -59869,19 +59869,19 @@ _Directly tested._
   - calls: $_ensure
 - **children** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes)
 - **lastSeen** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
 - **lastSeen** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updateKeyProviderTimestamp)
@@ -59917,12 +59917,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -60128,7 +60128,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -60347,7 +60347,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **localNode** (method)
@@ -60362,7 +60362,7 @@ _No known direct test._
   - calls: $_ensure
 - **buckets** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.containsPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount)
@@ -60374,12 +60374,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -60585,7 +60585,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -60804,7 +60804,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **nodes** (method)
@@ -60846,12 +60846,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -61057,7 +61057,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -61276,7 +61276,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **target** (method)
@@ -61294,12 +61294,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -61505,7 +61505,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -61724,7 +61724,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **closestNodes** (method)
@@ -61770,12 +61770,12 @@ Represents a node in a Red-Black Tree.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -61981,7 +61981,7 @@ Represents a node in a Red-Black Tree.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -62200,12 +62200,12 @@ Represents a node in a Red-Black Tree.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — The key associated with this node.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -62269,7 +62269,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -62333,7 +62333,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -62343,7 +62343,7 @@ Represents a node in a Red-Black Tree.
   - calls: $_ensure
 - **value** (method) — The value associated with this node.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -62437,7 +62437,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -62537,7 +62537,7 @@ Represents a node in a Red-Black Tree.
   - calls: $_ensure
 - **color** (method) — The color of this node (RED or BLACK).
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/fix_violations.dart` (FixViolations.fixInsertion)
     - `lib/src/protocols/dht/red_black_tree/fix_violations.dart` (FixViolations.fixDeletion)
@@ -62546,7 +62546,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree)
 - **color** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/fix_violations.dart` (FixViolations.fixInsertion)
     - `lib/src/protocols/dht/red_black_tree/fix_violations.dart` (FixViolations.fixDeletion)
@@ -62605,12 +62605,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -62816,7 +62816,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -63035,7 +63035,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 
@@ -63043,12 +63043,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -63254,7 +63254,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -63473,12 +63473,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -63500,7 +63500,7 @@ _No known direct test._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -63561,12 +63561,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -63772,7 +63772,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -63991,12 +63991,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -64033,7 +64033,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -64079,12 +64079,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -64290,7 +64290,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -64509,12 +64509,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **success** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -64536,7 +64536,7 @@ _No known direct test._
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **success** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 30 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
     - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
@@ -64597,12 +64597,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -64808,7 +64808,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -65027,12 +65027,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **entries** (method) — Represents the routing table entries.
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -65113,12 +65113,12 @@ Request message for storing provider information
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -65324,7 +65324,7 @@ Request message for storing provider information
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -65543,12 +65543,12 @@ Request message for storing provider information
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — The key for which provider information is being stored
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -65612,7 +65612,7 @@ Request message for storing provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -65676,7 +65676,7 @@ Request message for storing provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -65696,13 +65696,13 @@ Request message for storing provider information
   - calls: $_ensure
 - **ttl** (method) — Time-to-live in seconds for this provider record
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **ttl** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
@@ -65717,12 +65717,12 @@ Response message for store provider operation
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -65928,7 +65928,7 @@ Response message for store provider operation
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -66147,12 +66147,12 @@ Response message for store provider operation
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **status** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -66161,7 +66161,7 @@ Response message for store provider operation
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
 - **status** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -66174,11 +66174,11 @@ Response message for store provider operation
   - calls: $_clearField
 - **errorMessage** (method) — Error message if status is ERROR
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **errorMessage** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **hasErrorMessage** (method)
   - calls: $_has
@@ -66186,12 +66186,12 @@ Response message for store provider operation
   - calls: $_clearField
 - **replicationCount** (method) — Number of successful replications
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.incrementReplicationCount)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.updateReplicationCount)
 - **replicationCount** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.incrementReplicationCount)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.updateReplicationCount)
 - **hasReplicationCount** (method)
@@ -66205,12 +66205,12 @@ Request to retrieve provider information
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -66416,7 +66416,7 @@ Request to retrieve provider information
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -66635,12 +66635,12 @@ Request to retrieve provider information
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method) — The key to look up providers for
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -66704,7 +66704,7 @@ Request to retrieve provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -66768,7 +66768,7 @@ Request to retrieve provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -66791,12 +66791,12 @@ Response containing provider information
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -67002,7 +67002,7 @@ Response containing provider information
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -67221,12 +67221,12 @@ Response containing provider information
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **providers** (method) — List of providers for the requested key
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 - **closestPeers** (method) — Closest peers that might have the provider information
   - calls: $_getList
@@ -67248,7 +67248,7 @@ Status of the store operation
 - **CAPACITY_EXCEEDED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -67302,7 +67302,7 @@ Status of the store operation
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/dht/store_provider.pbjson.dart`
@@ -67363,12 +67363,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -67574,7 +67574,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -67793,7 +67793,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **typeUrl** (method) — A URL/resource name that uniquely identifies the type of the serialized
@@ -67806,7 +67806,7 @@ _No known direct test._
   - calls: $_clearField
 - **value** (method) — Must be a valid serialized protocol buffer of the above specified type.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -67900,7 +67900,7 @@ _No known direct test._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -68030,12 +68030,12 @@ Api is a light-weight descriptor for an API Interface.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -68241,7 +68241,7 @@ Api is a light-weight descriptor for an API Interface.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -68460,12 +68460,12 @@ Api is a light-weight descriptor for an API Interface.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — The fully qualified name of this interface, including package name
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -68493,7 +68493,7 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -68529,7 +68529,7 @@ Api is a light-weight descriptor for an API Interface.
   - calls: $_getList
 - **version** (method) — A version string for this interface. If specified, must have the form
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -68538,7 +68538,7 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -68576,12 +68576,12 @@ Method represents a method of an API interface.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -68787,7 +68787,7 @@ Method represents a method of an API interface.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -69006,12 +69006,12 @@ Method represents a method of an API interface.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — The simple name of this method.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -69039,7 +69039,7 @@ Method represents a method of an API interface.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -69118,12 +69118,12 @@ Declares an API Interface to be included in this interface. The including
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -69329,7 +69329,7 @@ Declares an API Interface to be included in this interface. The including
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -69548,12 +69548,12 @@ Declares an API Interface to be included in this interface. The including
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — The fully qualified name of the interface which is included.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -69581,7 +69581,7 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -69613,7 +69613,7 @@ Declares an API Interface to be included in this interface. The including
   - calls: $_clearField
 - **root** (method) — If non-empty specifies a path under which inherited HTTP paths
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh)
@@ -69631,7 +69631,7 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **root** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh)
@@ -69697,12 +69697,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -69908,7 +69908,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -70127,7 +70127,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **legacyClosedEnum** (method) — Whether or not to treat an enum field as closed.  This option is only
@@ -70168,12 +70168,12 @@ _No known direct test._
   - calls: _
 - **STRING** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -70227,7 +70227,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/google/protobuf/cpp_features.pbjson.dart`
@@ -70261,12 +70261,12 @@ The protocol compiler can output a FileDescriptorSet containing the .proto
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -70472,7 +70472,7 @@ The protocol compiler can output a FileDescriptorSet containing the .proto
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -70691,7 +70691,7 @@ The protocol compiler can output a FileDescriptorSet containing the .proto
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **file** (method)
@@ -70705,12 +70705,12 @@ Describes a complete .proto file.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -70916,7 +70916,7 @@ Describes a complete .proto file.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -71135,12 +71135,12 @@ Describes a complete .proto file.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -71168,7 +71168,7 @@ Describes a complete .proto file.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -71261,12 +71261,12 @@ Describes a complete .proto file.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -71472,7 +71472,7 @@ Describes a complete .proto file.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -71691,12 +71691,12 @@ Describes a complete .proto file.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -71726,7 +71726,7 @@ Describes a complete .proto file.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -71760,11 +71760,11 @@ Describes a complete .proto file.
   - calls: $_clearField
 - **end** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **end** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **hasEnd** (method)
   - calls: $_has
@@ -71787,12 +71787,12 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -71998,7 +71998,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -72217,12 +72217,12 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72252,7 +72252,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72286,11 +72286,11 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
   - calls: $_clearField
 - **end** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **end** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **hasEnd** (method)
   - calls: $_has
@@ -72303,12 +72303,12 @@ Describes a message type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -72514,7 +72514,7 @@ Describes a message type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -72733,12 +72733,12 @@ Describes a message type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -72766,7 +72766,7 @@ Describes a message type.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -72827,12 +72827,12 @@ Describes a message type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -73038,7 +73038,7 @@ Describes a message type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -73257,7 +73257,7 @@ Describes a message type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **number** (method) — The extension number declared within the extension range.
@@ -73278,7 +73278,7 @@ Describes a message type.
   - calls: $_clearField
 - **type** (method) — The fully-qualified type name of the extension field. Unlike
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -73337,7 +73337,7 @@ Describes a message type.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -73419,12 +73419,12 @@ Describes a message type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -73630,7 +73630,7 @@ Describes a message type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -73849,7 +73849,7 @@ Describes a message type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **declaration** (method) — For external users: DO NOT USE. We are in the process of open sourcing
@@ -73881,12 +73881,12 @@ Describes a field within a message.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -74092,7 +74092,7 @@ Describes a field within a message.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -74311,12 +74311,12 @@ Describes a field within a message.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -74344,7 +74344,7 @@ Describes a field within a message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -74392,11 +74392,11 @@ Describes a field within a message.
   - calls: $_clearField
 - **label** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.label)
 - **label** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.label)
 - **hasLabel** (method)
   - calls: $_has
@@ -74404,7 +74404,7 @@ Describes a field within a message.
   - calls: $_clearField
 - **type** (method) — If type_name is set, this need not be set.  If both this and type_name
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -74463,7 +74463,7 @@ Describes a field within a message.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -74581,12 +74581,12 @@ Describes a oneof.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -74792,7 +74792,7 @@ Describes a oneof.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -75011,12 +75011,12 @@ Describes a oneof.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -75044,7 +75044,7 @@ Describes a oneof.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -75091,12 +75091,12 @@ Range of reserved numeric values. Reserved values may not be used by
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -75302,7 +75302,7 @@ Range of reserved numeric values. Reserved values may not be used by
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -75521,12 +75521,12 @@ Range of reserved numeric values. Reserved values may not be used by
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -75556,7 +75556,7 @@ Range of reserved numeric values. Reserved values may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -75590,11 +75590,11 @@ Range of reserved numeric values. Reserved values may not be used by
   - calls: $_clearField
 - **end** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **end** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **hasEnd** (method)
   - calls: $_has
@@ -75607,12 +75607,12 @@ Describes an enum type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -75818,7 +75818,7 @@ Describes an enum type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -76037,12 +76037,12 @@ Describes an enum type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -76070,7 +76070,7 @@ Describes an enum type.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -76102,7 +76102,7 @@ Describes an enum type.
   - calls: $_clearField
 - **value** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -76215,12 +76215,12 @@ Describes a value within an enum.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -76426,7 +76426,7 @@ Describes a value within an enum.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -76645,12 +76645,12 @@ Describes a value within an enum.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -76678,7 +76678,7 @@ Describes a value within an enum.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -76733,12 +76733,12 @@ Describes a service.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -76944,7 +76944,7 @@ Describes a service.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -77163,12 +77163,12 @@ Describes a service.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -77196,7 +77196,7 @@ Describes a service.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -77248,12 +77248,12 @@ Describes a method of a service.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -77459,7 +77459,7 @@ Describes a method of a service.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -77678,12 +77678,12 @@ Describes a method of a service.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -77711,7 +77711,7 @@ Describes a method of a service.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -77788,12 +77788,12 @@ Describes a method of a service.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -77999,7 +77999,7 @@ Describes a method of a service.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -78218,7 +78218,7 @@ Describes a method of a service.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **javaPackage** (method) — Sets the Java package where classes generated from this .proto will be
@@ -78390,12 +78390,12 @@ Describes a method of a service.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -78601,7 +78601,7 @@ Describes a method of a service.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -78820,7 +78820,7 @@ Describes a method of a service.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **messageSetWireFormat** (method) — Set true to use the old proto1 MessageSet wire format for extensions.
@@ -78880,12 +78880,12 @@ Describes a method of a service.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -79091,7 +79091,7 @@ Describes a method of a service.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -79310,12 +79310,12 @@ Describes a method of a service.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -79409,7 +79409,7 @@ Describes a method of a service.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -79520,12 +79520,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -79731,7 +79731,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -79950,7 +79950,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **editionIntroduced** (method) — The edition that this feature was first available in.  In editions
@@ -79990,12 +79990,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -80201,7 +80201,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -80420,7 +80420,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **ctype** (method) — NOTE: ctype is deprecated. Use `features.(pb.cpp).string_type` instead.
@@ -80526,12 +80526,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -80737,7 +80737,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -80956,7 +80956,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **features** (method) — Any features defined in the specific edition.
@@ -80976,12 +80976,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -81187,7 +81187,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -81406,7 +81406,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **allowAlias** (method) — Set this option to true to allow mapping different tag names to the same
@@ -81450,12 +81450,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -81661,7 +81661,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -81880,7 +81880,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **deprecated** (method) — Is this enum value deprecated?
@@ -81926,12 +81926,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -82137,7 +82137,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -82356,7 +82356,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **deprecated** (method) — Is this service deprecated?
@@ -82384,12 +82384,12 @@ Information about the support window of a feature.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -82595,7 +82595,7 @@ Information about the support window of a feature.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -82814,7 +82814,7 @@ Information about the support window of a feature.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **deprecated** (method) — Is this method deprecated?
@@ -82852,12 +82852,12 @@ The name of the uninterpreted option.  Each string represents a segment in
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -83063,7 +83063,7 @@ The name of the uninterpreted option.  Each string represents a segment in
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -83282,7 +83282,7 @@ The name of the uninterpreted option.  Each string represents a segment in
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **namePart** (method)
@@ -83308,12 +83308,12 @@ A message representing a option the parser does not recognize. This only
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -83519,7 +83519,7 @@ A message representing a option the parser does not recognize. This only
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -83738,12 +83738,12 @@ A message representing a option the parser does not recognize. This only
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -83803,7 +83803,7 @@ A message representing a option the parser does not recognize. This only
   - calls: $_clearField
 - **stringValue** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -83812,7 +83812,7 @@ A message representing a option the parser does not recognize. This only
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **stringValue** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -83838,12 +83838,12 @@ TODO Enums in C++ gencode (and potentially other languages) are
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -84049,7 +84049,7 @@ TODO Enums in C++ gencode (and potentially other languages) are
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -84268,7 +84268,7 @@ TODO Enums in C++ gencode (and potentially other languages) are
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **fieldPresence** (method)
@@ -84326,12 +84326,12 @@ A map from every known edition with a unique set of defaults to its
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -84537,7 +84537,7 @@ A map from every known edition with a unique set of defaults to its
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -84756,7 +84756,7 @@ A map from every known edition with a unique set of defaults to its
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **edition** (method)
@@ -84794,12 +84794,12 @@ A compiled specification for the defaults of a set of features.  These
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -85005,7 +85005,7 @@ A compiled specification for the defaults of a set of features.  These
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -85224,7 +85224,7 @@ A compiled specification for the defaults of a set of features.  These
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **defaults** (method)
@@ -85250,12 +85250,12 @@ A compiled specification for the defaults of a set of features.  These
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -85461,7 +85461,7 @@ A compiled specification for the defaults of a set of features.  These
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -85680,12 +85680,12 @@ A compiled specification for the defaults of a set of features.  These
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **path** (method) — Identifies which part of the FileDescriptorProto was defined at this
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -85721,12 +85721,12 @@ Encapsulates information about the original source file from which a
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -85932,7 +85932,7 @@ Encapsulates information about the original source file from which a
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -86151,7 +86151,7 @@ Encapsulates information about the original source file from which a
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **location** (method) — A Location identifies a piece of source code in a .proto file which
@@ -86161,12 +86161,12 @@ Encapsulates information about the original source file from which a
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -86372,7 +86372,7 @@ Encapsulates information about the original source file from which a
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -86591,12 +86591,12 @@ Encapsulates information about the original source file from which a
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **path** (method) — Identifies the element in the original source .proto file. This field
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createTempDirectory)
@@ -86623,11 +86623,11 @@ Encapsulates information about the original source file from which a
   - calls: $_clearField
 - **end** (method) — Identifies the ending offset in bytes in the generated code that
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **end** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
 - **hasEnd** (method)
   - calls: $_has
@@ -86648,12 +86648,12 @@ Describes the relationship between generated code and its original source
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -86859,7 +86859,7 @@ Describes the relationship between generated code and its original source
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -87078,7 +87078,7 @@ Describes the relationship between generated code and its original source
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **annotation** (method) — An Annotation connects some span of text in generated code to an element
@@ -87119,7 +87119,7 @@ The full set of known editions.
 - **EDITION_MAX** (static field) — Placeholder for specifying unbounded edition support.  This should only
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87172,7 +87172,7 @@ The full set of known editions.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.sessions)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `ExtensionRangeOptions_VerificationState` extends $pb.ProtobufEnum
@@ -87184,7 +87184,7 @@ The verification state of the extension range.
 - **UNVERIFIED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87238,7 +87238,7 @@ The verification state of the extension range.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldDescriptorProto_Type` extends $pb.ProtobufEnum
@@ -87280,7 +87280,7 @@ The verification state of the extension range.
 - **TYPE_SINT64** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87334,7 +87334,7 @@ The verification state of the extension range.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldDescriptorProto_Label` extends $pb.ProtobufEnum
@@ -87346,7 +87346,7 @@ The verification state of the extension range.
 - **LABEL_REQUIRED** (static field) — The required label is only allowed in google.protobuf.  In proto3 and Editions
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87400,7 +87400,7 @@ The verification state of the extension range.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FileOptions_OptimizeMode` extends $pb.ProtobufEnum
@@ -87414,7 +87414,7 @@ Generated classes can be optimized for speed or code size.
 - **LITE_RUNTIME** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87468,14 +87468,14 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldOptions_CType` extends $pb.ProtobufEnum
 
 - **STRING** (static field) — Default mode.
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87484,7 +87484,7 @@ Generated classes can be optimized for speed or code size.
 - **STRING_PIECE** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87538,7 +87538,7 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldOptions_JSType` extends $pb.ProtobufEnum
@@ -87550,7 +87550,7 @@ Generated classes can be optimized for speed or code size.
 - **JS_NUMBER** (static field) — Use JavaScript numbers.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87604,7 +87604,7 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldOptions_OptionRetention` extends $pb.ProtobufEnum
@@ -87618,7 +87618,7 @@ If set to RETENTION_SOURCE, the option will be omitted from the binary.
 - **RETENTION_SOURCE** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87672,7 +87672,7 @@ If set to RETENTION_SOURCE, the option will be omitted from the binary.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FieldOptions_OptionTargetType` extends $pb.ProtobufEnum
@@ -87700,7 +87700,7 @@ This indicates the types of entities that the field may apply to when used
 - **TARGET_TYPE_METHOD** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87754,7 +87754,7 @@ This indicates the types of entities that the field may apply to when used
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `MethodOptions_IdempotencyLevel` extends $pb.ProtobufEnum
@@ -87768,7 +87768,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **IDEMPOTENT** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87822,7 +87822,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_FieldPresence` extends $pb.ProtobufEnum
@@ -87836,7 +87836,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **LEGACY_REQUIRED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87890,7 +87890,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_EnumType` extends $pb.ProtobufEnum
@@ -87902,7 +87902,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **CLOSED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -87956,7 +87956,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_RepeatedFieldEncoding` extends $pb.ProtobufEnum
@@ -87968,7 +87968,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **EXPANDED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -88022,7 +88022,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_Utf8Validation` extends $pb.ProtobufEnum
@@ -88034,7 +88034,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **NONE** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -88088,7 +88088,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_MessageEncoding` extends $pb.ProtobufEnum
@@ -88100,7 +88100,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **DELIMITED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -88154,7 +88154,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `FeatureSet_JsonFormat` extends $pb.ProtobufEnum
@@ -88166,7 +88166,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
 - **LEGACY_BEST_EFFORT** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -88220,7 +88220,7 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `GeneratedCodeInfo_Annotation_Semantic` extends $pb.ProtobufEnum
@@ -88234,7 +88234,7 @@ Represents the identified object's effect on the element in the original
 - **ALIAS** (static field) — An alias to the element is returned.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -88288,7 +88288,7 @@ Represents the identified object's effect on the element in the original
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/google/protobuf/descriptor.pbjson.dart`
@@ -88629,12 +88629,12 @@ A Duration represents a signed, fixed-length span of time represented
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -88840,7 +88840,7 @@ A Duration represents a signed, fixed-length span of time represented
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -89059,17 +89059,17 @@ A Duration represents a signed, fixed-length span of time represented
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **seconds** (method) — Signed seconds of the span of time. Must be from -315,576,000,000
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **seconds** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **hasSeconds** (method)
@@ -89078,12 +89078,12 @@ A Duration represents a signed, fixed-length span of time represented
   - calls: $_clearField
 - **nanos** (method) — Signed fractions of a second at nanosecond resolution of the span
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **nanos** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **hasNanos** (method)
@@ -89138,12 +89138,12 @@ A generic empty message that you can re-use to avoid defining duplicated
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -89349,7 +89349,7 @@ A generic empty message that you can re-use to avoid defining duplicated
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -89568,7 +89568,7 @@ A generic empty message that you can re-use to avoid defining duplicated
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 
@@ -89605,12 +89605,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -89816,7 +89816,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -90035,7 +90035,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **paths** (method) — The set of field mask paths.
@@ -90068,12 +90068,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -90279,7 +90279,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -90498,7 +90498,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **legacyClosedEnum** (method) — Whether or not to treat an enum field as closed.  This option is only
@@ -90542,7 +90542,7 @@ The UTF8 validation strategy to use.  See go/editions-utf8-validation for
 - **VERIFY** (static field) — Verifies UTF8 validity overriding the global utf8_validation
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -90596,7 +90596,7 @@ The UTF8 validation strategy to use.  See go/editions-utf8-validation for
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/google/protobuf/java_features.pbjson.dart`
@@ -90630,12 +90630,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -90841,7 +90841,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -91060,7 +91060,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **fileName** (method) — The path-qualified name of the .proto file that contained the associated
@@ -91103,12 +91103,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -91314,7 +91314,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -91533,12 +91533,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **fields** (method) — Unordered map of dynamically typed values.
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.==)
 
 ### class `Value` extends $pb.GeneratedMessage
@@ -91547,12 +91547,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -91758,7 +91758,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -91977,7 +91977,7 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **whichKind** (method)
@@ -92002,7 +92002,7 @@ _No known direct test._
   - calls: $_clearField
 - **stringValue** (method) — Represents a string value.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -92011,7 +92011,7 @@ _No known direct test._
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **stringValue** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -92024,13 +92024,13 @@ _No known direct test._
   - calls: $_clearField
 - **boolValue** (method) — Represents a boolean value.
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **boolValue** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
@@ -92050,7 +92050,7 @@ _No known direct test._
   - calls: $_ensure
 - **listValue** (method) — Represents a repeated `Value`.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
@@ -92058,7 +92058,7 @@ _No known direct test._
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreUnion.toNode)
 - **listValue** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
@@ -92077,12 +92077,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -92288,7 +92288,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -92507,12 +92507,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **values** (method) — Repeated field of dynamically typed values.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -92578,7 +92578,7 @@ _No known direct test._
 - **NULL_VALUE** (static field) — Null value.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -92632,7 +92632,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/google/protobuf/struct.pbjson.dart`
@@ -92693,12 +92693,12 @@ A Timestamp represents a point in time independent of any time zone or local
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -92904,7 +92904,7 @@ A Timestamp represents a point in time independent of any time zone or local
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -93123,17 +93123,17 @@ A Timestamp represents a point in time independent of any time zone or local
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **seconds** (method) — Represents seconds of UTC time since Unix epoch
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **seconds** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **hasSeconds** (method)
@@ -93142,12 +93142,12 @@ A Timestamp represents a point in time independent of any time zone or local
   - calls: $_clearField
 - **nanos** (method) — Non-negative fractions of a second at nanosecond resolution. Negative
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **nanos** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/proto/generated/google/protobuf/duration.pb.dart` (Duration.fromDart)
 - **hasNanos** (method)
@@ -93188,12 +93188,12 @@ A protocol buffer message type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -93399,7 +93399,7 @@ A protocol buffer message type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -93618,12 +93618,12 @@ A protocol buffer message type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — The fully qualified message name.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -93651,7 +93651,7 @@ A protocol buffer message type.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -93683,7 +93683,7 @@ A protocol buffer message type.
   - calls: $_clearField
 - **fields** (method) — The list of fields.
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreFields.==)
 - **oneofs** (method) — The list of types appearing in `oneof` definitions in this type.
   - calls: $_getList
@@ -93722,12 +93722,12 @@ A single field of a message type.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -93933,7 +93933,7 @@ A single field of a message type.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -94152,12 +94152,12 @@ A single field of a message type.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **kind** (method) — The field type.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -94178,7 +94178,7 @@ A single field of a message type.
     - `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector)
 - **kind** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -94219,7 +94219,7 @@ A single field of a message type.
   - calls: $_clearField
 - **name** (method) — The field name.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -94247,7 +94247,7 @@ A single field of a message type.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -94326,12 +94326,12 @@ Enum type definition.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -94537,7 +94537,7 @@ Enum type definition.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -94756,12 +94756,12 @@ Enum type definition.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — Enum type name.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -94789,7 +94789,7 @@ Enum type definition.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -94856,12 +94856,12 @@ Enum value definition.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -95067,7 +95067,7 @@ Enum value definition.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -95286,12 +95286,12 @@ Enum value definition.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — Enum value name.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -95319,7 +95319,7 @@ Enum value definition.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -95366,12 +95366,12 @@ A protocol buffer option, which can be attached to a message, field,
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -95577,7 +95577,7 @@ A protocol buffer option, which can be attached to a message, field,
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -95796,12 +95796,12 @@ A protocol buffer option, which can be attached to a message, field,
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **name** (method) — The option's name. For protobuf built-in options (options defined in
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -95829,7 +95829,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **name** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -95861,7 +95861,7 @@ A protocol buffer option, which can be attached to a message, field,
   - calls: $_clearField
 - **value** (method) — The option's value packed in an Any message. If the value is a primitive,
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -95955,7 +95955,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -96071,7 +96071,7 @@ The syntax in which a protocol buffer element is defined.
 - **SYNTAX_EDITIONS** (static field) — Syntax `editions`.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -96125,7 +96125,7 @@ The syntax in which a protocol buffer element is defined.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `Field_Kind` extends $pb.ProtobufEnum
@@ -96171,7 +96171,7 @@ Basic field types.
 - **TYPE_SINT64** (static field) — Field type sint64.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -96225,7 +96225,7 @@ Basic field types.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ### class `Field_Cardinality` extends $pb.ProtobufEnum
@@ -96241,7 +96241,7 @@ Whether a field is optional, required, or repeated.
 - **CARDINALITY_REPEATED** (static field) — For repeated fields.
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -96295,7 +96295,7 @@ Whether a field is optional, required, or repeated.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/google/protobuf/type.pbjson.dart`
@@ -96378,12 +96378,12 @@ Wrapper message for `double`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -96589,7 +96589,7 @@ Wrapper message for `double`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -96808,12 +96808,12 @@ Wrapper message for `double`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The double value.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -96907,7 +96907,7 @@ Wrapper message for `double`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setDouble
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -97010,12 +97010,12 @@ Wrapper message for `float`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -97221,7 +97221,7 @@ Wrapper message for `float`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -97440,12 +97440,12 @@ Wrapper message for `float`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The float value.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -97539,7 +97539,7 @@ Wrapper message for `float`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setFloat
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -97642,12 +97642,12 @@ Wrapper message for `int64`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -97853,7 +97853,7 @@ Wrapper message for `int64`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -98072,12 +98072,12 @@ Wrapper message for `int64`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The int64 value.
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -98171,7 +98171,7 @@ Wrapper message for `int64`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -98274,12 +98274,12 @@ Wrapper message for `uint64`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -98485,7 +98485,7 @@ Wrapper message for `uint64`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -98704,12 +98704,12 @@ Wrapper message for `uint64`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The uint64 value.
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -98803,7 +98803,7 @@ Wrapper message for `uint64`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -98906,12 +98906,12 @@ Wrapper message for `int32`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -99117,7 +99117,7 @@ Wrapper message for `int32`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -99336,12 +99336,12 @@ Wrapper message for `int32`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The int32 value.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -99435,7 +99435,7 @@ Wrapper message for `int32`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -99538,12 +99538,12 @@ Wrapper message for `uint32`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -99749,7 +99749,7 @@ Wrapper message for `uint32`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -99968,12 +99968,12 @@ Wrapper message for `uint32`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The uint32 value.
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -100067,7 +100067,7 @@ Wrapper message for `uint32`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -100170,12 +100170,12 @@ Wrapper message for `bool`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -100381,7 +100381,7 @@ Wrapper message for `bool`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -100600,12 +100600,12 @@ Wrapper message for `bool`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The bool value.
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -100699,7 +100699,7 @@ Wrapper message for `bool`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -100802,12 +100802,12 @@ Wrapper message for `string`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -101013,7 +101013,7 @@ Wrapper message for `string`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -101232,12 +101232,12 @@ Wrapper message for `string`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The string value.
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -101331,7 +101331,7 @@ Wrapper message for `string`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -101434,12 +101434,12 @@ Wrapper message for `bytes`.
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -101645,7 +101645,7 @@ Wrapper message for `bytes`.
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -101864,12 +101864,12 @@ Wrapper message for `bytes`.
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method) — The bytes value.
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -101963,7 +101963,7 @@ Wrapper message for `bytes`.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -102163,12 +102163,12 @@ Main Graphsync Message
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -102374,7 +102374,7 @@ Main Graphsync Message
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -102593,7 +102593,7 @@ Main Graphsync Message
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **requests** (method)
@@ -102605,13 +102605,13 @@ Main Graphsync Message
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest)
 - **responses** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **blocks** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -102619,7 +102619,7 @@ Main Graphsync Message
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **extensions** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 
@@ -102629,12 +102629,12 @@ Request for graph traversal
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -102840,7 +102840,7 @@ Request for graph traversal
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -103059,12 +103059,12 @@ Request for graph traversal
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103104,7 +103104,7 @@ Request for graph traversal
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103148,7 +103148,7 @@ Request for graph traversal
   - calls: $_clearField
 - **root** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh)
@@ -103166,7 +103166,7 @@ Request for graph traversal
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **root** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh)
@@ -103188,11 +103188,11 @@ Request for graph traversal
   - calls: $_clearField
 - **selector** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **selector** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **hasSelector** (method)
   - calls: $_has
@@ -103200,7 +103200,7 @@ Request for graph traversal
   - calls: $_clearField
 - **priority** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -103209,7 +103209,7 @@ Request for graph traversal
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
 - **priority** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -103222,12 +103222,12 @@ Request for graph traversal
   - calls: $_clearField
 - **extensions** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **cancel** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
@@ -103254,7 +103254,7 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
 - **cancel** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/bootstrap_handler.dart` (BootstrapHandler.stop)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
@@ -103285,11 +103285,11 @@ Request for graph traversal
   - calls: $_clearField
 - **pause** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest)
 - **pause** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createPauseRequest)
 - **hasPause** (method)
   - calls: $_has
@@ -103297,11 +103297,11 @@ Request for graph traversal
   - calls: $_clearField
 - **unpause** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest)
 - **unpause** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createUnpauseRequest)
 - **hasUnpause** (method)
   - calls: $_has
@@ -103314,12 +103314,12 @@ Response to graph request
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -103525,7 +103525,7 @@ Response to graph request
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -103744,12 +103744,12 @@ Response to graph request
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103789,7 +103789,7 @@ Response to graph request
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103833,7 +103833,7 @@ Response to graph request
   - calls: $_clearField
 - **status** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -103842,7 +103842,7 @@ Response to graph request
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.listRemotePins)
 - **status** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -103855,12 +103855,12 @@ Response to graph request
   - calls: $_clearField
 - **extensions** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createRequest)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **metadata** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -103873,12 +103873,12 @@ Block data with prefix
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -104084,7 +104084,7 @@ Block data with prefix
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -104303,12 +104303,12 @@ Block data with prefix
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **prefix** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -104316,7 +104316,7 @@ Block data with prefix
     - `lib/src/storage/hive_datastore.dart` (HiveDatastore.query)
 - **prefix** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
@@ -104328,7 +104328,7 @@ Block data with prefix
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -104383,7 +104383,7 @@ Block data with prefix
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -104438,7 +104438,7 @@ Block data with prefix
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -104480,7 +104480,7 @@ Standard response status codes
 - **RS_PAUSED_PENDING_RESOURCES** (static field) — Request is paused pending local resources
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -104534,7 +104534,7 @@ Standard response status codes
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/graphsync/graphsync.pbjson.dart`
@@ -104616,12 +104616,12 @@ Main message wrapping all IPLD value types
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -104827,7 +104827,7 @@ Main message wrapping all IPLD value types
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -105046,7 +105046,7 @@ Main message wrapping all IPLD value types
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **whichValue** (method)
@@ -105055,7 +105055,7 @@ Main message wrapping all IPLD value types
   - calls: $_clearField, $_whichOneof
 - **kind** (method) — The kind of value stored
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -105076,7 +105076,7 @@ Main message wrapping all IPLD value types
     - `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector)
 - **kind** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -105101,13 +105101,13 @@ Main message wrapping all IPLD value types
   - calls: $_clearField
 - **boolValue** (method) — Basic types
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **boolValue** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
@@ -105117,14 +105117,14 @@ Main message wrapping all IPLD value types
   - calls: $_clearField
 - **intValue** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **intValue** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
@@ -105143,7 +105143,7 @@ Main message wrapping all IPLD value types
   - calls: $_clearField
 - **stringValue** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -105152,7 +105152,7 @@ Main message wrapping all IPLD value types
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
 - **stringValue** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -105165,7 +105165,7 @@ Main message wrapping all IPLD value types
   - calls: $_clearField
 - **bytesValue** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -105173,7 +105173,7 @@ Main message wrapping all IPLD value types
     - `lib/src/core/ipld/codecs/standard_codecs.dart` (RawCodec.decode)
 - **bytesValue** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
@@ -105185,7 +105185,7 @@ Main message wrapping all IPLD value types
   - calls: $_clearField
 - **listValue** (method) — Complex types
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
@@ -105193,7 +105193,7 @@ Main message wrapping all IPLD value types
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreUnion.toNode)
 - **listValue** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
@@ -105207,7 +105207,7 @@ Main message wrapping all IPLD value types
   - calls: $_ensure
 - **mapValue** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -105219,7 +105219,7 @@ Main message wrapping all IPLD value types
     - `lib/src/core/ipld/selectors/selector_ast.dart` (parseSelector)
 - **mapValue** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.encode)
@@ -105237,11 +105237,11 @@ Main message wrapping all IPLD value types
   - calls: $_ensure
 - **linkValue** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
 - **linkValue** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
 - **hasLinkValue** (method)
   - calls: $_has
@@ -105264,12 +105264,12 @@ Represents an ordered sequence of IPLD values
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -105475,7 +105475,7 @@ Represents an ordered sequence of IPLD values
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -105694,12 +105694,12 @@ Represents an ordered sequence of IPLD values
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **values** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -105758,12 +105758,12 @@ Represents key-value associations
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -105969,7 +105969,7 @@ Represents key-value associations
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -106188,12 +106188,12 @@ Represents key-value associations
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **entries** (method)
   - calls: $_getList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -106245,12 +106245,12 @@ Individual map entry
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -106456,7 +106456,7 @@ Individual map entry
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -106675,12 +106675,12 @@ Individual map entry
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **key** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -106744,7 +106744,7 @@ Individual map entry
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **key** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -106808,7 +106808,7 @@ Individual map entry
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
@@ -106816,7 +106816,7 @@ Individual map entry
   - calls: $_clearField
 - **value** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -106910,7 +106910,7 @@ Individual map entry
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -107015,12 +107015,12 @@ Represents a CID link
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -107226,7 +107226,7 @@ Represents a CID link
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -107445,12 +107445,12 @@ Represents a CID link
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **version** (method) — CID version (0 or 1)
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -107459,7 +107459,7 @@ Represents a CID link
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
@@ -107472,7 +107472,7 @@ Represents a CID link
   - calls: $_clearField
 - **codec** (method) — Codec of the target content
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -107489,7 +107489,7 @@ Represents a CID link
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **codec** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -107510,7 +107510,7 @@ Represents a CID link
   - calls: $_clearField
 - **multihash** (method) — Multihash of the target content
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
@@ -107531,7 +107531,7 @@ Represents a CID link
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
 - **multihash** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
@@ -107583,7 +107583,7 @@ Enumeration of all possible IPLD kinds
   - calls: _
 - **STRING** (static field)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/ipld/codecs/advanced_codecs.dart` (DagJoseCodec.decode)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -107628,7 +107628,7 @@ Enumeration of all possible IPLD kinds
 - **BIG_INT** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -107682,7 +107682,7 @@ Enumeration of all possible IPLD kinds
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/ipld/data_model.pbjson.dart`
@@ -107753,12 +107753,12 @@ _Directly tested._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -107964,7 +107964,7 @@ _Directly tested._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -108183,12 +108183,12 @@ _Directly tested._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **value** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -108282,7 +108282,7 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -108380,7 +108380,7 @@ _Directly tested._
   - calls: $_clearField
 - **signature** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -108389,7 +108389,7 @@ _Directly tested._
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
 - **signature** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -108402,12 +108402,12 @@ _Directly tested._
   - calls: $_clearField
 - **validityType** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
 - **validityType** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
 - **hasValidityType** (method)
@@ -108416,13 +108416,13 @@ _Directly tested._
   - calls: $_clearField
 - **validity** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **validity** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
@@ -108432,14 +108432,14 @@ _Directly tested._
   - calls: $_clearField
 - **sequence** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **sequence** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursive.==)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
@@ -108450,13 +108450,13 @@ _Directly tested._
   - calls: $_clearField
 - **ttl** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **ttl** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
@@ -108466,11 +108466,11 @@ _Directly tested._
   - calls: $_clearField
 - **pubKey** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **pubKey** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **hasPubKey** (method)
   - calls: $_has
@@ -108478,12 +108478,12 @@ _Directly tested._
   - calls: $_clearField
 - **signatureV2** (method) — Kubo encodes the V2 signature in field 8 and the DAG-CBOR data in field 9
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **signatureV2** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **hasSignatureV2** (method)
@@ -108492,7 +108492,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -108547,7 +108547,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -108602,7 +108602,7 @@ _Directly tested._
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -108621,7 +108621,7 @@ _Directly tested._
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -108675,7 +108675,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/ipns.pbjson.dart`
@@ -108705,12 +108705,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -108916,7 +108916,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -109135,12 +109135,12 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **timestamp** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -109151,7 +109151,7 @@ _No known direct test._
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **timestamp** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -109168,7 +109168,7 @@ _No known direct test._
   - calls: $_ensure
 - **peerMetrics** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
@@ -109178,7 +109178,7 @@ _No known direct test._
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.reset)
 - **protocolMetrics** (method)
   - calls: $_getMap
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
@@ -109189,12 +109189,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -109400,7 +109400,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -109619,19 +109619,19 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **messagesSent** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -109642,14 +109642,14 @@ _No known direct test._
   - calls: $_clearField
 - **messagesReceived** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -109660,7 +109660,7 @@ _No known direct test._
   - calls: $_clearField
 - **bytesSent** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -109669,7 +109669,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -109682,13 +109682,13 @@ _No known direct test._
   - calls: $_clearField
 - **bytesReceived** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
 - **bytesReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -109717,12 +109717,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -109928,7 +109928,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -110147,19 +110147,19 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **messagesSent** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesSent** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -110170,14 +110170,14 @@ _No known direct test._
   - calls: $_clearField
 - **messagesReceived** (method)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordLatency)
 - **messagesReceived** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getMessagesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -110258,12 +110258,12 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -110469,7 +110469,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -110688,12 +110688,12 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method) — The type of UnixFS node
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110752,7 +110752,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110815,7 +110815,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **data** (method) — The raw data contained within this node (if any)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -110870,7 +110870,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -110925,7 +110925,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
@@ -110933,12 +110933,12 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **filesize** (method) — The size of each block of data (when splitting a file)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fileSize)
 - **filesize** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fileSize)
 - **hasFilesize** (method)
@@ -110949,11 +110949,11 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_getList
 - **hashType** (method) — Optional hash type for symlinks
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.hashType)
 - **hashType** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.hashType)
 - **hasHashType** (method)
   - calls: $_has
@@ -110961,12 +110961,12 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **fanout** (method) — Optional fanout for HAMT directories
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fanout)
 - **fanout** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/unixfs/unixfs_hamt.dart` (resolveHAMTSegment)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.fanout)
 - **hasFanout** (method)
@@ -110975,13 +110975,13 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **mode** (method) — Optional mode (permissions) for this node
   - calls: $_getIZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **mode** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setMode)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
@@ -110994,14 +110994,14 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **mtime** (method) — Optional modification time (in seconds since epoch)
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.stat)
 - **mtime** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.setModificationTime)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
@@ -111029,12 +111029,12 @@ Metadata represents metadata about a UnixFS node
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -111240,7 +111240,7 @@ Metadata represents metadata about a UnixFS node
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -111459,7 +111459,7 @@ Metadata represents metadata about a UnixFS node
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **mimeType** (method) — MimeType is the mime type of the file
@@ -111472,7 +111472,7 @@ Metadata represents metadata about a UnixFS node
   - calls: $_clearField
 - **size** (method) — Size is the size of the file in bytes
   - calls: $_getI64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -111495,7 +111495,7 @@ Metadata represents metadata about a UnixFS node
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -111588,7 +111588,7 @@ _Directly tested._
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.parseDirectoryBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.serveContent)
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -111642,7 +111642,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/unixfs/unixfs.pbjson.dart`
@@ -111685,12 +111685,12 @@ _No known direct test._
 
 - **clone** (method)
   - calls: deepCopy
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/interfaces/block_cloneable.dart` (BlockCloneable.baseClone)
     - `lib/src/proto/base_message.dart` (BaseProtoMessage.cloneAs)
 - **copyWith** (method)
   - calls: copyWith, updates
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 205 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.copyWith)
     - `lib/src/proto/generated/base_messages.pb.dart` (NetworkEvent.copyWith)
     - `lib/src/proto/generated/bitswap/bitswap.pb.dart` (Message_Wantlist_Entry.copyWith)
@@ -111896,7 +111896,7 @@ _No known direct test._
 - **info_** (method)
 - **create** (method)
   - calls: _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -112115,16 +112115,16 @@ _No known direct test._
   - calls: create
 - **getDefault** (method)
   - calls: $_defaultFor, GeneratedMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 203 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/proto/generated/google/protobuf/cpp_features.pb.dart` (Cpp_features.cpp)
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **isValid** (method)
   - calls: $_getBF
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **isValid** (method)
   - calls: $_setBool
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **hasIsValid** (method)
   - calls: $_has
@@ -112132,11 +112132,11 @@ _No known direct test._
   - calls: $_clearField
 - **errorMessage** (method)
   - calls: $_getSZ
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **errorMessage** (method)
   - calls: $_setString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **hasErrorMessage** (method)
   - calls: $_has
@@ -112144,12 +112144,12 @@ _No known direct test._
   - calls: $_clearField
 - **code** (method)
   - calls: $_getN
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **code** (method)
   - calls: $_setField
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **hasCode** (method)
@@ -112182,7 +112182,7 @@ _No known direct test._
 - **RATE_LIMITED** (static field)
   - calls: _
 - **values** (static field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 49 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -112236,7 +112236,7 @@ _No known direct test._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **valueOf** (method)
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 46 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
 
 ## `lib/src/proto/generated/validation.pbjson.dart`

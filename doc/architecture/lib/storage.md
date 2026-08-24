@@ -1,7 +1,7 @@
 ---
 module: storage
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.438635
+generated: 2026-08-24T09:25:26.333226
 ---
 
 # Module `storage` (`lib/src/storage/`)
@@ -22,7 +22,7 @@ Hive-based implementation of the [Datastore] interface.
 
 - **init** (method)
   - calls: init, openBox, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
@@ -36,7 +36,7 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **put** (method)
   - calls: _ensureInitialized, _getBox, _getInnerKey, put, toList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -54,7 +54,7 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method)
   - calls: _ensureInitialized, _getBox, _getInnerKey, get, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -108,7 +108,7 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **has** (method)
   - calls: _ensureInitialized, _getBox, _getInnerKey, containsKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.hasBlock)
     - `lib/src/core/repository/repository.dart` (Repository.hasBlock)
     - `lib/src/services/content_service.dart` (ContentService.removeContent)
@@ -116,7 +116,7 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/services/content_service.dart` (ContentService.hasContent)
 - **delete** (method)
   - calls: _ensureInitialized, _getBox, _getInnerKey, delete
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.unpin)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
@@ -134,14 +134,14 @@ Hive-based implementation of the [Datastore] interface.
     - `lib/src/services/pinning/pinning_service_api.dart` (PinningServiceAPIClient.removePin)
 - **query** (method)
   - calls: _ensureInitialized, _selectBoxes, prefix, _getPrefixForBox, keys, startsWith, Key, keysOnly, get, fromList, filters, filter, MapEntry, QueryEntry
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
 - **close** (method)
   - calls: close, info
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)

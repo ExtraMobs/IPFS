@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.434496
+generated: 2026-08-24T09:25:26.327998
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -22,7 +22,7 @@ Handles content routing operations for an IPFS node.
 
 - **start** (method) — Starts the content routing services.
   - calls: initialize, start, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -51,7 +51,7 @@ Handles content routing operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the content routing services.
   - calls: stop, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -74,7 +74,7 @@ Handles content routing operations for an IPFS node.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
 - **findProviders** (method) — Finds providers for a given CID in the DHT network.
   - calls: findProviders, isEmpty, info, length, toList, map, encode, Base58, value, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -83,14 +83,14 @@ Handles content routing operations for an IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **provide** (method) — Announces that the local node provides a given CID.
   - calls: toBase58, peerId, addProvider, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.provideAll)
     - `lib/src/protocols/dht/interface_dht_handler.dart` (IDHTHandler.provideAll)
     - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.provideAll)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provideAll)
 - **resolveDNSLink** (method) — Resolves a DNSLink to its corresponding CID.
   - calls: resolve, info, Exception, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolveDNSLink)
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.resolveDNSLink)
@@ -106,10 +106,10 @@ _Directly tested._
 Response from a routing request.
 
 - **providers** (field) — List of provider peer IDs.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 - **error** (field) — Error message if the request failed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -304,7 +304,7 @@ Response from a routing request.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **isSuccess** (method) — Returns true if the request succeeded.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 
 ### class `DelegatedRoutingHandler`
@@ -313,7 +313,7 @@ Handles delegated routing operations following the IPFS Delegated Routing V1 HTT
 
 - **findProviders** (method) — Finds providers for a given CID using the delegated routing API
   - calls: isEmpty, toString, error, parse, get, statusCode, decode, body, toList, cast, where, map, whereType, isNotEmpty, success
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -323,7 +323,7 @@ Handles delegated routing operations following the IPFS Delegated Routing V1 HTT
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **dispose** (method) — Closes the HTTP client
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -354,7 +354,7 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -364,7 +364,7 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 - **findProviders** (method) — Queries all configured endpoints for providers of [cid].
   - calls: error, isEmpty, parse, toString, get, statusCode, body, jsonDecode, containsKey, trim, toList, map, whereType, IPNIProviderMetadata, multiaddrs, IPNIProvider, metadata, success, values
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -378,7 +378,7 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
 A single provider entry returned from an IPNI query.
 
 - **peerId** (field) — The provider's peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -414,10 +414,10 @@ A single provider entry returned from an IPNI query.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **multiaddrs** (field) — Multiaddresses advertised by this provider.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
 - **metadata** (field) — Optional metadata entries (e.g. transport protocols supported).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
@@ -425,7 +425,7 @@ A single provider entry returned from an IPNI query.
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **toJson** (method) — Serializes this provider to the IPNI JSON representation.
   - calls: List, toList, map, toJson
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -445,12 +445,12 @@ Metadata attached to an IPNI provider entry.
 
 - **protocol** (field) — The protocol name (e.g. `transport-bitswap`).
 - **manifest** (field) — An optional manifest identifier.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.metricsEmitterFor)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.disablePlugin)
 - **toJson** (method) — Serializes this metadata entry to the IPNI JSON representation.
   - calls: isNotEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -470,10 +470,10 @@ Metadata attached to an IPNI provider entry.
 The result of an IPNI provider query.
 
 - **providers** (field) — The providers discovered for the queried CID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 - **error** (field) — A non-empty error description when the query failed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -669,7 +669,7 @@ The result of an IPNI provider query.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **isSuccess** (method) — Whether the query succeeded. A successful response may have no providers.
   - calls: isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 
 ## `lib/src/routing/reframe_routing.dart`
@@ -691,7 +691,7 @@ Client for the Reframe delegated routing protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -701,7 +701,7 @@ Client for the Reframe delegated routing protocol.
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dispose)
 - **findProviders** (method) — Queries all configured Reframe endpoints for providers of [cid].
   - calls: error, isEmpty, _queryEndpoint, statusCode, body, jsonDecode, _parseProviders, addAll, success
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
@@ -715,7 +715,7 @@ Client for the Reframe delegated routing protocol.
 A single provider entry returned from a Reframe query.
 
 - **peerId** (field) — The provider's peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -751,16 +751,16 @@ A single provider entry returned from a Reframe query.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **multiaddrs** (field) — Multiaddresses advertised by this provider.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
 - **protocols** (field) — Protocols supported by this provider (e.g. `transport-bitswap`).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
 - **toJson** (method) — Serializes this provider to the Reframe JSON representation.
   - calls: List
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -780,10 +780,10 @@ A single provider entry returned from a Reframe query.
 The result of a Reframe provider query.
 
 - **providers** (field) — The providers discovered for the queried CID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 - **error** (field) — A non-empty error description when the query failed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -979,6 +979,6 @@ The result of a Reframe provider query.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **isSuccess** (method) — Whether the query succeeded. A successful response may have no providers.
   - calls: isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
 

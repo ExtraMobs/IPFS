@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.439162
+generated: 2026-08-24T09:25:26.334812
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -26,7 +26,7 @@ Handles circuit relay operations for an IPFS node.
 
 - **start** (method) — Starts the circuit relay client.
   - calls: debug, hasStarted, start, registerProtocol, registerProtocolHandler, cancel, listen, connectionEvents, type, disconnected, _onPeerDisconnected, peerId, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -55,7 +55,7 @@ Handles circuit relay operations for an IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the circuit relay client.
   - calls: debug, cancel, values, clear, isCompleted, completeError, completer, close, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -79,7 +79,7 @@ Handles circuit relay operations for an IPFS node.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **reserve** (method) — Requests a reservation from a relay peer (Circuit Relay v2 HOP).
   - calls: enabled, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, HopMessage, type, RESERVE, HopMessage_Type, limit, Limit, duration, Int64, data, Completer, then, timeout, future, reservationTimeout, remove, TimeoutException, _scheduleReservationRefresh, add, CircuitRelayConnectionEvent, sendMessage, writeToBuffer, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **connectThroughRelay** (method) — Connects to [targetPeerId] through a circuit relay at [relayAddr].
   - calls: enabled, CircuitRelayException, isEmpty, debug, _parseRelayAddrOrPeerId, relayPeerId, relayAddr, isExpired, reserve, _acquireCircuitSlot, HopMessage, type, CONNECT, HopMessage_Type, peer, Peer, id, base58Decode, Base58, limit, Limit, duration, limitDuration, data, limitData, Completer, _PendingConnect, timeout, future, reservationTimeout, remove, TimeoutException, sendMessage, writeToBuffer, OK, Status, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, _buildRelayedMultiaddr, connect, warning, registerRelayedConnection, RelayedConnection, error, toString
@@ -87,7 +87,7 @@ Handles circuit relay operations for an IPFS node.
   - calls: toList, map, where, values, isExpired, relayAddr
 - **connect** (method) — Connects to a peer using a circuit relay.
   - calls: debug, connect, add, CircuitRelayConnectionEvent, error, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
@@ -98,7 +98,7 @@ Handles circuit relay operations for an IPFS node.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **disconnect** (method) — Disconnects from a peer using a circuit relay.
   - calls: debug, disconnect, remove, _releaseCircuitSlot, add, CircuitRelayConnectionEvent, error, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
@@ -107,7 +107,7 @@ Handles circuit relay operations for an IPFS node.
   - calls: stream
 - **connectionEvents** (method) — Stream of circuit relay connection events (alias).
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
@@ -128,10 +128,10 @@ Represents a circuit relay event.
 - **eventType** (field) — The type of relay event (e.g., 'circuit_relay_created').
 - **relayAddress** (field) — The multiaddress or peer ID of the relay.
 - **errorMessage** (field) — Error message if the event signifies a failure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **reason** (field) — Reason for the event or closure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **dataSize** (field) — Total data size transferred during the session.
 
@@ -140,24 +140,24 @@ Represents a circuit relay event.
 Represents a Circuit Relay v2 reservation.
 
 - **relayPeerId** (field) — The relay peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **relayAddr** (field) — The relay address (or peer ID) used to reach the relay.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 - **expireTime** (field) — When this reservation expires.
 - **limitData** (field) — Maximum data allowed in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limitDuration** (field) — Maximum duration allowed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **isExpired** (method) — Returns true if this reservation has expired.
   - calls: isAfter, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
@@ -167,12 +167,12 @@ Represents a Circuit Relay v2 reservation.
 Represents an active relayed connection.
 
 - **relayAddr** (field) — The relay address used for this connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 - **relayPeerId** (field) — The relay peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **targetPeerId** (field) — The target peer reached through the relay.
@@ -185,7 +185,7 @@ Represents an active relayed connection.
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -204,7 +204,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -325,7 +325,7 @@ _No known direct test._
 Handles circuit relay operations for an IPFS node (web stub).
 
 - **start** (method) — Starts the circuit relay client.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -355,7 +355,7 @@ Handles circuit relay operations for an IPFS node (web stub).
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the circuit relay client.
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -379,14 +379,14 @@ Handles circuit relay operations for an IPFS node (web stub).
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **reserve** (method) — Requests a reservation from a relay peer (Circuit Relay v2 HOP).
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **connectThroughRelay** (method) — Connects to [targetPeerId] through a circuit relay at [relayAddr].
   - calls: UnimplementedError
 - **activeRelayAddrs** (method) — List of relay addresses for which we hold an active reservation.
 - **connect** (method) — Connects to a peer using a circuit relay.
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
@@ -397,7 +397,7 @@ Handles circuit relay operations for an IPFS node (web stub).
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **disconnect** (method) — Disconnects from a peer using a circuit relay.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
@@ -407,7 +407,7 @@ Handles circuit relay operations for an IPFS node (web stub).
   - calls: stream
 - **connectionEvents** (method) — Stream of circuit relay connection events (alias).
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
@@ -421,10 +421,10 @@ Represents a circuit relay event.
 - **eventType** (field) — The type of relay event.
 - **relayAddress** (field) — The relay address.
 - **errorMessage** (field) — Error message if applicable.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
 - **reason** (field) — Reason for the event.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **dataSize** (field) — Data size transferred.
 
@@ -433,24 +433,24 @@ Represents a circuit relay event.
 Represents a Circuit Relay v2 reservation.
 
 - **relayPeerId** (field) — The relay peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **relayAddr** (field) — The relay address (or peer ID) used to reach the relay.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 - **expireTime** (field) — When this reservation expires.
 - **limitData** (field) — Maximum data allowed in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **limitDuration** (field) — Maximum duration allowed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **isExpired** (method) — Returns true if this reservation has expired.
   - calls: isAfter, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
@@ -460,12 +460,12 @@ Represents a Circuit Relay v2 reservation.
 Represents an active relayed connection (web stub; never instantiated).
 
 - **relayAddr** (field) — The relay address used for this connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.activeRelayAddrs)
 - **relayPeerId** (field) — The relay peer ID.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **targetPeerId** (field) — The target peer reached through the relay.
@@ -478,7 +478,7 @@ Represents an active relayed connection (web stub; never instantiated).
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -497,7 +497,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -622,7 +622,7 @@ Implements the Circuit Relay v2 Server (Relay Service).
 - **transportProtocolId** (static field) — The transport protocol ID for relayed data.
 - **start** (method) — Starts the service and registers protocol handlers.
   - calls: enableCircuitRelay, debug, registerProtocolHandler, periodic, Duration, _cleanupExpired, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -652,7 +652,7 @@ Implements the Circuit Relay v2 Server (Relay Service).
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the service and cleans up resources.
   - calls: debug, cancel, clear, info
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -685,7 +685,7 @@ Internal context for an active relayed circuit.
 - **destinationPeerId** (field) — The destination peer ID.
 - **expire** (field) — Unix timestamp when this circuit expires.
 - **limitData** (field) — Maximum number of bytes allowed to be transferred.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **bytesTransferred** (field) — Total number of bytes transferred in this circuit.
 
@@ -703,7 +703,7 @@ Client for interacting with public IPFS HTTP Gateways.
   - calls: endsWith, substring, length, parse, debug, timeout, get, Duration, statusCode, bodyBytes, warning, info, error
 - **get** (method) — Fetches raw data for a CID from available gateways.
   - calls: _fetchFromGateway, warning
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -760,7 +760,7 @@ Client for interacting with public IPFS HTTP Gateways.
   - calls: timeout, head, parse, Duration, statusCode, debug
 - **close** (method) — Closes the underlying HTTP client if it was created internally.
   - calls: close, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -833,7 +833,7 @@ Native libp2p router implementation.
 - **setQuicTransportFactoryForTesting** (method) — Set the QUIC transport factory used for testing.
 - **peerID** (method)
   - calls: toString, id, fromPublicKey, PeerId, publicKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -845,14 +845,14 @@ Native libp2p router implementation.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
 - **hasStarted** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **isInitialized** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/router.dart` (Router.isInitialized)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
 - **connectedPeers** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -863,13 +863,13 @@ Native libp2p router implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **listeningAddresses** (method)
   - calls: toList, map, listenAddresses, network, toString, _buildListenAddresses
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
 - **supportsQuic** (method) — True when the QUIC transport is enabled in config and available at runtime.
   - calls: enableQuic, network
 - **connectionEvents** (method)
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
@@ -882,11 +882,11 @@ Native libp2p router implementation.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
 - **receiveMessages** (method)
   - calls: stream, putIfAbsent, StreamController
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
 - **initialize** (method)
   - calls: warning, debug, _generateKeyPairFromSeed, _generateKeyPair, _probeQuicTransport, error, StateError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -900,7 +900,7 @@ Native libp2p router implementation.
   - calls: EcdsaSigner, derivePeerId
 - **start** (method)
   - calls: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -929,7 +929,7 @@ Native libp2p router implementation.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **stop** (method)
   - calls: warning, debug, timeout, close, Duration, clear, values, isClosed, info, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -953,7 +953,7 @@ Native libp2p router implementation.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **connect** (method)
   - calls: _checkStarted, debug, _extractPeerIdFromMultiaddr, ArgumentError, split, MultiAddr, fromString, PeerId, addAddrs, addrBook, peerStore, Duration, AddrInfo, timeout, connect, TimeoutException, add, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
@@ -964,7 +964,7 @@ Native libp2p router implementation.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **disconnect** (method)
   - calls: _checkStarted, contains, _extractPeerIdFromMultiaddr, remove, close, debug, warning
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
@@ -972,18 +972,18 @@ Native libp2p router implementation.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
 - **listConnectedPeers** (method)
   - calls: toList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.listConnectedPeers)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **isConnectedPeer** (method)
   - calls: contains
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraphFromPeer)
 - **sendMessage** (method)
   - calls: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, close, error, NetworkException
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
     - `lib/src/network/router.dart` (Router.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
@@ -1001,7 +1001,7 @@ Native libp2p router implementation.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **sendRequest** (method)
   - calls: _checkStarted, verbose, fromString, PeerId, Context, Duration, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, close, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendRequest)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
@@ -1010,11 +1010,11 @@ Native libp2p router implementation.
     - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
 - **sendMessageWithResponse** (method)
   - calls: _checkStarted, Duration, verbose, fromString, PeerId, Context, newStream, _encodeLengthPrefix, length, write, fromList, _readLengthPrefixedMessage, TimeoutException, close, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
 - **registerProtocolHandler** (method)
   - calls: add, setStreamHandler, toString, verbose, _readLengthPrefixedMessage, isEmpty, warning, NetworkPacket, _encodeLengthPrefix, length, write, fromList, error, handler, close, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -1029,11 +1029,11 @@ Native libp2p router implementation.
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.register)
 - **unregisterProtocolHandler** (method)
   - calls: remove, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.stop)
 - **removeMessageHandler** (method)
   - calls: remove, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.stop)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
     - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.stop)
@@ -1041,7 +1041,7 @@ Native libp2p router implementation.
     - `lib/src/transport/router_interface.dart` (RouterInterface.unregisterProtocolHandler)
 - **registerProtocol** (method)
   - calls: add, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start)
@@ -1051,7 +1051,7 @@ Native libp2p router implementation.
   - calls: _checkStarted, sendMessage, warning
 - **emitEvent** (method)
   - calls: handler, NetworkMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **onEvent** (method)
   - calls: add, putIfAbsent
@@ -1061,7 +1061,7 @@ Native libp2p router implementation.
   - calls: MultiAddr, warning
 - **resolvePeerId** (method)
   - calls: isNotEmpty, unmodifiable
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolvePeerId)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
@@ -1069,7 +1069,7 @@ Native libp2p router implementation.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
 - **registerRelayedConnection** (method)
   - calls: add, debug
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 
 ### class `NetworkException` implements Exception
@@ -1077,7 +1077,7 @@ Native libp2p router implementation.
 Exception thrown when a network operation fails in the transport layer.
 
 - **message** (field) — The error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -1096,7 +1096,7 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1222,7 +1222,7 @@ A [Listener] that wraps an underlying listener and applies the PNET
   - calls: addr
 - **isClosed** (method)
   - calls: isClosed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -1241,7 +1241,7 @@ A [Listener] that wraps an underlying listener and applies the PNET
   - calls: accept, create
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -1325,7 +1325,7 @@ A [TransportConn] that wraps an underlying transport connection and
 
 - **create** (method) — Creates a new PNET-wrapped connection after performing the handshake.
   - calls: fromList, List, nextInt, write, read, length, StateError, _
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
@@ -1542,7 +1542,7 @@ A [TransportConn] that wraps an underlying transport connection and
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
 - **read** (method)
   - calls: read, process
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -1554,7 +1554,7 @@ A [TransportConn] that wraps an underlying transport connection and
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **write** (method)
   - calls: process, write
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -1576,7 +1576,7 @@ A [TransportConn] that wraps an underlying transport connection and
   - calls: notifyActivity
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -1637,7 +1637,7 @@ A [TransportConn] that wraps an underlying transport connection and
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **id** (method)
   - calls: id
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -1676,7 +1676,7 @@ A [TransportConn] that wraps an underlying transport connection and
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **newStream** (method)
   - calls: newStream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -1685,7 +1685,7 @@ A [TransportConn] that wraps an underlying transport connection and
   - calls: streams
 - **isClosed** (method)
   - calls: isClosed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -1702,23 +1702,23 @@ A [TransportConn] that wraps an underlying transport connection and
   - calls: localPeer
 - **remotePeer** (method)
   - calls: remotePeer
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **remotePublicKey** (method)
   - calls: remotePublicKey
 - **state** (method)
   - calls: state
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
 - **localMultiaddr** (method)
   - calls: localMultiaddr
 - **remoteMultiaddr** (method)
   - calls: remoteMultiaddr
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stat** (method)
   - calls: stat
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **scope** (method)
@@ -1738,15 +1738,15 @@ A [Transport] wrapper that upgrades every TCP connection with the libp2p
 - **psk** (field) — The 32-byte pre-shared key.
 - **config** (method)
   - calls: config
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
 - **dial** (method)
   - calls: dial, StateError, create
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 - **listen** (method)
   - calls: listen, PnetListener
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
@@ -1761,19 +1761,19 @@ A [Transport] wrapper that upgrades every TCP connection with the libp2p
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
   - calls: protocols
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
 - **canDial** (method)
   - calls: canDial
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
 - **canListen** (method)
   - calls: canListen
 - **dispose** (method)
   - calls: dispose
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -1862,7 +1862,7 @@ Interface for router implementations to handle multiaddresses.
 A wrapper for raw bytes sent over the network.
 
 - **data** (field) — The raw data of the message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1917,7 +1917,7 @@ A wrapper for raw bytes sent over the network.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **fromBytes** (method) — Creates a network message from a byte array.
   - calls: NetworkMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -1956,7 +1956,7 @@ Represents a network packet with source/destination info.
 Represents a change in peer connection state.
 
 - **type** (field) — The type of connection event (connected/disconnected).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2014,7 +2014,7 @@ Represents a change in peer connection state.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **peerId** (field) — The unique identifier of the peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -2055,7 +2055,7 @@ Represents a change in peer connection state.
 Represents an incoming message from a peer.
 
 - **peerId** (field) — The unique identifier of the sender.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -2091,7 +2091,7 @@ Represents an incoming message from a peer.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **message** (field) — The raw message payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2115,7 +2115,7 @@ Represents an incoming message from a peer.
 Data from a DHT operation.
 
 - **type** (field) — The type of DHT event.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2173,7 +2173,7 @@ Data from a DHT operation.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The payload data returned by the DHT.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -2232,13 +2232,13 @@ Data from a DHT operation.
 Content or metadata from a PubSub subscription.
 
 - **topic** (field) — The subscription topic.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.onMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.add)
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **message** (field) — The raw message payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2264,7 +2264,7 @@ Content or metadata from a PubSub subscription.
 Represents a protocol or network error.
 
 - **type** (field) — The classification of the error.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2322,7 +2322,7 @@ Represents a protocol or network error.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **message** (field) — A human-readable error message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2346,7 +2346,7 @@ Represents a protocol or network error.
 Lifecycle or data event for a multi-stream.
 
 - **type** (field) — The type of stream event.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -2405,7 +2405,7 @@ Lifecycle or data event for a multi-stream.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **streamId** (field) — The unique identifier for the stream.
 - **data** (field) — Optional data payload for 'data' events.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -2470,7 +2470,7 @@ _Directly tested._
 Abstract interface for P2P network routers.
 
 - **peerID** (method) — The local peer ID string of this node.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -2482,14 +2482,14 @@ Abstract interface for P2P network routers.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provideAll)
 - **hasStarted** (method) — Whether the router has been started.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **isInitialized** (method) — Whether the router has been initialized.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/router.dart` (Router.isInitialized)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
 - **connectedPeers** (method) — Set of currently connected peer IDs.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -2499,13 +2499,13 @@ Abstract interface for P2P network routers.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **connectionEvents** (method) — Stream of connection events (peer connected/disconnected).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **messageEvents** (method) — Stream of message events from peers.
 - **initialize** (method) — Initializes the router with configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -2514,7 +2514,7 @@ Abstract interface for P2P network routers.
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method) — Starts the router and begins accepting connections.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2543,7 +2543,7 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the router and disconnects all peers.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -2566,7 +2566,7 @@ Abstract interface for P2P network routers.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **connect** (method) — Connects to a peer using its multiaddress.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.connectToPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
@@ -2577,26 +2577,26 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **disconnect** (method) — Disconnects from a peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.canConnectDirectly)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.testDialback)
     - `lib/src/network/router.dart` (Router.disconnectFromPeer)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
 - **listeningAddresses** (method) — Returns list of addresses the router is listening on.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
 - **listConnectedPeers** (method) — Returns a list of connected peer IDs.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.listConnectedPeers)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectedPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.pushUpdate)
 - **isConnectedPeer** (method) — Checks if a peer is currently connected.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraphFromPeer)
 - **sendMessage** (method) — Sends a message to a specific peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
     - `lib/src/network/router.dart` (Router.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
@@ -2613,7 +2613,7 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.broadcastMessage)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **sendRequest** (method) — Sends a request and waits for a response.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendRequest)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValueRaw)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
@@ -2621,10 +2621,10 @@ Abstract interface for P2P network routers.
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
 - **receiveMessages** (method) — Receives messages from a specific peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
 - **registerProtocolHandler** (method) — Registers a handler for a specific protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.start)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -2638,7 +2638,7 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.start)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.register)
 - **removeMessageHandler** (method) — Removes the handler for a specific protocol.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.stop)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
     - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.stop)
@@ -2646,13 +2646,13 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/router_interface.dart` (RouterInterface.unregisterProtocolHandler)
 - **unregisterProtocolHandler** (method) — Unregisters a protocol handler.
   - calls: removeMessageHandler
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATServer.stop)
 - **sendMessageWithResponse** (method) — Sends a message and waits for a response with timeout.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
 - **registerProtocol** (method) — Registers a protocol without a handler.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.start)
@@ -2660,20 +2660,20 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **broadcastMessage** (method) — Broadcasts a message to all connected peers.
 - **emitEvent** (method) — Emits a network event.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
 - **onEvent** (method) — Registers a handler for network events.
 - **offEvent** (method) — Removes a handler for network events.
 - **parseMultiaddr** (method) — Parses a multiaddress string into address components.
 - **resolvePeerId** (method) — Resolves a peer ID to available addresses.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.resolvePeerId)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.resolvePeerId)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
 - **registerRelayedConnection** (method) — Registers a virtual relayed connection so that higher-level protocols
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **dhtRoutingTable** (method) — Returns the DHT routing table for distance-based peer selection.
 
@@ -2692,7 +2692,7 @@ Base class for WebRTC DataChannel-backed streams.
 - **protocol** (method)
 - **setProtocol** (method)
 - **isClosed** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -2709,11 +2709,11 @@ Base class for WebRTC DataChannel-backed streams.
 - **conn** (method)
   - calls: UnimplementedError
 - **label** (method) — The label of the data channel.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.label)
 - **onMessage** (method) — Called when a message is received on the data channel.
   - calls: addAll, isCompleted, complete
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.onMessage)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.start)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
@@ -2721,7 +2721,7 @@ Base class for WebRTC DataChannel-backed streams.
   - calls: isCompleted, complete
 - **read** (method)
   - calls: length, isEmpty, Uint8List, Completer, future, removeFirst
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -2733,7 +2733,7 @@ Base class for WebRTC DataChannel-backed streams.
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **write** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -2747,7 +2747,7 @@ Base class for WebRTC DataChannel-backed streams.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write)
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -2809,7 +2809,7 @@ Base class for WebRTC DataChannel-backed streams.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **reset** (method)
 - **id** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -2849,14 +2849,14 @@ Base class for WebRTC DataChannel-backed streams.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **scope** (method)
   - calls: NullScope
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **closeRead** (method)
 - **closeWrite** (method)
   - calls: close
 - **stat** (method)
   - calls: StreamStats, outbound, Direction, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
@@ -2878,18 +2878,18 @@ A generic WebRTC ICE server configuration.
   - referenced by (by name):
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
 - **username** (field) — Optional username for TURN authentication.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.==)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
 - **credential** (field) — Optional credential (password) for TURN authentication.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/network_config.dart` (TurnServer.==)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.==)
 - **==** (method)
   - calls: identical, urls, username, credential
 - **hashCode** (method)
   - calls: hash
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 24 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (Matcher.hashCode)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRecursiveEdge.hashCode)
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
@@ -2911,40 +2911,40 @@ _Directly tested._
 Abstract interface for WebRTC PeerConnections.
 
 - **setRemoteDescription** (method) — Sets the remote description for this connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createOffer** (method) — Creates an SDP offer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createAnswer** (method) — Creates an SDP answer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
 - **setLocalDescription** (method) — Sets the local description for this connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **addIceCandidate** (method) — Adds an ICE candidate to the connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **onIceCandidate** (method) — Stream of ICE candidates generated by the local peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **onDataChannel** (method) — Stream of incoming data channels.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createDataChannel** (method) — Creates a new data channel with the given label.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method) — Closes the peer connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3007,11 +3007,11 @@ Abstract interface for WebRTC PeerConnections.
 - **localDescriptionSdp** (method) — The local SDP description.
 - **remoteDescriptionSdp** (method) — The remote SDP description.
 - **iceConnectionState** (method) — The ICE connection state, if available.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method) — The signaling state, if available.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
 
@@ -3020,7 +3020,7 @@ Abstract interface for WebRTC PeerConnections.
 Initialization parameters for an [RTCSessionDescription].
 
 - **type** (field) — The type of the session description (offer, answer, etc.).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3102,7 +3102,7 @@ Initialization parameters for an [RTCIceCandidate].
   - referenced by (by name):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
 - **toJson** (method) — Converts this candidate to a JSON-compatible map.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3137,11 +3137,11 @@ IO implementation of [PeerConnection] (stub for now).
 
 - **onIceCandidate** (method)
   - calls: Stream.empty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **onDataChannel** (method)
   - calls: Stream.empty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **localDescriptionSdp** (method)
@@ -3149,48 +3149,48 @@ IO implementation of [PeerConnection] (stub for now).
 - **remoteDescriptionSdp** (method)
   - calls: UnimplementedError
 - **iceConnectionState** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
 - **createOffer** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createAnswer** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
 - **setLocalDescription** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **setRemoteDescription** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **addIceCandidate** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createDataChannel** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3255,7 +3255,7 @@ IO implementation of [PeerConnection] (stub for now).
 
 - **createPC** (function) — Factory for creating a [PeerConnectionIO].
   - calls: PeerConnectionIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/peer_connection_stub.dart`
@@ -3270,11 +3270,11 @@ Stub implementation of [PeerConnection] for non-supported platforms.
 
 - **onIceCandidate** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **onDataChannel** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **localDescriptionSdp** (method)
@@ -3282,48 +3282,48 @@ Stub implementation of [PeerConnection] for non-supported platforms.
 - **remoteDescriptionSdp** (method)
   - calls: UnimplementedError
 - **iceConnectionState** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
 - **createOffer** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createAnswer** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
 - **setLocalDescription** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **setRemoteDescription** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setRemoteDescription)
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **addIceCandidate** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.addIceCandidate)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createDataChannel** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createDataChannel)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3388,7 +3388,7 @@ Stub implementation of [PeerConnection] for non-supported platforms.
 
 - **createPC** (function) — Factory for creating a [PeerConnectionStub].
   - calls: PeerConnectionStub
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/peer_connection_web.dart`
@@ -3403,11 +3403,11 @@ Web implementation of [PeerConnection] using `package:web`.
 
 - **onIceCandidate** (method)
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **onDataChannel** (method)
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **localDescriptionSdp** (method)
@@ -3416,40 +3416,40 @@ Web implementation of [PeerConnection] using `package:web`.
   - calls: sdp, remoteDescription
 - **iceConnectionState** (method)
   - calls: iceConnectionState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.iceConnectionState)
 - **signalingState** (method)
   - calls: signalingState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.signalingState)
 - **createOffer** (method)
   - calls: toDart, createOffer, Exception, RTCSessionDescriptionInit, type, sdp
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createAnswer** (method)
   - calls: toDart, createAnswer, Exception, RTCSessionDescriptionInit, type, sdp
 - **setLocalDescription** (method)
   - calls: toDart, setLocalDescription, RTCLocalSessionDescriptionInit, type, sdp
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **setRemoteDescription** (method)
   - calls: toDart, setRemoteDescription, RTCSessionDescriptionInit
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **addIceCandidate** (method)
   - calls: toDart, addIceCandidate, RTCIceCandidateInit, candidate, sdpMid, sdpMLineIndex
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **createDataChannel** (method)
   - calls: createDataChannel, _WebDataChannelStream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.newStream)
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3515,7 +3515,7 @@ Web implementation of [PeerConnection] using `package:web`.
   - calls: label
 - **write** (method)
   - calls: send, toJS
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -3530,7 +3530,7 @@ Web implementation of [PeerConnection] using `package:web`.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -3594,7 +3594,7 @@ Web implementation of [PeerConnection] using `package:web`.
 
 - **createPC** (function) — Factory for creating a [PeerConnectionWeb].
   - calls: PeerConnectionWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection.dart` (createPeerConnection)
 
 ## `lib/src/transport/webrtc/signaling_protocol.dart`
@@ -3608,7 +3608,7 @@ _Directly tested._
 A message exchanged over the WebRTC signaling protocol.
 
 - **type** (field) — The type of message.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3666,7 +3666,7 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The message data (SDP or ICE candidate string).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3721,7 +3721,7 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **encode** (method) — Encodes this message into a protobuf-compatible byte array.
   - calls: encode, index, add, addAll, _encodeVarint, length, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -3841,7 +3841,7 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **decode** (method) — Decodes a signaling message from a protobuf-compatible byte array.
   - calls: length, _decodeVarint, values, value, newOffset, decode, sublist, Exception, SignalingMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
@@ -3905,7 +3905,7 @@ A message exchanged over the WebRTC signaling protocol.
 ### class `_VarintResult`
 
 - **value** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -4006,7 +4006,7 @@ A message exchanged over the WebRTC signaling protocol.
 Implementation of the WebRTC signaling protocol for libp2p.
 
 - **id** (static field) — The protocol identifier.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -4046,11 +4046,11 @@ Implementation of the WebRTC signaling protocol for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **register** (method) — Registers the protocol handler with the given router.
   - calls: registerProtocolHandler
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **messages** (method) — Stream of signaling messages received.
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/protocol_manager.dart` (ProtocolManager.pubsubMessages)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **handleStream** (method) — Handles an incoming signaling stream.
@@ -4059,7 +4059,7 @@ Implementation of the WebRTC signaling protocol for libp2p.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **sendMessage** (method) — Sends a signaling message over the given stream.
   - calls: encode, _encodeVarint, length, write, fromList
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
     - `lib/src/network/router.dart` (Router.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
@@ -4088,26 +4088,26 @@ WebRTC Direct transport implementation for libp2p.
 
 - **config** (method)
   - calls: libp2p_config.TransportConfig
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **canDial** (method)
   - calls: contains, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
 - **canListen** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
 - **dial** (method)
   - calls: toString, split, indexOf, last, fromString, PeerId, createPeerConnection, createOffer, setLocalDescription, parse, post, sdp, statusCode, Exception, body, setRemoteDescription, Completer, listen, onDataChannel, isCompleted, complete, WebRTCConnection, random, Duration, timeout, future
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 - **listen** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
@@ -4122,12 +4122,12 @@ WebRTC Direct transport implementation for libp2p.
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
 - **dispose** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -4147,7 +4147,7 @@ _Directly tested._
 WebRTC transport implementation for libp2p.
 
 - **host** (field) — The libp2p host associated with this transport.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.url)
@@ -4156,27 +4156,27 @@ WebRTC transport implementation for libp2p.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **config** (method)
   - calls: libp2p_config.TransportConfig
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **canDial** (method)
   - calls: toString, contains
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
 - **canListen** (method)
   - calls: canDial
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
 - **dial** (method)
   - calls: Exception, toString, indexOf, MultiAddr, substring, last, split, fromString, PeerId, Duration, timeout, connect, AddrInfo, random, Context, newStream, id, SignalingProtocol, handleStream, createPeerConnection, Completer, listen, onIceCandidate, sendMessage, SignalingMessage, candidate, messages, type, answer, setRemoteDescription, data, addIceCandidate, RTCIceCandidateInit, createOffer, setLocalDescription, offer, sdp, onDataChannel, isCompleted, complete, WebRTCConnection, future
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 - **listen** (method)
   - calls: WebRTCListener
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
@@ -4191,12 +4191,12 @@ WebRTC transport implementation for libp2p.
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
 - **dispose** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
@@ -4210,23 +4210,23 @@ WebRTC transport implementation for libp2p.
 WebRTC connection implementation for libp2p.
 
 - **localPeer** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localPeer)
 - **remotePeer** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePeer)
 - **localMultiaddr** (method)
   - calls: MultiAddr
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localMultiaddr)
 - **remoteMultiaddr** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remoteMultiaddr)
 - **newStream** (method)
   - calls: Exception, createDataChannel, add
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -4234,11 +4234,11 @@ WebRTC connection implementation for libp2p.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **streams** (method)
   - calls: value, unmodifiable
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.streams)
 - **close** (method)
   - calls: unawaited, close, clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -4298,7 +4298,7 @@ WebRTC connection implementation for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **isClosed** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -4314,17 +4314,17 @@ WebRTC connection implementation for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **stat** (method)
   - calls: _WebRTCConnStats, Stats, outbound, Direction, length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
 - **scope** (method)
   - calls: NullScope
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **id** (method)
   - calls: toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -4364,20 +4364,20 @@ WebRTC connection implementation for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **remotePublicKey** (method)
   - calls: value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePublicKey)
 - **state** (method)
   - calls: libp2p.ConnState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
 - **iceConnectionState** (method) — The ICE connection state reported by the underlying peer connection, if any.
   - calls: iceConnectionState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.iceConnectionState)
 - **signalingState** (method) — The signaling state reported by the underlying peer connection, if any.
   - calls: signalingState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.signalingState)
 
 ### class `_WebRTCConnStats` implements libp2p.ConnStats
@@ -4393,7 +4393,7 @@ WebRTC listener implementation for libp2p.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -4453,18 +4453,18 @@ WebRTC listener implementation for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **addr** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.addr)
 - **connectionStream** (method)
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.connectionStream)
 - **accept** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.accept)
 - **isClosed** (method)
   - calls: isClosed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -4479,7 +4479,7 @@ WebRTC listener implementation for libp2p.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **supportsAddr** (method)
   - calls: contains, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.supportsAddr)
 
 ## `lib/src/transport/webtransport/certhash.dart`
@@ -4493,11 +4493,11 @@ _No known direct test._
 Represents a certificate hash for WebTransport.
 
 - **algorithm** (field) — The hash algorithm (e.g. 'sha-256').
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **value** (field) — The hash value.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -4604,7 +4604,7 @@ Information parsed from a WebTransport multiaddr.
   - referenced by (by name):
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **port** (field) — The port.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -4622,7 +4622,7 @@ Parser for WebTransport multiaddrs.
 
 - **parse** (method) — Parses a WebTransport multiaddr.
   - calls: toString, split, length, tryParse, multibaseDecode, fromList, codeUnits, decode, add, WebTransportCertHash, digest, WebTransportMultiaddrInfo
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeyEntry.fromJson)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink)
@@ -4686,7 +4686,7 @@ Statistics for WebTransport datagram I/O.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
 - **receivedCount** (field) — Number of datagrams received.
 - **bytesSent** (field) — Total bytes sent via datagrams.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -4694,7 +4694,7 @@ Statistics for WebTransport datagram I/O.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesReceived** (field) — Total bytes received via datagrams.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -4704,7 +4704,7 @@ Statistics for WebTransport datagram I/O.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
 - **reset** (method) — Resets all counters to zero.
 - **toString** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4819,11 +4819,11 @@ Statistics for WebTransport datagram I/O.
 Configuration for WebTransport datagram I/O.
 
 - **maxDatagramSize** (field) — Maximum datagram size in bytes.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.maxDatagramSize)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **maxQueueSize** (field) — Maximum number of outgoing datagrams to queue before applying backpressure.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.fromConfig)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.send)
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
@@ -4837,7 +4837,7 @@ Configuration for WebTransport datagram I/O.
 A received WebTransport datagram with optional metadata.
 
 - **data** (field) — The datagram payload.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -4892,7 +4892,7 @@ A received WebTransport datagram with optional metadata.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **receivedAt** (field) — When the datagram was received locally.
 - **timestamp** (field) — Optional timestamp from the sender (if provided by the transport).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 26 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
@@ -4903,7 +4903,7 @@ A received WebTransport datagram with optional metadata.
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **size** (method) — Size of the datagram payload in bytes.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 21 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
@@ -4946,11 +4946,11 @@ Provides unreliable, unordered datagram send/receive for a WebTransport
   - calls: stream
 - **stats** (method) — Statistics for datagram I/O.
 - **config** (method) — The configured datagram limits.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **isClosed** (method) — Whether datagram I/O has been closed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -4966,12 +4966,12 @@ Provides unreliable, unordered datagram send/receive for a WebTransport
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **maxDatagramSize** (method) — The effective maximum datagram size in bytes.
   - calls: call, maxDatagramSizeFn, maxDatagramSize
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **pendingQueueLength** (method) — Number of datagrams currently queued for transmission.
 - **send** (method) — Sends a datagram.
   - calls: StateError, length, droppedCount, ArgumentError, isEmpty, maxQueueSize, sendFn, sentCount, bytesSent
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
@@ -4981,7 +4981,7 @@ Provides unreliable, unordered datagram send/receive for a WebTransport
   - calls: isEmpty, length, droppedCount, maxQueueSize, sendFn, sentCount, bytesSent
 - **close** (method) — Closes the datagram channel.
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5053,7 +5053,7 @@ Negotiates the maximum datagram size between client and server.
 - **updateLocalMaxSize** (method) — Updates the local maximum datagram size.
 - **validate** (method) — Validates that [data] does not exceed the negotiated maximum size.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
 
 ## `lib/src/transport/webtransport/webtransport_dialer.dart`
@@ -5067,7 +5067,7 @@ _No known direct test._
 Abstract interface for a WebTransport dialer.
 
 - **dial** (method) — Dials a WebTransport multiaddr.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
@@ -5090,7 +5090,7 @@ IO-specific WebTransport dialer (placeholder).
 
 - **dial** (method)
   - calls: UnimplementedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
@@ -5098,7 +5098,7 @@ IO-specific WebTransport dialer (placeholder).
 
 - **createDialer** (function) — Factory for IO-specific dialer.
   - calls: WebTransportDialerIO
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_dialer_stub.dart`
@@ -5111,7 +5111,7 @@ _No known direct test._
 
 - **createDialer** (function) — Factory for creating the platform-specific dialer.
   - calls: UnsupportedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_dialer_web.dart`
@@ -5126,7 +5126,7 @@ Web implementation of [WebTransportDialer] using the browser's WebTransport API.
 
 - **dial** (method)
   - calls: parse, ArgumentError, ip, port, WebTransportOptions, toJS, toList, map, certHashes, WebTransportHash, algorithm, value, WebTransport, toDart, ready, close, Exception, last, split, toString, fromString, PeerId, WebTransportConnectionWeb, random
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.dial)
 
@@ -5135,23 +5135,23 @@ Web implementation of [WebTransportDialer] using the browser's WebTransport API.
 Web implementation of a WebTransport connection.
 
 - **localPeer** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localPeer)
 - **remotePeer** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePeer)
 - **localMultiaddr** (method)
   - calls: MultiAddr
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.localMultiaddr)
 - **remoteMultiaddr** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remoteMultiaddr)
 - **newStream** (method)
   - calls: toDart, createBidirectionalStream, WebTransportStreamWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -5159,7 +5159,7 @@ Web implementation of a WebTransport connection.
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5219,7 +5219,7 @@ Web implementation of a WebTransport connection.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **isClosed** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -5235,17 +5235,17 @@ Web implementation of a WebTransport connection.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **stat** (method)
   - calls: _WebTransportConnStats, Stats, outbound, Direction
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
 - **scope** (method)
   - calls: NullScope
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **id** (method)
   - calls: toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -5285,16 +5285,16 @@ Web implementation of a WebTransport connection.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **remotePublicKey** (method)
   - calls: value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.remotePublicKey)
 - **state** (method)
   - calls: libp2p.ConnState
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
 - **streams** (method)
   - calls: value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.streams)
 
 ### class `_WebTransportConnStats` implements libp2p.ConnStats
@@ -5310,7 +5310,7 @@ Web implementation of a WebTransport stream.
 
 - **write** (method)
   - calls: getWriter, writable, toDart, write, toJS, releaseLock
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -5324,7 +5324,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **read** (method)
   - calls: getReader, readable, toDart, read, releaseLock, value, asUint8List
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -5336,7 +5336,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
 - **close** (method)
   - calls: toDart, close, writable
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5401,7 +5401,7 @@ Web implementation of a WebTransport stream.
 - **conn** (method)
 - **isClosed** (method)
   - calls: isClosed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -5415,7 +5415,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.isClosed)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **id** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -5455,7 +5455,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **scope** (method)
   - calls: NullScope
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.scope)
 - **closeRead** (method)
 - **closeWrite** (method)
@@ -5497,7 +5497,7 @@ Web implementation of a WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.incomingUniStreams)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.incomingDatagrams)
 - **flush** (method) — Flushes the stream.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.flushAll)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush)
 - **setDeadline** (method)
@@ -5506,7 +5506,7 @@ Web implementation of a WebTransport stream.
 - **setProtocol** (method)
 - **stat** (method)
   - calls: StreamStats, outbound, Direction
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.stat)
@@ -5518,7 +5518,7 @@ Web implementation of a WebTransport stream.
 
 - **createDialer** (function) — Creates a web-specific WebTransport dialer.
   - calls: WebTransportDialerWeb
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_dialer.dart` (createWebTransportDialer)
 
 ## `lib/src/transport/webtransport/webtransport_listener.dart`
@@ -5533,7 +5533,7 @@ WebTransport listener implementation (stub for now, as browsers only dial).
 
 - **close** (method)
   - calls: close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5593,18 +5593,18 @@ WebTransport listener implementation (stub for now, as browsers only dial).
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.closeAll)
 - **addr** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.addr)
 - **connectionStream** (method)
   - calls: stream
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.connectionStream)
 - **accept** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.accept)
 - **isClosed** (method)
   - calls: isClosed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -5619,7 +5619,7 @@ WebTransport listener implementation (stub for now, as browsers only dial).
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **supportsAddr** (method)
   - calls: contains, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.supportsAddr)
 
 ## `lib/src/transport/webtransport/webtransport_session.dart`
@@ -5633,10 +5633,10 @@ _Directly tested._
 Configuration for a [WebTransportSession].
 
 - **maxSessions** (field) — Maximum number of concurrent WebTransport sessions per connection.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.maxSessions)
 - **maxDatagramSize** (field) — Maximum datagram size in bytes negotiated for this session.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.maxDatagramSize)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **initialMaxData** (field) — Initial session-level flow-control credit (bytes).
@@ -5664,7 +5664,7 @@ Statistics for a [WebTransportSession].
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.onPeerClose)
 - **bytesSent** (field) — Total bytes sent over all streams and datagrams.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesSent)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageSent)
@@ -5672,7 +5672,7 @@ Statistics for a [WebTransportSession].
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **bytesReceived** (field) — Total bytes received over all streams and datagrams.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getBytesReceived)
     - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.updateConnectionMetrics)
     - `lib/src/core/metrics/network_metrics.dart` (NetworkMetrics.recordMessageReceived)
@@ -5688,7 +5688,7 @@ Statistics for a [WebTransportSession].
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **duration** (method) — Duration the session has been (or was) open.
   - calls: difference, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 
@@ -5697,7 +5697,7 @@ Statistics for a [WebTransportSession].
 Represents a bidirectional WebTransport stream.
 
 - **id** (field) — The stream identifier (QUIC stream ID within the session).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -5736,7 +5736,7 @@ Represents a bidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **isClosed** (method) — Whether this stream has been closed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -5752,7 +5752,7 @@ Represents a bidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **write** (method) — Writes [data] to the stream.
   - calls: StateError, _writeFn
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -5767,7 +5767,7 @@ Represents a bidirectional WebTransport stream.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **read** (method) — Reads data from the stream.
   - calls: _readFn
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesRead)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -5780,7 +5780,7 @@ Represents a bidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.read)
 - **close** (method) — Closes the stream gracefully (sends FIN).
   - calls: _closeFn
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5848,7 +5848,7 @@ Represents a bidirectional WebTransport stream.
 Represents a unidirectional WebTransport stream.
 
 - **id** (field) — The stream identifier (QUIC stream ID within the session).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -5887,7 +5887,7 @@ Represents a unidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **isClosed** (method) — Whether this stream has been closed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -5903,7 +5903,7 @@ Represents a unidirectional WebTransport stream.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **write** (method) — Writes [data] to the stream.
   - calls: StateError, _writeFn
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.promptPassword)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
@@ -5918,7 +5918,7 @@ Represents a unidirectional WebTransport stream.
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 - **close** (method) — Closes the stream gracefully (sends FIN).
   - calls: _closeFn
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -5986,16 +5986,16 @@ Represents a unidirectional WebTransport stream.
 Callbacks that a platform-specific backend must provide to create a
 
 - **openBidirectionalStream** (method) — Opens a bidirectional stream within the session.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
 - **openUnidirectionalStream** (method) — Opens a unidirectional stream within the session.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **sendDatagram** (method) — Sends an unreliable datagram.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.sendDatagram)
 - **closeSession** (method) — Closes the session with [errorCode] and optional [reasonPhrase].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.close)
 - **sendDrain** (method) — Sends a DRAIN capsule to the peer.
   - referenced by (by name):
@@ -6013,11 +6013,11 @@ Represents an established WebTransport session over HTTP/3 (RFC 9220).
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.registerSession)
 - **stats** (method) — Statistics for this session.
 - **config** (method) — The session configuration.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **isClosed** (method) — Whether the session has been closed (locally or by the peer).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
@@ -6035,7 +6035,7 @@ Represents an established WebTransport session over HTTP/3 (RFC 9220).
   - referenced by (by name):
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSessionManager.cleanupInactive)
 - **isActive** (method) — Whether the session is still active (not draining and not closed).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessions)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.sessionsInterestedIn)
@@ -6064,7 +6064,7 @@ Represents an established WebTransport session over HTTP/3 (RFC 9220).
   - calls: StateError, length, maxDatagramSize, ArgumentError, sendDatagram, datagramsSent, bytesSent
 - **close** (method) — Initiates a graceful close of this session.
   - calls: closedAt, now, values, close, clear, closeSession, _closeControllers
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 27 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/node.dart` (IPFSDataNode.dispose)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
@@ -6137,7 +6137,7 @@ Represents an established WebTransport session over HTTP/3 (RFC 9220).
 Manages multiple WebTransport sessions over a single connection.
 
 - **maxSessions** (method) — Maximum number of concurrent sessions allowed.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.maxSessions)
 - **sessionCount** (method) — Number of currently active sessions.
   - calls: length
@@ -6147,18 +6147,18 @@ Manages multiple WebTransport sessions over a single connection.
   - calls: unmodifiable, values
 - **isFull** (method) — Whether the maximum session limit has been reached.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.isSessionLimitReached)
 - **registerSession** (method) — Registers a new session with the manager.
   - calls: length, StateError, sessionId, containsKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.registerSession)
 - **getSession** (method) — Retrieves a session by its session ID, or null if not found.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.getSession)
 - **removeSession** (method) — Removes a session from the manager.
   - calls: remove
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.removeSession)
 - **closeAll** (method) — Closes all active sessions and clears the registry.
   - calls: values, isActive, add, close, wait, clear
@@ -6174,7 +6174,7 @@ HTTP/3 SETTINGS identifiers for WebTransport (draft-ietf-webtrans-http3).
 - **enableConnectProtocol** (static field) — SETTINGS_ENABLE_CONNECT_PROTOCOL (0x08) per RFC 9220.
 - **h3Datagram** (static field) — SETTINGS_H3_DATAGRAM (0x33) per RFC 9297.
 - **wtEnabled** (static field) — SETTINGS_WEBTRANSPORT_ENABLED (0x2c7cf000) per
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
 - **wtInitialMaxData** (static field) — SETTINGS_WEBTRANSPORT_INITIAL_MAX_DATA (0x2b61) per
 - **wtInitialMaxStreamsUni** (static field) — SETTINGS_WEBTRANSPORT_INITIAL_MAX_STREAMS_UNI (0x2b64) per
@@ -6182,7 +6182,7 @@ HTTP/3 SETTINGS identifiers for WebTransport (draft-ietf-webtrans-http3).
 - **wtMaxSessions** (static field) — SETTINGS_WT_MAX_SESSIONS — maximum concurrent WebTransport sessions.
 - **parse** (method) — Parses WebTransport-related settings from a raw settings map.
   - calls: WebTransportSettingsParsed
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeyEntry.fromJson)
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.resolveDNSLink)
@@ -6230,10 +6230,10 @@ HTTP/3 SETTINGS identifiers for WebTransport (draft-ietf-webtrans-http3).
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromBytes)
 - **buildServerSettings** (method) — Builds a settings map suitable for inclusion in an HTTP/3 SETTINGS frame.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildServerSettings)
 - **buildClientSettings** (method) — Builds a settings map for a client connecting to a WebTransport server.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.buildClientSettings)
 
 ### class `WebTransportSettingsParsed`
@@ -6245,7 +6245,7 @@ Parsed WebTransport settings from an HTTP/3 SETTINGS frame.
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
 - **h3DatagramEnabled** (field) — Whether HTTP/3 datagrams (RFC 9297) are enabled by the peer.
 - **wtEnabled** (field) — Whether WebTransport is enabled by the peer.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.validatePeerSettings)
 - **wtInitialMaxData** (field) — Initial session-level flow-control limit in bytes.
 - **wtInitialMaxStreamsUni** (field) — Initial maximum number of unidirectional streams per session.
@@ -6288,26 +6288,26 @@ WebTransport transport implementation for libp2p.
   - calls: parse, wtEnabled, StateError, connectProtocolEnabled, isWebTransportSupported
 - **config** (method)
   - calls: libp2p_config.TransportConfig
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **canDial** (method)
   - calls: contains, toString
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canDial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canListen)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canListen)
 - **canListen** (method)
   - calls: canDial
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.canListen)
 - **dial** (method)
   - calls: createWebTransportDialer, Duration, timeout, dial
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.dial)
 - **listen** (method)
   - calls: WebTransportListener
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.start)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.startServer)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
@@ -6322,13 +6322,13 @@ WebTransport transport implementation for libp2p.
     - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocols** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
 - **dispose** (method)
   - calls: closeAll
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)

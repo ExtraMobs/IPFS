@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.446185
+generated: 2026-08-24T09:25:26.347733
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -22,7 +22,7 @@ Base58 encoding/decoding for IPFS identifiers.
 
 - **encode** (method) — Encodes a [bytes] array to a Base58 string.
   - calls: isEmpty, from, toInt
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.serializePublicKey)
@@ -178,7 +178,7 @@ A utility class for resolving DNSLink to CID.
 
 - **resolve** (method) — Resolves a DNSLink for the given domain name.
   - calls: length, hasMatch, parse, encodeComponent, Client, timeout, get, Duration, statusCode, jsonDecode, body, isNotEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.resolveDNSLink)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.resolveIPNS)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.resolveDNSLink)
@@ -200,7 +200,7 @@ Utility class for encoding and decoding IPFS data
 
 - **toBase58** (method) — Encode bytes to Base58 string with multibase prefix
   - calls: encode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_id.dart` (PeerId.toString)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
@@ -273,7 +273,7 @@ Generic LRU cache with O(1) get/put operations.
 - **onEvict** (field) — Callback invoked when an entry is evicted.
 - **length** (method) — Number of entries in the cache.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.readByte)
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.readBytes)
     - `lib/src/core/cbor/byte_reader.dart` (ByteReader.isBreak)
@@ -543,7 +543,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/varint.dart` (decodeVarint)
 - **isEmpty** (method) — Whether the cache is empty.
   - calls: isEmpty
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.unlock)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
@@ -634,11 +634,11 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/password_prompt.dart` (PasswordPrompt.promptNew)
 - **isFull** (method) — Whether the cache is at capacity.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.isSessionLimitReached)
 - **put** (method) — Adds or updates an entry.
   - calls: containsKey, _moveToFront, value, _Node, length, _removeLRU, _addToFront
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -657,7 +657,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method) — Gets an entry, returning null if not found.
   - calls: _moveToFront, value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -716,7 +716,7 @@ Generic LRU cache with O(1) get/put operations.
   - calls: get, compute, put
 - **containsKey** (method) — Checks if the key exists in the cache.
   - calls: containsKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.hasKey)
@@ -760,7 +760,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/keystore.dart` (Keystore.hasKeyPair)
 - **remove** (method) — Removes an entry from the cache.
   - calls: remove, _removeNode, value
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.removeKey)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
@@ -827,7 +827,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/keystore.dart` (Keystore.removeKeyPair)
 - **clear** (method) — Clears all entries from the cache.
   - calls: entries, key, value, clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.clear)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
@@ -873,7 +873,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration)
 - **keys** (method) — Returns all keys in order from most to least recently used.
   - calls: add, key, next
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.keyNames)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.start)
@@ -893,7 +893,7 @@ Generic LRU cache with O(1) get/put operations.
 ### class `_Node`
 
 - **key** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -956,7 +956,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/keystore.dart` (Keystore.deserialize)
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **value** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.deserialize)
@@ -1049,7 +1049,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/keystore.dart` (Keystore.deserialize)
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **next** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreAll.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreIndex.==)
     - `lib/src/core/ipld/selectors/selector_ast.dart` (ExploreRange.==)
@@ -1059,7 +1059,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.keys)
 - **prev** (field)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes)
 
 ### class `TimedLRUCache` extends GenericLRUCache<K, V>
@@ -1067,13 +1067,13 @@ Generic LRU cache with O(1) get/put operations.
 Timed LRU cache that automatically expires entries.
 
 - **ttl** (field) — Duration before entries expire.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **put** (method)
   - calls: put, now
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -1091,7 +1091,7 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
 - **get** (method)
   - calls: difference, now, remove, get
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
@@ -1145,7 +1145,7 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
 - **remove** (method)
   - calls: remove
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.removeKey)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.unpinBlock)
@@ -1212,7 +1212,7 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/utils/keystore.dart` (Keystore.removeKeyPair)
 - **clear** (method)
   - calls: clear
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.clear)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.deserialize)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
@@ -1268,7 +1268,7 @@ _Directly tested._
 Represents a public/private key pair for cryptographic operations.
 
 - **publicKey** (field) — The public key in string format.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1286,7 +1286,7 @@ Represents a public/private key pair for cryptographic operations.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **privateKey** (field) — The private key in string format.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1327,17 +1327,17 @@ In-memory keystore for managing IPNS keys and cryptographic identities.
   - calls: map, MapEntry, publicKey, privateKey, jsonEncode
 - **deserialize** (method) — Deserializes the keystore from JSON format (optional).
   - calls: jsonDecode, FormatException, entries, value, key, addKeyPair, KeyPair, info
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.loadAndUnlock)
 - **verifySignature** (method) — Verifies a signature using a public key
   - calls: _decodePublicKey, SimplePublicKey, ed25519, Signature, verify, warning, message, error
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.verify)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
 - **privateKey** (method) — Getter for the default private key
   - calls: StateError, fromString, privateKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -1373,7 +1373,7 @@ A hierarchical logging system for IPFS operations.
   - calls: MetricsCollector, enableStructuredLogging
 - **debug** (method) — Log a debug message
   - calls: fine
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
@@ -1540,7 +1540,7 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
 - **info** (method) — Log an info message
   - calls: info
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -1763,7 +1763,7 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **error** (method) — Log an error message with optional error object and stack trace
   - calls: severe
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/builders/ipfs_node_builder.dart` (IPFSNodeBuilder.build)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.stop)
@@ -2026,12 +2026,12 @@ _Directly tested._
 ECDSA private key for IPFS cryptographic operations.
 
 - **algorithm** (field) — The signing algorithm (e.g., 'ECDSA').
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **publicKey** (method) — The public key component.
   - calls: publicKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -2049,7 +2049,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **privateKey** (method) — The private key component.
   - calls: privateKey
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.sign)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -2068,7 +2068,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey)
 - **sign** (method) — Signs the given data using the private key
   - calls: Signer, SecureRandom, secure, seed, KeyParameter, fromList, List, nextInt, ParametersWithRandom, PrivateKeyParameter, privateKey, init, generateSignature, padLeft, toRadixString, r, s, decode
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseSigner.sign)
@@ -2080,7 +2080,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
 - **verify** (method) — Verifies a signature using the corresponding public key
   - calls: Signer, PublicKeyParameter, publicKey, init, parse, encode, sublist, ECSignature, verifySignature
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeCOSE)
     - `lib/src/core/ipld/jose_cose_handler.dart` (_IpfsCoseVerifier.verify)
@@ -2111,7 +2111,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/utils/keystore.dart` (Keystore.privateKey)
 - **fromBytes** (method) — Creates an IPFSPrivateKey from raw bytes (hex-encoded string compatible)
   - calls: parse, encode, ECCurve_secp256k1, G, ECPublicKey, ECPrivateKey, IPFSPrivateKey, AsymmetricKeyPair, UnsupportedError
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -2147,7 +2147,7 @@ _Directly tested._
 
 - **decodeVarint** (function) — Decodes an unsigned varint from a byte array.
   - calls: length
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.decode)
     - `lib/src/utils/encoding.dart` (EncodingUtils.isValidCIDBytes)
 

@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-24T09:15:13.314978
+generated: 2026-08-24T09:25:26.206089
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -21,7 +21,7 @@ _Directly tested._
 Base class for mDNS resource records.
 
 - **name** (field) — The domain name of this record.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -48,7 +48,7 @@ Base class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **ttl** (field) — Time-to-live for this record.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
@@ -65,7 +65,7 @@ SRV record containing service location information.
 
 - **target** (field) — The target hostname.
 - **port** (field) — The port number.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.port)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.start)
@@ -74,7 +74,7 @@ SRV record containing service location information.
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **priority** (field) — Service priority (lower is higher priority).
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -94,7 +94,7 @@ TXT record containing service metadata.
 Query class for mDNS resource records.
 
 - **name** (field) — The name to query.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
@@ -121,7 +121,7 @@ Query class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **type** (field) — The type of record to query.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -190,7 +190,7 @@ Query class for mDNS resource records.
 Abstract client for multicast DNS operations.
 
 - **start** (method) — Starts the mDNS client.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -219,7 +219,7 @@ Abstract client for multicast DNS operations.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the mDNS client.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -242,15 +242,15 @@ Abstract client for multicast DNS operations.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method) — Performs a lookup for resource records matching [query].
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup)
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
 - **startServer** (method) — Starts an mDNS server to respond to queries.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
 - **announce** (method) — Announces a service via mDNS.
 - **isRunning** (method) — Returns true if the client is currently running.
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 
 ## `lib/src/network/mdns_client_io.dart`
@@ -265,7 +265,7 @@ IO implementation of the mDNS client.
 
 - **start** (method)
   - calls: MDnsClient, start
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -294,7 +294,7 @@ IO implementation of the mDNS client.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: stop
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -317,14 +317,14 @@ IO implementation of the mDNS client.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method)
   - calls: ResourceRecordQuery, _getResourceRecordType, type, name, timeout, lookup, _transformRecord
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
 - **isRunning** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 - **startServer** (method)
   - calls: bind, anyIPv4, joinMulticast, listen, read, receive, _handlePacket
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
 - **announce** (method)
   - calls: _sendResponse
@@ -350,7 +350,7 @@ _No known direct test._
 Stub implementation of the mDNS client for platforms where it's not supported.
 
 - **start** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -379,7 +379,7 @@ Stub implementation of the mDNS client for platforms where it's not supported.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -402,15 +402,15 @@ Stub implementation of the mDNS client for platforms where it's not supported.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup)
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
 - **startServer** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
 - **announce** (method)
 - **isRunning** (method)
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
 
 ### top-level `createMDnsClient` (function)
@@ -458,7 +458,7 @@ High-level network router for IPFS peer communication.
 
 - **peerID** (method) — The peer ID of this node
   - calls: peerID
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.peerID)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.peerID)
@@ -472,7 +472,7 @@ High-level network router for IPFS peer communication.
   - calls: stream
 - **connectedPeers** (method) — Currently connected peers
   - calls: unmodifiable
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectedPeers)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -483,11 +483,11 @@ High-level network router for IPFS peer communication.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmPeers)
 - **isInitialized** (method) — Whether the router has been initialized
   - calls: isInitialized
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getStatus)
 - **start** (method) — Starts the router
   - calls: start
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -516,7 +516,7 @@ High-level network router for IPFS peer communication.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the router
   - calls: stop, close
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -539,7 +539,7 @@ High-level network router for IPFS peer communication.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **sendMessage** (method) — Sends a message to a specific peer
   - calls: sendMessage
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.sendMessage)
     - `lib/src/network/router.dart` (Router.broadcast)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.send)
@@ -558,13 +558,13 @@ High-level network router for IPFS peer communication.
   - calls: sendMessage, encode, Base58, value, id
 - **connectToPeer** (method) — Connects to a peer
   - calls: connect
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.connectToPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.connectToPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmConnect)
 - **disconnectFromPeer** (method) — Disconnects from a peer
   - calls: disconnect
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.disconnectFromPeer)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.disconnectFromPeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleSwarmDisconnect)
