@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-25T08:24:06.102562
+generated: 2026-08-25T08:38:55.020021
 ---
 
 # `test/(root)/`
@@ -140,6 +140,21 @@ generated: 2026-08-25T08:24:06.102562
 - isFqdn(${input.isEmpty ? 
 - fqdn(${input.isEmpty ? 
 
+## `test/ecdsa_key_parity_test.dart`
+
+- ECDSA (P-256) -- real Go-generated vector
+- unmarshal SEC1 private key, re-marshal matches byte-for-byte
+- unmarshal PKIX public key, re-marshal matches byte-for-byte
+- private key
+- verifies a real Go-produced ECDSA/SHA-256 signature
+- rejects a tampered signature
+- rejects a signature over the wrong message
+- Dart
+- ECDSA (P-256) -- generation and round-trip
+- a freshly generated key signs and verifies its own signature
+- marshal -> unmarshal round-trips a freshly generated key
+- rejects a public key on the wrong curve OID
+
 ## `test/multiaddr_parity_test.dart`
 
 - Multiaddr.parse -- must succeed (go-multiaddr `good`)
@@ -222,4 +237,20 @@ generated: 2026-08-25T08:24:06.102562
 - a freshly generated key signs and verifies its own signature
 - rejects a key smaller than minRsaKeyBits
 - marshal -> unmarshal round-trips a freshly generated key
+
+## `test/secp256k1_key_parity_test.dart`
+
+- Secp256k1 -- real Go-generated vector
+- unmarshal 32-byte private key, re-marshal matches byte-for-byte
+- unmarshal compressed public key, re-marshal matches byte-for-byte
+- private key
+- verifies a real dcrd RFC6979/DER signature
+- rejects a tampered signature
+- rejects a signature over the wrong message
+- Dart
+- Secp256k1 -- generation and round-trip
+- a freshly generated key signs and verifies its own signature
+- signing the same key/message twice is deterministic
+- marshal -> unmarshal round-trips a freshly generated key
+- rejects a private key of the wrong length
 

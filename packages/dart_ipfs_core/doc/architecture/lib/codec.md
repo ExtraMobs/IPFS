@@ -1,7 +1,7 @@
 ---
 module: codec
 kind: lib/src audit
-generated: 2026-08-25T08:24:06.085671
+generated: 2026-08-25T08:38:55.002098
 ---
 
 # Module `codec` (`lib/src/codec/`)
@@ -43,6 +43,8 @@ Interface for all IPLD codecs in dart_ipfs_core.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodeSec1EcPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodePkixEcPublicKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method) — Decodes bytes into a Dart value.
@@ -86,6 +88,8 @@ Codec for DAG-CBOR.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodeSec1EcPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodePkixEcPublicKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)
@@ -129,6 +133,8 @@ Codec for DAG-JSON.
     - `lib/src/cid/multihash.dart` (MultihashUtils.encode)
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodeSec1EcPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodePkixEcPublicKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)
@@ -172,6 +178,8 @@ Codec for raw binary data.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodeSec1EcPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodePkixEcPublicKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
     - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)

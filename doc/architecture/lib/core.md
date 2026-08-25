@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-25T08:24:51.327542
+generated: 2026-08-25T08:39:35.157981
 ---
 
 # Module `core` (`lib/src/core/`)

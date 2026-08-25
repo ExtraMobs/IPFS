@@ -1,7 +1,7 @@
 ---
 module: multiaddr
 kind: lib/src audit
-generated: 2026-08-25T08:24:06.091946
+generated: 2026-08-25T08:38:55.008738
 ---
 
 # Module `multiaddr` (`lib/src/multiaddr/`)
@@ -99,6 +99,9 @@ One `/protocol/value` (or bare `/protocol` for a flag protocol) segment
     - `lib/src/multiaddr/multiaddr.dart` (Multiaddr.valueForProtocol)
     - `lib/src/multiaddr/multiaddr.dart` (Multiaddr.hasProtocol)
 - **valueBytes** (field) — The component's decoded value, in its raw wire-format bytes (not
+  - referenced by (by name):
+    - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (encodeSec1EcPrivateKey)
 - **value** (method) — The component's value in string form (empty for flag protocols).
   - calls: size, bytesToString, transcoder
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):

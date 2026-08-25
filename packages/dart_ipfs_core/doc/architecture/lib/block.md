@@ -1,7 +1,7 @@
 ---
 module: block
 kind: lib/src audit
-generated: 2026-08-25T08:24:06.074382
+generated: 2026-08-25T08:38:54.991072
 ---
 
 # Module `block` (`lib/src/block/`)
@@ -184,6 +184,8 @@ A simple in-memory block store implementation.
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.decrypt)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.zeroMemory)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.constantTimeEquals)
+    - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPrivateKey)
+    - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPublicKey)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.generateKeyPair)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
@@ -192,6 +194,7 @@ A simple in-memory block store implementation.
     - `lib/src/crypto/key_types.dart` (unmarshalKeyProto)
     - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
     - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
+    - `lib/src/crypto/secp256k1_key.dart` (unmarshalSecp256k1PrivateKey)
     - `lib/src/data_structures/immutable_bytes.dart` (ImmutableBytes.length)
     - `lib/src/data_structures/typed_map.dart` (TypedMap.length)
     - `lib/src/multiaddr/dns_resolver.dart` (Resolver.resolve)

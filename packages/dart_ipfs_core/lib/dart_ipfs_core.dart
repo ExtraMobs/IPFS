@@ -29,6 +29,15 @@ export 'src/codec/dag_json_codec.dart' show DagJsonCodec;
 export 'src/codec/raw_codec.dart' show RawCodec;
 
 export 'src/crypto/crypto_utils.dart' show CryptoUtils, EncryptedData;
+export 'src/crypto/ecdsa_key.dart'
+    show
+        EcdsaPrivateKey,
+        EcdsaPublicKey,
+        encodePkixEcPublicKey,
+        encodeSec1EcPrivateKey,
+        generateEcdsaKeyPair,
+        unmarshalEcdsaPrivateKey,
+        unmarshalEcdsaPublicKey;
 export 'src/crypto/ed25519_signer.dart' show Ed25519Signer, KeyPairExtensions;
 export 'src/crypto/key_types.dart'
     show Key, KeyType, PrivKey, PubKey, marshalKeyProto, unmarshalKeyProto;
@@ -42,6 +51,13 @@ export 'src/crypto/rsa_key.dart'
         minRsaKeyBits,
         unmarshalRsaPrivateKey,
         unmarshalRsaPublicKey;
+export 'src/crypto/secp256k1_key.dart'
+    show
+        Secp256k1PrivateKey,
+        Secp256k1PublicKey,
+        generateSecp256k1KeyPair,
+        unmarshalSecp256k1PrivateKey,
+        unmarshalSecp256k1PublicKey;
 
 export 'src/data_structures/immutable_bytes.dart' show ImmutableBytes;
 export 'src/data_structures/typed_map.dart' show TypedMap;

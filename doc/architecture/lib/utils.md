@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-25T08:24:51.569266
+generated: 2026-08-25T08:39:35.417429
 ---
 
 # Module `utils` (`lib/src/utils/`)
