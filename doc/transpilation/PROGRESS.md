@@ -30,11 +30,10 @@
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
-| `matest` |  | não iniciado |  |
-| `multiaddr` |  | não iniciado |  |
-| `net` |  | não iniciado |  |
-| `x/meg` |  | não iniciado |  |
+| `(root)` | `packages/dart_ipfs_core/lib/src/multiaddr/{protocol,transcoders,multiaddr}.dart` | portado com paridade comprovada | Reescrito do zero em `dart_ipfs_core` (a dependência existente, `ipfs_libp2p`'s `MultiAddr`, cobria só 15/37 protocolos e tinha **dois bugs reais de código de wire**: `quic-v1` usava o código 460, que é o de `quic` puro em go-multiaddr -- o `P_QUIC_V1` real é 461; e `sni` usava 467 em vez do real 449 -- ambos causariam incompatibilidade de wire silenciosa com peers reais). Tabela completa de 37 protocolos (`Protocols` em `protocol.dart`, códigos/tamanhos copiados literalmente de `protocols.go`) + todos os transcoders (`transcoders.dart`: ip4/ip6/ip6zone/ipcidr/port/dns/onion/onion3/garlic64/garlic32/p2p/unix/certhash/http-path/memory) + `Component`/`Multiaddr` (`multiaddr.dart`: parse/toBytes/fromBytes/encapsulate/decapsulate/valueForProtocol/compare/equal). IPv4/IPv6 parsing é caseiro (não usa `dart:io`'s `InternetAddress`, pra manter `dart_ipfs_core` sem dependência de `dart:io`/web-incompatível) -- inclui formatação IPv6 canônica RFC 5952 com compressão `::` e caso especial `::ffff:a.b.c.d`. 152 testes de paridade em `test/multiaddr_parity_test.dart`, usando as listas `good`/`bad` reais de `multiaddr_test.go` (incluindo os payloads i2p/Tor completos), mais round-trip binário e um teste cruzado provando que um PeerId em base58 e o mesmo PeerId como CID base32 (`libp2p-key`) decodificam pro mesmo valor. **Gap real e documentado (não silencioso):** CIDs de PeerId em base36 (`k2k4r8oq...`, prefixo `k`) falham -- `package:multibase` não tem codec base36; 11 vetores `good` de `multiaddr_test.go` que usam base36 viraram um grupo de teste explícito "known gap" esperando falha, para virar verde automaticamente quando o próximo pacote (`go-multibase`) ganhar base36. `FilterAddrs`/`Filters` (filtro allow/deny de endereços) e `Match`/`x/meg` (mini-linguagem de pattern matching sobre protocolos) não portados -- nenhum caller em `dart_ipfs` precisa deles hoje; retomar se/quando o swarm precisar de política de filtragem de endereço. |
+| `matest` |  | fora do escopo (helpers de teste do próprio go-multiaddr, não é API de produção) |  |
+| `net` |  | não iniciado | Conveniências que integram `Multiaddr` com `net.Conn`/`net.Dial` do Go (`ToNetAddr`, `FromNetAddr`, `Listen`, etc.) -- equivalente Dart seria integração com `dart:io`'s `Socket`/`RawDatagramSocket` no Tier 3 (transporte), não faz sentido portar antes do transporte real existir. |
+| `x/meg` |  | não iniciado | Mini-linguagem de pattern matching usada só por `Multiaddr.Match`; ver nota do `(root)` acima -- sem caller no `dart_ipfs` hoje. |
 
 ### `go-multihash`
 
@@ -57,7 +56,7 @@
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` |  | não iniciado | **Bloqueia um teste "known gap" em `test/multiaddr_parity_test.dart`** (`go-multiaddr`, ver nota acima): falta base36 (`k...`) em `package:multibase`/`MultibaseUtils`. Ao portar base36 aqui, mover os 11 vetores de `_base36Gap` daquele arquivo pra `_good` e confirmar que passam. Também vale reauditar `package:multibase`'s base58btc quanto a bytes líder-zero (verificado OK neste sprint por teste ad hoc, mas não com um teste de paridade formal ainda) e o bug de base32 já documentado em `multibase.dart`. |
 | `multibase-conv` |  | não iniciado |  |
 
 ### `go-multicodec`

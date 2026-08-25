@@ -33,3 +33,7 @@ export 'src/crypto/ed25519_signer.dart' show Ed25519Signer, KeyPairExtensions;
 
 export 'src/data_structures/immutable_bytes.dart' show ImmutableBytes;
 export 'src/data_structures/typed_map.dart' show TypedMap;
+
+export 'src/multiaddr/multiaddr.dart' show Component, Multiaddr;
+export 'src/multiaddr/protocol.dart'
+    show Protocol, Protocols, Transcoder, kLengthPrefixedVarSize;
