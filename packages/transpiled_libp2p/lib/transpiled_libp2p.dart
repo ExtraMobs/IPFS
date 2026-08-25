@@ -29,6 +29,7 @@ export 'src/core/crypto/key_codec.dart'
         unmarshalPublicKey;
 export 'src/core/crypto/key_types.dart'
     show Key, KeyType, PrivKey, PubKey, marshalKeyProto, unmarshalKeyProto;
+export 'src/core/crypto/proto_varint.dart' show encodeProtoVarint, readProtoVarint;
 export 'src/core/crypto/rsa_key.dart'
     show
         RsaPrivateKey,
