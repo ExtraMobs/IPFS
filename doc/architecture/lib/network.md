@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.688319
+generated: 2026-08-25T01:38:18.237400
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -121,7 +121,7 @@ Query class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **type** (field) — The type of record to query.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -174,6 +174,7 @@ Query class for mDNS resource records.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -240,9 +241,11 @@ Abstract client for multicast DNS operations.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method) — Performs a lookup for resource records matching [query].
-  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup)
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
 - **startServer** (method) — Starts an mDNS server to respond to queries.
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
@@ -313,8 +316,10 @@ IO implementation of the mDNS client.
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method)
   - calls: ResourceRecordQuery, _getResourceRecordType, type, name, timeout, lookup, _transformRecord
-  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
 - **isRunning** (method)
   - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/services/health_check_service.dart` (HealthCheckService.checkHealth)
@@ -396,9 +401,11 @@ Stub implementation of the mDNS client for platforms where it's not supported.
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
     - `lib/src/routing/content_routing.dart` (ContentRouting.stop)
 - **lookup** (method)
-  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.lookup)
     - `lib/src/services/gateway/content_type_handler.dart` (ContentTypeHandler.detectContentType)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
 - **startServer** (method)
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)

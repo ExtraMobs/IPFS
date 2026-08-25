@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.810980
+generated: 2026-08-25T01:38:20.075439
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -1476,6 +1476,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
@@ -1612,6 +1613,7 @@ IPFS HTTP Gateway Server
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 - **port** (field) — The port to listen on.
   - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
@@ -2579,7 +2581,7 @@ Pin status for a single peer in the cluster.
 Information about a cluster peer.
 
 - **id** (field) — The peer ID.
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -3914,6 +3916,7 @@ IPFS HTTP RPC API Server
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 - **port** (field) — The port to listen on.
   - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)

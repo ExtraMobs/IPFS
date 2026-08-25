@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.709053
+generated: 2026-08-25T01:38:18.249927
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -52,6 +52,7 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Create message from bytes
   - calls: factory, mergeFromBuffer
@@ -612,7 +613,7 @@ Base message wrapper for all IPFS messages
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -665,13 +666,14 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -724,6 +726,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -1308,7 +1311,7 @@ Network events
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1360,10 +1363,11 @@ Network events
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1415,6 +1419,7 @@ Network events
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -3127,7 +3132,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3179,10 +3184,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3234,6 +3240,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -3771,7 +3778,7 @@ _Directly tested._
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3824,13 +3831,14 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3883,6 +3891,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5035,7 +5044,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5088,13 +5097,14 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5147,6 +5157,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5661,7 +5672,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5714,13 +5725,14 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -5773,6 +5785,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -6277,7 +6290,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -6316,7 +6329,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -7291,7 +7304,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getI64
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -7343,10 +7356,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -7398,6 +7412,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -13444,7 +13459,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -13496,10 +13511,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -13551,6 +13567,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -17288,7 +17305,7 @@ PBNode represents a DAG node
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method) — opaque user data content
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -17340,10 +17357,11 @@ PBNode represents a DAG node
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -17395,6 +17413,7 @@ PBNode represents a DAG node
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -17924,7 +17943,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **type** (method) — Link type for different DAG structures
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17977,13 +17996,14 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18036,6 +18056,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18720,7 +18741,7 @@ _No known direct test._
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -18772,10 +18793,11 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -18827,6 +18849,7 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -18838,7 +18861,7 @@ _No known direct test._
   - calls: $_clearField
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18891,13 +18914,14 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18950,6 +18974,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -21258,7 +21283,7 @@ Represents a peer in the IPFS network.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21297,7 +21322,7 @@ Represents a peer in the IPFS network.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21940,7 +21965,7 @@ _Directly tested._
   - calls: $_ensure
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -21993,13 +22018,14 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -22052,6 +22078,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -25616,7 +25643,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -25655,7 +25682,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26163,7 +26190,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as a string.
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26202,7 +26229,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26765,7 +26792,7 @@ Defines a message representing a node in a data structure.
   - calls: $_ensure
 - **data** (method) — Arbitrary data associated with this node, represented as bytes.
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -26817,10 +26844,11 @@ Defines a message representing a node in a data structure.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -26872,6 +26900,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -27323,7 +27352,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as bytes.
   - calls: $_getN
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -27362,7 +27391,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -28742,7 +28771,7 @@ Represents a peer participating in the DHT.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — Required: The ID of the peer.
   - calls: $_getN
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -28781,7 +28810,7 @@ Represents a peer participating in the DHT.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -58210,7 +58239,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -58263,13 +58292,14 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -58322,6 +58352,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -58979,7 +59010,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -59018,7 +59049,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -73244,7 +73275,7 @@ Describes a message type.
   - calls: $_clearField
 - **type** (method) — The fully-qualified type name of the extension field. Unlike
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -73297,13 +73328,14 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -73356,6 +73388,7 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -74370,7 +74403,7 @@ Describes a field within a message.
   - calls: $_clearField
 - **type** (method) — If type_name is set, this need not be set.  If both this and type_name
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -74423,13 +74456,14 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -74482,6 +74516,7 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -103005,7 +103040,7 @@ Request for graph traversal
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103044,7 +103079,7 @@ Request for graph traversal
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103688,7 +103723,7 @@ Response to graph request
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103727,7 +103762,7 @@ Response to graph request
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -104265,7 +104300,7 @@ Block data with prefix
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -104317,10 +104352,11 @@ Block data with prefix
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -104372,6 +104408,7 @@ Block data with prefix
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -108425,7 +108462,7 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -108477,10 +108514,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -108532,6 +108570,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -110626,7 +110665,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **type** (method) — The type of UnixFS node
   - calls: $_getN
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110679,13 +110718,14 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **type** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110738,6 +110778,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -110748,7 +110789,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **data** (method) — The raw data contained within this node (if any)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -110800,10 +110841,11 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -110855,6 +110897,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has

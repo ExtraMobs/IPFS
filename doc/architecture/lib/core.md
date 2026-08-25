@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.654716
+generated: 2026-08-25T01:38:18.191799
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -205,6 +205,7 @@ Simple byte accumulator for the encoder.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `_CborReader`
@@ -446,6 +447,7 @@ Configuration for the IPFS HTTP Gateway.
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 - **writable** (field) — Whether the gateway is writable (allows POST/PUT).
   - referenced by (by name):
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportStreamWeb.write)
@@ -1285,6 +1287,7 @@ Result of AES-GCM encryption containing ciphertext and nonce.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes from bytes.
   - calls: length, nonceSize, ArgumentError, EncryptedData, sublist
@@ -1770,7 +1773,7 @@ _No known direct test._
 Abstract base class for content-addressed blocks.
 
 - **data** (field) — The raw data payload.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -1822,6 +1825,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **cid** (field) — The content identifier.
   - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
@@ -1895,6 +1899,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes a block from bytes using the provided factory function.
   - calls: length, FormatException, sublist, isValidCIDBytes, fromBytes, factory
@@ -2758,6 +2763,8 @@ Builder for CAR v2 index payloads.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
@@ -3380,7 +3387,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (field) — The raw data payload of this node.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -3432,6 +3439,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **isDirectory** (field) — Whether this node represents a directory.
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
@@ -3539,6 +3547,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **toString** (method)
   - calls: length
@@ -4373,6 +4382,7 @@ Represents a network address (IP + Port).
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 - **port** (field) — The port number of the peer.
   - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
@@ -4498,7 +4508,7 @@ Represents a network address (IP + Port).
 Represents a peer node in the IPFS network.
 
 - **id** (field) — The unique cryptographic identifier for this peer.
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -4757,7 +4767,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **type** (field) — The type of pin (direct, recursive, indirect).
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -4810,6 +4820,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5952,6 +5963,7 @@ Event emitted when a peer connects.
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 
 ### class `BlockTransferEvent` extends NetworkEvent
 
@@ -6035,7 +6047,7 @@ Event emitted when a block is transferred.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **type** (field) — Whether this was a send or receive.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -6088,6 +6100,7 @@ Event emitted when a block is transferred.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -6444,7 +6457,7 @@ _Directly tested._
 Abstract interface for block data access.
 
 - **data** (method) — The raw binary content of this block.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -6496,6 +6509,7 @@ Abstract interface for block data access.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **cid** (method) — The content identifier for this block.
   - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
@@ -6592,6 +6606,7 @@ Abstract interface for block data access.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ## `lib/src/core/interfaces/block_store_operations.dart`
@@ -6965,7 +6980,7 @@ Handles NAT detection and traversal for an IPFS node.
 
 ## `lib/src/core/ipfs_node/bootstrap_handler.dart`
 
-Handles bootstrap peer connections for an IPFS node.
+How many chained DNS redirects (e.g. bootstrap.libp2p.io's TXT records
 
 _Directly tested._
 
@@ -8437,6 +8452,8 @@ A minimal IPFS node for web browsers.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
@@ -11821,7 +11838,7 @@ Result of a selector execution.
 IPLD Selector for querying and traversing DAG structures.
 
 - **type** (field) — The selector type.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -11874,6 +11891,7 @@ IPLD Selector for querying and traversing DAG structures.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -11924,6 +11942,7 @@ IPLD Selector for querying and traversing DAG structures.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytesAsync** (method) — Creates an IPLDSelector from its CBOR byte representation
   - calls: _decodeBytes, kind, MAP, IPLDDecodingError, firstWhere, values, toString, stringValue, value, entries, mapValue, key, MapEntry, IPLDNode, IPLDMap, _decodeValue, toInt, intValue, NULL, toList, map, listValue, LIST, IPLDList, fromNode, boolValue, IPLDSelector
@@ -12566,7 +12585,7 @@ _No known direct test._
 Base class for all network messages.
 
 - **data** (field) — The message payload.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -12618,6 +12637,7 @@ Base class for all network messages.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **protocol** (field) — The protocol identifier.
 - **toBytes** (method) — Serializes the message to bytes.
@@ -12651,6 +12671,7 @@ Base class for all network messages.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `DHTMessage` extends BaseMessage
@@ -12979,7 +13000,7 @@ Kubo-compatible stat result for an MFS path.
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.fetchGraphFromPeer)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createResponse)
 - **type** (field) — Node type: 'file', 'directory', or 'raw'.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13032,6 +13053,7 @@ Kubo-compatible stat result for an MFS path.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -13099,7 +13121,7 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **type** (field) — Entry type: 0=raw, 1=directory, 2=file (Kubo convention).
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13152,6 +13174,7 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -14047,7 +14070,7 @@ A field read from a protobuf message.
 ---------------------------------------------------------------------------
 
 - **type** (field) — The key type.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -14100,12 +14123,13 @@ A field read from a protobuf message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (field) — The raw key bytes.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -14157,6 +14181,7 @@ A field read from a protobuf message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **encode** (method) — Encodes this public key to protobuf bytes.
   - calls: _encodeVarintField, value, _encodeLengthDelimited, fromList
@@ -15423,7 +15448,7 @@ Event emitted by the peering service.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **type** (field) — The type of event.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -15476,6 +15501,7 @@ Event emitted by the peering service.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -15776,7 +15802,7 @@ _Directly tested._
 Base class for all IPFS plugins.
 
 - **id** (method) — The unique identifier of the plugin.
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -16296,7 +16322,7 @@ Exception thrown when a plugin manifest is invalid or cannot be parsed.
 A parsed and validated plugin manifest.
 
 - **id** (field) — Reverse-DNS plugin identifier (e.g. `org.dart-ipfs.examples.metrics-emitter`).
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -16795,7 +16821,7 @@ Generic response wrapper for block operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **data** (field) — The result data, if any.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -16847,6 +16873,7 @@ Generic response wrapper for block operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 
 ## `lib/src/core/responses/block_response_factory.dart`
@@ -17754,6 +17781,7 @@ Operator-controlled content denylist service.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
@@ -19725,7 +19753,7 @@ _Directly tested._
 Core peer representation used throughout the application.
 
 - **id** (field) — The peer ID.
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -20583,7 +20611,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **data** (field) — The serialized block bytes for this node.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -20635,6 +20663,7 @@ Represents a decoded UnixFS node, including its outer DAG-PB container and
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **pbNode** (field) — The outer DAG-PB node.
   - referenced by (by name):

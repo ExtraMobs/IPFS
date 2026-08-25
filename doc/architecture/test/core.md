@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-24T10:18:28.887515
+generated: 2026-08-25T01:38:20.163020
 ---
 
 # `test/core/`
@@ -797,6 +797,10 @@ generated: 2026-08-24T10:18:28.887515
 - reconnection with new peers (simulated)
 - start/stop multiple times
 - connection failure handles error
+- BootstrapHandler DNS resolution
+- resolves a /dnsaddr/ bootstrap peer before connecting
+- a /dnsaddr/ domain with no matching records connects to nothing
+- a plain (non-DNS) bootstrap peer is unaffected by the resolver
 
 ## `test/core/ipfs_node/bootstrap_utils_test.mocks.dart`
 

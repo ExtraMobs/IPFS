@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-24T10:18:28.894936
+generated: 2026-08-25T01:38:20.179340
 ---
 
 # `test/transport/`
@@ -94,6 +94,34 @@ generated: 2026-08-24T10:18:28.894936
 - multiple start/stop cycles are safe
 - event stream handles multiple listeners
 - CircuitRelayConnectionEvent with negative dataSize
+
+## `test/transport/dns/dns_message_test.dart`
+
+- encodeDnsQuery
+- matches the real query bytes sent for a TXT lookup
+- rejects a label over 63 bytes
+- decodeDnsMessage -- real captured responses
+- TXT: parses 4 dnsaddr records via name-compressed answers
+- A: parses two IPv4 addresses
+- AAAA: parses two IPv6 addresses in canonical compressed form
+- NXDOMAIN: rcode is 3 with no answer records (SOA is authority-only)
+- decodeDnsMessage -- structural validation
+- rejects a message shorter than the 12-byte header
+- rejects a forward-pointing compression pointer
+- rejects RDATA that overruns the message
+
+## `test/transport/dns/system_resolver_network_test.dart`
+
+- SystemResolver + dart_ipfs_core Resolver (live network)
+- resolves a real /dnsaddr/ bootstrap multiaddr
+- resolves a plain dns4 hostname to real IPv4 addresses
+
+## `test/transport/dns/udp_dns_client_network_test.dart`
+
+- UdpDnsClient
+- falls back to the next resolver when the first one times out
+- a nonexistent domain resolves to an empty list, not an error
+- TXT lookup matches the real bootstrap.libp2p.io records
 
 ## `test/transport/http_gateway_client_test.dart`
 

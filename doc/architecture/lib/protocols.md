@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.798575
+generated: 2026-08-25T01:38:18.364872
 ---
 
 # Module `protocols` (`lib/src/protocols/`)
@@ -731,7 +731,7 @@ _Directly tested._
 A Bitswap session that groups related block requests for optimized
 
 - **id** (field) — Unique session identifier.
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -1385,6 +1385,7 @@ Represents a Bitswap protocol message.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `WantlistEntry`
@@ -1635,7 +1636,7 @@ A block presence notification (HAVE or DONT_HAVE).
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **type** (field) — The presence type.
-  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -1688,6 +1689,7 @@ A block presence notification (HAVE or DONT_HAVE).
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -1830,6 +1832,8 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
@@ -2244,6 +2248,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
@@ -3523,6 +3528,8 @@ Sorted queue of peers by XOR distance to a target.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
@@ -3639,6 +3646,7 @@ Thin framing envelope for DHT request/response correlation.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.createRecord)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ## `lib/src/protocols/dht/dht_handler.dart`
@@ -6077,7 +6085,7 @@ _No known direct test._
 Represents a peer in the DHT network
 
 - **id** (field) — The unique identifier of the peer
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -6120,6 +6128,7 @@ Represents a peer in the DHT network
     - `lib/src/platform/http_server_adapter_io.dart` (IpfsHttpServerInstanceIO.host)
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
     - `lib/src/protocols/dht/peer.dart` (Peer.==)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupIPAddr)
 - **metadata** (field) — Optional metadata about the peer
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/peer.dart` (Peer.copyWith)
@@ -11845,7 +11854,7 @@ PubSub message.
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -11897,10 +11906,11 @@ PubSub message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -11952,6 +11962,7 @@ PubSub message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -15031,7 +15042,7 @@ A message received on a Gossipsub topic.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **data** (field) — The message payload bytes.
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
@@ -15083,6 +15094,7 @@ A message received on a Gossipsub topic.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **sender** (field) — The sender peer ID as a base58 string.
 - **seqno** (field) — The 8-byte big-endian sequence number.
@@ -15542,6 +15554,8 @@ Cache of recently seen Gossipsub messages per topic.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.emitCircuitRelayEvent)
     - `lib/src/transport/circuit_relay_client_web.dart` (CircuitRelayClient.emitCircuitRelayEvent)
+    - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
@@ -15669,7 +15683,7 @@ Cache of recently seen Gossipsub messages per topic.
 ### class `_CachedMessage`
 
 - **id** (field)
-  - referenced by (by name) (name shared by 34 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)

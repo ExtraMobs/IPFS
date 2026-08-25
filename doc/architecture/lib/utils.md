@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-24T10:18:28.826683
+generated: 2026-08-25T01:38:20.095774
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -503,6 +503,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
+    - `lib/src/transport/dns/dns_message.dart` (decodeDnsMessage)
     - `lib/src/transport/http_gateway_client.dart` (HttpGatewayClient.fetchRawBlock)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
