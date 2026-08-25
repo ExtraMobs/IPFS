@@ -1,0 +1,54 @@
+// Parity vectors from go-libp2p-routing-helpers's own null_test.go
+// (go-ipfs-reference/go-libp2p-routing-helpers/null_test.go, TestNull).
+import 'dart:typed_data';
+
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_libp2p_routing_helpers/transpiled_libp2p_routing_helpers.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:test/test.dart';
+
+void main() {
+  group('NullRouter', () {
+    const n = NullRouter();
+
+    test('putValue always throws RoutingNotSupportedException', () {
+      expect(
+        () => n.putValue('anything', Uint8List(0)),
+        throwsA(isA<RoutingNotSupportedException>()),
+      );
+    });
+
+    test('getValue always throws RoutingNotFoundException', () {
+      expect(
+        () => n.getValue('anything'),
+        throwsA(isA<RoutingNotFoundException>()),
+      );
+    });
+
+    test('provide always throws RoutingNotSupportedException', () async {
+      final cid = await CID.fromContent(Uint8List(0));
+      expect(
+        () => n.provide(cid, false),
+        throwsA(isA<RoutingNotSupportedException>()),
+      );
+    });
+
+    test('findProvidersAsync always returns an empty stream', () async {
+      final cid = await CID.fromContent(Uint8List(0));
+      final results = await n.findProvidersAsync(cid, 10).toList();
+      expect(results, isEmpty);
+    });
+
+    test('findPeer always throws RoutingNotFoundException', () {
+      final id = PeerId(value: Uint8List.fromList('thing'.codeUnits));
+      expect(
+        () => n.findPeer(id),
+        throwsA(isA<RoutingNotFoundException>()),
+      );
+    });
+
+    test('bootstrap always succeeds instantly', () {
+      expect(n.bootstrap(), completes);
+    });
+  });
+}
