@@ -1,5 +1,5 @@
-/// Port of `go-libp2p`: `core/crypto`, `core/peer`, `core/record`, and
-/// `p2p/security/noise`.
+/// Port of `go-libp2p`: `core/crypto`, `core/peer`, `core/record`,
+/// `core/routing`, and `p2p/security/noise`.
 library;
 
 export 'src/core/crypto/crypto_utils.dart' show CryptoUtils, EncryptedData;
@@ -83,6 +83,21 @@ export 'src/core/record/record.dart'
         Record,
         registerType,
         unmarshalRecordPayload;
+export 'src/core/routing/options.dart'
+    show RoutingOption, RoutingOptions, expiredOption, offlineOption;
+export 'src/core/routing/routing.dart'
+    show
+        ContentDiscovery,
+        ContentProviding,
+        ContentRouting,
+        PeerRouting,
+        PubKeyFetcher,
+        Routing,
+        RoutingNotFoundException,
+        RoutingNotSupportedException,
+        ValueStore,
+        getPublicKey,
+        keyForPublicKey;
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
