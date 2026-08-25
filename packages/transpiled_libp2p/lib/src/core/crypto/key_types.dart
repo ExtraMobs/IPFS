@@ -8,6 +8,8 @@
 // protobuf codegen for two fields.
 import 'dart:typed_data';
 
+import 'proto_varint.dart';
+
 /// go-libp2p core/crypto/pb's `KeyType` enum (crypto.proto).
 enum KeyType {
   /// KeyType.RSA = 0.
@@ -77,43 +79,15 @@ bool _bytesEqual(Uint8List a, Uint8List b) {
   return true;
 }
 
-Uint8List _encodeProtoVarint(int value) {
-  final bytes = <int>[];
-  var v = value;
-  while (v >= 0x80) {
-    bytes.add((v & 0x7f) | 0x80);
-    v >>= 7;
-  }
-  bytes.add(v);
-  return Uint8List.fromList(bytes);
-}
-
-(int value, int length) _readProtoVarint(Uint8List bytes, int offset) {
-  var value = 0;
-  var shift = 0;
-  var index = offset;
-  while (true) {
-    if (index >= bytes.length) {
-      throw const FormatException('protobuf varint runs past end of message');
-    }
-    final byte = bytes[index];
-    value |= (byte & 0x7f) << shift;
-    index++;
-    if ((byte & 0x80) == 0) return (value, index - offset);
-    shift += 7;
-    if (shift > 63) throw const FormatException('protobuf varint too long');
-  }
-}
-
 /// Encodes `{required KeyType Type = 1; required bytes Data = 2;}`
 /// (crypto.proto's `PublicKey`/`PrivateKey` message shape -- used for
 /// both) on the wire.
 Uint8List marshalKeyProto(KeyType type, Uint8List data) {
   final out = BytesBuilder();
   out.addByte(0x08); // field 1, varint wire type
-  out.add(_encodeProtoVarint(type.protoValue));
+  out.add(encodeProtoVarint(type.protoValue));
   out.addByte(0x12); // field 2, length-delimited wire type
-  out.add(_encodeProtoVarint(data.length));
+  out.add(encodeProtoVarint(data.length));
   out.add(data);
   return out.toBytes();
 }
@@ -124,13 +98,13 @@ Uint8List marshalKeyProto(KeyType type, Uint8List data) {
   Uint8List? data;
   var offset = 0;
   while (offset < bytes.length) {
-    final (tag, tagLen) = _readProtoVarint(bytes, offset);
+    final (tag, tagLen) = readProtoVarint(bytes, offset);
     offset += tagLen;
     final fieldNumber = tag >> 3;
     final wireType = tag & 0x7;
     switch (wireType) {
       case 0: // varint
-        final (value, len) = _readProtoVarint(bytes, offset);
+        final (value, len) = readProtoVarint(bytes, offset);
         offset += len;
         if (fieldNumber == 1) {
           type = KeyType.fromProtoValue(value);
@@ -139,7 +113,7 @@ Uint8List marshalKeyProto(KeyType type, Uint8List data) {
           }
         }
       case 2: // length-delimited
-        final (length, lenLen) = _readProtoVarint(bytes, offset);
+        final (length, lenLen) = readProtoVarint(bytes, offset);
         offset += lenLen;
         if (offset + length > bytes.length) {
           throw const FormatException('protobuf field runs past end of message');

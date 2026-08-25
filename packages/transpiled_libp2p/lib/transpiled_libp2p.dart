@@ -1,4 +1,4 @@
-/// Port of `go-libp2p`: `core/crypto`, `core/peer`, and
+/// Port of `go-libp2p`: `core/crypto`, `core/peer`, `core/record`, and
 /// `p2p/security/noise`.
 library;
 
@@ -64,6 +64,24 @@ export 'src/core/peer/peer_id.dart'
         PeerId,
         peerIdFromCid,
         peerIdToCid;
+export 'src/core/peer/peer_record.dart'
+    show
+        PeerRecord,
+        peerRecordEnvelopeDomain,
+        peerRecordEnvelopePayloadType,
+        timestampSeq;
+export 'src/core/record/envelope.dart'
+    show
+        Envelope,
+        EmptyDomainException,
+        EmptyPayloadTypeException,
+        InvalidSignatureException;
+export 'src/core/record/record.dart'
+    show
+        PayloadTypeNotRegisteredException,
+        Record,
+        registerType,
+        unmarshalRecordPayload;
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
