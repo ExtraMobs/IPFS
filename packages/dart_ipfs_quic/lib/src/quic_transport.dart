@@ -62,7 +62,12 @@ class QuicTransport implements libp2p.Transport {
     final hasUDP = addr.hasProtocol('udp');
     final hasQuic = addr.hasProtocol('quic-v1');
     final hasCircuit = addr.hasProtocol('p2p-circuit');
-    return hasIP && hasUDP && hasQuic && !hasCircuit;
+    // A `/quic-v1/webtransport` address is WebTransport's address, not
+    // plain QUIC's -- without this check this transport would claim it
+    // ahead of WebTransportTransport (registered later) and then fail to
+    // dial/listen on it with a parse error.
+    final hasWebtransport = addr.hasProtocol('webtransport');
+    return hasIP && hasUDP && hasQuic && !hasCircuit && !hasWebtransport;
   }
 
   @override

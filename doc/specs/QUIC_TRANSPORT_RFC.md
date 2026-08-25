@@ -2,6 +2,20 @@
 
 ## Status
 
+**Updated v1.2** — Investigated during the `refactor/core-module-split`
+transpilation session (2026-08-25) after a real-node test surfaced a QUIC
+dial failure. Found and fixed a small, real bug (`QuicTransport.canDial`/
+`canListen` claimed `/quic-v1/webtransport` addresses that belong to
+WebTransport, breaking WebTransport whenever QUIC was also enabled) — see
+`packages/dart_ipfs_quic/lib/src/quic_transport.dart`'s `_isQuicAddr`.
+
+That fix aside, **native QUIC dialing to a real peer is confirmed broken by
+architecture, not by a fixable implementation gap**, and is being archived
+here as a known, deliberately-unresolved limitation rather than worked
+around. See "Architectural blocker (2026-08-25)" below for the full finding
+before attempting further QUIC work — it changes what "finish QUIC" would
+actually require.
+
 **Updated v1.1** — The project now uses the pure-Dart `quic_lib` package as the
 QUIC transport foundation. The previous quiche FFI foundation has been removed
 from `packages/dart_ipfs_quic`. The conditional QUIC_SPEC requirements (config,
@@ -9,6 +23,82 @@ runtime probe, TCP fallback) remain implemented in
 `lib/src/core/config/network_config.dart` and
 `lib/src/transport/libp2p_router.dart`. This RFC records the rationale and
 remaining work toward a Kubo/Helia-interoperable QUIC transport.
+
+## Architectural blocker (2026-08-25)
+
+Reproduced a QUIC-only dial (no TCP fallback available) against a real
+bootstrap.libp2p.io peer and got:
+
+```
+Exception: Unsupported operation: QuicConnection does not support raw
+transport writes; use streams.
+```
+
+Root cause: `package:ipfs_libp2p`'s `Swarm`/`BasicUpgrader`
+(`lib/p2p/transport/basic_upgrader.dart`) unconditionally runs, for
+**every** transport with no exceptions: multistream-select for a security
+protocol → `SecurityProtocol.secureOutbound`/`secureInbound` (reading/
+writing raw bytes on the `TransportConn`) → multistream-select for a stream
+muxer → muxer negotiation over the now-secured connection. There is no
+extension point in `Transport`, `Swarm`, or `BasicUpgrader` for a transport
+that is already self-securing and self-multiplexing at the transport layer
+— which is exactly what real libp2p-over-QUIC is (RFC: authentication lives
+in the QUIC/TLS 1.3 handshake via a certificate extension, ​multiplexing is
+QUIC's own native stream mechanism; there is no separate security or muxer
+negotiation step at all). `QuicConnection.read()`/`write()`
+(`packages/dart_ipfs_quic/lib/src/quic_transport.dart`) deliberately throw
+`UnsupportedError` because there is no "raw byte stream" to speak of for a
+spec-compliant QUIC connection — and that assumption crashes the instant
+`BasicUpgrader` tries to run its hardcoded pipeline on top.
+
+Worse: this isn't only a dialing problem. `Swarm.newStream()` — what
+`Host.newStream()` calls, and therefore what **every** existing protocol
+handler (DHT, Bitswap, Identify) goes through to open a stream to a peer —
+hard-casts its connection to `SwarmConn`, an internal (non-exported) class
+of `ipfs_libp2p`:
+
+```dart
+if (conn is! SwarmConn) {
+  throw StateError('Connection from dialPeer is not a SwarmConn. ...');
+}
+```
+
+So a QUIC connection can only ever be usable by dart_ipfs's *existing*
+protocol stack if it is produced by `Swarm`'s own transport-dial path — the
+exact path that forces the Noise+muxer negotiation QUIC doesn't use in
+reality. Being both (a) spec-compliant/interoperable with real
+go-libp2p/rust-libp2p QUIC peers and (b) usable by the DHT/Bitswap/Identify
+code as written today are **mutually exclusive** without editing
+`ipfs_libp2p` itself (a third-party pub.dev dependency, not editable in
+this repo — same constraint documented for the Noise fix in
+`doc/transpilation/PROGRESS.md`'s `p2p/security/noise` row).
+
+Genuinely finishing QUIC therefore means one of:
+
+1. A self-consistent-but-non-interoperable QUIC: keep running Noise+yamux
+   (already built for TCP) over a QUIC-backed byte pipe. Works between two
+   dart_ipfs nodes; does **not** work against real external QUIC peers,
+   since they don't expect that extra negotiation on a QUIC connection at
+   all. Moderate effort, fits the existing `Swarm`-based architecture.
+2. Real libp2p-QUIC (TLS-cert auth via `quic_lib`'s already-partially-built
+   `Libp2pTlsHandshakeVerifier`/`Libp2pCertificateGenerator`, native QUIC
+   stream multiplexing, no extra negotiation) **plus** a parallel
+   implementation of the DHT/Bitswap/Identify stream-opening paths that
+   bypasses `Swarm` entirely for QUIC connections, since option (2) alone
+   produces a connection nothing in the existing protocol stack can use.
+   This is not "finish the QUIC transport" scope — it's closer to forking
+   large parts of the protocol-handler layer for a second, QUIC-specific
+   connection-management path. Multi-week scale, real regression risk to
+   the working TCP stack if the duplication isn't kept carefully separate.
+
+**Decision (2026-08-25): neither was pursued.** Given TCP already provides
+proven real-network connectivity (see `p2p/security/noise` in
+`doc/transpilation/PROGRESS.md` — bootstrap.libp2p.io peers connect and
+stay connected), this is being left as a documented, deliberate gap rather
+than committing to either path speculatively. Revisit only with a concrete
+reason QUIC connectivity is needed (e.g. a peer reachable only over QUIC),
+and re-read this section first — it changes the shape of "Recommended Next
+Steps" below.
 
 ## Background
 
@@ -182,6 +272,14 @@ Run `dart pub get` followed by `dart test` for both `quic_lib` and
   cryptographically verified.
 
 ## Recommended Next Steps
+
+**Superseded by "Architectural blocker (2026-08-25)" above.** The steps
+below assumed QUIC only needed a security-handshake gap filled in; that
+turned out not to be the real blocker (see above — it's a hard
+architectural mismatch with `ipfs_libp2p`'s `Swarm`/`BasicUpgrader`, not a
+missing piece of glue code). Keeping the original list for historical
+context, but do not resume from it without first deciding between the two
+paths the blocker section lays out.
 
 1. Update `quic_lib` so the live TLS handshake exposes the peer's certificate
    bytes to the adapter, then call `verifyPeerCertificate()` automatically

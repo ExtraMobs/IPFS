@@ -59,6 +59,15 @@ void main() {
             .canDial(MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1/p2p-circuit')),
         isFalse,
       );
+      // A `/quic-v1/webtransport` address belongs to WebTransport, not
+      // plain QUIC; claiming it too makes WebTransportTransport
+      // unreachable whenever QUIC is also registered.
+      expect(
+        transport.canDial(
+          MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1/webtransport'),
+        ),
+        isFalse,
+      );
     });
 
     test('canListen recognizes QUIC multiaddrs', () {
@@ -73,6 +82,12 @@ void main() {
       );
       expect(
         transport.canListen(MultiAddr('/ip4/0.0.0.0/tcp/4001')),
+        isFalse,
+      );
+      expect(
+        transport.canListen(
+          MultiAddr('/ip4/0.0.0.0/udp/4002/quic-v1/webtransport'),
+        ),
         isFalse,
       );
     });
