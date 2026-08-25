@@ -1,12 +1,12 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/protocol_manager.dart';
-import 'package:dart_ipfs/src/core/di/service_container.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/content_routing_handler.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/protocol_manager.dart';
+import 'package:transpiled_ipfs/src/core/di/service_container.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/content_routing_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart';
 
 import 'protocol_manager_test.mocks.dart';
 

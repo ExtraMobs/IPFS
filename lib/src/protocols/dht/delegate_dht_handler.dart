@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:http/http.dart' as http;
 
 /// A DHT handler that delegates queries to an HTTP IPFS node (e.g. Kubo RPC).

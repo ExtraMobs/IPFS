@@ -7,10 +7,10 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/security/security_manager.dart';
-import 'package:dart_ipfs/src/utils/password_prompt.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart';
+import 'package:transpiled_ipfs/src/utils/password_prompt.dart';
 
 Future<void> main() async {
   print('=== IPFS Keystore Unlock Example ===\n');

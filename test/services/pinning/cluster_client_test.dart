@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:dart_ipfs/src/services/pinning/cluster_client.dart';
+import 'package:transpiled_ipfs/src/services/pinning/cluster_client.dart';
 
 import 'cluster_client_test.mocks.dart';
 

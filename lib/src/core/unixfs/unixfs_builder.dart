@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:async/async.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
     as unixfs_pb;
 import 'package:fixnum/fixnum.dart';
 

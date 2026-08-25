@@ -1,9 +1,11 @@
 // lib/src/core/block_proto_codec.dart
 //
 // Protobuf and Bitswap-protobuf (de)serialization for Block, kept out of
-// dart_ipfs_core (protobuf-free) and out of Block itself now that Block is
-// a re-export shim of dart_ipfs_core's Block (see
-// lib/src/core/data_structures/block.dart).
+// Block itself so a protocol-agnostic Block (now real, local content --
+// see lib/src/core/data_structures/block.dart, dissolved back into
+// transpiled_ipfs from the former dart_ipfs_core package (dissolved); see
+// doc/transpilation/PROGRESS.md) doesn't need to depend on generated
+// protobuf code.
 //
 // `block.toProto()`/`block.toBitswapProto()` keep working unchanged for
 // existing call sites via the extension below -- Dart extension methods
@@ -14,11 +16,10 @@
 // functions; call sites update accordingly.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs_core/dart_ipfs_core.dart';
-
 import '../proto/generated/bitswap/bitswap.pb.dart' as bitswap_pb;
 import '../proto/generated/core/block.pb.dart';
 import 'cid_proto_codec.dart';
+import 'data_structures/block.dart';
 
 /// Adds protobuf and Bitswap-protobuf serialization to [Block].
 extension BlockProtoCodec on Block {

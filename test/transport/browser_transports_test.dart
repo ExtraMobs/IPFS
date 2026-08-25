@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/config/network_config.dart';
-import 'package:dart_ipfs/src/transport/webtransport/multiaddr_parser.dart';
-import 'package:dart_ipfs/src/transport/webrtc/ice_server.dart';
-import 'package:dart_ipfs/src/transport/webrtc/webrtc_direct_transport.dart';
-import 'package:dart_ipfs/src/transport/webrtc/webrtc_transport.dart';
+import 'package:transpiled_ipfs/src/core/config/network_config.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/multiaddr_parser.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/ice_server.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/webrtc_direct_transport.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/webrtc_transport.dart';
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
 import 'package:mockito/mockito.dart';
 import 'package:multibase/multibase.dart';

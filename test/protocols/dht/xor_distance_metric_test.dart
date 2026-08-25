@@ -2,8 +2,8 @@ import 'dart:typed_data';
 
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/xor_distance_metric.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/xor_distance_metric.dart';
 
 void main() {
   group('XorDistanceMetric', () {

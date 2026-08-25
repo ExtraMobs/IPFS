@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart'; // For Key/Value
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart'; // For Key/Value
 import 'package:test/test.dart';
 
 import 'mock_dht_handler.dart';
 
 // Helper aliases if needed
 // Key and Value are typedefs typically.
-// mock_dht_handler.dart uses: import 'package:dart_ipfs/src/protocols/dht/Interface_dht_handler.dart';
+// mock_dht_handler.dart uses: import 'package:transpiled_ipfs/src/protocols/dht/Interface_dht_handler.dart';
 // Let's assume Key and Value are available via that import.
 
 void main() {
@@ -49,7 +49,7 @@ void main() {
       // Or just create objects that satisfy Types.
 
       // If Key is just `List<int>` or String check imports.
-      // Checking local imports: `package:dart_ipfs/src/protocols/dht/Interface_dht_handler.dart`
+      // Checking local imports: `package:transpiled_ipfs/src/protocols/dht/Interface_dht_handler.dart`
       // I'll skip complex type creation if I can assume `MockDHTHandler` handles generics cleanly via dynamic or simple types in tests.
       // Actually `putValue(Key key, Value value)`.
       // I need to create compatible Key and Value.

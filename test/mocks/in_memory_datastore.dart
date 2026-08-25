@@ -1,7 +1,7 @@
 // test/mocks/in_memory_datastore.dart
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
 
 /// In-memory implementation of Datastore for testing.
 ///

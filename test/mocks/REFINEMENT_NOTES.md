@@ -15,7 +15,7 @@ The following mock files were created in Phase 1 but need interface corrections 
 **Impact**: Not currently used in passing tests (MockDHTHandler is sufficient for Phase 2A)
 
 **Future Work**: When IPNS testing requires security manager:
-1. Update to use `IPFSPrivateKey` from `package:dart_ipfs/src/utils/private_key.dart`
+1. Update to use `IPFSPrivateKey` from `package:transpiled_ipfs/src/utils/private_key.dart`
 2. Add proper constructor with `SecurityConfig` and `MetricsCollector`
 3. Remove invalid `@override` annotations or match actual SecurityManager interface
 

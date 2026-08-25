@@ -1,8 +1,9 @@
 // src/core/ipfs_node/bootstrap_handler.dart
 import 'dart:async';
 
-import 'package:dart_ipfs_core/dart_ipfs_core.dart'
-    show BasicResolver, Multiaddr, Resolver, dnsMatches;
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart' show Multiaddr;
+import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart'
+    show BasicResolver, Resolver, dnsMatches;
 
 import '../../transport/dns/dns_bootstrap_resolver.dart';
 import '../../utils/logger.dart';

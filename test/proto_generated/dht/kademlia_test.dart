@@ -1,9 +1,9 @@
 // Auto-generated proto coverage tests. Do not hand-edit.
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/dht.pb.dart' as $0;
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/dht.pb.dart' as $0;
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart';
 
 void main() {
   group('Message', () {

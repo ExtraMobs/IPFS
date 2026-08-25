@@ -6,10 +6,10 @@ library;
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 // Manual Mocks

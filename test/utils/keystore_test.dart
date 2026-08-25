@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart' hide KeyPair;
-import 'package:dart_ipfs/src/utils/keystore.dart';
+import 'package:transpiled_ipfs/src/utils/keystore.dart';
 import 'package:test/test.dart';
 
 void main() {

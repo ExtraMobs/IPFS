@@ -13,13 +13,13 @@ import '../../core/ipfs_node/ipfs_node.dart';
 import '../../core/ipfs_node/network_handler.dart';
 import '../../core/metrics/metrics_collector.dart';
 import '../../core/storage/datastore.dart' as ds;
-import '../../core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import '../../proto/generated/dht/dht.pb.dart' as dht_proto;
 import '../../proto/generated/dht/ipfs_node_network_events.pb.dart'
     as ipfs_node_network_events;
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
 import '../../transport/router_interface.dart';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/logger.dart';
 import 'dht_envelope.dart';
 import 'kademlia_routing_adapter.dart';

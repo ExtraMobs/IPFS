@@ -1,10 +1,10 @@
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/block_proto_codec.dart';
-import 'package:dart_ipfs/src/core/data_structures/merkle_dag_node.dart';
-import 'package:dart_ipfs/src/core/data_structures/link.dart';
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/merkle_dag_node.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/link.dart';
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
     as unixfs_proto;
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';

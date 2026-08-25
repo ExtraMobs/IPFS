@@ -9,10 +9,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:args/command_runner.dart';
-import 'package:dart_ipfs/dart_ipfs.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_server.dart';
-import 'package:dart_ipfs/src/services/rpc/rpc_server.dart';
-import 'package:dart_ipfs/src/version.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_server.dart';
+import 'package:transpiled_ipfs/src/services/rpc/rpc_server.dart';
+import 'package:transpiled_ipfs/src/version.dart';
 import 'package:path/path.dart' as p;
 
 Future<void> main(List<String> args) async {

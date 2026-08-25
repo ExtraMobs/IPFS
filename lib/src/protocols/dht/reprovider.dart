@@ -3,16 +3,16 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/dht_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/mfs/mfs_manager.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/dht_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/mfs/mfs_manager.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:synchronized/synchronized.dart';
 
 /// Result of a single reprovide run.

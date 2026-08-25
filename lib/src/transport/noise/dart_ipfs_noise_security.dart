@@ -18,7 +18,7 @@
 // combination is what blocked connecting to real, non-Ed25519 peers.
 //
 // This class fixes that by dispatching the remote identity key through
-// dart_ipfs_core's generic `key_codec.dart` (RSA/Ed25519/Secp256k1/ECDSA
+// transpiled_libp2p's generic `key_codec.dart` (RSA/Ed25519/Secp256k1/ECDSA
 // all handled uniformly), while still reusing ipfs_libp2p's own
 // `SecuredConnection` for the post-handshake transport -- its internal
 // AEAD framing (2-byte length prefix, ChaCha20-Poly1305, empty AAD,
@@ -28,16 +28,13 @@
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart' as pkg_crypto;
-import 'package:dart_ipfs_core/dart_ipfs_core.dart' as core_crypto;
 import 'package:ipfs_libp2p/core/crypto/keys.dart' as libp2p_keys;
 import 'package:ipfs_libp2p/core/crypto/pb/crypto.pb.dart' as libp2p_crypto_pb;
 import 'package:ipfs_libp2p/core/network/transport_conn.dart';
 import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p_peer;
 import 'package:ipfs_libp2p/p2p/security/secured_connection.dart';
 import 'package:ipfs_libp2p/p2p/security/security_protocol.dart';
-
-import 'noise_handshake_payload.dart';
-import 'noise_state.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 /// The multistream-select protocol ID for Noise, per go-libp2p (and
 /// matching ipfs_libp2p's own `NoiseSecurity.protocolIdForState`, so
@@ -68,13 +65,13 @@ class DartIpfsNoiseException implements Exception {
 /// using ipfs_libp2p's own `NoiseSecurity`).
 class DartIpfsNoiseSecurity implements SecurityProtocol {
   /// Creates a Noise security transport that authenticates as
-  /// [localIdentityKey] (any of dart_ipfs_core's four supported key
+  /// [localIdentityKey] (any of transpiled_libp2p's four supported key
   /// types).
   DartIpfsNoiseSecurity(this.localIdentityKey);
 
   /// This node's libp2p identity private key, used to sign the Noise
   /// handshake payload.
-  final core_crypto.PrivKey localIdentityKey;
+  final PrivKey localIdentityKey;
 
   @override
   String get protocolId => noiseProtocolId;
@@ -170,7 +167,7 @@ class DartIpfsNoiseSecurity implements SecurityProtocol {
     }
   }
 
-  /// Bridges a verified `dart_ipfs_core` public key into ipfs_libp2p's
+  /// Bridges a verified `transpiled_libp2p` public key into ipfs_libp2p's
   /// own `PublicKey` type (needed for `SecuredConnection`'s
   /// `establishedRemotePublicKey`), by re-decoding the same protobuf
   /// wire bytes through ipfs_libp2p's own dispatcher -- both packages
@@ -179,9 +176,9 @@ class DartIpfsNoiseSecurity implements SecurityProtocol {
   /// (e.g. it has no Secp256k1 unmarshaller registered) rather than
   /// failing the whole handshake over a field `SecuredConnection` only
   /// uses as an optional convenience.
-  libp2p_keys.PublicKey? _toLibp2pPublicKey(core_crypto.PubKey pubKey) {
+  libp2p_keys.PublicKey? _toLibp2pPublicKey(PubKey pubKey) {
     try {
-      final bytes = core_crypto.marshalPublicKey(pubKey);
+      final bytes = marshalPublicKey(pubKey);
       final pmes = libp2p_crypto_pb.PublicKey.fromBuffer(bytes);
       return libp2p_keys.publicKeyFromProto(pmes);
     } catch (_) {

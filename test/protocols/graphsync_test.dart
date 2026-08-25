@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_protocol.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_types.dart';
+import 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_protocol.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_types.dart';
 import 'package:test/test.dart';
 
 void main() {

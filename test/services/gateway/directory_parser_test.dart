@@ -3,11 +3,11 @@ import 'package:fixnum/fixnum.dart' as fixnum;
 import 'package:dart_multihash/dart_multihash.dart';
 import 'package:multibase/multibase.dart';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/services/gateway/directory_parser.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as pb;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
+import 'package:transpiled_ipfs/src/services/gateway/directory_parser.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as pb;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
 
 void main() {
   group('DirectoryHandler', () {

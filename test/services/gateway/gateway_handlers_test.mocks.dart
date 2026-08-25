@@ -6,11 +6,11 @@
 import 'dart:async' as _i3;
 import 'dart:typed_data' as _i4;
 
-import 'package:dart_ipfs/src/core/cid.dart' as _i5;
-import 'package:dart_ipfs/src/core/data_structures/block.dart' as _i7;
-import 'package:dart_ipfs/src/services/gateway/file_preview_handler.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart' as _i7;
+import 'package:transpiled_ipfs/src/services/gateway/file_preview_handler.dart'
     as _i6;
-import 'package:dart_ipfs/src/services/gateway/preview_cache_manager.dart'
+import 'package:transpiled_ipfs/src/services/gateway/preview_cache_manager.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

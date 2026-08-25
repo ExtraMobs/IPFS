@@ -19,7 +19,7 @@ import 'package:crypto/crypto.dart' as crypto;
 import 'package:pointycastle/asn1.dart';
 import 'package:pointycastle/export.dart';
 
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../peer/peer_record_pb.dart';
 
 /// Maximum protobuf-encoded public key size that uses identity multihash.

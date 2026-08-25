@@ -2,8 +2,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
 import 'package:path/path.dart' as path;
 
 /// A persistent cache for preview data using the platform's storage.

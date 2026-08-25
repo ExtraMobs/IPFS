@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/ipld/dag_json_handler.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipld/dag_json_handler.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 

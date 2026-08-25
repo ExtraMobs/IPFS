@@ -3,16 +3,16 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/block_proto_codec.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as message;
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_block_store.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as message;
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
 
 import 'bitswap_handler_coverage_test.mocks.dart';
 

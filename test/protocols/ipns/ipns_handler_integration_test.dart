@@ -4,14 +4,14 @@ import 'dart:typed_data';
 import 'package:cbor/cbor.dart';
 import 'package:cryptography/cryptography.dart';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
-import 'package:dart_ipfs/src/core/security/security_manager_interface.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_handler.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_record.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_interface.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_record.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_interface.dart';
 import 'package:test/test.dart';
 
 class MockSecurityManager implements ISecurityManager {

@@ -1,5 +1,6 @@
 // lib/src/transport/dns/dns_bootstrap_resolver_web.dart
-import 'package:dart_ipfs_core/dart_ipfs_core.dart' show BasicResolver;
+import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart'
+    show BasicResolver;
 
 /// Browsers expose no raw-socket API, so there is no DNS resolver on web
 /// (matching `network_handler_web.dart`'s `connectToPeer`, which is

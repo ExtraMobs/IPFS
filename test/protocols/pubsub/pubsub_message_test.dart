@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart';
 import 'package:test/test.dart';
 
 void main() {

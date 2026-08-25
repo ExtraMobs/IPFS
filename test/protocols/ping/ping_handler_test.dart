@@ -5,10 +5,10 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
-import 'package:dart_ipfs/src/protocols/ping/ping_handler.dart';
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/ping/ping_handler.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 /// A mock router for testing the ping handler.

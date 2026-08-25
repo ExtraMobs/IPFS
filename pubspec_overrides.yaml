@@ -1,20 +1,14 @@
-# Local development override so the umbrella package resolves dart_ipfs_core
-# and dart_ipfs_quic from their in-repo sources under packages/ instead of
-# the hosted pub.dev versions. `dart pub publish` ignores this file
-# automatically, so it's safe to keep committed.
-#
-# IMPORTANT: when pubspec_overrides.yaml is present, pub ignores
-# pubspec.yaml's own `dependency_overrides` block entirely rather than
-# merging with it -- confirmed by watching `dart pub get` silently
-# downgrade xml/dart_udx back to vulnerable versions the first time this
-# file was added with only the two path overrides below. The xml/dart_udx
-# pins are security-critical (see pubspec.yaml's own comments and
-# SECURITY.md's "Dependency Security" section) and must be duplicated here
-# for as long as this file exists.
+# dart_ipfs_core and dart_ipfs_quic no longer exist as separate packages
+# (dissolved into transpiled_ipfs's own lib/src/ and the transpiled_*
+# per-Go-module packages -- see doc/transpilation/PROGRESS.md), so their
+# path overrides are gone too. The xml/dart_udx pins remain: when
+# pubspec_overrides.yaml is present, pub ignores pubspec.yaml's own
+# `dependency_overrides` block entirely rather than merging with it --
+# confirmed by watching `dart pub get` silently downgrade xml/dart_udx
+# back to vulnerable versions the first time this file was added with
+# only path overrides. The pins are security-critical (see pubspec.yaml's
+# own comments and SECURITY.md's "Dependency Security" section) and must
+# be duplicated here for as long as this file exists.
 dependency_overrides:
   xml: ^7.0.1
   dart_udx: ^2.0.3
-  dart_ipfs_core:
-    path: packages/dart_ipfs_core
-  dart_ipfs_quic:
-    path: packages/dart_ipfs_quic

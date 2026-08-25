@@ -1,5 +1,5 @@
-import 'package:dart_ipfs/src/core/errors/graphsync_errors.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_budget.dart';
+import 'package:transpiled_ipfs/src/core/errors/graphsync_errors.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_budget.dart';
 import 'package:test/test.dart';
 
 void main() {

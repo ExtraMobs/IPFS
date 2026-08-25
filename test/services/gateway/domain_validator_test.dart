@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_ipfs/src/services/gateway/domain_validator.dart'
+import 'package:transpiled_ipfs/src/services/gateway/domain_validator.dart'
     show DomainValidator, DomainValidationResult;
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart' as http_testing;

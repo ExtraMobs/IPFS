@@ -1,9 +1,9 @@
 // lib/src/services/gateway/gateway_trustless_handler.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/security/denylist_service.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_handler.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/security/denylist_service.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_handler.dart'
     show TrustlessFormat;
 import 'package:shelf/shelf.dart';
 

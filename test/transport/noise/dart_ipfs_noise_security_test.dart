@@ -16,9 +16,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:async/async.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/transport/noise/dart_ipfs_noise_security.dart';
-import 'package:dart_ipfs_core/dart_ipfs_core.dart';
 import 'package:ipfs_libp2p/core/crypto/keys.dart' as libp2p_keys;
 import 'package:ipfs_libp2p/core/multiaddr.dart';
 import 'package:ipfs_libp2p/core/network/conn.dart';
@@ -28,6 +25,8 @@ import 'package:ipfs_libp2p/core/network/stream.dart';
 import 'package:ipfs_libp2p/core/network/transport_conn.dart';
 import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p_peer;
 import 'package:test/test.dart';
+import 'package:transpiled_ipfs/src/transport/noise/dart_ipfs_noise_security.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 class _FakeTransportConn implements TransportConn {
   _FakeTransportConn(Stream<Uint8List> incoming, this._outgoing)
@@ -184,7 +183,7 @@ void main() {
       // derived PeerId matching. `establishedRemotePublicKey` itself is
       // left null here: ipfs_libp2p's own RsaPublicKey.unmarshal expects
       // a bare PKCS1 SEQUENCE{n,e}, not the PKIX SubjectPublicKeyInfo
-      // dart_ipfs_core (correctly, matching x509.MarshalPKIXPublicKey)
+      // transpiled_libp2p (correctly, matching x509.MarshalPKIXPublicKey)
       // produces -- a separate, pre-existing gap in ipfs_libp2p's own
       // RSA support that DartIpfsNoiseSecurity degrades past gracefully
       // rather than failing the whole handshake over an optional field.

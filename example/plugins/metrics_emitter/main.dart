@@ -2,8 +2,8 @@
 //
 // Phase 1 example plugin: emits a custom counter to the host metrics collector.
 
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/plugins/ipfs_plugin.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/plugins/ipfs_plugin.dart';
 
 /// Metrics emitter example plugin.
 class MetricsEmitterPlugin implements IPFSPlugin {

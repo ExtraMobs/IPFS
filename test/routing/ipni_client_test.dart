@@ -4,9 +4,9 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
-import 'package:dart_ipfs/src/routing/ipni_client.dart';
-import 'package:dart_ipfs/dart_ipfs.dart' hide CID;
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/routing/ipni_client.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart' hide CID;
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 import 'ipni_client_test.mocks.dart';
 

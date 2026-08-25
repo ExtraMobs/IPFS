@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T09:40:09.021719
+generated: 2026-08-25T14:23:03.518931
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -22,10 +22,11 @@ Base class for protobuf message types with serialization helpers.
 
 - **toBytes** (method) — Convert message to bytes
   - calls: writeToBuffer
-  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.encodeDagCbor)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (_CborWriter.toBytes)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.toBytes)
+    - `lib/src/core/data_structures/block.dart` (Block.validate)
     - `lib/src/core/data_structures/car.dart` (CarSection.serializedSize)
     - `lib/src/core/data_structures/car.dart` (IndexBuilder.build)
     - `lib/src/core/data_structures/car.dart` (CarWriter.close)
@@ -53,11 +54,10 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Create message from bytes
   - calls: factory, mergeFromBuffer
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/data_structures/base_block.dart` (BaseBlock.fromBytes)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
@@ -668,7 +668,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -729,7 +729,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -1271,6 +1271,8 @@ Network events
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -1308,18 +1310,21 @@ Network events
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -1367,15 +1372,17 @@ Network events
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -1423,6 +1430,7 @@ Network events
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -1465,6 +1473,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -2055,7 +2065,7 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
@@ -2111,6 +2121,9 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
 - **cancel** (method)
   - calls: $_setBool
   - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
@@ -2138,6 +2151,9 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
 - **hasCancel** (method)
   - calls: $_has
 - **clearCancel** (method)
@@ -3135,12 +3151,13 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3188,15 +3205,17 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -3244,6 +3263,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -3693,11 +3713,13 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -3735,11 +3757,13 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -3835,7 +3859,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -3896,7 +3920,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -4414,6 +4438,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.fromData)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.add)
@@ -4442,6 +4467,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -4514,6 +4541,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -5103,7 +5132,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5164,7 +5193,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5733,7 +5762,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5794,7 +5823,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -6299,7 +6328,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -6338,7 +6367,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -7313,12 +7342,13 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getI64
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -7366,15 +7396,17 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -7422,6 +7454,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -7475,6 +7508,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -7544,6 +7579,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -7610,6 +7647,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -9696,6 +9735,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -9733,6 +9774,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -10252,6 +10295,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -10289,6 +10334,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -10399,6 +10446,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -12329,7 +12378,6 @@ Response message for bit value
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -12422,7 +12470,6 @@ Response message for bit value
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -12941,12 +12988,13 @@ Response message for bit value
   - calls: $_clearField
 - **size** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -12964,12 +13012,13 @@ Response message for bit value
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -13468,12 +13517,13 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13521,15 +13571,17 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -13577,6 +13629,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -13588,11 +13641,13 @@ _Directly tested._
   - calls: $_clearField
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -13630,11 +13685,13 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -13678,12 +13735,12 @@ _Directly tested._
   - calls: $_ensure
 - **format** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **format** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
 - **hasFormat** (method)
@@ -14757,7 +14814,7 @@ Response message for retrieving a block
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **hasBlock** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.get)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/repository/repository.dart` (Repository.removeBlock)
@@ -15377,7 +15434,7 @@ The BlockStore service definition
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15401,14 +15458,14 @@ The BlockStore service definition
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **removeBlock** (method)
   - calls: $createUnaryCall
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **getAllBlocks** (method)
   - calls: $createStreamingCall, fromIterable, Stream
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15427,7 +15484,7 @@ The BlockStore service definition
 - **getBlock_Pre** (method)
   - calls: getBlock
 - **getBlock** (method)
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15452,7 +15509,7 @@ The BlockStore service definition
 - **removeBlock_Pre** (method)
   - calls: removeBlock
 - **removeBlock** (method)
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15460,7 +15517,7 @@ The BlockStore service definition
 - **getAllBlocks_Pre** (method)
   - calls: getAllBlocks
 - **getAllBlocks** (method)
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -15520,7 +15577,7 @@ _No known direct test._
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
 - **getBlock** (method)
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.ls)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -15543,13 +15600,13 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockGet)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockStat)
 - **removeBlock** (method)
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.gc)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.removeBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
 - **getAllBlocks** (method)
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getAllBlocks_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
@@ -16029,6 +16086,7 @@ _Directly tested._
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.validate)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -16050,6 +16108,7 @@ _Directly tested._
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.validate)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -16154,6 +16213,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -16708,8 +16769,6 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
-    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
-    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **hash** (method)
   - calls: $_setBytes
@@ -16741,8 +16800,6 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
-    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
-    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **hasHash** (method)
   - calls: $_has
@@ -16776,7 +16833,6 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -16805,19 +16861,19 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
   - calls: $_clearField
 - **size** (method) — cumulative size of target object
   - calls: $_getI64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -16835,12 +16891,13 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -17320,12 +17377,13 @@ PBNode represents a DAG node
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method) — opaque user data content
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17373,15 +17431,17 @@ PBNode represents a DAG node
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -17429,6 +17489,7 @@ PBNode represents a DAG node
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -18012,7 +18073,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18073,7 +18134,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18126,6 +18187,8 @@ Link types for different DAG structures
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -18650,11 +18713,13 @@ _No known direct test._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -18692,11 +18757,13 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -18758,12 +18825,13 @@ _No known direct test._
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18811,15 +18879,17 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -18867,6 +18937,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -18932,7 +19003,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18993,7 +19064,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -19004,12 +19075,13 @@ _No known direct test._
   - calls: $_clearField
 - **size** (method)
   - calls: $_getI64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -19027,12 +19099,13 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -19672,6 +19745,8 @@ Enum representing the different types of nodes in the IPFS network.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -20239,11 +20314,13 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **cid** (method) — The CID involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -20281,11 +20358,13 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -21302,7 +21381,7 @@ Represents a peer in the IPFS network.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21341,7 +21420,7 @@ Represents a peer in the IPFS network.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -21894,11 +21973,13 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -21936,11 +22017,13 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -22038,7 +22121,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -22099,7 +22182,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -22166,6 +22249,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -22721,6 +22806,8 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -22758,6 +22845,8 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -25664,7 +25753,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -25703,7 +25792,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26211,7 +26300,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as a string.
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26250,7 +26339,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -26768,6 +26857,8 @@ Defines a message representing a node in a data structure.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -26805,6 +26896,8 @@ Defines a message representing a node in a data structure.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -26813,12 +26906,13 @@ Defines a message representing a node in a data structure.
   - calls: $_ensure
 - **data** (method) — Arbitrary data associated with this node, represented as bytes.
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -26866,15 +26960,17 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -26922,6 +27018,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -27373,7 +27470,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — The ID of the peer, represented as bytes.
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -27412,7 +27509,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -27928,6 +28025,8 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setBytes
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -27965,6 +28064,8 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -28003,7 +28104,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **protocols** (method) — A list of protocols supported by the peer.
   - calls: $_getList
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/identify/identify_handler.dart` (IdentifyHandler.identify)
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.protocols)
@@ -28085,6 +28186,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/utils/keystore.dart` (Keystore.serialize)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKey)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKeyBytes)
@@ -28104,6 +28206,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/utils/keystore.dart` (Keystore.serialize)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKey)
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKeyBytes)
@@ -28169,6 +28272,8 @@ Defines an enum representing the color of a node in a tree structure.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -28237,6 +28342,8 @@ The current connection status of the peer.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -28792,7 +28899,7 @@ Represents a peer participating in the DHT.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method) — Required: The ID of the peer.
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -28831,7 +28938,7 @@ Represents a peer participating in the DHT.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -29447,11 +29554,10 @@ Represents a record stored in the DHT.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method) — Required: The value of the record.
@@ -29486,7 +29592,6 @@ Represents a record stored in the DHT.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -29579,7 +29684,6 @@ Represents a record stored in the DHT.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -30242,11 +30346,10 @@ Represents a request to find providers for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **count** (method) — Optional: The maximum number of providers to return (default: unlimited).
@@ -31299,11 +31402,10 @@ Represents a request to provide a record for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **provider** (method) — Optional: The peer providing the record.
@@ -32374,11 +32476,10 @@ Represents a request to find a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 
@@ -32853,7 +32954,6 @@ Represents a response to a FindValue request.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -32946,7 +33046,6 @@ Represents a response to a FindValue request.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -33590,11 +33689,10 @@ Represents a request to store a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method) — Required: The value to store.
@@ -33629,7 +33727,6 @@ Represents a request to store a value for a key.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -33722,7 +33819,6 @@ Represents a request to store a value for a key.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -34752,6 +34848,8 @@ Represents a request to find a peer in the DHT by their ID.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setBytes
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -34789,6 +34887,8 @@ Represents a request to find a peer in the DHT by their ID.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -35839,6 +35939,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -35876,6 +35978,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -36357,6 +36461,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -36394,6 +36500,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -40011,6 +40119,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -40048,6 +40158,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -40535,6 +40647,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -40572,17 +40686,19 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -41063,6 +41179,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -41100,6 +41218,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -41627,6 +41747,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -41664,17 +41786,19 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -42155,6 +42279,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -42192,6 +42318,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -42679,6 +42807,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -42716,6 +42846,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -43168,11 +43300,13 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -43210,11 +43344,13 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -43291,6 +43427,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -43328,6 +43466,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -43772,11 +43912,13 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -43814,11 +43956,13 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 39 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/core/data_structures/pin.dart` (Pin.toProto)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
@@ -43895,6 +44039,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -43932,6 +44078,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -45414,11 +45562,10 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)
@@ -45453,7 +45600,6 @@ Event message definitions:
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -45546,7 +45692,6 @@ Event message definitions:
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -45648,6 +45793,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -45685,6 +45832,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -46257,11 +46406,10 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 
@@ -46832,11 +46980,10 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)
@@ -46871,7 +47018,6 @@ Event message definitions:
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -46964,7 +47110,6 @@ Event message definitions:
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -47597,11 +47742,10 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **peerId** (method)
@@ -47641,6 +47785,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -47678,6 +47824,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -48250,11 +48398,10 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **providers** (method)
@@ -49226,6 +49373,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -49263,6 +49412,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -51073,11 +51224,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -52893,11 +53044,11 @@ Event message definitions:
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -53343,8 +53494,12 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **streamId** (method)
   - calls: $_getSZ
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.streams)
 - **streamId** (method)
   - calls: $_setString
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.streams)
 - **hasStreamId** (method)
   - calls: $_has
 - **clearStreamId** (method)
@@ -53386,6 +53541,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -53423,6 +53580,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -53867,8 +54026,12 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **streamId** (method)
   - calls: $_getSZ
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.streams)
 - **streamId** (method)
   - calls: $_setString
+  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.streams)
 - **hasStreamId** (method)
   - calls: $_has
 - **clearStreamId** (method)
@@ -53910,6 +54073,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -53947,17 +54112,19 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
   - calls: $_clearField
 - **reason** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **reason** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **hasReason** (method)
   - calls: $_has
@@ -54438,6 +54605,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -54475,6 +54644,8 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -57317,6 +57488,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -57445,6 +57618,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -58324,7 +58499,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -58385,7 +58560,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -58524,11 +58699,10 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **record** (method)
@@ -59044,7 +59218,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -59083,7 +59257,7 @@ _Directly tested._
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -59157,6 +59331,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -59263,6 +59439,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -59831,6 +60009,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -59868,6 +60048,8 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -62372,11 +62554,10 @@ Represents a node in a Red-Black Tree.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -62413,7 +62594,6 @@ Represents a node in a Red-Black Tree.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -62506,7 +62686,6 @@ Represents a node in a Red-Black Tree.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -64069,6 +64248,8 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **peerId** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
@@ -64106,6 +64287,8 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.verifyPeer)
 - **hasPeerId** (method)
   - calls: $_has
 - **clearPeerId** (method)
@@ -65714,11 +65897,10 @@ Request message for storing provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -66807,11 +66989,10 @@ Request to retrieve provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -67292,6 +67473,8 @@ Status of the store operation
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -67876,7 +68059,6 @@ _No known direct test._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -67969,7 +68151,6 @@ _No known direct test._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -68529,7 +68710,6 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -68558,7 +68738,6 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -69077,7 +69256,6 @@ Method represents a method of an API interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -69106,7 +69284,6 @@ Method represents a method of an API interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -69621,7 +69798,6 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -69650,7 +69826,6 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -70221,6 +70396,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -71210,7 +71387,6 @@ Describes a complete .proto file.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -71239,7 +71415,6 @@ Describes a complete .proto file.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -71742,7 +71917,7 @@ Describes a complete .proto file.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -71771,7 +71946,7 @@ Describes a complete .proto file.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72266,7 +72441,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72295,7 +72470,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -72806,7 +72981,6 @@ Describes a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -72835,7 +73009,6 @@ Describes a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -73376,7 +73549,7 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -73437,7 +73610,7 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -74390,7 +74563,6 @@ Describes a field within a message.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -74419,7 +74591,6 @@ Describes a field within a message.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -74508,7 +74679,7 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -74569,7 +74740,7 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -75096,7 +75267,6 @@ Describes a oneof.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -75125,7 +75295,6 @@ Describes a oneof.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -75582,7 +75751,7 @@ Range of reserved numeric values. Reserved values may not be used by
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **start** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -75611,7 +75780,7 @@ Range of reserved numeric values. Reserved values may not be used by
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **start** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -76122,7 +76291,6 @@ Describes an enum type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -76151,7 +76319,6 @@ Describes an enum type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -76188,7 +76355,6 @@ Describes an enum type.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -76731,7 +76897,6 @@ Describes a value within an enum.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -76760,7 +76925,6 @@ Describes a value within an enum.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -77251,7 +77415,6 @@ Describes a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -77280,7 +77443,6 @@ Describes a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -77768,7 +77930,6 @@ Describes a method of a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -77797,7 +77958,6 @@ Describes a method of a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -79406,7 +79566,6 @@ Describes a method of a service.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -79499,7 +79658,6 @@ Describes a method of a service.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -83828,7 +83986,6 @@ A message representing a option the parser does not recognize. This only
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **identifierValue** (method) — The value of the uninterpreted option, in whatever type the tokenizer
   - calls: $_getSZ
 - **identifierValue** (method)
@@ -87183,6 +87340,8 @@ The full set of known editions.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87248,6 +87407,8 @@ The verification state of the extension range.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87344,6 +87505,8 @@ The verification state of the extension range.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87410,6 +87573,8 @@ The verification state of the extension range.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87478,6 +87643,8 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87548,6 +87715,8 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87614,6 +87783,8 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87682,6 +87853,8 @@ If set to RETENTION_SOURCE, the option will be omitted from the binary.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87764,6 +87937,8 @@ This indicates the types of entities that the field may apply to when used
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87832,6 +88007,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87900,6 +88077,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -87966,6 +88145,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -88032,6 +88213,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -88098,6 +88281,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -88164,6 +88349,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -88230,6 +88417,8 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -88298,6 +88487,8 @@ Represents the identified object's effect on the element in the original
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -90606,6 +90797,8 @@ The UTF8 validation strategy to use.  See go/editions-utf8-validation for
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -92576,6 +92769,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -92642,6 +92837,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -93709,7 +93906,6 @@ A protocol buffer message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -93738,7 +93934,6 @@ A protocol buffer message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -94307,7 +94502,6 @@ A single field of a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -94336,7 +94530,6 @@ A single field of a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -94851,7 +95044,6 @@ Enum type definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -94880,7 +95072,6 @@ Enum type definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -95383,7 +95574,6 @@ Enum value definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -95412,7 +95602,6 @@ Enum value definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -95895,7 +96084,6 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -95924,7 +96112,6 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -95961,7 +96148,6 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -96054,7 +96240,6 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -96143,6 +96328,8 @@ The syntax in which a protocol buffer element is defined.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -96243,6 +96430,8 @@ Basic field types.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -96313,6 +96502,8 @@ Whether a field is optional, required, or repeated.
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -96911,7 +97102,6 @@ Wrapper message for `double`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -97004,7 +97194,6 @@ Wrapper message for `double`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -97541,7 +97730,6 @@ Wrapper message for `float`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -97634,7 +97822,6 @@ Wrapper message for `float`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -98171,7 +98358,6 @@ Wrapper message for `int64`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -98264,7 +98450,6 @@ Wrapper message for `int64`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -98801,7 +98986,6 @@ Wrapper message for `uint64`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -98894,7 +99078,6 @@ Wrapper message for `uint64`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -99431,7 +99614,6 @@ Wrapper message for `int32`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -99524,7 +99706,6 @@ Wrapper message for `int32`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -100061,7 +100242,6 @@ Wrapper message for `uint32`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -100154,7 +100334,6 @@ Wrapper message for `uint32`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -100691,7 +100870,6 @@ Wrapper message for `bool`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -100784,7 +100962,6 @@ Wrapper message for `bool`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -101321,7 +101498,6 @@ Wrapper message for `string`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -101414,7 +101590,6 @@ Wrapper message for `string`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -101951,7 +102126,6 @@ Wrapper message for `bytes`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -102044,7 +102218,6 @@ Wrapper message for `bytes`.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -103114,7 +103287,7 @@ Request for graph traversal
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103153,7 +103326,7 @@ Request for graph traversal
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103300,6 +103473,9 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
 - **cancel** (method)
   - calls: $_setBool
   - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
@@ -103327,6 +103503,9 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
 - **hasCancel** (method)
   - calls: $_has
 - **clearCancel** (method)
@@ -103797,7 +103976,7 @@ Response to graph request
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **id** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -103836,7 +104015,7 @@ Response to graph request
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **id** (method)
   - calls: $_setSignedInt32
-  - referenced by (by name) (name shared by 35 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 37 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.requestBlock)
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
@@ -104374,12 +104553,13 @@ Block data with prefix
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -104427,15 +104607,17 @@ Block data with prefix
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -104483,6 +104665,7 @@ Block data with prefix
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -104532,6 +104715,8 @@ Standard response status codes
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -105751,6 +105936,8 @@ Represents an ordered sequence of IPLD values
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -106856,11 +107043,10 @@ Individual map entry
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
-    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)
@@ -106895,7 +107081,6 @@ Individual map entry
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -106988,7 +107173,6 @@ Individual map entry
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -107560,6 +107744,7 @@ Represents a CID link
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.validate)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -107581,6 +107766,7 @@ Represents a CID link
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/block.dart` (Block.validate)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.digest)
     - `lib/src/core/data_structures/car.dart` (_IndexEntry.multihashCode)
     - `lib/src/core/data_structures/car.dart` (CarReader.findCID)
@@ -107679,6 +107865,8 @@ Enumeration of all possible IPLD kinds
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -108265,7 +108453,6 @@ _Directly tested._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -108358,7 +108545,6 @@ _Directly tested._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getStatus)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getStatus)
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
-    - `lib/src/core/types/peer_id.dart` (PeerId.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
@@ -108432,6 +108618,7 @@ _Directly tested._
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
 - **signature** (method)
   - calls: $_setBytes
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
@@ -108441,6 +108628,7 @@ _Directly tested._
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
 - **hasSignature** (method)
   - calls: $_has
 - **clearSignature** (method)
@@ -108537,12 +108725,13 @@ _Directly tested._
   - calls: $_clearField
 - **data** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -108590,15 +108779,17 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -108646,6 +108837,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -108672,6 +108864,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -110794,7 +110988,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -110855,7 +111049,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -110866,12 +111060,13 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: $_clearField
 - **data** (method) — The raw data contained within this node (if any)
   - calls: $_getN
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110919,15 +111114,17 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **data** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 36 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/block_proto_codec.dart` (blockFromBitswapProto)
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
+    - `lib/src/core/data_structures/block.dart` (Block.==)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
@@ -110975,6 +111172,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/system_resolver.dart` (SystemResolver.lookupTXT)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **hasData** (method)
   - calls: $_has
@@ -111525,12 +111723,13 @@ Metadata represents metadata about a UnixFS node
   - calls: $_clearField
 - **size** (method) — Size is the size of the file in bytes
   - calls: $_getI64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -111548,12 +111747,13 @@ Metadata represents metadata about a UnixFS node
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
 - **size** (method)
   - calls: $_setInt64
-  - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 22 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/bitfield.dart` (BitField.toProto)
     - `lib/src/core/data_structures/bitfield.dart` (BitField.fromProto)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryEntry.toLink)
     - `lib/src/core/data_structures/link.dart` (Link.toProto)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getStatus)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.ls)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
@@ -111645,6 +111845,8 @@ _Directly tested._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
@@ -112239,6 +112441,8 @@ _No known direct test._
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertFromMerkleDAGNode)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getAllBlocks)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getStatus)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getAllBlocks)
+    - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getStatus)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.pinnedBlockCount)
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)

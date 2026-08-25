@@ -7,8 +7,8 @@
 @Tags(['network'])
 library;
 
-import 'package:dart_ipfs/src/transport/dns/dns_message.dart';
-import 'package:dart_ipfs/src/transport/dns/udp_dns_client.dart';
+import 'package:transpiled_ipfs/src/transport/dns/dns_message.dart';
+import 'package:transpiled_ipfs/src/transport/dns/udp_dns_client.dart';
 import 'package:test/test.dart';
 
 void main() {

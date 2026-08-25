@@ -5,21 +5,21 @@
 
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/block_proto_codec.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/security/security_manager_web.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_builder.dart';
-import 'package:dart_ipfs/src/platform/platform.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/delegate_dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_handler.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_client.dart';
-import 'package:dart_ipfs/src/transport/libp2p_router.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager_web.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_builder.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/delegate_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_client.dart';
+import 'package:transpiled_ipfs/src/transport/libp2p_router.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 
 import 'web_block_store.dart';
 

@@ -7,7 +7,7 @@ import 'impl/node_stub.dart'
     if (dart.library.io) 'impl/node_native.dart'
     if (dart.library.html) 'impl/node_web.dart';
 
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 
 /// Service managing the IPFS Node life-cycle and state.
 ///

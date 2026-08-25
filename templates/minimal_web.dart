@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:typed_data';
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 
 /// Template: Minimal Web Node
 ///

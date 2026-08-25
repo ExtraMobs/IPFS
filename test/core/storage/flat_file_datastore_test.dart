@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
-import 'package:dart_ipfs/src/core/storage/flat_file_datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/flat_file_datastore.dart';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 

@@ -3,9 +3,9 @@
 // End-to-end proof that the DNS gap this whole transpilation effort started
 // from (see doc/transpilation/PROGRESS.md's go-multiaddr-dns row) is
 // actually closed: SystemResolver (real DNS, this package) plugged into
-// dart_ipfs_core's Resolver orchestration (go-multiaddr-dns's own logic,
-// ported in the previous session) resolves a real production `/dnsaddr/`
-// bootstrap multiaddr -- the exact kind of address in
+// transpiled_multiaddr_dns's Resolver orchestration (go-multiaddr-dns's own
+// logic, ported in the previous session) resolves a real production
+// `/dnsaddr/` bootstrap multiaddr -- the exact kind of address in
 // lib/src/core/config/network_config.dart's default bootstrap list -- into
 // concrete dialable addresses.
 //
@@ -15,8 +15,8 @@
 @Tags(['network'])
 library;
 
-import 'package:dart_ipfs/src/transport/dns/system_resolver.dart';
-import 'package:dart_ipfs_core/dart_ipfs_core.dart';
+import 'package:transpiled_ipfs/src/transport/dns/system_resolver.dart';
+import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart';
 import 'package:test/test.dart';
 
 /// Repeatedly calls [Resolver.resolve] until every address is DNS-free.
@@ -46,7 +46,7 @@ Future<List<Multiaddr>> _resolveAll(Resolver resolver, Multiaddr addr) async {
 }
 
 void main() {
-  group('SystemResolver + dart_ipfs_core Resolver (live network)', () {
+  group('SystemResolver + transpiled_multiaddr_dns Resolver (live network)', () {
     test('resolves a real /dnsaddr/ bootstrap multiaddr', () async {
       final resolver = Resolver(defaultResolver: SystemResolver());
 

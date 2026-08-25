@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/transport/webtransport/webtransport_session.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/webtransport_session.dart';
 
 /// A mock backend for testing [WebTransportSession].
 class _MockSessionBackend implements WebTransportSessionBackend {

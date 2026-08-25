@@ -1,7 +1,7 @@
 // src/core/config/network_config.dart
 import 'dart:math';
 import 'dart:typed_data';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 
 /// Network configuration for the IPFS node.
 ///

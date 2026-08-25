@@ -6,7 +6,7 @@
 import 'dart:async' as _i3;
 import 'dart:typed_data' as _i4;
 
-import 'package:dart_ipfs/src/core/storage/datastore.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

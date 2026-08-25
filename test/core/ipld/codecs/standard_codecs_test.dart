@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/ipld/codecs/standard_codecs.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/core/ipld/codecs/standard_codecs.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 

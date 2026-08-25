@@ -1,5 +1,5 @@
 // test/protocols/bitswap/bitswap_session_test.dart
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_session.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/bitswap_session.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -7,20 +7,20 @@ import 'dart:async' as _i9;
 import 'dart:typed_data' as _i10;
 
 import 'package:cryptography/cryptography.dart' as _i2;
-import 'package:dart_ipfs/src/core/cid.dart' as _i14;
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart' as _i7;
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart' as _i17;
-import 'package:dart_ipfs/src/core/security/security_manager.dart' as _i8;
-import 'package:dart_ipfs/src/core/storage/datastore.dart' as _i5;
-import 'package:dart_ipfs/src/core/types/peer_id.dart' as _i16;
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart' as _i14;
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart' as _i7;
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart' as _i17;
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart' as _i8;
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as _i5;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' as _i16;
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     as _i13;
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart' as _i3;
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart' as _i12;
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i6;
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i18;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i4;
-import 'package:dart_ipfs/src/utils/private_key.dart' as _i11;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart' as _i3;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart' as _i12;
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i6;
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i18;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i4;
+import 'package:transpiled_ipfs/src/utils/private_key.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i15;
 

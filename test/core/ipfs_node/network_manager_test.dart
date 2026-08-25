@@ -3,17 +3,17 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_manager.dart';
-import 'package:dart_ipfs/src/core/di/service_container.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/content_routing_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/datastore_handler.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_manager.dart';
+import 'package:transpiled_ipfs/src/core/di/service_container.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/content_routing_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/datastore_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
 
 import 'package:get_it/get_it.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';

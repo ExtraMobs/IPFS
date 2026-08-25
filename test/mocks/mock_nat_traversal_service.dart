@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/network/nat_traversal_service.dart';
+import 'package:transpiled_ipfs/src/network/nat_traversal_service.dart';
 
 class MockNatTraversalService implements NatTraversalService {
   final List<String> mappedProtocols = ['TCP', 'UDP'];

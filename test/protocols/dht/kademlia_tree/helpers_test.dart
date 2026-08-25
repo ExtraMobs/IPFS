@@ -2,12 +2,12 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/helpers.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia_node.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/helpers.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia_node.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
     as common_pb;
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
 
 @GenerateMocks([DHTClient])
 import 'helpers_test.mocks.dart';

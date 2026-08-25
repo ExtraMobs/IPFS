@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/proto/generated/circuit_relay.pb.dart' as pb;
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart'
+import 'package:transpiled_ipfs/src/proto/generated/circuit_relay.pb.dart' as pb;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart'
     show DHTRoutingTable;
-import 'package:dart_ipfs/src/transport/circuit_relay_client_io.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/transport/circuit_relay_client_io.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:fixnum/fixnum.dart' as fixnum;
 import 'package:test/test.dart';
 

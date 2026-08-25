@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/types/peer_types.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
-import 'package:dart_ipfs/src/proto/generated/core/peer.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_ipfs/src/core/types/peer_types.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/peer.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
 import 'package:fixnum/fixnum.dart';
 
 void main() {

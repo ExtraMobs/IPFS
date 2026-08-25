@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'package:yaml/yaml.dart';
 
 import '../../platform/platform.dart';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/keystore.dart';
 import 'bitswap_config.dart';
 import 'dht_config.dart';

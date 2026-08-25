@@ -6,13 +6,13 @@
 // they must never crash or hang.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as pb;
-import 'package:dart_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as pb;
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
     as common_pb;
-import 'package:dart_ipfs/src/proto/generated/dht/dht_messages.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/dht/dht_messages.pb.dart'
     as dht_pb;
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as bitswap;
-import 'package:dart_ipfs/src/protocols/dht/dht_envelope.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as bitswap;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_envelope.dart';
 import 'package:test/test.dart';
 
 import '_fuzz_helpers.dart';

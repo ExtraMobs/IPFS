@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/ipld/extensions/ipld_node_json.dart';
-import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/core/ipld/extensions/ipld_node_json.dart';
+import 'package:transpiled_ipfs/src/core/ipld/selectors/ipld_selector.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 

@@ -5,9 +5,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/config/gateway_config.dart';
-import 'package:dart_ipfs/src/services/gateway/acme_client.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_tls_manager.dart';
+import 'package:transpiled_ipfs/src/core/config/gateway_config.dart';
+import 'package:transpiled_ipfs/src/services/gateway/acme_client.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_tls_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:pointycastle/export.dart' as pc;
 import 'package:test/test.dart';

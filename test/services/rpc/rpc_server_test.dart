@@ -3,21 +3,21 @@ library;
 
 import 'dart:convert';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart';
-import 'package:dart_ipfs/src/core/di/service_container.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/datastore_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/security/security_manager.dart';
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
-import 'package:dart_ipfs/src/core/storage/memory_datastore.dart';
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
-import 'package:dart_ipfs/src/services/rpc/rpc_server.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart';
+import 'package:transpiled_ipfs/src/core/di/service_container.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/datastore_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipld_handler.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/memory_datastore.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_ipfs/src/services/rpc/rpc_server.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

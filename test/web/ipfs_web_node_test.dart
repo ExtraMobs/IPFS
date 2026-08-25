@@ -1,10 +1,10 @@
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/config/network_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_web_node.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_record.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/config/network_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_web_node.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_record.dart';
 import 'package:test/test.dart';
 
 IPFSConfig _localConfig() => IPFSConfig(

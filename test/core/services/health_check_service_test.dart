@@ -1,9 +1,9 @@
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/services/health_check_service.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/services/health_check_service.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
 
 import 'health_check_service_test.mocks.dart';
 

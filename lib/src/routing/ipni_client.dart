@@ -1,7 +1,7 @@
 // lib/src/routing/ipni_client.dart
 import 'dart:convert';
 
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:http/http.dart' as http;
 
 /// Client for the InterPlanetary Network Indexer (IPNI) protocol.

@@ -4,7 +4,7 @@ import 'package:fixnum/fixnum.dart' as fixnum;
 
 import '../core/config/network_config.dart';
 import '../proto/generated/circuit_relay.pb.dart' as pb;
-import '../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../utils/logger.dart';
 import 'router_interface.dart';
 

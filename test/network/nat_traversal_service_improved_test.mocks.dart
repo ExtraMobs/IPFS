@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 import 'dart:io' as _i2;
 
-import 'package:dart_ipfs/src/utils/logger.dart' as _i5;
+import 'package:transpiled_ipfs/src/utils/logger.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:port_forwarder/port_forwarder.dart' as _i3;
 

@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 
 import '../../proto/generated/core/peer.pb.dart';
-import '../../utils/base58.dart';
-import '../types/peer_id.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 /// Represents a network address (IP + Port).
 /// Replaces p2plib.FullAddress.

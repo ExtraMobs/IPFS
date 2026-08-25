@@ -2,14 +2,13 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
-import 'package:dart_ipfs/src/protocols/dht/dht_protocol_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
-import 'package:dart_ipfs/src/protocols/dht/rate_limiter.dart';
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_protocol_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/rate_limiter.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 class _FakeRouter implements RouterInterface {

@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/core/di/service_container.dart';
+import 'package:transpiled_ipfs/src/core/di/service_container.dart';
 import 'package:get_it/get_it.dart';
 import 'package:test/test.dart';
 

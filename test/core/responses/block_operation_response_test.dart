@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/responses/block_operation_response.dart';
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/core/block.pb.dart';
+import 'package:transpiled_ipfs/src/core/responses/block_operation_response.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/block.pb.dart';
 
 void main() {
   group('BlockOperationResponse', () {

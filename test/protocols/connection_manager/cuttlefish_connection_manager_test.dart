@@ -1,5 +1,5 @@
 // test/protocols/connection_manager/cuttlefish_connection_manager_test.dart
-import 'package:dart_ipfs/src/protocols/connection_manager/cuttlefish_connection_manager.dart';
+import 'package:transpiled_ipfs/src/protocols/connection_manager/cuttlefish_connection_manager.dart';
 import 'package:test/test.dart';
 
 void main() {

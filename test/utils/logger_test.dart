@@ -1,5 +1,5 @@
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:test/test.dart';
 
 void main() {

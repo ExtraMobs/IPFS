@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:pointycastle/export.dart' as pc;
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/core/config/gateway_config.dart';
-import 'package:dart_ipfs/src/services/gateway/acme_persistence.dart';
+import 'package:transpiled_ipfs/src/core/config/gateway_config.dart';
+import 'package:transpiled_ipfs/src/services/gateway/acme_persistence.dart';
 
 void main() {
   group('AcmePersistence', () {

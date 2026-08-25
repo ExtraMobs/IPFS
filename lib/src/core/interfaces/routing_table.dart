@@ -1,12 +1,12 @@
 // src/core/interfaces/routing_table.dart
 //
 // Moved from protocols/dht/dht_routing_table_interface.dart: despite the
-// "DHT" name, this only depends on core/types/peer_id.dart and is consumed
+// "DHT" name, this only depends on transpiled_libp2p's peer_id.dart and is consumed
 // by transport/ (router_interface.dart, libp2p_router.dart), which should
 // not depend on a protocol-specific type. See
 // protocols/dht/dht_routing_table_interface.dart for the re-export shim
 // kept at the old path.
-import '../types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 /// Interface for calculating distance between peers in the DHT.
 ///

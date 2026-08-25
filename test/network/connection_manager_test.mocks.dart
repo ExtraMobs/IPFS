@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart' as _i2;
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart' as _i5;
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart' as _i3;
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 

@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/directory.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
-import 'package:dart_ipfs/src/core/security/denylist_service.dart';
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_builder.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/directory.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_block_store.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
+import 'package:transpiled_ipfs/src/core/security/denylist_service.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_builder.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:synchronized/synchronized.dart';
 

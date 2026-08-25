@@ -173,7 +173,7 @@ class Libp2pTlsHandshakeVerifier {
       case quic_ext.Libp2pKeyType.secp256k1:
       case quic_ext.Libp2pKeyType.ecdsa:
         // RSA, secp256k1, and ECDSA identity keys are not yet supported by
-        // this verifier because the dart_ipfs_quic transport currently only
+        // this verifier because the QUIC transport currently only
         // generates and consumes Ed25519 identity keys (matching the
         // quic_lib Libp2pCertificateGenerator). Supporting additional key
         // types requires the corresponding ipfs_libp2p PublicKey

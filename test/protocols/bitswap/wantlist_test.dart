@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/wantlist.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as msg;
+import 'package:transpiled_ipfs/src/protocols/bitswap/wantlist.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as msg;
 
 void main() {
   group('Wantlist', () {

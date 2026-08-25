@@ -1,14 +1,16 @@
 // lib/src/transport/dns/system_resolver.dart
 //
-// A dart_ipfs_core BasicResolver backed by real DNS: `InternetAddress.
-// lookup` (dart:io, uses the OS resolver -- already correct, no gap there)
-// for A/AAAA, and UdpDnsClient (this package, since dart:io has no TXT
-// API) for TXT. Feed this to a dart_ipfs_core `Resolver` to actually
-// resolve `/dns4/`, `/dns6/`, `/dns/`, and `/dnsaddr/` multiaddr
-// components against the real network.
+// A transpiled_multiaddr_dns BasicResolver backed by real DNS:
+// `InternetAddress.lookup` (dart:io, uses the OS resolver -- already
+// correct, no gap there) for A/AAAA, and UdpDnsClient (this package,
+// since dart:io has no TXT API) for TXT. Feed this to a
+// transpiled_multiaddr_dns `Resolver` to actually resolve `/dns4/`,
+// `/dns6/`, `/dns/`, and `/dnsaddr/` multiaddr components against the
+// real network.
 import 'dart:io';
 
-import 'package:dart_ipfs_core/dart_ipfs_core.dart' show BasicResolver;
+import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart'
+    show BasicResolver;
 
 import 'dns_message.dart';
 import 'udp_dns_client.dart';

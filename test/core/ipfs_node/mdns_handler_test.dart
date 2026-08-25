@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/mdns_handler.dart';
-import 'package:dart_ipfs/src/network/mdns_client.dart' as ipfs_mdns;
+import 'package:transpiled_ipfs/src/core/ipfs_node/mdns_handler.dart';
+import 'package:transpiled_ipfs/src/network/mdns_client.dart' as ipfs_mdns;
 import 'package:multicast_dns/multicast_dns.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/utils/base58.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 
 import 'mdns_handler_test.mocks.dart';
 

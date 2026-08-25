@@ -1,19 +1,9 @@
 ---
 test-group: utils
-generated: 2026-08-25T09:40:09.232370
+generated: 2026-08-25T14:23:03.829658
 ---
 
 # `test/utils/`
-
-## `test/utils/base58_test.dart`
-
-- Base58
-- encode/decode empty bytes
-- encode/decode simple string
-- encode/decode with leading zeros
-- decode invalid characters throws ArgumentError
-- bigIntToUint8List - zero
-- encode/decode large value (multi-hash style)
 
 ## `test/utils/car_test.dart`
 
@@ -115,6 +105,15 @@ generated: 2026-08-25T09:40:09.232370
 - getOrComputeSync caches the computed value
 - keys returns MRU-first order
 - eviction at capacity removes the LRU node
+
+## `test/utils/immutable_bytes_typed_map_test.dart`
+
+- ImmutableBytes
+- value-based equality
+- returns defensive copy
+- TypedMap
+- gets typed values with defaults
+- contains key and length
 
 ## `test/utils/keystore_test.dart`
 

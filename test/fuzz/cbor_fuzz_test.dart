@@ -6,9 +6,9 @@
 // crash, hang, or throw an unhandled error.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
-import 'package:dart_ipfs/src/core/errors/ipld_errors.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
+import 'package:transpiled_ipfs/src/core/errors/ipld_errors.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 

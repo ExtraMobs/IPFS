@@ -6,9 +6,9 @@ import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 
 import '../../core/data_structures/node_stats.dart';
-import '../../core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import '../../transport/router_interface.dart';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/logger.dart';
 import 'pubsub_interface.dart';
 import 'pubsub_message.dart';

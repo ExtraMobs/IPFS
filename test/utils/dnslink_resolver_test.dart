@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:dart_ipfs/src/utils/dnslink_resolver.dart';
+import 'package:transpiled_ipfs/src/utils/dnslink_resolver.dart';
 
 import 'dnslink_resolver_test.mocks.dart';
 

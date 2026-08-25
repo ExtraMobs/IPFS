@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-25T09:40:09.225172
+generated: 2026-08-25T14:23:03.817830
 ---
 
 # `test/core/`
@@ -321,39 +321,6 @@ generated: 2026-08-25T09:40:09.225172
 - constructor with only required parameters
 - constructor with zero maxRetries
 
-## `test/core/crypto/crypto_utils_test.dart`
-
-- CryptoUtils
-- deriveKey
-- derives consistent key from password and salt
-- derives different keys with different salts
-- derives different keys with different passwords
-- supports custom key length
-- encrypt/decrypt
-- encrypts and decrypts data correctly
-- produces different ciphertext each time (random nonce)
-- fails to decrypt with wrong key
-- rejects key of wrong size
-- zeroMemory
-- zeros buffer contents
-- handles empty buffer
-- randomBytes
-- generates bytes of correct length
-- generates different bytes each call
-- input validation
-- deriveKey rejects empty password
-- deriveKey rejects salts shorter than 8 bytes
-- decrypt rejects keys of wrong size
-- decrypt rejects ciphertexts shorter than the auth tag
-- randomBytes rejects non-positive lengths
-- EncryptedData serialisation
-- toBytes/fromBytes round-trip
-- fromBytes rejects payloads shorter than the nonce
-- constantTimeEquals
-- returns true for equal buffers
-- returns false for different buffers
-- returns false for different length buffers
-
 ## `test/core/crypto/ecdsa_signer_test.dart`
 
 - EcdsaSigner
@@ -372,23 +339,6 @@ generated: 2026-08-25T09:40:09.225172
 - decodePublicKeyPb rejects non-ECDSA key type
 - EcdsaKeyPair stores both keys
 - sign produces different signatures for same data (non-deterministic)
-
-## `test/core/crypto/ed25519_signer_test.dart`
-
-- Ed25519Signer
-- generateKeyPair without seed
-- generateKeyPair with seed
-- generateKeyPair with invalid seed length
-- keyPairFromSeed
-- keyPairFromSeed with invalid seed length
-- sign and verify roundtrip
-- verify failure with wrong data
-- verify failure with catch path
-- extractPublicKeyBytes
-- extractSeed
-- publicKeyFromBytes
-- publicKeyFromBytes invalid length
-- KeyPairExtensions.extractSeedAndZero
 
 ## `test/core/crypto/encrypted_keystore_test.dart`
 
@@ -422,12 +372,6 @@ generated: 2026-08-25T09:40:09.225172
 - EncryptedKeystore Locked Operations
 - generateKey throws when locked
 - getKey throws when locked
-
-## `test/core/crypto/pbkdf2_cross_implementation_test.dart`
-
-- PBKDF2 cross-implementation agreement
-- agrees on 
-- is deterministic across repeated calls (both implementations)
 
 ## `test/core/crypto/rsa_signer_test.dart`
 
@@ -538,6 +482,23 @@ generated: 2026-08-25T09:40:09.225172
 - setMode and setModificationTime update internal state
 - addEntry adds entries to directory
 - build sorts entries by name
+
+## `test/core/data_structures/in_memory_block_store_test.dart`
+
+- Block
+- equality is by CID object identity (structural), not by encoded 
+- creates block from data and computes CID
+- validates matching CID
+- validation fails for tampered data
+- validateSync is structural
+- toBytes returns data
+- InMemoryBlockStore
+- stores and retrieves block
+- reports missing block
+- removes block
+- returns all blocks
+- getStatus reports block count and total size
+- gc is a documented no-op without pin information
 
 ## `test/core/data_structures/metadata_test.dart`
 
@@ -2096,23 +2057,6 @@ generated: 2026-08-25T09:40:09.225172
 - has returns false for non-existent key
 - query with filters
 - query with orders
-
-## `test/core/types/peer_id_test.dart`
-
-- PeerId base36
-- toBase36 returns multibase-prefixed string
-- fromBase36 round-trips
-- fromBase36 accepts bare string without k prefix
-- fromBase36 rejects invalid characters
-- fromPublicKey Ed25519 derives deterministic PeerId
-- fromPublicKey inlines an Ed25519 key as its marshaled protobuf bytes
-- fromPublicKey RSA-sized keys hash instead of inlining
-- fromPublicKey rejects an unknown key type
-- fromPublicKey requires a 32-byte key for Ed25519
-- PeerId PoW
-- verifyPoW should accept PeerId with enough leading zeros
-- verifyPoW should reject PeerId with insufficient leading zeros
-- difficulty 0 should always pass
 
 ## `test/core/types/peer_types_test.dart`
 

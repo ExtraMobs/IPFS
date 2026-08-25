@@ -1,7 +1,7 @@
 @TestOn("vm")
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/platform/platform_io.dart';
+import 'package:transpiled_ipfs/src/platform/platform_io.dart';
 import 'package:test/test.dart';
 
 void main() {

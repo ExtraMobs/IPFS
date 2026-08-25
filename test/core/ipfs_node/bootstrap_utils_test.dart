@@ -5,12 +5,13 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:fake_async/fake_async.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/bootstrap_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/utils.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/utils/encoding.dart';
-import 'package:dart_ipfs_core/dart_ipfs_core.dart' show MockResolver;
+import 'package:transpiled_ipfs/src/core/ipfs_node/bootstrap_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/utils.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart'
+    show MockResolver;
 import 'package:crypto/crypto.dart';
 
 import 'bootstrap_utils_test.mocks.dart';

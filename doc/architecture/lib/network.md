@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-25T09:40:09.009622
+generated: 2026-08-25T14:23:03.488488
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -47,7 +47,6 @@ Base class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **ttl** (field) — Time-to-live for this record.
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -121,7 +120,6 @@ Query class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **type** (field) — The type of record to query.
   - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
@@ -177,7 +175,7 @@ Query class for mDNS resource records.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
-    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
+    - `lib/src/transport/quic/libp2p_tls_extension.dart` (Libp2pTlsHandshakeVerifier.verify)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -194,7 +192,7 @@ Query class for mDNS resource records.
 Abstract client for multicast DNS operations.
 
 - **start** (method) — Starts the mDNS client.
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -222,7 +220,7 @@ Abstract client for multicast DNS operations.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method) — Stops the mDNS client.
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -269,7 +267,7 @@ IO implementation of the mDNS client.
 
 - **start** (method)
   - calls: MDnsClient, start
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -297,7 +295,7 @@ IO implementation of the mDNS client.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
   - calls: stop
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -354,7 +352,7 @@ _No known direct test._
 Stub implementation of the mDNS client for platforms where it's not supported.
 
 - **start** (method)
-  - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
@@ -382,7 +380,7 @@ Stub implementation of the mDNS client for platforms where it's not supported.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **stop** (method)
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)

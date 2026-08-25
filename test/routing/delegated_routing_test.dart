@@ -3,8 +3,8 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
-import 'package:dart_ipfs/src/routing/delegated_routing.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/routing/delegated_routing.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 import 'delegated_routing_test.mocks.dart';
 

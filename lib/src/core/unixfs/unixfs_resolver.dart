@@ -1,12 +1,12 @@
 // src/core/unixfs/unixfs_resolver.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_errors.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_hamt.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_node.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_block_store.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_errors.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_hamt.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_node.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
 
 /// Resolves UnixFS paths against a block store.
 ///

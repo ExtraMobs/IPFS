@@ -6,14 +6,14 @@
 import 'dart:async' as _i7;
 import 'dart:typed_data' as _i10;
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart' as _i5;
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart' as _i2;
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler_io.dart' as _i6;
-import 'package:dart_ipfs/src/network/nat_traversal_service.dart' as _i11;
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler_io.dart' as _i6;
+import 'package:transpiled_ipfs/src/network/nat_traversal_service.dart' as _i11;
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
     as _i8;
-import 'package:dart_ipfs/src/transport/circuit_relay_client.dart' as _i4;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i3;
+import 'package:transpiled_ipfs/src/transport/circuit_relay_client.dart' as _i4;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i9;
 

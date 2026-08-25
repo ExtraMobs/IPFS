@@ -1,6 +1,6 @@
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/core/types/peer_types.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/core/types/peer_types.dart';
 
 /// Stores and manages peer information for the DHT protocol.
 ///

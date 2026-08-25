@@ -1,6 +1,6 @@
-import 'package:dart_ipfs/src/protocols/dht/red_black_tree.dart';
-import 'package:dart_ipfs/src/protocols/dht/red_black_tree/rotations.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/protocols/dht/red_black_tree.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/red_black_tree/rotations.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     as common_tree;
 import 'package:test/test.dart';
 

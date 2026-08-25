@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
 
 import 'dht_handler_coverage_test.mocks.dart';
 

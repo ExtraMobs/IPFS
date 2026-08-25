@@ -1,8 +1,8 @@
 // Auto-generated proto coverage tests. Do not hand-edit.
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
 
 void main() {
   group('GraphsyncMessage', () {

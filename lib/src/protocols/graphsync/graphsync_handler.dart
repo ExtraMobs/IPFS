@@ -4,24 +4,24 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/block_proto_codec.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart' as core;
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/core/errors/graphsync_errors.dart';
-import 'package:dart_ipfs/src/core/errors/ipld_errors.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';
-import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart' as ipld;
-import 'package:dart_ipfs/src/core/ipld/selectors/selector_ast.dart';
-import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_budget.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_protocol.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_types.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/utils/encoding.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart' as core;
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/errors/graphsync_errors.dart';
+import 'package:transpiled_ipfs/src/core/errors/ipld_errors.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipld_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipld/selectors/ipld_selector.dart' as ipld;
+import 'package:transpiled_ipfs/src/core/ipld/selectors/selector_ast.dart';
+import 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_budget.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_protocol.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_types.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 /// Graphsync protocol handler for efficient DAG (Directed Acyclic Graph) transfer.
 ///
@@ -816,7 +816,7 @@ class GraphsyncHandler {
   ///
   /// Returns `(length, value)`: the number of bytes consumed and the
   /// decoded integer. CID used to expose this as a static method; it moved
-  /// out when CID became a dart_ipfs_core re-export shim (Phase 2), and
+  /// out when CID became a re-export shim (Phase 2), and
   /// this is the only call site, so it's inlined here rather than shared.
   static (int, int) _readVarintAt(Uint8List bytes, int offset) {
     var value = 0;

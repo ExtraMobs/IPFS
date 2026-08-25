@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
 
 import '../core/ipfs_node/network_handler.dart';
 import '../protocols/dht/dht_client.dart'; // Import DHT client
-import '../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../utils/dnslink_resolver.dart'; // Import DNSLink resolver
 import '../utils/logger.dart';
 

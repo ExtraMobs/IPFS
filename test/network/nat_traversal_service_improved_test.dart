@@ -2,8 +2,8 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:port_forwarder/port_forwarder.dart';
-import 'package:dart_ipfs/src/network/nat_traversal_service.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/network/nat_traversal_service.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 @GenerateNiceMocks([MockSpec<Gateway>(), MockSpec<Logger>()])
 import 'nat_traversal_service_improved_test.mocks.dart';

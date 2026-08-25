@@ -2,15 +2,15 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipld_handler.dart';
-import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
-import 'package:dart_ipfs/src/protocols/graphsync/graphsync_handler.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipld_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipld/selectors/ipld_selector.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/graphsync/graphsync_handler.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 /// Coordinates data retrieval across multiple protocols.
 ///

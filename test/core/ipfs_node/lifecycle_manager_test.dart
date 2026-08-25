@@ -1,8 +1,8 @@
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/lifecycle_manager.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/lifecycle_manager.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
 
 @GenerateNiceMocks([MockSpec<ILifecycle>()])
 import 'lifecycle_manager_test.mocks.dart';

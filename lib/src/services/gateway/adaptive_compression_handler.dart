@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart' hide CompressionType;
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/platform/platform.dart';
-import 'package:dart_ipfs/src/services/gateway/compressed_cache_store.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/services/gateway/compressed_cache_store.dart';
 
 import 'package:dart_lz4/dart_lz4.dart';
 

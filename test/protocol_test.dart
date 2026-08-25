@@ -5,12 +5,12 @@ library;
 
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
     as bitswap;
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag;
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag;
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
 import 'package:fixnum/fixnum.dart';
 
 Future<void> main() async {

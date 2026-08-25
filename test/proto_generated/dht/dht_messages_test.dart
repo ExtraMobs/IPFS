@@ -1,9 +1,9 @@
 // Auto-generated proto coverage tests. Do not hand-edit.
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_kademlia.pb.dart'
     as $0;
-import 'package:dart_ipfs/src/proto/generated/dht/dht_messages.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/dht_messages.pb.dart';
 
 void main() {
   group('PingRequest', () {

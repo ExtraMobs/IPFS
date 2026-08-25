@@ -2,8 +2,8 @@
 
 import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
 
 void main() {
   group('NetworkEvent', () {

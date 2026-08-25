@@ -1,8 +1,8 @@
 // test/mocks/test_helpers.dart
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/utils/private_key.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/utils/private_key.dart';
 
 /// Test helper functions and utilities for integration tests.
 

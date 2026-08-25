@@ -2,12 +2,12 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
-import 'package:dart_ipfs/src/core/ipld/codecs/standard_codecs.dart';
-import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/ipld/codecs/standard_codecs.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/cid.pb.dart'
     show IPFSCIDProto, IPFSCIDVersion;
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 import 'package:fixnum/fixnum.dart' show Int64;
 
 // ---------------------------------------------------------------------------

@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/dht.pb.dart' as dht_pb;
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/dht.pb.dart' as dht_pb;
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
 
 /// Base class for Kademlia DHT protocol messages.
 abstract class KademliaMessage {

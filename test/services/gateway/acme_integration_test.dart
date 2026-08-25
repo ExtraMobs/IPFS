@@ -1,11 +1,11 @@
 // test/services/gateway/acme_integration_test.dart
 import 'dart:io';
 
-import 'package:dart_ipfs/src/core/config/gateway_config.dart';
-import 'package:dart_ipfs/src/services/gateway/acme_client.dart';
-import 'package:dart_ipfs/src/services/gateway/acme_persistence.dart';
-import 'package:dart_ipfs/src/services/gateway/domain_validator.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_tls_manager.dart';
+import 'package:transpiled_ipfs/src/core/config/gateway_config.dart';
+import 'package:transpiled_ipfs/src/services/gateway/acme_client.dart';
+import 'package:transpiled_ipfs/src/services/gateway/acme_persistence.dart';
+import 'package:transpiled_ipfs/src/services/gateway/domain_validator.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_tls_manager.dart';
 import 'package:test/test.dart';
 
 void main() {

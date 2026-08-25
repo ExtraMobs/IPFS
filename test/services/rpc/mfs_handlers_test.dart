@@ -6,11 +6,11 @@ import 'package:mockito/mockito.dart';
 import 'package:shelf/shelf.dart';
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/mfs/mfs_manager.dart';
-import 'package:dart_ipfs/src/core/security/denylist_service.dart';
-import 'package:dart_ipfs/src/services/rpc/mfs_handlers.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/mfs/mfs_manager.dart';
+import 'package:transpiled_ipfs/src/core/security/denylist_service.dart';
+import 'package:transpiled_ipfs/src/services/rpc/mfs_handlers.dart';
 
 class FakeMFSManager extends Fake implements MFSManager {
   FakeMFSManager({this.lsResult = const [], this.statResult, this.readBytes});

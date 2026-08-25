@@ -1,7 +1,7 @@
 // test/transport/router_events_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
 import 'package:test/test.dart';
 
 void main() {

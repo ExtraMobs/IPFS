@@ -1,10 +1,10 @@
 // test/protocols/dht/kademlia_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_routing_table.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_routing_table.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
 import 'package:test/test.dart';
 
 class MockNetworkHandler implements NetworkHandler {

@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/gossipsub/gossipsub.dart';
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/gossipsub/gossipsub.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 class _FakeRouter implements RouterInterface {

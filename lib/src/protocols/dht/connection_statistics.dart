@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     show V_PeerInfo;
 
 /// Statistics for a peer connection in the DHT.

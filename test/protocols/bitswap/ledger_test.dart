@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/ledger.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
+import 'package:transpiled_ipfs/src/protocols/bitswap/ledger.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
     as bitswap;
 
 void main() {

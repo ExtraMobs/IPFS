@@ -4,12 +4,12 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/services/gateway/lazy_preview_handler.dart';
-import 'package:dart_ipfs/src/services/gateway/cached_preview_generator.dart';
-import 'package:dart_ipfs/src/services/gateway/preview_cache_manager.dart';
-import 'package:dart_ipfs/src/services/gateway/file_preview_handler.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/services/gateway/lazy_preview_handler.dart';
+import 'package:transpiled_ipfs/src/services/gateway/cached_preview_generator.dart';
+import 'package:transpiled_ipfs/src/services/gateway/preview_cache_manager.dart';
+import 'package:transpiled_ipfs/src/services/gateway/file_preview_handler.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 import 'gateway_handlers_test.mocks.dart';
 

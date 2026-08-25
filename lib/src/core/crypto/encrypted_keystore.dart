@@ -6,8 +6,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cryptography/cryptography.dart';
-import 'crypto_utils.dart';
-import 'ed25519_signer.dart';
+import 'package:transpiled_libp2p/src/core/crypto/crypto_utils.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
 
 /// Entry for an encrypted key in the keystore.
 ///

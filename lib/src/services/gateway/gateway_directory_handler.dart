@@ -2,11 +2,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_hamt.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_node.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_hamt.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_node.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart';
 import 'package:shelf/shelf.dart';
 
 /// Resolves an encoded CID string to a [Block] from the block store.

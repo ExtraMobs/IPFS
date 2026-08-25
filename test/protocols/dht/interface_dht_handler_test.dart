@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
 
 void main() {
   group('Key', () {

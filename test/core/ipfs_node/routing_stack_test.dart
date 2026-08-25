@@ -3,14 +3,14 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
-import 'package:dart_ipfs/src/core/ipfs_node/routing_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/content_routing_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/dns_link_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/routing/content_routing.dart';
-import 'package:dart_ipfs/src/routing/delegated_routing.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/routing_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/content_routing_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/dns_link_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/routing/content_routing.dart';
+import 'package:transpiled_ipfs/src/routing/delegated_routing.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 import 'routing_stack_test.mocks.dart';
 

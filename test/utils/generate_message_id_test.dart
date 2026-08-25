@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/utils/generate_message_id.dart';
+import 'package:transpiled_ipfs/src/utils/generate_message_id.dart';
 import 'package:test/test.dart';
 
 void main() {

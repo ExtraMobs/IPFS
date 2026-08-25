@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:dart_ipfs/src/protocols/dht/rate_limiter.dart';
-import 'package:dart_ipfs/src/proto/generated/config.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/rate_limiter.dart';
+import 'package:transpiled_ipfs/src/proto/generated/config.pb.dart';
 import 'package:test/test.dart';
 
 void main() {

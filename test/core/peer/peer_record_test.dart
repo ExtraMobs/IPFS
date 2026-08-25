@@ -5,8 +5,8 @@
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/peer/peer_record.dart';
-import 'package:dart_ipfs/src/core/peer/peer_record_pb.dart';
+import 'package:transpiled_ipfs/src/core/peer/peer_record.dart';
+import 'package:transpiled_ipfs/src/core/peer/peer_record_pb.dart';
 import 'package:test/test.dart';
 
 void main() {

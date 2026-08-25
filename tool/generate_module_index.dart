@@ -92,8 +92,8 @@ String _normalizePath(String path) {
 }
 
 String? _resolveTarget(String target, String fileDir) {
-  if (target.startsWith('package:dart_ipfs/src/')) {
-    return 'lib/src/${target.substring('package:dart_ipfs/src/'.length)}';
+  if (target.startsWith('package:transpiled_ipfs/src/')) {
+    return 'lib/src/${target.substring('package:transpiled_ipfs/src/'.length)}';
   }
   if (target.startsWith('.')) {
     return _normalizePath('$fileDir/$target');
@@ -291,11 +291,12 @@ void main() {
     final fileDir = _toForwardSlashes(file.parent.path);
     for (final match in importPattern.allMatches(content)) {
       final target = match.group(1)!;
-      if (target.startsWith('package:dart_ipfs_core')) {
-        edges.putIfAbsent(mod, () => {}).add('dart_ipfs_core[pkg]');
-        continue;
-      } else if (target.startsWith('package:dart_ipfs_quic')) {
-        edges.putIfAbsent(mod, () => {}).add('dart_ipfs_quic[pkg]');
+      if (target.startsWith('package:transpiled_')) {
+        final pkgName = target.substring(
+          'package:'.length,
+          target.indexOf('/', 'package:'.length),
+        );
+        edges.putIfAbsent(mod, () => {}).add('$pkgName[pkg]');
         continue;
       }
       final targetPath = _resolveTarget(target, fileDir);

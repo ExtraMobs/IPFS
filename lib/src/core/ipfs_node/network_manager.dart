@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import '../../protocols/bitswap/bitswap_handler.dart';
 import '../../protocols/dht/dht_handler.dart';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/logger.dart';
 import '../cid.dart';
 import '../data_structures/peer.dart';

@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-25T09:40:09.012771
+generated: 2026-08-25T14:23:03.503572
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -25,7 +25,7 @@ _No known direct test._
 Abstract interface for a running HTTP server instance.
 
 - **close** (method) — Closes the server.
-  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -69,6 +69,13 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeWrite)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.reset)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dispose)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.close)
     - `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close)
@@ -125,7 +132,7 @@ IO implementation of HTTP server instance.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -168,6 +175,13 @@ IO implementation of HTTP server instance.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeWrite)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.reset)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dispose)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.close)
     - `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close)
@@ -259,7 +273,7 @@ _No known direct test._
 Web stub implementation of HTTP server instance.
 
 - **close** (method)
-  - referenced by (by name) (name shared by 28 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -303,6 +317,13 @@ Web stub implementation of HTTP server instance.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/pnet/pnet_listener.dart` (PnetListener.close)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.close)
+    - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeWrite)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
+    - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.reset)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dispose)
+    - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.close)
     - `lib/src/transport/webrtc/data_channel_stream.dart` (DataChannelStream.closeWrite)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.close)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (_WebDataChannelStream.close)

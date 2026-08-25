@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
 import 'package:yaml/yaml.dart';
 
 /// Exception thrown when a plugin manifest is invalid or cannot be parsed.

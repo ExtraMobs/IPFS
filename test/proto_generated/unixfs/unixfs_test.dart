@@ -2,8 +2,8 @@
 
 import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
 
 void main() {
   group('Data', () {

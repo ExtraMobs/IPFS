@@ -5,21 +5,21 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i10;
 
-import 'package:dart_ipfs/src/core/cid.dart' as _i14;
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart' as _i2;
-import 'package:dart_ipfs/src/core/di/service_container.dart' as _i7;
-import 'package:dart_ipfs/src/core/ipfs_node/content_routing_handler.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart' as _i14;
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/di/service_container.dart' as _i7;
+import 'package:transpiled_ipfs/src/core/ipfs_node/content_routing_handler.dart'
     as _i16;
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart' as _i9;
-import 'package:dart_ipfs/src/core/storage/datastore.dart' as _i5;
-import 'package:dart_ipfs/src/core/types/peer_id.dart' as _i15;
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart' as _i9;
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as _i5;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' as _i15;
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     as _i13;
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart' as _i3;
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart' as _i12;
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i6;
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i11;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i4;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart' as _i3;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart' as _i12;
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i6;
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i11;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 

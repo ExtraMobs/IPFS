@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/config/network_config.dart';
-import 'package:dart_ipfs/src/transport/libp2p_router.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/config/network_config.dart';
+import 'package:transpiled_ipfs/src/transport/libp2p_router.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'dart:math' show Random;
 import 'dart:typed_data';
 
-import 'package:dart_ipfs_core/dart_ipfs_core.dart' as core_crypto;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' as core_crypto;
 import 'package:ipfs_libp2p/config/config.dart' as config;
 import 'package:ipfs_libp2p/core/crypto/ed25519.dart' as crypto;
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
@@ -58,7 +58,7 @@ class Libp2pRouter implements RouterInterface {
   libp2p.Host? _host;
   libp2p.KeyPair? _keyPair;
 
-  /// The same identity as [_keyPair], as a `dart_ipfs_core` [core_crypto.PrivKey]
+  /// The same identity as [_keyPair], as a `transpiled_libp2p` [core_crypto.PrivKey]
   /// -- kept in sync (derived from the same seed) so [DartIpfsNoiseSecurity]
   /// can sign the Noise handshake payload without needing raw key material
   /// ipfs_libp2p's own [libp2p.KeyPair] doesn't expose.
@@ -205,7 +205,7 @@ class Libp2pRouter implements RouterInterface {
 
   /// Derives a key pair from a 32-byte Ed25519 seed, populating both the
   /// ipfs_libp2p-facing [libp2p.KeyPair] and this router's own
-  /// `dart_ipfs_core`-typed [_identityKey] from the same seed.
+  /// `transpiled_libp2p`-typed [_identityKey] from the same seed.
   Future<libp2p.KeyPair> _generateKeyPairFromSeed(Uint8List seed) async {
     if (_keyType.toLowerCase() != 'ed25519') {
       _logger.warning(

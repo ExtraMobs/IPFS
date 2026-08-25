@@ -1,7 +1,7 @@
 // Auto-generated proto coverage tests. Do not hand-edit.
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/proto/generated/core/bitfield.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/bitfield.pb.dart';
 
 void main() {
   group('BitFieldProto_SetBitRequest', () {

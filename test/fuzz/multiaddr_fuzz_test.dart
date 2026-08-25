@@ -7,7 +7,7 @@
 import 'dart:math' as math;
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
 import 'package:test/test.dart';
 
 import '_fuzz_helpers.dart';

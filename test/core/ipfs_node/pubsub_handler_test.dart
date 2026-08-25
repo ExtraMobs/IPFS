@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart';
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_client.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_client.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
 
 import 'pubsub_handler_test.mocks.dart';
 

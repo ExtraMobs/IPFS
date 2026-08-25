@@ -8,7 +8,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 import '../services/node_service.dart';
 import 'ipld_explorer_screen.dart';
 

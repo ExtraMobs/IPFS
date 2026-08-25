@@ -11,8 +11,8 @@ import '../lib/dart_ipfs_client.dart';
 // ignore: avoid_relative_lib_imports
 import '../lib/kubo_client.dart';
 
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/car.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/car.dart';
 
 const kKuboApiHost = String.fromEnvironment('KUBO_HOST', defaultValue: 'kubo');
 const kKuboApiPort = int.fromEnvironment('KUBO_PORT', defaultValue: 5001);

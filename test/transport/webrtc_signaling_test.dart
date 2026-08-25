@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/transport/webrtc/signaling_protocol.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/signaling_protocol.dart';
 
 void main() {
   group('SignalingMessage', () {

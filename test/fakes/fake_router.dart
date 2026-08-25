@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart'
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart'
     show DHTRoutingTable;
 
 /// A no-op [RouterInterface] fake for tests that only need to stub the router

@@ -1,30 +1,30 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart';
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
-import 'package:dart_ipfs/src/core/di/service_container.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/content_manager.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/datastore_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_manager.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/protocol_manager.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/bitswap_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_ipfs/src/core/di/service_container.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/content_manager.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/datastore_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_manager.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/protocol_manager.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'managers_coverage_test.mocks.dart';
 
-import 'package:dart_ipfs/src/proto/generated/core/cid.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/core/pin.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/cid.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/pin.pb.dart';
 
 @GenerateNiceMocks([
   MockSpec<DatastoreHandler>(),

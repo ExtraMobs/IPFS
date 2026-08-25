@@ -1,6 +1,6 @@
 @TestOn('browser')
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
 import 'package:test/test.dart';
 
 void main() {

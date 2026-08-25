@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 import '../kademlia_tree.dart';
 import '../red_black_tree.dart';

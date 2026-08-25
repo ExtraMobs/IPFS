@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_lru_cache.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_lru_cache.dart';
 
 void main() {
   group('GatewayLruCache', () {

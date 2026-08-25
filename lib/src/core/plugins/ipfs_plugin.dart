@@ -1,4 +1,4 @@
-import '../../../dart_ipfs.dart';
+import '../../../transpiled_ipfs.dart';
 
 /// Base class for all IPFS plugins.
 ///

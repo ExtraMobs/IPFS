@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-25T09:40:09.223534
+generated: 2026-08-25T14:23:03.815829
 ---
 
 # `test/(root)/`
@@ -36,13 +36,4 @@ generated: 2026-08-25T09:40:09.223534
 
 - RPC Protocol Tests
 - handleBlockPut should store the block
-
-## `test/umbrella_reexports_test.dart`
-
-- Umbrella re-exports
-- CID API is available from umbrella and core
-- Block API is available from umbrella and core
-- InMemoryBlockStore is available from umbrella
-- CryptoUtils is available from umbrella and core
-- CarHeader.roots exposes the same CID type the barrel exports 
 

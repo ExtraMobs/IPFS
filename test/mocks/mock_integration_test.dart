@@ -1,8 +1,8 @@
 // test/mocks/mock_integration_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/storage/datastore.dart' as ds;
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as ds;
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
 import 'package:test/test.dart';
 
 import 'in_memory_datastore.dart';

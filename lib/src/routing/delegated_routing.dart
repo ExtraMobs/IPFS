@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:http/http.dart' as http;
 
 /// Response from a routing request.

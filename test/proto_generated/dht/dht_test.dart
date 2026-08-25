@@ -2,7 +2,7 @@
 
 import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
-import 'package:dart_ipfs/src/proto/generated/dht/dht.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/dht.pb.dart';
 
 void main() {
   group('DHTPeer', () {

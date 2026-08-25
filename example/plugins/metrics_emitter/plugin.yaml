@@ -11,7 +11,7 @@ plugin:
   entrypoint: main.dart
   signature:
     algorithm: ed25519
-    public_key: "mtPKOzIUIdC42ckrt6YDt7eGw42RRFQNcurHKXkquZQ="
-    signature: "MEt+sD1eYs9uemvBIh0Nv/Xh4nGZ7H+IQHRXpc5a2jOIFUmj1AVcuGHqVdmMo+dQjO5X3x2b1NsIlqPqUVb6AA=="
+    public_key: "lXjcuHOCnSpypBoXiK3ZSC1dzSS79DxghXqAFRHOqFo="
+    signature: "jb7qgNNliuXpc6xZkC9rsbea2Xtv6VGOPRNdBS/T2WD1D40U/srVFcb9nFFd++kVKQrJHjLZNr2FN0Zeht1ZAQ=="
   checksums:
-    archive_sha256: "4feac748f622477cb5623bc3356ccc900cd138d7443974e82b883f4d5686afd3"
+    archive_sha256: "490e6d2a58b5b24b7121ec8d70a2b0e60b26a329a9c610ac0115b056de22f7de"

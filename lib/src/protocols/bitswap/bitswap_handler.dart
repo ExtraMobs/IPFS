@@ -1,20 +1,20 @@
 import 'dart:async';
 
-import 'package:dart_ipfs/src/core/block_proto_codec.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
-import 'package:dart_ipfs/src/core/security/denylist_service.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/ledger.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as message;
-import 'package:dart_ipfs/src/protocols/bitswap/wantlist.dart';
-import 'package:dart_ipfs/src/transport/http_gateway_client.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/utils/generic_lru_cache.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_block_store.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
+import 'package:transpiled_ipfs/src/core/security/denylist_service.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/interface_bitswap_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/ledger.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as message;
+import 'package:transpiled_ipfs/src/protocols/bitswap/wantlist.dart';
+import 'package:transpiled_ipfs/src/transport/http_gateway_client.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/utils/generic_lru_cache.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:meta/meta.dart';
 
 /// Handles Bitswap protocol operations for an IPFS node following the Bitswap 1.2.0 specification

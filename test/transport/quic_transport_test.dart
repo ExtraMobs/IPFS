@@ -1,5 +1,5 @@
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/transport/libp2p_router.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/transport/libp2p_router.dart';
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
 import 'package:ipfs_libp2p/p2p/host/resource_manager/limiter.dart';
 import 'package:ipfs_libp2p/p2p/host/resource_manager/resource_manager_impl.dart';

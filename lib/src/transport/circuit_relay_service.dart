@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/proto/generated/circuit_relay.pb.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/utils/base58.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/proto/generated/circuit_relay.pb.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:fixnum/fixnum.dart';
 
 /// Implements the Circuit Relay v2 Server (Relay Service).

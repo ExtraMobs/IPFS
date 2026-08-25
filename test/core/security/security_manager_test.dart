@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart' hide KeyPair;
-import 'package:dart_ipfs/src/core/config/security_config.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/security/security_manager.dart';
-import 'package:dart_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/core/config/security_config.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
 import 'package:test/test.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as p;

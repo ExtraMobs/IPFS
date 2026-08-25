@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/dart_ipfs.dart';
-import 'package:dart_ipfs/src/core/config/network_config.dart';
-import 'package:dart_ipfs/src/transport/libp2p_router.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
+import 'package:transpiled_ipfs/src/core/config/network_config.dart';
+import 'package:transpiled_ipfs/src/transport/libp2p_router.dart';
 import 'package:test/test.dart';
 
 /// Tests that StreamController resources are properly cleaned up when peers

@@ -1,8 +1,8 @@
 // test/core/utils/utils_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/utils/base58.dart';
-import 'package:dart_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_ipfs/src/utils/encoding.dart';
 import 'package:test/test.dart';
 
 void main() {

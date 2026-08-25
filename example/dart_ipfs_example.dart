@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 
 Future<void> main() async {
   // 1. Initialize the IPFS Node

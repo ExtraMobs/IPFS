@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/auto_nat_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/dns_link_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/mdns_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/routing_handler.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/network/mdns_client.dart';
-import 'package:dart_ipfs/src/routing/content_routing.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/auto_nat_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/dns_link_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/mdns_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/routing_handler.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/network/mdns_client.dart';
+import 'package:transpiled_ipfs/src/routing/content_routing.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

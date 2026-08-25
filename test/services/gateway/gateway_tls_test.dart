@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dart_ipfs/src/core/config/gateway_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/platform/http_server.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_server.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_tls_manager.dart';
+import 'package:transpiled_ipfs/src/core/config/gateway_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/platform/http_server.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_server.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_tls_manager.dart';
 import 'package:shelf/shelf.dart';
 import 'package:test/test.dart';
 

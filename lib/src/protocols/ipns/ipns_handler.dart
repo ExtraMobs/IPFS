@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
-import 'package:dart_ipfs/src/core/interfaces/i_lifecycle.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_record.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_record.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 /// Handles IPNS (InterPlanetary Name System) operations.
 ///

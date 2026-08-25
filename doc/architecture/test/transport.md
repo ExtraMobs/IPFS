@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-25T09:40:09.232370
+generated: 2026-08-25T14:23:03.828659
 ---
 
 # `test/transport/`
@@ -112,7 +112,7 @@ generated: 2026-08-25T09:40:09.232370
 
 ## `test/transport/dns/system_resolver_network_test.dart`
 
-- SystemResolver + dart_ipfs_core Resolver (live network)
+- SystemResolver + transpiled_multiaddr_dns Resolver (live network)
 - resolves a real /dnsaddr/ bootstrap multiaddr
 - resolves a plain dns4 hostname to real IPv4 addresses
 
@@ -195,35 +195,6 @@ generated: 2026-08-25T09:40:09.232370
 - an RSA identity (which ipfs_libp2p\
 - a large write spanning multiple frames round-trips correctly
 
-## `test/transport/noise/noise_framing_test.dart`
-
-- noise_framing
-- empty plaintext produces zero frames
-- small plaintext round-trips in exactly one frame
-- length prefix matches the actual ciphertext length
-- plaintext larger than maxPlaintextLength is chunked across frames
-- a plaintext of exactly maxPlaintextLength stays in one frame
-- decrypting with the wrong cipher state fails
-
-## `test/transport/noise/noise_handshake_payload_test.dart`
-
-- Noise handshake payload -- real go-libp2p-generated vector
-- verifies a real payload and derives the correct PeerId
-- honors an expectedRemoteId that matches
-- rejects a mismatched expectedRemoteId
-- rejects the payload when checked against the wrong Noise static key
-- rejects a truncated payload
-- Noise handshake payload -- generate/verify round trip
-- a freshly generated Ed25519 identity round-trips through generate+verify
-- rejects a payload verified against a different Noise static key
-
-## `test/transport/noise/noise_state_test.dart`
-
-- Noise_XX_25519_ChaChaPoly_SHA256 -- real flynn/noise vector
-- every handshake and transport message matches byte-for-byte
-- HandshakeState -- self-interop sanity
-- two fresh sessions complete a handshake and exchange data
-
 ## `test/transport/pnet/pnet_test.dart`
 
 - Swarm key loader
@@ -235,6 +206,102 @@ generated: 2026-08-25T09:40:09.232370
 - mismatched PSKs fail the handshake or corrupt data
 - PNET transport wrapper round-trip over TCP
 - wrapped TCP transport round-trips data
+
+## `test/transport/quic/libp2p_tls_extension_test.dart`
+
+- Libp2pTlsHandshakeVerifier
+- verifies a valid libp2p certificate and derives the peer ID
+- derived peer ID matches libp2p PeerId.fromPublicKey (identity multihash)
+- fails with peerIdMismatch when expected peer ID differs
+- fails with noExtension when certificate lacks the libp2p extension
+- fails with noExtension for an unrelated extension OID
+- fails with invalidSignature when the extension signature is tampered
+- fails with parseError for empty bytes
+- fails with parseError for non-DER garbage
+- fails with unsupportedKeyType for a non-Ed25519 extension
+- fails with invalidSignature when Ed25519 public key is not 32 bytes
+- result toString is informative for both outcomes
+- PeerIdMismatchException
+- carries expected and actual peer IDs
+- PeerCertificateVerificationException
+- carries reason and detail
+
+## `test/transport/quic/quic_listener_test.dart`
+
+- QuicListener
+- exposes addr and connectionStream
+- accept returns a connection from pending
+- accept waits for the first connection when pending is empty
+- accept returns null when closed
+- accept returns null when stream is done
+- supportsAddr recognizes QUIC multiaddrs
+- close is idempotent
+- forwards stream errors to connectionStream
+- closes connectionStream when underlying stream is done
+
+## `test/transport/quic/quic_p2p_stream_test.dart`
+
+- QuicP2PStream
+- exposes metadata and stat
+- write sends data through the send stream
+- close marks the stream as closed
+- close is idempotent
+- read throws when stream is closed
+- reset closes the stream
+- deadline methods are no-ops
+- incoming stream controller is a broadcast stream
+- read returns buffered data from receive stream
+- read waits for data on receive stream
+- read returns empty when receive stream is done
+- closeRead cancels receive subscription
+- closeWrite closes the send side
+- write throws when no send stream is available
+- read with maxLength returns partial buffer
+- read with maxLength from fresh delivery splits and keeps remainder
+- reset calls reset on receive stream
+- forwards receive stream errors to incoming controller
+- scope returns NullScope
+- read attaches via fallback when receive stream appears later
+- read throws when stream is closed while waiting for receive stream
+- read with maxLength keeps whole remaining chunks
+- incoming getter returns the stream itself
+- drain recursively serves multiple pending read requests
+- read with maxLength zero leaves all chunks in buffer
+
+## `test/transport/quic/quic_transport_test.dart`
+
+- QuicTransport
+- implements libp2p Transport
+- reports QUIC protocols
+- canDial recognizes QUIC multiaddrs
+- canListen recognizes QUIC multiaddrs
+- dial returns a connection wrapper
+- listen returns a listener
+- dispose marks transport as closed
+- QuicConnection
+- newStream opens a bidirectional QUIC stream
+- streams returns incoming receive streams
+- verifyPeerCertificate validates a libp2p TLS certificate
+- verifyPeerFromHandshake returns false when no handshake cert captured
+- remotePeer throws when peerId is not set
+- verifyPeer returns true when peerId is set
+- close is idempotent
+- raw read and write throw UnsupportedError
+- newStream throws when underlying connection is not a QuicConnection
+- streams returns empty when underlying connection is not a QuicConnection
+- exposes connection metadata
+- streams returns inbound P2PStreams for receive streams
+- quicConnection exposes underlying delegate
+- isEstablished delegates to QuicConnectionAdapter
+- openBidirectionalStream delegates to QuicConnectionAdapter
+- openBidirectionalStream throws when not a QuicConnectionAdapter
+- newStream waits for adapter handshake before opening stream
+- QuicP2PStream
+- implements P2PStream
+- Integration: libp2p TLS 1.3 handshake
+- complete handshake flow with mock QUIC connection
+- verifies peer certificate extraction from quic_lib handshake
+- verifies ALPN negotiation is properly configured
 
 ## `test/transport/quic_transport_test.dart`
 

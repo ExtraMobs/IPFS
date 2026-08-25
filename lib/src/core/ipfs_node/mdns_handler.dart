@@ -3,12 +3,12 @@ import 'dart:async';
 import 'dart:io';
 
 import '../../network/mdns_client.dart';
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/logger.dart';
 import '../config/ipfs_config.dart';
 import '../data_structures/peer.dart';
 import '../interfaces/i_lifecycle.dart';
-import '../types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 /// Handles mDNS (multicast DNS) peer discovery for an IPFS node.
 class MDNSHandler implements ILifecycle {

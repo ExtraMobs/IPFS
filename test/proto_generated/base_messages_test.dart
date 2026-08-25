@@ -3,8 +3,8 @@
 import 'package:test/test.dart';
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
     as $0;
-import 'package:dart_ipfs/src/proto/generated/base_messages.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/base_messages.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/base_messages.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/base_messages.pb.dart';
 
 void main() {
   group('IPFSMessage', () {

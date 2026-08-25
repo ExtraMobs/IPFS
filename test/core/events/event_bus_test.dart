@@ -1,7 +1,7 @@
 // test/core/events/event_bus_test.dart
 import 'dart:async';
 
-import 'package:dart_ipfs/src/core/events/event_bus.dart';
+import 'package:transpiled_ipfs/src/core/events/event_bus.dart';
 import 'package:test/test.dart';
 
 void main() {

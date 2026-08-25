@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/link.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag_proto;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/link.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag_proto;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
     as unixfs_proto;
 
 // lib/src/core/data_structures/merkle_dag_node.dart

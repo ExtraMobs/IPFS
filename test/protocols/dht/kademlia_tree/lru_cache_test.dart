@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/lru_cache.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/lru_cache.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 void main() {
   group('LRUCache', () {

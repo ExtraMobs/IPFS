@@ -23,7 +23,7 @@ import 'dart:typed_data';
 
 import '../../core/cid.dart';
 import '../../core/metrics/metrics_collector.dart';
-import '../../core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
 import '../../utils/logger.dart';
 import 'dht_client.dart';

@@ -1,5 +1,5 @@
 name: cli_dashboard
-description: "A hacker-style CLI dashboard for dart_ipfs."
+description: "A hacker-style CLI dashboard for transpiled_ipfs."
 publish_to: 'none'
 version: 1.0.0
 
@@ -7,7 +7,7 @@ environment:
   sdk: '>=3.5.4 <4.0.0'
 
 dependencies:
-  dart_ipfs:
+  transpiled_ipfs:
     path: ../../
   dart_console: ^1.2.0
   async: ^2.11.0

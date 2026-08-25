@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/core/errors/node_errors.dart';
+import 'package:transpiled_ipfs/src/core/errors/node_errors.dart';
 import 'package:test/test.dart';
 
 void main() {

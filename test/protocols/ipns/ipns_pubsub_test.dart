@@ -1,9 +1,9 @@
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/pubsub_handler.dart';
-import 'package:dart_ipfs/src/core/security/security_manager.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart';
-import 'package:dart_ipfs/src/protocols/ipns/ipns_handler.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart';
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/ipns/ipns_handler.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';

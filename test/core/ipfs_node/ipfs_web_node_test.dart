@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_web_node.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/config/network_config.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_web_node.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/config/network_config.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 void main() {
   group('IPFSWebNode', () {

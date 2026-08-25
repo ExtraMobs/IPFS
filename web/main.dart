@@ -4,7 +4,7 @@ import 'dart:js_interop';
 import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 
 /// Global web IPFS node instance.
 IPFSWebNode? _node;

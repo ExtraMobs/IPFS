@@ -6,7 +6,7 @@ import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 
 import '../../../transport/router_interface.dart';
-import '../../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../../utils/logger.dart';
 import 'gossipsub.pb.dart';
 import 'gossipsub_config.dart';

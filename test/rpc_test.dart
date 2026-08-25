@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'package:dart_ipfs/dart_ipfs.dart';
-import 'package:dart_ipfs/src/services/rpc/rpc_handlers.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
+import 'package:transpiled_ipfs/src/services/rpc/rpc_handlers.dart';
 import 'package:shelf/shelf.dart';
 import 'package:test/test.dart';
 

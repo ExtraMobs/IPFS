@@ -4,10 +4,10 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
-import 'package:dart_ipfs/src/transport/webrtc/webrtc_transport.dart';
-import 'package:dart_ipfs/src/transport/webrtc/peer_connection.dart';
-import 'package:dart_ipfs/src/transport/webrtc/data_channel_stream.dart';
-import 'package:dart_ipfs/src/transport/webrtc/signaling_protocol.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/webrtc_transport.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/peer_connection.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/data_channel_stream.dart';
+import 'package:transpiled_ipfs/src/transport/webrtc/signaling_protocol.dart';
 
 import 'webrtc_transport_test.mocks.dart';
 

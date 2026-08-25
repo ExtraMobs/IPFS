@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 // example/gateway_example.dart
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_server.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_server.dart';
 
 /// Example of running the IPFS HTTP Gateway
 ///

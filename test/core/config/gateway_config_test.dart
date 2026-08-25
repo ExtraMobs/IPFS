@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/config/gateway_config.dart';
+import 'package:transpiled_ipfs/src/core/config/gateway_config.dart';
 
 void main() {
   group('GatewayConfig', () {

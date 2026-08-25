@@ -3,18 +3,18 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
-import 'package:dart_ipfs/src/core/config/dht_config.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/mfs/mfs_manager.dart';
-import 'package:dart_ipfs/src/core/storage/memory_datastore.dart';
-import 'package:dart_ipfs/src/proto/generated/core/pin.pb.dart';
-import 'package:dart_ipfs/src/protocols/dht/reprovider.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/config/dht_config.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/mfs/mfs_manager.dart';
+import 'package:transpiled_ipfs/src/core/storage/memory_datastore.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/pin.pb.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/reprovider.dart';
 
 import '../../mocks/mock_dht_handler.dart';
 

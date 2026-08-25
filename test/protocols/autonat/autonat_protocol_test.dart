@@ -4,9 +4,9 @@ import 'dart:typed_data';
 
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/protocols/autonat/autonat_protocol.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/protocols/autonat/autonat_protocol.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 
 import '../../fakes/fake_router.dart';
 

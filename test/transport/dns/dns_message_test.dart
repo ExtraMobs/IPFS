@@ -11,7 +11,7 @@
 // against Windows' `Resolve-DnsName -Type TXT` for the same name.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/transport/dns/dns_message.dart';
+import 'package:transpiled_ipfs/src/transport/dns/dns_message.dart';
 import 'package:test/test.dart';
 
 Uint8List _fromHex(String hex) {

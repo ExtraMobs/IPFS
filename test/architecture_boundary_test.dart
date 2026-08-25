@@ -9,7 +9,7 @@
 // for the current import graph these rules are checked against.
 //
 // Import resolution mirrors tool/generate_module_index.dart's lightweight
-// regex approach (both 'package:dart_ipfs/src/...' and relative imports),
+// regex approach (both 'package:transpiled_ipfs/src/...' and relative imports),
 // duplicated here rather than shared since each file is a short, standalone
 // script/test with no common library to import from.
 import 'dart:io';
@@ -51,8 +51,8 @@ String _normalizePath(String path) {
 }
 
 String? _resolveToLibSrcPath(String target, String fileDir) {
-  if (target.startsWith('package:dart_ipfs/src/')) {
-    return 'lib/src/${target.substring('package:dart_ipfs/src/'.length)}';
+  if (target.startsWith('package:transpiled_ipfs/src/')) {
+    return 'lib/src/${target.substring('package:transpiled_ipfs/src/'.length)}';
   }
   if (target.startsWith('.')) {
     return _normalizePath('$fileDir/$target');

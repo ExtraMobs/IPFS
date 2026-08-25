@@ -7,14 +7,14 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/peer/peer_record.dart';
-import 'package:dart_ipfs/src/core/peer/peer_record_pb.dart';
-import 'package:dart_ipfs/src/protocols/identify/identify_handler.dart';
-import 'package:dart_ipfs/src/protocols/identify/identify_pb.dart';
-import 'package:dart_ipfs/src/protocols/identify/identify_push_handler.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/core/peer/peer_record.dart';
+import 'package:transpiled_ipfs/src/core/peer/peer_record_pb.dart';
+import 'package:transpiled_ipfs/src/protocols/identify/identify_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/identify/identify_pb.dart';
+import 'package:transpiled_ipfs/src/protocols/identify/identify_push_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_routing_table_interface.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:test/test.dart';
 
 /// A mock router for testing protocol handlers.

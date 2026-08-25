@@ -3,17 +3,17 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/peer.dart';
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
-import 'package:dart_ipfs/src/core/types/p2p_types.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/types/p2p_types.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
     as bitswap_pb;
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as proto;
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart'
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as proto;
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart'
     as bitswap_message;
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 import 'ledger.dart';
 

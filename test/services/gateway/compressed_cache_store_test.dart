@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/services/gateway/compressed_cache_store.dart';
-import 'package:dart_ipfs/src/platform/platform.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/services/gateway/compressed_cache_store.dart';
+import 'package:transpiled_ipfs/src/platform/platform.dart';
 import 'package:test/test.dart';
 import 'package:path/path.dart' as path;
 

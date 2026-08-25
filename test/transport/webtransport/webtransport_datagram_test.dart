@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/transport/webtransport/webtransport_datagram.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/webtransport_datagram.dart';
 
 /// A mock backend for testing [WebTransportDatagram].
 class _MockDatagramBackend implements WebTransportDatagramBackend {

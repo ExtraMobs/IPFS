@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart';
-import 'package:dart_ipfs/src/proto/generated/core/node_stats.pb.dart' as proto;
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/node_stats.pb.dart' as proto;
 import 'package:fixnum/fixnum.dart';
 
 void main() {

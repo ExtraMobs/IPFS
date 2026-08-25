@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart';
 
 import 'ipfs_node_network_events_test.mocks.dart';
 

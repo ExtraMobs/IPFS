@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/protocol_messages.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/protocol_messages.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
 
 void main() {
   final sender = PeerId(value: Uint8List.fromList([1, 2, 3]));

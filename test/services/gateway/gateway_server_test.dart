@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart';
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/responses/block_response_factory.dart';
-import 'package:dart_ipfs/src/platform/http_server.dart';
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
-import 'package:dart_ipfs/src/services/gateway/gateway_server.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/responses/block_response_factory.dart';
+import 'package:transpiled_ipfs/src/platform/http_server.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_ipfs/src/services/gateway/gateway_server.dart';
 import 'package:shelf/shelf.dart';
 import 'package:test/test.dart';
 

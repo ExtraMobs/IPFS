@@ -5,10 +5,10 @@ import 'package:crypto/crypto.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_client.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/transport/router_events.dart';
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_client.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/transport/router_events.dart';
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart';
 
 import 'pubsub_client_coverage_test.mocks.dart';
 

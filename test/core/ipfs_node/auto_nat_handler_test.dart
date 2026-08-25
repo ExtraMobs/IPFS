@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/auto_nat_handler.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/network/nat_traversal_service.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/auto_nat_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/network/nat_traversal_service.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
 
 import 'auto_nat_handler_test.mocks.dart';
 import '../../fakes/fake_router.dart';

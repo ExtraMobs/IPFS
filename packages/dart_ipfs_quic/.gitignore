@@ -1,9 +1,0 @@
-# Dart / Flutter
-.dart_tool/
-.packages
-pubspec.lock
-build/
-
-# Test artifacts
-test_tmp/
-*.log

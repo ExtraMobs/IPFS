@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/builders/ipfs_node_builder.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/builders/ipfs_node_builder.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
 import 'package:path/path.dart' as p;
 
 void main() {

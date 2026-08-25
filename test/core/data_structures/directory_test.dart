@@ -1,6 +1,6 @@
 // test/core/data_structures/directory_test.dart
-import 'package:dart_ipfs/src/core/data_structures/directory.dart';
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/directory.dart';
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
 

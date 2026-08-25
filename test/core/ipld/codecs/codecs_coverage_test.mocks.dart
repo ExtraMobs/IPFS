@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:typed_data' as _i5;
 
-import 'package:dart_ipfs/src/utils/private_key.dart' as _i3;
+import 'package:transpiled_ipfs/src/utils/private_key.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 import 'package:pointycastle/export.dart' as _i2;

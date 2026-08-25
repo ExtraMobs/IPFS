@@ -2,8 +2,8 @@
 
 import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 
 void main() {
   group('IPLDNode', () {

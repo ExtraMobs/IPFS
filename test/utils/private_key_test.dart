@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:convert/convert.dart';
-import 'package:dart_ipfs/src/utils/private_key.dart';
+import 'package:transpiled_ipfs/src/utils/private_key.dart';
 import 'package:test/test.dart';
 
 void main() {

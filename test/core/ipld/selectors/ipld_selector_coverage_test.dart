@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/ipld/selectors/ipld_selector.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/core/ipld/selectors/ipld_selector.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
 
 void main() {
   group('IPLDSelector Coverage Tests', () {

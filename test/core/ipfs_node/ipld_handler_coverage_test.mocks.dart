@@ -6,13 +6,13 @@
 import 'dart:async' as _i7;
 import 'dart:typed_data' as _i10;
 
-import 'package:dart_ipfs/src/core/data_structures/block.dart' as _i8;
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart' as _i5;
-import 'package:dart_ipfs/src/core/data_structures/pin_manager.dart' as _i2;
-import 'package:dart_ipfs/src/core/ipld/codecs/ipld_codec.dart' as _i9;
-import 'package:dart_ipfs/src/core/ipld/schema/ipld_schema.dart' as _i11;
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart' as _i3;
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart' as _i4;
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart' as _i8;
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/data_structures/pin_manager.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/ipld/codecs/ipld_codec.dart' as _i9;
+import 'package:transpiled_ipfs/src/core/ipld/schema/ipld_schema.dart' as _i11;
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart' as _i3;
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
 

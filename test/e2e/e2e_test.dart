@@ -1,8 +1,8 @@
 @TestOn("vm")
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
 import 'package:test/test.dart';
 import 'package:path/path.dart' as path;
 

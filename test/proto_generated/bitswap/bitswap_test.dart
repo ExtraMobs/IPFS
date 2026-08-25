@@ -1,8 +1,8 @@
 // Auto-generated proto coverage tests. Do not hand-edit.
 
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart';
 
 void main() {
   group('Message_Wantlist_Entry', () {

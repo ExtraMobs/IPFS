@@ -1,8 +1,8 @@
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/config/metrics_config.dart';
-import 'package:dart_ipfs/src/core/config/storage_config.dart';
-// import 'package:dart_ipfs/src/core/config/dht_config.dart';
-// import 'package:dart_ipfs/src/core/config/security_config.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/config/metrics_config.dart';
+import 'package:transpiled_ipfs/src/core/config/storage_config.dart';
+// import 'package:transpiled_ipfs/src/core/config/dht_config.dart';
+// import 'package:transpiled_ipfs/src/core/config/security_config.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -2,8 +2,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/cid_proto_codec.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid_proto_codec.dart';
 import 'package:test/test.dart';
 
 /// Comprehensive CID tests using VERIFIED APIs from actual source code.

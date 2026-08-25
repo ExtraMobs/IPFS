@@ -1,8 +1,8 @@
 /// Web stub for the public QUIC types exported from `dart_ipfs`.
 ///
-/// The real `dart_ipfs_quic` package depends on `quic_lib`, which uses
+/// This package's QUIC transport depends on `quic_lib`, which uses
 /// `Int64` literals that cannot be compiled to JavaScript. On the web we
-/// expose these symbols as stubs so that importing `package:dart_ipfs/dart_ipfs.dart`
+/// expose these symbols as stubs so that importing `package:transpiled_ipfs/transpiled_ipfs.dart`
 /// does not pull the native QUIC stack into the dart2js bundle.
 library;
 

@@ -9,7 +9,7 @@ import '../../transport/libp2p_router.dart';
 import '../../transport/router_interface.dart';
 import '../../utils/logger.dart';
 import '../config/ipfs_config.dart';
-import '../types/peer_id.dart' as dht;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' as dht;
 import 'ipfs_node.dart';
 
 // lib/src/core/ipfs_node/network_handler.dart

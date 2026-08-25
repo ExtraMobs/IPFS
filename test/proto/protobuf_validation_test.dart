@@ -1,10 +1,10 @@
 // Simplified validation tests for key protobuf classes
-import 'package:dart_ipfs/src/proto/generated/base_messages.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/base_messages.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
     as bitswap;
-import 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pb.dart'
     as graphsync;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart' as unixfs;
 import 'package:test/test.dart';
 
 void main() {
@@ -39,7 +39,7 @@ void main() {
       // Add a dummy request to ensure serialization produces bytes
       // assuming requests is a list field
       // GraphsyncRequest usually has request info
-      // Check imports: 'package:dart_ipfs/src/proto/generated/graphsync/graphsync.pb.dart' as graphsync;
+      // Check imports: 'package:transpiled_ipfs/src/proto/generated/graphsync/graphsync.pb.dart' as graphsync;
       // I don't know the exact API of GraphsyncMessage from here, but I can try adding one.
       // Or I can test something else if I can't construct it easily.
       // But let's try to pass `isEmpty` if I can't populate it?

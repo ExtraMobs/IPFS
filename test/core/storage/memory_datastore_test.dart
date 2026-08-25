@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/storage/memory_datastore.dart';
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/memory_datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
 
 class ValueFilter implements QueryFilter {
   final int expectedValue;

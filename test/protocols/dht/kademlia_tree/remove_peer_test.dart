@@ -2,14 +2,14 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/transport/router_interface.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/remove_peer.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/add_peer.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/bucket_management.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/helpers.dart'
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/transport/router_interface.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/remove_peer.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/add_peer.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/bucket_management.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/helpers.dart'
     as helpers;
 
 @GenerateMocks([DHTClient, RouterInterface])

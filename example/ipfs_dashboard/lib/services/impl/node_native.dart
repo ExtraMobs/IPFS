@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 import 'node_interface.dart';
 
 import 'package:flutter/foundation.dart';

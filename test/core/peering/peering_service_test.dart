@@ -3,9 +3,9 @@ import 'dart:async';
 
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/core/peering/peering_service.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/core/peering/peering_service.dart';
 
 import '../../fakes/fake_router.dart';
 

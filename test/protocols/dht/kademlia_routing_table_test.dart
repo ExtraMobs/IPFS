@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_routing_table.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_routing_table.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
     as pb_ts;
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
-import 'package:dart_ipfs/src/protocols/dht/red_black_tree.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/red_black_tree.dart';
 import 'package:test/test.dart';
 
 // Mocks/Fakes

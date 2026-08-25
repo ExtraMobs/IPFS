@@ -3,7 +3,7 @@
 
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 /// Compare two CIDs by their canonical byte representation, ignoring encoding
 /// differences such as CIDv0 base32 vs CIDv1 base36.

@@ -3,13 +3,13 @@ import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:dart_ipfs/src/protocols/dht/delegate_dht_handler.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/delegate_dht_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
 import 'package:dart_multihash/dart_multihash.dart';
 import 'package:multibase/multibase.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
 
 import 'package:logging/logging.dart';
 

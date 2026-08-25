@@ -1,9 +1,9 @@
 // src/utils/encoding.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/utils/base58.dart';
-import 'package:dart_ipfs/src/utils/varint.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_ipfs/src/utils/varint.dart';
 
 /// Utility class for encoding and decoding IPFS data
 class EncodingUtils {

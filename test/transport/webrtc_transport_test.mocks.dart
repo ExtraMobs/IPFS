@@ -7,8 +7,8 @@ import 'dart:async' as _i15;
 import 'dart:io' as _i11;
 import 'dart:typed_data' as _i21;
 
-import 'package:dart_ipfs/src/transport/webrtc/data_channel_stream.dart' as _i3;
-import 'package:dart_ipfs/src/transport/webrtc/peer_connection.dart' as _i2;
+import 'package:transpiled_ipfs/src/transport/webrtc/data_channel_stream.dart' as _i3;
+import 'package:transpiled_ipfs/src/transport/webrtc/peer_connection.dart' as _i2;
 import 'package:ipfs_libp2p/core/connmgr/conn_manager.dart' as _i8;
 import 'package:ipfs_libp2p/core/crypto/keys.dart' as _i20;
 import 'package:ipfs_libp2p/core/event/bus.dart' as _i9;

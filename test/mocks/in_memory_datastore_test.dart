@@ -1,7 +1,7 @@
 // test/mocks/in_memory_datastore_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/storage/datastore.dart';
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart';
 import 'package:test/test.dart';
 
 import 'in_memory_datastore.dart';

@@ -3,9 +3,9 @@ import 'dart:typed_data';
 
 import 'package:test/test.dart';
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
-import 'package:dart_ipfs/src/transport/webtransport/webtransport_transport.dart';
-import 'package:dart_ipfs/src/transport/webtransport/webtransport_session.dart';
-import 'package:dart_ipfs/src/transport/webtransport/webtransport_datagram.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/webtransport_transport.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/webtransport_session.dart';
+import 'package:transpiled_ipfs/src/transport/webtransport/webtransport_datagram.dart';
 
 /// A mock backend for testing [WebTransportSession] within the transport.
 class _MockBackend implements WebTransportSessionBackend {

@@ -4,10 +4,10 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_routing_adapter.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_routing_table.dart';
-import 'package:dart_ipfs/src/protocols/dht/xor_distance_metric.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_routing_adapter.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_routing_table.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/xor_distance_metric.dart';
 
 @GenerateMocks([KademliaRoutingTable])
 import 'kademlia_routing_adapter_test.mocks.dart';

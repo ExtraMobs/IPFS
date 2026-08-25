@@ -7,8 +7,8 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:dart_ipfs/src/services/pinning/pinning_service_api.dart';
-import 'package:dart_ipfs/src/services/pinning/remote_pinning_service.dart';
+import 'package:transpiled_ipfs/src/services/pinning/pinning_service_api.dart';
+import 'package:transpiled_ipfs/src/services/pinning/remote_pinning_service.dart';
 
 import 'remote_pinning_service_test.mocks.dart';
 

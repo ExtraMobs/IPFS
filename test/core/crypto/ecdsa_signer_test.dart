@@ -4,8 +4,8 @@
 
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/crypto/ecdsa_signer.dart';
-import 'package:dart_ipfs/src/core/peer/peer_record_pb.dart';
+import 'package:transpiled_ipfs/src/core/crypto/ecdsa_signer.dart';
+import 'package:transpiled_ipfs/src/core/peer/peer_record_pb.dart';
 import 'package:pointycastle/ecc/api.dart';
 import 'package:test/test.dart';
 

@@ -4,8 +4,8 @@
 // generators with a fixed seed for reproducibility.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/dart_ipfs.dart' hide CID, Block, IBlock, IBlockStore;
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart' hide CID, Block, IBlock, IBlockStore;
+import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:multibase/multibase.dart';
 import 'package:test/test.dart';
 

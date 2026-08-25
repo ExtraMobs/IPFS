@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart';
 
 /// A priority-ordered list of blocks that a peer wants to receive.
 ///

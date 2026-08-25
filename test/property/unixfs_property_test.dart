@@ -5,13 +5,13 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/dart_ipfs.dart' hide CID, Block, IBlock, IBlockStore;
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_builder.dart';
-import 'package:dart_ipfs/src/core/unixfs/unixfs_node.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
-import 'package:dart_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
+import 'package:transpiled_ipfs/transpiled_ipfs.dart' hide CID, Block, IBlock, IBlockStore;
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_builder.dart';
+import 'package:transpiled_ipfs/src/core/unixfs/unixfs_node.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag_pb;
+import 'package:transpiled_ipfs/src/proto/generated/unixfs/unixfs.pb.dart'
     as unixfs_pb;
 import 'package:test/test.dart';
 

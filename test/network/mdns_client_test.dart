@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:multicast_dns/multicast_dns.dart' as mdns;
-import 'package:dart_ipfs/src/network/mdns_client.dart';
+import 'package:transpiled_ipfs/src/network/mdns_client.dart';
 
 import 'mdns_client_test.mocks.dart';
 

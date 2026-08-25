@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/bitswap/bitswap_service.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as proto;
+import 'package:transpiled_ipfs/src/core/bitswap/bitswap_service.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as proto;
 import 'package:test/test.dart';
 
 void main() {

@@ -3,7 +3,7 @@
 // Tests for generic LRU cache utilities
 
 import 'dart:async';
-import 'package:dart_ipfs/src/utils/generic_lru_cache.dart';
+import 'package:transpiled_ipfs/src/utils/generic_lru_cache.dart';
 import 'package:test/test.dart';
 
 void main() {

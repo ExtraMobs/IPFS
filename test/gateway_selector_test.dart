@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dart_ipfs/dart_ipfs.dart';
+import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 import 'package:test/test.dart';
 
 @Timeout(Duration(minutes: 2))

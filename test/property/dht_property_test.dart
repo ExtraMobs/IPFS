@@ -6,7 +6,7 @@
 import 'dart:math' as math;
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:test/test.dart';
 
 import '../fuzz/_fuzz_helpers.dart';
@@ -14,7 +14,7 @@ import '../fuzz/_fuzz_helpers.dart';
 /// Calculates the logarithmic XOR distance (bit length) between two Peer IDs.
 ///
 /// This is a local reimplementation of `calculateDistance` from
-/// `package:dart_ipfs/src/protocols/dht/kademlia_tree/helpers.dart` to avoid
+/// `package:transpiled_ipfs/src/protocols/dht/kademlia_tree/helpers.dart` to avoid
 /// the broken transitive import chain through `dht_client.dart` -> quic
 /// transport. The algorithm is identical and tests the same logic.
 int calculateDistance(PeerId a, PeerId b) {
@@ -164,7 +164,7 @@ void main() {
     test(
       'PeerId base36 round-trip: toBase36 -> fromBase36 -> equals original',
       () {
-        // toBase36/fromBase36 now delegate to dart_ipfs_core's
+        // toBase36/fromBase36 now delegate to transpiled_multibase's
         // MultibaseUtils base36 codec (package:base_x, which counts
         // leading zero bytes explicitly rather than converting through a
         // single BigInt), so leading-zero peer IDs round-trip correctly
@@ -182,7 +182,7 @@ void main() {
     test('PeerId base36 round-trips leading zero bytes', () {
       // Previously a known limitation (base36 used a BigInt conversion
       // that silently dropped leading zero bytes) -- fixed by switching to
-      // dart_ipfs_core's MultibaseUtils, whose base36 codec (via
+      // transpiled_multibase's MultibaseUtils, whose base36 codec (via
       // package:base_x) explicitly counts and preserves them, the same way
       // base58 does.
       final bytes = Uint8List.fromList([0, 1, 2, 3, 4, 5]);

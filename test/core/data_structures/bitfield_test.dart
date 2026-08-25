@@ -1,7 +1,7 @@
 // test/core/data_structures/bitfield_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/data_structures/bitfield.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/bitfield.dart';
 import 'package:test/test.dart';
 
 void main() {

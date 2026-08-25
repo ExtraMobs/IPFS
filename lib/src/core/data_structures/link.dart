@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/proto/generated/core/dag.pb.dart' as dag_proto;
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/dag.pb.dart' as dag_proto;
 import 'package:fixnum/fixnum.dart' as fixnum;
 
 // lib/src/core/data_structures/link.dart

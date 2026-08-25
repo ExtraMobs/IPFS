@@ -6,9 +6,9 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/transport/pnet/pnet_transport_conn.dart';
-import 'package:dart_ipfs/src/transport/pnet/pnet_transport_wrapper.dart';
-import 'package:dart_ipfs/src/transport/pnet/swarm_key_loader.dart';
+import 'package:transpiled_ipfs/src/transport/pnet/pnet_transport_conn.dart';
+import 'package:transpiled_ipfs/src/transport/pnet/pnet_transport_wrapper.dart';
+import 'package:transpiled_ipfs/src/transport/pnet/swarm_key_loader.dart';
 import 'package:ipfs_libp2p/core/crypto/keys.dart';
 import 'package:ipfs_libp2p/core/multiaddr.dart';
 import 'package:ipfs_libp2p/core/network/conn.dart' show ConnState, ConnStats;

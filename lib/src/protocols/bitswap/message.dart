@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart' show Block;
-import 'package:dart_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as pb;
-import 'package:dart_ipfs/src/utils/encoding.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart' show Block;
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as pb;
+import 'package:transpiled_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:dart_multihash/dart_multihash.dart';
 
 /// Represents a Bitswap protocol message.

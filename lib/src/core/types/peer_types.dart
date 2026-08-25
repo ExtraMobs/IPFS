@@ -4,9 +4,10 @@ import 'package:fixnum/fixnum.dart';
 
 import '../../proto/generated/core/peer.pb.dart';
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
-import '../../utils/base58.dart';
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+
 import '../data_structures/peer.dart';
-import 'peer_id.dart';
 
 /// Core peer representation used throughout the application.
 class IPFSPeer {

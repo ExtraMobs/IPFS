@@ -1,9 +1,9 @@
 // test/protocols/bitswap/bitswap_handler_test.dart
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/protocols/bitswap/ledger.dart';
-import 'package:dart_ipfs/src/protocols/bitswap/message.dart' as bitswap_msg;
-import 'package:dart_ipfs/src/protocols/bitswap/wantlist.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/ledger.dart';
+import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as bitswap_msg;
+import 'package:transpiled_ipfs/src/protocols/bitswap/wantlist.dart';
 import 'package:test/test.dart';
 
 void main() {

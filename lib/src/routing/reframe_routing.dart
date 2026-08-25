@@ -1,7 +1,7 @@
 // lib/src/routing/reframe_routing.dart
 import 'dart:convert';
 
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:http/http.dart' as http;
 
 /// Client for the Reframe delegated routing protocol.

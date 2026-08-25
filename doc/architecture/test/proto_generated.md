@@ -1,6 +1,6 @@
 ---
 test-group: proto_generated
-generated: 2026-08-25T09:40:09.231198
+generated: 2026-08-25T14:23:03.826137
 ---
 
 # `test/proto_generated/`

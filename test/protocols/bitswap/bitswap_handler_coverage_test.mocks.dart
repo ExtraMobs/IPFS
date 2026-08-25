@@ -6,12 +6,12 @@
 import 'dart:async' as _i4;
 import 'dart:typed_data' as _i9;
 
-import 'package:dart_ipfs/src/core/data_structures/block.dart' as _i5;
-import 'package:dart_ipfs/src/core/interfaces/i_block_store.dart' as _i3;
-import 'package:dart_ipfs/src/core/interfaces/routing_table.dart' as _i10;
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart' as _i2;
-import 'package:dart_ipfs/src/transport/router_events.dart' as _i8;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i6;
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/interfaces/i_block_store.dart' as _i3;
+import 'package:transpiled_ipfs/src/core/interfaces/routing_table.dart' as _i10;
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart' as _i2;
+import 'package:transpiled_ipfs/src/transport/router_events.dart' as _i8;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 

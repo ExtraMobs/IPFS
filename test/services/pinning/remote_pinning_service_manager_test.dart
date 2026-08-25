@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:test/test.dart';
 
-import 'package:dart_ipfs/src/services/pinning/pinning_service_api.dart';
-import 'package:dart_ipfs/src/services/pinning/remote_pinning_service.dart';
+import 'package:transpiled_ipfs/src/services/pinning/pinning_service_api.dart';
+import 'package:transpiled_ipfs/src/services/pinning/remote_pinning_service.dart';
 
 void main() {
   group('RemotePinningService manager', () {

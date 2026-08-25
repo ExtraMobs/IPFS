@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:dart_ipfs/src/proto/generated/config.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/config.pb.dart';
 
 /// Exception thrown when a rate-limited operation is evicted because the
 /// wait queue is full.

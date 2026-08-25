@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 // example/rpc_example.dart
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/services/rpc/rpc_server.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/services/rpc/rpc_server.dart';
 
 /// Example of running the IPFS RPC API server
 ///

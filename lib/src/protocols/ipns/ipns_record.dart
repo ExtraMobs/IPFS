@@ -7,12 +7,12 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:cbor/cbor.dart';
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/ipld/data_model.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/ipns.pb.dart';
+import 'package:transpiled_ipfs/src/core/cbor/enhanced_cbor_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+import 'package:transpiled_ipfs/src/proto/generated/ipld/data_model.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/ipns.pb.dart';
 import 'package:fixnum/fixnum.dart';
 
 /// IPNS V2 Record with Ed25519 signature.

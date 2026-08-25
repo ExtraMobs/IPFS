@@ -1,4 +1,4 @@
-import 'package:dart_ipfs/src/core/config/metrics_config.dart';
+import 'package:transpiled_ipfs/src/core/config/metrics_config.dart';
 import 'package:test/test.dart';
 
 void main() {

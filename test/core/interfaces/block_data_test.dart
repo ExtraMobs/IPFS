@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/core/interfaces/block_data.dart';
-import 'package:dart_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/interfaces/block_data.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 
 class MockBlockData extends BlockData {
   @override

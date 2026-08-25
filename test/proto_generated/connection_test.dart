@@ -4,8 +4,8 @@ import 'package:test/test.dart';
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/well_known_types/google/protobuf/timestamp.pb.dart'
     as $0;
-import 'package:dart_ipfs/src/proto/generated/connection.pbenum.dart';
-import 'package:dart_ipfs/src/proto/generated/connection.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/connection.pbenum.dart';
+import 'package:transpiled_ipfs/src/proto/generated/connection.pb.dart';
 
 void main() {
   group('ConnectionState', () {

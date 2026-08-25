@@ -1,13 +1,13 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/block.dart';
-import 'package:dart_ipfs/src/core/responses/block_operation_response.dart';
-import 'package:dart_ipfs/src/core/responses/block_response_handler.dart';
-import 'package:dart_ipfs/src/core/responses/block_responses.dart';
-import 'package:dart_ipfs/src/core/responses/response_handler.dart';
-import 'package:dart_ipfs/src/proto/generated/core/block.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/block.dart';
+import 'package:transpiled_ipfs/src/core/responses/block_operation_response.dart';
+import 'package:transpiled_ipfs/src/core/responses/block_response_handler.dart';
+import 'package:transpiled_ipfs/src/core/responses/block_responses.dart';
+import 'package:transpiled_ipfs/src/core/responses/response_handler.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/block.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
 import 'package:test/test.dart';
 
 void main() {

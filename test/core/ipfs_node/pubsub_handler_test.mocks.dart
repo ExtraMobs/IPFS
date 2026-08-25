@@ -6,16 +6,16 @@
 import 'dart:async' as _i5;
 import 'dart:typed_data' as _i7;
 
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart' as _i2;
-import 'package:dart_ipfs/src/core/interfaces/routing_table.dart' as _i8;
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart'
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/interfaces/routing_table.dart' as _i8;
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node_network_events.dart'
     as _i9;
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
     as _i10;
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_client.dart' as _i11;
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i12;
-import 'package:dart_ipfs/src/transport/router_events.dart' as _i6;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i3;
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_client.dart' as _i11;
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i12;
+import 'package:transpiled_ipfs/src/transport/router_events.dart' as _i6;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i4;
 

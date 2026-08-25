@@ -12,11 +12,11 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/plugins/ipfs_plugin.dart';
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/plugins/ipfs_plugin.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:path/path.dart' as p;
 
 import 'capability_metrics_emitter.dart';

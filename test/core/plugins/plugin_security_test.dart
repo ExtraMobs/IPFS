@@ -9,13 +9,13 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:cryptography/cryptography.dart';
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
-import 'package:dart_ipfs/src/core/crypto/ed25519_signer.dart';
-import 'package:dart_ipfs/src/core/metrics/metrics_collector.dart';
-import 'package:dart_ipfs/src/core/plugins/capability_exception.dart';
-import 'package:dart_ipfs/src/core/plugins/capability_registry.dart';
-import 'package:dart_ipfs/src/core/plugins/plugin_host.dart';
-import 'package:dart_ipfs/src/core/plugins/plugin_manifest.dart';
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
+import 'package:transpiled_libp2p/src/core/crypto/ed25519_signer.dart';
+import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
+import 'package:transpiled_ipfs/src/core/plugins/capability_exception.dart';
+import 'package:transpiled_ipfs/src/core/plugins/capability_registry.dart';
+import 'package:transpiled_ipfs/src/core/plugins/plugin_host.dart';
+import 'package:transpiled_ipfs/src/core/plugins/plugin_manifest.dart';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 

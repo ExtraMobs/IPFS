@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/data_structures/node_stats.dart';
-import 'package:dart_ipfs/src/core/messages/message_factory.dart';
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/proto/generated/base_messages.pb.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/helpers.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/data_structures/node_stats.dart';
+import 'package:transpiled_ipfs/src/core/messages/message_factory.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/proto/generated/base_messages.pb.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/kademlia.pb.dart' as kad;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/helpers.dart'
     as helpers;
-import 'package:dart_ipfs/src/utils/logger.dart';
+import 'package:transpiled_ipfs/src/utils/logger.dart';
 
 import 'connection_statistics.dart';
 import 'kademlia_tree/find_closest_peers.dart';

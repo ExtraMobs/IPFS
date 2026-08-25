@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import '../../core/types/peer_id.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 import 'dht_routing_table_interface.dart';
 

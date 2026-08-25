@@ -1,8 +1,8 @@
 // lib/src/core/cid_proto_codec.dart
 //
-// Protobuf (de)serialization for CID, kept out of dart_ipfs_core (which
+// Protobuf (de)serialization for CID, kept out of transpiled_cid (which
 // stays protobuf-free) and out of CID itself now that CID is a re-export
-// shim of dart_ipfs_core's CID (see lib/src/core/cid.dart).
+// shim of transpiled_cid's CID (see lib/src/core/cid.dart).
 //
 // `cid.toProto()` keeps working unchanged for existing call sites via the
 // extension below -- Dart extension methods use ordinary dot-call syntax.
@@ -11,7 +11,8 @@
 // top-level `cidFromProto(proto)` function; call sites update accordingly.
 import 'dart:typed_data';
 
-import 'package:dart_ipfs_core/dart_ipfs_core.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:transpiled_multihash/transpiled_multihash.dart';
 
 import '../proto/generated/core/cid.pb.dart';
 

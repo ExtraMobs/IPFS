@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/types/peer_id.dart';
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/add_peer.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
-import 'package:dart_ipfs/src/protocols/dht/kademlia_tree/remove_peer.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/add_peer.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/kademlia_tree_node.dart';
+import 'package:transpiled_ipfs/src/protocols/dht/kademlia_tree/remove_peer.dart';
 
 /// Kademlia-based routing table for DHT peer management.
 ///

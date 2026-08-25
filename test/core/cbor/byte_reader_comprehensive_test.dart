@@ -1,5 +1,5 @@
 // test/core/cbor/byte_reader_comprehensive_test.dart
-import 'package:dart_ipfs/src/core/cbor/byte_reader.dart';
+import 'package:transpiled_ipfs/src/core/cbor/byte_reader.dart';
 import 'package:test/test.dart';
 
 /// Comprehensive verified tests for ByteReader utility.

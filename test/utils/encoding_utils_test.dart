@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/utils/encoding.dart';
 import 'package:test/test.dart';
 
 void main() {

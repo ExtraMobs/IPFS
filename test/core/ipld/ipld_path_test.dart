@@ -1,6 +1,6 @@
 // test/core/ipld/ipld_path_test.dart
-import 'package:dart_ipfs/src/core/cid.dart';
-import 'package:dart_ipfs/src/core/ipld/path/ipld_path_handler.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
+import 'package:transpiled_ipfs/src/core/ipld/path/ipld_path_handler.dart';
 import 'package:test/test.dart';
 
 void main() {

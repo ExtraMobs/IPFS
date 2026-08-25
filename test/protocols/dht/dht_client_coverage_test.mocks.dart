@@ -6,30 +6,30 @@
 import 'dart:async' as _i14;
 import 'dart:typed_data' as _i16;
 
-import 'package:dart_ipfs/src/core/cid.dart' as _i25;
-import 'package:dart_ipfs/src/core/config/ipfs_config.dart' as _i5;
-import 'package:dart_ipfs/src/core/data_structures/blockstore.dart' as _i9;
-import 'package:dart_ipfs/src/core/data_structures/link.dart' as _i21;
-import 'package:dart_ipfs/src/core/data_structures/peer.dart' as _i22;
-import 'package:dart_ipfs/src/core/interfaces/routing_table.dart' as _i17;
-import 'package:dart_ipfs/src/core/ipfs_node/ipfs_node.dart' as _i2;
-import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart' as _i18;
-import 'package:dart_ipfs/src/core/mfs/mfs_manager.dart' as _i6;
-import 'package:dart_ipfs/src/core/plugins/ipfs_plugin.dart' as _i7;
-import 'package:dart_ipfs/src/core/security/security_manager.dart' as _i8;
-import 'package:dart_ipfs/src/core/storage/datastore.dart' as _i11;
-import 'package:dart_ipfs/src/core/types/peer_id.dart' as _i26;
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/core/cid.dart' as _i25;
+import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart' as _i5;
+import 'package:transpiled_ipfs/src/core/data_structures/blockstore.dart' as _i9;
+import 'package:transpiled_ipfs/src/core/data_structures/link.dart' as _i21;
+import 'package:transpiled_ipfs/src/core/data_structures/peer.dart' as _i22;
+import 'package:transpiled_ipfs/src/core/interfaces/routing_table.dart' as _i17;
+import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart' as _i2;
+import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart' as _i18;
+import 'package:transpiled_ipfs/src/core/mfs/mfs_manager.dart' as _i6;
+import 'package:transpiled_ipfs/src/core/plugins/ipfs_plugin.dart' as _i7;
+import 'package:transpiled_ipfs/src/core/security/security_manager.dart' as _i8;
+import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as _i11;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' as _i26;
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     as _i24;
-import 'package:dart_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
+import 'package:transpiled_ipfs/src/proto/generated/dht/ipfs_node_network_events.pb.dart'
     as _i19;
-import 'package:dart_ipfs/src/protocols/dht/dht_client.dart' as _i10;
-import 'package:dart_ipfs/src/protocols/dht/dht_handler.dart' as _i23;
-import 'package:dart_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i12;
-import 'package:dart_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i20;
-import 'package:dart_ipfs/src/transport/circuit_relay_client.dart' as _i4;
-import 'package:dart_ipfs/src/transport/router_events.dart' as _i15;
-import 'package:dart_ipfs/src/transport/router_interface.dart' as _i3;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart' as _i10;
+import 'package:transpiled_ipfs/src/protocols/dht/dht_handler.dart' as _i23;
+import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart' as _i12;
+import 'package:transpiled_ipfs/src/protocols/pubsub/pubsub_message.dart' as _i20;
+import 'package:transpiled_ipfs/src/transport/circuit_relay_client.dart' as _i4;
+import 'package:transpiled_ipfs/src/transport/router_events.dart' as _i15;
+import 'package:transpiled_ipfs/src/transport/router_interface.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i13;
 

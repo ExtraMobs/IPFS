@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
-import 'package:dart_ipfs/src/protocols/dht/connection_statistics.dart';
-import 'package:dart_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
+import 'package:transpiled_ipfs/src/protocols/dht/connection_statistics.dart';
+import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart'
     as proto;
 
 void main() {
