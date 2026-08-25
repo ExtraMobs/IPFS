@@ -94,10 +94,14 @@ void main() {
     });
 
     test('supports namespace codecs', () {
+      // 'ipfs-ns'/'ipns-ns'/'ipld-ns' were never real go-multicodec entries
+      // -- the actual table assigns 0x300/0x301/0x302 to
+      // 'ipns-record'/'libp2p-peer-record'/'libp2p-relay-rsvp' instead (see
+      // doc/transpilation/PROGRESS.md, go-multicodec row).
       final nsCodecs = [
-        'ipfs-ns',
-        'ipns-ns',
-        'ipld-ns',
+        'ipns-record',
+        'libp2p-peer-record',
+        'libp2p-relay-rsvp',
         'dnslink',
         'ipfs',
         'ipns',

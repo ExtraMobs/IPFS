@@ -284,6 +284,40 @@ class Multiaddr {
     return Multiaddr(components.sublist(0, lastIndex));
   }
 
+  /// Walks the components in order, stopping early if [callback] returns
+  /// `false`. Equivalent to go-multiaddr's `ForEach` (prefer a plain `for`
+  /// loop over [components] when early exit isn't needed).
+  void forEach(bool Function(Component c) callback) {
+    for (final c in components) {
+      if (!callback(c)) return;
+    }
+  }
+
+  /// Splits at the first component for which [callback] returns `true`;
+  /// that component is included in the *second* half. Equivalent to
+  /// go-multiaddr's `SplitFunc`.
+  (Multiaddr pre, Multiaddr? post) splitFunc(bool Function(Component c) callback) {
+    if (components.isEmpty) return (Multiaddr.empty, null);
+    var idx = components.length;
+    for (var i = 0; i < components.length; i++) {
+      if (callback(components[i])) {
+        idx = i;
+        break;
+      }
+    }
+    final pre = components.sublist(0, idx);
+    final post = components.sublist(idx);
+    return (Multiaddr(pre), post.isEmpty ? null : Multiaddr(post));
+  }
+
+  /// Splits off the first component. Returns `(null, null)` if this
+  /// multiaddr is empty. Equivalent to go-multiaddr's `SplitFirst`.
+  (Component? first, Multiaddr? rest) splitFirst() {
+    if (components.isEmpty) return (null, null);
+    if (components.length == 1) return (components[0], null);
+    return (components[0], Multiaddr(components.sublist(1)));
+  }
+
   @override
   bool operator ==(Object other) {
     if (other is! Multiaddr) return false;

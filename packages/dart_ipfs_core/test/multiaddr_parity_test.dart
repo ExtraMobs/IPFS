@@ -3,32 +3,16 @@
 // Parity vectors taken verbatim from go-multiaddr's own multiaddr_test.go
 // (github.com/multiformats/go-multiaddr, at
 // go-ipfs-reference/go-multiaddr/multiaddr_test.go): `good` (must parse) and
-// `TestConstructFails`' `cases` (must fail to parse). A handful of entries
-// using base36-encoded ("k...") PeerId CIDs are excluded from the
-// must-succeed set -- base36 isn't supported by dart_ipfs_core's multibase
-// layer yet (package:multibase has no base36 codec; see
-// doc/transpilation/PROGRESS.md, go-multibase row). base58 ("Qm...",
-// "12D3Koo...") and base32 ("bafzbei...") PeerId CIDs, which ARE supported,
-// are covered and proven to decode to the same PeerId as their base58
-// equivalent.
+// `TestConstructFails`' `cases` (must fail to parse). This includes entries
+// using base36-encoded ("k...") PeerId CIDs -- base36 support landed in
+// dart_ipfs_core's multibase layer alongside the go-multibase port (see
+// doc/transpilation/PROGRESS.md). base58 ("Qm...", "12D3Koo...") and base32
+// ("bafzbei...") PeerId CIDs are covered too, and proven to decode to the
+// same PeerId as their base58 equivalent.
 import 'dart:typed_data';
 
 import 'package:dart_ipfs_core/dart_ipfs_core.dart';
 import 'package:test/test.dart';
-
-const _base36Gap = [
-  '/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
-  '/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
-  '/p2p/k51qzi5uqu5dhb6l8spkdx7yxafegfkee5by8h7lmjh2ehc2sgg34z7c15vzqs',
-  '/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
-  '/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
-  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
-  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
-  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
-  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
-  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234/unix/stdio',
-  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234/unix/stdio',
-];
 
 const _good = [
   '/ip4/1.2.3.4',
@@ -111,6 +95,17 @@ const _good = [
   '/ip4/127.0.0.1/tcp/0/p2p/12D3KooWCryG7Mon9orvQxcS1rYZjotPgpwoJNHHKcLLfE4Hf5mV/http-path/foo',
   '/ip4/127.0.0.1/tcp/443/tls/sni/example.com/http/http-path/foo',
   '/memory/4',
+  '/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
+  '/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
+  '/p2p/k51qzi5uqu5dhb6l8spkdx7yxafegfkee5by8h7lmjh2ehc2sgg34z7c15vzqs',
+  '/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
+  '/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
+  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
+  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
+  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
+  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234',
+  '/ip4/127.0.0.1/ipfs/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234/unix/stdio',
+  '/ip4/127.0.0.1/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7/tcp/1234/unix/stdio',
 ];
 
 const _bad = [
@@ -200,29 +195,19 @@ void main() {
     });
   });
 
-  group('known gap: base36 PeerId CIDs (go-multibase has no base36 yet)', () {
-    for (final s in _base36Gap) {
-      test(s, () {
-        // Documents a real, currently-open gap rather than silently
-        // skipping it: package:multibase has no base36 ("k...") codec, so
-        // these `good` vectors from go-multiaddr's own test suite fail
-        // here today. Closing the go-multibase row in
-        // doc/transpilation/PROGRESS.md should turn this green -- when it
-        // does, move these strings into `_good` above.
-        expect(() => Multiaddr.parse(s), throwsA(anything));
-      });
-    }
-  });
-
   group('p2p transcoder cross-base parity', () {
-    test('base58 and base32 CID PeerIds decode to the same value', () {
+    test('base58, base32, and base36 CID PeerIds decode to the same value', () {
       final fromB58 = Multiaddr.parse(
         '/p2p/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSupNKC',
       );
       final fromB32 = Multiaddr.parse(
         '/p2p/bafzbeigvf25ytwc3akrijfecaotc74udrhcxzh2cx3we5qqnw5vgrei4bm',
       );
+      final fromB36 = Multiaddr.parse(
+        '/p2p/k2k4r8oqamigqdo6o7hsbfwd45y70oyynp98usk7zmyfrzpqxh1pohl7',
+      );
       expect(fromB32.toBytes(), equals(fromB58.toBytes()));
+      expect(fromB36.toBytes(), equals(fromB58.toBytes()));
     });
   });
 

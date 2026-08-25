@@ -13,6 +13,7 @@ dependencies:
   multibase: ^1.0.0
   dart_multihash: ^1.0.1
   base32: ^2.2.0
+  base_x: ^2.0.1
 
   # Serialization
   cbor: ^6.3.7

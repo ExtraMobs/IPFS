@@ -173,10 +173,11 @@ class EncodingUtils {
     'dag-jose': 0x85, // DAG JOSE
     'dag-cose': 0x012b, // DAG COSE
     'car': 0x0202, // Content Addressable aRchive
-    // IPFS namespace codecs
-    'ipld-ns': 0x300, // IPLD namespace
-    'ipfs-ns': 0x301, // IPFS namespace
-    'ipns-ns': 0x302, // IPNS namespace
+    // go-multicodec's real 0x300 range (not ipld-ns/ipfs-ns/ipns-ns, which
+    // were never actual multicodec table entries)
+    'ipns-record': 0x300,
+    'libp2p-peer-record': 0x301,
+    'libp2p-relay-rsvp': 0x302,
     // Identity codec
     'identity': 0x00, // Raw identity
   };

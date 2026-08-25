@@ -1,140 +1,354 @@
 // lib/src/cid/multibase.dart
+//
+// Port of go-multibase's Encode/Decode (github.com/multiformats/go-multibase
+// multibase.go, base2.go, base32.go, base256emoji.go). go-multibase itself
+// declares Base8/Base10/Base45 as constants but does not implement them
+// (its Encode/Decode fall through to ErrUnsupportedEncoding for those) --
+// this port matches that exactly rather than inventing behavior upstream
+// doesn't have.
+import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:base32/base32.dart' as b32;
+import 'package:base32/encodings.dart' as b32enc;
+import 'package:base_x/base_x.dart' as basex;
+import 'package:convert/convert.dart' as pkgconvert;
 import 'package:multibase/multibase.dart' as mb;
 
 /// Helpers for multibase encoding/decoding used by CID and other multiformats.
 ///
-/// This class is a thin, stable wrapper around `package:multibase` that exposes
-/// only the bases used by dart_ipfs_core.
+/// [decode] and [encodeWithName] cover all 21 encodings go-multibase
+/// actually implements (identity, base2, base16(upper), the 8 base32
+/// variants, base36(upper), base58btc/flickr, the 4 base64 variants, and
+/// base256emoji), keyed by go-multibase's own prefix characters/names.
+///
+/// [encode] keeps its narrower `mb.Multibase`-typed signature for existing
+/// callers (CID's own encode path only ever needs base16/32/58btc/64), but
+/// is now routed through the same correct implementations as [decode]
+/// rather than through `package:multibase` directly.
 ///
 /// **base32 is handled separately, not delegated to `package:multibase`.**
 /// Verified empirically (see `test/multibase_base32_test.dart`): for a
 /// 123-case sweep of all-zero, leading-zero, and random byte sequences at
 /// every length 0..40, `package:multibase`'s `Multibase.base32` codec
 /// diverges from RFC 4648 in 107/123 encodings -- not a rare edge case, the
-/// general case. It appears to convert the byte array through a big
-/// integer rather than RFC 4648's fixed 5-bit grouping, which silently
-/// drops leading zero bytes/groups (mathematically insignificant for an
-/// integer, but semantically wrong for a byte string) and produces a
-/// different digit sequence than the spec for most other inputs too. This
-/// was confirmed against real content: encoding a raw-codec CIDv1 byte
-/// sequence with [_base32LowerEncode] reproduces the well-known
-/// `afkrei...` prefix used by real-world raw-block CIDs; `package:multibase`
-/// does not. All other bases are left untouched -- only base32 was
-/// verified broken.
+/// general case. It applies a big-integer base-conversion algorithm
+/// (correct for base58/base36, where it's the actual defined algorithm) to
+/// what RFC 4648 base16/32/64 define as fixed-width *bit-packing* schemes
+/// instead -- two unrelated algorithms that happen to both be called
+/// "baseN". `package:multibase`'s base16/base32(upper) paths have the same
+/// defect; this file no longer uses them at all, using `package:base32`
+/// (bit-packing, correct) and `package:convert`'s `hex` codec instead.
 class MultibaseUtils {
   // Private constructor to prevent instantiation.
   MultibaseUtils._();
 
-  /// Decodes a multibase-encoded string into raw bytes.
-  ///
-  /// The input string must include the multibase prefix character.
+  /// Decodes a multibase-encoded string into raw bytes. The input string
+  /// must include the multibase prefix character (which may be the
+  /// multi-byte `🚀` for base256emoji).
   static Uint8List decode(String input) {
-    if (input.isNotEmpty && input[0] == 'b') {
-      return _base32LowerDecode(input.substring(1));
+    if (input.isEmpty) {
+      throw const FormatException(
+        'cannot decode multibase for zero length string',
+      );
     }
-    return Uint8List.fromList(mb.multibaseDecode(input));
+    final prefix = input.runes.first;
+    final rest = input.substring(String.fromCharCode(prefix).length);
+    return _decodeByCode(prefix, rest);
   }
 
-  /// Encodes raw bytes using the requested [base].
+  /// Encodes raw bytes using the requested [base]. Covers the 8 encodings
+  /// `package:multibase`'s `Multibase` enum knows about; see
+  /// [encodeWithName] for the full 21-encoding set (identity, base2,
+  /// base32pad/hex variants, base36, base58flickr, base256emoji, ...).
   static String encode(mb.Multibase base, Uint8List bytes) {
-    if (base == mb.Multibase.base32) {
-      return 'b${_base32LowerEncode(bytes)}';
-    }
-    return mb.multibaseEncode(base, bytes);
+    final code = switch (base) {
+      mb.Multibase.base16 => 0x66, // 'f'
+      mb.Multibase.base16upper => 0x46, // 'F'
+      mb.Multibase.base32 => 0x62, // 'b'
+      mb.Multibase.base32upper => 0x42, // 'B'
+      mb.Multibase.base58btc => 0x7a, // 'z'
+      mb.Multibase.base64 => 0x6d, // 'm'
+      mb.Multibase.base64url => 0x75, // 'u'
+      mb.Multibase.base64urlpad => 0x55, // 'U'
+    };
+    return _encodeByCode(code, bytes);
   }
 
-  /// Encodes raw bytes using the requested base name.
-  ///
-  /// Falls back to base32 if the name is unknown.
+  /// Encodes raw bytes using the requested base name (go-multibase's
+  /// `EncodingToStr` values, e.g. `base32hexpadupper`, `base58flickr`,
+  /// `base256emoji`). Falls back to base32 if the name is unknown.
   static String encodeWithName(String name, Uint8List bytes) {
-    final base = _baseFromName(name);
-    return encode(base, bytes);
+    final code = _codeFromName[name.toLowerCase()];
+    if (code == null) {
+      return _encodeByCode(0x62, bytes); // 'b' == base32
+    }
+    return _encodeByCode(code, bytes);
   }
 
-  /// Parses a base name into a [mb.Multibase] enum value.
-  static mb.Multibase _baseFromName(String name) {
-    switch (name.toLowerCase()) {
-      case 'base16':
-      case 'base16lower':
-        return mb.Multibase.base16;
-      case 'base16upper':
-        return mb.Multibase.base16upper;
-      case 'base32':
-      case 'base32lower':
-        return mb.Multibase.base32;
-      case 'base32upper':
-        return mb.Multibase.base32upper;
-      case 'base58':
-      case 'base58btc':
-        return mb.Multibase.base58btc;
-      case 'base64':
-        return mb.Multibase.base64;
-      case 'base64url':
-        return mb.Multibase.base64url;
-      case 'base64urlpad':
-        return mb.Multibase.base64urlpad;
+  static const Map<String, int> _codeFromName = {
+    'identity': 0x00,
+    'base2': 0x30,
+    // Declared by go-multibase but never implemented (its own Encode/Decode
+    // fall through to ErrUnsupportedEncoding for these three) -- mapped to
+    // their real prefix chars so dispatch below also throws, matching
+    // upstream exactly rather than silently falling back to base32.
+    'base8': 0x37,
+    'base10': 0x39,
+    'base45': 0x52,
+    'base16': 0x66,
+    'base16upper': 0x46,
+    'base32': 0x62,
+    'base32upper': 0x42,
+    'base32pad': 0x63,
+    'base32padupper': 0x43,
+    'base32hex': 0x76,
+    'base32hexupper': 0x56,
+    'base32hexpad': 0x74,
+    'base32hexpadupper': 0x54,
+    'base36': 0x6b,
+    'base36upper': 0x4b,
+    'base58btc': 0x7a,
+    'base58flickr': 0x5a,
+    'base64': 0x6d,
+    'base64url': 0x75,
+    'base64pad': 0x4d,
+    'base64urlpad': 0x55,
+    'base256emoji': 0x1f680,
+  };
+
+  static String _encodeByCode(int code, Uint8List bytes) {
+    switch (code) {
+      case 0x00: // identity
+        return String.fromCharCode(0x00) + _identityString(bytes);
+      case 0x30: // '0' base2
+        return '0${_base2Encode(bytes)}';
+      case 0x66: // 'f' base16
+        return 'f${pkgconvert.hex.encode(bytes)}';
+      case 0x46: // 'F' base16upper
+        return 'F${pkgconvert.hex.encode(bytes).toUpperCase()}';
+      case 0x62: // 'b' base32
+        return 'b${_b32Encode(bytes, upper: false, pad: false, hex: false)}';
+      case 0x42: // 'B' base32upper
+        return 'B${_b32Encode(bytes, upper: true, pad: false, hex: false)}';
+      case 0x63: // 'c' base32pad
+        return 'c${_b32Encode(bytes, upper: false, pad: true, hex: false)}';
+      case 0x43: // 'C' base32padupper
+        return 'C${_b32Encode(bytes, upper: true, pad: true, hex: false)}';
+      case 0x76: // 'v' base32hex
+        return 'v${_b32Encode(bytes, upper: false, pad: false, hex: true)}';
+      case 0x56: // 'V' base32hexupper
+        return 'V${_b32Encode(bytes, upper: true, pad: false, hex: true)}';
+      case 0x74: // 't' base32hexpad
+        return 't${_b32Encode(bytes, upper: false, pad: true, hex: true)}';
+      case 0x54: // 'T' base32hexpadupper
+        return 'T${_b32Encode(bytes, upper: true, pad: true, hex: true)}';
+      case 0x6b: // 'k' base36
+        return 'k${_base36Lower.encode(bytes)}';
+      case 0x4b: // 'K' base36upper
+        return 'K${_base36Upper.encode(bytes)}';
+      case 0x7a: // 'z' base58btc
+        return 'z${_base58Btc.encode(bytes)}';
+      case 0x5a: // 'Z' base58flickr
+        return 'Z${_base58Flickr.encode(bytes)}';
+      case 0x6d: // 'm' base64 (unpadded)
+        return 'm${_stripPad(base64.encode(bytes))}';
+      case 0x75: // 'u' base64url (unpadded)
+        return 'u${_stripPad(base64Url.encode(bytes))}';
+      case 0x4d: // 'M' base64pad
+        return 'M${base64.encode(bytes)}';
+      case 0x55: // 'U' base64urlpad
+        return 'U${base64Url.encode(bytes)}';
+      case 0x1f680: // base256emoji
+        return '🚀${_base256EmojiEncode(bytes)}';
       default:
-        return mb.Multibase.base32;
+        throw UnsupportedError(
+          'selected encoding not supported (code $code)',
+        );
     }
   }
-}
 
-const _base32LowerAlphabet = 'abcdefghijklmnopqrstuvwxyz234567';
+  static Uint8List _decodeByCode(int code, String rest) {
+    switch (code) {
+      case 0x00: // identity
+        return Uint8List.fromList(rest.codeUnits);
+      case 0x30: // base2
+        return _base2Decode(rest);
+      case 0x66: // base16
+      case 0x46: // base16upper
+        return Uint8List.fromList(pkgconvert.hex.decode(rest.toLowerCase()));
+      case 0x62: // base32
+      case 0x42: // base32upper
+      case 0x63: // base32pad
+      case 0x43: // base32padupper
+        return _b32Decode(rest, hex: false);
+      case 0x76: // base32hex
+      case 0x56: // base32hexupper
+      case 0x74: // base32hexpad
+      case 0x54: // base32hexpadupper
+        return _b32Decode(rest, hex: true);
+      case 0x6b: // base36
+      case 0x4b: // base36upper
+        return _base36Lower.decode(rest.toLowerCase());
+      case 0x7a: // base58btc
+        return _base58Btc.decode(rest);
+      case 0x5a: // base58flickr
+        return _base58Flickr.decode(rest);
+      case 0x6d: // base64 (unpadded)
+        return base64.decode(_addPad(rest, 4));
+      case 0x75: // base64url (unpadded)
+        return base64Url.decode(_addPad(rest, 4));
+      case 0x4d: // base64pad
+        return base64.decode(rest);
+      case 0x55: // base64urlpad
+        return base64Url.decode(rest);
+      case 0x1f680: // base256emoji
+        return _base256EmojiDecode(rest);
+      default:
+        throw UnsupportedError(
+          'selected encoding not supported (code $code)',
+        );
+    }
+  }
 
-/// Encodes [data] to a lowercase, unpadded RFC 4648 base32 string.
-///
-/// Uses a straightforward bit-accumulator (mirrors [_base32LowerDecode]'s
-/// structure, just inverted) rather than hand-unrolling each of the four
-/// possible final-group remainders. That hand-unrolled version is how
-/// `EncodingUtils.base32LowerEncode` in the umbrella package
-/// (`lib/src/utils/encoding.dart`) is written, and porting it verbatim here
-/// first surfaced a real bug in it: for inputs whose length is 4 mod 5, it
-/// emits one spurious extra character (traced by hand against RFC 4648's
-/// own "foob" -> "MZXW6YQ" test vector, which it fails, producing an
-/// erroneous extra character between the correct 4th and 5th groups). The
-/// umbrella's version -- and therefore every base32 CID encoding made by
-/// the currently shipping `dart_ipfs` package for byte lengths of that
-/// shape -- has this same bug; worth reporting upstream separately from
-/// this refactor.
-String _base32LowerEncode(Uint8List data) {
-  if (data.isEmpty) return '';
-  final result = StringBuffer();
-  var buffer = 0;
-  var bits = 0;
-  for (final byte in data) {
-    buffer = (buffer << 8) | byte;
-    bits += 8;
-    while (bits >= 5) {
-      bits -= 5;
-      result.write(_base32LowerAlphabet[(buffer >> bits) & 31]);
-    }
-  }
-  if (bits > 0) {
-    result.write(_base32LowerAlphabet[(buffer << (5 - bits)) & 31]);
-  }
-  return result.toString();
-}
+  // --- identity -------------------------------------------------------
 
-/// Decodes a lowercase, unpadded RFC 4648 base32 string to bytes.
-Uint8List _base32LowerDecode(String encoded) {
-  if (encoded.isEmpty) return Uint8List(0);
-  final out = <int>[];
-  var buffer = 0;
-  var bits = 0;
-  for (var i = 0; i < encoded.length; i++) {
-    final c = encoded[i];
-    final value = _base32LowerAlphabet.indexOf(c);
-    if (value < 0) {
-      throw FormatException('Invalid base32 character: $c');
+  static String _identityString(Uint8List bytes) =>
+      String.fromCharCodes(bytes);
+
+  // --- base2 ------------------------------------------------------------
+
+  static String _base2Encode(Uint8List bytes) {
+    final out = StringBuffer();
+    for (final b in bytes) {
+      for (var j = 7; j >= 0; j--) {
+        out.write((b >> j) & 1);
+      }
     }
-    buffer = (buffer << 5) | value;
-    bits += 5;
-    if (bits >= 8) {
-      bits -= 8;
-      out.add((buffer >> bits) & 0xFF);
-    }
+    return out.toString();
   }
-  return Uint8List.fromList(out);
+
+  static Uint8List _base2Decode(String s) {
+    final padded = s.length % 8 == 0 ? s : ('0' * (8 - s.length % 8)) + s;
+    final out = Uint8List(padded.length ~/ 8);
+    for (var i = 0; i < out.length; i++) {
+      final byte = int.parse(padded.substring(i * 8, i * 8 + 8), radix: 2);
+      out[i] = byte;
+    }
+    return out;
+  }
+
+  // --- base32 family (8 variants; RFC 4648 bit-packing, case-insensitive
+  // decode, matching go-base32's `NewEncodingCI`) ------------------------
+
+  static String _b32Encode(
+    Uint8List bytes, {
+    required bool upper,
+    required bool pad,
+    required bool hex,
+  }) {
+    final encoding = hex
+        ? b32enc.Encoding.base32Hex
+        : b32enc.Encoding.standardRFC4648;
+    var out = b32.base32.encode(bytes, encoding: encoding);
+    if (!upper) out = out.toLowerCase();
+    if (!pad) out = _stripPad(out);
+    return out;
+  }
+
+  static Uint8List _b32Decode(String s, {required bool hex}) {
+    final encoding = hex
+        ? b32enc.Encoding.base32Hex
+        : b32enc.Encoding.standardRFC4648;
+    return b32.base32.decode(s.toUpperCase(), encoding: encoding);
+  }
+
+  // --- base36 / base58 (big-integer base conversion; correct algorithm for
+  // these, unlike base16/32/64) ------------------------------------------
+
+  static final basex.BaseXCodec _base36Lower = basex.BaseXCodec(
+    '0123456789abcdefghijklmnopqrstuvwxyz',
+  );
+  static final basex.BaseXCodec _base36Upper = basex.BaseXCodec(
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  );
+  static final basex.BaseXCodec _base58Btc = basex.BaseXCodec(
+    '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+  );
+  static final basex.BaseXCodec _base58Flickr = basex.BaseXCodec(
+    '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ',
+  );
+
+  // --- base64 helpers -----------------------------------------------------
+
+  static String _stripPad(String s) {
+    var end = s.length;
+    while (end > 0 && s[end - 1] == '=') {
+      end--;
+    }
+    return s.substring(0, end);
+  }
+
+  static String _addPad(String s, int multipleOf) {
+    final rem = s.length % multipleOf;
+    if (rem == 0) return s;
+    return s + ('=' * (multipleOf - rem));
+  }
+
+  // --- base256emoji: a direct byte<->emoji lookup table, no arithmetic ---
+
+  static const List<String> _base256EmojiTable = [
+    '🚀', '🪐', '☄', '🛰', '🌌', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗',
+    '🌘', '🌍', '🌏', '🌎', '🐉', '☀', '💻', '🖥', '💾', '💿', '😂', '❤',
+    '😍', '🤣', '😊', '🙏', '💕', '😭', '😘', '👍', '😅', '👏', '😁', '🔥',
+    '🥰', '💔', '💖', '💙', '😢', '🤔', '😆', '🙄', '💪', '😉', '☺', '👌',
+    '🤗', '💜', '😔', '😎', '😇', '🌹', '🤦', '🎉', '💞', '✌', '✨', '🤷',
+    '😱', '😌', '🌸', '🙌', '😋', '💗', '💚', '😏', '💛', '🙂', '💓', '🤩',
+    '😄', '😀', '🖤', '😃', '💯', '🙈', '👇', '🎶', '😒', '🤭', '❣', '😜',
+    '💋', '👀', '😪', '😑', '💥', '🙋', '😞', '😩', '😡', '🤪', '👊', '🥳',
+    '😥', '🤤', '👉', '💃', '😳', '✋', '😚', '😝', '😴', '🌟', '😬', '🙃',
+    '🍀', '🌷', '😻', '😓', '⭐', '✅', '🥺', '🌈', '😈', '🤘', '💦', '✔',
+    '😣', '🏃', '💐', '☹', '🎊', '💘', '😠', '☝', '😕', '🌺', '🎂', '🌻',
+    '😐', '🖕', '💝', '🙊', '😹', '🗣', '💫', '💀', '👑', '🎵', '🤞', '😛',
+    '🔴', '😤', '🌼', '😫', '⚽', '🤙', '☕', '🏆', '🤫', '👈', '😮', '🙆',
+    '🍻', '🍃', '🐶', '💁', '😲', '🌿', '🧡', '🎁', '⚡', '🌞', '🎈', '❌',
+    '✊', '👋', '😰', '🤨', '😶', '🤝', '🚶', '💰', '🍓', '💢', '🤟', '🙁',
+    '🚨', '💨', '🤬', '✈', '🎀', '🍺', '🤓', '😙', '💟', '🌱', '😖', '👶',
+    '🥴', '▶', '➡', '❓', '💎', '💸', '⬇', '😨', '🌚', '🦋', '😷', '🕺',
+    '⚠', '🙅', '😟', '😵', '👎', '🤲', '🤠', '🤧', '📌', '🔵', '💅', '🧐',
+    '🐾', '🍒', '😗', '🤑', '🌊', '🤯', '🐷', '☎', '💧', '😯', '💆', '👆',
+    '🎤', '🙇', '🍑', '❄', '🌴', '💣', '🐸', '💌', '📍', '🥀', '🤢', '👅',
+    '💡', '💩', '👐', '📸', '👻', '🤐', '🤮', '🎼', '🥵', '🚩', '🍎', '🍊',
+    '👼', '💍', '📣', '🥂',
+  ];
+
+  static Map<int, int>? _base256EmojiReverse;
+
+  static String _base256EmojiEncode(Uint8List bytes) {
+    final out = StringBuffer();
+    for (final b in bytes) {
+      out.write(_base256EmojiTable[b]);
+    }
+    return out.toString();
+  }
+
+  static Uint8List _base256EmojiDecode(String s) {
+    final reverse = _base256EmojiReverse ??= {
+      for (var i = 0; i < _base256EmojiTable.length; i++)
+        _base256EmojiTable[i].runes.first: i,
+    };
+    final runes = s.runes.toList();
+    final out = Uint8List(runes.length);
+    for (var i = 0; i < runes.length; i++) {
+      final v = reverse[runes[i]];
+      if (v == null) {
+        throw FormatException(
+          'illegal base256emoji data at index $i, char: '
+          '${String.fromCharCode(runes[i])}',
+        );
+      }
+      out[i] = v;
+    }
+    return out;
+  }
 }
