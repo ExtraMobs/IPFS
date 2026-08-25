@@ -1,0 +1,35 @@
+// lib/src/transport/dns/system_resolver.dart
+//
+// A dart_ipfs_core BasicResolver backed by real DNS: `InternetAddress.
+// lookup` (dart:io, uses the OS resolver -- already correct, no gap there)
+// for A/AAAA, and UdpDnsClient (this package, since dart:io has no TXT
+// API) for TXT. Feed this to a dart_ipfs_core `Resolver` to actually
+// resolve `/dns4/`, `/dns6/`, `/dns/`, and `/dnsaddr/` multiaddr
+// components against the real network.
+import 'dart:io';
+
+import 'package:dart_ipfs_core/dart_ipfs_core.dart' show BasicResolver;
+
+import 'dns_message.dart';
+import 'udp_dns_client.dart';
+
+/// The concrete, network-backed [BasicResolver] for real DNS resolution.
+class SystemResolver implements BasicResolver {
+  /// Builds a resolver using [client] for TXT lookups (a fresh
+  /// [UdpDnsClient] with its default public resolvers, unless overridden).
+  SystemResolver({UdpDnsClient? client}) : _client = client ?? UdpDnsClient();
+
+  final UdpDnsClient _client;
+
+  @override
+  Future<List<String>> lookupIPAddr(String name) async {
+    final addrs = await InternetAddress.lookup(name);
+    return [for (final a in addrs) a.address];
+  }
+
+  @override
+  Future<List<String>> lookupTXT(String name) async {
+    final records = await _client.lookup(name, DnsRecordType.txt);
+    return [for (final r in records) r.data];
+  }
+}

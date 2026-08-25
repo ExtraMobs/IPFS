@@ -10,6 +10,7 @@ import 'package:dart_ipfs/src/core/ipfs_node/network_handler.dart';
 import 'package:dart_ipfs/src/core/ipfs_node/utils.dart';
 import 'package:dart_ipfs/src/core/config/ipfs_config.dart';
 import 'package:dart_ipfs/src/utils/encoding.dart';
+import 'package:dart_ipfs_core/dart_ipfs_core.dart' show MockResolver;
 import 'package:crypto/crypto.dart';
 
 import 'bootstrap_utils_test.mocks.dart';
@@ -163,6 +164,84 @@ void main() {
       await handler.start();
       final status = await handler.getStatus();
       expect(status['connected_peers'], 0);
+      await handler.stop();
+    });
+  });
+
+  group('BootstrapHandler DNS resolution', () {
+    late MockNetworkHandler mockNetworkHandler;
+    const peerId = 'QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn';
+
+    setUp(() {
+      mockNetworkHandler = MockNetworkHandler();
+    });
+
+    test('resolves a /dnsaddr/ bootstrap peer before connecting', () async {
+      final config = IPFSConfig(
+        network: NetworkConfig(
+          bootstrapPeers: ['/dnsaddr/example.com/p2p/$peerId'],
+        ),
+      );
+      final mockResolver = MockResolver(
+        txt: {
+          '_dnsaddr.example.com': ['dnsaddr=/ip4/1.2.3.4/tcp/4001/p2p/$peerId'],
+        },
+      );
+      final handler = BootstrapHandler(
+        config,
+        mockNetworkHandler,
+        dnsResolver: mockResolver,
+      );
+
+      await handler.start();
+
+      // Connected using the *resolved* concrete address, not the original
+      // /dnsaddr/... string -- this is what was actually broken before
+      // (dialing a literal "/dnsaddr/..." address can never succeed).
+      verify(
+        mockNetworkHandler.connectToPeer('/ip4/1.2.3.4/tcp/4001/p2p/$peerId'),
+      ).called(1);
+
+      await handler.stop();
+    });
+
+    test('a /dnsaddr/ domain with no matching records connects to nothing', () async {
+      final config = IPFSConfig(
+        network: NetworkConfig(
+          bootstrapPeers: ['/dnsaddr/empty.example.com/p2p/$peerId'],
+        ),
+      );
+      final handler = BootstrapHandler(
+        config,
+        mockNetworkHandler,
+        dnsResolver: MockResolver(),
+      );
+
+      await handler.start();
+
+      verifyNever(mockNetworkHandler.connectToPeer(any));
+
+      await handler.stop();
+    });
+
+    test('a plain (non-DNS) bootstrap peer is unaffected by the resolver', () async {
+      final config = IPFSConfig(
+        network: NetworkConfig(
+          bootstrapPeers: ['/ip4/127.0.0.1/tcp/4001/p2p/$peerId'],
+        ),
+      );
+      final handler = BootstrapHandler(
+        config,
+        mockNetworkHandler,
+        dnsResolver: MockResolver(), // present, but never consulted.
+      );
+
+      await handler.start();
+
+      verify(
+        mockNetworkHandler.connectToPeer('/ip4/127.0.0.1/tcp/4001/p2p/$peerId'),
+      ).called(1);
+
       await handler.stop();
     });
   });

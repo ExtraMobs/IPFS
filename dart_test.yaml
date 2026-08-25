@@ -19,3 +19,11 @@ tags:
   cli:
     # CLI tests spawn subprocesses and are slower under coverage instrumentation.
     timeout: 2x
+  network:
+    # Talks to real DNS resolvers / real domains; skipped by default so the
+    # standard test run stays offline-safe. Run explicitly with
+    # `dart test --preset network` when you want to prove live behavior.
+    skip: "requires real network/DNS access (run via --preset network)"
+    presets:
+      network:
+        skip: false
