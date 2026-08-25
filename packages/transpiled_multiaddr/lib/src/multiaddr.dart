@@ -319,6 +319,17 @@ class Multiaddr {
     return (components[0], Multiaddr(components.sublist(1)));
   }
 
+  /// Splits off the last component. Returns `(null, null)` if this
+  /// multiaddr is empty. Equivalent to go-multiaddr's `SplitLast`.
+  (Multiaddr? prefix, Component? last) splitLast() {
+    if (components.isEmpty) return (null, null);
+    if (components.length == 1) return (null, components[0]);
+    return (
+      Multiaddr(components.sublist(0, components.length - 1)),
+      components.last,
+    );
+  }
+
   @override
   bool operator ==(Object other) {
     if (other is! Multiaddr) return false;

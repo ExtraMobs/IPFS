@@ -235,4 +235,34 @@ void main() {
       expect(m.valueForProtocol(Protocols.udp), isNull);
     });
   });
+
+  group('splitLast', () {
+    // Vectors from go-multiaddr's own TestSplitFirstLast
+    // (util_test.go), for the addresses built by progressively
+    // appending /ip4, /tcp, /quic, /ipfs.
+    const ip = '/ip4/0.0.0.0';
+    const tcp = '/tcp/123';
+    const quic = '/quic';
+    const ipfs = '/ipfs/QmPSQnBKM9g7BaUcZCvswUJVscQ1ipjmwxN5PXCjkp9EQ7';
+
+    test('splits the last component off a multi-component address', () {
+      final m = Multiaddr.parse('$ip$tcp$quic$ipfs');
+      final (prefix, last) = m.splitLast();
+      expect(prefix, equals(Multiaddr.parse('$ip$tcp$quic')));
+      expect(last, equals(Multiaddr.parse(ipfs).components.single));
+    });
+
+    test('a single-component address has a null prefix', () {
+      final m = Multiaddr.parse(ip);
+      final (prefix, last) = m.splitLast();
+      expect(prefix, isNull);
+      expect(last, equals(Multiaddr.parse(ip).components.single));
+    });
+
+    test('the empty address has a null prefix and last component', () {
+      final (prefix, last) = Multiaddr.empty.splitLast();
+      expect(prefix, isNull);
+      expect(last, isNull);
+    });
+  });
 }

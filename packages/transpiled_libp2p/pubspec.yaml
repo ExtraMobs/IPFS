@@ -12,6 +12,10 @@ dependencies:
   pointycastle: ^4.0.0
   transpiled_base58:
     path: ../transpiled_base58
+  transpiled_cid:
+    path: ../transpiled_cid
+  transpiled_multiaddr:
+    path: ../transpiled_multiaddr
   transpiled_multibase:
     path: ../transpiled_multibase
   transpiled_multihash:

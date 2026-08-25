@@ -46,7 +46,24 @@ export 'src/core/crypto/secp256k1_key.dart'
         generateSecp256k1KeyPair,
         unmarshalSecp256k1PrivateKey,
         unmarshalSecp256k1PublicKey;
-export 'src/core/peer/peer_id.dart' show PeerId, PublicKeyType;
+export 'src/core/peer/addr_info.dart'
+    show
+        AddrInfo,
+        addrInfoFromP2pAddr,
+        addrInfoFromString,
+        addrInfosFromP2pAddrs,
+        addrInfosToIds,
+        addrInfoToP2pAddrs,
+        idFromP2PAddr,
+        splitAddr;
+export 'src/core/peer/peer_id.dart'
+    show
+        EmptyPeerIdException,
+        InvalidPeerIdSourceException,
+        NoPublicKeyException,
+        PeerId,
+        peerIdFromCid,
+        peerIdToCid;
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
