@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-25T01:44:49.469279
+generated: 2026-08-25T08:24:06.102562
 ---
 
 # `test/(root)/`
@@ -207,4 +207,19 @@ generated: 2026-08-25T01:44:49.469279
 
 - MultihashUtils.sum parity with go-multihash
 - unsupported algorithm throws
+
+## `test/rsa_key_parity_test.dart`
+
+- RSA -- real Go-generated vector
+- unmarshal PKCS1 private key, re-marshal matches byte-for-byte
+- unmarshal PKIX public key, re-marshal matches byte-for-byte
+- private key
+- verifies a real go-libp2p-style SHA256/PKCS1v1.5 signature
+- rejects a tampered signature
+- rejects a signature over the wrong message
+- signs with Dart
+- RSA -- generation and round-trip
+- a freshly generated key signs and verifies its own signature
+- rejects a key smaller than minRsaKeyBits
+- marshal -> unmarshal round-trips a freshly generated key
 

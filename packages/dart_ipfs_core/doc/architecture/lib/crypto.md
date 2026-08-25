@@ -1,7 +1,7 @@
 ---
 module: crypto
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.454315
+generated: 2026-08-25T08:24:06.087244
 ---
 
 # Module `crypto` (`lib/src/crypto/`)
@@ -35,6 +35,7 @@ Result of AES-GCM encryption containing ciphertext and nonce.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
@@ -44,6 +45,8 @@ Result of AES-GCM encryption containing ciphertext and nonce.
   - calls: length, nonceSize, ArgumentError, EncryptedData, sublist
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/cid/cid.dart` (CID.decode)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
 
 ### class `CryptoUtils`
 
@@ -88,6 +91,8 @@ Unified Ed25519 signing service.
 
 - **generateKeyPair** (method) — Generates a new Ed25519 key pair.
   - calls: length, ArgumentError, newKeyPairFromSeed, newKeyPair
+  - referenced by (by name):
+    - `lib/src/crypto/rsa_key.dart` (generateRsaKeyPair)
 - **keyPairFromSeed** (method) — Creates a key pair from a 32-byte seed.
   - calls: length, ArgumentError, newKeyPairFromSeed
 - **sign** (method) — Signs data using an Ed25519 private key.
@@ -104,4 +109,118 @@ Unified Ed25519 signing service.
   - calls: extractPrivateKeyBytes, fromList, sublist
 - **publicKeyFromBytes** (method) — Creates a public key from raw bytes.
   - calls: length, ArgumentError, SimplePublicKey, ed25519
+
+## `lib/src/crypto/key_types.dart`
+
+go-libp2p core/crypto/pb's `KeyType` enum (crypto.proto).
+
+_Directly tested._
+
+### abstract class `Key`
+
+A cryptographic key that can be compared to another key. Equivalent to
+
+- **type** (method) — The protobuf key type (crypto.pb.KeyType).
+- **raw** (method) — The raw bytes of the key, not wrapped in the protobuf `PublicKey`/
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_types.dart` (Key.keyEquals)
+- **keyEquals** (method) — Whether this key has the same byte representation as [other].
+  - calls: _bytesEqual, raw
+
+### abstract class `PrivKey` extends Key
+
+A private key that can sign data and derive its public key. Equivalent
+
+- **sign** (method) — Signs [data], returning the signature bytes.
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
+- **getPublic** (method) — Returns the public key paired with this private key.
+
+### abstract class `PubKey` extends Key
+
+A public key that can verify signatures made by the paired private key.
+
+- **verify** (method) — Verifies that [signature] is a valid signature of [data] by the
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
+
+### top-level `marshalKeyProto` (function)
+
+- **marshalKeyProto** (function) — Encodes `{required KeyType Type = 1; required bytes Data = 2;}`
+  - calls: BytesBuilder, addByte, add, _encodeProtoVarint, protoValue, length, toBytes
+
+### top-level `unmarshalKeyProto` (function)
+
+- **unmarshalKeyProto** (function) — Decodes a `{Type, Data}` message produced by [marshalKeyProto].
+  - calls: length, _readProtoVarint, fromProtoValue, FormatException, sublist
+
+## `lib/src/crypto/rsa_key.dart`
+
+The minimum RSA key size go-libp2p accepts, per core/crypto/
+
+_Directly tested._
+
+### class `RsaPrivateKey` extends PrivKey
+
+An RSA private key, per go-libp2p's `core/crypto` `RsaPrivateKey`.
+
+- **type** (method)
+  - calls: rsa
+- **getPublic** (method)
+- **raw** (method)
+  - calls: encodePkcs1PrivateKey
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_types.dart` (Key.keyEquals)
+- **sign** (method)
+  - calls: RSASigner, SHA256Digest, init, PrivateKeyParameter, bytes, generateSignature
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
+
+### class `RsaPublicKey` extends PubKey
+
+An RSA public key, per go-libp2p's `core/crypto` `RsaPublicKey`.
+
+- **type** (method)
+  - calls: rsa
+- **raw** (method)
+  - calls: encodePkixPublicKey
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_types.dart` (Key.keyEquals)
+- **verify** (method)
+  - calls: RSASigner, SHA256Digest, init, PublicKeyParameter, verifySignature, RSASignature
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
+
+### top-level `minRsaKeyBits` (variable)
+
+- **minRsaKeyBits** (variable) — The minimum RSA key size go-libp2p accepts, per core/crypto/
+
+### top-level `generateRsaKeyPair` (function)
+
+- **generateRsaKeyPair** (function) — Generates a fresh RSA key pair with [bits] modulus size (must be at
+  - calls: ArgumentError, RSAKeyGenerator, init, ParametersWithRandom, RSAKeyGeneratorParameters, from, _secureRandom, generateKeyPair, fromPointyCastle, privateKey
+
+### top-level `unmarshalRsaPrivateKey` (function)
+
+- **unmarshalRsaPrivateKey** (function) — Parses an X.509/PKCS1-DER-encoded RSA private key, per go-libp2p's
+  - calls: fromBytes, elements, length, FormatException, integer, intAt, RSAPrivateKey, bitLength, modulus, fromPointyCastle
+
+### top-level `unmarshalRsaPublicKey` (function)
+
+- **unmarshalRsaPublicKey** (function) — Parses an X.509/PKIX-DER-encoded RSA public key
+  - calls: fromBytes, length, elements, FormatException, fromList, stringValues, integer, bitLength, fromPointyCastle, RSAPublicKey
+
+### top-level `encodePkcs1PrivateKey` (function)
+
+- **encodePkcs1PrivateKey** (function) — Encodes a PKCS1 `RSAPrivateKey` DER structure (RFC 8017 appendix
+  - calls: modulus, privateExponent, p, q, publicExponent, one, modInverse, ASN1Sequence, ASN1Integer, zero, encode
+  - referenced by (by name):
+    - `lib/src/crypto/rsa_key.dart` (RsaPrivateKey.raw)
+
+### top-level `encodePkixPublicKey` (function)
+
+- **encodePkixPublicKey** (function) — Encodes a PKIX `SubjectPublicKeyInfo` DER structure wrapping a PKCS1
+  - calls: encode, ASN1Sequence, ASN1Integer, modulus, publicExponent, ASN1ObjectIdentifier, ASN1Null, ASN1BitString, unusedbits
+  - referenced by (by name):
+    - `lib/src/crypto/rsa_key.dart` (RsaPublicKey.raw)
 

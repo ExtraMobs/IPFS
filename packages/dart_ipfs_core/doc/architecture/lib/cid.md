@@ -1,7 +1,7 @@
 ---
 module: cid
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.451646
+generated: 2026-08-25T08:24:06.082958
 ---
 
 # Module `cid` (`lib/src/cid/`)
@@ -37,6 +37,8 @@ A Content Identifier (CID) for content-addressed data in IPFS.
   - calls: isEmpty, ArgumentError, length, CID, decode, sublist, base58btc, Multibase, readVarint, FormatException, supportsByCode, name, base32
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/cid/cid.dart` (CID.decode)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
 - **decode** (method) — Decodes a CID from its string representation.
   - calls: isEmpty, ArgumentError, startsWith, decode, fromBytes
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
@@ -67,6 +69,8 @@ A Content Identifier (CID) for content-addressed data in IPFS.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **encodeWithBase** (method) — Encodes the CID using the requested [base].
   - calls: toBytes, encode, base58btc, Multibase, substring, base32
   - referenced by (by name):
@@ -82,6 +86,7 @@ A Content Identifier (CID) for content-addressed data in IPFS.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
@@ -166,6 +171,8 @@ Helpers for multibase encoding/decoding used by CID and other multiformats.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **encodeWithName** (method) — Encodes raw bytes using the requested base name (go-multibase's
   - calls: toLowerCase, _encodeByCode
 
@@ -230,6 +237,8 @@ Helpers for computing and decoding multihashes.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method) — Decodes a multihash byte array.
   - calls: decode, Multihash
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):

@@ -1,7 +1,7 @@
 ---
 module: multiaddr
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.458123
+generated: 2026-08-25T08:24:06.091946
 ---
 
 # Module `multiaddr` (`lib/src/multiaddr/`)
@@ -114,6 +114,7 @@ One `/protocol/value` (or bare `/protocol` for a flag protocol) segment
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
     - `lib/src/multiaddr/multiaddr.dart` (Component.compareTo)
@@ -169,6 +170,7 @@ A self-describing network address: an ordered sequence of [Component]s.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)

@@ -1,7 +1,7 @@
 ---
 module: codec
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.453266
+generated: 2026-08-25T08:24:06.085671
 ---
 
 # Module `codec` (`lib/src/codec/`)
@@ -43,6 +43,8 @@ Interface for all IPLD codecs in dart_ipfs_core.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method) — Decodes bytes into a Dart value.
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/cid/cid.dart` (CID.fromBytes)
@@ -84,6 +86,8 @@ Codec for DAG-CBOR.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)
   - calls: cborDecode, _fromCbor
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
@@ -125,6 +129,8 @@ Codec for DAG-JSON.
     - `lib/src/cid/multihash.dart` (MultihashUtils.encode)
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)
   - calls: decode, _denormalize, jsonDecode
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
@@ -166,6 +172,8 @@ Codec for raw binary data.
     - `lib/src/cid/multihash.dart` (MultihashUtils.sum)
     - `lib/src/codec/dag_json_codec.dart` (DagJsonCodec.encode)
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.deriveKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkcs1PrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (encodePkixPublicKey)
 - **decode** (method)
   - calls: fromList
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):

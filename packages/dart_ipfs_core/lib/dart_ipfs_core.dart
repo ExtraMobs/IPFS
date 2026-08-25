@@ -30,6 +30,18 @@ export 'src/codec/raw_codec.dart' show RawCodec;
 
 export 'src/crypto/crypto_utils.dart' show CryptoUtils, EncryptedData;
 export 'src/crypto/ed25519_signer.dart' show Ed25519Signer, KeyPairExtensions;
+export 'src/crypto/key_types.dart'
+    show Key, KeyType, PrivKey, PubKey, marshalKeyProto, unmarshalKeyProto;
+export 'src/crypto/rsa_key.dart'
+    show
+        RsaPrivateKey,
+        RsaPublicKey,
+        encodePkcs1PrivateKey,
+        encodePkixPublicKey,
+        generateRsaKeyPair,
+        minRsaKeyBits,
+        unmarshalRsaPrivateKey,
+        unmarshalRsaPublicKey;
 
 export 'src/data_structures/immutable_bytes.dart' show ImmutableBytes;
 export 'src/data_structures/typed_map.dart' show TypedMap;

@@ -1,7 +1,7 @@
 ---
 module: block
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.442622
+generated: 2026-08-25T08:24:06.074382
 ---
 
 # Module `block` (`lib/src/block/`)
@@ -44,6 +44,7 @@ Interface for content-addressed data blocks.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
@@ -87,6 +88,7 @@ Represents an IPFS block.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
@@ -186,6 +188,10 @@ A simple in-memory block store implementation.
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.publicKeyFromBytes)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
+    - `lib/src/crypto/key_types.dart` (unmarshalKeyProto)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
     - `lib/src/data_structures/immutable_bytes.dart` (ImmutableBytes.length)
     - `lib/src/data_structures/typed_map.dart` (TypedMap.length)
     - `lib/src/multiaddr/dns_resolver.dart` (Resolver.resolve)

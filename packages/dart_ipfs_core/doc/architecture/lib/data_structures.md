@@ -1,7 +1,7 @@
 ---
 module: data_structures
 kind: lib/src audit
-generated: 2026-08-25T01:44:49.456449
+generated: 2026-08-25T08:24:06.089886
 ---
 
 # Module `data_structures` (`lib/src/data_structures/`)
@@ -29,6 +29,7 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/cid/cid.dart` (CID.toPrefixBytes)
     - `lib/src/cid/cid.dart` (CID.==)
     - `lib/src/cid/cid.dart` (CID.hashCode)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
     - `lib/src/multiaddr/multiaddr.dart` (Component.toBytes)
     - `lib/src/multiaddr/multiaddr.dart` (Component.==)
     - `lib/src/multiaddr/multiaddr.dart` (Component.hashCode)
@@ -58,6 +59,10 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.publicKeyFromBytes)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
+    - `lib/src/crypto/key_types.dart` (unmarshalKeyProto)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
     - `lib/src/data_structures/typed_map.dart` (TypedMap.length)
     - `lib/src/multiaddr/dns_resolver.dart` (Resolver.resolve)
     - `lib/src/multiaddr/dns_resolver.dart` (isFqdn)
@@ -119,6 +124,10 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.publicKeyFromBytes)
+    - `lib/src/crypto/key_types.dart` (marshalKeyProto)
+    - `lib/src/crypto/key_types.dart` (unmarshalKeyProto)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPrivateKey)
+    - `lib/src/crypto/rsa_key.dart` (unmarshalRsaPublicKey)
     - `lib/src/data_structures/immutable_bytes.dart` (ImmutableBytes.length)
     - `lib/src/multiaddr/dns_resolver.dart` (Resolver.resolve)
     - `lib/src/multiaddr/dns_resolver.dart` (isFqdn)
