@@ -65,6 +65,17 @@ Future<Ed25519PrivKey> generateEd25519KeyPair() async {
   return _wrapKeyPair(await _signer.generateKeyPair());
 }
 
+/// Deterministically derives an Ed25519 key pair from a 32-byte seed,
+/// per go-libp2p's `ed25519.NewKeyFromSeed` convention -- useful when a
+/// caller already has (or wants to persist) just the seed rather than
+/// the full 64-byte `seed || publicKey` private key.
+Future<Ed25519PrivKey> ed25519KeyPairFromSeed(Uint8List seed) async {
+  if (seed.length != 32) {
+    throw ArgumentError('Ed25519 seed must be exactly 32 bytes, got ${seed.length}');
+  }
+  return _wrapKeyPair(await _signer.keyPairFromSeed(seed));
+}
+
 /// Parses a raw Ed25519 private key, per go-libp2p's
 /// `UnmarshalEd25519PrivateKey`: either the standard 64-byte
 /// `seed || publicKey` form, or a legacy 96-byte form with one redundant

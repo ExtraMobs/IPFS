@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-25T08:55:51.714695
+generated: 2026-08-25T09:40:09.232370
 ---
 
 # `test/transport/`
@@ -187,6 +187,23 @@ generated: 2026-08-25T08:55:51.714695
 - seed presence determines identity type
 - PeerId Conversion
 - extracts first 32 bytes for Ed25519 public key
+
+## `test/transport/noise/dart_ipfs_noise_security_test.dart`
+
+- DartIpfsNoiseSecurity -- end-to-end handshake
+- two Ed25519 identities complete a handshake and exchange data
+- an RSA identity (which ipfs_libp2p\
+- a large write spanning multiple frames round-trips correctly
+
+## `test/transport/noise/noise_framing_test.dart`
+
+- noise_framing
+- empty plaintext produces zero frames
+- small plaintext round-trips in exactly one frame
+- length prefix matches the actual ciphertext length
+- plaintext larger than maxPlaintextLength is chunked across frames
+- a plaintext of exactly maxPlaintextLength stays in one frame
+- decrypting with the wrong cipher state fails
 
 ## `test/transport/noise/noise_handshake_payload_test.dart`
 

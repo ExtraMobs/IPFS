@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.500616
+generated: 2026-08-25T09:40:09.021719
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -532,13 +532,13 @@ Base message wrapper for all IPFS messages
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **protocolId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **protocolId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -8174,13 +8174,13 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **protocolId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **protocolId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -14207,7 +14207,7 @@ Response message for adding a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -14227,7 +14227,7 @@ Response message for adding a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15310,7 +15310,7 @@ Response message for removing a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15330,7 +15330,7 @@ Response message for removing a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -55803,7 +55803,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -55823,7 +55823,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56755,7 +56755,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56775,7 +56775,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57245,7 +57245,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57265,7 +57265,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)

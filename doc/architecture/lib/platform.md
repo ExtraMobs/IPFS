@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.485053
+generated: 2026-08-25T09:40:09.012771
 ---
 
 # Module `platform` (`lib/src/platform/`)

@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.614266
+generated: 2026-08-25T09:40:09.130106
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -238,7 +238,7 @@ An ACME order as returned by the server.
 Exception thrown for ACME protocol errors.
 
 - **message** (field) — Human-readable error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -257,7 +257,7 @@ Exception thrown for ACME protocol errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -718,7 +718,7 @@ Result of a domain validation check.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable message describing the result.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -741,7 +741,7 @@ Result of a domain validation check.
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1483,6 +1483,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
@@ -2087,7 +2088,7 @@ Replication factor for a cluster pin.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **toString** (method)
   - calls: toString
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3416,7 +3417,7 @@ Response from a list pins request.
 Error returned by the pinning service API.
 
 - **message** (field) — Human-readable error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -3442,7 +3443,7 @@ Error returned by the pinning service API.
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

@@ -117,6 +117,13 @@ class CipherState {
   /// Whether a key has been established yet.
   bool get hasKey => _key != null;
 
+  /// The raw 32-byte symmetric key, once established (`null` before
+  /// then). Exposed so post-handshake transport wrappers that do their
+  /// own AEAD framing (e.g. reusing an existing `TransportConn`-style
+  /// connection wrapper instead of this class's own encrypt/decrypt)
+  /// can seed themselves from this `CipherState`'s derived key.
+  Uint8List? get keyBytes => _key;
+
   /// Sets (or replaces) the key and resets the nonce counter to 0.
   void initializeKey(Uint8List key) {
     _key = key;

@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.437478
+generated: 2026-08-25T09:40:08.974689
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -347,7 +347,7 @@ _Directly tested._
 Configuration options for the DHT (Distributed Hash Table)
 
 - **protocolId** (field) — Protocol identifier for DHT.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -611,6 +611,7 @@ Configuration for an IPFS node.
 - **security** (field) — Security and identity configuration.
   - referenced by (by name):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
 - **gateway** (field) — HTTP Gateway configuration.
 - **bitswap** (field) — Bitswap protocol configuration.
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
@@ -1010,7 +1011,7 @@ Network configuration for the IPFS node.
 Configuration for a specific protocol.
 
 - **protocolId** (field) — The protocol identifier.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -2167,7 +2168,7 @@ _Directly tested._
 Base class for CAR parsing errors.
 
 - **message** (field) — Human-readable error description.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2186,7 +2187,7 @@ Base class for CAR parsing errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2347,7 +2348,7 @@ Immutable CAR file header.
     - `lib/src/core/storage/datastore.dart` (Key.hashCode)
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2543,7 +2544,7 @@ A single CID/block section within a CAR archive.
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2792,6 +2793,7 @@ Builder for CAR v2 index payloads.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -3582,7 +3584,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3894,7 +3896,7 @@ Represents statistics about the IPFS node.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4113,7 +4115,7 @@ A single entry in the operation log.
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
   - calls: toString, name
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -4289,7 +4291,7 @@ A circular log of operations performed on the datastore.
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.loadAndUnlock)
 - **toString** (method)
   - calls: join, map, toString
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
@@ -4425,7 +4427,7 @@ Represents a network address (IP + Port).
     - `lib/src/services/rpc/rpc_server.dart` (RPCServer.url)
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4617,7 +4619,7 @@ Represents a peer node in the IPFS network.
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
   - calls: value, toList, map, toString
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4894,7 +4896,7 @@ A pin that prevents content from being garbage collected.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getAllBlocks)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5174,7 +5176,7 @@ _Directly tested._
 Base class for Graphsync protocol errors
 
 - **message** (field) — The error message describing what went wrong.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5194,7 +5196,7 @@ Base class for Graphsync protocol errors
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **cause** (field) — The underlying cause of this error, if any.
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5357,7 +5359,7 @@ _Directly tested._
 Base class for IPLD (InterPlanetary Linked Data) errors.
 
 - **message** (field) — The error message describing what went wrong.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5376,7 +5378,7 @@ Base class for IPLD (InterPlanetary Linked Data) errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5551,7 +5553,7 @@ _No known direct test._
 Base class for network-related errors.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5626,7 +5628,7 @@ Error when connecting to a remote peer fails.
 Error in a P2P protocol (e.g., Bitswap, DHT).
 
 - **protocolId** (field) — The protocol that encountered the error.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -5646,7 +5648,7 @@ Base class for all IPFS Node related errors.
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -5780,7 +5782,7 @@ Error thrown when a required component is missing or fails.
 
 - **component** (field) — The component that failed.
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6230,7 +6232,7 @@ Events related to peer connection status.
 Event for received network messages.
 
 - **message** (field) — The received message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -8495,6 +8497,7 @@ A minimal IPFS node for web browsers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -11144,7 +11147,7 @@ _Directly tested._
 Errors thrown while encoding a value into DAG-JSON.
 
 - **message** (field) — Human-readable description of the failure.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -11163,7 +11166,7 @@ Errors thrown while encoding a value into DAG-JSON.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -11284,7 +11287,7 @@ _(no public members)_
 Errors thrown while decoding a DAG-JSON string into an IPLD node.
 
 - **message** (field) — Human-readable description of the failure.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -11303,7 +11306,7 @@ Errors thrown while decoding a DAG-JSON string into an IPLD node.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -13334,7 +13337,7 @@ Kubo-compatible entry in an MFS directory listing.
 Error thrown when a path argument is invalid or escapes the MFS root.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -13353,7 +13356,7 @@ Error thrown when a path argument is invalid or escapes the MFS root.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -13651,7 +13654,7 @@ A signed peer record: a [PeerRecordPb] wrapped in a signed [EnvelopePb].
   - calls: encode
 - **toString** (method)
   - calls: length, peerId, addresses, seq
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -14443,7 +14446,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -14814,7 +14817,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: decode, length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15162,7 +15165,7 @@ A field read from a protobuf message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15587,7 +15590,7 @@ Event emitted by the peering service.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15722,7 +15725,7 @@ Exception thrown when a plugin exercises (or attempts to exercise) a
   - referenced by (by name) (name shared by 16 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_audit_log.dart` (PluginAuditLog.recordException)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -16269,7 +16272,7 @@ _Directly tested._
 Exception thrown when a plugin manifest is invalid or cannot be parsed.
 
 - **message** (field) — Human-readable error description.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16288,7 +16291,7 @@ Exception thrown when a plugin manifest is invalid or cannot be parsed.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -16634,7 +16637,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (method) — Human-readable message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16653,7 +16656,7 @@ Base class for protobuf block responses with validation.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method) — Sets the message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16708,7 +16711,7 @@ Base class for API responses with success status.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16742,7 +16745,7 @@ Base class for API responses with success status.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -16884,7 +16887,7 @@ Generic response wrapper for block operations.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -17116,7 +17119,7 @@ Base class for block operation responses.
     - `lib/src/routing/reframe_routing.dart` (ReframeRoutingClient.findProviders)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **message** (field) — Human-readable result message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -17150,7 +17153,7 @@ Base class for block operation responses.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesStat)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -17869,6 +17872,7 @@ Operator-controlled content denylist service.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
@@ -18333,7 +18337,7 @@ _Directly tested._
 Error thrown when a datastore operation fails.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -18352,7 +18356,7 @@ Error thrown when a datastore operation fails.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -18483,7 +18487,7 @@ Represents a key in the datastore.
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.rotateRight)
     - `lib/src/protocols/dht/red_black_tree/rotations.dart` (Rotations.validateTree)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -19716,7 +19720,7 @@ Represents a peer identifier in the IPFS network.
     - `lib/src/protocols/dht/peer.dart` (Peer.hashCode)
 - **toString** (method)
   - calls: toBase58
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20124,7 +20128,7 @@ _Directly tested._
 Thrown when UnixFS path resolution fails because of a malformed path,
 
 - **message** (field) — Human-readable description of the resolution failure.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -20143,7 +20147,7 @@ Thrown when UnixFS path resolution fails because of a malformed path,
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20258,7 +20262,7 @@ Thrown when UnixFS path resolution fails because of a malformed path,
 Thrown when a cycle is detected while traversing a UnixFS DAG.
 
 - **message** (field) — Human-readable description of the cycle.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -20277,7 +20281,7 @@ Thrown when a cycle is detected while traversing a UnixFS DAG.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -20392,7 +20396,7 @@ Thrown when a cycle is detected while traversing a UnixFS DAG.
 Thrown when a symlink cycle is detected during UnixFS path resolution.
 
 - **message** (field) — Human-readable description of the symlink cycle.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -20411,7 +20415,7 @@ Thrown when a symlink cycle is detected during UnixFS path resolution.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

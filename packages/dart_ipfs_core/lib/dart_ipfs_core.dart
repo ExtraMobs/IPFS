@@ -42,6 +42,7 @@ export 'src/crypto/ed25519_key.dart'
     show
         Ed25519PrivKey,
         Ed25519PubKey,
+        ed25519KeyPairFromSeed,
         generateEd25519KeyPair,
         unmarshalEd25519PrivateKey,
         unmarshalEd25519PublicKey;

@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.480369
+generated: 2026-08-25T09:40:09.009622
 ---
 
 # Module `network` (`lib/src/network/`)

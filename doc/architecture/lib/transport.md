@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.619506
+generated: 2026-08-25T09:40:09.135441
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -181,7 +181,7 @@ Represents an active relayed connection.
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -200,7 +200,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -470,7 +470,7 @@ Represents an active relayed connection (web stub; never instantiated).
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -489,7 +489,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1256,7 +1256,7 @@ Native libp2p router implementation.
 - **derivePeerIdFromECDSA** (method) — Derives a peer ID from an ECDSA public key.
   - calls: EcdsaSigner, derivePeerId
 - **start** (method)
-  - calls: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
+  - calls: warning, initialize, debug, _loadPrivateNetworkPsk, info, _buildListenAddresses, ResourceManagerImpl, FixedLimiter, WebRTCTransport, network, WebRTCDirectTransport, WebTransportTransport, TCPTransport, PnetTransportWrapper, transport, Libp2p, enableQuic, add, enableWebTransport, enableWebRtc, new_, listenAddrs, identity, userAgent, security, DartIpfsNoiseSecurity, host, register, start, notify, NotifyBundle, toString, remotePeer, remoteMultiaddr, ConnectionEvent, connected, remove, disconnected, first, id, _connectToBootstrapPeers, error, StateError
   - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
@@ -1428,7 +1428,7 @@ Native libp2p router implementation.
 Exception thrown when a network operation fails in the transport layer.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -1447,7 +1447,7 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1557,6 +1557,194 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial)
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
 
+## `lib/src/transport/noise/dart_ipfs_noise_security.dart`
+
+The multistream-select protocol ID for Noise, per go-libp2p (and
+
+_Directly tested._
+
+### class `DartIpfsNoiseException` implements Exception
+
+Thrown when a Noise handshake over [TransportConn] fails -- framing,
+
+- **message** (field) — The error message.
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
+    - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
+    - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse)
+    - `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock)
+    - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
+    - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
+- **cause** (field) — The underlying error, if this wraps one.
+- **toString** (method)
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
+    - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
+    - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
+    - `lib/src/core/data_structures/peer.dart` (Peer.toString)
+    - `lib/src/core/events/event_bus.dart` (EventBus.publish)
+    - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus)
+    - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
+    - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata)
+    - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock)
+    - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock)
+    - `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics)
+    - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes)
+    - `lib/src/core/repository/repository.dart` (Repository.addFile)
+    - `lib/src/core/repository/repository.dart` (Repository.processProtoBlock)
+    - `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson)
+    - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
+    - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
+    - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink)
+    - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue)
+    - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue)
+    - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider)
+    - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders)
+    - `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson)
+    - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
+    - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse)
+    - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
+    - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
+    - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
+    - `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders)
+    - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
+    - `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock)
+    - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
+    - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
+    - `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock)
+    - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData)
+    - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
+    - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
+    - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord)
+    - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
+    - `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString)
+    - `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial)
+    - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr)
+    - `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id)
+    - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr)
+    - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial)
+    - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
+
+### class `DartIpfsNoiseSecurity` implements SecurityProtocol
+
+A [SecurityProtocol] implementation backed by this repo's own Noise
+
+- **localIdentityKey** (field) — This node's libp2p identity private key, used to sign the Noise
+- **protocolId** (method)
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
+    - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
+    - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
+- **secureOutbound** (method)
+  - calls: _runHandshake
+- **secureInbound** (method)
+  - calls: _runHandshake
+
+### top-level `noiseProtocolId` (variable)
+
+- **noiseProtocolId** (variable) — The multistream-select protocol ID for Noise, per go-libp2p (and
+
+## `lib/src/transport/noise/noise_framing.dart`
+
+The Noise-imposed maximum transport message length, inclusive of the
+
+_Directly tested._
+
+### top-level `maxTransportMsgLength` (variable)
+
+- **maxTransportMsgLength** (variable) — The Noise-imposed maximum transport message length, inclusive of the
+
+### top-level `maxPlaintextLength` (variable)
+
+- **maxPlaintextLength** (variable) — The maximum plaintext payload per frame; larger writes are chunked,
+
+### top-level `lengthPrefixLength` (variable)
+
+- **lengthPrefixLength** (variable) — The length of the frame's length prefix itself, per go-libp2p's
+
+### top-level `encryptFrames` (function)
+
+- **encryptFrames** (function) — Splits [plaintext] into `<= maxPlaintextLength`-byte chunks, encrypts
+  - calls: length, encryptWithAd, Uint8List, sublist, add, _withLengthPrefix
+
+### top-level `decryptFrame` (function)
+
+- **decryptFrame** (function) — Decrypts one already length-delimited ciphertext frame (i.e. the
+  - calls: decryptWithAd, Uint8List
+
 ## `lib/src/transport/noise/noise_handshake_payload.dart`
 
 Prepended to the Noise static public key before signing with the
@@ -1627,7 +1815,7 @@ The libp2p identity of the remote peer, recovered and authenticated
 Thrown when a Noise handshake payload's signature doesn't verify
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -1646,7 +1834,7 @@ Thrown when a Noise handshake payload's signature doesn't verify
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1796,16 +1984,19 @@ Noise spec section 5.1: `k` (32-byte key, or absent) and `n` (64-bit
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **keyBytes** (method) — The raw 32-byte symmetric key, once established (`null` before
 - **initializeKey** (method) — Sets (or replaces) the key and resets the nonce counter to 0.
   - referenced by (by name):
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixKey)
 - **encryptWithAd** (method) — `EncryptWithAd`: returns `plaintext` unmodified if no key is set yet
   - calls: _nonceBytes, encrypt, SecretKey, fromList, cipherText, bytes, mac
   - referenced by (by name):
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.encryptAndHash)
 - **decryptWithAd** (method) — `DecryptWithAd`: mirrors [encryptWithAd].
   - calls: length, FormatException, _nonceBytes, SecretBox, sublist, Mac, decrypt, SecretKey, fromList
   - referenced by (by name):
+    - `lib/src/transport/noise/noise_framing.dart` (decryptFrame)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.decryptAndHash)
 
 ### class `SymmetricState`
@@ -2782,7 +2973,7 @@ Represents an incoming message from a peer.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **message** (field) — The raw message payload.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2932,7 +3123,7 @@ Content or metadata from a PubSub subscription.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **message** (field) — The raw message payload.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -3018,7 +3209,7 @@ Represents a protocol or network error.
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **message** (field) — A human-readable error message.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -5379,7 +5570,7 @@ Statistics for WebTransport datagram I/O.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
 - **reset** (method) — Resets all counters to zero.
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

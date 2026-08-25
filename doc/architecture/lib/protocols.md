@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.600477
+generated: 2026-08-25T09:40:09.116734
 ---
 
 # Module `protocols` (`lib/src/protocols/`)
@@ -1160,7 +1160,7 @@ Tracks bandwidth exchange (sent vs received bytes) with a peer.
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **toString** (method)
   - calls: getDebt
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1846,6 +1846,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -2261,6 +2262,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
@@ -2343,7 +2345,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.clear)
     - `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2533,7 +2535,7 @@ A tagged connection with priority and metadata for the Cuttlefish
   - referenced by (by name):
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionsByTag)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3548,6 +3550,7 @@ Sorted queue of peers by XOR distance to a target.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -3843,7 +3846,7 @@ _No known direct test._
 Implementation of the Kademlia DHT protocol following IPFS specs.
 
 - **protocolId** (static field) — Protocol identifier for Kademlia DHT.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -3889,7 +3892,7 @@ _Directly tested._
 Kademlia DHT protocol message handler.
 
 - **protocolId** (static field) — Kademlia protocol ID.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -4025,7 +4028,7 @@ Represents a key in the DHT
     - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: encode, Base58
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4167,7 +4170,7 @@ Represents a value stored in the DHT
     - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: decode
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6160,7 +6163,7 @@ Represents a peer in the DHT network
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **toString** (method) — Creates a string representation of the peer
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6554,7 +6557,7 @@ _Directly tested._
 Exception thrown when a rate-limited operation is evicted because the
 
 - **message** (field) — Description of why the operation was dropped.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -6573,7 +6576,7 @@ Exception thrown when a rate-limited operation is evicted because the
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -8428,7 +8431,7 @@ The libp2p Identify message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -8596,7 +8599,7 @@ Event emitted when a remote peer pushes updated identify info.
 - **identify** (field) — The decoded identify message from the remote peer.
 - **toString** (method)
   - calls: agentVersion
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9077,7 +9080,7 @@ Handles IPNS (InterPlanetary Name System) operations.
 Error thrown when an IPNS name cannot be resolved.
 
 - **message** (field) — Human-readable description of the resolution failure.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -9096,7 +9099,7 @@ Error thrown when an IPNS name cannot be resolved.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9211,7 +9214,7 @@ Error thrown when an IPNS name cannot be resolved.
 Error thrown when an IPNS record fails validation.
 
 - **message** (field) — Human-readable description of the validation failure.
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -9230,7 +9233,7 @@ Error thrown when an IPNS record fails validation.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9850,7 +9853,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.resolve)
 - **toString** (method) — Human-readable representation.
   - calls: decode, toIso8601String
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -10237,7 +10240,7 @@ Result of a ping operation.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - calls: inMilliseconds
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15025,7 +15028,7 @@ _No known direct test._
 Configuration for Gossipsub v1.1.
 
 - **protocolId** (field) — Primary Gossipsub protocol ID.
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.protocolId)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
@@ -15140,7 +15143,7 @@ A message received on a Gossipsub topic.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15257,7 +15260,7 @@ Spec-compliant Gossipsub v1.1 handler.
 - **isStarted** (method) — Whether the handler has been started.
 - **protocolId** (method) — The configured protocol ID.
   - calls: protocolId
-  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/messages/message_factory.dart` (MessageFactory.createBaseMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.start)
 - **start** (method) — Starts the handler, registers the protocol, and begins the heartbeat.
@@ -15592,6 +15595,7 @@ Cache of recently seen Gossipsub messages per topic.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
@@ -15752,7 +15756,7 @@ Cache of recently seen Gossipsub messages per topic.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **message** (field)
-  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16132,7 +16136,7 @@ Represents a message published on a PubSub topic.
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **sender** (field) — The sender's peer ID.
 - **toString** (method)
-  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 57 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

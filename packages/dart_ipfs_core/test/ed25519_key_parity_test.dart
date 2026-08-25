@@ -103,5 +103,21 @@ void main() {
     test('rejects a private key of the wrong length', () async {
       await expectLater(unmarshalEd25519PrivateKey(Uint8List(10)), throwsFormatException);
     });
+
+    test('ed25519KeyPairFromSeed is deterministic and matches the seed embedded in raw()', () async {
+      final seed = Uint8List.fromList(List<int>.generate(32, (i) => i * 7 % 256));
+      final a = await ed25519KeyPairFromSeed(seed);
+      final b = await ed25519KeyPairFromSeed(seed);
+      expect(a.raw(), equals(b.raw()));
+      expect(a.raw().sublist(0, 32), equals(seed));
+
+      final data = Uint8List.fromList('seeded key check'.codeUnits);
+      final sig = await a.sign(data);
+      expect(await b.getPublic().verify(data, sig), isTrue);
+    });
+
+    test('ed25519KeyPairFromSeed rejects a seed of the wrong length', () async {
+      await expectLater(ed25519KeyPairFromSeed(Uint8List(31)), throwsArgumentError);
+    });
   });
 }

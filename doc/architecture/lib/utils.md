@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-25T08:55:51.639119
+generated: 2026-08-25T09:40:09.143454
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -511,6 +511,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_framing.dart` (encryptFrames)
     - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
     - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
     - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)

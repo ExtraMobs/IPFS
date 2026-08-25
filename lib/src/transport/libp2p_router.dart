@@ -1,7 +1,9 @@
 // lib/src/transport/libp2p_router.dart
 import 'dart:async';
+import 'dart:math' show Random;
 import 'dart:typed_data';
 
+import 'package:dart_ipfs_core/dart_ipfs_core.dart' as core_crypto;
 import 'package:ipfs_libp2p/config/config.dart' as config;
 import 'package:ipfs_libp2p/core/crypto/ed25519.dart' as crypto;
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
@@ -16,6 +18,7 @@ import '../core/crypto/ecdsa_signer.dart';
 import '../core/crypto/rsa_signer.dart';
 import '../core/interfaces/routing_table.dart';
 import '../utils/logger.dart';
+import 'noise/dart_ipfs_noise_security.dart';
 import 'pnet/pnet_transport_wrapper.dart';
 import 'pnet/swarm_key_loader.dart';
 import 'quic_transport_probe.dart'
@@ -54,6 +57,12 @@ class Libp2pRouter implements RouterInterface {
 
   libp2p.Host? _host;
   libp2p.KeyPair? _keyPair;
+
+  /// The same identity as [_keyPair], as a `dart_ipfs_core` [core_crypto.PrivKey]
+  /// -- kept in sync (derived from the same seed) so [DartIpfsNoiseSecurity]
+  /// can sign the Noise handshake payload without needing raw key material
+  /// ipfs_libp2p's own [libp2p.KeyPair] doesn't expose.
+  core_crypto.PrivKey? _identityKey;
   bool _hasStarted = false;
   bool _isInitialized = false;
   libp2p_transport.Transport? _quicTransport;
@@ -183,40 +192,36 @@ class Libp2pRouter implements RouterInterface {
 
   /// Generates a key pair based on the configured key type.
   Future<libp2p.KeyPair> _generateKeyPair() async {
-    switch (_keyType.toLowerCase()) {
-      case 'rsa':
-        _logger.warning(
-          'RSA keys not directly supported by ipfs_libp2p, using Ed25519',
-        );
-        return await crypto.generateEd25519KeyPair();
-      case 'ecdsa':
-        _logger.warning(
-          'ECDSA keys not directly supported by ipfs_libp2p, using Ed25519',
-        );
-        return await crypto.generateEd25519KeyPair();
-      case 'ed25519':
-      default:
-        return await crypto.generateEd25519KeyPair();
+    if (_keyType.toLowerCase() != 'ed25519') {
+      _logger.warning(
+        'RSA/ECDSA keys not directly supported by ipfs_libp2p, using Ed25519',
+      );
     }
+    final seed = Uint8List.fromList(
+      List<int>.generate(32, (_) => Random.secure().nextInt(256)),
+    );
+    return _generateKeyPairFromSeed(seed);
   }
 
-  /// Derives a key pair from a seed based on the configured key type.
+  /// Derives a key pair from a 32-byte Ed25519 seed, populating both the
+  /// ipfs_libp2p-facing [libp2p.KeyPair] and this router's own
+  /// `dart_ipfs_core`-typed [_identityKey] from the same seed.
   Future<libp2p.KeyPair> _generateKeyPairFromSeed(Uint8List seed) async {
-    switch (_keyType.toLowerCase()) {
-      case 'rsa':
-        _logger.warning(
-          'RSA keys not directly supported by ipfs_libp2p, using Ed25519',
-        );
-        return await crypto.generateEd25519KeyPairFromSeed(seed);
-      case 'ecdsa':
-        _logger.warning(
-          'ECDSA keys not directly supported by ipfs_libp2p, using Ed25519',
-        );
-        return await crypto.generateEd25519KeyPairFromSeed(seed);
-      case 'ed25519':
-      default:
-        return await crypto.generateEd25519KeyPairFromSeed(seed);
+    if (_keyType.toLowerCase() != 'ed25519') {
+      _logger.warning(
+        'RSA/ECDSA keys not directly supported by ipfs_libp2p, using Ed25519',
+      );
     }
+    // `crypto.Ed25519PrivateKey.fromRawBytes` (unlike
+    // `crypto.generateEd25519KeyPairFromSeed`) retains the seed bytes, so
+    // the resulting KeyPair's private key actually exposes `.raw` --
+    // needed nowhere in ipfs_libp2p's own code today, but required for
+    // nothing here either; what we actually need is just parallel,
+    // seed-derived construction of both key representations.
+    final identityKey = await core_crypto.ed25519KeyPairFromSeed(seed);
+    _identityKey = identityKey;
+    final libp2pPrivateKey = await crypto.Ed25519PrivateKey.fromRawBytes(seed);
+    return libp2p.KeyPair(libp2pPrivateKey.publicKey, libp2pPrivateKey);
   }
 
   /// Derives a peer ID from an RSA public key.
@@ -306,6 +311,7 @@ class Libp2pRouter implements RouterInterface {
         config.Libp2p.listenAddrs(listenAddresses),
         config.Libp2p.identity(_keyPair!),
         config.Libp2p.userAgent('dart_ipfs/2.0.0'),
+        config.Libp2p.security(DartIpfsNoiseSecurity(_identityKey!)),
       ]);
 
       if (_config.network.enableWebRtc) {
