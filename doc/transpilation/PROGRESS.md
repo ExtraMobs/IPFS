@@ -14,9 +14,20 @@
 
 ## Status
 
-- `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `fora do escopo (daemon-CLI só, ver plano)`.
+- `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `implementação original não auditada` | `fora do escopo (daemon-CLI só, ver plano)`.
+- `implementação original não auditada` (valor novo, adicionado em 2026-08): existe código Dart funcional cobrindo (parte d)o que este pacote Go faz, mas foi escrito do zero, nunca comparado função-a-função com o Go real, e não tem teste de paridade contra vetores reais. **Não confundir com `não iniciado`** (nenhum código relevante existe) — a distinção importa porque a suite de testes já achou 2 bugs reais em código que "funcionava" antes de ser auditado (Noise só-Ed25519, RSA com DER errado). Ver a seção "Estado em aberto" abaixo pra o levantamento completo de onde essa cobertura existe.
 - `Destino em lib/src/` fica em branco até o pacote ser realmente mapeado — preencher ao decidir onde o port mora no `dart_ipfs`.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
+
+## Estado em aberto (2026-08-25)
+
+Isto é o que uma sessão futura precisa saber pra continuar de onde paramos — não é redundante com as tabelas abaixo, é o contexto que não cabe numa célula de tabela.
+
+- **Levantamento recursivo de dependências completo**, cruzando `kubo/go.mod` + os 15 módulos clonados + o estado real deste repo (não só o que esta tabela diz): https://claude.ai/code/artifact/6b94efde-3f58-4ad6-98bd-c18d8de19330 — inclui a ordem de construção recomendada (abaixo) e, importante, a cobertura original já existente em `lib/src/` pra cada um dos 8 módulos sem port literal (DHT, PubSub, IPLD codecs, Bitswap, UnixFS, Gateway/CAR, storage, routing helpers).
+- **Ordem de construção recomendada**, derivada dos imports Go reais (não suposição): (1) `core/record`+`core/peer/pb` (fecha `PeerRecord`, autocontido) → (2) três frentes paralelas sem dependência cruzada: `go-libp2p-record`→`routing-helpers`, `go-libp2p-kbucket`, `go-datastore`, `go-ipld-prime`, `go-libp2p-pubsub` → (3) `boxo` núcleo (bitswap/blockstore/dag/files/mfs/gateway — não depende da DHT) → (4) `go-libp2p-kad-dht` (ponto de convergência: kbucket+record+routing-helpers+boxo+datastore — é o ÚLTIMO a ficar pronto, não o primeiro) → (5) `boxo` namesys/routing (só cantos que realmente usam a DHT). Cortando tudo isso: o resto do `go-libp2p` em si (Host/Swarm/Transportes/NAT/Identify) ainda vem inteiro do `ipfs_libp2p` de terceiro — é o maior corpo de trabalho restante em linhas de código de todo o grafo, e nenhum item da lista acima o reduz.
+- **Tarefa aberta, ainda não iniciada**: mapear a árvore/funções públicas do guarda-chuva pra espelhar `kubo` de verdade. Ponto de entrada já identificado: `bin/ipfs.dart` (`CommandRunner` → `DaemonCommand`/etc. → `IPFSNode`) é o equivalente do `kubo/cmd/ipfs/main.go` → `core/builder.go` → `core/core.go`. Falta decidir, por etapa (usando a ordem acima), o que em `lib/src/` é reaproveitável como está (cola de integração genuína, ex. `core/ipfs_node/`, `services/`) vs. o que precisa ser substituído por port real conforme cada módulo da ordem acima for feito.
+- **Limpeza de identidade do fork (concluída)**: removidos `README.md`/`CONTRIBUTING.md`/`CHANGELOG.md`/`LICENSE`/`SECURITY.md`/`ROADMAP.md`/`ENGINEERING_NOTES.md`/`CODE_OF_CONDUCT.md`/`FUNDING.yml`/workflow de publish automático no pub.dev/Docker+Helm+K8s (apontavam pro registry do autor original) — eram 100% conteúdo do projeto `jxoesneon/IPFS` upstream, sem valor de código pra este fork. `pubspec.yaml`/`melos.yaml` e os docs técnicos que restaram agora apontam pro fork real (`github.com/ExtraMobs/IPFS`). Esses arquivos precisam ser reescritos do zero quando o fork tiver uma identidade própria definida — não foram recriados ainda, de propósito.
+- **Limitação conhecida dos planos do Claude Code**: o arquivo de plano (`C:\Users\Administrador\.claude\plans\...`) não é versionado neste repositório — vive só na instalação local do Claude Code, e pode ser sobrescrito por um plano mais novo com o mesmo nome (já aconteceu nesta sessão: o plano original de metodologia foi substituído pelo plano de reorganização de pacotes). Esta seção existe justamente pra não depender só do arquivo de plano pra continuidade entre sessões.
 
 
 ### `go-cid`
@@ -315,10 +326,12 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 ### `boxo`
 
+**Nota de cobertura (2026-08-25)**: é o módulo com mais implementação original já existente de toda esta lista, mas espalhada e não mapeada linha a linha contra os 114 pacotes reais do boxo -- por isso as linhas abaixo continuam em branco em vez de marcadas uma a uma. O que já existe e funciona: `lib/src/protocols/bitswap/` (7 arquivos, 1974 linhas, ~ `bitswap`+`bitswap/client`+`bitswap/server`+`bitswap/message`), `lib/src/core/unixfs/` (8, 1181, ~ pacote `unixfs` do próprio boxo -- que na verdade vive em `go-unixfsnode`, não clonado), `lib/src/services/gateway/` (23 arquivos, ~ `gateway`), `lib/src/core/data_structures/car.dart` (835 linhas, ~ `car`/`ipld/car`, mas o formato real vem do módulo separado `go-car/v2`, também não clonado), `lib/src/core/mfs/` (~ `mfs`), `lib/src/protocols/ipns/` (~ parte de `ipns`/`namesys`). Nenhum foi comparado função-a-função com o boxo real ainda -- status real de todos: `implementação original não auditada`, não `não iniciado`.
+
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
 | `autoconf` |  | não iniciado |  |
-| `bitswap` |  | não iniciado |  |
+| `bitswap` | `lib/src/protocols/bitswap/` (ver nota acima) | implementação original não auditada |  |
 | `bitswap/client` |  | não iniciado |  |
 | `bitswap/client/internal` |  | não iniciado |  |
 | `bitswap/client/internal/blockpresencemanager` |  | não iniciado |  |
@@ -436,15 +449,15 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` |  | não iniciado | Modelo de dados/travessia genérico do IPLD real (`Node`, `NodeBuilder`, `Path`, seletores) -- **não tem equivalente algum** no que já existe em `lib/src/core/ipld/` (ver notas de `codec/*` abaixo); a camada Dart só cobre encode/decode dos formatos, não o modelo de dados/travessia. |
 | `adl` |  | não iniciado |  |
 | `adl/rot13adl` |  | não iniciado |  |
 | `codec` |  | não iniciado |  |
 | `codec/cbor` |  | não iniciado |  |
-| `codec/dagcbor` |  | não iniciado |  |
-| `codec/dagjson` |  | não iniciado |  |
+| `codec/dagcbor` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`DagCborCodec`) | implementação original não auditada | Codec funcional já em uso, nunca comparado byte a byte com este pacote. |
+| `codec/dagjson` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`DagJsonCodec`) | implementação original não auditada | Idem `codec/dagcbor`. |
 | `codec/json` |  | não iniciado |  |
-| `codec/raw` |  | não iniciado |  |
+| `codec/raw` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`RawCodec`) | implementação original não auditada | Idem `codec/dagcbor`. `DagPbCodec` (também em `standard_codecs.dart`) não tem equivalente aqui -- DAG-PB é um módulo Go separado, `go-codec-dagpb`, não clonado em `go-ipfs-reference/` ainda. |
 | `datamodel` |  | não iniciado |  |
 | `fluent` |  | não iniciado |  |
 | `fluent/qp` |  | não iniciado |  |
@@ -488,7 +501,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` | `lib/src/protocols/dht/` (40 arquivos, 7171 linhas) | implementação original não auditada | Cliente DHT completo e em uso -- `dht_client.dart`, `dht_handler.dart`, `provider_store.dart`, `peer_store.dart`, `reprovider.dart`, `optimistic_provider.dart`, `rate_limiter.dart` -- mas escrito do zero, nunca comparado função-a-função com este módulo. Depende de `go-libp2p-kbucket`+`record`+`routing-helpers`+`boxo`+`go-datastore` (nenhum ainda portado) -- é o último módulo da ordem de construção recomendada, não o primeiro (ver "Estado em aberto" acima). |
 | `amino` |  | não iniciado |  |
 | `crawler` |  | não iniciado |  |
 | `dual` |  | não iniciado |  |
@@ -518,7 +531,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` | `lib/src/protocols/pubsub/` (14 arquivos, 2557 linhas, incl. `gossipsub/`) | implementação original não auditada | GossipSub funcional já em uso (`gossipsub_handler.dart`, `pubsub_client.dart`), escrito do zero. Estruturalmente independente da cadeia DHT/boxo -- pode ser auditado/re-portado a qualquer momento, sem esperar por outro módulo. |
 | `compat` |  | não iniciado |  |
 | `internal/gologshim` |  | não iniciado |  |
 | `internal/merkle` |  | não iniciado |  |
@@ -531,7 +544,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` | `lib/src/core/storage/` (`datastore.dart`, `hive_datastore.dart`) | implementação original não auditada | Abstração de storage própria com backend Hive, já em uso. Sem dependência estrutural de outro módulo desta lista -- decisão real de paridade-vs-reuso quando chegar a vez dele, não bloqueio duro pra mais nada. |
 | `autobatch` |  | não iniciado |  |
 | `context` |  | não iniciado |  |
 | `delayed` |  | não iniciado |  |
@@ -557,7 +570,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` | `lib/src/protocols/dht/kademlia_tree/` (12 arquivos) + `xor_distance_metric.dart`, `red_black_tree.dart`, `kademlia_routing_table.dart` | implementação original não auditada | Árvore Kademlia por distância XOR funcional já em uso, escrita do zero. Falta a filtragem de diversidade por ASN/faixa de IP que o `peerdiversity` real tem. Depende de `go-cidranger`+`go-libp2p-asn-util`, nenhum dos dois clonado em `go-ipfs-reference/` ainda. |
 | `generate` |  | não iniciado |  |
 | `keyspace` |  | não iniciado |  |
 | `peerdiversity` |  | não iniciado |  |
@@ -566,12 +579,12 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` |  | não iniciado | Sem cobertura existente nenhuma -- a validação de valor da DHT hoje está embutida direto em `dht_handler.dart`, sem um `Validator`/`ValidatorRegistry` reutilizável. Menor dos módulos sem port (339 linhas/6 arquivos/2 pacotes); só depende de `go-libp2p` (`core/crypto`, já pronto) + `go-multihash`. Candidato natural a vir logo depois de `core/record` (ver "Estado em aberto"). |
 | `pb` |  | não iniciado |  |
 
 ### `go-libp2p-routing-helpers`
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
+| `(root)` | `lib/src/routing/` (5 arquivos: `content_routing.dart`, `delegated_routing.dart`, `reframe_routing.dart`, `ipni_client.dart`, `dnslink_resolver.dart`) | implementação original não auditada | Composição de roteadores já existe, design próprio (não espelha `Parallel`/`Sequential`/`Compose`/`LimitedValueStore` do Go). Depende de `go-libp2p-record` (não portado ainda). |
 | `tracing` |  | não iniciado |  |
