@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.698122
+generated: 2026-08-25T04:10:39.459960
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -206,6 +206,7 @@ Simple byte accumulator for the encoder.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `_CborReader`
@@ -234,6 +235,10 @@ Byte reader for the decoder.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **offset** (field)
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.decodeDagCbor)
@@ -1288,6 +1293,7 @@ Result of AES-GCM encryption containing ciphertext and nonce.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes from bytes.
   - calls: length, nonceSize, ArgumentError, EncryptedData, sublist
@@ -1332,10 +1338,12 @@ Cryptographic utilities for secure key management.
   - referenced by (by name):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
 - **decrypt** (method) — Decrypts AES-256-GCM encrypted data.
   - calls: length, ArgumentError, with256bits, AesGcm, SecretKey, ciphertext, sublist, SecretBox, nonce, Mac, decrypt, fromList
   - referenced by (by name):
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getKey)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
 - **zeroMemory** (method) — Zeros a memory buffer to prevent sensitive data from lingering.
   - calls: length
   - referenced by (by name):
@@ -1507,6 +1515,7 @@ Unified Ed25519 signing service.
   - referenced by (by name):
     - `lib/src/core/crypto/ed25519_signer.dart` (Ed25519Signer.extractPublicKeyBytes)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.publicKey)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **extractPublicKeyBytes** (method) — Extracts the public key bytes from a key pair.
   - calls: extractPublicKey, fromList, bytes
   - referenced by (by name):
@@ -1642,10 +1651,11 @@ Encrypted keystore for secure private key storage.
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.getSecurePublicKey)
 - **hasKey** (method) — Checks if a key exists in the keystore.
   - calls: containsKey
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **removeKey** (method) — Removes a key from the keystore.
   - calls: remove
 - **serialize** (method) — Serializes the keystore to encrypted JSON format.
@@ -1900,6 +1910,7 @@ Abstract base class for content-addressed blocks.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Deserializes a block from bytes using the provided factory function.
   - calls: length, FormatException, sublist, isValidCIDBytes, fromBytes, factory
@@ -2507,6 +2518,10 @@ A single CID/block section within a CAR archive.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **serializedSize** (method) — The on-wire size of this section, including the varint length prefix.
   - calls: toBytes, length, _varintLength
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
@@ -2771,6 +2786,7 @@ Builder for CAR v2 index payloads.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
@@ -3103,6 +3119,10 @@ Append-only writer for CAR v1 and v2 archives.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 
 ## `lib/src/core/data_structures/directory.dart`
 
@@ -3170,6 +3190,8 @@ Represents a single entry within an IPFS directory for construction purposes.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **size** (field) — The cumulative size of the linked content in bytes.
   - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
@@ -3548,6 +3570,7 @@ A node in the IPFS Merkle DAG (Directed Acyclic Graph).
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **toString** (method)
   - calls: length
@@ -6607,6 +6630,7 @@ Abstract interface for block data access.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ## `lib/src/core/interfaces/block_store_operations.dart`
@@ -8460,6 +8484,7 @@ A minimal IPFS node for web browsers.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
@@ -8958,13 +8983,14 @@ Handles network operations for an IPFS node.
 - **circuitRelayClient** (method) — Returns the circuit relay client.
 - **initialize** (method) — Initializes the network handler.
   - calls: debug, initialize, verbose, _setupEventHandlers, error
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **canConnectDirectly** (method) — Tests if a direct connection can be established with a peer
   - calls: verbose, connect, disconnect, debug, error
 - **testDialback** (method) — Tests if the node is reachable from the outside network through dialback
@@ -9127,7 +9153,7 @@ Web stub for NetworkHandler.
 - **testConnection** (method) — Tests connection (stub).
 - **testDialback** (method) — Tests dialback (stub).
 - **initialize** (method) — Initializes the handler (stub).
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -9135,6 +9161,7 @@ Web stub for NetworkHandler.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 
 ## `lib/src/core/ipfs_node/network_manager.dart`
 
@@ -11943,6 +11970,7 @@ IPLD Selector for querying and traversing DAG structures.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytesAsync** (method) — Creates an IPLDSelector from its CBOR byte representation
   - calls: _decodeBytes, kind, MAP, IPLDDecodingError, firstWhere, values, toString, stringValue, value, entries, mapValue, key, MapEntry, IPLDNode, IPLDMap, _decodeValue, toInt, intValue, NULL, toList, map, listValue, LIST, IPLDList, fromNode, boolValue, IPLDSelector
@@ -12672,6 +12700,7 @@ Base class for all network messages.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `DHTMessage` extends BaseMessage
@@ -12968,6 +12997,8 @@ Kubo-compatible stat result for an MFS path.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **size** (field) — File size in bytes, or 0 for directories.
   - referenced by (by name) (name shared by 20 declarations -- not resolved to this one specifically, see caveat):
@@ -13230,6 +13261,8 @@ Kubo-compatible entry in an MFS directory listing.
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **mode** (field) — Unix mode, when requested.
   - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
@@ -16142,7 +16175,7 @@ The plugin host validates, loads, and manages in-process plugins.
 - **registry** (method) — Returns the capability registry.
 - **initialize** (method) — Initializes the host by loading trusted keys and scanning plugins.
   - calls: info, enabled, _loadTrustedKeys, length, pluginDirectories, _loadPluginsFromDirectory
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -16150,6 +16183,7 @@ The plugin host validates, loads, and manages in-process plugins.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **startAll** (method) — Starts all loaded plugins.
   - calls: disabled, plugin, onStart, _NullIpfsNode
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
@@ -17787,6 +17821,10 @@ Operator-controlled content denylist service.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (_PnetCipher.process)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk)

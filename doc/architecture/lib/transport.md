@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.986334
+generated: 2026-08-25T04:10:39.767648
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -1241,7 +1241,7 @@ Native libp2p router implementation.
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.receiveMessages)
 - **initialize** (method)
   - calls: warning, debug, _generateKeyPairFromSeed, _generateKeyPair, _probeQuicTransport, error, StateError
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -1249,6 +1249,7 @@ Native libp2p router implementation.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **derivePeerIdFromRSA** (method) — Derives a peer ID from an RSA public key.
   - calls: RsaSigner, derivePeerId
 - **derivePeerIdFromECDSA** (method) — Derives a peer ID from an ECDSA public key.
@@ -1554,6 +1555,137 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial)
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
+
+## `lib/src/transport/noise/noise_state.dart`
+
+`Noise_XX_25519_ChaChaPoly_SHA256`'s protocol name, per spec section
+
+_Directly tested._
+
+### class `NoiseKeyPair`
+
+A Noise DH key pair: [privateKeyBytes] is the raw 32-byte X25519 scalar
+
+- **privateKeyBytes** (field) — The raw 32-byte X25519 private scalar (pre-clamping seed).
+- **publicKeyBytes** (field) — The corresponding X25519 public key.
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+
+### class `CipherState`
+
+Noise spec section 5.1: `k` (32-byte key, or absent) and `n` (64-bit
+
+- **hasKey** (method) — Whether a key has been established yet.
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
+    - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
+    - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **initializeKey** (method) — Sets (or replaces) the key and resets the nonce counter to 0.
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixKey)
+- **encryptWithAd** (method) — `EncryptWithAd`: returns `plaintext` unmodified if no key is set yet
+  - calls: _nonceBytes, encrypt, SecretKey, fromList, cipherText, bytes, mac
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.encryptAndHash)
+- **decryptWithAd** (method) — `DecryptWithAd`: mirrors [encryptWithAd].
+  - calls: length, FormatException, _nonceBytes, SecretBox, sublist, Mac, decrypt, SecretKey, fromList
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.decryptAndHash)
+
+### class `SymmetricState`
+
+Noise spec section 5.2: `ck` (chaining key), `h` (handshake hash), and
+
+- **initialize** (method) — Initializes `ck`/`h` from [protocolName] (spec section 5.2's
+  - calls: fromList, codeUnits, length, Uint8List, setRange, bytes, hash, _
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
+    - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
+    - `lib/src/routing/content_routing.dart` (ContentRouting.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
+- **cipherState** (field) — The symmetric cipher state derived from the chaining key so far.
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **mixKey** (method) — Mixes a DH output (or other input key material) into the chaining
+  - calls: _noiseHkdf, initializeKey
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **mixHash** (method) — Mixes [data] into the running handshake hash `h`.
+  - calls: fromList, bytes, hash, _concat
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.encryptAndHash)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.decryptAndHash)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **encryptAndHash** (method) — Encrypts (if a key is set) [plaintext] under the current handshake
+  - calls: encryptWithAd, mixHash
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+- **decryptAndHash** (method) — Mirrors [encryptAndHash] for the receiving side.
+  - calls: decryptWithAd, mixHash
+  - referenced by (by name):
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+- **split** (method) — Spec section 5.3 `Split()`: derives the two directional
+  - calls: _noiseHkdf, Uint8List, CipherState
+  - referenced by (by name):
+    - `lib/src/core/data_structures/peer.dart` (Peer.fromMultiaddr)
+    - `lib/src/core/data_structures/peer.dart` (parseMultiaddrString)
+    - `lib/src/core/data_structures/peer.dart` (multiaddrToBytes)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink)
+    - `lib/src/core/ipld/path/ipld_path_handler.dart` (IPLDPathHandler.parsePath)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toSpecSelector)
+    - `lib/src/core/repository/repository.dart` (Repository.addFile)
+    - `lib/src/core/security/denylist_service.dart` (DenylistService.isBlockedPath)
+    - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.resolveSubPath)
+    - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory)
+    - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handlePath)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
+    - `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk)
+    - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
+    - `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
+    - `lib/src/utils/base58.dart` (Base58.base58Decode)
+
+### class `HandshakeState`
+
+Drives one side of a `Noise_XX_25519_ChaChaPoly_SHA256` handshake.
+
+- **initialize** (method) — Starts a handshake as [initiator] or responder, using [staticKeyPair]
+  - calls: initialize, mixHash, Uint8List, _
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
+    - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
+    - `lib/src/routing/content_routing.dart` (ContentRouting.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+- **initiator** (field) — Whether this side sent the first handshake message.
+- **writeMessage** (method) — Writes the next handshake message (per [_xxPattern]), embedding
+  - calls: length, StateError, BytesBuilder, e, _ephemeralKeyGenerator, add, publicKeyBytes, mixHash, s, encryptAndHash, ee, mixKey, _dh, es, se, split, toBytes
+- **readMessage** (method) — Reads the next handshake message, mirroring [writeMessage]. Returns
+  - calls: length, StateError, e, FormatException, sublist, mixHash, s, hasKey, cipherState, decryptAndHash, ee, mixKey, _dh, es, se, split
+- **remoteStaticKey** (method) — The remote peer's static public key, available once message 2 (the
+
+### top-level `noiseProtocolName` (variable)
+
+- **noiseProtocolName** (variable) — `Noise_XX_25519_ChaChaPoly_SHA256`'s protocol name, per spec section
+
+### top-level `generateNoiseKeyPair` (function)
+
+- **generateNoiseKeyPair** (function) — Generates a fresh X25519 key pair (used for both the Noise static key
+  - calls: newKeyPair, extractPrivateKeyBytes, extractPublicKey, NoiseKeyPair, fromList, bytes
 
 ## `lib/src/transport/pnet/pnet_listener.dart`
 
@@ -2852,7 +2984,7 @@ Abstract interface for P2P network routers.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **messageEvents** (method) — Stream of message events from peers.
 - **initialize** (method) — Initializes the router with configuration.
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -2860,6 +2992,7 @@ Abstract interface for P2P network routers.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **start** (method) — Starts the router and begins accepting connections.
   - referenced by (by name) (name shared by 65 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)

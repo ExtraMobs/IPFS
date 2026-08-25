@@ -1,6 +1,6 @@
 ---
 test-group: property
-generated: 2026-08-25T03:56:08.125859
+generated: 2026-08-25T04:10:39.916403
 ---
 
 # `test/property/`

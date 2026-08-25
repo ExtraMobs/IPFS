@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-25T03:56:08.161914
+generated: 2026-08-25T04:10:39.924341
 ---
 
 # `test/transport/`
@@ -187,6 +187,13 @@ generated: 2026-08-25T03:56:08.161914
 - seed presence determines identity type
 - PeerId Conversion
 - extracts first 32 bytes for Ed25519 public key
+
+## `test/transport/noise/noise_state_test.dart`
+
+- Noise_XX_25519_ChaChaPoly_SHA256 -- real flynn/noise vector
+- every handshake and transport message matches byte-for-byte
+- HandshakeState -- self-interop sanity
+- two fresh sessions complete a handshake and exchange data
 
 ## `test/transport/pnet/pnet_test.dart`
 

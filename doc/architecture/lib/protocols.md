@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.946394
+generated: 2026-08-25T04:10:39.744135
 ---
 
 # Module `protocols` (`lib/src/protocols/`)
@@ -1386,6 +1386,7 @@ Represents a Bitswap protocol message.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ### class `WantlistEntry`
@@ -1840,6 +1841,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
@@ -2254,6 +2256,10 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (_PnetCipher.process)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk)
@@ -3106,13 +3112,14 @@ Kademlia DHT client implementation for IPFS.
 - **protocolDhtLan** (static field) — Protocol identifier for LAN Kademlia DHT (used by private networks).
 - **initialize** (method) — Initializes the DHT client.
   - calls: dht, config, initialize, start, isEmpty, peerID, StateError, fromBase58, KademliaRoutingTable, KademliaRoutingAdapter, setDHTRoutingTable, _registerProtocols, _setupHandlers, listen, connectionEvents, type, connected, unawaited, _bootstrapConnectedPeer, peerId
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **getRoutingKey** (method) — Computes the routing key for a CID string.
   - calls: decode, toBytes, multihash, fromList, bytes, convert, encode, PeerId
   - referenced by (by name):
@@ -3536,6 +3543,7 @@ Sorted queue of peers by XOR distance to a target.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)
@@ -3647,6 +3655,7 @@ Thin framing envelope for DHT request/response correlation.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 
 ## `lib/src/protocols/dht/dht_handler.dart`
@@ -4005,6 +4014,10 @@ Represents a key in the DHT
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: encode, Base58
   - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
@@ -4143,6 +4156,10 @@ Represents a value stored in the DHT
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
     - `lib/src/services/content_service.dart` (ContentService.computeHash)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.encryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
+    - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: decode
   - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
@@ -4374,7 +4391,7 @@ Kademlia DHT routing table implementation using k-buckets.
 - **maxPeersPerIp** (static field) — Maximum allowed peers from a single IP address (Security: Sybil protection).
 - **initialize** (method) — Initializes the routing table with the provided [client].
   - calls: KademliaTree, KademliaTreeNode, peerId, associatedPeerId, millisecondsSinceEpoch, now, debug
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -4382,6 +4399,7 @@ Kademlia DHT routing table implementation using k-buckets.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **addPeer** (method) — Adds a peer to the routing table, enforcing security and bucket constraints.
   - calls: containsKey, warning, _calculateXorDistance, peerId, root, _getBucketIndex, _getOrCreateBucket, _findNodeInBucket, lastSeen, millisecondsSinceEpoch, now, verbose, size, _removeStaleNode, debug, KademliaTreeNode, putIfAbsent, ConnectionStatistics
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
@@ -10410,7 +10428,7 @@ Coordinates data retrieval across multiple protocols.
 
 - **initialize** (method) — Initializes all protocol handlers.
   - calls: debug, start, info, error
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 10 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.initialize)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
@@ -10418,6 +10436,7 @@ Coordinates data retrieval across multiple protocols.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.start)
     - `lib/src/routing/content_routing.dart` (ContentRouting.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.initialize)
 - **retrieveData** (method) — Retrieves data by CID using available protocols.
   - calls: debug, timeout, _retrieveInternal, warning, error, _fallbackIpldRetrieval
 - **getStatus** (method) — Returns the status of all protocol handlers.
@@ -12154,10 +12173,11 @@ PubSub message.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 
@@ -15562,6 +15582,7 @@ Cache of recently seen Gossipsub messages per topic.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocol)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.onEvent)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerRelayedConnection)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/transport/webrtc/ice_server.dart` (buildIceServersFromNetworkConfig)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.handleStream)

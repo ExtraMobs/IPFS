@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.759265
+generated: 2026-08-25T04:10:39.579375
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -53,6 +53,7 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesWrite)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/transport/dns/dns_message.dart` (encodeDnsQuery)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.cidToBytes)
 - **fromBytes** (method) — Create message from bytes
   - calls: factory, mergeFromBuffer
@@ -16699,6 +16700,8 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **hash** (method)
   - calls: $_setBytes
@@ -16730,6 +16733,8 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findChildCid)
     - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesLs)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.mixHash)
     - `lib/src/transport/webrtc/ice_server.dart` (IceServer.hashCode)
 - **hasHash** (method)
   - calls: $_has
@@ -29426,10 +29431,11 @@ Represents a record stored in the DHT.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method) — Required: The value of the record.
@@ -30220,10 +30226,11 @@ Represents a request to find providers for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **count** (method) — Optional: The maximum number of providers to return (default: unlimited).
@@ -31276,10 +31283,11 @@ Represents a request to provide a record for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **provider** (method) — Optional: The peer providing the record.
@@ -32350,10 +32358,11 @@ Represents a request to find a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 
@@ -33565,10 +33574,11 @@ Represents a request to store a value for a key.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method) — Required: The value to store.
@@ -45388,10 +45398,11 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)
@@ -46230,10 +46241,11 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 
@@ -46804,10 +46816,11 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)
@@ -47568,10 +47581,11 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **peerId** (method)
@@ -48220,10 +48234,11 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **providers** (method)
@@ -58491,10 +58506,11 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **record** (method)
@@ -62338,10 +62354,11 @@ Represents a node in a Red-Black Tree.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -65679,10 +65696,11 @@ Request message for storing provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -66771,10 +66789,11 @@ Request to retrieve provider information
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **ensureKey** (method)
@@ -106782,10 +106801,11 @@ Individual map entry
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **hasKey** (method)
   - calls: $_has
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 18 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/security/security_manager.dart` (SecurityManager.hasSecureKey)
     - `lib/src/core/security/security_manager.dart` (SecurityManager.migrateKeysFromPlaintext)
     - `lib/src/core/security/security_manager_web.dart` (SecurityManagerWeb.hasSecureKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
 - **clearKey** (method)
   - calls: $_clearField
 - **value** (method)

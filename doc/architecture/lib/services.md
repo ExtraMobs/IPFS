@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.974586
+generated: 2026-08-25T04:10:39.759650
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -1482,6 +1482,10 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (_PnetCipher.process)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk)

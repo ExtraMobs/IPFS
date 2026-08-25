@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.972305
+generated: 2026-08-25T04:10:39.758623
 ---
 
 # Module `routing` (`lib/src/routing/`)

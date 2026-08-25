@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-25T03:56:07.998924
+generated: 2026-08-25T04:10:39.775977
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -509,6 +509,10 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/noise/noise_state.dart` (CipherState.decryptWithAd)
+    - `lib/src/transport/noise/noise_state.dart` (SymmetricState.initialize)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.readMessage)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (_PnetCipher.process)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.create)
     - `lib/src/transport/pnet/swarm_key_loader.dart` (decodeV1Psk)
@@ -2061,8 +2065,9 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **publicKeyBytes** (method) — Returns the compressed public key bytes (SEC1)
   - calls: getEncoded, Q, publicKey, Uint8List
-  - referenced by (by name):
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.publicKey)
+    - `lib/src/transport/noise/noise_state.dart` (HandshakeState.writeMessage)
 - **sign** (method) — Signs the given data using the private key
   - calls: Signer, SecureRandom, secure, seed, KeyParameter, fromList, List, nextInt, ParametersWithRandom, PrivateKeyParameter, privateKey, init, generateSignature, padLeft, toRadixString, r, s, decode
   - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
