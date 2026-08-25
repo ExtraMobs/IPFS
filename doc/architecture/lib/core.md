@@ -1,7 +1,7 @@
 ---
 module: core
 kind: lib/src audit
-generated: 2026-08-25T01:38:18.191799
+generated: 2026-08-25T03:56:07.698122
 ---
 
 # Module `core` (`lib/src/core/`)
@@ -19506,7 +19506,7 @@ _No known direct test._
 
 ## `lib/src/core/types/peer_id.dart`
 
-Represents a peer identifier in the IPFS network.
+go-libp2p core/crypto/pb's `KeyType` enum (crypto.proto): the wire value
 
 _Directly tested._
 
@@ -19616,7 +19616,7 @@ Represents a peer identifier in the IPFS network.
     - `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson)
     - `lib/src/routing/content_routing.dart` (ContentRouting.provide)
 - **toBase36** (method) — Converts the peer ID to a multibase-prefixed base36-encoded string.
-  - calls: _encodeBase36
+  - calls: encodeWithName
   - referenced by (by name):
     - `lib/src/protocols/ipns/ipns_record.dart` (deriveIpnsName)
 - **==** (method)

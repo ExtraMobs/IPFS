@@ -164,12 +164,13 @@ void main() {
     test(
       'PeerId base36 round-trip: toBase36 -> fromBase36 -> equals original',
       () {
-        // The base36 encoding uses BigInt which drops leading zero bytes, so
-        // we only test peer IDs without leading zeros. This is a known
-        // limitation of the current implementation.
+        // toBase36/fromBase36 now delegate to dart_ipfs_core's
+        // MultibaseUtils base36 codec (package:base_x, which counts
+        // leading zero bytes explicitly rather than converting through a
+        // single BigInt), so leading-zero peer IDs round-trip correctly
+        // too -- no skipping needed.
         for (var i = 0; i < 500; i++) {
           final bytes = randomBytes(rng, 32);
-          if (bytes[0] == 0) continue; // Skip leading-zero peer IDs.
           final id = PeerId(value: bytes);
           final encoded = id.toBase36();
           final decoded = PeerId.fromBase36(encoded);
@@ -178,17 +179,18 @@ void main() {
       },
     );
 
-    test('PeerId base36 with leading zeros: documents known limitation', () {
-      // Peer IDs with leading zero bytes lose those zeros in base36 encoding
-      // because BigInt conversion drops them. This test documents the
-      // behavior rather than asserting round-trip equality.
+    test('PeerId base36 round-trips leading zero bytes', () {
+      // Previously a known limitation (base36 used a BigInt conversion
+      // that silently dropped leading zero bytes) -- fixed by switching to
+      // dart_ipfs_core's MultibaseUtils, whose base36 codec (via
+      // package:base_x) explicitly counts and preserves them, the same way
+      // base58 does.
       final bytes = Uint8List.fromList([0, 1, 2, 3, 4, 5]);
       final id = PeerId(value: bytes);
       final encoded = id.toBase36();
       final decoded = PeerId.fromBase36(encoded);
-      // The decoded value will have the leading zero stripped.
-      expect(decoded.value.length, lessThan(id.value.length));
-      expect(decoded.value, equals(Uint8List.fromList([1, 2, 3, 4, 5])));
+      expect(decoded.value, equals(bytes));
+      expect(decoded, equals(id));
     });
 
     test('PeerId equality: same bytes -> equal', () {

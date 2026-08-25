@@ -1,6 +1,61 @@
 import 'dart:typed_data';
 import 'package:crypto/crypto.dart' as crypto;
+import 'package:dart_ipfs_core/dart_ipfs_core.dart'
+    show MultibaseUtils, MultihashUtils;
 import '../../utils/base58.dart';
+
+/// go-libp2p core/crypto/pb's `KeyType` enum (crypto.proto): the wire value
+/// used in the protobuf-marshaled `PublicKey`/`PrivateKey` messages that
+/// peer IDs and the Noise/TLS handshakes are built from.
+enum PublicKeyType {
+  /// KeyType.RSA = 0.
+  rsa(0),
+
+  /// KeyType.Ed25519 = 1.
+  ed25519(1),
+
+  /// KeyType.Secp256k1 = 2.
+  secp256k1(2),
+
+  /// KeyType.ECDSA = 3.
+  ecdsa(3);
+
+  const PublicKeyType(this.protoValue);
+
+  /// The enum's wire value in the `crypto.pb.KeyType` protobuf enum.
+  final int protoValue;
+}
+
+/// A peer ID's public key is inline-hashed (multihash `identity`, i.e. the
+/// hash IS the marshaled key) rather than SHA2-256-hashed when the
+/// marshaled protobuf `PublicKey` message is this short or shorter -- see
+/// go-libp2p core/peer's `maxInlineKeyLength`. Ed25519 keys are always
+/// under this threshold (36 marshaled bytes); RSA keys never are.
+const int _maxInlineKeyLength = 42;
+
+/// Encodes `PublicKey{required KeyType Type = 1; required bytes Data = 2;}`
+/// (crypto.proto) on the wire: a hand-rolled 2-field protobuf message, not
+/// worth pulling in a full protobuf codegen step for.
+Uint8List _marshalPublicKeyProto(PublicKeyType type, Uint8List rawKeyBytes) {
+  final out = BytesBuilder();
+  out.addByte(0x08); // field 1, varint wire type
+  out.addByte(type.protoValue); // KeyType values all fit in one byte
+  out.addByte(0x12); // field 2, length-delimited wire type
+  out.add(_encodeProtoVarint(rawKeyBytes.length));
+  out.add(rawKeyBytes);
+  return out.toBytes();
+}
+
+Uint8List _encodeProtoVarint(int value) {
+  final bytes = <int>[];
+  var v = value;
+  while (v >= 0x80) {
+    bytes.add((v & 0x7f) | 0x80);
+    v >>= 7;
+  }
+  bytes.add(v);
+  return Uint8List.fromList(bytes);
+}
 
 /// Represents a peer identifier in the IPFS network.
 class PeerId {
@@ -20,29 +75,42 @@ class PeerId {
     if (base36.isEmpty) {
       throw ArgumentError('Empty base36 string');
     }
-    var encoded = base36;
-    if (encoded[0] == 'k') {
-      encoded = encoded.substring(1);
-    }
-    return PeerId(value: _decodeBase36(encoded));
+    final prefixed = base36[0] == 'k' ? base36 : 'k$base36';
+    return PeerId(value: MultibaseUtils.decode(prefixed));
   }
 
-  /// Creates a PeerId from a public key.
+  /// Creates a PeerId from a raw public key, per go-libp2p core/peer's
+  /// `IDFromPublicKey`: the key is wrapped in a protobuf `PublicKey{Type,
+  /// Data}` message (crypto.proto), then that message is hashed as a
+  /// multihash -- `identity` (the hash IS the marshaled message) when the
+  /// message is [_maxInlineKeyLength] bytes or shorter, `sha2-256`
+  /// otherwise. Ed25519 keys (36 marshaled bytes) always take the inline
+  /// path, producing the well-known `12D3Koo...` peer ID family; RSA and
+  /// other larger keys always hash, producing the `Qm...` family.
   ///
-  /// [type] must be `'Ed25519'` for this simplified implementation. The peer
-  /// ID is derived as the SHA-256 digest of the raw public key bytes. A full
-  /// libp2p implementation would use the protobuf-encoded public key and the
-  /// identity multihash for Ed25519 keys.
+  /// [type] names the key algorithm: `'Ed25519'`, `'RSA'`, `'Secp256k1'`,
+  /// or `'ECDSA'` (case-insensitive). [publicKey] must be exactly 32 bytes
+  /// for Ed25519 -- the other algorithms don't have a fixed raw-key length
+  /// enforced here.
   factory PeerId.fromPublicKey(Uint8List publicKey, {required String type}) {
-    if (type != 'Ed25519') {
-      throw UnsupportedError('Only Ed25519 public keys are supported');
-    }
-    if (publicKey.length != 32) {
+    final keyType = switch (type.toLowerCase()) {
+      'ed25519' => PublicKeyType.ed25519,
+      'rsa' => PublicKeyType.rsa,
+      'secp256k1' => PublicKeyType.secp256k1,
+      'ecdsa' => PublicKeyType.ecdsa,
+      _ => throw UnsupportedError('Unknown public key type: $type'),
+    };
+    if (keyType == PublicKeyType.ed25519 && publicKey.length != 32) {
       throw ArgumentError(
         'Ed25519 public key must be 32 bytes, got ${publicKey.length}',
       );
     }
-    return PeerId(value: _sha256(publicKey));
+
+    final marshaled = _marshalPublicKeyProto(keyType, publicKey);
+    final alg = marshaled.length <= _maxInlineKeyLength
+        ? 'identity'
+        : 'sha2-256';
+    return PeerId(value: MultihashUtils.sum(alg, marshaled).toBytes());
   }
 
   /// The raw bytes of the peer ID.
@@ -58,7 +126,7 @@ class PeerId {
   /// The returned string starts with `k`, the base36 multibase prefix, e.g.
   /// `k51qzi5uqu5...`.
   String toBase36() {
-    return 'k${_encodeBase36(value)}';
+    return MultibaseUtils.encodeWithName('base36', value);
   }
 
   @override
@@ -124,48 +192,3 @@ int _listHashCode(List<int> list) {
   return list.fold(0, (prev, element) => prev ^ element.hashCode);
 }
 
-const _base36Alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
-
-/// Encodes a non-negative big integer, represented as big-endian bytes, to a
-/// base36 string using the lowercase alphabet `0-9a-z`.
-String _encodeBase36(Uint8List data) {
-  if (data.isEmpty) return '0';
-  var value = BigInt.zero;
-  for (final byte in data) {
-    value = (value << 8) | BigInt.from(byte);
-  }
-  if (value == BigInt.zero) return '0';
-  final buffer = StringBuffer();
-  final base = BigInt.from(36);
-  while (value > BigInt.zero) {
-    final remainder = value % base;
-    buffer.write(_base36Alphabet[remainder.toInt()]);
-    value = value ~/ base;
-  }
-  return buffer.toString().split('').reversed.join();
-}
-
-/// Decodes a base36 string (lowercase `0-9a-z`) to big-endian bytes.
-Uint8List _decodeBase36(String encoded) {
-  if (encoded.isEmpty) {
-    throw ArgumentError('Empty base36 string');
-  }
-  var value = BigInt.zero;
-  final base = BigInt.from(36);
-  for (final ch in encoded.toLowerCase().split('')) {
-    final index = _base36Alphabet.indexOf(ch);
-    if (index == -1) {
-      throw ArgumentError('Invalid base36 character: $ch');
-    }
-    value = value * base + BigInt.from(index);
-  }
-  if (value == BigInt.zero) {
-    return Uint8List(0);
-  }
-  final bytes = <int>[];
-  while (value > BigInt.zero) {
-    bytes.add((value & BigInt.from(0xff)).toInt());
-    value = value >> 8;
-  }
-  return Uint8List.fromList(bytes.reversed.toList());
-}

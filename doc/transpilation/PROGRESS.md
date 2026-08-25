@@ -74,6 +74,12 @@
 
 ### `go-libp2p`
 
+**Ordem de prioridade invertida** (ver plano, `lexical-fluttering-acorn.md`): testei um nó real conectando contra `bootstrap.libp2p.io` e descobri que o handshake Noise da dependência `ipfs_libp2p` (usada hoje pra host/transporte/segurança) é hardcoded pra Ed25519 (`p2p/security/noise/noise_protocol.dart`: `if (pubKey.type != crypto_pb.KeyType.Ed25519) throw ...`) -- rejeita qualquer peer real que use RSA, então portar `core/crypto`/`core/peer` sozinho (Tier 2 original) não destrava conexão real (a checagem está na camada de segurança). Por isso `core/sec`/`p2p/security/{noise,tls}` (Tier 3 original) viraram prioridade antes do resto de `core/crypto`/`core/peer`/`core/record`. Também achado no mesmo teste: discagem QUIC-v1 de saída falha com "No transport found for address" -- gap de registro de transporte, investigar junto.
+
+Um bug concreto de `core/peer` já foi corrigido fora de ordem (motivado pelo mesmo teste): `PeerId.fromPublicKey` em `lib/src/core/types/peer_id.dart` calculava `sha256(chave pública crua)` diretamente, em vez de multihash do `PublicKey{Type, Data}` protobuf-marshaled (`identity` multihash quando o marshaled cabe em ≤42 bytes -- sempre o caso pra Ed25519, 36 bytes -- `sha2-256` caso contrário, exatamente `IDFromPublicKey` de `core/peer/peer.go`). Também rejeitava qualquer tipo que não fosse `'Ed25519'`; agora aceita `RSA`/`Secp256k1`/`ECDSA` também (só a derivação do PeerId, não assinatura/verificação -- isso ainda é `core/crypto` de verdade). Um protobuf mínimo de 2 campos (`PublicKey{Type, Data}`, crypto.proto) foi escrito à mão em `peer_id.dart` -- não vale a pena codegen completo pra isso.
+
+Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_decodeBase36` (também em `peer_id.dart`) convertiam os bytes pra um único `BigInt`, descartando bytes zero à esquerda -- mesma classe de bug já documentada e corrigida em `multibase.dart` no Tier 1 (base32 do `package:multibase`). Como o identity-multihash de uma chave Ed25519 sempre começa com o byte `0x00` (o código do multihash `identity`), esse bug ficava latente até a derivação de PeerId ficar correta. Corrigido substituindo `_encodeBase36`/`_decodeBase36` inteiros pelas chamadas equivalentes em `dart_ipfs_core`'s `MultibaseUtils` (já testado, 116 casos de paridade no Tier 1) -- não faz sentido manter dois codecs base36 no projeto. Testes atualizados: `test/core/types/peer_id_test.dart` (vetores exatos calculados à mão pro caso Ed25519) e `test/property/dht_property_test.dart` (o teste que antes documentava a limitação de bytes-zero-à-esquerda como conhecida agora prova que foi corrigida, com 500 iterações aleatórias sem pular nenhuma).
+
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
 | `(root)` |  | não iniciado |  |
@@ -81,8 +87,8 @@
 | `core` |  | não iniciado |  |
 | `core/connmgr` |  | não iniciado |  |
 | `core/control` |  | não iniciado |  |
-| `core/crypto` |  | não iniciado |  |
-| `core/crypto/pb` |  | não iniciado |  |
+| `core/crypto` |  | não iniciado | Bloqueado indiretamente: o gap real que impede conexão com peers RSA está no handshake Noise (`p2p/security/noise`, fora do escopo do go-libp2p core -- ver nota acima), não aqui. Portar mesmo assim quando chegar a vez (RSA/Secp256k1/ECDSA completos, Sign/Verify, Marshal/UnmarshalPrivateKey/PublicKey) -- `core/peer`'s derivação de PeerId já foi corrigida adiantada e só precisa dos tipos de chave completos pra assinar/verificar de verdade. |
+| `core/crypto/pb` | (protobuf mínimo de 2 campos hand-rolled em `lib/src/core/types/peer_id.dart`, só o necessário pra `PeerId.fromPublicKey`) | portado sem teste de paridade formal (coberto indiretamente pelos testes de `peer_id_test.dart`) | Falta: `PrivateKey{Type,Data}` (só `PublicKey` foi implementado, que é o que `core/peer` precisa), e não geramos código de um `.proto` real -- é só os 2 campos hand-rolled. Revisitar quando `core/crypto` completo for portado, pra decidir se vale migrar pra protobuf codegen de verdade (o projeto já usa `protoc`-gerado em outros lugares, ver `lib/src/proto/`). |
 | `core/discovery` |  | não iniciado |  |
 | `core/event` |  | não iniciado |  |
 | `core/host` |  | não iniciado |  |
@@ -90,7 +96,7 @@
 | `core/metrics` |  | não iniciado |  |
 | `core/network` |  | não iniciado |  |
 | `core/network/mocks` |  | não iniciado |  |
-| `core/peer` |  | não iniciado |  |
+| `core/peer` | `lib/src/core/types/peer_id.dart` (`PeerId.fromPublicKey` apenas) | em andamento | `IDFromPublicKey` corrigido (ver nota acima) -- resto do pacote (interface `ID`, `AddrInfo`, `Set`, etc.) não iniciado. |
 | `core/peer/pb` |  | não iniciado |  |
 | `core/peerstore` |  | não iniciado |  |
 | `core/pnet` |  | não iniciado |  |

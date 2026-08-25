@@ -1,6 +1,6 @@
 ---
 test-group: property
-generated: 2026-08-25T01:38:20.168010
+generated: 2026-08-25T03:56:08.125859
 ---
 
 # `test/property/`
@@ -50,7 +50,7 @@ generated: 2026-08-25T01:38:20.168010
 - XOR distance satisfies triangle inequality for same-length peer IDs
 - PeerId base58 round-trip: toBase58 -> fromBase58 -> equals original
 - PeerId base36 round-trip: toBase36 -> fromBase36 -> equals original
-- PeerId base36 with leading zeros: documents known limitation
+- PeerId base36 round-trips leading zero bytes
 - PeerId equality: same bytes -> equal
 - PeerId inequality: different bytes -> not equal
 

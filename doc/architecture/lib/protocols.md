@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-25T01:38:18.364872
+generated: 2026-08-25T03:56:07.946394
 ---
 
 # Module `protocols` (`lib/src/protocols/`)

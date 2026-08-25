@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-25T01:38:20.163020
+generated: 2026-08-25T03:56:08.114508
 ---
 
 # `test/core/`
@@ -2105,7 +2105,10 @@ generated: 2026-08-25T01:38:20.163020
 - fromBase36 accepts bare string without k prefix
 - fromBase36 rejects invalid characters
 - fromPublicKey Ed25519 derives deterministic PeerId
-- fromPublicKey requires Ed25519 type and 32-byte key
+- fromPublicKey inlines an Ed25519 key as its marshaled protobuf bytes
+- fromPublicKey RSA-sized keys hash instead of inlining
+- fromPublicKey rejects an unknown key type
+- fromPublicKey requires a 32-byte key for Ed25519
 - PeerId PoW
 - verifyPoW should accept PeerId with enough leading zeros
 - verifyPoW should reject PeerId with insufficient leading zeros
