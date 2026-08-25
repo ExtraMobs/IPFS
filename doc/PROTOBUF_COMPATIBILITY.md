@@ -129,9 +129,9 @@ For projects migrating from protobuf 5.x to 6.0.0:
 ## 📚 Additional Resources
 
 - [Protobuf Dart Package](https://pub.dev/packages/protobuf)
-- [dart_ipfs GitHub](https://github.com/jxoesneon/IPFS)
-- [Issue Tracker](https://github.com/jxoesneon/IPFS/issues)
-- [Discussions](https://github.com/jxoesneon/IPFS/discussions)
+- [transpiled_ipfs GitHub](https://github.com/ExtraMobs/IPFS)
+- [Issue Tracker](https://github.com/ExtraMobs/IPFS/issues)
+- [Discussions](https://github.com/ExtraMobs/IPFS/discussions)
 
 ## 🎯 Best Practices
 
@@ -144,8 +144,8 @@ For projects migrating from protobuf 5.x to 6.0.0:
 ## 📞 Support
 
 For issues related to protobuf 6.0.0 compatibility:
-- Open an issue on [GitHub Issues](https://github.com/jxoesneon/IPFS/issues)
-- Join the discussion on [GitHub Discussions](https://github.com/jxoesneon/IPFS/discussions)
+- Open an issue on [GitHub Issues](https://github.com/ExtraMobs/IPFS/issues)
+- Join the discussion on [GitHub Discussions](https://github.com/ExtraMobs/IPFS/discussions)
 - Check the [CHANGELOG.md](../CHANGELOG.md) for latest updates
 
 ---

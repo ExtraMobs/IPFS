@@ -111,9 +111,8 @@
 ///
 /// ## Learn More
 ///
-/// - [GitHub Repository](https://github.com/jxoesneon/IPFS)
+/// - [GitHub Repository](https://github.com/ExtraMobs/IPFS)
 /// - [IPFS Specifications](https://specs.ipfs.tech/)
-/// - [API Documentation](https://pub.dev/documentation/dart_ipfs/latest/)
 library;
 
 // Multiformats primitives, now their own per-Go-module packages (see

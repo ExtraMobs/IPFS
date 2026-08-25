@@ -342,7 +342,7 @@ final node = await IPFSWebNode.create(
 If you're still experiencing issues:
 
 1. Check the [Architecture Guide](ARCHITECTURE.md) for implementation details
-2. Review [GitHub Issues](https://github.com/jxoesneon/IPFS/issues) for similar problems
+2. Review [GitHub Issues](https://github.com/ExtraMobs/IPFS/issues) for similar problems
 3. Open a new issue with:
    - dart_ipfs version
    - Dart SDK version
