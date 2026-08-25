@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.344329
+generated: 2026-08-25T08:55:51.639119
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -133,6 +133,8 @@ Base58 encoding/decoding for IPFS identifiers.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.toBase58)
@@ -1269,7 +1271,7 @@ _Directly tested._
 Represents a public/private key pair for cryptographic operations.
 
 - **publicKey** (field) — The public key in string format.
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -2032,7 +2034,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
 - **publicKey** (method) — The public key component.
   - calls: publicKey
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -2080,6 +2082,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.sign)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
 - **verify** (method) — Verifies a signature using the corresponding public key
   - calls: Signer, PublicKeyParameter, publicKey, init, parse, encode, sublist, ECSignature, verifySignature
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
@@ -2090,6 +2093,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.verify)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **generate** (method) — Creates a new key pair
   - calls: KeyGenerator, ECKeyGeneratorParameters, ECCurve_secp256k1, SecureRandom, secure, seed, KeyParameter, fromList, List, nextInt, init, ParametersWithRandom, generateKeyPair, AsymmetricKeyPair, publicKey, privateKey, IPFSPrivateKey

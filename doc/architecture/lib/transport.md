@@ -1,7 +1,7 @@
 ---
 module: transport
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.339584
+generated: 2026-08-25T08:55:51.619506
 ---
 
 # Module `transport` (`lib/src/transport/`)
@@ -181,7 +181,7 @@ Represents an active relayed connection.
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -200,7 +200,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -470,7 +470,7 @@ Represents an active relayed connection (web stub; never instantiated).
 Exception thrown by [CircuitRelayClient] operations.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -489,7 +489,7 @@ Exception thrown by [CircuitRelayClient] operations.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -785,6 +785,7 @@ One parsed resource record's relevant fields: enough to serve
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -1427,7 +1428,7 @@ Native libp2p router implementation.
 Exception thrown when a network operation fails in the transport layer.
 
 - **message** (field) — The error message.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -1446,7 +1447,7 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1555,6 +1556,219 @@ Exception thrown when a network operation fails in the transport layer.
     - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr)
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial)
     - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
+
+## `lib/src/transport/noise/noise_handshake_payload.dart`
+
+Prepended to the Noise static public key before signing with the
+
+_Directly tested._
+
+### class `NoiseRemoteIdentity`
+
+The libp2p identity of the remote peer, recovered and authenticated
+
+- **publicKey** (field) — The remote peer's libp2p identity public key.
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
+    - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
+    - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
+    - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.encodeJWS)
+    - `lib/src/core/ipld/jose_cose_handler.dart` (JoseCoseHandler.decodeJWS)
+    - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
+    - `lib/src/core/peer/peer_record_pb.dart` (EnvelopePb.==)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
+    - `lib/src/protocols/identify/identify_pb.dart` (IdentifyPb.==)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
+    - `lib/src/utils/keystore.dart` (Keystore.serialize)
+    - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKey)
+    - `lib/src/utils/private_key.dart` (IPFSPrivateKey.publicKeyBytes)
+    - `lib/src/utils/private_key.dart` (IPFSPrivateKey.verify)
+    - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
+- **peerId** (field) — The [PeerId] derived from [publicKey], per `core/peer`'s
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
+    - `lib/src/core/peer/peer_record.dart` (SignedPeerRecord.toString)
+    - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyPeerId)
+    - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
+    - `lib/src/core/peering/peering_service.dart` (PeeringService.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findPeer)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleRoutingTableUpdate)
+    - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.initialize)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeer)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.refresh)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addPeerToBucket)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.updatePeer)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.addKeyProvider)
+    - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
+    - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
+    - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findNode)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/routing/content_routing.dart` (ContentRouting.provide)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
+
+### class `NoiseHandshakeAuthException` implements Exception
+
+Thrown when a Noise handshake payload's signature doesn't verify
+
+- **message** (field) — The error message.
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
+    - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
+    - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successAdd)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureAdd)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.successRemove)
+    - `lib/src/core/responses/block_response_factory.dart` (BlockResponseFactory.failureRemove)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.success)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.failure)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.removed)
+    - `lib/src/core/responses/block_response_handler.dart` (BlockResponseHandler.notRemoved)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toAddBlockResponse)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toRemoveBlockResponse)
+    - `lib/src/core/responses/response_handler.dart` (ResponseHandler.fromProtoResponse)
+    - `lib/src/core/unixfs/unixfs_node.dart` (unixfsPutBlock)
+    - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
+    - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
+- **toString** (method)
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
+    - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
+    - `lib/src/core/data_structures/peer.dart` (Peer.toProto)
+    - `lib/src/core/data_structures/peer.dart` (Peer.toString)
+    - `lib/src/core/events/event_bus.dart` (EventBus.publish)
+    - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.getStatus)
+    - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addFile)
+    - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.addDirectory)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.loadPinnedCIDs)
+    - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getStatus)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveLink)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.executeSelector)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getMetadata)
+    - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.resolveWithMetadata)
+    - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock)
+    - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.removeBlock)
+    - `lib/src/core/ipld/dag_json_handler.dart` (DAGJsonHandler.encode)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.toBytes)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromBytesAsync)
+    - `lib/src/core/ipld/selectors/ipld_selector.dart` (IPLDSelector.fromNode)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordGatewayRequest)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.recordRpcRequest)
+    - `lib/src/core/metrics/metrics_collector.dart` (MetricsCollector.getPrometheusMetrics)
+    - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.canonicalBytes)
+    - `lib/src/core/repository/repository.dart` (Repository.addFile)
+    - `lib/src/core/repository/repository.dart` (Repository.processProtoBlock)
+    - `lib/src/core/responses/block_responses.dart` (BlockGetResponse.toJson)
+    - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
+    - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
+    - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.start)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
+    - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveIPNS)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.provide)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.handleProvideRequest)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink)
+    - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.provide)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.sendPing)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.storeValue)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.putValue)
+    - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.getValue)
+    - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.addProvider)
+    - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.getProviders)
+    - `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson)
+    - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.requestGraph)
+    - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createProgressResponse)
+    - `lib/src/protocols/ping/ping_handler.dart` (PingHandler.ping)
+    - `lib/src/protocols/protocol_coordinator.dart` (ProtocolCoordinator.getStatus)
+    - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
+    - `lib/src/routing/delegated_routing.dart` (DelegatedRoutingHandler.findProviders)
+    - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
+    - `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock)
+    - `lib/src/services/block_store_service.dart` (BlockStoreService.removeBlock)
+    - `lib/src/services/content_service.dart` (ContentService.listPinnedContent)
+    - `lib/src/services/gateway/adaptive_compression_handler.dart` (AdaptiveCompressionHandler.compressBlock)
+    - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.storeCompressedData)
+    - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
+    - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
+    - `lib/src/services/gateway/gateway_handler.dart` (GatewayHandler.handleSubdomain)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagCbor)
+    - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveIpnsRecord)
+    - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
+    - `lib/src/services/pinning/cluster_client.dart` (ReplicationFactor.toString)
+    - `lib/src/services/pinning/pinning_service_api.dart` (PinListFilter.toQueryParams)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleAdd)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagExport)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
+    - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindPeer)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connect)
+    - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.disconnect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
+    - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.canDial)
+    - `lib/src/transport/webrtc/webrtc_direct_transport.dart` (WebRTCDirectTransport.dial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.canDial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCConnection.id)
+    - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCListener.supportsAddr)
+    - `lib/src/transport/webtransport/multiaddr_parser.dart` (WebTransportMultiaddrParser.parse)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportDialerWeb.dial)
+    - `lib/src/transport/webtransport/webtransport_dialer_web.dart` (WebTransportConnectionWeb.id)
+    - `lib/src/transport/webtransport/webtransport_listener.dart` (WebTransportListener.supportsAddr)
+    - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.canDial)
+    - `lib/src/utils/encoding.dart` (EncodingUtils.base32LowerEncode)
+
+### top-level `noisePayloadSigPrefix` (variable)
+
+- **noisePayloadSigPrefix** (variable) — Prepended to the Noise static public key before signing with the
+
+### top-level `generateNoiseHandshakePayload` (function)
+
+- **generateNoiseHandshakePayload** (function) — Builds the libp2p handshake payload (`pb.NoiseHandshakePayload`) sent
+  - calls: fromList, encode, sign, marshalPublicKey, getPublic, _encodeNoiseHandshakePayload
+
+### top-level `verifyNoiseHandshakePayload` (function)
+
+- **verifyNoiseHandshakePayload** (function) — Parses and authenticates a remote peer's handshake payload, per
+  - calls: _decodeNoiseHandshakePayload, unmarshalPublicKey, fromPublicKey, raw, name, type, NoiseHandshakeAuthException, fromList, encode, verify, NoiseRemoteIdentity
 
 ## `lib/src/transport/noise/noise_state.dart`
 
@@ -2485,12 +2699,13 @@ Represents a change in peer connection state.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **peerId** (field) — The unique identifier of the peer.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -2531,7 +2746,7 @@ Represents a change in peer connection state.
 Represents an incoming message from a peer.
 
 - **peerId** (field) — The unique identifier of the sender.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -2567,7 +2782,7 @@ Represents an incoming message from a peer.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtProvide)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **message** (field) — The raw message payload.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2645,6 +2860,7 @@ Data from a DHT operation.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -2716,7 +2932,7 @@ Content or metadata from a PubSub subscription.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.messageId)
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **message** (field) — The raw message payload.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2796,12 +3012,13 @@ Represents a protocol or network error.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
 - **message** (field) — A human-readable error message.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -2879,6 +3096,7 @@ Lifecycle or data event for a multi-stream.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -3545,6 +3763,7 @@ Initialization parameters for an [RTCSessionDescription].
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -4126,6 +4345,7 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -4298,6 +4518,8 @@ A message exchanged over the WebRTC signaling protocol.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.toBase58)
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
@@ -5157,7 +5379,7 @@ Statistics for WebTransport datagram I/O.
     - `lib/src/transport/webtransport/webtransport_datagram.dart` (WebTransportDatagram.trySend)
 - **reset** (method) — Resets all counters to zero.
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)

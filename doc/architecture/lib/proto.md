@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.185613
+generated: 2026-08-25T08:55:51.500616
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -668,6 +668,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -728,6 +729,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -1234,7 +1236,7 @@ Network events
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -1271,7 +1273,7 @@ Network events
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -3833,6 +3835,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -3893,6 +3896,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5099,6 +5103,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5159,6 +5164,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5727,6 +5733,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -5787,6 +5794,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -9653,7 +9661,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -9690,7 +9698,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -10209,7 +10217,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -10246,7 +10254,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -14199,7 +14207,7 @@ Response message for adding a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -14219,7 +14227,7 @@ Response message for adding a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15302,7 +15310,7 @@ Response message for removing a block
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15322,7 +15330,7 @@ Response message for removing a block
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -16768,6 +16776,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -16796,6 +16805,7 @@ PBLink represents a link between two DAG nodes
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -18002,6 +18012,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18062,6 +18073,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18920,6 +18932,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -18980,6 +18993,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -22024,6 +22038,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -22084,6 +22099,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -22670,7 +22686,7 @@ _No known direct test._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -22707,7 +22723,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -26717,7 +26733,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — The unique identifier of the peer associated with this node.
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -26754,7 +26770,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -27877,7 +27893,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — The unique identifier of the peer.
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -27914,7 +27930,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -28057,7 +28073,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: $_clearField
 - **publicKey** (method) — The public key of the peer, used for authentication.
   - calls: $_getN
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -28076,7 +28092,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.generate)
 - **publicKey** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -34701,7 +34717,7 @@ Represents a request to find a peer in the DHT by their ID.
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method) — Required: The ID of the peer to find.
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -34738,7 +34754,7 @@ Represents a request to find a peer in the DHT by their ID.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -35788,7 +35804,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -35825,7 +35841,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -36306,7 +36322,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -36343,7 +36359,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -39960,7 +39976,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -39997,7 +40013,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -40484,7 +40500,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -40521,7 +40537,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41012,7 +41028,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41049,7 +41065,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41576,7 +41592,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -41613,7 +41629,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42104,7 +42120,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42141,7 +42157,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42628,7 +42644,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -42665,7 +42681,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43240,7 +43256,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43277,7 +43293,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43844,7 +43860,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -43881,7 +43897,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -45597,7 +45613,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -45634,7 +45650,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -47590,7 +47606,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -47627,7 +47643,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -49175,7 +49191,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -49212,7 +49228,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53335,7 +53351,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53372,7 +53388,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53859,7 +53875,7 @@ Event message definitions:
   - calls: $_clearField
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -53896,7 +53912,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -54387,7 +54403,7 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -54424,7 +54440,7 @@ Event message definitions:
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -55787,7 +55803,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -55807,7 +55823,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56739,7 +56755,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -56759,7 +56775,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57229,7 +57245,7 @@ Event message definitions:
   - calls: $_clearField
 - **message** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -57249,7 +57265,7 @@ Event message definitions:
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **message** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -58308,6 +58324,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -58368,6 +58385,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -59778,7 +59796,7 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -59815,7 +59833,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -64016,7 +64034,7 @@ _No known direct test._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **peerId** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -64053,7 +64071,7 @@ _No known direct test._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
 - **peerId** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -68511,6 +68529,7 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -68539,6 +68558,7 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -69057,6 +69077,7 @@ Method represents a method of an API interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -69085,6 +69106,7 @@ Method represents a method of an API interface.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -69599,6 +69621,7 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -69627,6 +69650,7 @@ Declares an API Interface to be included in this interface. The including
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -71186,6 +71210,7 @@ Describes a complete .proto file.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -71214,6 +71239,7 @@ Describes a complete .proto file.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -72780,6 +72806,7 @@ Describes a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -72808,6 +72835,7 @@ Describes a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -73348,6 +73376,7 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -73408,6 +73437,7 @@ Describes a message type.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -74360,6 +74390,7 @@ Describes a field within a message.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -74388,6 +74419,7 @@ Describes a field within a message.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -74476,6 +74508,7 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -74536,6 +74569,7 @@ Describes a field within a message.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -75062,6 +75096,7 @@ Describes a oneof.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -75090,6 +75125,7 @@ Describes a oneof.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -76086,6 +76122,7 @@ Describes an enum type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -76114,6 +76151,7 @@ Describes an enum type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -76693,6 +76731,7 @@ Describes a value within an enum.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -76721,6 +76760,7 @@ Describes a value within an enum.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -77211,6 +77251,7 @@ Describes a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -77239,6 +77280,7 @@ Describes a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -77726,6 +77768,7 @@ Describes a method of a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -77754,6 +77797,7 @@ Describes a method of a service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -83784,6 +83828,7 @@ A message representing a option the parser does not recognize. This only
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **identifierValue** (method) — The value of the uninterpreted option, in whatever type the tokenizer
   - calls: $_getSZ
 - **identifierValue** (method)
@@ -93664,6 +93709,7 @@ A protocol buffer message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -93692,6 +93738,7 @@ A protocol buffer message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -94260,6 +94307,7 @@ A single field of a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -94288,6 +94336,7 @@ A single field of a message type.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -94802,6 +94851,7 @@ Enum type definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -94830,6 +94880,7 @@ Enum type definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -95332,6 +95383,7 @@ Enum value definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -95360,6 +95412,7 @@ Enum value definition.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -95842,6 +95895,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **name** (method)
   - calls: $_setString
   - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
@@ -95870,6 +95924,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **hasName** (method)
   - calls: $_has
 - **clearName** (method)
@@ -110739,6 +110794,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -110799,6 +110855,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)

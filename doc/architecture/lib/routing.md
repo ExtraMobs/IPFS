@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.333640
+generated: 2026-08-25T08:55:51.613210
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -376,7 +376,7 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
 A single provider entry returned from an IPNI query.
 
 - **peerId** (field) — The provider's peer ID.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -713,7 +713,7 @@ Client for the Reframe delegated routing protocol.
 A single provider entry returned from a Reframe query.
 
 - **peerId** (field) — The provider's peer ID.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)

@@ -1,6 +1,6 @@
 ---
 test-group: transport
-generated: 2026-08-25T08:48:49.426706
+generated: 2026-08-25T08:55:51.714695
 ---
 
 # `test/transport/`
@@ -187,6 +187,18 @@ generated: 2026-08-25T08:48:49.426706
 - seed presence determines identity type
 - PeerId Conversion
 - extracts first 32 bytes for Ed25519 public key
+
+## `test/transport/noise/noise_handshake_payload_test.dart`
+
+- Noise handshake payload -- real go-libp2p-generated vector
+- verifies a real payload and derives the correct PeerId
+- honors an expectedRemoteId that matches
+- rejects a mismatched expectedRemoteId
+- rejects the payload when checked against the wrong Noise static key
+- rejects a truncated payload
+- Noise handshake payload -- generate/verify round trip
+- a freshly generated Ed25519 identity round-trips through generate+verify
+- rejects a payload verified against a different Noise static key
 
 ## `test/transport/noise/noise_state_test.dart`
 

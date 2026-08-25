@@ -1,6 +1,6 @@
 ---
 test-group: routing
-generated: 2026-08-25T08:48:49.422665
+generated: 2026-08-25T08:55:51.711023
 ---
 
 # `test/routing/`

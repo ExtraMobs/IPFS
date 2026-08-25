@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.166069
+generated: 2026-08-25T08:55:51.480369
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -47,6 +47,7 @@ Base class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **ttl** (field) — Time-to-live for this record.
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.publishIPNS)
@@ -120,6 +121,7 @@ Query class for mDNS resource records.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **type** (field) — The type of record to query.
   - referenced by (by name) (name shared by 38 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
@@ -175,6 +177,7 @@ Query class for mDNS resource records.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)

@@ -1,7 +1,7 @@
 ---
 module: protocols
 kind: lib/src audit
-generated: 2026-08-25T08:48:49.320036
+generated: 2026-08-25T08:55:51.600477
 ---
 
 # Module `protocols` (`lib/src/protocols/`)
@@ -137,6 +137,8 @@ AutoNAT dial request message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.toBase58)
@@ -334,6 +336,8 @@ AutoNAT dial response message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.toBase58)
@@ -1092,7 +1096,7 @@ _Directly tested._
 Tracks bandwidth exchange (sent vs received bytes) with a peer.
 
 - **peerId** (field) — The peer this ledger tracks.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -1156,7 +1160,7 @@ Tracks bandwidth exchange (sent vs received bytes) with a peer.
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
 - **toString** (method)
   - calls: getDebt
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -1691,6 +1695,7 @@ A block presence notification (HAVE or DONT_HAVE).
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.reserve)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/dns/udp_dns_client.dart` (UdpDnsClient.lookup)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createOffer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.createAnswer)
     - `lib/src/transport/webrtc/peer_connection_web.dart` (PeerConnectionWeb.setLocalDescription)
@@ -2338,7 +2343,7 @@ A priority-ordered list of blocks that a peer wants to receive.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.clear)
     - `lib/src/utils/keystore.dart` (Keystore.clearAfterMigration)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -2459,7 +2464,7 @@ _Directly tested._
 A tagged connection with priority and metadata for the Cuttlefish
 
 - **peerId** (field) — The peer ID of this connection.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -2528,7 +2533,7 @@ A tagged connection with priority and metadata for the Cuttlefish
   - referenced by (by name):
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionsByTag)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -3065,7 +3070,7 @@ Kademlia DHT client implementation for IPFS.
   - referenced by (by name):
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
 - **peerId** (field) — The local peer ID.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -4020,7 +4025,7 @@ Represents a key in the DHT
     - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: encode, Base58
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4162,7 +4167,7 @@ Represents a value stored in the DHT
     - `lib/src/transport/noise/noise_state.dart` (generateNoiseKeyPair)
 - **toString** (method)
   - calls: decode
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -4766,7 +4771,7 @@ _Directly tested._
 A node in the Kademlia tree representing a peer.
 
 - **peerId** (field) — The peer identifier.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -6155,7 +6160,7 @@ Represents a peer in the DHT network
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/directory_parser.dart` (DirectoryParser.generateHtmlListing)
 - **toString** (method) — Creates a string representation of the peer
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -6549,7 +6554,7 @@ _Directly tested._
 Exception thrown when a rate-limited operation is evicted because the
 
 - **message** (field) — Description of why the operation was dropped.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -6568,7 +6573,7 @@ Exception thrown when a rate-limited operation is evicted because the
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -8194,7 +8199,7 @@ _Directly tested._
 The libp2p Identify message.
 
 - **publicKey** (field) — The public key of the peer (marshalled protobuf PublicKey).
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -8350,6 +8355,8 @@ The libp2p Identify message.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingMessage.encode)
     - `lib/src/transport/webrtc/signaling_protocol.dart` (SignalingProtocol.sendMessage)
     - `lib/src/utils/encoding.dart` (EncodingUtils.toBase58)
@@ -8421,7 +8428,7 @@ The libp2p Identify message.
     - `lib/src/utils/private_key.dart` (IPFSPrivateKey.fromString)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -8551,7 +8558,7 @@ _Directly tested._
 Event emitted when a remote peer pushes updated identify info.
 
 - **peerId** (field) — The peer that sent the push.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -8589,7 +8596,7 @@ Event emitted when a remote peer pushes updated identify info.
 - **identify** (field) — The decoded identify message from the remote peer.
 - **toString** (method)
   - calls: agentVersion
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9070,7 +9077,7 @@ Handles IPNS (InterPlanetary Name System) operations.
 Error thrown when an IPNS name cannot be resolved.
 
 - **message** (field) — Human-readable description of the resolution failure.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -9089,7 +9096,7 @@ Error thrown when an IPNS name cannot be resolved.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9204,7 +9211,7 @@ Error thrown when an IPNS name cannot be resolved.
 Error thrown when an IPNS record fails validation.
 
 - **message** (field) — Human-readable description of the validation failure.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -9223,7 +9230,7 @@ Error thrown when an IPNS record fails validation.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9452,7 +9459,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.toIpnsEntry)
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **publicKey** (field) — The Ed25519 public key of the record owner.
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -9519,6 +9526,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.syncPin)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleLs)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
 - **create** (method) — Creates and signs a new IPNS record.
   - calls: Ed25519Signer, extractPublicKeyBytes, fromList, encode, _, add, now, sign
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
@@ -9747,6 +9755,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.create)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signMessage)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.signData)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (generateNoiseHandshakePayload)
 - **verify** (method) — Verifies the record signature.
   - calls: isAfter, now, Ed25519Signer, publicKeyFromBytes, _buildV2DataBytes, verify, fromList, encode, _getSignableData
   - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
@@ -9756,6 +9765,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/plugins/plugin_manifest.dart` (PluginManifest.verifySignature)
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
+    - `lib/src/transport/noise/noise_handshake_payload.dart` (verifyNoiseHandshakePayload)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toCBOR** (method) — Encodes the record to CBOR format for DHT storage.
   - calls: CborMap, CborString, CborBytes, fromList, encode, toIso8601String, toUtc, CborSmallInt, inMicroseconds
@@ -9840,7 +9850,7 @@ IPNS V2 Record with Ed25519 signature.
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.resolve)
 - **toString** (method) — Human-readable representation.
   - calls: decode, toIso8601String
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -9973,7 +9983,7 @@ _Directly tested._
 Result of a ping operation.
 
 - **peerId** (field) — The peer that was pinged.
-  - referenced by (by name) (name shared by 69 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 70 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.findProviders)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerId)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.peerID)
@@ -10227,7 +10237,7 @@ Result of a ping operation.
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
   - calls: inMilliseconds
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15130,7 +15140,7 @@ A message received on a Gossipsub topic.
     - `lib/src/protocols/pubsub/gossipsub/message_signing.dart` (Ed25519MessageSigner.verifyMessage)
 - **toString** (method)
   - calls: length
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
@@ -15742,7 +15752,7 @@ Cache of recently seen Gossipsub messages per topic.
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openUnidirectionalStream)
 - **message** (field)
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 42 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/plugins/plugin_host.dart` (PluginHost.loadPluginFromYaml)
     - `lib/src/core/responses/block_responses.dart` (BlockAddResponse.toProto)
     - `lib/src/core/responses/block_responses.dart` (BlockRemoveResponse.toProto)
@@ -15773,7 +15783,7 @@ Provides Ed25519 signing and verification for Gossipsub messages.
 
 - **publicKey** (method) — The public key bytes (32 bytes for Ed25519).
   - calls: extractPublicKey, fromList, bytes
-  - referenced by (by name) (name shared by 12 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.generateKeyPair)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.getPublicKey)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.generateKeyPair)
@@ -16122,7 +16132,7 @@ Represents a message published on a PubSub topic.
     - `lib/src/protocols/pubsub/pubsub_client.dart` (PubSubClient.onMessage)
 - **sender** (field) — The sender's peer ID.
 - **toString** (method)
-  - referenced by (by name) (name shared by 55 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 56 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toString)
     - `lib/src/core/data_structures/operation_log.dart` (OperationLog.toString)
