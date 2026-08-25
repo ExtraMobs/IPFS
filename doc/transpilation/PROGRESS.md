@@ -23,8 +23,8 @@
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
-| `_rsrch/internal/cidiface` |  | não iniciado |  |
+| `(root)` | `packages/dart_ipfs_core/lib/src/cid/cid.dart` | portado com paridade comprovada | Auditoria completa: NewCidV0/V1/Parse/Decode/Cast/CidFromBytes ≈ CID.v0/v1/decode/fromBytes; String/Encode ≈ encode/encodeWithBase; Set → dart:core Set\<CID\> nativo (CID já tem ==/hashCode corretos, nenhum port necessário). Gap real encontrado e fechado: tipo `Prefix` (version/codec/mhType/mhLength + `.sum(data)`), testado contra `TestNewPrefixV1`/`TestNewPrefixV0`. `Defined()`/Undef sentinel não portado (design Dart já usa exceção em vez de valor zero, não é lacuna). |
+| `_rsrch/internal/cidiface` |  | fora do escopo (pasta de pesquisa interna do próprio go-cid, não é API pública) |  |
 
 ### `go-multiaddr`
 
@@ -40,18 +40,18 @@
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` |  | não iniciado |  |
-| `core` |  | não iniciado |  |
+| `(root)` (a `Sum()` pública) | `packages/dart_ipfs_core/lib/src/cid/multihash.dart` (`MultihashUtils.sum`) | portado com paridade comprovada (subconjunto) | 12 vetores oficiais de `sum_test.go` passam byte a byte: identity, sha1, md5, sha2-256, sha2-512, dbl-sha2-256, sha3-224/256/384/512, keccak-256/512. **Deferido, não implementado:** blake2b, blake2s, blake3, shake-128/256, murmur3 (murmurhash já é dependência do projeto pra outra coisa -- HAMT -- mas não está fiado em MultihashUtils ainda), sha2-224/384/512-224/512-256. SHA2-256 domina o uso real de CID; os demais são baixa prioridade. |
+| `core` (registro dinâmico de hashers) | — | não iniciado | O switch estático em `MultihashUtils._digestFor` cobre o mesmo conjunto de algoritmos funcionalmente, mas não replica o padrão de registro dinâmico do Go (`Register`/`RegisterVariableSize`/`GetHasher`) -- não parece necessário em Dart, mas não auditado a fundo ainda. |
 | `multihash` |  | não iniciado |  |
 | `opts` |  | não iniciado |  |
-| `register/all` |  | não iniciado |  |
+| `register/all` |  | não iniciado (ver nota em `core`) |  |
 | `register/blake2` |  | não iniciado |  |
 | `register/blake3` |  | não iniciado |  |
 | `register/miniosha256` |  | não iniciado |  |
 | `register/murmur3` |  | não iniciado |  |
 | `register/sha256` |  | não iniciado |  |
 | `register/sha3` |  | não iniciado |  |
-| `test/sharness/t0030-lib` |  | não iniciado |  |
+| `test/sharness/t0030-lib` |  | fora do escopo (script de teste shell, não código de biblioteca) |  |
 
 ### `go-multibase`
 

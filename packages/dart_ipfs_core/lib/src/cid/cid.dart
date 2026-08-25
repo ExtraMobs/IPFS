@@ -258,6 +258,15 @@ class CID {
     return Uint8List.fromList(bytes.sublist(0, bytes.length - digestLength));
   }
 
+  /// This CID's shape -- version, codec, hash function, and hash length --
+  /// without the digest content. Equivalent to go-cid's `Cid.Prefix()`.
+  Prefix get prefix => Prefix(
+    version: version,
+    codec: version == 0 ? 'dag-pb' : (codec ?? 'raw'),
+    mhType: multihash.name,
+    mhLength: multihash.size,
+  );
+
   /// Validates the CID's structural invariants (version, codec, multihash
   /// size). Does not verify the multihash against any content -- for that,
   /// hash the content and compare, e.g. via [Block.validate] on the
@@ -319,4 +328,52 @@ class CID {
         return mb.Multibase.base32;
     }
   }
+}
+
+/// A CID's shape -- version, codec, hash function, and hash length --
+/// without any digest content. Lets you describe the kind of CID to produce
+/// once and reuse it to hash many different pieces of data. Equivalent to
+/// go-cid's `Prefix` type.
+class Prefix {
+  /// Creates a prefix.
+  const Prefix({
+    required this.version,
+    required this.codec,
+    required this.mhType,
+    required this.mhLength,
+  });
+
+  /// The CID version (0 or 1).
+  final int version;
+
+  /// The content codec (e.g. `dag-pb`, `raw`, `dag-cbor`).
+  final String codec;
+
+  /// The multihash function name (e.g. `sha2-256`).
+  final String mhType;
+
+  /// The digest length in bytes.
+  final int mhLength;
+
+  /// Hashes [data] with [mhType] and builds a CID with this prefix's
+  /// [version] and [codec]. Equivalent to go-cid's `Prefix.Sum(data)`.
+  CID sum(Uint8List data) {
+    final mh = MultihashUtils.sum(mhType, data);
+    if (version == 0) {
+      return CID.v0(Uint8List.fromList(mh.digest));
+    }
+    return CID.v1(codec, mh);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Prefix &&
+          version == other.version &&
+          codec == other.codec &&
+          mhType == other.mhType &&
+          mhLength == other.mhLength;
+
+  @override
+  int get hashCode => Object.hash(version, codec, mhType, mhLength);
 }

@@ -18,7 +18,7 @@ export 'src/block/block_store.dart'
     show BlockStoreResult, IBlockStore, BlockStoreStatus;
 export 'src/block/memory_block_store.dart' show InMemoryBlockStore;
 
-export 'src/cid/cid.dart' show CID;
+export 'src/cid/cid.dart' show CID, Prefix;
 export 'src/cid/multibase.dart' show MultibaseUtils;
 export 'src/cid/multicodec.dart' show Multicodec;
 export 'src/cid/multihash.dart' show MultihashInfo, MultihashUtils;
