@@ -1,16 +1,50 @@
-/// Port of `go-ipld-prime`'s `datamodel` package: the IPLD Data Model's
-/// core interfaces (`Node`/`NodeBuilder`/`NodeAssembler`), `Kind`, `Path`,
-/// and `Link`.
+/// Port of `go-ipld-prime`'s `datamodel` package (the IPLD Data Model's
+/// core interfaces -- `Node`/`NodeBuilder`/`NodeAssembler`, `Kind`, `Path`,
+/// `Link`) and `node/basicnode` (a concrete, general-purpose `Node`
+/// implementation for any Data Model value).
 ///
-/// Everything else in go-ipld-prime -- `node/basicnode` (a concrete `Node`
-/// implementation), `codec/*` (this umbrella already has original,
-/// unaudited `dagcbor`/`dagjson`/`raw` codecs -- see
+/// Everything else in go-ipld-prime -- `codec/*` (this umbrella already
+/// has original, unaudited `dagcbor`/`dagjson`/`raw` codecs -- see
 /// doc/transpilation/PROGRESS.md), `linking`/`linking/cid`, `storage`,
 /// `traversal`/`traversal/selector`, `schema`/`schema/gen/go` (code
 /// generation via Go reflection has no direct Dart equivalent and needs
 /// its own design), and the ADL system -- is not ported yet.
 library;
 
+export 'src/basicnode/any_node.dart' show AnyBuilder, PrototypeAny;
+export 'src/basicnode/base_node.dart' show BaseAssembler, BaseNode;
+export 'src/basicnode/list_node.dart' show PlainList, PlainListAssembler, PrototypeList;
+export 'src/basicnode/map_node.dart' show PlainMap, PlainMapAssembler, PrototypeMap;
+export 'src/basicnode/prototypes.dart' show BasicnodePrototype, prototype;
+export 'src/basicnode/scalars.dart'
+    show
+        PlainBool,
+        PlainBoolAssembler,
+        PlainBytes,
+        PlainBytesAssembler,
+        PlainFloat,
+        PlainFloatAssembler,
+        PlainInt,
+        PlainIntAssembler,
+        PlainLink,
+        PlainLinkAssembler,
+        PlainString,
+        PlainStringAssembler,
+        PlainUint,
+        PrototypeBool,
+        PrototypeBytes,
+        PrototypeFloat,
+        PrototypeInt,
+        PrototypeLink,
+        PrototypeString,
+        newBool,
+        newBytes,
+        newFloat,
+        newInt,
+        newLink,
+        newString;
+export 'src/basicnode/stream_bytes.dart' show StreamBytes, newBytesFromReader;
+export 'src/basicnode/value_assembler.dart' show ValueAssembler;
 export 'src/datamodel/copy.dart' show copyNode;
 export 'src/datamodel/equal.dart' show deepEqual;
 export 'src/datamodel/errors.dart'
