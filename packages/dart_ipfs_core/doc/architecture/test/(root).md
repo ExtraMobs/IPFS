@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-25T08:38:55.020021
+generated: 2026-08-25T08:48:16.286039
 ---
 
 # `test/(root)/`
@@ -154,6 +154,30 @@ generated: 2026-08-25T08:38:55.020021
 - a freshly generated key signs and verifies its own signature
 - marshal -> unmarshal round-trips a freshly generated key
 - rejects a public key on the wrong curve OID
+
+## `test/ed25519_key_parity_test.dart`
+
+- Ed25519 -- real Go-generated vector
+- unmarshal 64-byte private key, re-marshal matches byte-for-byte
+- unmarshal 32-byte public key, re-marshal matches byte-for-byte
+- private key
+- verifies a real Go-produced EdDSA signature
+- rejects a tampered signature
+- Dart
+- rejects a private key with a mismatched redundant public key
+- Ed25519 -- generation and round-trip
+- a freshly generated key signs and verifies its own signature
+- marshal -> unmarshal round-trips a freshly generated key
+- rejects a private key of the wrong length
+
+## `test/key_codec_test.dart`
+
+- key_codec
+- RSA public/private key round-trip through the generic codec
+- Ed25519 public/private key round-trip through the generic codec
+- Secp256k1 public/private key round-trip through the generic codec
+- ECDSA public/private key round-trip through the generic codec
+- a signature made with one type verifies through the generically-decoded key
 
 ## `test/multiaddr_parity_test.dart`
 

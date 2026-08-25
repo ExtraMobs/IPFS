@@ -38,7 +38,20 @@ export 'src/crypto/ecdsa_key.dart'
         generateEcdsaKeyPair,
         unmarshalEcdsaPrivateKey,
         unmarshalEcdsaPublicKey;
+export 'src/crypto/ed25519_key.dart'
+    show
+        Ed25519PrivKey,
+        Ed25519PubKey,
+        generateEd25519KeyPair,
+        unmarshalEd25519PrivateKey,
+        unmarshalEd25519PublicKey;
 export 'src/crypto/ed25519_signer.dart' show Ed25519Signer, KeyPairExtensions;
+export 'src/crypto/key_codec.dart'
+    show
+        marshalPrivateKey,
+        marshalPublicKey,
+        unmarshalPrivateKey,
+        unmarshalPublicKey;
 export 'src/crypto/key_types.dart'
     show Key, KeyType, PrivKey, PubKey, marshalKeyProto, unmarshalKeyProto;
 export 'src/crypto/rsa_key.dart'

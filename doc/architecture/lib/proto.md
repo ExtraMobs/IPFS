@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T08:39:35.218574
+generated: 2026-08-25T08:48:49.185613
 ---
 
 # Module `proto` (`lib/src/proto/`)

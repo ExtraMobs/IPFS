@@ -1,7 +1,7 @@
 ---
 module: multiaddr
 kind: lib/src audit
-generated: 2026-08-25T08:38:55.008738
+generated: 2026-08-25T08:48:16.276172
 ---
 
 # Module `multiaddr` (`lib/src/multiaddr/`)

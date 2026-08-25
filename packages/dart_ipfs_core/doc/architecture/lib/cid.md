@@ -1,7 +1,7 @@
 ---
 module: cid
 kind: lib/src audit
-generated: 2026-08-25T08:38:54.999030
+generated: 2026-08-25T08:48:16.265126
 ---
 
 # Module `cid` (`lib/src/cid/`)

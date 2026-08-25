@@ -1,7 +1,7 @@
 ---
 module: codec
 kind: lib/src audit
-generated: 2026-08-25T08:38:55.002098
+generated: 2026-08-25T08:48:16.267750
 ---
 
 # Module `codec` (`lib/src/codec/`)

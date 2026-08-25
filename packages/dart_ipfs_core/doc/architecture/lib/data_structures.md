@@ -1,7 +1,7 @@
 ---
 module: data_structures
 kind: lib/src audit
-generated: 2026-08-25T08:38:55.007124
+generated: 2026-08-25T08:48:16.274023
 ---
 
 # Module `data_structures` (`lib/src/data_structures/`)
@@ -57,6 +57,8 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.constantTimeEquals)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPrivateKey)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPublicKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PrivateKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PublicKey)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.generateKeyPair)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
@@ -125,6 +127,8 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.constantTimeEquals)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPrivateKey)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPublicKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PrivateKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PublicKey)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.generateKeyPair)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)

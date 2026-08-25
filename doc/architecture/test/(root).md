@@ -1,6 +1,6 @@
 ---
 test-group: (root)
-generated: 2026-08-25T08:39:35.495313
+generated: 2026-08-25T08:48:49.413812
 ---
 
 # `test/(root)/`

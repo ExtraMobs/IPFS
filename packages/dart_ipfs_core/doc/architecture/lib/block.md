@@ -1,7 +1,7 @@
 ---
 module: block
 kind: lib/src audit
-generated: 2026-08-25T08:38:54.991072
+generated: 2026-08-25T08:48:16.256527
 ---
 
 # Module `block` (`lib/src/block/`)
@@ -186,6 +186,8 @@ A simple in-memory block store implementation.
     - `lib/src/crypto/crypto_utils.dart` (CryptoUtils.constantTimeEquals)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPrivateKey)
     - `lib/src/crypto/ecdsa_key.dart` (unmarshalEcdsaPublicKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PrivateKey)
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PublicKey)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.generateKeyPair)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.keyPairFromSeed)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)

@@ -1,7 +1,7 @@
 ---
 module: crypto
 kind: lib/src audit
-generated: 2026-08-25T08:38:55.003697
+generated: 2026-08-25T08:48:16.269724
 ---
 
 # Module `crypto` (`lib/src/crypto/`)
@@ -80,6 +80,8 @@ Cryptographic utilities for secure key management.
   - calls: randomBytes
 - **constantTimeEquals** (method) — Constant-time comparison to prevent timing attacks.
   - calls: length
+  - referenced by (by name):
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PrivateKey)
 
 ## `lib/src/crypto/ecdsa_key.dart`
 
@@ -93,14 +95,20 @@ An ECDSA (NIST P-256) private key, per go-libp2p's `core/crypto`
 
 - **type** (method)
   - calls: ecdsa
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **getPublic** (method)
 - **raw** (method)
   - calls: encodeSec1EcPrivateKey, _key
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **sign** (method)
   - calls: ECDSASigner, SHA256Digest, init, ParametersWithRandom, PrivateKeyParameter, _secureRandom, generateSignature, _encodeDerSignature
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PrivKey.sign)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
 
 ### class `EcdsaPublicKey` extends PubKey
@@ -109,13 +117,19 @@ An ECDSA (NIST P-256) public key, per go-libp2p's `core/crypto`
 
 - **type** (method)
   - calls: ecdsa
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **raw** (method)
   - calls: encodePkixEcPublicKey
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **verify** (method)
   - calls: _decodeDerSignature, ECDSASigner, SHA256Digest, init, PublicKeyParameter, verifySignature
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
 
 ### top-level `generateEcdsaKeyPair` (function)
@@ -127,11 +141,15 @@ An ECDSA (NIST P-256) public key, per go-libp2p's `core/crypto`
 
 - **unmarshalEcdsaPrivateKey** (function) — Parses a SEC1 (RFC 5915) EC private key, per go-libp2p's
   - calls: fromBytes, elements, length, FormatException, integer, one, _decodeUnsigned, octets, skip, tag, valueBytes, objectIdentifierAsString, join, decodePoint, curve, stringValues, G, _, ECPrivateKey, fromPointyCastle, ECPublicKey
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPrivateKey)
 
 ### top-level `unmarshalEcdsaPublicKey` (function)
 
 - **unmarshalEcdsaPublicKey** (function) — Parses a PKIX-DER EC public key (`SubjectPublicKeyInfo`), per
   - calls: fromBytes, elements, length, FormatException, objectIdentifierAsString, join, decodePoint, curve, stringValues, fromPointyCastle, ECPublicKey
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPublicKey)
 
 ### top-level `encodeSec1EcPrivateKey` (function)
 
@@ -147,6 +165,70 @@ An ECDSA (NIST P-256) public key, per go-libp2p's `core/crypto`
   - referenced by (by name):
     - `lib/src/crypto/ecdsa_key.dart` (EcdsaPublicKey.raw)
 
+## `lib/src/crypto/ed25519_key.dart`
+
+An Ed25519 private key, per go-libp2p's `core/crypto`
+
+_Directly tested._
+
+### class `Ed25519PrivKey` extends PrivKey
+
+An Ed25519 private key, per go-libp2p's `core/crypto`
+
+- **type** (method)
+  - calls: ed25519
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
+- **getPublic** (method)
+- **raw** (method)
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
+    - `lib/src/crypto/key_types.dart` (Key.keyEquals)
+- **sign** (method)
+  - calls: sign
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
+
+### class `Ed25519PubKey` extends PubKey
+
+An Ed25519 public key, per go-libp2p's `core/crypto`
+
+- **type** (method)
+  - calls: ed25519
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
+- **raw** (method)
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
+    - `lib/src/crypto/key_types.dart` (Key.keyEquals)
+- **verify** (method)
+  - calls: verify, publicKeyFromBytes
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
+
+### top-level `generateEd25519KeyPair` (function)
+
+- **generateEd25519KeyPair** (function) — Generates a fresh Ed25519 key pair, per go-libp2p's
+  - calls: _wrapKeyPair, generateKeyPair
+
+### top-level `unmarshalEd25519PrivateKey` (function)
+
+- **unmarshalEd25519PrivateKey** (function) — Parses a raw Ed25519 private key, per go-libp2p's
+  - calls: length, sublist, constantTimeEquals, FormatException, keyPairFromSeed, _
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPrivateKey)
+
+### top-level `unmarshalEd25519PublicKey` (function)
+
+- **unmarshalEd25519PublicKey** (function) — Parses a 32-byte Ed25519 public key, per go-libp2p's
+  - calls: length, FormatException, _
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPublicKey)
+
 ## `lib/src/crypto/ed25519_signer.dart`
 
 Unified Ed25519 signing service.
@@ -161,14 +243,21 @@ Unified Ed25519 signing service.
   - calls: length, ArgumentError, newKeyPairFromSeed, newKeyPair
   - referenced by (by name):
     - `lib/src/crypto/ecdsa_key.dart` (generateEcdsaKeyPair)
+    - `lib/src/crypto/ed25519_key.dart` (generateEd25519KeyPair)
     - `lib/src/crypto/rsa_key.dart` (generateRsaKeyPair)
     - `lib/src/crypto/secp256k1_key.dart` (generateSecp256k1KeyPair)
 - **keyPairFromSeed** (method) — Creates a key pair from a 32-byte seed.
   - calls: length, ArgumentError, newKeyPairFromSeed
+  - referenced by (by name):
+    - `lib/src/crypto/ed25519_key.dart` (unmarshalEd25519PrivateKey)
 - **sign** (method) — Signs data using an Ed25519 private key.
   - calls: sign, fromList, bytes
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PrivKey.sign)
 - **verify** (method) — Verifies an Ed25519 signature.
   - calls: length, Signature, verify
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
 - **extractPublicKey** (method) — Extracts the public key from a key pair.
   - calls: extractPublicKey
   - referenced by (by name):
@@ -179,6 +268,34 @@ Unified Ed25519 signing service.
   - calls: extractPrivateKeyBytes, fromList, sublist
 - **publicKeyFromBytes** (method) — Creates a public key from raw bytes.
   - calls: length, ArgumentError, SimplePublicKey, ed25519
+  - referenced by (by name):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
+
+## `lib/src/crypto/key_codec.dart`
+
+Decodes a protobuf-wrapped public key (`crypto.pb.PublicKey`),
+
+_Directly tested._
+
+### top-level `unmarshalPublicKey` (function)
+
+- **unmarshalPublicKey** (function) — Decodes a protobuf-wrapped public key (`crypto.pb.PublicKey`),
+  - calls: unmarshalKeyProto, rsa, unmarshalRsaPublicKey, ed25519, unmarshalEd25519PublicKey, secp256k1, unmarshalSecp256k1PublicKey, ecdsa, unmarshalEcdsaPublicKey
+
+### top-level `marshalPublicKey` (function)
+
+- **marshalPublicKey** (function) — Encodes a public key as a protobuf-wrapped `crypto.pb.PublicKey`, per
+  - calls: marshalKeyProto, type, raw
+
+### top-level `unmarshalPrivateKey` (function)
+
+- **unmarshalPrivateKey** (function) — Decodes a protobuf-wrapped private key (`crypto.pb.PrivateKey`),
+  - calls: unmarshalKeyProto, rsa, unmarshalRsaPrivateKey, ed25519, unmarshalEd25519PrivateKey, secp256k1, unmarshalSecp256k1PrivateKey, ecdsa, unmarshalEcdsaPrivateKey
+
+### top-level `marshalPrivateKey` (function)
+
+- **marshalPrivateKey** (function) — Encodes a private key as a protobuf-wrapped `crypto.pb.PrivateKey`,
+  - calls: marshalKeyProto, type, raw
 
 ## `lib/src/crypto/key_types.dart`
 
@@ -191,8 +308,13 @@ _Directly tested._
 A cryptographic key that can be compared to another key. Equivalent to
 
 - **type** (method) — The protobuf key type (crypto.pb.KeyType).
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **raw** (method) — The raw bytes of the key, not wrapped in the protobuf `PublicKey`/
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **keyEquals** (method) — Whether this key has the same byte representation as [other].
   - calls: _bytesEqual, raw
@@ -202,7 +324,8 @@ A cryptographic key that can be compared to another key. Equivalent to
 A private key that can sign data and derive its public key. Equivalent
 
 - **sign** (method) — Signs [data], returning the signature bytes.
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PrivKey.sign)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
 - **getPublic** (method) — Returns the public key paired with this private key.
 
@@ -211,18 +334,25 @@ A private key that can sign data and derive its public key. Equivalent
 A public key that can verify signatures made by the paired private key.
 
 - **verify** (method) — Verifies that [signature] is a valid signature of [data] by the
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
 
 ### top-level `marshalKeyProto` (function)
 
 - **marshalKeyProto** (function) — Encodes `{required KeyType Type = 1; required bytes Data = 2;}`
   - calls: BytesBuilder, addByte, add, _encodeProtoVarint, protoValue, length, toBytes
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 
 ### top-level `unmarshalKeyProto` (function)
 
 - **unmarshalKeyProto** (function) — Decodes a `{Type, Data}` message produced by [marshalKeyProto].
   - calls: length, _readProtoVarint, fromProtoValue, FormatException, sublist
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (unmarshalPrivateKey)
 
 ## `lib/src/crypto/rsa_key.dart`
 
@@ -236,14 +366,20 @@ An RSA private key, per go-libp2p's `core/crypto` `RsaPrivateKey`.
 
 - **type** (method)
   - calls: rsa
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **getPublic** (method)
 - **raw** (method)
   - calls: encodePkcs1PrivateKey
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **sign** (method)
   - calls: RSASigner, SHA256Digest, init, PrivateKeyParameter, bytes, generateSignature
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PrivKey.sign)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
 
 ### class `RsaPublicKey` extends PubKey
@@ -252,13 +388,19 @@ An RSA public key, per go-libp2p's `core/crypto` `RsaPublicKey`.
 
 - **type** (method)
   - calls: rsa
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **raw** (method)
   - calls: encodePkixPublicKey
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **verify** (method)
   - calls: RSASigner, SHA256Digest, init, PublicKeyParameter, verifySignature, RSASignature
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
 
 ### top-level `minRsaKeyBits` (variable)
@@ -274,11 +416,15 @@ An RSA public key, per go-libp2p's `core/crypto` `RsaPublicKey`.
 
 - **unmarshalRsaPrivateKey** (function) — Parses an X.509/PKCS1-DER-encoded RSA private key, per go-libp2p's
   - calls: fromBytes, elements, length, FormatException, integer, intAt, RSAPrivateKey, bitLength, modulus, fromPointyCastle
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPrivateKey)
 
 ### top-level `unmarshalRsaPublicKey` (function)
 
 - **unmarshalRsaPublicKey** (function) — Parses an X.509/PKIX-DER-encoded RSA public key
   - calls: fromBytes, length, elements, FormatException, fromList, stringValues, integer, bitLength, fromPointyCastle, RSAPublicKey
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPublicKey)
 
 ### top-level `encodePkcs1PrivateKey` (function)
 
@@ -306,14 +452,20 @@ A Secp256k1 private key, per go-libp2p's `core/crypto`
 
 - **type** (method)
   - calls: secp256k1
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **getPublic** (method)
 - **raw** (method)
   - calls: _encodeFixed32, d
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **sign** (method)
   - calls: ECDSASigner, SHA256Digest, HMac, init, PrivateKeyParameter, generateSignature, _encodeDerSignature, normalize
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PrivKey.sign)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.sign)
 
 ### class `Secp256k1PublicKey` extends PubKey
@@ -322,13 +474,19 @@ A Secp256k1 public key, per go-libp2p's `core/crypto`
 
 - **type** (method)
   - calls: secp256k1
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
 - **raw** (method)
   - calls: getEncoded, Q
-  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/key_codec.dart` (marshalPublicKey)
+    - `lib/src/crypto/key_codec.dart` (marshalPrivateKey)
     - `lib/src/crypto/key_types.dart` (Key.keyEquals)
 - **verify** (method)
   - calls: _decodeDerSignature, ECDSASigner, SHA256Digest, init, PublicKeyParameter, verifySignature
-  - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/crypto/ed25519_key.dart` (Ed25519PubKey.verify)
     - `lib/src/crypto/ed25519_signer.dart` (Ed25519Signer.verify)
 
 ### top-level `generateSecp256k1KeyPair` (function)
@@ -340,9 +498,13 @@ A Secp256k1 public key, per go-libp2p's `core/crypto`
 
 - **unmarshalSecp256k1PrivateKey** (function) — Parses a raw 32-byte big-endian Secp256k1 private key, per go-libp2p's
   - calls: length, FormatException, _decodeUnsigned, zero, n, fromPointyCastle, ECPrivateKey
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPrivateKey)
 
 ### top-level `unmarshalSecp256k1PublicKey` (function)
 
 - **unmarshalSecp256k1PublicKey** (function) — Parses a SEC1-encoded (compressed or uncompressed) Secp256k1 public
   - calls: decodePoint, curve, FormatException, fromPointyCastle, ECPublicKey
+  - referenced by (by name):
+    - `lib/src/crypto/key_codec.dart` (unmarshalPublicKey)
 

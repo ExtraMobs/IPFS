@@ -1,6 +1,6 @@
 ---
 test-group: fakes
-generated: 2026-08-25T08:39:35.499185
+generated: 2026-08-25T08:48:49.415933
 ---
 
 # `test/fakes/`

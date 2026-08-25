@@ -1,6 +1,6 @@
 ---
 test-group: protocols
-generated: 2026-08-25T08:39:35.502361
+generated: 2026-08-25T08:48:49.419621
 ---
 
 # `test/protocols/`

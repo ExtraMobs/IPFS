@@ -1,6 +1,6 @@
 ---
 test-group: bin
-generated: 2026-08-25T08:39:35.496828
+generated: 2026-08-25T08:48:49.414347
 ---
 
 # `test/bin/`
