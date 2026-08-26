@@ -117,6 +117,7 @@ export 'src/core/routing/routing.dart'
         ValueStore,
         getPublicKey,
         keyForPublicKey;
+export 'src/core/protocol/protocol.dart';
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
