@@ -20,7 +20,8 @@ export 'src/core/crypto/ed25519_key.dart'
         generateEd25519KeyPair,
         unmarshalEd25519PrivateKey,
         unmarshalEd25519PublicKey;
-export 'src/core/crypto/ed25519_signer.dart' show Ed25519Signer, KeyPairExtensions;
+export 'src/core/crypto/ed25519_signer.dart'
+    show Ed25519Signer, KeyPairExtensions;
 export 'src/core/crypto/key_codec.dart'
     show
         marshalPrivateKey,
@@ -29,7 +30,8 @@ export 'src/core/crypto/key_codec.dart'
         unmarshalPublicKey;
 export 'src/core/crypto/key_types.dart'
     show Key, KeyType, PrivKey, PubKey, marshalKeyProto, unmarshalKeyProto;
-export 'src/core/crypto/proto_varint.dart' show encodeProtoVarint, readProtoVarint;
+export 'src/core/crypto/proto_varint.dart'
+    show encodeProtoVarint, readProtoVarint;
 export 'src/core/crypto/rsa_key.dart'
     show
         RsaPrivateKey,
@@ -85,6 +87,23 @@ export 'src/core/record/record.dart'
         unmarshalRecordPayload;
 export 'src/core/routing/options.dart'
     show RoutingOption, RoutingOptions, expiredOption, offlineOption;
+export 'src/core/routing/query.dart'
+    show
+        QueryEvent,
+        QueryEventRegistration,
+        QueryEventType,
+        addingPeer,
+        dialingPeer,
+        finalPeer,
+        peerResponse,
+        provider,
+        publishQueryEvent,
+        queryError,
+        queryEventBufferSize,
+        registerForQueryEvents,
+        sendingQuery,
+        subscribesToQueryEvents,
+        value;
 export 'src/core/routing/routing.dart'
     show
         ContentDiscovery,

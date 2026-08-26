@@ -1,10 +1,14 @@
 # Progresso da transpilação kubo/go-libp2p/boxo → dart_ipfs
 
-**Leia este arquivo antes do plano.** O plano (`C:\Users\Administrador\.claude\plans\lexical-fluttering-acorn.md`, ou peça pro usuário reexportar se estiver em outra máquina/sessão) explica o *porquê* e o *como fazer* — a metodologia recursiva, a ordem de prioridade por tier, os critérios de escopo. Este arquivo diz *o que já foi feito*. Comece por aqui.
+**Leia `AGENTS.md` e este arquivo antes de transpilar.** `AGENTS.md` define o
+escopo atual (biblioteca/runtime, sem componentes exclusivamente CLI); este
+arquivo registra a ordem e o que já foi validado.
 
 ## Como isto foi gerado / como continuar
 
 - Todos os 16 repositórios Go de referência estão clonados (`git clone --depth 1`) em `B:\Syncthing\Desenvolvimento\Projetos\Pessoal\go-ipfs-reference\` — **fora** do repositório git do `dart_ipfs`, então não aparecem aqui.
+- URLs e commits exatos dessas fontes estão fixados em
+  [`UPSTREAM_LOCK.md`](UPSTREAM_LOCK.md).
 - Cada um já foi indexado com `go-ipfs-reference\go_module_index.go` (ferramenta AST em Go, mesmo formato/metodologia do `tool/generate_module_index.dart` do `dart_ipfs`) — o resultado está em `go-ipfs-reference\<repo>-index\`. **Não precisa reclonar nem reindexar** para continuar a execução; se algum índice parecer desatualizado, regenere com:
   ```
   go-ipfs-reference\go_module_index.exe go-ipfs-reference\<repo> go-ipfs-reference\<repo>-index
@@ -14,7 +18,7 @@
 
 ## Status
 
-- `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `implementação original não auditada` | `fora do escopo (daemon-CLI só, ver plano)`.
+- `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `implementação original não auditada` | `fora do escopo (<razão confirmada>)`.
 - `implementação original não auditada` (valor novo, adicionado em 2026-08): existe código Dart funcional cobrindo (parte d)o que este pacote Go faz, mas foi escrito do zero, nunca comparado função-a-função com o Go real, e não tem teste de paridade contra vetores reais. **Não confundir com `não iniciado`** (nenhum código relevante existe) — a distinção importa porque a suite de testes já achou 2 bugs reais em código que "funcionava" antes de ser auditado (Noise só-Ed25519, RSA com DER errado). Ver a seção "Estado em aberto" abaixo pra o levantamento completo de onde essa cobertura existe.
 - `Destino em lib/src/` fica em branco até o pacote ser realmente mapeado — preencher ao decidir onde o port mora no `dart_ipfs`.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
@@ -28,10 +32,12 @@ Isto é o que uma sessão futura precisa saber pra continuar de onde paramos —
 - **Levantamento recursivo de dependências completo**, cruzando `kubo/go.mod` + os 15 módulos clonados + o estado real deste repo (não só o que esta tabela diz): https://claude.ai/code/artifact/6b94efde-3f58-4ad6-98bd-c18d8de19330 — inclui a ordem de construção recomendada (abaixo) e, importante, a cobertura original já existente em `lib/src/` pra cada um dos 8 módulos sem port literal (DHT, PubSub, IPLD codecs, Bitswap, UnixFS, Gateway/CAR, storage, routing helpers).
 - **Ordem de construção recomendada**, derivada dos imports Go reais (não suposição): ~~(1) `core/record`+`core/peer/pb` (fecha `PeerRecord`, autocontido)~~ **feito em 2026-08-25** → (2) três frentes paralelas sem dependência cruzada: ~~`go-libp2p-record`~~ **feito em 2026-08-25** →`routing-helpers` **(em andamento, ver nota abaixo)**, ~~`go-libp2p-kbucket`~~ **feito em 2026-08-25**, ~~`go-datastore`~~ **feito em 2026-08-25**, `go-ipld-prime` **(em andamento -- `datamodel`+`node/basicnode` feitos em 2026-08-25, resto por fazer: `codec/*`, `linking`/`linking/cid`, `storage`, `traversal`/`traversal/selector`; `schema`/`schema/gen/go` fica pra depois de tudo isso por depender de geração de código via reflexão do Go, sem equivalente direto em Dart -- precisa de design próprio)**, `go-libp2p-pubsub` **(em andamento -- `timecache`+`partialmessages/bitmap` feitos em 2026-08-25 (únicos subpacotes sem dependência de `Host`/`Stream` do `go-libp2p`); `PubSub`/`GossipSubRouter` (a orquestração central, ~27500 linhas) ficam bloqueados até `go-libp2p` Host/Stream/Network estar pronto -- ver nota completa na linha `(root)` da tabela)** → (3) `boxo` núcleo (bitswap/blockstore/dag/files/mfs/gateway — não depende da DHT) → (4) `go-libp2p-kad-dht` (ponto de convergência: kbucket+record+routing-helpers+boxo+datastore — é o ÚLTIMO a ficar pronto, não o primeiro) → (5) `boxo` namesys/routing (só cantos que realmente usam a DHT). Cortando tudo isso: o resto do `go-libp2p` em si (Host/Swarm/Transportes/NAT/Identify) ainda vem inteiro do `ipfs_libp2p` de terceiro — é o maior corpo de trabalho restante em linhas de código de todo o grafo, e nenhum item da lista acima o reduz.
 - **`go-libp2p-kbucket` portado (2026-08-25)**: novo pacote `packages/transpiled_libp2p_kbucket/` (ver a linha `(root)` da tabela abaixo pra detalhe técnico completo). Dois bugs reais encontrados e corrigidos durante este port, ambos do mesmo gênero (Dart não tem largura fixa de inteiro, Go sim): (1) o gerador de `bucket_prefixmap.go` (arquivo GERADO de 65536 linhas no Go — portado como script, não transcrito à mão) hasheava só 6 dos 34 bytes reais na primeira versão; (2) `genRandomKey` usava `~` de precisão arbitrária do Dart onde o Go usa complemento de bits de um `uint8` real, causando sobreposição de máscaras que contaminava bits que deveriam vir determinadamente da chave local — pego pelo próprio teste de paridade (`TestGenRandomKey`, 100 iterações), não por inspeção. Reforça o padrão já visto nesta sessão: todo `~`/complemento de bits portado do Go precisa de `& 0xFF` (ou a máscara de largura equivalente) logo depois, nunca confiar no comportamento "óbvio".
-- **`core/routing` + parte de `go-libp2p-routing-helpers` portados (2026-08-25)**: `core/routing` (pré-requisito não detectado na auditoria original -- ver a linha da tabela do `go-libp2p` acima) e as peças mecânicas/autocontidas de `go-libp2p-routing-helpers` (`Bootstrap`, `NullRouter`, `LimitedValueStore`, `Compose`) estão prontas. **`Parallel`/`Tiered`/`Sequential` continuam pendentes de propósito** -- exigem decidir como representar a propagação de `context.Value` do Go (o sistema de `QueryEvent`) em Dart antes de portar, não é trabalho mecânico. Ver a nota completa na linha `(root)` de `go-libp2p-routing-helpers` abaixo antes de retomar.
+- **Primeira onda multiagente validada (2026-08-26)**: `boxo/bitswap/client/wantlist`, `go-ipld-prime/codec`+`codec/raw` e `go-libp2p/core/routing/query.go` foram revisados, testados contra seus pacotes Go e validados em Dart. `codec/raw` ainda não registra o multicodec `raw` (`0x55`), pois o registry/linking correspondente permanece pendente; `QueryEvent` usa `Zone` e `QueryEventRegistration.close()` no lugar de `context.Context`/canal genéricos. Essas limitações estão registradas nas linhas das tabelas, não são licença para pular os consumidores.
+- **`core/routing` + parte de `go-libp2p-routing-helpers` portados (2026-08-25/26)**: `core/routing` e as peças mecânicas/autocontidas de `go-libp2p-routing-helpers` (`Bootstrap`, `NullRouter`, `LimitedValueStore`, `Compose`) estão prontas; `query.go` agora também está pronto. `Parallel`/`Tiered`/`Sequential` continuam pendentes, mas seu pré-requisito de propagação de eventos já tem a adaptação Dart documentada.
 - **`go-libp2p-record` portado (2026-08-25)**: novo pacote `packages/transpiled_libp2p_record/` (ver a linha da tabela abaixo pra detalhe técnico). Primeiro pacote novo desde a reorganização de módulos que não é `transpiled_libp2p` nem um dos multiformats -- confirma que a convenção de pacote-por-módulo-Go se sustenta pra módulos menores também.
 - **`core/record` + `core/peer/pb` portados (2026-08-25)**: `Record`/`Envelope`/`PeerRecord` completos em `packages/transpiled_libp2p/lib/src/core/record/` e `core/peer/peer_record.dart` (ver as linhas das tabelas abaixo pra detalhe técnico). Achado de metodologia relevante pra qualquer port futuro que precise imitar o `init()` do Go: uma variável de nível de biblioteca em Dart (`final bool _x = _setup();`) **não** roda só por importar o arquivo -- inicialização de topo em Dart é preguiçosa (só roda no primeiro acesso a essa variável). O registro automático do `PeerRecord` em `Envelope` teve que ser movido pro construtor (idempotente, com guarda contra recursão), não um "top-level init". Isso já causou um teste falhar nesta sessão antes de ser corrigido -- vale revisar qualquer port futuro que dependa do padrão `init()`/registro automático do Go.
-- **Tarefa aberta, ainda não iniciada**: mapear a árvore/funções públicas do guarda-chuva pra espelhar `kubo` de verdade. Ponto de entrada já identificado: `bin/ipfs.dart` (`CommandRunner` → `DaemonCommand`/etc. → `IPFSNode`) é o equivalente do `kubo/cmd/ipfs/main.go` → `core/builder.go` → `core/core.go`. Falta decidir, por etapa (usando a ordem acima), o que em `lib/src/` é reaproveitável como está (cola de integração genuína, ex. `core/ipfs_node/`, `services/`) vs. o que precisa ser substituído por port real conforme cada módulo da ordem acima for feito.
+- **Tarefa aberta, ainda não iniciada**: mapear a API pública do guarda-chuva contra a composição programática de `kubo/core` (`builder.go`, `core.go` e serviços reutilizáveis). `bin/ipfs.dart` é apenas uma ferramenta original e não é referência de arquitetura nem alvo de paridade. Falta decidir, por etapa (usando a ordem acima), o que em `lib/src/` é cola de integração genuína reaproveitável (por exemplo `core/ipfs_node/` e `services/`) e o que precisa ser substituído por port real.
+- **Correção de escopo após auditoria de callers (2026-08-25)**: o plano antigo marcava toda a árvore FUSE, `plugin/loader` e todas as migrações como “daemon-CLI only”. Isso era amplo demais. `core/core.go` importa `fuse/mount`, `core/coreapi` importa `internal/fusemount`, `repo/fsrepo` usa `repo/fsrepo/migrations`, e o exemplo oficial `kubo-as-a-library` usa `plugin/loader`. Essas unidades voltaram para `não iniciado`. Implementações FUSE chamadas somente por `cmd`/`core/commands`, os binários `main` de migração e `ipfsfetcher` continuam fora após busca dos imports reais.
 - **Limpeza de identidade do fork (concluída)**: removidos `README.md`/`CONTRIBUTING.md`/`CHANGELOG.md`/`LICENSE`/`SECURITY.md`/`ROADMAP.md`/`ENGINEERING_NOTES.md`/`CODE_OF_CONDUCT.md`/`FUNDING.yml`/workflow de publish automático no pub.dev/Docker+Helm+K8s (apontavam pro registry do autor original) — eram 100% conteúdo do projeto `jxoesneon/IPFS` upstream, sem valor de código pra este fork. `pubspec.yaml`/`melos.yaml` e os docs técnicos que restaram agora apontam pro fork real (`github.com/ExtraMobs/IPFS`). Esses arquivos precisam ser reescritos do zero quando o fork tiver uma identidade própria definida — não foram recriados ainda, de propósito.
 - **Limitação conhecida dos planos do Claude Code**: o arquivo de plano (`C:\Users\Administrador\.claude\plans\...`) não é versionado neste repositório — vive só na instalação local do Claude Code, e pode ser sobrescrito por um plano mais novo com o mesmo nome (já aconteceu nesta sessão: o plano original de metodologia foi substituído pelo plano de reorganização de pacotes). Esta seção existe justamente pra não depender só do arquivo de plano pra continuidade entre sessões.
 
@@ -122,7 +128,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `core/protocol` |  | não iniciado |  |
 | `core/record` | `packages/transpiled_libp2p/lib/src/core/record/record.dart` (`Record`, `RegisterType` -- `record.go`) + `envelope.dart` (`Envelope`, `Seal`, `Consume(Typed)Envelope` -- `envelope.go`) | **portado com paridade comprovada** | `Record` interface + registro completos: `registerType`/`unmarshalRecordPayload`, adaptado pra usar uma *factory function* (`Record Function()`) em vez de refletir um `reflect.Type` registrado (Dart não tem `reflect.New` a partir de um token de tipo em runtime) -- a factory é chamada uma vez na hora do registro (pra ler `codec()`) e de novo a cada unmarshal, mesmo efeito líquido do padrão Go. `Envelope` completo: `Seal`, `ConsumeEnvelope`, `ConsumeTypedEnvelope`, `UnmarshalEnvelope`/`marshal`, `equals`, `record()`/`typedRecord`, `_validate` com o mesmo domain-separation (`makeUnsigned`: cada campo prefixado por varint de comprimento, concatenado) -- buffer pooling do Go (`go-buffer-pool`) não portado, é otimização de performance sem efeito observável, GC do Dart cobre o caso. Protobuf de `Envelope{public_key, payload_type, payload, signature}` (campos 1/2/3/5, hand-rolled) reaproveita `marshalPublicKey`/`unmarshalPublicKey` (`key_codec.dart`) pro campo `public_key` aninhado, já que é o mesmo formato `crypto.pb.PublicKey`. Testes com vetores do próprio `record_test.go`/`envelope_test.go` do go-libp2p (incluindo os testes de adulteração de domain/payload/payloadType que provam rejeição de assinatura) em `test/record_test.dart`/`test/envelope_test.dart`. |
 | `core/record/pb` | `packages/transpiled_libp2p/lib/src/core/record/envelope.dart` (protobuf de `Envelope{public_key, payload_type, payload, signature}` hand-rolled) | portado sem teste de paridade formal isolado (coberto indiretamente por `envelope_test.dart`) |  |
-| `core/routing` | `packages/transpiled_libp2p/lib/src/core/routing/{routing,options}.dart` | **portado com paridade comprovada** | Achado durante o port de `go-libp2p-routing-helpers`: esse módulo depende diretamente das interfaces de `core/routing` do próprio go-libp2p (`Routing`/`ValueStore`/`PeerRouting`/`ContentRouting`/`Option`), que a auditoria de dependências original (ver "Estado em aberto") não tinha detectado como pré-requisito -- não é um módulo Go separado, mas precisou ser portado antes de continuar. `routing.go` completo: `ContentProviding`/`ContentDiscovery`/`ContentRouting`/`PeerRouting`/`ValueStore`/`Routing`/`PubKeyFetcher`, `KeyForPublicKey`, `GetPublicKey` (usa `PeerId.extractPublicKey`/`NoPublicKeyException` já portados). `options.go` completo: `Options`→`RoutingOptions`, `Option`→`RoutingOption` (função void em vez de retornar erro, convenção de exceção já usada no resto do pacote), `Apply`/`ToOption`/`Expired`/`Offline`. `ErrNotFound`/`ErrNotSupported` viraram `RoutingNotFoundException`/`RoutingNotSupportedException`. Achado de Dart real durante o port: um parâmetro `store` tipado `ValueStore` não promovia pra `PubKeyFetcher` dentro de um `if (store is PubKeyFetcher)` (erro `undefined_method` mesmo com o tipo certo) -- contornado com cast explícito (`store as PubKeyFetcher`) em vez de depender de promoção implícita; causa raiz não totalmente investigada, mas o cast explícito é correto independente da causa. Testado em `test/routing_test.dart` (`keyForPublicKey`, `getPublicKey` nos três caminhos: chave embutida via identity-multihash, `PubKeyFetcher` otimizado, fallback `GetValue` puro). |
+| `core/routing` | `packages/transpiled_libp2p/lib/src/core/routing/{routing,options,query}.dart` | **portado com paridade comprovada** | Além de `routing.go`/`options.go` já registrados, `query.go` está em `query.dart`: valores 0–7, serialização JSON, buffer 16, ordenação e cópia profunda de respostas. `context.Value`/canal Go foi adaptado para `Zone` + `QueryEventRegistration`; `close()` cancela novas publicações e drena eventos enfileirados. Vetores Dart em `test/query_event_test.dart`; `go test ./core/routing`, análise direcionada e `dart test -j 1` passaram. |
 | `core/sec` |  | não iniciado |  |
 | `core/test` |  | não iniciado |  |
 | `core/transport` |  | não iniciado |  |
@@ -243,23 +249,23 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `blocks/blockstoreutil` |  | não iniciado |  |
 | `client/rpc` |  | não iniciado |  |
 | `client/rpc/auth` |  | não iniciado |  |
-| `cmd/ipfs` |  | não iniciado |  |
-| `cmd/ipfs/kubo` |  | não iniciado |  |
-| `cmd/ipfs/util` |  | não iniciado |  |
-| `cmd/ipfswatch` |  | não iniciado |  |
-| `commands` |  | não iniciado |  |
+| `cmd/ipfs` |  | fora do escopo (exclusivamente CLI) |  |
+| `cmd/ipfs/kubo` |  | fora do escopo (exclusivamente CLI) |  |
+| `cmd/ipfs/util` |  | fora do escopo (exclusivamente CLI) |  |
+| `cmd/ipfswatch` |  | fora do escopo (exclusivamente CLI) |  |
+| `commands` |  | fora do escopo (exclusivamente CLI) |  |
 | `config` |  | não iniciado |  |
 | `config/serialize` |  | não iniciado |  |
 | `core` |  | não iniciado |  |
-| `core/commands` |  | não iniciado |  |
-| `core/commands/cmdenv` |  | não iniciado |  |
-| `core/commands/cmdutils` |  | não iniciado |  |
-| `core/commands/dag` |  | não iniciado |  |
-| `core/commands/e` |  | não iniciado |  |
-| `core/commands/keyencode` |  | não iniciado |  |
-| `core/commands/name` |  | não iniciado |  |
-| `core/commands/object` |  | não iniciado |  |
-| `core/commands/pin` |  | não iniciado |  |
+| `core/commands` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/cmdenv` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/cmdutils` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/dag` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/e` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/keyencode` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/name` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/object` |  | fora do escopo (exclusivamente CLI) |  |
+| `core/commands/pin` |  | fora do escopo (exclusivamente CLI) |  |
 | `core/coreapi` |  | não iniciado |  |
 | `core/corehttp` |  | não iniciado |  |
 | `core/coreiface` |  | não iniciado |  |
@@ -275,19 +281,19 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `core/shutdown` |  | não iniciado |  |
 | `coverage/main` |  | não iniciado |  |
 | `docs/examples/kubo-as-a-library` |  | não iniciado |  |
-| `fuse/fusetest` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/ipns` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/mfs` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/mount` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/node` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/readonly` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `fuse/writable` |  | fora do escopo (daemon-CLI só, ver plano) |  |
+| `fuse/fusetest` |  | fora do escopo (helper de teste) |  |
+| `fuse/ipns` |  | fora do escopo (somente CLI/testes) | Callers de produção encontrados somente na montagem iniciada pela CLI. |
+| `fuse/mfs` |  | fora do escopo (somente CLI/testes) | Callers de produção encontrados somente na montagem iniciada pela CLI. |
+| `fuse/mount` |  | não iniciado | Importado por `core/core.go`; fornece os tipos de estado de montagem expostos pelo nó. |
+| `fuse/node` |  | fora do escopo (somente CLI/testes) | Callers de produção encontrados em `cmd/ipfs/kubo/daemon.go` e `core/commands`. |
+| `fuse/readonly` |  | fora do escopo (somente CLI/testes) | Usado por `fuse/node`, que é CLI-only no grafo atual. |
+| `fuse/writable` |  | fora do escopo (somente CLI/testes) | Usado por `fuse/ipns`/`fuse/mfs`, que são CLI-only no grafo atual. |
 | `gc` |  | não iniciado |  |
-| `internal/fusemount` |  | fora do escopo (daemon-CLI só, ver plano) |  |
+| `internal/fusemount` |  | não iniciado | Importado por `core/coreapi`; marca chamadas de publicação originadas por FUSE. |
 | `misc/fsutil` |  | não iniciado |  |
 | `p2p` |  | não iniciado |  |
 | `plugin` |  | não iniciado |  |
-| `plugin/loader` |  | fora do escopo (daemon-CLI só, ver plano) |  |
+| `plugin/loader` |  | não iniciado | Usado pelo exemplo oficial `docs/examples/kubo-as-a-library` para registrar plugins embutidos. |
 | `plugin/plugins/badgerds` |  | não iniciado |  |
 | `plugin/plugins/dagjose` |  | não iniciado |  |
 | `plugin/plugins/flatfs` |  | não iniciado |  |
@@ -302,23 +308,23 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `repo` |  | não iniciado |  |
 | `repo/common` |  | não iniciado |  |
 | `repo/fsrepo` |  | não iniciado |  |
-| `repo/fsrepo/migrations` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/atomicfile` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/common` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/fs-repo-16-to-17` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/fs-repo-16-to-17/migration` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/fs-repo-17-to-18` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/fs-repo-17-to-18/migration` |  | fora do escopo (daemon-CLI só, ver plano) |  |
-| `repo/fsrepo/migrations/ipfsfetcher` |  | fora do escopo (daemon-CLI só, ver plano) |  |
+| `repo/fsrepo/migrations` |  | não iniciado | `repo/fsrepo` usa `RepoVersion` e `WriteRepoVersion`; também contém migrações embutidas. |
+| `repo/fsrepo/migrations/atomicfile` |  | não iniciado | Dependência das migrações embutidas via `common`. |
+| `repo/fsrepo/migrations/common` |  | não iniciado | Dependência das migrações embutidas 16→17 e 17→18. |
+| `repo/fsrepo/migrations/fs-repo-16-to-17` |  | fora do escopo (wrapper CLI `main`) | A lógica reutilizável está no subpacote `migration`. |
+| `repo/fsrepo/migrations/fs-repo-16-to-17/migration` |  | não iniciado | Importado por `migrations/embedded.go`. |
+| `repo/fsrepo/migrations/fs-repo-17-to-18` |  | fora do escopo (wrapper CLI `main`) | A lógica reutilizável está no subpacote `migration`. |
+| `repo/fsrepo/migrations/fs-repo-17-to-18/migration` |  | não iniciado | Importado por `migrations/embedded.go`. |
+| `repo/fsrepo/migrations/ipfsfetcher` |  | fora do escopo (somente CLI/testes) | Callers de produção encontrados apenas em `cmd/ipfs/kubo/add_migrations.go`. |
 | `routing` |  | não iniciado |  |
 | `test/api-startup` |  | não iniciado |  |
-| `test/bench/bench_cli_ipfs_add` |  | não iniciado |  |
+| `test/bench/bench_cli_ipfs_add` |  | fora do escopo (exclusivamente CLI) |  |
 | `test/bench/offline_add` |  | não iniciado |  |
-| `test/cli` |  | não iniciado |  |
-| `test/cli/harness` |  | não iniciado |  |
-| `test/cli/testutils` |  | não iniciado |  |
-| `test/cli/testutils/httprouting` |  | não iniciado |  |
-| `test/cli/testutils/pinningservice` |  | não iniciado |  |
+| `test/cli` |  | fora do escopo (exclusivamente CLI) |  |
+| `test/cli/harness` |  | fora do escopo (exclusivamente CLI) |  |
+| `test/cli/testutils` |  | fora do escopo (exclusivamente CLI) |  |
+| `test/cli/testutils/httprouting` |  | fora do escopo (exclusivamente CLI) |  |
+| `test/cli/testutils/pinningservice` |  | fora do escopo (exclusivamente CLI) |  |
 | `test/dependencies` |  | não iniciado |  |
 | `test/dependencies/go-sleep` |  | não iniciado |  |
 | `test/dependencies/go-timeout` |  | não iniciado |  |
@@ -350,7 +356,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `bitswap/client/internal/sessionmanager` |  | não iniciado |  |
 | `bitswap/client/internal/sessionpeermanager` |  | não iniciado |  |
 | `bitswap/client/traceability` |  | não iniciado |  |
-| `bitswap/client/wantlist` |  | não iniciado |  |
+| `bitswap/client/wantlist` | `packages/transpiled_boxo/lib/src/bitswap/client/wantlist/{wantlist,want_type}.dart` | **portado com paridade comprovada** | `NewRefEntry`, `New`, `Len`, `Add`, `Remove`, `RemoveType`, `Has`, `Get` e `Entries`, incluindo cache, precedência Block/Have e ordenação por prioridade. `WantType` preserva os valores protobuf `Block=0` e `Have=1`. Vetores de `wantlist_test.go` adaptados em 10 testes Dart; `go test ./bitswap/client/wantlist`, `dart analyze` e `dart test -j 1` passaram. |
 | `bitswap/decision` |  | não iniciado |  |
 | `bitswap/internal` |  | não iniciado |  |
 | `bitswap/internal/defaults` |  | não iniciado |  |
@@ -458,12 +464,12 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `(root)` | `packages/transpiled_ipld_prime/lib/transpiled_ipld_prime.dart` (barrel) | **portado com paridade comprovada** | O pacote `ipld` raiz do Go (`datamodel.go`, `linking.go`, `schema.go`, `codec.go`, `adl.go`, `operations.go`) é só um facade de re-export/alias sobre `datamodel`/`linking`/`schema` -- os próprios mantenedores do Go documentam isso como "transicional"/"namespace noise que pode ser removido um dia". O barrel Dart já cumpre exatamente esse papel: expõe os símbolos de `datamodel` (portados, ver a linha `datamodel` abaixo) direto no top-level do pacote, sem prefixo, igual ao que o facade Go faz. Nada a portar aqui além do próprio barrel. |
 | `adl` |  | não iniciado |  |
 | `adl/rot13adl` |  | não iniciado |  |
-| `codec` |  | não iniciado |  |
+| `codec` | `packages/transpiled_ipld_prime/lib/src/codec/api.dart` | **portado com paridade comprovada** | Tipos `Encoder`/`Decoder`, `ErrBudgetExhausted` e `MapSortMode`; os valores e a mensagem de erro são cobertos em `test/codec/api_test.dart`. |
 | `codec/cbor` |  | não iniciado |  |
 | `codec/dagcbor` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`DagCborCodec`) | implementação original não auditada | Codec funcional já em uso, nunca comparado byte a byte com este pacote. |
 | `codec/dagjson` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`DagJsonCodec`) | implementação original não auditada | Idem `codec/dagcbor`. |
 | `codec/json` |  | não iniciado |  |
-| `codec/raw` | `lib/src/core/ipld/codecs/standard_codecs.dart` (`RawCodec`) | implementação original não auditada | Idem `codec/dagcbor`. `DagPbCodec` (também em `standard_codecs.dart`) não tem equivalente aqui -- DAG-PB é um módulo Go separado, `go-codec-dagpb`, não clonado em `go-ipfs-reference/` ainda. |
+| `codec/raw` | `packages/transpiled_ipld_prime/lib/src/codec/raw/codec.dart` | **portado com paridade comprovada (uso direto)** | `Encode`/`Decode` preservam bytes, propagação de erros e reuso de `Uint8List`; vetores de `codec/raw/codec_test.go` adaptados. O `init()` Go que registra multicodec `raw` (`0x55`) permanece pendente de `linking`/registry; `TestRoundtripCidlink` também depende de `linking/cid`. Não usar a implementação original do guarda-chuva como evidência de paridade. |
 | `datamodel` | `packages/transpiled_ipld_prime/lib/src/datamodel/{kind,path_segment,path,link,node,node_builder,errors,null_node,copy,equal}.dart` | **portado com paridade comprovada** | `Kind`/`KindSet` (`kind.go`, enum Dart com campo `code` guardando o char ASCII original, só por rastreabilidade/debug), `PathSegment` (`pathSegment.go`, união string-ou-int portada do mesmo jeito que o Go -- campos `_s`/`_i` com sentinela, Dart não tem união mais leve também), `Path` (`path.go`), `Link`/`LinkPrototype` (`link.go`, interfaces puras -- `linking/cid`, a implementação real baseada em CID, ainda não portada), `Node`/`NodePrototype`/`NodePrototypeSupportingAmend`/`MapIterator`/`ListIterator`/`UintNode`/`LargeBytesNode` (`node.go`; `io.ReadSeeker` do `LargeBytesNode` virou um `ByteReadSeeker` mínimo próprio, já que Dart não tem uma interface seekable-genérica equivalente em `dart:core`/`dart:io`), `NodeAssembler`/`MapAssembler`/`ListAssembler`/`NodeBuilder` (`nodeBuilder.go`), `ErrWrongKind`→`WrongKindException`/`ErrNotExists`→`NotExistsException`/`ErrRepeatedMapKey`→`RepeatedMapKeyException`/`ErrInvalidSegmentForList`→`InvalidSegmentForListException`/`ErrIteratorOverread`→`IteratorOverreadException` (`errors.go`), `Null`→`nullNode`/`Absent`→`absentNode` (`unit.go`), `Copy`→`copyNode` (`copy.go`), `DeepEqual`→`deepEqual` (`equal.go`). **Divergência de convenção deliberada**: todo método Go que retorna `(valor, error)` (lookups, `As*`, `Next()` dos iteradores) virou um método que retorna só o valor e LANÇA uma exceção no erro -- mesma convenção já usada em `transpiled_libp2p` (ex. `PeerId.extractPublicKey`), não um padrão novo. Testado contra vetores reais de `kind_test.go` (`TestErrWrongKind_String`), `path_test.go` (`TestParsePath`; `TestPathSegmentZeroValue` não portado -- testa especificamente o "pegadinha" do valor-zero de struct do Go, que não existe em Dart já que toda `PathSegment` precisa passar por um construtor nomeado explícito). `equal_test.go`/`copy_test.go` (`TestDeepEqual`/`TestCopy`) **não puderam usar os fixtures reais do Go** (que dependem de `node/basicnode`+`fluent/qp`+`linking/cid`, nenhum portado ainda) -- os MESMOS casos de teste (mesmas entradas, mesmo resultado esperado) foram reproduzidos usando um `Node`/`NodeBuilder` mínimo e propositalmente simples (`test/fixtures/simple_node.dart`, NÃO um port do `basicnode` real, só o suficiente pra exercitar `deepEqual`/`copyNode`) -- documentado no cabeçalho do arquivo de teste e aqui pra não ser confundido com o port real de `node/basicnode`, que continua "não iniciado" na tabela abaixo. |
 | `fluent` |  | não iniciado |  |
 | `fluent/qp` |  | não iniciado |  |
@@ -592,6 +598,6 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` | `packages/transpiled_libp2p_routing_helpers/lib/src/{bootstrap,null_router,limited_value_store,compose,multi_error}.dart` (parcial) + `lib/src/routing/` (5 arquivos originais do guarda-chuva, não substituídos ainda) | **em andamento** | Portado: `Bootstrap` (`bootstrap.go`), `Null`→`NullRouter` (`null.go`, renomeado porque `Null` colide com o tipo `Null` nativo do Dart), `LimitedValueStore` (`limited.go`), `Compose` (`composed.go`), e um `MultiError`/`combineErrors`/`appendError` própios equivalentes a `go.uber.org/multierr` (não vale a pena um pacote à parte pra duas funções). **Deliberadamente não portado ainda**: `Parallel`/`Tiered`/`Sequential` e seus builders `CompParallel`/`CompSequential` (`parallel.go`/`tiered.go`/`compparallel.go`/`compsequential.go`, ~1500 linhas) -- todos dependem do sistema de `QueryEvent` do `core/routing` (`core/routing/query.go`, propagação de evento via valor de `context.Context`, sem equivalente direto em Dart) e usam fan-out/fan-in via goroutine+channel+`select` (incluindo um caminho via `reflect.Select` pra >8 canais) que precisa ser redesenhado com `Stream`/`Future.wait` do Dart, não traduzido mecanicamente -- isso é uma decisão de design real, não uma lacuna esquecida. Retomar isso exige primeiro decidir como representar a propagação de `context.Value` do Go em Dart (candidatos: `Zone` do Dart, que tem semântica parecida, ou passagem explícita de parâmetro). Achado de Dart real durante o port: um `ValueStore` não promovia pra `Bootstrap` dentro de `if (store is Bootstrap)` (mesmo quirk de `core/routing`, ver nota lá) -- contornado com cast explícito. Testado contra os vetores reais de `null_test.go`/`limited_test.go` (`TestNull`, `TestLimitedValueStore`) em `test/null_router_test.dart`/`test/limited_value_store_test.dart`; `Compose`/`MultiError` testados sem vetor Go direto (comportamento óbvio: componente ausente = `NullRouter`). Ainda não consumido por `lib/src/routing/`, que continua com a implementação própria não auditada. |
+| `(root)` | `packages/transpiled_libp2p_routing_helpers/lib/src/{bootstrap,null_router,limited_value_store,compose,multi_error}.dart` (parcial) + `lib/src/routing/` (5 arquivos originais do guarda-chuva, não substituídos ainda) | **em andamento** | Portado: `Bootstrap`, `NullRouter`, `LimitedValueStore`, `Compose` e `MultiError`/`combineErrors`/`appendError`. **Pendente**: `Parallel`/`Tiered`/`Sequential` e builders (`parallel.go`/`tiered.go`/`compparallel.go`/`compsequential.go`, ~1500 linhas), que exigem fan-out/fan-in Dart em vez de goroutine/channel/select. Seu pré-requisito agora existe: `QueryEvent` usa `Zone` + `QueryEventRegistration`, conforme `core/routing/query.dart`; os ports devem consumir essa adaptação, não inventar um segundo mecanismo de contexto. Ainda não consumido por `lib/src/routing/`, que continua implementação original não auditada. |
 | `tracing` |  | não iniciado | Wrapper de OpenTelemetry em volta de cada método do `Compose`/`Parallel`/etc -- observabilidade, não lógica de protocolo; não portado de propósito, mesmo padrão de "pular telemetria" já aplicado a outros achados desta sessão (ex.: buffer pooling do `go-buffer-pool` em `core/record`). |
 | `tracing` |  | não iniciado |  |
