@@ -97,7 +97,8 @@ enum _MapAsmState { initial, midKey, expectValue, midValue, finished }
 /// `plainMap__Builder`/`plainMap__Assembler` (merged -- see
 /// `scalars.dart`'s header for why builder/assembler splits aren't ported
 /// separately).
-class PlainMapAssembler extends BaseAssembler implements NodeBuilder, MapAssembler {
+class PlainMapAssembler extends BaseAssembler
+    implements NodeBuilder, MapAssembler {
   final Map<String, Node> _entries = {};
   _MapAsmState _state = _MapAsmState.initial;
   String? _pendingKey;
@@ -189,7 +190,9 @@ class PlainMapAssembler extends BaseAssembler implements NodeBuilder, MapAssembl
   @override
   Node build() {
     if (_state != _MapAsmState.finished) {
-      throw StateError("invalid state: assembler must be 'finished' before build can be called!");
+      throw StateError(
+        "invalid state: assembler must be 'finished' before build can be called!",
+      );
     }
     return PlainMap(Map.of(_entries));
   }
@@ -218,7 +221,8 @@ class _MapKeyAssembler extends BaseAssembler {
   @override
   void assignString(String v) {
     final parent = _parent;
-    if (parent == null) throw StateError('misuse: this key assembler has already been used');
+    if (parent == null)
+      throw StateError('misuse: this key assembler has already been used');
     if (parent._entries.containsKey(v)) {
       parent._state = _MapAsmState.initial;
       _parent = null;

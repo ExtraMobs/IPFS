@@ -204,7 +204,8 @@ class _AbsentNode implements Node {
 class _AbsentPrototype implements NodePrototype {
   const _AbsentPrototype();
   @override
-  NodeBuilder newBuilder() => throw UnsupportedError('cannot build absent nodes');
+  NodeBuilder newBuilder() =>
+      throw UnsupportedError('cannot build absent nodes');
 }
 
 /// The singleton "absent" node: returned when traversing a schema-defined

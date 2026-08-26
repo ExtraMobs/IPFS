@@ -26,7 +26,11 @@ class SimpleNode implements Node {
   final Object? _value;
 
   WrongKindException _wrongKind(String method, KindSet appropriate) =>
-      WrongKindException(methodName: method, appropriateKind: appropriate, actualKind: _kind);
+      WrongKindException(
+        methodName: method,
+        appropriateKind: appropriate,
+        actualKind: _kind,
+      );
 
   @override
   Kind kind() => _kind;
@@ -46,7 +50,8 @@ class SimpleNode implements Node {
   Node lookupByIndex(int idx) {
     if (_kind != Kind.list) throw _wrongKind('lookupByIndex', KindSet.justList);
     final list = _value! as List<Node>;
-    if (idx < 0 || idx >= list.length) throw NotExistsException(PathSegment.ofInt(idx));
+    if (idx < 0 || idx >= list.length)
+      throw NotExistsException(PathSegment.ofInt(idx));
     return list[idx];
   }
 
@@ -58,11 +63,13 @@ class SimpleNode implements Node {
   }
 
   @override
-  MapIterator? mapIterator() =>
-      _kind == Kind.map ? _SimpleMapIterator((_value! as Map<String, Node>).entries.iterator) : null;
+  MapIterator? mapIterator() => _kind == Kind.map
+      ? _SimpleMapIterator((_value! as Map<String, Node>).entries.iterator)
+      : null;
 
   @override
-  ListIterator? listIterator() => _kind == Kind.list ? _SimpleListIterator(_value! as List<Node>) : null;
+  ListIterator? listIterator() =>
+      _kind == Kind.list ? _SimpleListIterator(_value! as List<Node>) : null;
 
   @override
   int length() {

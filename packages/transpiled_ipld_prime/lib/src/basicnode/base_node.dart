@@ -30,24 +30,29 @@ abstract class BaseNode implements Node {
   /// `'bool'`, `'map'`).
   String get typeName;
 
-  WrongKindException _wrongKind(String method, KindSet appropriate) => WrongKindException(
-    typeName: typeName,
-    methodName: method,
-    appropriateKind: appropriate,
-    actualKind: kind(),
-  );
+  WrongKindException _wrongKind(String method, KindSet appropriate) =>
+      WrongKindException(
+        typeName: typeName,
+        methodName: method,
+        appropriateKind: appropriate,
+        actualKind: kind(),
+      );
 
   @override
-  Node lookupByString(String key) => throw _wrongKind('LookupByString', KindSet.justMap);
+  Node lookupByString(String key) =>
+      throw _wrongKind('LookupByString', KindSet.justMap);
 
   @override
-  Node lookupByNode(Node key) => throw _wrongKind('LookupByNode', KindSet.justMap);
+  Node lookupByNode(Node key) =>
+      throw _wrongKind('LookupByNode', KindSet.justMap);
 
   @override
-  Node lookupByIndex(int idx) => throw _wrongKind('LookupByIndex', KindSet.justList);
+  Node lookupByIndex(int idx) =>
+      throw _wrongKind('LookupByIndex', KindSet.justList);
 
   @override
-  Node lookupBySegment(PathSegment seg) => throw _wrongKind('LookupBySegment', KindSet.recursive);
+  Node lookupBySegment(PathSegment seg) =>
+      throw _wrongKind('LookupBySegment', KindSet.recursive);
 
   @override
   MapIterator? mapIterator() => null;
@@ -98,18 +103,21 @@ abstract class BaseAssembler implements NodeAssembler {
   /// The kind this assembler builds.
   Kind get selfKind;
 
-  WrongKindException _wrongKind(String method, KindSet appropriate) => WrongKindException(
-    typeName: typeName,
-    methodName: method,
-    appropriateKind: appropriate,
-    actualKind: selfKind,
-  );
+  WrongKindException _wrongKind(String method, KindSet appropriate) =>
+      WrongKindException(
+        typeName: typeName,
+        methodName: method,
+        appropriateKind: appropriate,
+        actualKind: selfKind,
+      );
 
   @override
-  MapAssembler beginMap(int sizeHint) => throw _wrongKind('BeginMap', KindSet.justMap);
+  MapAssembler beginMap(int sizeHint) =>
+      throw _wrongKind('BeginMap', KindSet.justMap);
 
   @override
-  ListAssembler beginList(int sizeHint) => throw _wrongKind('BeginList', KindSet.justList);
+  ListAssembler beginList(int sizeHint) =>
+      throw _wrongKind('BeginList', KindSet.justList);
 
   @override
   void assignNull() => throw _wrongKind('AssignNull', KindSet.justNull);
@@ -121,13 +129,16 @@ abstract class BaseAssembler implements NodeAssembler {
   void assignInt(int v) => throw _wrongKind('AssignInt', KindSet.justInt);
 
   @override
-  void assignFloat(double v) => throw _wrongKind('AssignFloat', KindSet.justFloat);
+  void assignFloat(double v) =>
+      throw _wrongKind('AssignFloat', KindSet.justFloat);
 
   @override
-  void assignString(String v) => throw _wrongKind('AssignString', KindSet.justString);
+  void assignString(String v) =>
+      throw _wrongKind('AssignString', KindSet.justString);
 
   @override
-  void assignBytes(Uint8List v) => throw _wrongKind('AssignBytes', KindSet.justBytes);
+  void assignBytes(Uint8List v) =>
+      throw _wrongKind('AssignBytes', KindSet.justBytes);
 
   @override
   void assignLink(Link v) => throw _wrongKind('AssignLink', KindSet.justLink);

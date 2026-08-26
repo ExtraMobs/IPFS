@@ -48,7 +48,8 @@ class ValueAssembler implements NodeAssembler {
   bool _used = false;
 
   void _markUsed() {
-    if (_used) throw StateError('misuse: this value assembler has already been used');
+    if (_used)
+      throw StateError('misuse: this value assembler has already been used');
     _used = true;
   }
 

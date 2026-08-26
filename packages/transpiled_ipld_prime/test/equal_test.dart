@@ -37,19 +37,49 @@ void main() {
     final cases = <(String, Node?, Node?, bool)>[
       ('MismatchingKinds', SimpleNode.ofBool(true), SimpleNode.ofInt(3), false),
       ('SameNodeSamePointer', globalNode, globalNode, true),
-      ('SameNodeDiffPointer', SimpleNode.ofString('same'), SimpleNode.ofString('same'), true),
+      (
+        'SameNodeDiffPointer',
+        SimpleNode.ofString('same'),
+        SimpleNode.ofString('same'),
+        true,
+      ),
       ('NilVsNil', null, null, true),
       ('NilVsNull', null, nullNode, false),
       ('SameKindNull', nullNode, nullNode, true),
       ('DiffKindNull', nullNode, absentNode, false),
       ('SameKindBool', SimpleNode.ofBool(true), SimpleNode.ofBool(true), true),
-      ('DiffKindBool', SimpleNode.ofBool(true), SimpleNode.ofBool(false), false),
+      (
+        'DiffKindBool',
+        SimpleNode.ofBool(true),
+        SimpleNode.ofBool(false),
+        false,
+      ),
       ('SameKindInt', SimpleNode.ofInt(12), SimpleNode.ofInt(12), true),
       ('DiffKindInt', SimpleNode.ofInt(12), SimpleNode.ofInt(15), false),
-      ('SameKindFloat', SimpleNode.ofFloat(1.25), SimpleNode.ofFloat(1.25), true),
-      ('DiffKindFloat', SimpleNode.ofFloat(1.25), SimpleNode.ofFloat(1.75), false),
-      ('SameKindString', SimpleNode.ofString('foobar'), SimpleNode.ofString('foobar'), true),
-      ('DiffKindString', SimpleNode.ofString('foobar'), SimpleNode.ofString('baz'), false),
+      (
+        'SameKindFloat',
+        SimpleNode.ofFloat(1.25),
+        SimpleNode.ofFloat(1.25),
+        true,
+      ),
+      (
+        'DiffKindFloat',
+        SimpleNode.ofFloat(1.25),
+        SimpleNode.ofFloat(1.75),
+        false,
+      ),
+      (
+        'SameKindString',
+        SimpleNode.ofString('foobar'),
+        SimpleNode.ofString('foobar'),
+        true,
+      ),
+      (
+        'DiffKindString',
+        SimpleNode.ofString('foobar'),
+        SimpleNode.ofString('baz'),
+        false,
+      ),
       (
         'SameKindBytes',
         SimpleNode.ofBytes(Uint8List.fromList([5, 2, 3])),
@@ -62,8 +92,18 @@ void main() {
         SimpleNode.ofBytes(Uint8List.fromList([5, 8, 3])),
         false,
       ),
-      ('SameKindLink', SimpleNode.ofLink(globalLink), SimpleNode.ofLink(globalLink), true),
-      ('DiffKindLink', SimpleNode.ofLink(globalLink), SimpleNode.ofLink(globalLink2), false),
+      (
+        'SameKindLink',
+        SimpleNode.ofLink(globalLink),
+        SimpleNode.ofLink(globalLink),
+        true,
+      ),
+      (
+        'DiffKindLink',
+        SimpleNode.ofLink(globalLink),
+        SimpleNode.ofLink(globalLink2),
+        false,
+      ),
       (
         'SameKindList',
         SimpleNode.ofList([SimpleNode.ofInt(7), SimpleNode.ofInt(8)]),
@@ -84,20 +124,35 @@ void main() {
       ),
       (
         'SameKindMap',
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(7), 'bar': SimpleNode.ofInt(8)}),
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(7), 'bar': SimpleNode.ofInt(8)}),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(7),
+          'bar': SimpleNode.ofInt(8),
+        }),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(7),
+          'bar': SimpleNode.ofInt(8),
+        }),
         true,
       ),
       (
         'DiffKindMap_length',
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(7), 'bar': SimpleNode.ofInt(8)}),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(7),
+          'bar': SimpleNode.ofInt(8),
+        }),
         SimpleNode.ofMap({'foo': SimpleNode.ofInt(7)}),
         false,
       ),
       (
         'DiffKindMap_elems',
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(7), 'bar': SimpleNode.ofInt(8)}),
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(3), 'baz': SimpleNode.ofInt(8)}),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(7),
+          'bar': SimpleNode.ofInt(8),
+        }),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(3),
+          'baz': SimpleNode.ofInt(8),
+        }),
         false,
       ),
     ];

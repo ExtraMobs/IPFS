@@ -42,9 +42,17 @@ void main() {
       ('Bool', SimpleNode.ofBool(true), null),
       ('Float', SimpleNode.ofFloat(1.1), null),
       ('String', SimpleNode.ofString('mary had'), null),
-      ('Bytes', SimpleNode.ofBytes(Uint8List.fromList('mary had'.codeUnits)), null),
+      (
+        'Bytes',
+        SimpleNode.ofBytes(Uint8List.fromList('mary had'.codeUnits)),
+        null,
+      ),
       ('Link', SimpleNode.ofLink(globalLink), null),
-      ('List', SimpleNode.ofList([SimpleNode.ofInt(7), SimpleNode.ofInt(8)]), null),
+      (
+        'List',
+        SimpleNode.ofList([SimpleNode.ofInt(7), SimpleNode.ofInt(8)]),
+        null,
+      ),
       (
         'List of mixed kinds',
         SimpleNode.ofList([
@@ -56,7 +64,10 @@ void main() {
       ),
       (
         'Map',
-        SimpleNode.ofMap({'foo': SimpleNode.ofInt(7), 'bar': SimpleNode.ofInt(8)}),
+        SimpleNode.ofMap({
+          'foo': SimpleNode.ofInt(7),
+          'bar': SimpleNode.ofInt(8),
+        }),
         null,
       ),
       (
@@ -75,7 +86,11 @@ void main() {
     for (final (name, n, expectedError) in cases) {
       final builder = SimpleNodeBuilder();
       if (expectedError != null) {
-        expect(() => copyNode(n, builder), throwsA(isA<ArgumentError>()), reason: name);
+        expect(
+          () => copyNode(n, builder),
+          throwsA(isA<ArgumentError>()),
+          reason: name,
+        );
         continue;
       }
       copyNode(n, builder);

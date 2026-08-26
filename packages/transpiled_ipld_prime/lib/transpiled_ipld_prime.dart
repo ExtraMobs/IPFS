@@ -11,6 +11,9 @@
 library;
 
 export 'fluent/qp.dart';
+export 'traversal_selector.dart';
+export 'traversal_selector_builder.dart';
+export 'traversal_selector_parse.dart';
 
 export 'src/basicnode/any_node.dart' show AnyBuilder, PrototypeAny;
 export 'src/basicnode/base_node.dart' show BaseAssembler, BaseNode;

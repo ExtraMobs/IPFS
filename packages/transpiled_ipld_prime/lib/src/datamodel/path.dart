@@ -53,7 +53,8 @@ class Path {
 
   /// A new path with [segment] appended. Equivalent to go-ipld-prime's
   /// `Path.AppendSegment`.
-  Path appendSegment(PathSegment segment) => Path.nocopy([..._segments, segment]);
+  Path appendSegment(PathSegment segment) =>
+      Path.nocopy([..._segments, segment]);
 
   /// A new path with a string segment appended. Equivalent to
   /// go-ipld-prime's `Path.AppendSegmentString`.
@@ -74,7 +75,8 @@ class Path {
 
   /// This path's trailing segment, or [PathSegment.empty] if this path has
   /// none. Equivalent to go-ipld-prime's `Path.Last`.
-  PathSegment get last => _segments.isEmpty ? PathSegment.empty : _segments.last;
+  PathSegment get last =>
+      _segments.isEmpty ? PathSegment.empty : _segments.last;
 
   /// This path with its last segment removed (or the empty path, if
   /// already empty). Equivalent to go-ipld-prime's `Path.Pop`.

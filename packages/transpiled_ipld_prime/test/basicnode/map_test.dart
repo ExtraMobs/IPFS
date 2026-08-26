@@ -57,7 +57,11 @@ void _specTestMapStrInt(NodePrototype np) {
       expect(
         () => n.lookupByString('nope'),
         throwsA(
-          predicate((e) => e is NotExistsException && e.toString() == 'key not found: "nope"'),
+          predicate(
+            (e) =>
+                e is NotExistsException &&
+                e.toString() == 'key not found: "nope"',
+          ),
         ),
       );
     });
@@ -94,8 +98,14 @@ void _specTestMapStrInt(NodePrototype np) {
 }
 
 void main() {
-  group('SpecTestMapStrInt via Prototype.map', () => _specTestMapStrInt(prototype.map));
-  group('TestAnyBeingMapStrInt via Prototype.any', () => _specTestMapStrInt(prototype.any));
+  group(
+    'SpecTestMapStrInt via Prototype.map',
+    () => _specTestMapStrInt(prototype.map),
+  );
+  group(
+    'TestAnyBeingMapStrInt via Prototype.any',
+    () => _specTestMapStrInt(prototype.any),
+  );
 
   test('SpecTestMapStrMapStrInt: map<str,map<str,int>>', () {
     final nb = prototype.map.newBuilder();

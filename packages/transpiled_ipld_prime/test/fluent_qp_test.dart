@@ -6,10 +6,14 @@ void main() {
   test('builds nested map and list', () {
     final (node, error) = buildMap(ipld.prototype.any, 2, (map) {
       mapEntry(map, 'x', stringValue('y'));
-      mapEntry(map, 'list', list(2, (list) {
-        listEntry(list, intValue(1));
-        listEntry(list, boolValue(true));
-      }));
+      mapEntry(
+        map,
+        'list',
+        list(2, (list) {
+          listEntry(list, intValue(1));
+          listEntry(list, boolValue(true));
+        }),
+      );
     });
     expect(error, isNull);
     expect(node!.lookupByString('x').asString(), 'y');

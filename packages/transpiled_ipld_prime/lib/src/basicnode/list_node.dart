@@ -87,7 +87,8 @@ enum _ListAsmState { initial, midValue, finished }
 /// `plainList__Builder`/`plainList__Assembler` (merged -- see
 /// `scalars.dart`'s header for why builder/assembler splits aren't ported
 /// separately).
-class PlainListAssembler extends BaseAssembler implements NodeBuilder, ListAssembler {
+class PlainListAssembler extends BaseAssembler
+    implements NodeBuilder, ListAssembler {
   final List<Node> _items = [];
   _ListAsmState _state = _ListAsmState.initial;
 
@@ -154,7 +155,9 @@ class PlainListAssembler extends BaseAssembler implements NodeBuilder, ListAssem
   @override
   Node build() {
     if (_state != _ListAsmState.finished) {
-      throw StateError("invalid state: assembler must be 'finished' before build can be called!");
+      throw StateError(
+        "invalid state: assembler must be 'finished' before build can be called!",
+      );
     }
     return PlainList(List.of(_items));
   }
