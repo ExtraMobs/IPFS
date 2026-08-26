@@ -337,6 +337,12 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `thirdparty/verifbs` |  | não iniciado |  |
 | `tracing` |  | não iniciado |  |
 
+### `go-block-format`
+
+| Pacote Go | Destino em `lib/src/` | Status | Notas |
+|---|---|---|---|
+| `(root)` | `packages/transpiled_block_format/lib/src/blocks.dart` | **portado com paridade comprovada (caminho padrão)** | `Block`, `BasicBlock`, `NewBlock`, `NewBlockWithPrefix`, `NewBlockWithCid`, `Multihash`, `RawData`, `Cid`, `String` e `Loggable`; erro `ErrWrongHash` preservado para o modo de depuração. Fonte fixada em `UPSTREAM_LOCK.md` (v0.2.4). Como no Go, `NewBlockWithCid` aceita CID confiável no caminho padrão (`boxo/util.Debug=false`); o toggle global de depuração ainda precisa ser integrado quando `boxo/util` for portado. Testes Dart cobrem CIDv0 e metadados; `go test ./...` passou no módulo clonado. |
+
 ### `boxo`
 
 **Nota de cobertura (2026-08-25)**: é o módulo com mais implementação original já existente de toda esta lista, mas espalhada e não mapeada linha a linha contra os 114 pacotes reais do boxo -- por isso as linhas abaixo continuam em branco em vez de marcadas uma a uma. O que já existe e funciona: `lib/src/protocols/bitswap/` (7 arquivos, 1974 linhas, ~ `bitswap`+`bitswap/client`+`bitswap/server`+`bitswap/message`), `lib/src/core/unixfs/` (8, 1181, ~ pacote `unixfs` do próprio boxo -- que na verdade vive em `go-unixfsnode`, não clonado), `lib/src/services/gateway/` (23 arquivos, ~ `gateway`), `lib/src/core/data_structures/car.dart` (835 linhas, ~ `car`/`ipld/car`, mas o formato real vem do módulo separado `go-car/v2`, também não clonado), `lib/src/core/mfs/` (~ `mfs`), `lib/src/protocols/ipns/` (~ parte de `ipns`/`namesys`). Nenhum foi comparado função-a-função com o boxo real ainda -- status real de todos: `implementação original não auditada`, não `não iniciado`.

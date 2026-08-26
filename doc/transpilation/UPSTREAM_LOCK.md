@@ -14,6 +14,7 @@ dos clones só podem alterar esta tabela junto com a revalidação dos ports afe
 | `go-libp2p` | `github.com/libp2p/go-libp2p` | `e20bb60ffc4b4ee33640e5fe8f45fccce893cecd` | <https://github.com/libp2p/go-libp2p.git> |
 | `kubo` | `github.com/ipfs/kubo` | `d0fdc246db494877e7fa08a72933c8daa5c3f0e8` | <https://github.com/ipfs/kubo.git> |
 | `boxo` | `github.com/ipfs/boxo` | `25b1db8931508bb069eb6e67243b34d353cbe845` | <https://github.com/ipfs/boxo.git> |
+| `go-block-format` | `github.com/ipfs/go-block-format` | `190a5a4ed6ae45c01b8ec9e380893d16c6eefe84` | <https://github.com/ipfs/go-block-format.git> |
 | `go-ipld-prime` | `github.com/ipld/go-ipld-prime` | `ab9fe751f33fca77e7b8c4f7bb3dee40f6974313` | <https://github.com/ipld/go-ipld-prime.git> |
 | `go-libp2p-kad-dht` | `github.com/libp2p/go-libp2p-kad-dht` | `10e0adf9859ef86ba08d8493d8313869a2e83d8a` | <https://github.com/libp2p/go-libp2p-kad-dht.git> |
 | `go-libp2p-pubsub` | `github.com/libp2p/go-libp2p-pubsub` | `892d7aaf6b8952c1ebfb540901b9a5656615d949` | <https://github.com/libp2p/go-libp2p-pubsub.git> |
