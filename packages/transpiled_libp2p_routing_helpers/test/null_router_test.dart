@@ -2,10 +2,10 @@
 // (go-ipfs-reference/go-libp2p-routing-helpers/null_test.go, TestNull).
 import 'dart:typed_data';
 
+import 'package:test/test.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:transpiled_libp2p_routing_helpers/transpiled_libp2p_routing_helpers.dart';
-import 'package:transpiled_cid/transpiled_cid.dart';
-import 'package:test/test.dart';
 
 void main() {
   group('NullRouter', () {
@@ -41,10 +41,7 @@ void main() {
 
     test('findPeer always throws RoutingNotFoundException', () {
       final id = PeerId(value: Uint8List.fromList('thing'.codeUnits));
-      expect(
-        () => n.findPeer(id),
-        throwsA(isA<RoutingNotFoundException>()),
-      );
+      expect(() => n.findPeer(id), throwsA(isA<RoutingNotFoundException>()));
     });
 
     test('bootstrap always succeeds instantly', () {

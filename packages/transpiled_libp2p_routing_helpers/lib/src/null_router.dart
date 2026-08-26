@@ -40,7 +40,8 @@ class NullRouter implements Routing, Bootstrap {
       throw const RoutingNotSupportedException();
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) => const Stream.empty();
+  Stream<AddrInfo> findProvidersAsync(CID cid, int count) =>
+      const Stream.empty();
 
   @override
   Future<AddrInfo> findPeer(PeerId id) async =>

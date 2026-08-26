@@ -10,7 +10,8 @@
 /// `multierr.Combine` build when there's more than one error).
 class MultiError implements Exception {
   /// Creates the exception wrapping [errors] (must be non-empty).
-  MultiError(this.errors) : assert(errors.isNotEmpty, 'MultiError needs at least one error');
+  MultiError(this.errors)
+    : assert(errors.isNotEmpty, 'MultiError needs at least one error');
 
   /// The underlying errors, in the order they were added.
   final List<Object> errors;

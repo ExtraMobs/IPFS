@@ -2,10 +2,10 @@
 // behavior (unset components behave like NullRouter).
 import 'dart:typed_data';
 
+import 'package:test/test.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:transpiled_libp2p_routing_helpers/transpiled_libp2p_routing_helpers.dart';
-import 'package:transpiled_cid/transpiled_cid.dart';
-import 'package:test/test.dart';
 
 import 'dummy_value_store.dart';
 
@@ -50,11 +50,14 @@ void main() {
       );
     });
 
-    test('bootstrap deduplicates identical components and combines errors', () async {
-      final shared = DummyValueStore();
-      final compose = Compose(valueStore: shared);
-      await compose.bootstrap();
-      expect(shared.bootstrapCalls, equals(1));
-    });
+    test(
+      'bootstrap deduplicates identical components and combines errors',
+      () async {
+        final shared = DummyValueStore();
+        final compose = Compose(valueStore: shared);
+        await compose.bootstrap();
+        expect(shared.bootstrapCalls, equals(1));
+      },
+    );
   });
 }

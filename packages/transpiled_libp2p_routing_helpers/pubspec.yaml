@@ -2,6 +2,7 @@ name: transpiled_libp2p_routing_helpers
 description: Port of go-libp2p-routing-helpers.
 version: 0.1.0
 homepage: https://github.com/libp2p/go-libp2p-routing-helpers
+publish_to: none
 
 environment:
   sdk: ^3.10.0
@@ -13,6 +14,8 @@ dependencies:
     path: ../transpiled_libp2p
   transpiled_libp2p_record:
     path: ../transpiled_libp2p_record
+  transpiled_multihash:
+    path: ../transpiled_multihash
 
 dev_dependencies:
   test: ^1.28.0

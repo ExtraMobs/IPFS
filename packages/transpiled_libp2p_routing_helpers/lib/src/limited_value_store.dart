@@ -6,7 +6,8 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart' as core_routing
+import 'package:transpiled_libp2p/transpiled_libp2p.dart'
+    as core_routing
     show getPublicKey;
 
 import 'bootstrap.dart';

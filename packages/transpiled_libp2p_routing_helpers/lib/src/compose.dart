@@ -9,7 +9,8 @@ import 'dart:typed_data';
 
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart' as core_routing
+import 'package:transpiled_libp2p/transpiled_libp2p.dart'
+    as core_routing
     show getPublicKey;
 
 import 'bootstrap.dart';
@@ -99,13 +100,20 @@ class Compose implements Routing, PubKeyFetcher, Bootstrap {
     // be an issue, but using the same router for multiple fields of
     // Compose is common.
     final routers = <Bootstrap>{};
-    for (final component in <Object?>[valueStore, contentRouting, peerRouting]) {
+    for (final component in <Object?>[
+      valueStore,
+      contentRouting,
+      peerRouting,
+    ]) {
       if (component == null || component is NullRouter) continue;
       if (component is Bootstrap) routers.add(component);
     }
 
     final results = await Future.wait(
-      routers.map((r) => r.bootstrap().then<Object?>((_) => null, onError: (Object e) => e)),
+      routers.map(
+        (r) =>
+            r.bootstrap().then<Object?>((_) => null, onError: (Object e) => e),
+      ),
     );
     final errors = results.whereType<Object>().toList();
     final combined = combineErrors(errors);
