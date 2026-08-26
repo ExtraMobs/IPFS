@@ -73,6 +73,7 @@ export 'src/core/peer/peer_record.dart'
         peerRecordEnvelopeDomain,
         peerRecordEnvelopePayloadType,
         timestampSeq;
+export 'src/core/peerstore/peerstore.dart';
 export 'src/core/record/envelope.dart'
     show
         Envelope,
@@ -120,6 +121,8 @@ export 'src/core/routing/routing.dart'
 export 'src/core/protocol/protocol.dart';
 export 'src/core/network/network.dart';
 export 'src/core/event/addrs.dart';
+export 'src/core/event/network.dart';
+export 'src/core/event/reachability.dart';
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
