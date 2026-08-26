@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -8,9 +10,30 @@ import '../../datamodel/node.dart';
 import '../../datamodel/node_builder.dart';
 import '../../linking/cid/cid_link.dart';
 
-/// Encode an IPLD node using the DAG-JSON representation.
+/// Encoding options matching go-ipld-prime's dagjson.EncodeOptions.
+final class DagJsonEncodeOptions {
+  const DagJsonEncodeOptions({
+    this.encodeLinks = true,
+    this.encodeBytes = true,
+    this.sortMaps = true,
+  });
+  final bool encodeLinks;
+  final bool encodeBytes;
+  final bool sortMaps;
+}
+
+/// Encode an IPLD node using the default DAG-JSON representation.
 void encodeDagJson(Node node, Sink<List<int>> writer) {
-  writer.add(utf8.encode(jsonEncode(_value(node, sortMaps: true))));
+  encodeDagJsonWithOptions(node, writer, const DagJsonEncodeOptions());
+}
+
+/// Encode an IPLD node with explicit DAG-JSON options.
+void encodeDagJsonWithOptions(
+  Node node,
+  Sink<List<int>> writer,
+  DagJsonEncodeOptions options,
+) {
+  writer.add(utf8.encode(jsonEncode(_value(node, options: options))));
 }
 
 /// Decode a DAG-JSON value into an assembler.
@@ -18,20 +41,42 @@ void decodeDagJson(NodeAssembler assembler, Iterable<int> reader) {
   _assign(assembler, jsonDecode(utf8.decode(reader.toList(growable: false))));
 }
 
-Object? _value(Node node, {bool sortMaps = false}) => switch (node.kind()) {
-      Kind.null_ => null,
-      Kind.bool_ => node.asBool(),
-      Kind.int_ => node.asInt(),
-      Kind.float => node.asFloat(),
-      Kind.string => node.asString(),
-      Kind.bytes => {'/': {'bytes': base64Encode(node.asBytes()).replaceAll('=', '')}},
-      Kind.link => {'/': node.asLink().toString()},
-      Kind.map => {
-          for (final entry in (_entries(node).toList()..sort((a, b) => sortMaps ? a.$1.asString().compareTo(b.$1.asString()) : 0))) entry.$1.asString(): _value(entry.$2, sortMaps: sortMaps),
-        },
-      Kind.list => [for (final value in _values(node)) _value(value, sortMaps: sortMaps)],
-      Kind.invalid => throw const FormatException('cannot encode absent node'),
-    };
+Object? _value(
+  Node node, {
+  DagJsonEncodeOptions options = const DagJsonEncodeOptions(),
+}) => switch (node.kind()) {
+  Kind.null_ => null,
+  Kind.bool_ => node.asBool(),
+  Kind.int_ => node.asInt(),
+  Kind.float => node.asFloat(),
+  Kind.string => node.asString(),
+  Kind.bytes =>
+    options.encodeBytes
+        ? {
+            '/': {'bytes': base64Encode(node.asBytes()).replaceAll('=', '')},
+          }
+        : throw const FormatException(
+            'cannot marshal IPLD bytes to this codec',
+          ),
+  Kind.link =>
+    options.encodeLinks
+        ? {'/': node.asLink().toString()}
+        : throw const FormatException(
+            'cannot marshal IPLD links to this codec',
+          ),
+  Kind.map => {
+    for (final entry
+        in (_entries(node).toList()..sort(
+          (a, b) =>
+              options.sortMaps ? a.$1.asString().compareTo(b.$1.asString()) : 0,
+        )))
+      entry.$1.asString(): _value(entry.$2, options: options),
+  },
+  Kind.list => [
+    for (final value in _values(node)) _value(value, options: options),
+  ],
+  Kind.invalid => throw const FormatException('cannot encode absent node'),
+};
 
 Iterable<(Node, Node)> _entries(Node node) sync* {
   final iterator = node.mapIterator()!;
@@ -45,31 +90,47 @@ Iterable<Node> _values(Node node) sync* {
 
 void _assign(NodeAssembler assembler, Object? value) {
   switch (value) {
-    case null: assembler.assignNull();
-    case bool v: assembler.assignBool(v);
-    case int v: assembler.assignInt(v);
-    case double v: assembler.assignFloat(v);
-    case String v: assembler.assignString(v);
+    case null:
+      assembler.assignNull();
+    case bool v:
+      assembler.assignBool(v);
+    case int v:
+      assembler.assignInt(v);
+    case double v:
+      assembler.assignFloat(v);
+    case String v:
+      assembler.assignString(v);
     case List<Object?> v:
       final list = assembler.beginList(v.length);
       for (final item in v) _assign(list.assembleValue(), item);
       list.finish();
-    case Map<String, Object?> v when v.length == 1 && v.containsKey('/') && v['/'] is Map:
+    case Map<String, Object?> v
+        when v.length == 1 && v.containsKey('/') && v['/'] is Map:
       final bytes = (v['/']! as Map)['bytes'];
-      if (bytes is! String) throw const FormatException('invalid DAG-JSON bytes');
-      assembler.assignBytes(Uint8List.fromList(base64Decode(bytes.padRight((bytes.length + 3) ~/ 4 * 4, '='))));
+      if (bytes is! String)
+        throw const FormatException('invalid DAG-JSON bytes');
+      assembler.assignBytes(
+        Uint8List.fromList(
+          base64Decode(bytes.padRight((bytes.length + 3) ~/ 4 * 4, '=')),
+        ),
+      );
     case Map<String, Object?> v when v.length == 1 && v.containsKey('/'):
       final marker = v['/'];
-      if (marker is! String) throw const FormatException('invalid DAG-JSON link');
+      if (marker is! String)
+        throw const FormatException('invalid DAG-JSON link');
       if (marker.startsWith('base64')) {
-        assembler.assignBytes(Uint8List.fromList(base64Decode(marker.substring(6))));
+        assembler.assignBytes(
+          Uint8List.fromList(base64Decode(marker.substring(6))),
+        );
       } else {
         assembler.assignLink(CidLink(CID.decode(marker)));
       }
     case Map<String, Object?> v:
       final map = assembler.beginMap(v.length);
-      for (final entry in v.entries) _assign(map.assembleEntry(entry.key), entry.value);
+      for (final entry in v.entries)
+        _assign(map.assembleEntry(entry.key), entry.value);
       map.finish();
-    default: throw const FormatException('unsupported DAG-JSON value');
+    default:
+      throw const FormatException('unsupported DAG-JSON value');
   }
 }
