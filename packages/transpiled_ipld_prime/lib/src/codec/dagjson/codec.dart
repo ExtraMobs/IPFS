@@ -10,7 +10,7 @@ import '../../linking/cid/cid_link.dart';
 
 /// Encode an IPLD node using the DAG-JSON representation.
 void encodeDagJson(Node node, Sink<List<int>> writer) {
-  writer.add(utf8.encode(jsonEncode(_value(node))));
+  writer.add(utf8.encode(jsonEncode(_value(node, sortMaps: true))));
 }
 
 /// Decode a DAG-JSON value into an assembler.
@@ -18,7 +18,7 @@ void decodeDagJson(NodeAssembler assembler, Iterable<int> reader) {
   _assign(assembler, jsonDecode(utf8.decode(reader.toList(growable: false))));
 }
 
-Object? _value(Node node) => switch (node.kind()) {
+Object? _value(Node node, {bool sortMaps = false}) => switch (node.kind()) {
       Kind.null_ => null,
       Kind.bool_ => node.asBool(),
       Kind.int_ => node.asInt(),
@@ -27,9 +27,9 @@ Object? _value(Node node) => switch (node.kind()) {
       Kind.bytes => {'/': {'bytes': base64Encode(node.asBytes()).replaceAll('=', '')}},
       Kind.link => {'/': node.asLink().toString()},
       Kind.map => {
-          for (final (key, value) in _entries(node)) key.asString(): _value(value),
+          for (final entry in (_entries(node).toList()..sort((a, b) => sortMaps ? a.$1.asString().compareTo(b.$1.asString()) : 0))) entry.$1.asString(): _value(entry.$2, sortMaps: sortMaps),
         },
-      Kind.list => [for (final value in _values(node)) _value(value)],
+      Kind.list => [for (final value in _values(node)) _value(value, sortMaps: sortMaps)],
       Kind.invalid => throw const FormatException('cannot encode absent node'),
     };
 

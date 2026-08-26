@@ -9,7 +9,7 @@ void main() {
     final node = PlainMap({'n': newInt(3), 'b': newBytes(Uint8List.fromList([1, 2]))});
     final out = <int>[];
     encodeDagJson(node, outSink(out));
-    expect(String.fromCharCodes(out), '{"n":3,"b":{"/":{"bytes":"AQI"}}}');
+    expect(String.fromCharCodes(out), '{"b":{"/":{"bytes":"AQI"}},"n":3}');
     final builder = const PrototypeAny().newBuilder();
     decodeDagJson(builder, out);
     expect(builder.build().lookupByString('n').asInt(), 3);
