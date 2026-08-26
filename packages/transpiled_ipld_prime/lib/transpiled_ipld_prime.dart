@@ -10,6 +10,8 @@
 /// its own design), and the ADL system -- is not ported yet.
 library;
 
+export 'fluent/qp.dart';
+
 export 'src/basicnode/any_node.dart' show AnyBuilder, PrototypeAny;
 export 'src/basicnode/base_node.dart' show BaseAssembler, BaseNode;
 export 'src/basicnode/list_node.dart' show PlainList, PlainListAssembler, PrototypeList;
