@@ -147,6 +147,34 @@ void main() {
     expect((await events).map((event) => event.type), [value, provider]);
   });
 
+  test('Parallel merges query events for Future reads', () async {
+    final registration = registerForQueryEvents();
+    final events = registration.events.toList();
+    final found = await registration.run(
+      () => Parallel(
+        routers: [
+          _EventRouter(eventType: queryError),
+          _EventRouter(eventType: value, valueText: 'ok'),
+        ],
+      ).getValue('key'),
+    );
+    expect(String.fromCharCodes(found), 'ok');
+    await registration.close();
+    expect((await events).map((event) => event.type), [value]);
+  });
+
+  test('Parallel public-key lookup filters by key support', () async {
+    final key = _PublicKey();
+    final store = _PublicKeyStore(key);
+    final peer = PeerId(
+      value: Uint8List.fromList([0x12, 0x20, ...List.filled(32, 0)]),
+    );
+    expect(
+      await Parallel(routers: [Compose(valueStore: store)]).getPublicKey(peer),
+      same(key),
+    );
+  });
+
   test('Parallel publishes one query error when every stream fails', () async {
     final registration = registerForQueryEvents();
     final events = registration.events.toList();
@@ -328,6 +356,17 @@ class _EventRouter extends _Router {
   final String? valueText;
 
   @override
+  Future<Uint8List> getValue(
+    String key, {
+    List<RoutingOption> options = const [],
+  }) async {
+    publishQueryEvent(QueryEvent(type: eventType));
+    final text = valueText;
+    if (text == null) throw const RoutingNotFoundException();
+    return Uint8List.fromList(text.codeUnits);
+  }
+
+  @override
   Stream<Uint8List> searchValue(
     String key, {
     List<RoutingOption> options = const [],
@@ -380,6 +419,45 @@ class _Validator implements Validator {
 
   @override
   void validate(String key, Uint8List value) {}
+}
+
+class _PublicKey extends PubKey {
+  @override
+  KeyType get type => KeyType.ed25519;
+
+  @override
+  Uint8List raw() => Uint8List(32);
+
+  @override
+  Future<bool> verify(Uint8List data, Uint8List signature) async => true;
+}
+
+class _PublicKeyStore implements ValueStore, PubKeyFetcher {
+  _PublicKeyStore(this.key);
+
+  final PubKey key;
+
+  @override
+  Future<PubKey> getPublicKey(PeerId id) async => key;
+
+  @override
+  Future<Uint8List> getValue(
+    String key, {
+    List<RoutingOption> options = const [],
+  }) async => throw const RoutingNotFoundException();
+
+  @override
+  Future<void> putValue(
+    String key,
+    Uint8List value, {
+    List<RoutingOption> options = const [],
+  }) async {}
+
+  @override
+  Stream<Uint8List> searchValue(
+    String key, {
+    List<RoutingOption> options = const [],
+  }) => const Stream.empty();
 }
 
 class _BatchRouter extends _Router implements ProvideManyRouter {
