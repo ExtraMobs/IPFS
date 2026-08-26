@@ -14,6 +14,7 @@ export 'fluent/qp.dart';
 export 'traversal_selector.dart';
 export 'traversal_selector_builder.dart';
 export 'traversal_selector_parse.dart';
+export 'traversal.dart';
 
 export 'src/basicnode/any_node.dart' show AnyBuilder, PrototypeAny;
 export 'src/basicnode/base_node.dart' show BaseAssembler, BaseNode;
@@ -86,4 +87,4 @@ export 'src/linking/cid/link_system.dart'
 export 'src/linking/linking.dart';
 export 'src/multicodec/registry.dart';
 export 'src/storage/memstore.dart' show MemoryStore;
-export 'src/storage/storage.dart';
+export 'src/storage/storage.dart' hide get;
