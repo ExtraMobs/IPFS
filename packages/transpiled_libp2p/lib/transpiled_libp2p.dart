@@ -119,6 +119,7 @@ export 'src/core/routing/routing.dart'
         keyForPublicKey;
 export 'src/core/protocol/protocol.dart';
 export 'src/core/network/network.dart';
+export 'src/core/event/addrs.dart';
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
