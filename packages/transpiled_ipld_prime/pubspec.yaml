@@ -12,6 +12,8 @@ dependencies:
     path: ../transpiled_cid
   transpiled_multihash:
     path: ../transpiled_multihash
+  transpiled_multicodec:
+    path: ../transpiled_multicodec
 
 dev_dependencies:
   test: ^1.28.0

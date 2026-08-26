@@ -45,7 +45,6 @@ export 'src/basicnode/scalars.dart'
 export 'src/basicnode/stream_bytes.dart' show StreamBytes, newBytesFromReader;
 export 'src/basicnode/value_assembler.dart' show ValueAssembler;
 export 'src/codec/api.dart' show BudgetExhaustedException, Decoder, Encoder, MapSortMode;
-export 'src/linking/cid/cid_link.dart' show CidLink, CidLinkPrototype;
 export 'src/datamodel/copy.dart' show copyNode;
 export 'src/datamodel/equal.dart' show deepEqual;
 export 'src/datamodel/errors.dart'
@@ -73,3 +72,5 @@ export 'src/datamodel/node_builder.dart'
 export 'src/datamodel/null_node.dart' show absentNode, nullNode;
 export 'src/datamodel/path.dart' show Path;
 export 'src/datamodel/path_segment.dart' show PathSegment;
+export 'src/linking/cid/cid_link.dart' show CidLink, CidLinkPrototype;
+export 'src/multicodec/registry.dart';

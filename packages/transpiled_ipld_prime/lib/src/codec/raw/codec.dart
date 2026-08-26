@@ -1,12 +1,18 @@
 // Port of go-ipld-prime's codec/raw/codec.go.
 import 'dart:typed_data';
 
+import 'package:transpiled_multicodec/transpiled_multicodec.dart';
+
 import '../../datamodel/node.dart';
 import '../../datamodel/node_builder.dart';
+import '../../multicodec/registry.dart';
 
-// Go registers raw (multicodec 0x55) from init(). Registration stays omitted
-// until this package has a multicodec registry dependency; callers can use
-// encode/decode directly in the meantime.
+/// Registers raw (multicodec 0x55) in [registry].
+void registerRawCodec([Registry? registry]) {
+  final code = Multicodec.code('raw');
+  (registry ?? defaultRegistry).registerEncoder(code, encode);
+  (registry ?? defaultRegistry).registerDecoder(code, decode);
+}
 
 /// Decodes all bytes from [reader] into [assembler].
 ///

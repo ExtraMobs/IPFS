@@ -1,9 +1,20 @@
 // Port of go-ipld-prime/codec/json.  This is ordinary JSON: IPLD links and
 // bytes are intentionally rejected (unlike dag-json).
 import 'dart:convert';
+
+import 'package:transpiled_multicodec/transpiled_multicodec.dart';
+
 import '../../datamodel/kind.dart';
 import '../../datamodel/node.dart';
 import '../../datamodel/node_builder.dart';
+import '../../multicodec/registry.dart';
+
+/// Registers ordinary JSON (multicodec 0x0200) in [registry].
+void registerJsonCodec([Registry? registry]) {
+  final code = Multicodec.code('json');
+  (registry ?? defaultRegistry).registerEncoder(code, encode);
+  (registry ?? defaultRegistry).registerDecoder(code, decode);
+}
 
 /// Decodes UTF-8 JSON from [reader] into [assembler].
 void decode(NodeAssembler assembler, Iterable<int> reader) {
