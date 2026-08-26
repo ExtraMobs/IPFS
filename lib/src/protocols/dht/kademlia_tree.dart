@@ -19,7 +19,7 @@ import 'kademlia_tree/kademlia_tree_node.dart';
 import 'kademlia_tree/lru_cache.dart';
 import 'kademlia_tree/protocol_messages.dart';
 import 'kademlia_tree/refresh.dart';
-import 'kademlia_tree/value_store.dart';
+import 'kademlia_tree/value_store.dart' as dht_values;
 import 'provider_store.dart';
 import 'rate_limiter.dart';
 import 'red_black_tree.dart';
@@ -40,7 +40,7 @@ class KademliaTree {
 
     _initializeBuckets();
     _startPeriodicTasks();
-    _valueStore = ValueStore(dhtClient);
+    _valueStore = dht_values.ValueStore(dhtClient);
     _providerStore = ProviderStore();
     _startValueMaintenanceTasks();
 
@@ -92,7 +92,7 @@ class KademliaTree {
 
   /// The underlying [DHTClient].
   final DHTClient dhtClient;
-  late final ValueStore _valueStore;
+  late final dht_values.ValueStore _valueStore;
   late final ProviderStore _providerStore;
 
   late final RateLimiter _lookupLimiter;
