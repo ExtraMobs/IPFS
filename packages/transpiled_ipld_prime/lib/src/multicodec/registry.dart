@@ -2,6 +2,7 @@
 import '../codec/api.dart';
 import '../codec/json/codec.dart';
 import '../codec/raw/codec.dart';
+import '../codec/dagjson/codec.dart';
 
 /// Maps multicodec indicator numbers to codec functions.
 final class Registry {
@@ -52,6 +53,7 @@ Registry get defaultRegistry {
     _defaultCodecsInitialized = true;
     registerRawCodec(registry);
     registerJsonCodec(registry);
+    registerDagJsonCodec(registry);
   }
   return registry;
 }

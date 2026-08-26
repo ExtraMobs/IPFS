@@ -26,5 +26,7 @@ void main() {
   test('default registry exposes built-in codecs on first access', () {
     expect(lookupEncoder(0x55), isNotNull);
     expect(lookupDecoder(0x0200), isNotNull);
+    expect(lookupEncoder(0x0129), isNotNull);
+    expect(lookupDecoder(0x0129), isNotNull);
   });
 }

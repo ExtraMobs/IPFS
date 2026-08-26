@@ -9,6 +9,7 @@ import '../../datamodel/kind.dart';
 import '../../datamodel/node.dart';
 import '../../datamodel/node_builder.dart';
 import '../../linking/cid/cid_link.dart';
+import '../../multicodec/registry.dart';
 
 /// Encoding options matching go-ipld-prime's dagjson.EncodeOptions.
 final class DagJsonEncodeOptions {
@@ -20,6 +21,13 @@ final class DagJsonEncodeOptions {
   final bool encodeLinks;
   final bool encodeBytes;
   final bool sortMaps;
+}
+
+/// Registers DAG-JSON (multicodec 0x0129) in [registry].
+void registerDagJsonCodec([Registry? registry]) {
+  final target = registry ?? defaultRegistry;
+  target.registerEncoder(0x0129, encodeDagJson);
+  target.registerDecoder(0x0129, decodeDagJson);
 }
 
 /// Encode an IPLD node using the default DAG-JSON representation.
