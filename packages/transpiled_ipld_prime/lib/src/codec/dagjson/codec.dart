@@ -10,7 +10,7 @@ import '../../linking/cid/cid_link.dart';
 
 /// Encode an IPLD node using the DAG-JSON representation.
 void encodeDagJson(Node node, Sink<List<int>> writer) {
-  writer.add(utf8.encode('${jsonEncode(_value(node))}\n'));
+  writer.add(utf8.encode(jsonEncode(_value(node))));
 }
 
 /// Decode a DAG-JSON value into an assembler.
