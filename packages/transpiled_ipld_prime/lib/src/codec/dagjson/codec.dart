@@ -24,7 +24,7 @@ Object? _value(Node node) => switch (node.kind()) {
       Kind.int_ => node.asInt(),
       Kind.float => node.asFloat(),
       Kind.string => node.asString(),
-      Kind.bytes => {'/': 'base64${base64Encode(node.asBytes())}'},
+      Kind.bytes => {'/': {'bytes': base64Encode(node.asBytes()).replaceAll('=', '')}},
       Kind.link => {'/': node.asLink().toString()},
       Kind.map => {
           for (final (key, value) in _entries(node)) key.asString(): _value(value),
@@ -54,6 +54,10 @@ void _assign(NodeAssembler assembler, Object? value) {
       final list = assembler.beginList(v.length);
       for (final item in v) _assign(list.assembleValue(), item);
       list.finish();
+    case Map<String, Object?> v when v.length == 1 && v.containsKey('/') && v['/'] is Map:
+      final bytes = (v['/']! as Map)['bytes'];
+      if (bytes is! String) throw const FormatException('invalid DAG-JSON bytes');
+      assembler.assignBytes(Uint8List.fromList(base64Decode(bytes.padRight((bytes.length + 3) ~/ 4 * 4, '='))));
     case Map<String, Object?> v when v.length == 1 && v.containsKey('/'):
       final marker = v['/'];
       if (marker is! String) throw const FormatException('invalid DAG-JSON link');
