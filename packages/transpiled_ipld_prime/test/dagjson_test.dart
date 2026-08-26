@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart';
 
 void main() {
@@ -13,6 +14,21 @@ void main() {
     decodeDagJson(builder, out);
     expect(builder.build().lookupByString('n').asInt(), 3);
     expect(builder.build().lookupByString('b').asBytes(), [1, 2]);
+  });
+
+  test('DAG-JSON matches Go link and padded-bytes forms', () {
+    final cid = CID.decode(
+      'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
+    );
+    final out = <int>[];
+    encodeDagJson(newLink(CidLink(cid)), outSink(out));
+    expect(
+      String.fromCharCodes(out),
+      '{"/":"bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi"}\n',
+    );
+    final builder = const PrototypeAny().newBuilder();
+    decodeDagJson(builder, '{"/":{"bytes":"ZGVhZGJlZWY="}}'.codeUnits);
+    expect(String.fromCharCodes(builder.build().asBytes()), 'deadbeef');
   });
 }
 
