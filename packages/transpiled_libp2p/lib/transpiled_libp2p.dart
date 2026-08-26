@@ -123,6 +123,7 @@ export 'src/core/network/network.dart';
 export 'src/core/event/addrs.dart';
 export 'src/core/event/network.dart';
 export 'src/core/event/reachability.dart';
+export 'src/core/event/protocol.dart';
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,
