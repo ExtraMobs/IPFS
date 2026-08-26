@@ -44,6 +44,24 @@ void main() {
       ),
       throwsA(isA<FormatException>()),
     );
+    final bytesBuilder = const PrototypeAny().newBuilder();
+    expect(
+      () => decodeDagJsonWithOptions(
+        bytesBuilder,
+        '{"/":{"bytes":"AQI"}}'.codeUnits,
+        const DagJsonDecodeOptions(parseBytes: false),
+      ),
+      throwsA(isA<FormatException>()),
+    );
+    final depthBuilder = const PrototypeAny().newBuilder();
+    expect(
+      () => decodeDagJsonWithOptions(
+        depthBuilder,
+        '[[1]]'.codeUnits,
+        const DagJsonDecodeOptions(maxDepth: 1),
+      ),
+      throwsA(isA<FormatException>()),
+    );
   });
 }
 

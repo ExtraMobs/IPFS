@@ -38,7 +38,30 @@ void encodeDagJsonWithOptions(
 
 /// Decode a DAG-JSON value into an assembler.
 void decodeDagJson(NodeAssembler assembler, Iterable<int> reader) {
-  _assign(assembler, jsonDecode(utf8.decode(reader.toList(growable: false))));
+  decodeDagJsonWithOptions(assembler, reader, const DagJsonDecodeOptions());
+}
+
+final class DagJsonDecodeOptions {
+  const DagJsonDecodeOptions({
+    this.parseLinks = true,
+    this.parseBytes = true,
+    this.maxDepth = 0,
+  });
+  final bool parseLinks;
+  final bool parseBytes;
+  final int maxDepth;
+}
+
+void decodeDagJsonWithOptions(
+  NodeAssembler assembler,
+  Iterable<int> reader,
+  DagJsonDecodeOptions options,
+) {
+  _assign(
+    assembler,
+    jsonDecode(utf8.decode(reader.toList(growable: false))),
+    options: options,
+  );
 }
 
 Object? _value(
@@ -88,7 +111,15 @@ Iterable<Node> _values(Node node) sync* {
   while (!iterator.done()) yield iterator.next().$2;
 }
 
-void _assign(NodeAssembler assembler, Object? value) {
+void _assign(
+  NodeAssembler assembler,
+  Object? value, {
+  required DagJsonDecodeOptions options,
+  int depth = 0,
+}) {
+  if (options.maxDepth > 0 && depth > options.maxDepth) {
+    throw const FormatException('dag-json maximum depth exceeded');
+  }
   switch (value) {
     case null:
       assembler.assignNull();
@@ -102,13 +133,16 @@ void _assign(NodeAssembler assembler, Object? value) {
       assembler.assignString(v);
     case List<Object?> v:
       final list = assembler.beginList(v.length);
-      for (final item in v) _assign(list.assembleValue(), item);
+      for (final item in v)
+        _assign(list.assembleValue(), item, options: options, depth: depth + 1);
       list.finish();
     case Map<String, Object?> v
         when v.length == 1 && v.containsKey('/') && v['/'] is Map:
       final bytes = (v['/']! as Map)['bytes'];
       if (bytes is! String)
         throw const FormatException('invalid DAG-JSON bytes');
+      if (!options.parseBytes)
+        throw const FormatException('DAG-JSON bytes disabled');
       assembler.assignBytes(
         Uint8List.fromList(
           base64Decode(bytes.padRight((bytes.length + 3) ~/ 4 * 4, '=')),
@@ -118,6 +152,9 @@ void _assign(NodeAssembler assembler, Object? value) {
       final marker = v['/'];
       if (marker is! String)
         throw const FormatException('invalid DAG-JSON link');
+      if (!options.parseLinks && !marker.startsWith('base64')) {
+        throw const FormatException('DAG-JSON links disabled');
+      }
       if (marker.startsWith('base64')) {
         assembler.assignBytes(
           Uint8List.fromList(base64Decode(marker.substring(6))),
@@ -128,7 +165,12 @@ void _assign(NodeAssembler assembler, Object? value) {
     case Map<String, Object?> v:
       final map = assembler.beginMap(v.length);
       for (final entry in v.entries)
-        _assign(map.assembleEntry(entry.key), entry.value);
+        _assign(
+          map.assembleEntry(entry.key),
+          entry.value,
+          options: options,
+          depth: depth + 1,
+        );
       map.finish();
     default:
       throw const FormatException('unsupported DAG-JSON value');
