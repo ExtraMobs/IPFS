@@ -25,7 +25,7 @@ arquivo registra a ordem e o que já foi validado.
 
 ## Estado em aberto (2026-08-25)
 
-- 🚧 **NÃO CONFIÁVEL — `go-ipld-prime/codec/dagjson` em auditoria (2026-08-26)**: núcleo Node↔DAG-JSON adicionado em `transpiled_ipld_prime`, com CID, bytes no envelope `{\"/\":{\"bytes\":...}}`, ordenação lexical padrão, opções de encode/decode para links/bytes e limite de profundidade; ainda falta comparação completa dos vetores Go (limites e erros); não declarar paridade.
+- 🚧 **NÃO CONFIÁVEL — `go-ipld-prime/codec/dagjson` em auditoria (2026-08-26)**: núcleo Node↔DAG-JSON adicionado em `transpiled_ipld_prime`, registrado no multicodec `0x0129`, com CID, bytes no envelope `{\"/\":{\"bytes\":...}}`, ordenação lexical padrão, opções de encode/decode para links/bytes e limite de profundidade; ainda falta comparação completa dos vetores Go (limites e erros); não declarar paridade.
 
 Isto é o que uma sessão futura precisa saber pra continuar de onde paramos — não é redundante com as tabelas abaixo, é o contexto que não cabe numa célula de tabela.
 
