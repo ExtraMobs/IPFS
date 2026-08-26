@@ -1,0 +1,16 @@
+import 'package:test/test.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:transpiled_ipld_prime/linking_cid.dart';
+
+void main() {
+  test('CID link preserves string, binary bytes, and prototype', () {
+    final cid = CID.decode(
+      'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
+    );
+    final link = CidLink(cid);
+    expect(link.toString(), cid.toString());
+    expect(link.binary(), cid.toBytes());
+    final rebuilt = link.prototype().buildLink(cid.multihash.digest);
+    expect(rebuilt.toString(), cid.toString());
+  });
+}

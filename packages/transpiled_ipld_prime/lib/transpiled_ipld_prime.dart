@@ -4,7 +4,7 @@
 /// implementation for any Data Model value).
 ///
 /// Everything else in go-ipld-prime -- codecs beyond the shared `codec` API
-/// and `codec/raw`, `linking`/`linking/cid`, `storage`,
+/// and `codec/raw`, `linking` beyond `linking/cid`, `storage`,
 /// `traversal`/`traversal/selector`, `schema`/`schema/gen/go` (code
 /// generation via Go reflection has no direct Dart equivalent and needs
 /// its own design), and the ADL system -- is not ported yet.
@@ -45,6 +45,7 @@ export 'src/basicnode/scalars.dart'
 export 'src/basicnode/stream_bytes.dart' show StreamBytes, newBytesFromReader;
 export 'src/basicnode/value_assembler.dart' show ValueAssembler;
 export 'src/codec/api.dart' show BudgetExhaustedException, Decoder, Encoder, MapSortMode;
+export 'src/linking/cid/cid_link.dart' show CidLink, CidLinkPrototype;
 export 'src/datamodel/copy.dart' show copyNode;
 export 'src/datamodel/equal.dart' show deepEqual;
 export 'src/datamodel/errors.dart'
