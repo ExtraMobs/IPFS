@@ -6,6 +6,25 @@ necessárias para executar um nó IPFS embutido em aplicações Dart ou Flutter.
 Kubo, Boxo e go-libp2p são referências de comportamento, não superfícies de
 produto que devam ser reproduzidas integralmente.
 
+## Objetivo prioritário do projeto
+
+Até ser concluído e marcado como tal em `doc/transpilation/PROGRESS.md`, o
+primeiro objetivo é comprovar o download P2P de um bloco por CID interoperando
+com Kubo:
+
+`Kubo conhecido → TCP/Noise → /ipfs/bitswap/1.2.0 → WANT_BLOCK → bloco validado pelo CID → blockstore`.
+
+Depois da prova com provider conhecido, estenda o mesmo fluxo para:
+
+`CID → DHT.findProviders → AddrInfo → conectar provider → Bitswap → validar → blockstore`.
+
+Todo agente que atuar na transpilação deve seguir a ordem e os critérios da
+checklist "Objetivo 1 — primeiro download P2P por CID" no topo de
+`doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essa
+checklist fica atrás dela, salvo correção necessária para manter a suíte verde
+ou instrução explícita do usuário. Gateway HTTP(S) não conta como download P2P
+e só entra no escopo quando o usuário o pedir explicitamente.
+
 ## Fora do escopo
 
 Ignore qualquer pacote, arquivo ou teste cuja única finalidade seja CLI,

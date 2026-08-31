@@ -16,6 +16,63 @@ arquivo registra a ordem e o que já foi validado.
 - `gopls` está instalado (`go install golang.org/x/tools/gopls@latest`) — a ferramenta `LSP` genérica (goToDefinition/findReferences/callHierarchy) funciona sobre os repos clonados pra desambiguar os casos que o índice sinaliza como "nome compartilhado por N declarações". Para cross-reference profundo dentro de um repo específico (não só o arquivo aberto), rode `go mod download` dentro daquele repo primeiro — os clones rasos não têm o cache de módulos populado por padrão.
 - Comparação de dependências/arquitetura dart_ipfs × kubo (o que motivou esta transpilação): https://claude.ai/code/artifact/22156809-3f60-4775-adc3-23725ba42444
 
+## Objetivo 1 — primeiro download P2P por CID
+
+Este é o objetivo prioritário para qualquer agente até todos os critérios de
+conclusão abaixo estarem comprovados. "Download" significa exclusivamente P2P;
+gateway HTTP(S) não satisfaz nenhum item.
+
+### Marco A — bloco de provider conhecido
+
+Fluxo-alvo:
+
+`Kubo conhecido → TCP/Noise → /ipfs/bitswap/1.2.0 → WANT_BLOCK → bloco validado pelo CID → blockstore`.
+
+- [ ] Fixar um fixture de interoperabilidade: Kubo cria um bloco raw e informa
+  CID, Peer ID e multiaddr ao nó Dart.
+- [ ] Auditar/portar `boxo/bitswap/message` e `bitswap/message/pb`, preservando
+  wire format, limites, wantlist, `WANT_BLOCK`/`WANT_HAVE`, payloads,
+  `HAVE`/`DONT_HAVE` e blocos.
+- [ ] Auditar/portar `boxo/bitswap/network` e `bitswap/network/bsnet`: negociação
+  de protocolo, framing, streams persistentes, sender por peer, múltiplas
+  mensagens por stream, conexão/desconexão e erros.
+- [ ] Auditar/portar o subconjunto de download de `boxo/bitswap/client`:
+  `getter`, `notifications`, `messagequeue`, `peermanager`,
+  `blockpresencemanager`, wantlist e somente as partes de sessão/interesse
+  exigidas pelo client.
+- [ ] Portar ou adaptar o mínimo de `boxo/blockstore` (`has`/`get`/`put`) ao
+  blockstore Dart existente, sempre verificando CID ↔ dados antes de persistir.
+- [ ] Com Kubo diretamente conectado, obter por Bitswap um bloco ausente
+  localmente, validar seus bytes contra o CID, persistir e reler do blockstore.
+- [ ] Manter um teste de interoperabilidade executável e registrar comando,
+  CID/fixture e resultado aqui. Testes apenas mockados não concluem o marco.
+
+### Marco B — provider descoberto pela rede pública
+
+Fluxo-alvo:
+
+`CID → DHT.findProviders → AddrInfo → conectar provider → Bitswap → validar → blockstore`.
+
+- [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
+  `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
+  shortlist, `closerPeers`, `providerPeers`, validação, timeout e cancelamento.
+- [ ] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
+  reduzir o resultado a apenas Peer ID.
+- [ ] Completar/adaptar `core/peerstore` address/protocol book e o caminho
+  `Host.connect(AddrInfo)` necessários para armazenar endereços, negociar
+  Bitswap e discar o provider encontrado.
+- [ ] Baixar um bloco raw público por CID sem conexão prévia com seu provider,
+  usando apenas bootstrap + DHT + Bitswap, validar e persistir o bloco.
+- [ ] Manter um teste de rede real reproduzível e registrar comando, CID e
+  resultado aqui. Conectar a bootstrap sem receber o bloco não conclui o marco.
+
+### Fora do caminho crítico deste objetivo
+
+Não bloquear o primeiro bloco raw por PubSub, gateway, Bitswap server/decision
+engine, QUIC, UnixFS, DAG traversal, MFS ou pinning. Bitswap server é necessário
+para servir blocos; UnixFS/DAG entram quando o objetivo passar de um bloco raw
+para reconstruir arquivos ou diretórios completos.
+
 ## Status
 
 - `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `implementação original não auditada` | `fora do escopo (<razão confirmada>)`.
