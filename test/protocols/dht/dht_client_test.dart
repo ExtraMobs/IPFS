@@ -92,6 +92,28 @@ void main() {
   }
 
   group('DHTClient integration spec', () {
+    test('stop cancels routing-table maintenance timers', () async {
+      final timers = <Timer>[];
+
+      await runZoned(
+        () async {
+          await client.initialize();
+          expect(timers, hasLength(4));
+
+          await client.stop();
+        },
+        zoneSpecification: ZoneSpecification(
+          createPeriodicTimer: (self, parent, zone, duration, callback) {
+            final timer = parent.createPeriodicTimer(zone, duration, callback);
+            timers.add(timer);
+            return timer;
+          },
+        ),
+      );
+
+      expect(timers.every((timer) => !timer.isActive), isTrue);
+    });
+
     test('iterative queries use raw Kademlia request/response', () async {
       await client.initialize();
       final peer = PeerId.fromBase58(
@@ -434,6 +456,57 @@ void main() {
         mockRouter.sendMessage(any, any, protocolId: anyNamed('protocolId')),
       ).called(1);
       await expectLater(client.stop(), completes);
+    });
+
+    test('timed out fallback RPC leaves no cleanup timer', () async {
+      config = IPFSConfig(
+        dht: const DHTConfig(requestTimeout: Duration(milliseconds: 100)),
+      );
+      when(mockNetworkHandler.config).thenReturn(config);
+      client = DHTClient(
+        networkHandler: mockNetworkHandler,
+        router: mockRouter,
+        metricsCollector: metrics,
+      );
+      final timers = <Timer>[];
+
+      await runZoned(
+        () async {
+          await client.initialize();
+          final peer = PeerId.fromBase58(
+            'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+          );
+          await client.kademliaRoutingTable.addPeer(peer, peer);
+          when(
+            mockRouter.sendRequest(any, any, any),
+          ).thenAnswer((_) async => null);
+          when(
+            mockRouter.sendMessage(
+              any,
+              any,
+              protocolId: anyNamed('protocolId'),
+            ),
+          ).thenAnswer((_) async {});
+
+          await client
+              .findProvidersAsync(
+                CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+                1,
+              )
+              .toList();
+          await client.stop();
+        },
+        zoneSpecification: ZoneSpecification(
+          createTimer: (self, parent, zone, duration, callback) {
+            final timer = parent.createTimer(zone, duration, callback);
+            timers.add(timer);
+            return timer;
+          },
+        ),
+      );
+
+      expect(timers, isNotEmpty);
+      expect(timers.every((timer) => !timer.isActive), isTrue);
     });
 
     test('stop cancels a pending fallback RPC', () async {

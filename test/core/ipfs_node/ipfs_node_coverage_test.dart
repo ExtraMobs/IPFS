@@ -16,6 +16,7 @@ import 'package:transpiled_ipfs/src/core/ipfs_node/datastore_handler.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/dns_link_handler.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/ipfs_node.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/ipld_handler.dart';
+import 'package:transpiled_ipfs/src/core/ipfs_node/lifecycle_manager.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/mdns_handler.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/network_handler.dart';
 import 'package:transpiled_ipfs/src/core/ipfs_node/pubsub_handler.dart';
@@ -176,12 +177,17 @@ class MockIPLDHandler implements IPLDHandler {
 class MockNetworkHandler implements NetworkHandler {
   bool started = false;
   bool stopped = false;
+  void Function()? onStop;
   IPFSNode? node;
   final MockRouter routerInstance = MockRouter();
   @override
   Future<void> start() async => started = true;
   @override
-  Future<void> stop() async => stopped = true;
+  Future<void> stop() async {
+    stopped = true;
+    onStop?.call();
+  }
+
   @override
   Future<Map<String, dynamic>> getStatus() async => {'status': 'active'};
   @override
@@ -221,10 +227,15 @@ class MockMDNSHandler implements MDNSHandler {
 class MockDHTHandler implements DHTHandler {
   bool started = false;
   bool stopped = false;
+  void Function()? onStop;
   @override
   Future<void> start() async => started = true;
   @override
-  Future<void> stop() async => stopped = true;
+  Future<void> stop() async {
+    stopped = true;
+    onStop?.call();
+  }
+
   @override
   Future<Map<String, dynamic>> getStatus() async => {'status': 'active'};
   @override
@@ -415,6 +426,20 @@ void main() {
       await node.stop();
 
       expect(blockStore.stopped, isTrue);
+    });
+
+    test('stops DHT before the network transport', () async {
+      final stopped = <String>[];
+      network.onStop = () => stopped.add('network');
+      dht.onStop = () => stopped.add('dht');
+      container.registerSingleton<LifecycleManager>(LifecycleManager());
+      registerAll();
+      final node = IPFSNode.fromContainer(container);
+
+      await node.start();
+      await node.stop();
+
+      expect(stopped, ['dht', 'network']);
     });
 
     test('getHealthStatus with all services', () async {

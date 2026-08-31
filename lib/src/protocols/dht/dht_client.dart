@@ -80,7 +80,7 @@ class DHTClient implements ContentDiscovery {
   StreamSubscription<ConnectionEvent>? _connectionEventSub;
 
   final Map<String, Completer<Uint8List>> _pendingRequests = {};
-  final Set<String> _expiredRequests = {};
+  final Map<String, DateTime> _expiredRequests = {};
   Completer<void> _stopSignal = Completer<void>();
   final Random _random = Random.secure();
   int _requestCounter = 0;
@@ -930,6 +930,7 @@ class DHTClient implements ContentDiscovery {
     Uint8List data, {
     Duration? timeout,
   }) async {
+    _pruneExpiredRequests();
     final requestId = _generateRequestId();
     final completer = Completer<Uint8List>();
     _pendingRequests[requestId] = completer;
@@ -956,11 +957,8 @@ class DHTClient implements ContentDiscovery {
     try {
       return await completer.future.timeout(timeout ?? _config.requestTimeout);
     } on TimeoutException {
-      _expiredRequests.add(requestId);
-      unawaited(
-        Future<void>.delayed(timeout ?? _config.requestTimeout, () {
-          _expiredRequests.remove(requestId);
-        }),
+      _expiredRequests[requestId] = DateTime.now().add(
+        timeout ?? _config.requestTimeout,
       );
       rethrow;
     } finally {
@@ -972,6 +970,11 @@ class DHTClient implements ContentDiscovery {
     operation,
     _stopSignal.future.then<T>((_) => throw StateError('DHT client stopped')),
   ]);
+
+  void _pruneExpiredRequests() {
+    final now = DateTime.now();
+    _expiredRequests.removeWhere((_, expiresAt) => !expiresAt.isAfter(now));
+  }
 
   String _generateRequestId() {
     _requestCounter++;
@@ -985,6 +988,7 @@ class DHTClient implements ContentDiscovery {
       'DHT packet from ${packet.srcPeerId}, ${packet.datagram.length} bytes',
     );
     try {
+      _pruneExpiredRequests();
       late final kad.Message message;
       late final DHTEnvelope envelope;
       // Kubo and other libp2p-kad-dht implementations send raw protobuf
@@ -1017,7 +1021,7 @@ class DHTClient implements ContentDiscovery {
           completer.complete(Uint8List.fromList(envelope.payload));
           return;
         }
-        if (_expiredRequests.remove(envelope.requestId)) return;
+        if (_expiredRequests.remove(envelope.requestId) != null) return;
       }
 
       final peerIdStr = packet.srcPeerId;
@@ -1328,7 +1332,7 @@ class DHTClient implements ContentDiscovery {
 
       // Clear routing table
       if (_initialized) {
-        _kademliaRoutingTable.clear();
+        _kademliaRoutingTable.dispose();
       }
       _initialized = false;
       _bootstrappedPeers.clear();

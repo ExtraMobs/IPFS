@@ -116,7 +116,6 @@ class IPFSNodeBuilder {
         denylistService: denylistService,
       );
       _container.registerSingleton(dhtHandler);
-      _container.get<LifecycleManager>().register(dhtHandler);
 
       // Provide the routing table size to the metrics collector once the DHT
       // handler is available. The provider is invoked later by the periodic

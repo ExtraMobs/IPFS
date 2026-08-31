@@ -212,6 +212,12 @@ class KademliaRoutingTable {
     _connectionStats.clear();
   }
 
+  /// Releases maintenance resources owned by the underlying tree.
+  void dispose() {
+    _tree.dispose();
+    clear();
+  }
+
   /// Calculates the XOR distance between two peers.
   int calculateDistance(PeerId a, PeerId b) => _calculateXorDistance(a, b);
 

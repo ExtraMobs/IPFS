@@ -173,6 +173,9 @@ class IPFSNode {
     _lifecycleManager.register(_container.get<BlockStore>());
     _lifecycleManager.register(_contentManager);
     _lifecycleManager.register(_networkManager);
+    if (_container.isRegistered<DHTHandler>()) {
+      _lifecycleManager.register(_container.get<DHTHandler>());
+    }
     _lifecycleManager.register(_protocolManager);
     if (_reprovider != null) {
       _lifecycleManager.register(_reprovider!);

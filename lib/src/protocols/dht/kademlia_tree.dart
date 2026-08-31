@@ -100,6 +100,7 @@ class KademliaTree {
   late final RateLimiter _findValueLimiter;
 
   final Map<int, LRUCache> _bucketCaches = {};
+  final List<Timer> _maintenanceTimers = [];
 
   // Public getters for other files in the same package/logic
   /// The root node of the Kademlia tree.
@@ -144,19 +145,40 @@ class KademliaTree {
   }
 
   void _startPeriodicTasks() {
-    Timer.periodic(refreshInterval, (_) => refresh());
-    Timer.periodic(republishInterval, (_) => _republishKeys());
-    Timer.periodic(const Duration(hours: 1), (_) => _providerStore.gc());
+    _maintenanceTimers.add(Timer.periodic(refreshInterval, (_) => refresh()));
+    _maintenanceTimers.add(
+      Timer.periodic(republishInterval, (_) => _republishKeys()),
+    );
+    _maintenanceTimers.add(
+      Timer.periodic(const Duration(hours: 1), (_) => _providerStore.gc()),
+    );
   }
 
   void _startValueMaintenanceTasks() {
-    Timer.periodic(republishInterval, (_) async {
-      try {
-        await _valueStore.republishValues();
-      } catch (e) {
-        _logger.error('Failed to republish values during maintenance', e);
+    _maintenanceTimers.add(
+      Timer.periodic(republishInterval, (_) async {
+        try {
+          await _valueStore.republishValues();
+        } catch (e) {
+          _logger.error('Failed to republish values during maintenance', e);
+        }
+      }),
+    );
+  }
+
+  /// Stops periodic maintenance started for this routing table.
+  void dispose() {
+    for (final timer in _maintenanceTimers) {
+      timer.cancel();
+    }
+    _maintenanceTimers.clear();
+
+    for (final completer in _pendingRequests.values) {
+      if (!completer.isCompleted) {
+        completer.completeError(StateError('Kademlia tree stopped'));
       }
-    });
+    }
+    _pendingRequests.clear();
   }
 
   /// Performs an iterative node lookup to find the K closest peers to [target].
