@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:test/test.dart';
@@ -383,6 +384,94 @@ void main() {
 
       expect(providers, hasLength(1));
       expect(requestCount, 1);
+    });
+
+    test('timeout drops a late fallback RPC response', () async {
+      config = IPFSConfig(
+        dht: const DHTConfig(requestTimeout: Duration(milliseconds: 10)),
+      );
+      when(mockNetworkHandler.config).thenReturn(config);
+      client = DHTClient(
+        networkHandler: mockNetworkHandler,
+        router: mockRouter,
+        metricsCollector: metrics,
+      );
+      await client.initialize();
+      final peer = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      await client.kademliaRoutingTable.addPeer(peer, peer);
+      final packetHandler = _captureHandler(mockRouter);
+      Uint8List? request;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async => null);
+      when(
+        mockRouter.sendMessage(any, any, protocolId: anyNamed('protocolId')),
+      ).thenAnswer((invocation) async {
+        request = invocation.positionalArguments[1] as Uint8List;
+      });
+
+      await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            1,
+          )
+          .toList();
+      final envelope = DHTEnvelope.fromBytes(request!);
+      packetHandler(
+        NetworkPacket(
+          srcPeerId: peer.toBase58(),
+          datagram: DHTEnvelope(
+            requestId: envelope.requestId,
+            payload:
+                (kad.Message()..type = kad.Message_MessageType.GET_PROVIDERS)
+                    .writeToBuffer(),
+          ).toBytes(),
+        ),
+      );
+      await Future<void>.delayed(Duration.zero);
+
+      verify(
+        mockRouter.sendMessage(any, any, protocolId: anyNamed('protocolId')),
+      ).called(1);
+      await expectLater(client.stop(), completes);
+    });
+
+    test('stop cancels a pending fallback RPC', () async {
+      config = IPFSConfig(
+        dht: const DHTConfig(requestTimeout: Duration(seconds: 1)),
+      );
+      when(mockNetworkHandler.config).thenReturn(config);
+      client = DHTClient(
+        networkHandler: mockNetworkHandler,
+        router: mockRouter,
+        metricsCollector: metrics,
+      );
+      await client.initialize();
+      final peer = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      await client.kademliaRoutingTable.addPeer(peer, peer);
+      final sent = Completer<void>();
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async => null);
+      when(
+        mockRouter.sendMessage(any, any, protocolId: anyNamed('protocolId')),
+      ).thenAnswer((_) async {
+        if (!sent.isCompleted) sent.complete();
+      });
+
+      final lookup = client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            1,
+          )
+          .toList();
+      await sent.future;
+
+      await expectLater(
+        client.stop().timeout(const Duration(milliseconds: 100)),
+        completes,
+      );
+      await expectLater(lookup, completes);
     });
 
     test('findProviders expands iteratively via closer peers', () async {

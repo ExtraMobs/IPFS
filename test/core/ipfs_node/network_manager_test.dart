@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -69,6 +68,12 @@ void main() {
   });
 
   group('NetworkManager', () {
+    test('stop closes the underlying network handler', () async {
+      await manager.stop();
+
+      verify(mockNetworkHandler.stop()).called(1);
+    });
+
     test('peerId and connectedPeers delegating', () async {
       when(mockNetworkHandler.peerID).thenReturn('QmID');
       when(

@@ -80,6 +80,8 @@ class DHTClient implements ContentDiscovery {
   StreamSubscription<ConnectionEvent>? _connectionEventSub;
 
   final Map<String, Completer<Uint8List>> _pendingRequests = {};
+  final Set<String> _expiredRequests = {};
+  Completer<void> _stopSignal = Completer<void>();
   final Random _random = Random.secure();
   int _requestCounter = 0;
 
@@ -92,6 +94,8 @@ class DHTClient implements ContentDiscovery {
   /// Initializes the DHT client.
   Future<void> initialize() async {
     if (_initialized) return;
+
+    if (_stopSignal.isCompleted) _stopSignal = Completer<void>();
 
     _config = networkHandler.config.dht;
 
@@ -865,13 +869,27 @@ class DHTClient implements ContentDiscovery {
     try {
       final requestBytes = request.writeToBuffer();
       final stopwatch = Stopwatch()..start();
+      Uint8List? directResponse;
+      try {
+        directResponse = await _awaitUntilStopped(
+          _router
+              .sendRequest(peer.toBase58(), protocolDht, requestBytes)
+              .timeout(_config.requestTimeout),
+        );
+      } on TimeoutException {
+        return null;
+      }
+
+      final remaining = _config.requestTimeout - stopwatch.elapsed;
+      if (remaining <= Duration.zero) return null;
       final responseBytes =
-          await _router.sendRequest(
-            peer.toBase58(),
+          directResponse ??
+          await _sendRequest(
+            peer,
             protocolDht,
             requestBytes,
-          ) ??
-          await _sendRequest(peer, protocolDht, requestBytes);
+            timeout: remaining,
+          );
       stopwatch.stop();
       _metrics?.recordLatency(protocolDht, stopwatch.elapsed);
       _metrics?.recordMessageSent(protocolDht, requestBytes.length);
@@ -909,8 +927,9 @@ class DHTClient implements ContentDiscovery {
   Future<Uint8List> _sendRequest(
     PeerId peer,
     String protocol,
-    Uint8List data,
-  ) async {
+    Uint8List data, {
+    Duration? timeout,
+  }) async {
     final requestId = _generateRequestId();
     final completer = Completer<Uint8List>();
     _pendingRequests[requestId] = completer;
@@ -934,8 +953,25 @@ class DHTClient implements ContentDiscovery {
       rethrow;
     }
 
-    return completer.future.timeout(_config.requestTimeout);
+    try {
+      return await completer.future.timeout(timeout ?? _config.requestTimeout);
+    } on TimeoutException {
+      _expiredRequests.add(requestId);
+      unawaited(
+        Future<void>.delayed(timeout ?? _config.requestTimeout, () {
+          _expiredRequests.remove(requestId);
+        }),
+      );
+      rethrow;
+    } finally {
+      _pendingRequests.remove(requestId);
+    }
   }
+
+  Future<T> _awaitUntilStopped<T>(Future<T> operation) => Future.any([
+    operation,
+    _stopSignal.future.then<T>((_) => throw StateError('DHT client stopped')),
+  ]);
 
   String _generateRequestId() {
     _requestCounter++;
@@ -981,6 +1017,7 @@ class DHTClient implements ContentDiscovery {
           completer.complete(Uint8List.fromList(envelope.payload));
           return;
         }
+        if (_expiredRequests.remove(envelope.requestId)) return;
       }
 
       final peerIdStr = packet.srcPeerId;
@@ -1278,6 +1315,8 @@ class DHTClient implements ContentDiscovery {
   /// Stops the DHT client and cleans up resources.
   Future<void> stop() async {
     try {
+      if (!_stopSignal.isCompleted) _stopSignal.complete();
+
       // Clean up any active requests or connections
       for (final completer in _pendingRequests.values) {
         if (!completer.isCompleted) {
@@ -1285,6 +1324,7 @@ class DHTClient implements ContentDiscovery {
         }
       }
       _pendingRequests.clear();
+      _expiredRequests.clear();
 
       // Clear routing table
       if (_initialized) {
