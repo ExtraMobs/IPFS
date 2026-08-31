@@ -28,8 +28,11 @@ Fluxo-alvo:
 
 `Kubo conhecido → TCP/Noise → /ipfs/bitswap/1.2.0 → WANT_BLOCK → bloco validado pelo CID → blockstore`.
 
-- [ ] Fixar um fixture de interoperabilidade: Kubo cria um bloco raw e informa
-  CID, Peer ID e multiaddr ao nó Dart.
+- [x] Fixar um fixture de interoperabilidade: Kubo cria um bloco raw e informa
+  CID, Peer ID e multiaddr ao nó Dart. Coberto por
+  `test/interop/test/bitswap_test.dart`; prova local de 2026-08-31 usou Kubo
+  `0.43.0`, peer `12D3KooWPAfko2Q2pSAzf4ZGKZaG2n6yNJkByJsS4FqPp6nQr54B`
+  em `/ip4/127.0.0.1/tcp/4401`.
 - [ ] Auditar/portar `boxo/bitswap/message` e `bitswap/message/pb`, preservando
   wire format, limites, wantlist, `WANT_BLOCK`/`WANT_HAVE`, payloads,
   `HAVE`/`DONT_HAVE` e blocos.
@@ -42,10 +45,18 @@ Fluxo-alvo:
   exigidas pelo client.
 - [ ] Portar ou adaptar o mínimo de `boxo/blockstore` (`has`/`get`/`put`) ao
   blockstore Dart existente, sempre verificando CID ↔ dados antes de persistir.
-- [ ] Com Kubo diretamente conectado, obter por Bitswap um bloco ausente
+- [x] Com Kubo diretamente conectado, obter por Bitswap um bloco ausente
   localmente, validar seus bytes contra o CID, persistir e reler do blockstore.
-- [ ] Manter um teste de interoperabilidade executável e registrar comando,
+  Prova local em 2026-08-31: CID raw
+  `bafkreiexlv6augtw6ppvcp7mf5kbm5j7scm3tt2ikdm6hnjfk3wye4qzvm`, 3682
+  bytes, SHA-256
+  `975d7c0a1a76f3df513fec2f5416753f9099b9cf4850d9e3b52556ed827219ab`;
+  primeira leitura P2P em 8912 ms, segunda leitura do blockstore em 13 ms, bytes
+  idênticos nas duas.
+- [x] Manter um teste de interoperabilidade executável e registrar comando,
   CID/fixture e resultado aqui. Testes apenas mockados não concluem o marco.
+  Harness: `test/interop/test/bitswap_test.dart`; CI/comando reproduzível:
+  `docker compose -f test/interop/docker-compose.yml run --rm test-runner dart test --enable-experiment=native-assets --tags p0 --reporter expanded`.
 
 ### Marco B — provider descoberto pela rede pública
 

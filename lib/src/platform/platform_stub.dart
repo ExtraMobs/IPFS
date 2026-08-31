@@ -19,6 +19,9 @@ abstract class IpfsPlatform {
   /// in IndexedDB.
   Future<void> writeBytes(String path, Uint8List bytes);
 
+  /// Appends [bytes] to the file at [path].
+  Future<void> appendBytes(String path, Uint8List bytes);
+
   /// Returns a [Future] that completes when [content] is written to a file at [path].
   ///
   /// On VM, this writes to the local file system. On Web, this stores the data

@@ -49,6 +49,12 @@ class IpfsPlatformWeb implements IpfsPlatform {
   }
 
   @override
+  Future<void> appendBytes(String path, Uint8List bytes) async {
+    final existing = await readBytes(path) ?? Uint8List(0);
+    await writeBytes(path, Uint8List.fromList([...existing, ...bytes]));
+  }
+
+  @override
   Future<void> writeString(String path, String content) async {
     final bytes = Uint8List.fromList(content.codeUnits);
     await writeBytes(path, bytes);

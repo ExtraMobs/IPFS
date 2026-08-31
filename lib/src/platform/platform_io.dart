@@ -28,6 +28,13 @@ class IpfsPlatformIO implements IpfsPlatform {
   }
 
   @override
+  Future<void> appendBytes(String path, Uint8List bytes) async {
+    final file = File(path);
+    await file.parent.create(recursive: true);
+    await file.writeAsBytes(bytes, mode: FileMode.append, flush: true);
+  }
+
+  @override
   Future<void> writeString(String path, String content) async {
     final file = File(path);
     await file.parent.create(recursive: true);

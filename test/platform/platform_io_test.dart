@@ -38,6 +38,16 @@ void main() {
       expect(read, equals(data));
     });
 
+    test('appendBytes preserves existing bytes', () async {
+      final filePath = '${tempDir.path}/append.bin';
+      await platform.appendBytes(filePath, Uint8List.fromList([1, 2]));
+      await platform.appendBytes(filePath, Uint8List.fromList([3, 4]));
+
+      final bytes = await platform.readBytes(filePath);
+      expect(bytes, hasLength(4));
+      expect(bytes, containsAll([1, 2, 3, 4]));
+    });
+
     test('readBytes returns null for non-existent file', () async {
       final read = await platform.readBytes('${tempDir.path}/missing.bin');
       expect(read, isNull);

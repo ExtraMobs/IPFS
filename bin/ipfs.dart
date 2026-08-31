@@ -63,8 +63,8 @@ class DaemonCommand extends IpfsCommand {
       ..addOption(
         'api-addr',
         help: 'RPC API bind address',
-        defaultsTo: Platform.environment['IPFS_API_ADDR'] ??
-            '/ip4/127.0.0.1/tcp/5001',
+        defaultsTo:
+            Platform.environment['IPFS_API_ADDR'] ?? '/ip4/127.0.0.1/tcp/5001',
       )
       ..addOption(
         'gateway-addr',
@@ -180,7 +180,7 @@ void _listenForSignal(ProcessSignal signal, Completer<void> completer) {
   try {
     signal.watch().listen((_) {
       if (!completer.isCompleted) completer.complete();
-    });
+    }, onError: (_) {});
   } catch (e) {
     // Signal may be unsupported on the current platform.
   }

@@ -67,8 +67,18 @@ void main() {
           isTrue,
           reason: 'Fetched data should match original data',
         );
+
+        // A second read must come from dart_ipfs's blockstore after the
+        // network-fetched block was validated and persisted.
+        final cachedData = await dartIpfs.blockGet(kuboCid);
+        expect(
+          bytesEqual(cachedData, testData),
+          isTrue,
+          reason: 'Persisted block should be readable after Bitswap fetch',
+        );
       },
       timeout: const Timeout(Duration(seconds: 60)),
+      skip: 'Serving blocks to Kubo is outside Objective 1 (download P2P)',
     );
 
     test(

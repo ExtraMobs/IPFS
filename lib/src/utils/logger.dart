@@ -44,6 +44,7 @@ class Logger {
   static bool _structured = false;
   static MetricsCollector? _metrics;
   static IpfsPlatform? _platform;
+  static Future<void> _pendingWrite = Future<void>.value();
   final bool _debug;
   final bool _verbose;
 
@@ -117,12 +118,12 @@ class Logger {
       // Use platform abstraction for file writing. Use a per-process log file
       // to avoid conflicts when multiple tests/nodes run in parallel.
       final logFile = Platform.environment['IPFS_LOG_FILE'] ?? 'ipfs_$pid.log';
-      _platform!.writeBytes(
-        logFile,
-        // Append mode not directly supported, so we read + write
-        // For simplicity, just log to console on web
-        _stringToBytes('$message\n'),
-      );
+      _pendingWrite = _pendingWrite
+          .then(
+            (_) =>
+                _platform!.appendBytes(logFile, _stringToBytes('$message\n')),
+          )
+          .catchError((_) {});
     } catch (e) {
       // Silently fail if log file write fails to avoid recursive issues or unwanted output
     }
