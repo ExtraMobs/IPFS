@@ -120,6 +120,14 @@ export 'src/core/routing/routing.dart'
         keyForPublicKey;
 export 'src/core/protocol/protocol.dart';
 export 'src/core/network/network.dart';
+export 'src/core/control/disconnect.dart';
+export 'src/core/connmgr/decay.dart';
+export 'src/core/connmgr/gater.dart';
+export 'src/core/connmgr/manager.dart';
+export 'src/core/connmgr/null.dart';
+export 'src/core/connmgr/presets.dart';
+export 'src/core/discovery/discovery.dart';
+export 'src/core/discovery/options.dart';
 export 'src/core/event/addrs.dart';
 export 'src/core/event/network.dart';
 export 'src/core/event/reachability.dart';

@@ -32,3 +32,30 @@ biblioteca.
 
 Antes de trabalhar na transpilação, leia
 `doc/transpilation/PROGRESS.md`.
+
+## Preservação da API durante a transpilação
+
+Para toda API pública reutilizável do upstream, preserve o nome conceitual, a
+responsabilidade, os valores padrão e o comportamento observável. Adapte
+somente o necessário às convenções e ao sistema de tipos do Dart:
+
+- tipos públicos usam `UpperCamelCase` e funções, métodos e campos públicos
+  usam `lowerCamelCase`;
+- construtores `NewX` do Go viram construtores ou factories Dart quando isso
+  preservar o contrato, sem criar funções `newX` artificiais;
+- retornos `(valor, error)` viram retorno do valor com exceção tipada;
+- variádicos, canais, goroutines e `context.Context` usam o equivalente Dart
+  mais próximo (`List<T>`, `Stream`, `Future`, cancelamento), somente quando o
+  comportamento exigir;
+- símbolos internos do Go não precisam virar API pública Dart.
+
+Toda renomeação não mecânica, fusão, remoção ou mudança de assinatura pública
+deve ser registrada em `doc/transpilation/PROGRESS.md` junto ao símbolo Go
+correspondente. Não substitua uma API pública upstream por uma abstração
+original sem justificar uma incompatibilidade concreta.
+
+Cada port deve manter uma checklist verificável de símbolos públicos Go → Dart
+nas notas do pacote em `PROGRESS.md`, incluindo omissões deliberadas e suas
+razões. Paridade exige preservar também wire format, ordenação, defaults e
+erros observáveis relevantes; sem essa auditoria, use no máximo o status
+`portado sem teste de paridade`.
