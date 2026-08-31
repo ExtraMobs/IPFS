@@ -133,6 +133,12 @@ export 'package:transpiled_libp2p/transpiled_libp2p.dart'
 // module -- see doc/transpilation/PROGRESS.md's note on dart_ipfs_core's
 // dissolution).
 export 'src/core/data_structures/block.dart' show Block, IBlock;
+export 'src/core/data_structures/blockstore.dart'
+    show
+        BlockStore,
+        Blockstore,
+        BlockstoreHashMismatchException,
+        BlockstoreNotFoundException;
 export 'src/core/data_structures/block_store.dart'
     show BlockStoreResult, IBlockStore;
 export 'src/core/data_structures/memory_block_store.dart'

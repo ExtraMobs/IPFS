@@ -1,6 +1,7 @@
 // src/core/data_structures/blockstore.dart
 import 'dart:async';
 
+import 'package:path/path.dart' as p;
 import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
 import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/core/cid_proto_codec.dart';
@@ -11,14 +12,65 @@ import 'package:transpiled_ipfs/src/core/responses/block_response_factory.dart';
 import 'package:transpiled_ipfs/src/platform/platform.dart';
 import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
 import 'package:transpiled_ipfs/src/utils/logger.dart';
-import 'package:path/path.dart' as p;
+
+/// Minimal reusable subset of Boxo's `blockstore.Blockstore` surface.
+///
+/// Enumeration, deletion, sizing, and batch writes stay on the existing
+/// [IBlockStore] API until a runtime caller needs them.
+abstract interface class Blockstore {
+  /// Reports whether [cid] is present.
+  Future<bool> has(CID cid);
+
+  /// Retrieves and verifies the block addressed by [cid].
+  Future<Block> get(CID cid);
+
+  /// Verifies and stores [block].
+  Future<void> put(Block block);
+}
+
+Future<bool> _blockMatchesCid(Block block) async {
+  try {
+    final computed = await CID.fromContent(
+      block.data,
+      codec: block.cid.codec ?? 'raw',
+      version: block.cid.version,
+    );
+    return computed == block.cid;
+  } catch (_) {
+    return false;
+  }
+}
+
+/// Thrown when a requested block is absent.
+final class BlockstoreNotFoundException implements Exception {
+  /// Creates a missing-block error.
+  const BlockstoreNotFoundException(this.cid);
+
+  /// The missing CID.
+  final CID cid;
+
+  @override
+  String toString() => 'block not found: $cid';
+}
+
+/// Thrown when block bytes do not match their CID.
+final class BlockstoreHashMismatchException implements Exception {
+  /// Creates a hash-mismatch error.
+  const BlockstoreHashMismatchException(this.cid);
+
+  /// The CID whose bytes failed validation.
+  final CID cid;
+
+  @override
+  String toString() => 'block data does not match CID: $cid';
+}
 
 /// Persistent storage for content-addressed blocks in IPFS.
 ///
 /// **Platform Note**: Storage behavior is platform-dependent. On VM platforms,
 /// it uses the local file system. On Web platforms, it uses IndexedDB via the
 /// [IpfsPlatform] abstraction.
-class BlockStore implements IBlockStore {
+class BlockStore implements IBlockStore, Blockstore {
   /// Creates a new [BlockStore] at the given [path].
   BlockStore({required this.path}) : _logger = Logger('BlockStore') {
     _pinManager = PinManager(this);
@@ -33,6 +85,42 @@ class BlockStore implements IBlockStore {
   PinManager get pinManager => _pinManager;
 
   final Logger _logger;
+
+  /// Boxo-compatible presence check over this existing blockstore.
+  @override
+  Future<bool> has(CID cid) => hasBlock(cid.toString());
+
+  /// Boxo-compatible read, including CID↔bytes verification.
+  @override
+  Future<Block> get(CID cid) async {
+    final response = await getBlock(cid.toString());
+    if (!response.found || !response.hasBlock()) {
+      // The legacy response API collapses read errors and missing blocks.
+      if (await has(cid)) {
+        throw BlockstoreHashMismatchException(cid);
+      }
+      throw BlockstoreNotFoundException(cid);
+    }
+
+    final block = blockFromProto(response.block);
+    if (block.cid != cid || !await _blockMatchesCid(block)) {
+      throw BlockstoreHashMismatchException(cid);
+    }
+    return block;
+  }
+
+  /// Boxo-compatible write. [putBlock] is the shared validation point for
+  /// both this API and the existing runtime callers.
+  @override
+  Future<void> put(Block block) async {
+    final response = await putBlock(block);
+    if (response.message.startsWith('Block data does not match CID:')) {
+      throw BlockstoreHashMismatchException(block.cid);
+    }
+    if (!response.success) {
+      throw StateError(response.message);
+    }
+  }
 
   @override
   /// Returns a [Future] that completes when the [BlockStore] and its pin manager have started.
@@ -86,7 +174,18 @@ class BlockStore implements IBlockStore {
       if (await getPlatform().exists(blockPath)) {
         final data = await getPlatform().readBytes(blockPath);
         if (data != null) {
-          final block = await Block.fromData(data);
+          final decodedCid = CID.decode(cid);
+          final block = Block(
+            cid: decodedCid,
+            data: data,
+            format: decodedCid.codec == 'dag-pb'
+                ? 'dag-pb'
+                : (decodedCid.codec ?? 'raw'),
+          );
+          if (!await _blockMatchesCid(block)) {
+            _logger.warning('Block data does not match CID: $cid');
+            return BlockResponseFactory.notFound();
+          }
           _blocks[cid] = block; // Update index
           return BlockResponseFactory.successGet(block.toProto());
         }
@@ -104,6 +203,14 @@ class BlockStore implements IBlockStore {
   /// Returns a [Future] that resolves to an [AddBlockResponse] after storing the given [block].
   Future<AddBlockResponse> putBlock(Block block) async {
     try {
+      // Validate before checking or writing the destination: invalid bytes
+      // must never become visible in the blockstore.
+      if (!await _blockMatchesCid(block)) {
+        return BlockResponseFactory.failureAdd(
+          'Block data does not match CID: ${block.cid}',
+        );
+      }
+
       final cidStr = block.cid.toString();
       final blockPath = p.join(path, cidStr);
 
@@ -244,7 +351,19 @@ class BlockStore implements IBlockStore {
       try {
         final data = await getPlatform().readBytes(filePath);
         if (data != null) {
-          _blocks[cid] = await Block.fromData(data);
+          final decodedCid = CID.decode(cid);
+          final block = Block(
+            cid: decodedCid,
+            data: data,
+            format: decodedCid.codec == 'dag-pb'
+                ? 'dag-pb'
+                : (decodedCid.codec ?? 'raw'),
+          );
+          if (await _blockMatchesCid(block)) {
+            _blocks[cid] = block;
+          } else {
+            _logger.warning('Ignoring block with mismatched CID: $cid');
+          }
         }
       } catch (e) {
         _logger.warning('Failed to load block file $cid: $e');
