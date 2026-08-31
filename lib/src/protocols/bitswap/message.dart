@@ -1,11 +1,16 @@
 import 'dart:typed_data';
+
 import 'package:crypto/crypto.dart';
+import 'package:dart_multihash/dart_multihash.dart';
 import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/core/data_structures/block.dart' show Block;
-import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart' as pb;
-import 'package:transpiled_ipfs/src/utils/encoding.dart';
+import 'package:transpiled_ipfs/src/proto/generated/bitswap/bitswap.pb.dart'
+    as pb;
 import 'package:transpiled_ipfs/src/utils/logger.dart';
-import 'package:dart_multihash/dart_multihash.dart';
+import 'package:transpiled_ipfs/src/utils/varint.dart';
+import 'package:transpiled_multicodec/transpiled_multicodec.dart';
+import 'package:transpiled_multihash/transpiled_multihash.dart';
+import 'package:transpiled_varint/transpiled_varint.dart' as varint;
 
 /// Represents a Bitswap protocol message.
 ///
@@ -13,7 +18,15 @@ import 'package:dart_multihash/dart_multihash.dart';
 /// notifications (HAVE/DONT_HAVE).
 class Message {
   /// Creates an empty message.
-  Message();
+  Message({this.full = false});
+
+  /// The libp2p maximum framed message size used by Bitswap.
+  static const int maxMessageSize = 1 << 22;
+
+  /// Whether this message's wantlist is an authoritative full wantlist.
+  ///
+  /// This is the `Message_Wantlist.full` field from the Bitswap protobuf.
+  final bool full;
 
   /// List of blocks being sent (Payload)
   final List<Block> _blocks = [];
@@ -35,7 +48,15 @@ class Message {
 
   /// Adds a block to the message payload.
   void addBlock(Block block) {
-    _blocks.add(block);
+    final index = _blocks.indexWhere((existing) => existing.cid == block.cid);
+    if (index == -1) {
+      _blocks.add(block);
+    } else {
+      _blocks[index] = block;
+    }
+    _blockPresences.removeWhere(
+      (presence) => presence.cid == block.cid.encode(),
+    );
   }
 
   /// Returns an unmodifiable list of blocks.
@@ -49,13 +70,29 @@ class Message {
     WantType wantType = WantType.block,
     bool sendDontHave = false,
   }) {
+    final old = _wantlist.entries[cid];
+    if (old == null) {
+      _wantlist.addEntry(
+        WantlistEntry(
+          cid: cid,
+          priority: priority,
+          cancel: cancel,
+          wantType: wantType,
+          sendDontHave: sendDontHave,
+        ),
+      );
+      return;
+    }
+
     _wantlist.addEntry(
       WantlistEntry(
         cid: cid,
-        priority: priority,
-        cancel: cancel,
-        wantType: wantType,
-        sendDontHave: sendDontHave,
+        priority: old.wantType == wantType ? priority : old.priority,
+        cancel: old.cancel || cancel,
+        wantType: old.wantType == WantType.have && wantType == WantType.block
+            ? WantType.block
+            : old.wantType,
+        sendDontHave: old.sendDontHave || sendDontHave,
       ),
     );
   }
@@ -65,7 +102,14 @@ class Message {
 
   /// Adds a block presence notification.
   void addBlockPresence(String cid, BlockPresenceType type) {
-    _blockPresences.add(BlockPresence(cid: cid, type: type));
+    if (_blocks.any((block) => block.cid.encode() == cid)) return;
+    final presence = BlockPresence(cid: cid, type: type);
+    final index = _blockPresences.indexWhere((existing) => existing.cid == cid);
+    if (index == -1) {
+      _blockPresences.add(presence);
+    } else {
+      _blockPresences[index] = presence;
+    }
   }
 
   /// Returns an unmodifiable list of block presences.
@@ -84,8 +128,13 @@ class Message {
   ///
   /// Throws an error if the bytes cannot be parsed as a valid Bitswap message.
   static Future<Message> fromBytes(Uint8List bytes) async {
+    if (bytes.length > maxMessageSize) {
+      throw const FormatException('Bitswap message exceeds 4 MiB limit');
+    }
     final pbMessage = pb.Message.fromBuffer(bytes);
-    final message = Message();
+    final message = Message(
+      full: pbMessage.hasWantlist() && pbMessage.wantlist.full,
+    );
 
     // Parse pending bytes
     message.pendingBytes = pbMessage.pendingBytes;
@@ -94,7 +143,7 @@ class Message {
     if (pbMessage.hasWantlist()) {
       for (var entry in pbMessage.wantlist.entries) {
         try {
-          final cidObj = CID.fromBytes(Uint8List.fromList(entry.block));
+          final cidObj = _decodeCid(entry.block, 'wantlist entry');
           final cidStr = cidObj.encode();
 
           final wantType = entry.wantType == pb.Message_Wantlist_WantType.Have
@@ -108,8 +157,8 @@ class Message {
             wantType: wantType,
             sendDontHave: entry.sendDontHave,
           );
-        } catch (e, st) {
-          _logger.error('Error parsing wantlist entry CID', e, st);
+        } catch (e) {
+          throw FormatException('Invalid wantlist entry CID: $e');
         }
       }
     }
@@ -122,44 +171,44 @@ class Message {
       try {
         final data = Uint8List.fromList(payloadBlock.data);
         final prefix = payloadBlock.prefix;
-
-        if (prefix.isNotEmpty) {
-          final cid = _cidFromPrefixAndData(prefix, data);
-          message.addBlock(
-            Block(cid: cid, data: data, format: cid.codec ?? 'raw'),
-          );
-        } else {
-          final newBlock = await Block.fromData(data);
-          message.addBlock(newBlock);
+        if (prefix.isEmpty) {
+          throw const FormatException('Missing CID prefix in payload block');
         }
-      } catch (e, st) {
-        _logger.error('Error parsing payload block', e, st);
+        final cid = _cidFromPrefixAndData(prefix, data);
+        message.addBlock(
+          Block(cid: cid, data: data, format: cid.codec ?? 'raw'),
+        );
+      } catch (e) {
+        throw FormatException('Invalid payload block: $e');
       }
     }
 
     // Parse legacy blocks (1.0)
     for (var blockBytes in pbMessage.blocks) {
       try {
-        final newBlock = await Block.fromData(
-          Uint8List.fromList(blockBytes),
+        final data = Uint8List.fromList(blockBytes);
+        final digest = Uint8List.fromList(sha256.convert(data).bytes);
+        final newBlock = Block(
+          cid: CID.v0(digest),
+          data: data,
           format: 'dag-pb',
         );
         message.addBlock(newBlock);
-      } catch (e, st) {
-        _logger.error('Error parsing legacy block', e, st);
+      } catch (e) {
+        throw FormatException('Invalid legacy block: $e');
       }
     }
 
     // Parse block presences
     for (var pres in pbMessage.blockPresences) {
       try {
-        final cidObj = CID.fromBytes(Uint8List.fromList(pres.cid));
+        final cidObj = _decodeCid(pres.cid, 'block presence');
         final type = pres.type == pb.Message_BlockPresence_Type.DontHave
             ? BlockPresenceType.dontHave
             : BlockPresenceType.have;
         message.addBlockPresence(cidObj.encode(), type);
-      } catch (e, st) {
-        _logger.error('Error parsing block presence CID', e, st);
+      } catch (e) {
+        throw FormatException('Invalid block presence CID: $e');
       }
     }
 
@@ -170,49 +219,36 @@ class Message {
   Uint8List toBytes() {
     final pbMessage = pb.Message();
 
-    pbMessage.pendingBytes = pendingBytes;
+    if (pendingBytes != 0) pbMessage.pendingBytes = pendingBytes;
 
-    // Add wantlist entries
-    if (_wantlist.entries.isNotEmpty) {
-      final pbWantlist = pb.Message_Wantlist();
-      pbWantlist.full = false;
-
-      for (var entry in _wantlist.entries.values) {
-        final pbEntry = pb.Message_Wantlist_Entry();
-        try {
-          final cidObj = CID.decode(entry.cid);
-          pbEntry.block = cidObj.toBytes();
-          pbEntry.priority = entry.priority;
-          pbEntry.cancel = entry.cancel;
-          pbEntry.sendDontHave = entry.sendDontHave;
-          pbEntry.wantType = entry.wantType == WantType.have
-              ? pb.Message_Wantlist_WantType.Have
-              : pb.Message_Wantlist_WantType.Block;
-
-          pbWantlist.entries.add(pbEntry);
-        } catch (e, st) {
-          _logger.error(
-            'Skipping invalid CID in wantlist: ${entry.cid}',
-            e,
-            st,
-          );
+    // Go's ToProtoV1 always emits a wantlist, even when it is empty.
+    final pbWantlist = pb.Message_Wantlist();
+    if (full) pbWantlist.full = true;
+    for (var entry in _wantlist.entries.values) {
+      final pbEntry = pb.Message_Wantlist_Entry();
+      try {
+        final cidObj = CID.decode(entry.cid);
+        pbEntry.block = cidObj.toBytes();
+        if (entry.priority != 0) pbEntry.priority = entry.priority;
+        if (entry.cancel) pbEntry.cancel = true;
+        if (entry.sendDontHave) pbEntry.sendDontHave = true;
+        if (entry.wantType == WantType.have) {
+          pbEntry.wantType = pb.Message_Wantlist_WantType.Have;
         }
+
+        pbWantlist.entries.add(pbEntry);
+      } catch (e, st) {
+        _logger.error('Skipping invalid CID in wantlist: ${entry.cid}', e, st);
       }
-      pbMessage.wantlist = pbWantlist;
     }
+    pbMessage.wantlist = pbWantlist;
 
     // Add blocks (Payload)
     for (var block in _blocks) {
       final pbBlock = pb.Message_Block();
       pbBlock.data = block.data;
 
-      if (block.cid.version == 1) {
-        final cidBytes = block.cid.toBytes();
-        final digestSize = block.cid.multihash.digest.length;
-        if (cidBytes.length > digestSize) {
-          pbBlock.prefix = cidBytes.sublist(0, cidBytes.length - digestSize);
-        }
-      }
+      pbBlock.prefix = _prefixBytes(block.cid);
 
       pbMessage.payload.add(pbBlock);
     }
@@ -223,9 +259,9 @@ class Message {
         final cidObj = CID.decode(pres.cid);
         final pbPres = pb.Message_BlockPresence();
         pbPres.cid = cidObj.toBytes();
-        pbPres.type = pres.type == BlockPresenceType.dontHave
-            ? pb.Message_BlockPresence_Type.DontHave
-            : pb.Message_BlockPresence_Type.Have;
+        if (pres.type == BlockPresenceType.dontHave) {
+          pbPres.type = pb.Message_BlockPresence_Type.DontHave;
+        }
         pbMessage.blockPresences.add(pbPres);
       } catch (e, st) {
         _logger.error(
@@ -244,55 +280,114 @@ class Message {
 ///
 /// Prefix format: `<cidVersion><codec><mhType><mhLen>` as unsigned varints.
 CID _cidFromPrefixAndData(List<int> prefix, Uint8List data) {
+  final bytes = Uint8List.fromList(prefix);
   var offset = 0;
 
-  int readVarint() {
-    var result = 0;
-    var shift = 0;
-    while (offset < prefix.length) {
-      final byte = prefix[offset++];
-      result |= (byte & 0x7F) << shift;
-      if ((byte & 0x80) == 0) return result;
-      shift += 7;
-    }
-    throw const FormatException('Truncated varint in Bitswap prefix');
+  int next() {
+    final value = varint.readVarint(bytes, offset);
+    offset += value.$2;
+    return value.$1;
   }
 
-  final cidVersion = readVarint();
-  final codecCode = readVarint();
-  final mhType = readVarint();
-  readVarint(); // mhLen — not needed, we hash the data ourselves
+  final version = next();
+  final codecCode = next();
+  final mhType = next();
+  final mhLength = next();
+  final hashName = _multihashName(mhType);
 
-  // Hash the data with the specified function
-  Uint8List hashDigest;
-  if (mhType == 0x12) {
-    // sha2-256
-    hashDigest = Uint8List.fromList(sha256.convert(data).bytes);
-  } else if (mhType == 0x00) {
-    // identity — digest is the data itself
-    hashDigest = data;
-  } else {
-    throw UnsupportedError(
-      'Unsupported multihash type 0x${mhType.toRadixString(16)} in Bitswap prefix',
+  if (version == 0) {
+    if (codecCode != 0x70 || mhType != 0x12 || mhLength != 32) {
+      throw const FormatException('Invalid CIDv0 Bitswap prefix');
+    }
+    return CID.v0(
+      Uint8List.fromList(MultihashUtils.sum(hashName, data).digest),
     );
   }
+  if (version != 1) {
+    throw FormatException('Unsupported CID version $version in Bitswap prefix');
+  }
 
-  final mhInfo = Multihash.encode(
-    mhType == 0x12 ? 'sha2-256' : 'identity',
-    hashDigest,
+  final digest = MultihashUtils.sum(hashName, data).digest;
+  if (mhType != 0 && mhLength > digest.length) {
+    throw FormatException(
+      'Invalid multihash length $mhLength in Bitswap prefix',
+    );
+  }
+  if (!Multicodec.supportsByCode(codecCode)) {
+    throw FormatException('Unsupported codec 0x${codecCode.toRadixString(16)}');
+  }
+  // go-cid's Prefix.Sum intentionally ignores MhLength for identity hashes;
+  // go-multihash always uses the complete data as the digest in that case.
+  final encodedDigest = mhType == 0
+      ? Uint8List.fromList(digest)
+      : Uint8List.fromList(digest.sublist(0, mhLength));
+  return CID.v1(
+    Multicodec.name(codecCode),
+    Multihash.encode(hashName, encodedDigest),
   );
+}
 
-  String codecName;
-  try {
-    codecName = EncodingUtils.getCodecFromCode(codecCode);
-  } catch (_) {
-    codecName = 'raw';
-  }
+CID _decodeCid(List<int> bytes, String field) {
+  if (bytes.isEmpty) throw FormatException('Missing CID in $field');
+  final raw = Uint8List.fromList(bytes);
+  final cid = CID.fromBytes(raw);
 
-  if (cidVersion == 0) {
-    return CID.v0(hashDigest);
+  // CID.fromBytes is permissive for historical callers and may stop after a
+  // complete CID. go-cid's cid.Cast, used by Boxo, rejects trailing bytes.
+  if (cid.version == 0) {
+    if (raw.length != 34) {
+      throw FormatException('Trailing bytes in $field CID');
+    }
+  } else {
+    var offset = 1;
+    var value = varint.readVarint(raw, offset);
+    offset += value.$2;
+    value = varint.readVarint(raw, offset);
+    offset += value.$2;
+    value = varint.readVarint(raw, offset);
+    offset += value.$2;
+    if (offset + value.$1 != raw.length) {
+      throw FormatException('Trailing bytes in $field CID');
+    }
   }
-  return CID.v1(codecName, mhInfo);
+  return cid;
+}
+
+Uint8List _prefixBytes(CID cid) {
+  final codec = cid.version == 0 ? 0x70 : Multicodec.code(cid.codec ?? 'raw');
+  final hashCode = Multicodec.code(cid.multihash.name);
+  final builder = BytesBuilder()
+    ..add(encodeVarint(cid.version))
+    ..add(encodeVarint(codec))
+    ..add(encodeVarint(hashCode))
+    ..add(encodeVarint(cid.multihash.size));
+  return builder.toBytes();
+}
+
+String _multihashName(int code) {
+  const names = {
+    0x00: 'identity',
+    0x11: 'sha1',
+    0x12: 'sha2-256',
+    0x13: 'sha2-512',
+    0x14: 'sha3-512',
+    0x15: 'sha3-384',
+    0x16: 'sha3-256',
+    0x17: 'sha3-224',
+    0x1a: 'keccak-224',
+    0x1b: 'keccak-256',
+    0x1c: 'keccak-384',
+    0x1d: 'keccak-512',
+    0x56: 'dbl-sha2-256',
+    0xd5: 'md5',
+  };
+  final name = names[code];
+  if (name == null) {
+    throw UnsupportedError(
+      'Unsupported multihash type 0x${code.toRadixString(16)}',
+    );
+  }
+  return name;
 }
 
 /// The type of block request.
