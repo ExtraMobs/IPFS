@@ -46,7 +46,7 @@ import 'kademlia_routing_table.dart';
 /// // Find providers for a CID
 /// final providers = await dht.findProviders(cid);
 /// ```
-class DHTClient {
+class DHTClient implements ContentDiscovery {
   /// Creates a new DHT client.
   DHTClient({
     required this.networkHandler,
@@ -194,21 +194,32 @@ class DHTClient {
 
   /// Validates a provider [Peer] entry from the wire.
   ///
-  /// Enforces the checks required by the DHT integration spec:
-  /// - non-empty peer ID
-  /// - at least one parseable multiaddr
+  /// Invalid addresses are discarded by [_convertKadPeerToAddrInfo]; an
+  /// addressless peer remains a valid provider and may later be upgraded by a
+  /// record for the same peer carrying addresses.
   bool _isValidProviderRecord(kad.Peer provider) {
     if (!_config.validateProviderRecords) return true;
     if (provider.id.isEmpty) return false;
-    if (provider.addrs.isEmpty) return false;
-    return provider.addrs.any((addr) {
-      try {
-        libp2p.MultiAddr.fromBytes(Uint8List.fromList(addr));
-        return true;
-      } catch (_) {
+    try {
+      _convertKadPeerToPeerId(provider).validate();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _isValidAddProviderRecord(kad.Peer provider, String sender) {
+    if (!_isValidProviderRecord(provider) || provider.addrs.isEmpty) {
+      return false;
+    }
+    try {
+      if (_convertKadPeerToPeerId(provider) != PeerId.fromBase58(sender)) {
         return false;
       }
-    });
+      return provider.addrs.any((addr) => _tryParseMultiaddr(addr) != null);
+    } catch (_) {
+      return false;
+    }
   }
 
   // Helper: Get Routing Key (SHA-256 of Multihash)
@@ -237,41 +248,82 @@ class DHTClient {
       (await findProviderInfos(cid)).map((provider) => provider.id).toList();
 
   /// Finds providers while preserving the addresses returned by the DHT.
-  Future<List<AddrInfo>> findProviderInfos(String cid) async {
+  Future<List<AddrInfo>> findProviderInfos(String cid) {
     _checkInitialized();
+    // Preserve the legacy helper's operational contract: return as soon as a
+    // usable provider is found. Call findProvidersAsync directly to exhaust
+    // the lookup or request a different count.
+    return findProvidersAsync(CID.decode(cid), 1).toList();
+  }
+
+  /// Finds providers incrementally, matching go-libp2p-kad-dht's
+  /// `FindProvidersAsync`. A [count] of zero runs the bounded lookup to
+  /// completion; cancelling the subscription stops it at the next yield.
+  @override
+  Stream<AddrInfo> findProvidersAsync(CID cid, int count) async* {
+    _checkInitialized();
+    if (count < 0) return;
     if (_kademliaRoutingTable.peerCount == 0) {
       await _seedConnectedPeers();
     }
+
+    final providers = <String, AddrInfo>{};
+    final findAll = count == 0;
+
+    bool shouldEmit(AddrInfo provider) {
+      final key = provider.id.toBase58();
+      final previous = providers[key];
+      if (previous != null &&
+          (previous.addrs.isNotEmpty || provider.addrs.isEmpty)) {
+        return false;
+      }
+      if (previous == null && !findAll && providers.length >= count) {
+        return false;
+      }
+      providers[key] = provider;
+      return true;
+    }
+
+    bool enoughProviders() => !findAll && providers.length >= count;
+
+    final cidString = cid.toString();
 
     // Fast path: if a provider record was already announced to us locally,
     // return it immediately. This covers the interop case where Kubo/Helia
     // send ADD_PROVIDER messages and we need to report them without relying on
     // a full iterative query over the wire.
-    var localProviders = node.dhtHandler?.getLocalProvidersForCid(cid);
+    var localProviders = node.dhtHandler?.getLocalProvidersForCid(cidString);
     // ignore: avoid_print
-    print('findProviders($cid) local=${localProviders?.length ?? -1}');
+    print('findProviders($cidString) local=${localProviders?.length ?? -1}');
     if (localProviders != null && localProviders.isNotEmpty) {
-      return localProviders.map(_peerIdToAddrInfo).toList();
+      for (final provider in localProviders.map(_peerIdToAddrInfo)) {
+        if (shouldEmit(provider)) yield provider;
+        if (enoughProviders()) return;
+      }
     }
 
     // In small/private networks a peer may have just announced itself as a
     // provider but the ADD_PROVIDER hasn't been processed yet. Poll briefly
     // for a local record before falling back to network queries.
-    if (_router.connectedPeers.isNotEmpty) {
+    if (_router.connectedPeers.isNotEmpty && providers.isEmpty) {
       for (var i = 0; i < 5; i++) {
         await Future<void>.delayed(const Duration(milliseconds: 500));
-        localProviders = node.dhtHandler?.getLocalProvidersForCid(cid);
+        localProviders = node.dhtHandler?.getLocalProvidersForCid(cidString);
         if (localProviders != null && localProviders.isNotEmpty) {
           // ignore: avoid_print
           print(
-            'findProviders($cid) local after poll=${localProviders.length}',
+            'findProviders($cidString) local after poll=${localProviders.length}',
           );
-          return localProviders.map(_peerIdToAddrInfo).toList();
+          for (final provider in localProviders.map(_peerIdToAddrInfo)) {
+            if (shouldEmit(provider)) yield provider;
+            if (enoughProviders()) return;
+          }
+          break;
         }
       }
     }
 
-    final target = getRoutingKey(cid);
+    final target = getRoutingKey(cidString);
     final alpha = _config.alpha;
     final k = _config.bucketSize;
     final maxQueries = k * 2;
@@ -279,12 +331,11 @@ class DHTClient {
     final request = kad.Message()
       ..type = kad.Message_MessageType.GET_PROVIDERS
       // The key sent on wire is the raw Multihash bytes for GET_PROVIDERS
-      ..key = CID.decode(cid).multihash.toBytes()
+      ..key = cid.multihash.toBytes()
       // go-libp2p stores the zero-based cluster level on wire as level + 1.
       ..clusterLevelRaw = 1;
 
     final queried = <PeerId>{};
-    final providers = <String, AddrInfo>{};
     final peerRecords = <String, kad.Peer>{};
     final closest = _SortedPeerQueue(target, _kademliaRoutingTable);
 
@@ -320,10 +371,13 @@ class DHTClient {
 
         if (response == null) continue;
 
-        for (final provider in response.providerPeers) {
+        final responseProviders = response.providerPeers.toList()
+          ..shuffle(_random);
+        for (final provider in responseProviders) {
           if (_isValidProviderRecord(provider)) {
             final info = _convertKadPeerToAddrInfo(provider);
-            providers[info.id.toBase58()] = info;
+            if (shouldEmit(info)) yield info;
+            if (enoughProviders()) return;
           } else {
             _metrics?.recordSecurityEvent('invalid_provider_record');
             _logger.debug(
@@ -339,11 +393,7 @@ class DHTClient {
           closest.add(id);
         }
       }
-
-      if (providers.isNotEmpty) return providers.values.toList();
     }
-
-    return providers.values.toList();
   }
 
   /// Finds a peer by its ID in the DHT using iterative Kademlia expansion.
@@ -1066,7 +1116,7 @@ class DHTClient {
         print(
           '  provider ${providerId.toBase58()}, addrs=${provider.addrs.length}',
         );
-        if (_isValidProviderRecord(provider)) {
+        if (_isValidAddProviderRecord(provider, peerIdStr)) {
           await handler.handleProvideRequest(cid, providerId);
           // ignore: avoid_print
           print('  stored provider for $cidStr');

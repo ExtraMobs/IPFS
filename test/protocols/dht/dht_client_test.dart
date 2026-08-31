@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
 import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
@@ -148,7 +149,7 @@ void main() {
       );
     });
 
-    test('findProviders drops providers without valid multiaddrs', () async {
+    test('findProviders preserves providers without multiaddrs', () async {
       await client.initialize();
       final peer = PeerId.fromBase58(
         'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8v',
@@ -167,7 +168,131 @@ void main() {
       final providers = await client.findProviders(
         'QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn',
       );
-      expect(providers, isEmpty);
+      expect(providers, [provider]);
+    });
+
+    test('findProvidersAsync applies count', () async {
+      await client.initialize();
+      final peer = PeerId.fromBase58(
+        'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8v',
+      );
+      await client.kademliaRoutingTable.addPeer(peer, peer);
+
+      final response = kad.Message()
+        ..type = kad.Message_MessageType.GET_PROVIDERS
+        ..providerPeers.addAll([
+          kad.Peer()
+            ..id = PeerId.fromBase58(
+              'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8w',
+            ).value,
+          kad.Peer()
+            ..id = PeerId.fromBase58(
+              'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+            ).value,
+        ]);
+      mockRawResponse(mockRouter, response);
+
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            1,
+          )
+          .toList();
+
+      expect(providers, hasLength(1));
+    });
+
+    test('findProvidersAsync emits an address upgrade', () async {
+      await client.initialize();
+      final seedPeer = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final closerPeer = PeerId.fromBase58(
+        'QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa',
+      );
+      final provider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      await client.kademliaRoutingTable.addPeer(seedPeer, seedPeer);
+
+      var requestCount = 0;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async {
+        requestCount++;
+        final response = kad.Message()
+          ..type = kad.Message_MessageType.GET_PROVIDERS;
+        if (requestCount == 1) {
+          response
+            ..providerPeers.add(kad.Peer()..id = provider.value)
+            ..closerPeers.add(
+              kad.Peer()
+                ..id = closerPeer.value
+                ..addrs.add(
+                  libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4002').toBytes(),
+                ),
+            );
+        } else {
+          response.providerPeers.add(
+            kad.Peer()
+              ..id = provider.value
+              ..addrs.add(
+                libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes(),
+              ),
+          );
+        }
+        return response.writeToBuffer();
+      });
+
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            0,
+          )
+          .toList();
+
+      expect(providers, hasLength(2));
+      expect(providers.first.addrs, isEmpty);
+      expect(providers.last.addrs, hasLength(1));
+    });
+
+    test('cancelling findProvidersAsync stops before the next query', () async {
+      await client.initialize();
+      final seedPeer = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final closerPeer = PeerId.fromBase58(
+        'QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa',
+      );
+      final provider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      await client.kademliaRoutingTable.addPeer(seedPeer, seedPeer);
+
+      var requestCount = 0;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async {
+        requestCount++;
+        return (kad.Message()
+              ..type = kad.Message_MessageType.GET_PROVIDERS
+              ..providerPeers.add(kad.Peer()..id = provider.value)
+              ..closerPeers.add(
+                kad.Peer()
+                  ..id = closerPeer.value
+                  ..addrs.add(
+                    libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4002').toBytes(),
+                  ),
+              ))
+            .writeToBuffer();
+      });
+
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            0,
+          )
+          .take(1)
+          .toList();
+
+      expect(providers, hasLength(1));
+      expect(requestCount, 1);
     });
 
     test('findProviders expands iteratively via closer peers', () async {
@@ -284,6 +409,35 @@ void main() {
         Uint8List.fromList(msg.providerPeers.first.addrs.first),
       );
       expect(addr.toString(), '/ip4/127.0.0.1/tcp/4001');
+    });
+
+    test('ADD_PROVIDER rejects a provider different from the sender', () async {
+      await client.initialize();
+      final sender = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final provider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      final cid = CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn');
+      final message = kad.Message()
+        ..type = kad.Message_MessageType.ADD_PROVIDER
+        ..key = cid.multihash.toBytes()
+        ..providerPeers.add(
+          kad.Peer()
+            ..id = provider.value
+            ..addrs.add(libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes()),
+        );
+
+      _captureHandler(mockRouter)(
+        NetworkPacket(
+          srcPeerId: sender.toBase58(),
+          datagram: message.writeToBuffer(),
+        ),
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+
+      verifyNever(mockDhtHandler.handleProvideRequest(any, any));
     });
 
     test('reprovide enumerates stored keys and records metrics', () async {

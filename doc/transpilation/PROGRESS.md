@@ -67,14 +67,16 @@ Fluxo-alvo:
 - [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
   `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
   shortlist, `closerPeers`, `providerPeers`, validação, timeout e cancelamento.
-  Auditoria de 2026-08-31 confirmou como pendências: API incremental com
-  `count`/cancelamento; deduplicação e upgrade para registros com endereço;
-  `QueryPeerset` com estados, `alpha`/`beta`, starvation e follow-up dos K mais
-  próximos; limite de `closerPeers` a `2*k`, descarte de self e persistência no
-  peerstore; limites de 8 KiB por `Peer` e da mensagem; prazo do lookup/RPC e
-  limpeza de requests vencidos; resposta `GET_PROVIDERS` com `AddrInfo`
-  completo; e validação de `ADD_PROVIDER` contra o remetente. O campo wire
-  `clusterLevelRaw` já foi corrigido de 0 para 1 e coberto por teste.
+  Feito em 2026-08-31: API `findProvidersAsync(CID, count)` implementando
+  `ContentDiscovery`, emissão incremental por `Stream<AddrInfo>`, `count == 0`,
+  cancelamento por subscription, deduplicação e upgrade de registro sem
+  endereço; wrappers antigos preservados; `ADD_PROVIDER` agora exige provider
+  igual ao remetente e endereço válido; `clusterLevelRaw` corrigido de 0 para
+  1. Permanecem: `QueryPeerset` com estados, `alpha`/`beta`, starvation e
+  follow-up dos K mais próximos; limite de `closerPeers` a `2*k`, descarte de
+  self e persistência no peerstore; limites de 8 KiB por `Peer` e da mensagem;
+  prazo do lookup/RPC e limpeza de requests vencidos; e resposta
+  `GET_PROVIDERS` com `AddrInfo` completo.
 - [x] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
   reduzir o resultado a apenas Peer ID.
 - [x] Completar/adaptar `core/peerstore` address/protocol book e o caminho
@@ -122,10 +124,12 @@ para reconstruir arquivos ou diretórios completos.
 ## Estado em aberto (2026-08-25)
 
 - **Auditoria de `FindProvidersAsync` em andamento (2026-08-31)**: o download
-  público funciona e `clusterLevelRaw` já está corrigido/testado, mas as demais
-  pendências enumeradas no checklist do Marco B ainda impedem declarar
-  paridade. O caminho necessário de peerstore/`Host.connect(AddrInfo)` foi
-  auditado e fechado por adaptação ao runtime existente, sem duplicá-lo.
+  público funciona; a API incremental, deduplicação/upgrade,
+  `clusterLevelRaw` e autenticação básica de `ADD_PROVIDER` estão
+  corrigidos/testados, mas as demais pendências enumeradas no checklist do
+  Marco B ainda impedem declarar paridade. O caminho necessário de
+  peerstore/`Host.connect(AddrInfo)` foi auditado e fechado por adaptação ao
+  runtime existente, sem duplicá-lo.
 
 - **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`
