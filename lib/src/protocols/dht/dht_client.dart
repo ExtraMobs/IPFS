@@ -25,6 +25,7 @@ import '../../utils/logger.dart';
 import 'dht_envelope.dart';
 import 'kademlia_routing_adapter.dart';
 import 'kademlia_routing_table.dart';
+import 'query_peerset.dart';
 
 /// Kademlia DHT client implementation for IPFS.
 ///
@@ -328,8 +329,8 @@ class DHTClient implements ContentDiscovery {
 
     final target = getRoutingKey(cidString);
     final alpha = _config.alpha;
+    final beta = _config.beta;
     final k = _config.bucketSize;
-    final maxQueries = k * 2;
 
     final request = kad.Message()
       ..type = kad.Message_MessageType.GET_PROVIDERS
@@ -338,63 +339,118 @@ class DHTClient implements ContentDiscovery {
       // go-libp2p stores the zero-based cluster level on wire as level + 1.
       ..clusterLevelRaw = 1;
 
-    final queried = <PeerId>{};
     final peerRecords = <String, kad.Peer>{};
-    final closest = _SortedPeerQueue(target, _kademliaRoutingTable);
+    final peers = QueryPeerset(
+      target,
+      (target, a, b) => _kademliaRoutingTable
+          .calculateDistance(target, a)
+          .compareTo(_kademliaRoutingTable.calculateDistance(target, b)),
+    );
+    for (final seed in _kademliaRoutingTable.findClosestPeers(target, k)) {
+      if (seed != peerId) peers.tryAdd(seed, peerId);
+    }
 
-    // Seed from routing table.
-    closest.addAll(_kademliaRoutingTable.findClosestPeers(target, k));
-
-    while (closest.isNotEmpty && queried.length < maxQueries) {
-      final batch = closest.takeUnqueried(alpha, queried);
-      if (batch.isEmpty) break;
-      queried.addAll(batch);
-
-      final ready = await Future.wait(
-        batch.map((peer) async {
-          final record = peerRecords[peer.toBase58()];
-          return record == null ||
-              _router.connectedPeers.contains(peer.toBase58()) ||
-              await _connectKadPeer(record);
-        }),
+    Future<_ProviderQueryResult> query(PeerId peer) async {
+      final record = peerRecords[peer.toBase58()];
+      final ready =
+          record == null ||
+          _router.connectedPeers.contains(peer.toBase58()) ||
+          await _connectKadPeer(record);
+      return _ProviderQueryResult(
+        peer,
+        ready ? await _queryPeer(peer, request) : null,
       );
-      final queryable = [
-        for (var i = 0; i < batch.length; i++)
-          if (ready[i]) batch[i],
-      ];
-      if (queryable.isEmpty) continue;
+    }
 
-      final responses = await Future.wait(
-        queryable.map((peer) => _queryPeer(peer, request)),
+    List<AddrInfo> apply(_ProviderQueryResult result) {
+      final response = result.response;
+      peers.setState(
+        result.peer,
+        response == null ? PeerState.unreachable : PeerState.queried,
       );
+      if (response == null) return const [];
 
-      for (var i = 0; i < queryable.length; i++) {
-        final peer = queryable[i];
-        final response = responses[i];
-
-        if (response == null) continue;
-
-        final responseProviders = response.providerPeers.toList()
-          ..shuffle(_random);
-        for (final provider in responseProviders) {
-          if (_isValidProviderRecord(provider)) {
-            final info = _convertKadPeerToAddrInfo(provider);
-            if (shouldEmit(info)) yield info;
-            if (enoughProviders()) return;
-          } else {
-            _metrics?.recordSecurityEvent('invalid_provider_record');
-            _logger.debug(
-              'Dropping invalid provider record from ${peer.toBase58()}',
-            );
-          }
+      final emitted = <AddrInfo>[];
+      final responseProviders = response.providerPeers.toList()
+        ..shuffle(_random);
+      for (final provider in responseProviders) {
+        if (_isValidProviderRecord(provider)) {
+          final info = _convertKadPeerToAddrInfo(provider);
+          if (shouldEmit(info)) emitted.add(info);
+        } else {
+          _metrics?.recordSecurityEvent('invalid_provider_record');
+          _logger.debug(
+            'Dropping invalid provider record from ${result.peer.toBase58()}',
+          );
         }
+      }
 
-        for (final closer in response.closerPeers) {
-          if (closer.id.isEmpty) continue;
-          final id = _convertKadPeerToPeerId(closer);
-          peerRecords[id.toBase58()] = closer;
-          closest.add(id);
+      for (final closer in response.closerPeers.take(2 * k)) {
+        if (closer.id.isEmpty) continue;
+        final id = _convertKadPeerToPeerId(closer);
+        if (id == peerId) continue;
+        final key = id.toBase58();
+        final previous = peerRecords[key];
+        if (previous == null ||
+            (previous.addrs.isEmpty && closer.addrs.isNotEmpty)) {
+          peerRecords[key] = closer;
         }
+        peers.tryAdd(id, result.peer);
+      }
+      return emitted;
+    }
+
+    final pending = <PeerId, Future<_ProviderQueryResult>>{};
+    var needsFollowup = false;
+    while (true) {
+      if (enoughProviders()) return;
+
+      final closest = peers.getClosestNInStates(beta, {
+        PeerState.heard,
+        PeerState.waiting,
+        PeerState.queried,
+      });
+      if (closest.isNotEmpty &&
+          closest.every((peer) => peers.getState(peer) == PeerState.queried)) {
+        needsFollowup = true;
+        break;
+      }
+      if (peers.numHeard == 0 && pending.isEmpty) break;
+
+      final available = alpha - pending.length;
+      for (final peer in peers.getClosestNInStates(available, {
+        PeerState.heard,
+      })) {
+        peers.setState(peer, PeerState.waiting);
+        pending[peer] = query(peer);
+      }
+      if (pending.isEmpty) break;
+
+      final result = await Future.any(pending.values);
+      final _ = pending.remove(result.peer);
+      for (final provider in apply(result)) {
+        yield provider;
+        if (enoughProviders()) return;
+      }
+    }
+
+    if (!needsFollowup || enoughProviders()) return;
+    final followups = <PeerId, Future<_ProviderQueryResult>>{};
+    for (final peer in peers.getClosestNInStates(k, {
+      PeerState.heard,
+      PeerState.waiting,
+    })) {
+      if (peers.getState(peer) == PeerState.heard) {
+        peers.setState(peer, PeerState.waiting);
+      }
+      followups[peer] = pending[peer] ?? query(peer);
+    }
+    while (followups.isNotEmpty) {
+      final result = await Future.any(followups.values);
+      final _ = followups.remove(result.peer);
+      for (final provider in apply(result)) {
+        yield provider;
+        if (enoughProviders()) return;
       }
     }
   }
@@ -1517,4 +1573,11 @@ class _SortedPeerQueue {
     }
     return result;
   }
+}
+
+class _ProviderQueryResult {
+  const _ProviderQueryResult(this.peer, this.response);
+
+  final PeerId peer;
+  final kad.Message? response;
 }

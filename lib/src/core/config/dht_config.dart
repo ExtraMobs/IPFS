@@ -6,7 +6,8 @@ class DHTConfig {
   /// Creates a new [DHTConfig] with default Kademlia settings.
   const DHTConfig({
     this.protocolId = '/ipfs/kad/1.0.0',
-    this.alpha = 3,
+    this.alpha = 10,
+    this.beta = 3,
     this.bucketSize = 20,
     this.maxProvidersPerKey = 20,
     this.requestTimeout = const Duration(seconds: 30),
@@ -29,7 +30,8 @@ class DHTConfig {
   factory DHTConfig.fromJson(Map<String, dynamic> json) {
     return DHTConfig(
       protocolId: (json['protocolId'] as String?) ?? '/ipfs/kad/1.0.0',
-      alpha: (json['alpha'] as int?) ?? 3,
+      alpha: (json['alpha'] as int?) ?? 10,
+      beta: (json['beta'] as int?) ?? 3,
       bucketSize: (json['bucketSize'] as int?) ?? 20,
       maxProvidersPerKey: (json['maxProvidersPerKey'] as int?) ?? 20,
       requestTimeout: Duration(
@@ -58,6 +60,9 @@ class DHTConfig {
 
   /// Number of parallel lookups (alpha value in Kademlia).
   final int alpha;
+
+  /// Number of closest successfully queried peers required for termination.
+  final int beta;
 
   /// Size of k-buckets.
   final int bucketSize;
@@ -106,6 +111,7 @@ class DHTConfig {
   Map<String, dynamic> toJson() => {
     'protocolId': protocolId,
     'alpha': alpha,
+    'beta': beta,
     'bucketSize': bucketSize,
     'maxProvidersPerKey': maxProvidersPerKey,
     'requestTimeoutSeconds': requestTimeout.inSeconds,

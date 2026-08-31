@@ -1,11 +1,20 @@
 import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
-import 'package:transpiled_ipfs/src/core/config/metrics_config.dart';
-import 'package:transpiled_ipfs/src/core/config/storage_config.dart';
-// import 'package:transpiled_ipfs/src/core/config/dht_config.dart';
-// import 'package:transpiled_ipfs/src/core/config/security_config.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('DHTConfig', () {
+    test('uses Amino lookup defaults and preserves beta in JSON', () {
+      const defaults = DHTConfig();
+      expect(defaults.alpha, 10);
+      expect(defaults.beta, 3);
+
+      final restored = DHTConfig.fromJson({'alpha': 4, 'beta': 2});
+      expect(restored.alpha, 4);
+      expect(restored.beta, 2);
+      expect(restored.toJson()['beta'], 2);
+    });
+  });
+
   group('MetricsConfig', () {
     test('defaults', () {
       final config = const MetricsConfig();

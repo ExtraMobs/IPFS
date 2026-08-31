@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -441,6 +442,94 @@ void main() {
       expect(providers, isNotEmpty);
       expect(providers.any((p) => p.toBase58() == provider.toBase58()), isTrue);
       expect(requestCount, greaterThanOrEqualTo(2));
+    });
+
+    test('provider lookup never exceeds alpha concurrent queries', () async {
+      config = IPFSConfig(
+        dht: const DHTConfig(alpha: 2, beta: 3, bucketSize: 20),
+      );
+      when(mockNetworkHandler.config).thenReturn(config);
+      client = DHTClient(
+        networkHandler: mockNetworkHandler,
+        router: mockRouter,
+        metricsCollector: metrics,
+      );
+      await client.initialize();
+      for (var i = 0; i < 5; i++) {
+        final peer = PeerId(value: Uint8List(32)..[0] = i + 1);
+        await client.kademliaRoutingTable.addPeer(peer, peer);
+      }
+
+      var active = 0;
+      var maxActive = 0;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async {
+        active++;
+        maxActive = max(maxActive, active);
+        await Future<void>.delayed(const Duration(milliseconds: 10));
+        active--;
+        return (kad.Message()..type = kad.Message_MessageType.GET_PROVIDERS)
+            .writeToBuffer();
+      });
+
+      await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            0,
+          )
+          .toList();
+
+      expect(maxActive, 2);
+    });
+
+    test('beta termination follows up an unqueried top-k peer', () async {
+      config = IPFSConfig(
+        dht: const DHTConfig(alpha: 1, beta: 1, bucketSize: 20),
+      );
+      when(mockNetworkHandler.config).thenReturn(config);
+      client = DHTClient(
+        networkHandler: mockNetworkHandler,
+        router: mockRouter,
+        metricsCollector: metrics,
+      );
+      await client.initialize();
+      final firstSeed = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final secondSeed = PeerId.fromBase58(
+        'QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa',
+      );
+      final provider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      await client.kademliaRoutingTable.addPeer(firstSeed, firstSeed);
+      await client.kademliaRoutingTable.addPeer(secondSeed, secondSeed);
+
+      var requestCount = 0;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async {
+        requestCount++;
+        final response = kad.Message()
+          ..type = kad.Message_MessageType.GET_PROVIDERS;
+        if (requestCount == 2) {
+          response.providerPeers.add(
+            kad.Peer()
+              ..id = provider.value
+              ..addrs.add(
+                libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes(),
+              ),
+          );
+        }
+        return response.writeToBuffer();
+      });
+
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            1,
+          )
+          .toList();
+
+      expect(requestCount, 2);
+      expect(providers.single.id, provider);
     });
 
     test('findPeer iterates until target is discovered', () async {

@@ -72,11 +72,12 @@ Fluxo-alvo:
   cancelamento por subscription, deduplicação e upgrade de registro sem
   endereço; wrappers antigos preservados; `ADD_PROVIDER` agora exige provider
   igual ao remetente e endereço válido; `clusterLevelRaw` corrigido de 0 para
-  1. Permanecem: `QueryPeerset` com estados, `alpha`/`beta`, starvation e
-  follow-up dos K mais próximos; limite de `closerPeers` a `2*k`, descarte de
-  self e persistência no peerstore; limites de 8 KiB por `Peer` e da mensagem;
-  prazo do lookup/RPC e limpeza de requests vencidos; e resposta
-  `GET_PROVIDERS` com `AddrInfo` completo.
+  1; `QueryPeerset` com estados, limite `alpha`, terminação `beta`, starvation,
+  follow-up dos K mais próximos, limite de `closerPeers` a `2*k` e descarte de
+  self também concluídos e cobertos por teste. Permanecem: persistência dos
+  `closerPeers` no peerstore; limites de 8 KiB por `Peer` e da mensagem; prazo
+  do lookup/RPC e limpeza de requests vencidos; e resposta `GET_PROVIDERS` com
+  `AddrInfo` completo.
 - [x] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
   reduzir o resultado a apenas Peer ID.
 - [x] Completar/adaptar `core/peerstore` address/protocol book e o caminho
@@ -133,12 +134,14 @@ para reconstruir arquivos ou diretórios completos.
   Cobertura adicionada em 2026-08-31 confirma `count == 0`, supressão de
   duplicata idêntica, upgrade para endereço discável, cancelamento entre
   consultas e aceitação/rejeição de `ADD_PROVIDER` por remetente/endereço. A
-  prova pública foi repetida após renovar `block/put` + `routing/provide` no
-  Kubo: o próprio Kubo encontrou o provider
-  `12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1` com endereços, mas o
-  lookup Dart terminou sem encontrá-lo. Isto confirma que `QueryPeerset` e o
-  follow-up pendentes são necessários sob a topologia atual; não interpretar
-  a prova pública antiga como paridade estável do algoritmo simplificado.
+  primeira repetição pública, ainda com o algoritmo antigo, não encontrou o
+  provider. Após portar `QueryPeerset`/follow-up e renovar
+  `routing/provide`, o Dart encontrou
+  `12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1`, conectou por P2P e
+  confirmou `bytes=59 persisted=true`. O harness não encerrou sozinho depois
+  do sucesso e precisou ser interrompido: consultas/recursos pendentes no
+  cleanup continuam como lacuna de cancelamento, mas ocorreram depois da
+  validação e persistência do bloco.
 
 - **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`
@@ -667,7 +670,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `provider/internal/timeseries` |  | não iniciado |  |
 | `provider/keystore` |  | não iniciado |  |
 | `provider/stats` |  | não iniciado |  |
-| `qpeerset` |  | não iniciado |  |
+| `qpeerset` | `lib/src/protocols/dht/query_peerset.dart` | **portado com paridade comprovada** | `PeerState` e `QueryPeerset` com `TryAdd`→`tryAdd`, `SetState`→`setState`, `GetState`→`getState`, `GetReferrer`→`getReferrer`, filtros ordenados por distância, `NumHeard`/`NumWaiting`; vetores de `qpeerset_test.go` reproduzidos em `test/protocols/dht/query_peerset_test.dart`. A função de distância é injetada pelo routing table existente em vez de recriar outro `XORKeySpace`. Integrado ao `FindProvidersAsync` com `alpha` padrão 10, `beta` 3, starvation e follow-up top-K. |
 | `records` |  | não iniciado |  |
 | `rtrefresh` |  | não iniciado |  |
 

@@ -118,8 +118,10 @@ library;
 // Multiformats primitives, now their own per-Go-module packages (see
 // doc/transpilation/PROGRESS.md).
 export 'package:transpiled_cid/transpiled_cid.dart' show CID;
-export 'package:transpiled_multibase/transpiled_multibase.dart' show MultibaseUtils;
-export 'package:transpiled_multicodec/transpiled_multicodec.dart' show Multicodec;
+export 'package:transpiled_multibase/transpiled_multibase.dart'
+    show MultibaseUtils;
+export 'package:transpiled_multicodec/transpiled_multicodec.dart'
+    show Multicodec;
 export 'package:transpiled_multihash/transpiled_multihash.dart'
     show MultihashInfo, MultihashUtils;
 
@@ -131,8 +133,10 @@ export 'package:transpiled_libp2p/transpiled_libp2p.dart'
 // module -- see doc/transpilation/PROGRESS.md's note on dart_ipfs_core's
 // dissolution).
 export 'src/core/data_structures/block.dart' show Block, IBlock;
-export 'src/core/data_structures/block_store.dart' show BlockStoreResult, IBlockStore;
-export 'src/core/data_structures/memory_block_store.dart' show InMemoryBlockStore;
+export 'src/core/data_structures/block_store.dart'
+    show BlockStoreResult, IBlockStore;
+export 'src/core/data_structures/memory_block_store.dart'
+    show InMemoryBlockStore;
 export 'src/core/ipld/codecs/ipld_codec.dart' show IPLDCodec;
 export 'src/core/ipld/codecs/standard_codecs.dart'
     show DagCborCodec, DagJsonCodec, DagPbCodec, RawCodec;
@@ -153,4 +157,6 @@ export 'src/core/data_structures/car.dart';
 export 'src/core/ipfs_node/ipfs_node.dart';
 export 'src/core/ipfs_node/ipfs_web_node.dart';
 export 'src/ipfs.dart';
+export 'src/protocols/dht/dht_client.dart' show DHTClient;
+export 'src/protocols/dht/query_peerset.dart' show PeerState, QueryPeerset;
 export 'src/protocols/pubsub/pubsub_message.dart';
