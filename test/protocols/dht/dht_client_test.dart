@@ -189,6 +189,10 @@ void main() {
       when(mockRouter.sendRequest(any, any, any)).thenAnswer((
         invocation,
       ) async {
+        final request = kad.Message.fromBuffer(
+          invocation.positionalArguments[2] as Uint8List,
+        );
+        expect(request.clusterLevelRaw, 1);
         requestCount++;
 
         final response = kad.Message()

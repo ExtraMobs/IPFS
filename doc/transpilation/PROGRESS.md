@@ -67,11 +67,27 @@ Fluxo-alvo:
 - [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
   `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
   shortlist, `closerPeers`, `providerPeers`, validação, timeout e cancelamento.
+  Auditoria de 2026-08-31 confirmou como pendências: API incremental com
+  `count`/cancelamento; deduplicação e upgrade para registros com endereço;
+  `QueryPeerset` com estados, `alpha`/`beta`, starvation e follow-up dos K mais
+  próximos; limite de `closerPeers` a `2*k`, descarte de self e persistência no
+  peerstore; limites de 8 KiB por `Peer` e da mensagem; prazo do lookup/RPC e
+  limpeza de requests vencidos; resposta `GET_PROVIDERS` com `AddrInfo`
+  completo; e validação de `ADD_PROVIDER` contra o remetente. O campo wire
+  `clusterLevelRaw` já foi corrigido de 0 para 1 e coberto por teste.
 - [x] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
   reduzir o resultado a apenas Peer ID.
-- [ ] Completar/adaptar `core/peerstore` address/protocol book e o caminho
+- [x] Completar/adaptar `core/peerstore` address/protocol book e o caminho
   `Host.connect(AddrInfo)` necessários para armazenar endereços, negociar
-  Bitswap e discar o provider encontrado.
+  Bitswap e discar o provider encontrado. O runtime reutiliza
+  `ipfs_libp2p 0.5.6`: `MemoryPeerstore`/`MemoryAddrBook`/`MemoryProtoBook` já
+  são injetados no `Swarm`; `BasicHost.connect(AddrInfo)` persiste endereços e
+  chama `dialPeer`; `Libp2pRouter.connect` adapta a multiaddr DHT e o fluxo
+  `BitswapHandler._connectProviders` o exercita. A prova pública abaixo
+  confirmou esse caminho ponta a ponta. Isto conclui a adaptação necessária,
+  não uma transpilação função-a-função do peerstore: permanecem divergências
+  conhecidas de TTL (5/10 min no runtime/router versus `TempAddrTTL` de 2 min
+  no Go), fora do bloqueio funcional deste marco.
 - [x] Baixar um bloco raw público por CID sem conexão prévia com seu provider,
   usando apenas bootstrap + DHT + Bitswap, validar e persistir o bloco.
 - [x] Manter um teste de rede real reproduzível e registrar comando, CID e
@@ -104,6 +120,12 @@ para reconstruir arquivos ou diretórios completos.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
 
 ## Estado em aberto (2026-08-25)
+
+- **Auditoria de `FindProvidersAsync` em andamento (2026-08-31)**: o download
+  público funciona e `clusterLevelRaw` já está corrigido/testado, mas as demais
+  pendências enumeradas no checklist do Marco B ainda impedem declarar
+  paridade. O caminho necessário de peerstore/`Host.connect(AddrInfo)` foi
+  auditado e fechado por adaptação ao runtime existente, sem duplicá-lo.
 
 - **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`

@@ -280,7 +280,8 @@ class DHTClient {
       ..type = kad.Message_MessageType.GET_PROVIDERS
       // The key sent on wire is the raw Multihash bytes for GET_PROVIDERS
       ..key = CID.decode(cid).multihash.toBytes()
-      ..clusterLevelRaw = 0;
+      // go-libp2p stores the zero-based cluster level on wire as level + 1.
+      ..clusterLevelRaw = 1;
 
     final queried = <PeerId>{};
     final providers = <String, AddrInfo>{};
