@@ -130,6 +130,15 @@ para reconstruir arquivos ou diretórios completos.
   Marco B ainda impedem declarar paridade. O caminho necessário de
   peerstore/`Host.connect(AddrInfo)` foi auditado e fechado por adaptação ao
   runtime existente, sem duplicá-lo.
+  Cobertura adicionada em 2026-08-31 confirma `count == 0`, supressão de
+  duplicata idêntica, upgrade para endereço discável, cancelamento entre
+  consultas e aceitação/rejeição de `ADD_PROVIDER` por remetente/endereço. A
+  prova pública foi repetida após renovar `block/put` + `routing/provide` no
+  Kubo: o próprio Kubo encontrou o provider
+  `12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1` com endereços, mas o
+  lookup Dart terminou sem encontrá-lo. Isto confirma que `QueryPeerset` e o
+  follow-up pendentes são necessários sob a topologia atual; não interpretar
+  a prova pública antiga como paridade estável do algoritmo simplificado.
 
 - **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`

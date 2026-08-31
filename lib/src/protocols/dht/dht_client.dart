@@ -253,7 +253,10 @@ class DHTClient implements ContentDiscovery {
     // Preserve the legacy helper's operational contract: return as soon as a
     // usable provider is found. Call findProvidersAsync directly to exhaust
     // the lookup or request a different count.
-    return findProvidersAsync(CID.decode(cid), 1).toList();
+    return findProvidersAsync(
+      CID.decode(cid),
+      0,
+    ).where((provider) => provider.addrs.isNotEmpty).take(1).toList();
   }
 
   /// Finds providers incrementally, matching go-libp2p-kad-dht's

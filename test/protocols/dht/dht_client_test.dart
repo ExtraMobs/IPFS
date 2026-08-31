@@ -149,7 +149,7 @@ void main() {
       );
     });
 
-    test('findProviders preserves providers without multiaddrs', () async {
+    test('findProvidersAsync preserves providers without multiaddrs', () async {
       await client.initialize();
       final peer = PeerId.fromBase58(
         'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8v',
@@ -165,10 +165,14 @@ void main() {
 
       mockRawResponse(mockRouter, response);
 
-      final providers = await client.findProviders(
-        'QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn',
-      );
-      expect(providers, [provider]);
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            1,
+          )
+          .toList();
+      expect(providers.single.id, provider);
+      expect(providers.single.addrs, isEmpty);
     });
 
     test('findProvidersAsync applies count', () async {
@@ -200,6 +204,42 @@ void main() {
           .toList();
 
       expect(providers, hasLength(1));
+    });
+
+    test('count zero exhausts and suppresses identical providers', () async {
+      await client.initialize();
+      final peer = PeerId.fromBase58(
+        'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8v',
+      );
+      final firstProvider = PeerId.fromBase58(
+        'QmP8j68w7u6vYpx4BNDPqVvR2Y6a8VvX8v8v8v8v8v8w',
+      );
+      final secondProvider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      await client.kademliaRoutingTable.addPeer(peer, peer);
+
+      final response = kad.Message()
+        ..type = kad.Message_MessageType.GET_PROVIDERS
+        ..providerPeers.addAll([
+          kad.Peer()..id = firstProvider.value,
+          kad.Peer()..id = firstProvider.value,
+          kad.Peer()..id = secondProvider.value,
+        ]);
+      mockRawResponse(mockRouter, response);
+
+      final providers = await client
+          .findProvidersAsync(
+            CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn'),
+            0,
+          )
+          .toList();
+
+      expect(providers.map((provider) => provider.id).toSet(), {
+        firstProvider,
+        secondProvider,
+      });
+      expect(providers, hasLength(2));
     });
 
     test('findProvidersAsync emits an address upgrade', () async {
@@ -252,6 +292,55 @@ void main() {
       expect(providers, hasLength(2));
       expect(providers.first.addrs, isEmpty);
       expect(providers.last.addrs, hasLength(1));
+    });
+
+    test('legacy provider wrapper waits for a dialable upgrade', () async {
+      await client.initialize();
+      final seedPeer = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final closerPeer = PeerId.fromBase58(
+        'QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa',
+      );
+      final provider = PeerId.fromBase58(
+        'QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+      );
+      await client.kademliaRoutingTable.addPeer(seedPeer, seedPeer);
+
+      var requestCount = 0;
+      when(mockRouter.sendRequest(any, any, any)).thenAnswer((_) async {
+        requestCount++;
+        final response = kad.Message()
+          ..type = kad.Message_MessageType.GET_PROVIDERS;
+        if (requestCount == 1) {
+          response
+            ..providerPeers.add(kad.Peer()..id = provider.value)
+            ..closerPeers.add(
+              kad.Peer()
+                ..id = closerPeer.value
+                ..addrs.add(
+                  libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4002').toBytes(),
+                ),
+            );
+        } else {
+          response.providerPeers.add(
+            kad.Peer()
+              ..id = provider.value
+              ..addrs.add(
+                libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes(),
+              ),
+          );
+        }
+        return response.writeToBuffer();
+      });
+
+      final providers = await client.findProviderInfos(
+        'QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn',
+      );
+
+      expect(providers.single.id, provider);
+      expect(providers.single.addrs, hasLength(1));
+      expect(requestCount, 2);
     });
 
     test('cancelling findProvidersAsync stops before the next query', () async {
@@ -427,6 +516,61 @@ void main() {
           kad.Peer()
             ..id = provider.value
             ..addrs.add(libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes()),
+        );
+
+      _captureHandler(mockRouter)(
+        NetworkPacket(
+          srcPeerId: sender.toBase58(),
+          datagram: message.writeToBuffer(),
+        ),
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+
+      verifyNever(mockDhtHandler.handleProvideRequest(any, any));
+    });
+
+    test('ADD_PROVIDER accepts the sender with a valid address', () async {
+      await client.initialize();
+      final sender = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final cid = CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn');
+      when(
+        mockDhtHandler.handleProvideRequest(any, any),
+      ).thenAnswer((_) async {});
+      final message = kad.Message()
+        ..type = kad.Message_MessageType.ADD_PROVIDER
+        ..key = cid.multihash.toBytes()
+        ..providerPeers.add(
+          kad.Peer()
+            ..id = sender.value
+            ..addrs.add(libp2p.MultiAddr('/ip4/127.0.0.1/tcp/4001').toBytes()),
+        );
+
+      _captureHandler(mockRouter)(
+        NetworkPacket(
+          srcPeerId: sender.toBase58(),
+          datagram: message.writeToBuffer(),
+        ),
+      );
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+
+      verify(mockDhtHandler.handleProvideRequest(cid, sender)).called(1);
+    });
+
+    test('ADD_PROVIDER rejects an invalid address', () async {
+      await client.initialize();
+      final sender = PeerId.fromBase58(
+        'QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+      );
+      final cid = CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn');
+      final message = kad.Message()
+        ..type = kad.Message_MessageType.ADD_PROVIDER
+        ..key = cid.multihash.toBytes()
+        ..providerPeers.add(
+          kad.Peer()
+            ..id = sender.value
+            ..addrs.add([0xff]),
         );
 
       _captureHandler(mockRouter)(
