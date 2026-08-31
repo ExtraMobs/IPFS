@@ -143,6 +143,9 @@ class IPFSNodeBuilder {
       _container.get<BlockStore>(),
       router,
       denylistService: denylistService,
+      providerFinder: _container.isRegistered<DHTHandler>()
+          ? _container.get<DHTHandler>().dhtClient.findProviderInfos
+          : null,
     );
     _container.registerSingleton(bitswapHandler);
     _container.get<LifecycleManager>().register(bitswapHandler);

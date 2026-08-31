@@ -67,15 +67,27 @@ Fluxo-alvo:
 - [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
   `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
   shortlist, `closerPeers`, `providerPeers`, validação, timeout e cancelamento.
-- [ ] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
+- [x] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
   reduzir o resultado a apenas Peer ID.
 - [ ] Completar/adaptar `core/peerstore` address/protocol book e o caminho
   `Host.connect(AddrInfo)` necessários para armazenar endereços, negociar
   Bitswap e discar o provider encontrado.
-- [ ] Baixar um bloco raw público por CID sem conexão prévia com seu provider,
+- [x] Baixar um bloco raw público por CID sem conexão prévia com seu provider,
   usando apenas bootstrap + DHT + Bitswap, validar e persistir o bloco.
-- [ ] Manter um teste de rede real reproduzível e registrar comando, CID e
+- [x] Manter um teste de rede real reproduzível e registrar comando, CID e
   resultado aqui. Conectar a bootstrap sem receber o bloco não conclui o marco.
+
+Prova pública de 2026-08-31: Kubo `0.43.0` anunciou na DHT pública, sem
+conexão prévia no Dart, o bloco raw
+`bafkreihv6lajvgsmuyb4urhhgmaosge723ecectj7v5kcnntsd6iyyfjiu` (59 bytes).
+O Dart partiu apenas dos quatro bootstrappers padrão, percorreu `closerPeers`,
+descobriu o provider `12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1`,
+conectou-o, recebeu o bloco por Bitswap e confirmou `persisted=true`, com
+fallback HTTP desativado. Harness:
+`dart run tool/validate_public_p2p.dart <cid>`. Preparação reproduzível do
+provider: `POST /api/v0/block/put?format=raw&mhtype=sha2-256`, seguido de
+`POST /api/v0/routing/provide?arg=<cid>&recursive=false` em qualquer Kubo
+conectado à DHT pública.
 
 ### Fora do caminho crítico deste objetivo
 
@@ -92,6 +104,12 @@ para reconstruir arquivos ou diretórios completos.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
 
 ## Estado em aberto (2026-08-25)
+
+- **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
+  `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`
+  são discados em lotes `alpha`, e Bitswap conecta providers descobertos antes
+  do want. Prova pública registrada acima; auditoria completa de paridade e
+  peerstore continuam nos itens ainda desmarcados.
 
 
 - 🚧 **NÃO CONFIÁVEL — `go-ipld-prime/codec/dagjson` em auditoria (2026-08-26)**: núcleo Node↔DAG-JSON adicionado em `transpiled_ipld_prime`, registrado no multicodec `0x0129`, com CID, bytes no envelope `{\"/\":{\"bytes\":...}}`, ordenação lexical padrão, opções de encode/decode para links/bytes e limite de profundidade; ainda falta comparação completa dos vetores Go (limites e erros); não declarar paridade.

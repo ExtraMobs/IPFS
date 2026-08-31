@@ -13,6 +13,8 @@ import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/protocols/bitswap/message.dart' as message;
 import 'package:transpiled_ipfs/src/transport/router_events.dart';
 import 'package:transpiled_ipfs/src/proto/generated/core/blockstore.pb.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 
 import 'bitswap_handler_coverage_test.mocks.dart';
 
@@ -60,6 +62,53 @@ void main() {
       final result = await handler.wantBlock(cidStr);
       expect(result, isNotNull);
       expect(result!.data, equals([1, 2, 3]));
+    });
+
+    test('discovers and connects a provider before sending the want', () async {
+      final events = <String>[];
+      final connectedPeers = <String>{};
+      final data = Uint8List.fromList([9, 8, 7]);
+      final block = await Block.fromData(data);
+      final peer = PeerId.decode(
+        'QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn',
+      );
+      final provider = AddrInfo(
+        id: peer,
+        addrs: [Multiaddr.parse('/ip4/127.0.0.1/tcp/4001')],
+      );
+
+      when(mockRouter.connectedPeers).thenAnswer((_) => connectedPeers);
+      when(mockRouter.connect(any)).thenAnswer((invocation) async {
+        events.add('connect');
+        connectedPeers.add(peer.toBase58());
+      });
+      when(
+        mockRouter.sendMessage(any, any, protocolId: anyNamed('protocolId')),
+      ).thenAnswer((_) async {
+        events.add('send');
+        await handler.handleBlocks([block]);
+      });
+
+      handler = BitswapHandler(
+        config,
+        mockBlockStore,
+        mockRouter,
+        providerFinder: (_) async {
+          events.add('find');
+          return [provider];
+        },
+      );
+      await handler.start();
+
+      final result = await handler.want([
+        block.cid.encode(),
+      ], timeout: const Duration(seconds: 1));
+
+      expect(result.single.data, data);
+      expect(events, ['find', 'connect', 'send']);
+      verify(
+        mockRouter.connect('/ip4/127.0.0.1/tcp/4001/p2p/${peer.toBase58()}'),
+      ).called(1);
     });
 
     test('handlePacket processes incoming wantlist', () async {

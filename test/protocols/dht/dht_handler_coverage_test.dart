@@ -12,7 +12,8 @@ import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as ds;
 import 'package:transpiled_ipfs/src/utils/keystore.dart';
 import 'package:http/http.dart' as http;
 import 'package:transpiled_ipfs/src/core/cid.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show AddrInfo, PeerId;
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 import 'package:transpiled_ipfs/src/protocols/dht/interface_dht_handler.dart';
 import 'package:transpiled_ipfs/src/protocols/dht/kademlia_routing_table.dart';
 import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
@@ -75,15 +76,19 @@ void main() {
 
     test('findProviders delegates to client', () async {
       final cid = CID.decode('QmUNLLsPACCz1vLxQVkXqqLX5R1X345qqfHbsf67hvA3Nn');
-      when(mockClient.findProviders(any)).thenAnswer(
+      when(mockClient.findProviderInfos(any)).thenAnswer(
         (_) async => [
-          PeerId(value: Uint8List.fromList([1, 2, 3])),
+          AddrInfo(
+            id: PeerId(value: Uint8List.fromList([1, 2, 3])),
+            addrs: [Multiaddr.parse('/ip4/127.0.0.1/tcp/4001')],
+          ),
         ],
       );
 
       final providers = await handler.findProviders(cid);
       expect(providers, isNotEmpty);
       expect(providers.first.peerId, equals([1, 2, 3]));
+      expect(providers.first.addresses, ['/ip4/127.0.0.1/tcp/4001']);
     });
 
     test('putValue/getValue operations', () async {

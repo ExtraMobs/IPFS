@@ -6,6 +6,9 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart'; // For SHA256
 import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
+import 'package:transpiled_base58/transpiled_base58.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 
 import '../../core/cid.dart';
 import '../../core/config/ipfs_config.dart';
@@ -13,13 +16,11 @@ import '../../core/ipfs_node/ipfs_node.dart';
 import '../../core/ipfs_node/network_handler.dart';
 import '../../core/metrics/metrics_collector.dart';
 import '../../core/storage/datastore.dart' as ds;
-import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import '../../proto/generated/dht/dht.pb.dart' as dht_proto;
 import '../../proto/generated/dht/ipfs_node_network_events.pb.dart'
     as ipfs_node_network_events;
 import '../../proto/generated/dht/kademlia.pb.dart' as kad;
 import '../../transport/router_interface.dart';
-import 'package:transpiled_base58/transpiled_base58.dart';
 import '../../utils/logger.dart';
 import 'dht_envelope.dart';
 import 'kademlia_routing_adapter.dart';
@@ -143,6 +144,27 @@ class DHTClient {
     return PeerId(value: Uint8List.fromList(kadPeer.id));
   }
 
+  AddrInfo _convertKadPeerToAddrInfo(kad.Peer kadPeer) => AddrInfo(
+    id: _convertKadPeerToPeerId(kadPeer),
+    addrs: [for (final addr in kadPeer.addrs) ?_tryParseMultiaddr(addr)],
+  );
+
+  Multiaddr? _tryParseMultiaddr(List<int> bytes) {
+    try {
+      return Multiaddr.fromBytes(Uint8List.fromList(bytes));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  AddrInfo _peerIdToAddrInfo(PeerId peer) => AddrInfo(
+    id: peer,
+    addrs: [
+      for (final address in _router.resolvePeerId(peer.toBase58()))
+        ?_tryParseMultiaddr(libp2p.MultiAddr(address).toBytes()),
+    ],
+  );
+
   // Helper: Convert PeerId to kad.Peer with proper multiaddr byte encoding.
   kad.Peer _convertPeerIdToKadPeer(PeerId peerId) {
     var addresses = <String>[];
@@ -211,7 +233,11 @@ class DHTClient {
   ///
   /// This method queries the closest peers to the CID and returns a list of
   /// validated [PeerId]s.
-  Future<List<PeerId>> findProviders(String cid) async {
+  Future<List<PeerId>> findProviders(String cid) async =>
+      (await findProviderInfos(cid)).map((provider) => provider.id).toList();
+
+  /// Finds providers while preserving the addresses returned by the DHT.
+  Future<List<AddrInfo>> findProviderInfos(String cid) async {
     _checkInitialized();
     if (_kademliaRoutingTable.peerCount == 0) {
       await _seedConnectedPeers();
@@ -225,7 +251,7 @@ class DHTClient {
     // ignore: avoid_print
     print('findProviders($cid) local=${localProviders?.length ?? -1}');
     if (localProviders != null && localProviders.isNotEmpty) {
-      return localProviders;
+      return localProviders.map(_peerIdToAddrInfo).toList();
     }
 
     // In small/private networks a peer may have just announced itself as a
@@ -240,17 +266,9 @@ class DHTClient {
           print(
             'findProviders($cid) local after poll=${localProviders.length}',
           );
-          return localProviders;
+          return localProviders.map(_peerIdToAddrInfo).toList();
         }
       }
-    }
-
-    // Fallback for small/private networks: ask directly connected peers for
-    // providers. Kubo/Helia may not have propagated the record through a full
-    // iterative lookup yet, but they can answer a direct GET_PROVIDERS query.
-    final directProviders = await _queryConnectedPeersForProviders(cid);
-    if (directProviders.isNotEmpty) {
-      return directProviders;
     }
 
     final target = getRoutingKey(cid);
@@ -265,7 +283,8 @@ class DHTClient {
       ..clusterLevelRaw = 0;
 
     final queried = <PeerId>{};
-    final providers = <PeerId>{};
+    final providers = <String, AddrInfo>{};
+    final peerRecords = <String, kad.Peer>{};
     final closest = _SortedPeerQueue(target, _kademliaRoutingTable);
 
     // Seed from routing table.
@@ -274,21 +293,36 @@ class DHTClient {
     while (closest.isNotEmpty && queried.length < maxQueries) {
       final batch = closest.takeUnqueried(alpha, queried);
       if (batch.isEmpty) break;
+      queried.addAll(batch);
+
+      final ready = await Future.wait(
+        batch.map((peer) async {
+          final record = peerRecords[peer.toBase58()];
+          return record == null ||
+              _router.connectedPeers.contains(peer.toBase58()) ||
+              await _connectKadPeer(record);
+        }),
+      );
+      final queryable = [
+        for (var i = 0; i < batch.length; i++)
+          if (ready[i]) batch[i],
+      ];
+      if (queryable.isEmpty) continue;
 
       final responses = await Future.wait(
-        batch.map((peer) => _queryPeer(peer, request)),
+        queryable.map((peer) => _queryPeer(peer, request)),
       );
 
-      for (var i = 0; i < batch.length; i++) {
-        final peer = batch[i];
+      for (var i = 0; i < queryable.length; i++) {
+        final peer = queryable[i];
         final response = responses[i];
-        queried.add(peer);
 
         if (response == null) continue;
 
         for (final provider in response.providerPeers) {
           if (_isValidProviderRecord(provider)) {
-            providers.add(_convertKadPeerToPeerId(provider));
+            final info = _convertKadPeerToAddrInfo(provider);
+            providers[info.id.toBase58()] = info;
           } else {
             _metrics?.recordSecurityEvent('invalid_provider_record');
             _logger.debug(
@@ -299,12 +333,16 @@ class DHTClient {
 
         for (final closer in response.closerPeers) {
           if (closer.id.isEmpty) continue;
-          closest.add(_convertKadPeerToPeerId(closer));
+          final id = _convertKadPeerToPeerId(closer);
+          peerRecords[id.toBase58()] = closer;
+          closest.add(id);
         }
       }
+
+      if (providers.isNotEmpty) return providers.values.toList();
     }
 
-    return providers.toList();
+    return providers.values.toList();
   }
 
   /// Finds a peer by its ID in the DHT using iterative Kademlia expansion.
@@ -717,7 +755,13 @@ class DHTClient {
     try {
       final requestBytes = request.writeToBuffer();
       final stopwatch = Stopwatch()..start();
-      final responseBytes = await _sendRequest(peer, protocolDht, requestBytes);
+      final responseBytes =
+          await _router.sendRequest(
+            peer.toBase58(),
+            protocolDht,
+            requestBytes,
+          ) ??
+          await _sendRequest(peer, protocolDht, requestBytes);
       stopwatch.stop();
       _metrics?.recordLatency(protocolDht, stopwatch.elapsed);
       _metrics?.recordMessageSent(protocolDht, requestBytes.length);
@@ -729,65 +773,19 @@ class DHTClient {
     }
   }
 
-  /// Directly queries all connected peers for providers of [cid].
-  ///
-  /// This bypasses iterative Kademlia expansion and is used as a fast path in
-  /// small/private networks where we are directly connected to a provider.
-  Future<List<PeerId>> _queryConnectedPeersForProviders(String cid) async {
-    final providers = <PeerId>{};
-    final request = kad.Message()
-      ..type = kad.Message_MessageType.GET_PROVIDERS
-      ..key = CID.decode(cid).multihash.toBytes()
-      ..clusterLevelRaw = 0;
-    final requestBytes = request.writeToBuffer();
-
-    final router = node.dhtHandler?.router;
-    if (router == null) {
-      // ignore: avoid_print
-      print('_queryConnectedPeersForProviders: no router');
-      return [];
-    }
-    // ignore: avoid_print
-    print(
-      '_queryConnectedPeersForProviders: connected=${router.connectedPeers.length}',
-    );
-
-    for (final peerIdStr in router.connectedPeers) {
-      // ignore: avoid_print
-      print('  querying $peerIdStr');
+  Future<bool> _connectKadPeer(kad.Peer peer) async {
+    final info = _convertKadPeerToAddrInfo(peer);
+    final peerId = info.id.toBase58();
+    if (_router.connectedPeers.contains(peerId)) return true;
+    for (final address in addrInfoToP2pAddrs(info)) {
       try {
-        // In private networks Kubo/Helia use the LAN DHT protocol; try it
-        // first, then fall back to the WAN protocol.
-        Uint8List? responseBytes;
-        for (final proto in [protocolDhtLan, protocolDht]) {
-          responseBytes = await router.sendRequest(
-            peerIdStr,
-            proto,
-            requestBytes,
-          );
-          if (responseBytes != null) break;
-        }
-        // ignore: avoid_print
-        print(
-          '  response from $peerIdStr: ${responseBytes?.length ?? -1} bytes',
-        );
-        if (responseBytes == null) continue;
-        final response = kad.Message.fromBuffer(responseBytes);
-        for (final provider in response.providerPeers) {
-          if (_isValidProviderRecord(provider)) {
-            providers.add(_convertKadPeerToPeerId(provider));
-          }
-        }
+        await _router.connect(address.toAddrString());
+        return true;
       } catch (e) {
-        // ignore: avoid_print
-        print('  query $peerIdStr failed: $e');
-        _logger.debug('Direct provider query to $peerIdStr failed: $e');
+        _logger.debug('Failed to connect closer peer $peerId at $address: $e');
       }
     }
-
-    // ignore: avoid_print
-    print('_queryConnectedPeersForProviders result: ${providers.length}');
-    return providers.toList();
+    return false;
   }
 
   // Helper method for sending protocol requests with correlation.

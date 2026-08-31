@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:meta/meta.dart';
 import 'package:transpiled_ipfs/src/core/block_proto_codec.dart';
 import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
@@ -15,7 +16,10 @@ import 'package:transpiled_ipfs/src/transport/http_gateway_client.dart';
 import 'package:transpiled_ipfs/src/transport/router_interface.dart';
 import 'package:transpiled_ipfs/src/utils/generic_lru_cache.dart';
 import 'package:transpiled_ipfs/src/utils/logger.dart';
-import 'package:meta/meta.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+
+/// Resolves a CID to providers with dialable addresses.
+typedef ProviderFinder = Future<List<AddrInfo>> Function(String cid);
 
 /// Handles Bitswap protocol operations for an IPFS node following the Bitswap 1.2.0 specification
 class BitswapHandler implements IBitswapHandler, ILifecycle {
@@ -30,6 +34,7 @@ class BitswapHandler implements IBitswapHandler, ILifecycle {
     this._router, {
     HttpGatewayClientInterface? httpGatewayClient,
     DenylistService? denylistService,
+    ProviderFinder? providerFinder,
   }) : _maxConcurrentRequests = config.maxConcurrentBitswapRequests,
        _bitswapConfig = config.bitswap,
        _httpGatewayClient = config.bitswap.enableHttpFallback
@@ -38,6 +43,7 @@ class BitswapHandler implements IBitswapHandler, ILifecycle {
        _internalHttpClient =
            config.bitswap.enableHttpFallback && httpGatewayClient == null,
        _denylistService = denylistService,
+       _providerFinder = providerFinder,
        _logger = Logger(
          'BitswapHandler',
          debug: config.debug,
@@ -52,6 +58,7 @@ class BitswapHandler implements IBitswapHandler, ILifecycle {
   final HttpGatewayClientInterface? _httpGatewayClient;
   final bool _internalHttpClient;
   final DenylistService? _denylistService;
+  final ProviderFinder? _providerFinder;
   final Wantlist _wantlist = Wantlist();
   final LedgerManager _ledgerManager = LedgerManager();
   final Map<String, Completer<Block>> _pendingBlocks = {};
@@ -333,6 +340,10 @@ class BitswapHandler implements IBitswapHandler, ILifecycle {
       throw StateError('BitswapHandler is not running');
     }
 
+    if (!_hasConnectedProvider(cids)) {
+      await _connectProviders(cids);
+    }
+
     if (_router.connectedPeers.isEmpty) {
       throw StateError('No connected peers available for Bitswap request');
     }
@@ -374,6 +385,31 @@ class BitswapHandler implements IBitswapHandler, ILifecycle {
         }
       }
       rethrow;
+    }
+  }
+
+  bool _hasConnectedProvider(List<String> cids) => cids.any(
+    (cid) =>
+        _providersForBlock[cid]?.any(_router.connectedPeers.contains) ?? false,
+  );
+
+  Future<void> _connectProviders(List<String> cids) async {
+    final findProviders = _providerFinder;
+    if (findProviders == null) return;
+
+    for (final cid in cids) {
+      for (final provider in await findProviders(cid)) {
+        final peerId = provider.id.toBase58();
+        for (final address in addrInfoToP2pAddrs(provider)) {
+          try {
+            await _router.connect(address.toAddrString());
+            _providersForBlock.putIfAbsent(cid, () => {}).add(peerId);
+            break;
+          } catch (e) {
+            _logger.debug('Failed to connect provider $peerId at $address: $e');
+          }
+        }
+      }
     }
   }
 

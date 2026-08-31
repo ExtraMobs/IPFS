@@ -2,6 +2,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:fixnum/fixnum.dart';
+import 'package:http/http.dart' as http;
+import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
 import 'package:transpiled_ipfs/src/core/cid.dart';
 import 'package:transpiled_ipfs/src/core/config/ipfs_config.dart';
 import 'package:transpiled_ipfs/src/core/interfaces/i_lifecycle.dart';
@@ -10,7 +13,6 @@ import 'package:transpiled_ipfs/src/core/metrics/metrics_collector.dart';
 import 'package:transpiled_ipfs/src/core/security/denylist_service.dart';
 import 'package:transpiled_ipfs/src/core/storage/datastore.dart' as ds;
 import 'package:transpiled_ipfs/src/core/storage/hive_datastore.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
 import 'package:transpiled_ipfs/src/proto/generated/dht/common_red_black_tree.pb.dart';
 import 'package:transpiled_ipfs/src/proto/generated/ipns.pb.dart';
 import 'package:transpiled_ipfs/src/protocols/dht/dht_client.dart';
@@ -20,9 +22,7 @@ import 'package:transpiled_ipfs/src/utils/dnslink_resolver.dart';
 import 'package:transpiled_ipfs/src/utils/keystore.dart';
 import 'package:transpiled_ipfs/src/utils/logger.dart';
 import 'package:transpiled_ipfs/src/utils/private_key.dart';
-import 'package:fixnum/fixnum.dart';
-import 'package:http/http.dart' as http;
-import 'package:ipfs_libp2p/dart_libp2p.dart' as libp2p;
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' show PeerId;
 
 /// Handles DHT operations for an IPFS node.
 ///
@@ -111,9 +111,15 @@ class DHTHandler implements IDHTHandler, ILifecycle {
   Future<List<V_PeerInfo>> findProviders(CID cid) async {
     _logger.debug('Finding providers for CID: $cid');
     try {
-      final providers = await dhtClient.findProviders(cid.toString());
+      final providers = await dhtClient.findProviderInfos(cid.toString());
       return providers
-          .map((peer) => V_PeerInfo()..peerId = peer.value)
+          .map(
+            (provider) => V_PeerInfo()
+              ..peerId = provider.id.value
+              ..addresses.addAll(
+                provider.addrs.map((address) => address.toAddrString()),
+              ),
+          )
           .toList();
     } catch (e, st) {
       _logger.error('Error finding providers for CID: $cid', e, st);
