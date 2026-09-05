@@ -41,12 +41,5 @@ tool/
 /helm/
 /web/
 
-# Container/orchestration files
-Dockerfile
-.dockerignore
-docker-compose.yml
-docker-compose.override.yml
-docker-compose.debug.yml
-
 # Misc top-level scripts
 *.ps1

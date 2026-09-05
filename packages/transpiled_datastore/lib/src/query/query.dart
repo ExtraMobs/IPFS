@@ -1,17 +1,17 @@
 // lib/src/query/query.dart
 //
-// Port of go-datastore's query/query.go. Go builds `Results` two ways: a
-// channel-fed struct (`results`, for genuinely concurrent producers) and a
-// pull-based iterator (`resultsIter`, wrapping a synchronous `Next`
-// callback). Everything in this package only ever needs the pull-based
-// form -- Dart's single-isolate cooperative model has no concurrent
-// producer to feed a channel from, matching the `sync.RWMutex`-removal
-// rationale already used elsewhere in this transpilation (see
-// go-libp2p-kbucket's table.dart). So only the `resultsIter` path (and the
-// `Iterator`/`ResultsFromIterator` API it's built on) is ported; the
-// channel-based `results`/`ResultsWithContext` construction path is not.
+// Port of go-datastore's query/query.go. Go's result channel maps to a Dart
+// Stream and its cancellation context maps to a Future completed by close().
+import 'dart:async';
+
 import 'filter.dart';
 import 'order.dart';
+
+/// Upstream channel capacity for ordinary queries.
+const int normalBufSize = 1;
+
+/// Upstream channel capacity for key-only queries.
+const int keysOnlyBufSize = 128;
 
 /// A query against a [Read] datastore, mirroring go-datastore's `Query`.
 ///
@@ -162,7 +162,8 @@ class QueryResult {
 /// see this file's header).
 class QueryIterator {
   /// Creates an iterator from [next] (and optionally [close]).
-  QueryIterator({required this.next, void Function()? close}) : close = close ?? (() {});
+  QueryIterator({required this.next, void Function()? close})
+    : close = close ?? (() {});
 
   /// Returns the next result, or `(_, false)` when exhausted.
   final (QueryResult, bool) Function() next;
@@ -172,15 +173,20 @@ class QueryIterator {
   final void Function() close;
 }
 
-/// A set of query results, mirroring go-datastore's `query.Results`
-/// interface (its channel-based `Next`/`Done` are collapsed into a single
-/// synchronous [nextSync] -- see this file's header for why).
+/// A set of query results, mirroring go-datastore's `query.Results`.
 abstract class Results {
   /// The query these results correspond to.
   Query query();
 
   /// Blocks and returns the next result, or `(_, false)` when exhausted.
   (QueryResult, bool) nextSync();
+
+  /// Results as they become available. Equivalent to Go's `Results.Next`.
+  Stream<QueryResult> get next;
+
+  /// Completes when production ends (including after a [close] request).
+  /// Equivalent to Go's `Results.Done`.
+  Future<void> get done;
 
   /// Consumes every remaining result. Equivalent to go-datastore's
   /// `query.Results.Rest`.
@@ -205,6 +211,21 @@ class _IteratorResults extends Results {
   final Query _q;
   final QueryIterator _iterator;
   bool _closed = false;
+  final Completer<void> _done = Completer<void>();
+
+  @override
+  late final Stream<QueryResult> next = _asStream();
+
+  @override
+  Future<void> get done => _done.future;
+
+  Stream<QueryResult> _asStream() async* {
+    while (true) {
+      final (result, ok) = nextSync();
+      if (!ok) return;
+      yield result;
+    }
+  }
 
   @override
   Query query() => _q;
@@ -221,12 +242,67 @@ class _IteratorResults extends Results {
     if (_closed) return;
     _closed = true;
     _iterator.close();
+    if (!_done.isCompleted) _done.complete();
   }
 }
 
+/// Producer used by [resultsWithContext]. [cancelled] completes when the
+/// consumer closes the results; [output] accepts results until production
+/// returns.
+typedef ResultsProcess =
+    FutureOr<void> Function(Future<void> cancelled, Sink<QueryResult> output);
+
+class _ContextResults extends Results {
+  _ContextResults(this._q, ResultsProcess process) {
+    _controller = StreamController<QueryResult>(onCancel: close);
+    Future<void>(() async {
+      try {
+        await process(_cancelled.future, _controller.sink);
+      } finally {
+        await _controller.close();
+        if (!_done.isCompleted) _done.complete();
+      }
+    });
+  }
+
+  final Query _q;
+  final Completer<void> _cancelled = Completer<void>();
+  final Completer<void> _done = Completer<void>();
+  late final StreamController<QueryResult> _controller;
+  bool _closed = false;
+
+  @override
+  Query query() => _q;
+
+  @override
+  Stream<QueryResult> get next => _controller.stream;
+
+  @override
+  Future<void> get done => _done.future;
+
+  @override
+  (QueryResult, bool) nextSync() => throw UnsupportedError(
+    'resultsWithContext is asynchronous; consume Results.next instead',
+  );
+
+  @override
+  void close() {
+    if (_closed) return;
+    _closed = true;
+    if (!_cancelled.isCompleted) _cancelled.complete();
+  }
+}
+
+/// Starts [process] asynchronously and exposes its output as [Results.next].
+/// Dart streams handle scheduling and therefore do not require Go's explicit
+/// channel capacities [normalBufSize] and [keysOnlyBufSize].
+Results resultsWithContext(Query q, ResultsProcess process) =>
+    _ContextResults(q, process);
+
 /// Builds [Results] from a pull-based [iterator]. Equivalent to
 /// go-datastore's `query.ResultsFromIterator`.
-Results resultsFromIterator(Query q, QueryIterator iterator) => _IteratorResults(q, iterator);
+Results resultsFromIterator(Query q, QueryIterator iterator) =>
+    _IteratorResults(q, iterator);
 
 /// Builds [Results] from a fixed list of [entries]. Equivalent to
 /// go-datastore's `query.ResultsWithEntries`.
@@ -236,7 +312,9 @@ Results resultsWithEntries(Query q, List<Entry> entries) {
     q,
     QueryIterator(
       next: () {
-        if (i >= entries.length) return (const QueryResult(Entry(key: '')), false);
+        if (i >= entries.length) {
+          return (const QueryResult(Entry(key: '')), false);
+        }
         final next = entries[i];
         i++;
         return (QueryResult(next), true);

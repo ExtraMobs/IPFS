@@ -18,18 +18,35 @@ void main() {
     expect(b.get(10), isFalse);
   });
 
-  test('set grows the backing storage and stays visible to the same object', () {
-    final b = Bitmap(Uint8List(1));
-    expect(b.byteLength, equals(1));
+  test(
+    'set grows the backing storage and stays visible to the same object',
+    () {
+      final b = Bitmap(Uint8List(1));
+      expect(b.byteLength, equals(1));
 
-    b.set(20); // Beyond the first byte -- must grow.
-    expect(b.byteLength, greaterThan(1));
-    expect(b.get(20), isTrue);
-    // Growth must not disturb bits already set in the original byte.
-    b.set(3);
-    expect(b.get(3), isTrue);
-    expect(b.get(20), isTrue);
-  });
+      b.set(20); // Beyond the first byte -- must grow.
+      expect(b.byteLength, greaterThan(1));
+      expect(b.get(20), isTrue);
+      // Growth must not disturb bits already set in the original byte.
+      b.set(3);
+      expect(b.get(3), isTrue);
+      expect(b.get(20), isTrue);
+    },
+  );
+
+  test(
+    'growth is the documented Dart correction to upstream slice-value semantics',
+    () {
+      final bytes = Uint8List(1);
+      final bitmap = Bitmap(bytes)..set(20);
+
+      // The original fixed-length view remains one byte, while the Bitmap owns
+      // the grown replacement. This makes the intentional divergence explicit.
+      expect(bytes.length, equals(1));
+      expect(bitmap.byteLength, equals(3));
+      expect(bitmap.get(20), isTrue);
+    },
+  );
 
   test('clear unsets a bit; a no-op beyond current length', () {
     final b = Bitmap.withOnesCount(4);
@@ -56,10 +73,12 @@ void main() {
     final andResult = Bitmap(Uint8List.fromList(a.bytes))..and(b);
     expect(andResult.bytes, equals(Uint8List.fromList([0xF0, 0x0F])));
 
-    final orResult = Bitmap(Uint8List.fromList([0x0F]))..or(Bitmap(Uint8List.fromList([0xF0])));
+    final orResult = Bitmap(Uint8List.fromList([0x0F]))
+      ..or(Bitmap(Uint8List.fromList([0xF0])));
     expect(orResult.bytes, equals(Uint8List.fromList([0xFF])));
 
-    final xorResult = Bitmap(Uint8List.fromList([0xFF]))..xor(Bitmap(Uint8List.fromList([0x0F])));
+    final xorResult = Bitmap(Uint8List.fromList([0xFF]))
+      ..xor(Bitmap(Uint8List.fromList([0x0F])));
     expect(xorResult.bytes, equals(Uint8List.fromList([0xF0])));
   });
 

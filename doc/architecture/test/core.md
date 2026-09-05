@@ -1,6 +1,6 @@
 ---
 test-group: core
-generated: 2026-08-25T14:23:03.817830
+generated: 2026-09-02T08:21:38.727438
 ---
 
 # `test/core/`
@@ -46,6 +46,17 @@ generated: 2026-08-25T14:23:03.817830
 - hasBlock returns false for non-existent
 - getStatus includes pinned blocks count
 - getAllBlocks returns empty list when empty
+
+## `test/core/builders/build_cfg_test.dart`
+
+- zero BuildCfg is offline like Kubo
+- online BuildCfg is reflected in the runtime config
+- extra options preserve Go map mutability and reference semantics
+- shutdownTimeout defaults to Kubo unlimited shutdown
+- positive shutdownTimeout bounds node shutdown
+- concurrent stop calls share one successful shutdown
+- repeated stop calls share the same shutdown error
+- fromBuildCfg constructs the existing node runtime
 
 ## `test/core/builders/ipfs_node_builder_test.dart`
 
@@ -264,6 +275,8 @@ generated: 2026-08-25T14:23:03.817830
 
 ## `test/core/config/config_test.dart`
 
+- DHTConfig
+- uses Amino lookup defaults and preserves beta in JSON
 - MetricsConfig
 - defaults
 - fromJson/toJson
@@ -469,6 +482,13 @@ generated: 2026-08-25T14:23:03.817830
 - removeBlock removes from index and disk
 - gc with no blocks returns 0
 - pinManager persists pins across restarts
+
+## `test/core/data_structures/boxo_blockstore_test.dart`
+
+- has/get/put validates and rereads through the existing store
+- put rejects CID-divergent bytes before persistence
+- get distinguishes a corrupt persisted block from a missing block
+- get throws not-found for an absent block
 
 ## `test/core/data_structures/directory_test.dart`
 
@@ -736,6 +756,8 @@ generated: 2026-08-25T14:23:03.817830
 ## `test/core/ipfs_node/bootstrap_handler_test.dart`
 
 - BootstrapHandler
+- uses Boxo threshold and skips dialing when already connected
+- accepts a dynamic peer callback and custom timeout
 - start and stop lifecycle
 - start when already running
 - stop when already stopped
@@ -815,6 +837,7 @@ generated: 2026-08-25T14:23:03.817830
 
 - IPFSNode Coverage Tests
 - Full start and stop sequence
+- stops DHT before the network transport
 - getHealthStatus with all services
 - getHealthStatus with missing service
 - addresses getter handles missing NetworkHandler
@@ -1177,6 +1200,7 @@ generated: 2026-08-25T14:23:03.817830
 ## `test/core/ipfs_node/network_manager_test.dart`
 
 - NetworkManager
+- stop closes the underlying network handler
 - peerId and connectedPeers delegating
 - connect and disconnect delegating
 - resolvePeerId delegating
@@ -1344,6 +1368,7 @@ generated: 2026-08-25T14:23:03.817830
 - pinnedCids returns pinned content
 - resolveIPNS throws when DHTHandler not available
 - stop is idempotent
+- close delegates to idempotent stop
 - double start throws StateError or is handled
 - bandwidthIn and bandwidthOut return zero with no traffic
 - bandwidthIn and bandwidthOut aggregate metrics
@@ -1816,6 +1841,7 @@ generated: 2026-08-25T14:23:03.817830
 - removePeer removes and reports missing
 - isPeerConnected reflects state
 - status is consistent after stop
+- stop waits for an in-flight connection attempt
 - emits disconnected event when peer goes offline
 
 ## `test/core/plugins/plugin_security_test.dart`

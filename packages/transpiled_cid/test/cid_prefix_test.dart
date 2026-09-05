@@ -13,9 +13,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Prefix', () {
-    final data = Uint8List.fromList(
-      utf8.encode('this is some test content'),
-    );
+    final data = Uint8List.fromList(utf8.encode('this is some test content'));
 
     test('v1 prefix.sum matches a manually-built CID', () {
       const prefix = Prefix(
@@ -63,6 +61,22 @@ void main() {
       );
       expect(a, equals(b));
       expect(a.hashCode, equals(b.hashCode));
+    });
+
+    test('decodes Bitswap prefix bytes and honors digest truncation', () {
+      final prefix = Prefix.fromBytes(Uint8List.fromList([1, 0x55, 0x12, 20]));
+      final cid = prefix.sum(data);
+
+      expect(
+        prefix,
+        const Prefix(
+          version: 1,
+          codec: 'raw',
+          mhType: 'sha2-256',
+          mhLength: 20,
+        ),
+      );
+      expect(cid.multihash.size, 20);
     });
   });
 }

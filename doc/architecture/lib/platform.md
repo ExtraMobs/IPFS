@@ -1,7 +1,7 @@
 ---
 module: platform
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.503572
+generated: 2026-09-02T08:21:38.334070
 ---
 
 # Module `platform` (`lib/src/platform/`)
@@ -25,11 +25,10 @@ _No known direct test._
 Abstract interface for a running HTTP server instance.
 
 - **close** (method) — Closes the server.
-  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 33 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
@@ -44,6 +43,8 @@ Abstract interface for a running HTTP server instance.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
@@ -132,11 +133,10 @@ IO implementation of HTTP server instance.
 
 - **close** (method)
   - calls: close
-  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 33 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
@@ -150,6 +150,8 @@ IO implementation of HTTP server instance.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
@@ -273,11 +275,10 @@ _No known direct test._
 Web stub implementation of HTTP server instance.
 
 - **close** (method)
-  - referenced by (by name) (name shared by 32 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 33 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/events/event_bus.dart` (EventBus.dispose)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.stop)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipfs_node_network_events.dart` (IpfsNodeNetworkEvents.dispose)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
@@ -292,6 +293,8 @@ Web stub implementation of HTTP server instance.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.closeSession)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.stop)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.stop)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.start)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.complete)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (_ClientRequestContext.error)
     - `lib/src/protocols/identify/identify_push_handler.dart` (IdentifyPushHandler.stop)
@@ -435,30 +438,31 @@ IO implementation of the IPFS platform interface.
   - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **writeBytes** (method)
   - calls: File, create, parent, writeAsBytes
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.put)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.writeString)
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
+- **appendBytes** (method)
+  - calls: File, create, parent, writeAsBytes, append
 - **writeString** (method)
   - calls: File, create, parent, writeAsString
 - **readBytes** (method)
   - calls: File, exists, readAsBytes
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.get)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.readString)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.getLength)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData)
@@ -472,8 +476,7 @@ IO implementation of the IPFS platform interface.
 - **exists** (method)
   - calls: exists, File, Directory
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -533,8 +536,7 @@ IO implementation of the IPFS platform interface.
   - calls: IpfsPlatformIO
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -563,22 +565,23 @@ Abstract class representing platform-specific operations.
 - **isIO** (method) — Whether the current platform is Desktop/Mobile (supports dart:io).
 - **writeBytes** (method) — Returns a [Future] that completes when [bytes] are written to a file at [path].
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.put)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.writeString)
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
+- **appendBytes** (method) — Appends [bytes] to the file at [path].
 - **writeString** (method) — Returns a [Future] that completes when [content] is written to a file at [path].
 - **readBytes** (method) — Returns a [Future] that resolves to the [Uint8List] bytes from a file at [path],
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.get)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.readString)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.getLength)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData)
@@ -590,8 +593,7 @@ Abstract class representing platform-specific operations.
     - `lib/src/transport/pnet/swarm_key_loader.dart` (loadSwarmKey)
 - **exists** (method) — Returns a [Future] that resolves to `true` if a file or directory exists at [path].
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -646,7 +648,6 @@ Abstract class representing platform-specific operations.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **promptPassword** (method) — Returns a [Future] that resolves to a password entered by the user.
@@ -662,8 +663,7 @@ Abstract class representing platform-specific operations.
   - calls: UnsupportedError
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -702,30 +702,31 @@ Web implementation of the IPFS platform interface using IndexedDB.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **writeBytes** (method)
   - calls: _getDb, transaction, objectStore, put, completed
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.save)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.pin)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.putBlock)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.put)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.writeString)
     - `lib/src/services/gateway/persistent_preview_cache.dart` (PersistentPreviewCache.cachePreview)
+- **appendBytes** (method)
+  - calls: readBytes, Uint8List, writeBytes, fromList
 - **writeString** (method)
   - calls: fromList, codeUnits, writeBytes
 - **readBytes** (method)
   - calls: _getDb, transaction, objectStore, getObject, fromList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.hasBlock)
     - `lib/src/core/ipfs_node/web_block_store.dart` (WebBlockStore.getAllBlocks)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.get)
     - `lib/src/core/storage/flat_file_datastore.dart` (FlatFileDatastore.query)
+    - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.appendBytes)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.readString)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.getLength)
     - `lib/src/services/gateway/compressed_cache_store.dart` (CompressedCacheStore.getCompressedData)
@@ -739,8 +740,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
 - **exists** (method)
   - calls: _getDb, transaction, objectStore, count, lowerBound, Completer, listen, openCursor, startsWith, toString, key, complete, isCompleted, future
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)
@@ -799,8 +799,7 @@ Web implementation of the IPFS platform interface using IndexedDB.
   - calls: IpfsPlatformWeb
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.fromFile)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.getBlock)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/pin_manager.dart` (PinManager.load)

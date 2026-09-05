@@ -10,22 +10,14 @@ import 'quic_transport.dart';
 /// libp2p [Listener] implementation that wraps a [quic_lib] incoming
 /// connection stream.
 class QuicListener implements libp2p.Listener {
-  final Stream<quic_lib.Libp2pQuicConnection> _stream;
-  final libp2p.MultiAddr _addr;
-  final libp2p.MultiAddr _localAddr;
-  StreamSubscription<quic_lib.Libp2pQuicConnection>? _subscription;
-  final _pending = <quic_lib.Libp2pQuicConnection>[];
-  final _pendingController = StreamController<libp2p.TransportConn>.broadcast();
-  bool _closed = false;
-
   /// Creates a listener around [stream].
   QuicListener({
     required Stream<quic_lib.Libp2pQuicConnection> stream,
     required libp2p.MultiAddr addr,
     required libp2p.MultiAddr localAddr,
-  })  : _stream = stream,
-        _addr = addr,
-        _localAddr = localAddr {
+  }) : _stream = stream,
+       _addr = addr,
+       _localAddr = localAddr {
     _subscription = _stream.listen(
       (conn) {
         final adapter = QuicConnection(
@@ -47,6 +39,13 @@ class QuicListener implements libp2p.Listener {
       },
     );
   }
+  final Stream<quic_lib.Libp2pQuicConnection> _stream;
+  final libp2p.MultiAddr _addr;
+  final libp2p.MultiAddr _localAddr;
+  StreamSubscription<quic_lib.Libp2pQuicConnection>? _subscription;
+  final _pending = <quic_lib.Libp2pQuicConnection>[];
+  final _pendingController = StreamController<libp2p.TransportConn>.broadcast();
+  bool _closed = false;
 
   @override
   libp2p.MultiAddr get addr => _addr;

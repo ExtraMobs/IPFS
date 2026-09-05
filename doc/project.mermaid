@@ -62,14 +62,6 @@ graph TB
     
     IPFSNode -.-> Security & Metrics & Logger
 
-    %% Deployment & Infrastructure
-    subgraph "Deployment (Docker)"
-        Docker["Dockerfile / Compose"]
-        Nginx["Nginx Reverse Proxy"]
-        Docker --> IPFSNode
-        Nginx --> Gateway & RPC
-    end
-
     %% Styling
     classDef core fill:#e1f5fe,stroke:#01579b,stroke-width:3px;
     classDef service fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;

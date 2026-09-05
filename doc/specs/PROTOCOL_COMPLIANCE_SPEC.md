@@ -369,7 +369,7 @@ For each codec, encode a representative set of IPLD nodes and verify that decode
 
 ### 6.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job (or local Docker Compose stack) that runs the latest Kubo and Helia nodes and exercises:
+Create a CI job (or local interoperability harness) that runs the latest Kubo and Helia nodes and exercises:
 
 - **CAR:** dart_ipfs exports a CARv1/v2 file; Kubo/Helia imports it and the roots match. Kubo/Helia exports a CAR; dart_ipfs reads all sections and the CIDs match.
 - **DAG put/get:** dart_ipfs stores a DAG-CBOR or DAG-JSON node; Kubo `dag get` returns the same bytes and CID. Reverse direction also works.
@@ -421,4 +421,3 @@ The following priorities and scope decisions are extracted from the maintainer r
 | Consolidated DAG-JSON codec | P1 | MODIFIED: remove duplicate `lib/src/core/ipld/dag_json_codec.dart`, make `DagJsonCodec` in `lib/src/core/ipld/codecs/standard_codecs.dart` spec-compliant and implement the unified `IPLDCodec` interface |
 | Spec-compliant IPLD selector execution | P0 | APPROVED; wire into `IPLDHandler` and GraphSync |
 | Full IPLD Schema DSL validation | P2 | DEFERRED |
-

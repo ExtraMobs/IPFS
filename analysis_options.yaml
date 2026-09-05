@@ -3,6 +3,7 @@ include: package:lints/recommended.yaml
 analyzer:
   exclude:
     - example/**
+    - go-ipfs-reference/**
     - "packages/**"
     - lib/src/proto/generated/**
     - "**/*.g.dart"

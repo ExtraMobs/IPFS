@@ -52,6 +52,41 @@ biblioteca.
 Antes de trabalhar na transpilação, leia
 `doc/transpilation/PROGRESS.md`.
 
+## Dependências do ecossistema IPFS
+
+Dê prioridade aos ports Dart internos já auditados contra o módulo Go
+correspondente. O módulo Go upstream fixado em
+`doc/transpilation/UPSTREAM_LOCK.md` continua sendo a fonte autoritativa de
+fidelidade. Ports internos ainda não auditados e ports Dart externos servem
+apenas como pistas até serem confirmados contra esse upstream.
+
+Cada módulo Go reutilizável portado deve permanecer em um pacote Dart próprio,
+respeitando sua fronteira de `go.mod`. Esses pacotes ficam em
+`packages/transpiled_<nome_do_modulo>/`; somente a integração do nó embutido
+fica no pacote raiz, sob `lib/`.
+
+## Ordem obrigatória: transpilar antes de adaptar
+
+Ao encontrar uma lacuna, limite ou defeito em código Dart correspondente a
+Kubo, Boxo ou go-libp2p, siga obrigatoriamente esta ordem:
+
+1. localize o símbolo e o fluxo autoritativos no módulo Go fixado em
+   `doc/transpilation/UPSTREAM_LOCK.md`;
+2. transpile para o pacote Dart da mesma fronteira de `go.mod`, preservando
+   contrato, defaults, lifecycle, limites e erros observáveis;
+3. comprove a paridade com vetores ou testes derivados do upstream;
+4. somente depois adapte ao runtime ou ao sistema de tipos do Dart, no menor
+   ponto necessário e com justificativa concreta documentada em
+   `doc/transpilation/PROGRESS.md`.
+
+Não trate placeholders, defaults arbitrários ou APIs originais de ports Dart
+externos como equivalentes ao Go sem auditoria. Overrides que apenas elevem ou
+desativem limites para fazer um teste passar são diagnósticos temporários, não
+soluções finais; o comportamento upstream deve ser portado primeiro. Quando
+uma adaptação temporária for indispensável para investigar, marque-a
+explicitamente, mantenha-a fora do resultado final e registre o critério de
+remoção.
+
 ## Preservação da API durante a transpilação
 
 Para toda API pública reutilizável do upstream, preserve o nome conceitual, a

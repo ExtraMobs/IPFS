@@ -1,7 +1,7 @@
 ---
 module: services
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.719402
+generated: 2026-09-02T08:21:38.637786
 ---
 
 # Module `services` (`lib/src/services/`)
@@ -41,7 +41,6 @@ gRPC service implementation for block storage operations.
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
-    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.wantBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveDagJson)
@@ -174,8 +173,10 @@ A functional ACME v2 (RFC 8555) client that performs HTTP-01 challenges.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.obtainCertificate)
 - **dispose** (method) — Releases the HTTP client and clears cached state.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -257,7 +258,9 @@ Exception thrown for ACME protocol errors.
     - `lib/src/protocols/pubsub/gossipsub/message_cache.dart` (MessageCache.getForIWant)
     - `lib/src/utils/keystore.dart` (Keystore.verifySignature)
 - **toString** (method)
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
@@ -302,6 +305,7 @@ Exception thrown for ACME protocol errors.
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
@@ -357,6 +361,7 @@ Exception thrown for ACME protocol errors.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dial)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.listen)
@@ -384,7 +389,8 @@ _Directly tested._
 Manages persistent storage for ACME account keys and certificates.
 
 - **config** (field) — Gateway configuration containing storage path settings.
-  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **loadAccountKey** (method) — Loads the ACME account key from storage.
@@ -747,7 +753,9 @@ Result of a domain validation check.
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
@@ -792,6 +800,7 @@ Result of a domain validation check.
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
@@ -847,6 +856,7 @@ Result of a domain validation check.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dial)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.listen)
@@ -1026,12 +1036,13 @@ LRU (Least Recently Used) cache for gateway responses.
 - **capacity** (field) — Maximum number of entries.
 - **get** (method) — Retrieves a value by key, or null if not found.
   - calls: containsKey, remove
-  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.isOnline)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -1081,7 +1092,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.get)
 - **put** (method) — Inserts or updates a key-value pair.
   - calls: containsKey, remove, length, first, keys
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -1127,6 +1138,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.remove)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (TaggedConnection.removeTag)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.removeConnection)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
@@ -1196,7 +1208,9 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
     - `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.clear)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.clear)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.stop)
@@ -1221,7 +1235,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.hasKey)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.hasBlock)
@@ -1244,6 +1258,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.hasPeer)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.tryAdd)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.get)
@@ -1411,7 +1426,10 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.length)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionCount)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.addConnection)
@@ -1419,7 +1437,7 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
     - `lib/src/protocols/dht/connection_statistics.dart` (ConnectionStatistics.updateConnectionDuration)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -1444,6 +1462,9 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
     - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestInStates)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numHeard)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numWaiting)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.queueLength)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.acquire)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -1578,7 +1599,9 @@ LRU (Least Recently Used) cache for gateway responses.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -1659,6 +1682,7 @@ IPFS HTTP Gateway Server
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -1688,12 +1712,14 @@ IPFS HTTP Gateway Server
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
@@ -1752,7 +1778,10 @@ _Directly tested._
 Provider interface for automatic TLS certificate issuance via ACME.
 
 - **state** (method) — Current state of the certificate lifecycle.
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.setState)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getState)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
 - **obtainCertificate** (method) — Obtains or renews a certificate for the configured domain and returns a
@@ -1763,8 +1792,10 @@ Provider interface for automatic TLS certificate issuance via ACME.
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.certificateExpiry)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
 - **dispose** (method) — Releases any resources held by the provider.
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -1779,7 +1810,10 @@ Production-ready ACME provider for Let's Encrypt / ZeroSSL.
 - **staging** (field) — Whether to use the ACME provider's staging endpoint.
 - **pendingChallenges** (method) — Pending HTTP-01 challenges keyed by token, mapping to the key
 - **state** (method)
-  - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.setState)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getState)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.autoTlsState)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.state)
 - **obtainCertificate** (method)
@@ -1792,8 +1826,10 @@ Production-ready ACME provider for Let's Encrypt / ZeroSSL.
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.loadSecurityContext)
 - **dispose** (method)
   - calls: clear, dispose, idle
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService)
@@ -1805,7 +1841,8 @@ Production-ready ACME provider for Let's Encrypt / ZeroSSL.
 Manages TLS configuration, certificate loading, and AutoTLS orchestration
 
 - **config** (field) — Gateway configuration including TLS settings.
-  - referenced by (by name) (name shared by 13 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 14 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
     - `lib/src/transport/pnet/pnet_transport_wrapper.dart` (PnetTransportWrapper.config)
 - **isContextLoaded** (method) — Whether a TLS [SecurityContext] has been successfully loaded.
@@ -1838,8 +1875,10 @@ Manages TLS configuration, certificate loading, and AutoTLS orchestration
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
 - **dispose** (method) — Releases the provider and clears internal state.
   - calls: dispose
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.removeService)
@@ -2066,6 +2105,7 @@ Replication factor for a cluster pin.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -2099,7 +2139,9 @@ Replication factor for a cluster pin.
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **toString** (method)
   - calls: toString
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
@@ -2144,6 +2186,7 @@ Replication factor for a cluster pin.
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
@@ -2198,6 +2241,7 @@ Replication factor for a cluster pin.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dial)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.listen)
@@ -2258,6 +2302,7 @@ Options for a cluster pin operation.
 - **toJson** (method) — Converts to a JSON-serializable map for the Cluster API.
   - calls: value, isNotEmpty
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -2277,9 +2322,11 @@ Options for a cluster pin operation.
 A pin tracked by the IPFS Cluster.
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -2305,6 +2352,9 @@ A pin tracked by the IPFS Cluster.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -2362,6 +2412,7 @@ A pin tracked by the IPFS Cluster.
 - **toJson** (method) — Converts to a JSON-serializable map.
   - calls: toApiString, map, MapEntry, toJson
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -2431,7 +2482,6 @@ Pin status for a single peer in the cluster.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -2475,8 +2525,6 @@ Pin status for a single peer in the cluster.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -2578,6 +2626,7 @@ Pin status for a single peer in the cluster.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -2587,6 +2636,7 @@ Pin status for a single peer in the cluster.
 - **toJson** (method) — Converts to a JSON-serializable map.
   - calls: toApiString
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -2615,8 +2665,10 @@ Information about a cluster peer.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -2639,6 +2691,7 @@ Information about a cluster peer.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -2650,6 +2703,7 @@ Information about a cluster peer.
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
@@ -2660,13 +2714,13 @@ Information about a cluster peer.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **commit** (field) — Git commit.
 - **rpcProtocolVersion** (field) — RPC protocol version.
 - **toJson** (method) — Converts to a JSON-serializable map.
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -2732,7 +2786,6 @@ Cluster health status.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -2776,8 +2829,6 @@ Cluster health status.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -2879,6 +2930,7 @@ Cluster health status.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -2928,7 +2980,6 @@ Client for the IPFS Cluster REST API.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **sync** (method) — Syncs the local state with the cluster state for a given CID.
@@ -2939,8 +2990,10 @@ Client for the IPFS Cluster REST API.
   - calls: debug, timeout, get, parse, statusCode, jsonDecode, body, toList, map, fromJson, containsKey, Exception
 - **dispose** (method) — Releases HTTP resources.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -2959,9 +3012,11 @@ _Directly tested._
 A pin request object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the content to pin.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -2987,6 +3042,9 @@ A pin request object as defined by the Pinning Service API spec.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3033,6 +3091,7 @@ A pin request object as defined by the Pinning Service API spec.
 - **toJson** (method) — Converts this request to a JSON-serializable map.
   - calls: isNotEmpty
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3219,6 +3278,7 @@ A pin status response from the pinning service.
 - **toJson** (method) — Converts this response to a JSON-serializable map.
   - calls: toApiString, toJson
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3237,9 +3297,11 @@ A pin status response from the pinning service.
 A pin object as defined by the Pinning Service API spec.
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3265,6 +3327,9 @@ A pin object as defined by the Pinning Service API spec.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3311,6 +3376,7 @@ A pin object as defined by the Pinning Service API spec.
 - **toJson** (method) — Converts this pin to a JSON-serializable map.
   - calls: isNotEmpty
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3330,9 +3396,11 @@ A pin object as defined by the Pinning Service API spec.
 Filters for listing pins.
 
 - **cid** (field) — Filter by CID.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3358,6 +3426,9 @@ Filters for listing pins.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3463,7 +3534,9 @@ Error returned by the pinning service API.
     - `lib/src/core/data_structures/operation_log.dart` (OperationLogEntry.toProto)
     - `lib/src/services/gateway/domain_validator.dart` (DomainValidator.validateDomain)
 - **toString** (method)
-  - referenced by (by name) (name shared by 58 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 60 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.getBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.putBlock)
@@ -3508,6 +3581,7 @@ Error returned by the pinning service API.
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.findPeer)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.putValue)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getAllStoredKeys)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
@@ -3563,6 +3637,7 @@ Error returned by the pinning service API.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.listeningAddresses)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.dial)
     - `lib/src/transport/quic/quic_transport.dart` (QuicTransport.listen)
@@ -3606,8 +3681,10 @@ Client for the IPFS Pinning Service API v1.
   - calls: debug, cid, replace, parse, _pinsUrl, timeout, post, jsonEncode, toJson, _handlePinResponse
 - **dispose** (method) — Releases HTTP resources.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -3662,6 +3739,7 @@ Configuration for a registered pinning service.
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
 - **toJson** (method) — Converts to a JSON-serializable map.
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3681,9 +3759,11 @@ Configuration for a registered pinning service.
 A remote pin tracked by the [RemotePinningService].
 
 - **cid** (field) — The CID of the pinned content.
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3709,6 +3789,9 @@ A remote pin tracked by the [RemotePinningService].
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3777,6 +3860,7 @@ A remote pin tracked by the [RemotePinningService].
 - **toJson** (method) — Converts to a JSON-serializable map.
   - calls: toApiString
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -3843,8 +3927,10 @@ Manages multiple remote pinning services and coordinates pin operations.
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.start)
 - **dispose** (method) — Disposes all resources.
   - calls: values, dispose, clear
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -3974,6 +4060,7 @@ IPFS HTTP RPC API Server
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -4003,12 +4090,14 @@ IPFS HTTP RPC API Server
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)

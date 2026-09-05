@@ -26,7 +26,12 @@ import 'package:ipfs_libp2p/core/network/transport_conn.dart';
 import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p_peer;
 import 'package:test/test.dart';
 import 'package:transpiled_ipfs/src/transport/noise/dart_ipfs_noise_security.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart'
+    show
+        PeerId,
+        generateEd25519KeyPair,
+        generateRsaKeyPair,
+        minRsaKeyBits;
 
 class _FakeTransportConn implements TransportConn {
   _FakeTransportConn(Stream<Uint8List> incoming, this._outgoing)

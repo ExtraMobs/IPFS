@@ -2,20 +2,20 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/core/multiaddr.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/conn.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/transport_conn.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/rcmgr.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/common.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/context.dart' as libp2p;
-import 'package:ipfs_libp2p/core/network/stream.dart' as libp2p;
-import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p;
 import 'package:ipfs_libp2p/core/crypto/keys.dart' as libp2p;
+import 'package:ipfs_libp2p/core/multiaddr.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/common.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/conn.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/context.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/rcmgr.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/stream.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/transport_conn.dart' as libp2p;
+import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p;
 import 'package:ipfs_libp2p/p2p/transport/listener.dart' as libp2p;
 import 'package:ipfs_libp2p/p2p/transport/transport.dart' as libp2p;
 import 'package:ipfs_libp2p/p2p/transport/transport_config.dart' as libp2p;
-import 'package:quic_lib/quic_lib.dart' as quic_lib;
 import 'package:logging/logging.dart';
+import 'package:quic_lib/quic_lib.dart' as quic_lib;
 import 'package:uuid/uuid.dart';
 
 import 'quic_listener.dart';
@@ -30,23 +30,19 @@ final _log = Logger('QuicTransport');
 /// `/udp/.../quic-v1` listen addresses, and dial/accept QUIC connections
 /// without requiring native FFI libraries.
 class QuicTransport implements libp2p.Transport {
-  static const _supportedProtocols = [
-    '/ip4/udp/quic-v1',
-    '/ip6/udp/quic-v1',
-  ];
+  /// Creates a new QUIC transport.
+  ///
+  /// [config] defaults to [libp2p.TransportConfig.defaultConfig].
+  QuicTransport({libp2p.TransportConfig? config})
+    : config = config ?? libp2p.TransportConfig.defaultConfig,
+      _delegate = quic_lib.Libp2pQuicTransport();
+  static const _supportedProtocols = ['/ip4/udp/quic-v1', '/ip6/udp/quic-v1'];
 
   final quic_lib.Libp2pQuicTransport _delegate;
   bool _closed = false;
 
   @override
   final libp2p.TransportConfig config;
-
-  /// Creates a new QUIC transport.
-  ///
-  /// [config] defaults to [libp2p.TransportConfig.defaultConfig].
-  QuicTransport({libp2p.TransportConfig? config})
-      : config = config ?? libp2p.TransportConfig.defaultConfig,
-        _delegate = quic_lib.Libp2pQuicTransport();
 
   @override
   List<String> get protocols => _supportedProtocols;
@@ -71,8 +67,10 @@ class QuicTransport implements libp2p.Transport {
   }
 
   @override
-  Future<libp2p.TransportConn> dial(libp2p.MultiAddr addr,
-      {Duration? timeout}) async {
+  Future<libp2p.TransportConn> dial(
+    libp2p.MultiAddr addr, {
+    Duration? timeout,
+  }) async {
     if (_closed) {
       throw StateError('QuicTransport is closed');
     }
@@ -99,11 +97,7 @@ class QuicTransport implements libp2p.Transport {
     final quicAddr = quic_lib.Multiaddr.parse(addr.toString());
     final stream = await _delegate.listen(quicAddr);
 
-    return QuicListener(
-      stream: stream,
-      addr: addr,
-      localAddr: addr,
-    );
+    return QuicListener(stream: stream, addr: addr, localAddr: addr);
   }
 
   @override
@@ -127,6 +121,17 @@ class QuicTransport implements libp2p.Transport {
 /// connection lifecycle and metadata required by the libp2p transport
 /// interface.
 class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
+  /// Creates a QUIC connection adapter.
+  QuicConnection(
+    this._delegate, {
+    required libp2p.MultiAddr localAddr,
+    required libp2p.MultiAddr remoteAddr,
+    required bool isServer,
+  }) : _localAddr = localAddr,
+       _remoteAddr = remoteAddr,
+       _isServer = isServer,
+       _id = const Uuid().v4(),
+       _localPeer = _placeholderPeerId();
   final quic_lib.Libp2pQuicConnection _delegate;
   final libp2p.MultiAddr _localAddr;
   final libp2p.MultiAddr _remoteAddr;
@@ -142,18 +147,6 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
       Uint8List.fromList([0x12, 0x20, ...List<int>.filled(32, 0)]),
     );
   }
-
-  /// Creates a QUIC connection adapter.
-  QuicConnection(
-    this._delegate, {
-    required libp2p.MultiAddr localAddr,
-    required libp2p.MultiAddr remoteAddr,
-    required bool isServer,
-  })  : _localAddr = localAddr,
-        _remoteAddr = remoteAddr,
-        _isServer = isServer,
-        _id = const Uuid().v4(),
-        _localPeer = _placeholderPeerId();
 
   @override
   String get id => _id;
@@ -272,9 +265,7 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
   /// [PeerId] is then available through [remotePeer].
   Future<bool> verifyPeerFromHandshake() async {
     final backend = quic_lib.DefaultCryptoBackend();
-    return _delegate.verifyPeerCertificateFromHandshake(
-      backend: backend,
-    );
+    return _delegate.verifyPeerCertificateFromHandshake(backend: backend);
   }
 
   @override
@@ -285,27 +276,28 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
 
   @override
   libp2p.ConnState get state => const libp2p.ConnState(
-        streamMultiplexer: '',
-        security: '/tls/1.3',
-        transport: 'quic-v1',
-        usedEarlyMuxerNegotiation: false,
-      );
+    streamMultiplexer: '',
+    security: '/tls/1.3',
+    transport: 'quic-v1',
+    usedEarlyMuxerNegotiation: false,
+  );
 
   @override
   libp2p.ConnStats get stat => _QuicConnStats(
-        stats: libp2p.Stats(
-          direction:
-              _isServer ? libp2p.Direction.inbound : libp2p.Direction.outbound,
-          opened: DateTime.now(),
-        ),
-        numStreams: 0,
-      );
+    stats: libp2p.Stats(
+      direction: _isServer
+          ? libp2p.Direction.inbound
+          : libp2p.Direction.outbound,
+      opened: DateTime.now(),
+    ),
+    numStreams: 0,
+  );
 
   @override
   libp2p.ConnScope get scope => libp2p.NullScope();
 
   @override
-  Future<libp2p.P2PStream> newStream(libp2p.Context context) async {
+  Future<libp2p.P2PStream<dynamic>> newStream(libp2p.Context context) async {
     final quicConn = _delegate.quicConnection;
     if (quicConn is! quic_lib.QuicConnection &&
         quicConn is! QuicConnectionAdapter) {
@@ -313,32 +305,24 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
     }
     // Wait for the handshake to complete before opening a stream.
     while (!isEstablished) {
-      await Future.delayed(const Duration(milliseconds: 10));
+      await Future<void>.delayed(const Duration(milliseconds: 10));
     }
     final streamId = openBidirectionalStream();
-    return QuicP2PStream(
-      this,
-      streamId,
-      libp2p.Direction.outbound,
-      '',
-    );
+    return QuicP2PStream(this, streamId, libp2p.Direction.outbound, '');
   }
 
   @override
-  Future<List<libp2p.P2PStream>> get streams async {
+  Future<List<libp2p.P2PStream<dynamic>>> get streams async {
     final quicConn = _delegate.quicConnection;
     if (quicConn is! quic_lib.QuicConnection) {
       return [];
     }
-    final result = <libp2p.P2PStream>[];
+    final result = <libp2p.P2PStream<dynamic>>[];
     for (final stream in quicConn.streamManager.streams) {
       if (stream is quic_lib.QuicReceiveStream) {
-        result.add(QuicP2PStream(
-          this,
-          stream.streamId,
-          libp2p.Direction.inbound,
-          '',
-        ));
+        result.add(
+          QuicP2PStream(this, stream.streamId, libp2p.Direction.inbound, ''),
+        );
       }
     }
     return result;
@@ -371,8 +355,8 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
 
   @override
   Socket get socket => throw UnsupportedError(
-        'QuicConnection does not expose a dart:io Socket; it is backed by QUIC streams.',
-      );
+    'QuicConnection does not expose a dart:io Socket; it is backed by QUIC streams.',
+  );
 
   @override
   void setReadTimeout(Duration timeout) {

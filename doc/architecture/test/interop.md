@@ -1,6 +1,6 @@
 ---
 test-group: interop
-generated: 2026-08-25T14:23:03.820830
+generated: 2026-09-02T08:21:38.731863
 ---
 
 # `test/interop/`
@@ -18,6 +18,9 @@ generated: 2026-08-25T14:23:03.820830
 
 
 ## `test/interop/lib/kubo_client.dart`
+
+
+## `test/interop/lib/local_kubo_harness.dart`
 
 
 ## `test/interop/test/bitswap_test.dart`
@@ -62,4 +65,8 @@ generated: 2026-08-25T14:23:03.820830
 - P1 IPNS resolution with Kubo
 - dart_ipfs publishes a signed IPNS record and Kubo resolves it
 - Kubo publishes a signed IPNS record and dart_ipfs resolves it
+
+## `test/interop/test/local_kubo_bitswap_test.dart`
+
+- downloads a known-provider raw block from local Kubo via Bitswap
 

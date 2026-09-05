@@ -5,7 +5,7 @@
 **Target Release:** dart_ipfs v2.2  
 **Status:** Draft specification for implementation  
 **Maintainer Priority:** P1 MODIFIED  
-**Source:** `OPERATIONS_ECOSYSTEM_SPEC` section 4.6
+**Source:** Maintainer-approved operations backlog
 
 ---
 
@@ -219,7 +219,6 @@ Each example must:
 ### 7.3 CI Pipeline
 
 - Add or extend `.github/workflows/lint.yml` to run plugin tests on changes to `lib/src/plugin/`, `plugins/`, or `test/plugin/`.
-- Verify plugin examples load in the Docker smoke test.
 - Add a test that an unsigned plugin fails by default.
 - Add a test that a tampered archive fails signature verification.
 

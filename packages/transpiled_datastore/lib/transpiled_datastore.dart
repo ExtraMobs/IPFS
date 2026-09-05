@@ -41,11 +41,17 @@ export 'src/features.dart'
         featureNameTtl,
         features,
         featuresForDatastore;
-export 'src/key.dart' show Key, entryKeys, namespaceType, namespaceValue, randomKey;
+export 'src/key.dart'
+    show Key, entryKeys, namespaceType, namespaceValue, randomKey;
 export 'src/null_ds.dart' show NullDatastore;
 export 'src/path_clean.dart' show cleanPath;
 export 'src/query/filter.dart'
-    show Filter, FilterKeyCompare, FilterKeyPrefix, FilterOp, FilterValueCompare;
+    show
+        Filter,
+        FilterKeyCompare,
+        FilterKeyPrefix,
+        FilterOp,
+        FilterValueCompare;
 export 'src/query/order.dart'
     show
         Order,
@@ -65,8 +71,12 @@ export 'src/query/query.dart'
         QueryIterator,
         QueryResult,
         Results,
+        ResultsProcess,
+        keysOnlyBufSize,
+        normalBufSize,
         resultsFromIterator,
         resultsReplaceQuery,
+        resultsWithContext,
         resultsWithEntries;
 export 'src/query/query_impl.dart'
     show

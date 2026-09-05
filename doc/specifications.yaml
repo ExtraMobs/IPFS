@@ -231,7 +231,6 @@ publish(topic: String, message: String): void
 #   - doc/specs/PROTOCOL_COMPLIANCE_SPEC.md
 #   - doc/specs/NETWORKING_P2P_SPEC.md
 #   - doc/specs/SERVICES_APIS_SPEC.md
-#   - doc/specs/OPERATIONS_ECOSYSTEM_SPEC.md
 #
 # Per-feature deep specs in doc/specs/features/:
 #   Core Data Layer: CAR_FORMAT_SPEC.md, UNIXFS_SPEC.md, DAG_CBOR_SPEC.md,
@@ -243,7 +242,7 @@ publish(topic: String, message: String): void
 #                     IPNS_SPEC.md, CIRCUIT_RELAY_SPEC.md, BROWSER_TRANSPORTS_SPEC.md,
 #                     GRAPHSYNC_SPEC.md, BITSWAP_HTTP_FALLBACK_SPEC.md,
 #                     GATEWAY_TLS_SPEC.md
-#   Operations & Ecosystem: CLI_SPEC.md, DOCKER_SPEC.md, KUBERNETES_SPEC.md,
+#   Operations & Ecosystem: CLI_SPEC.md, KUBERNETES_SPEC.md,
 #                           INTEROP_TESTS_SPEC.md, MODULARIZATION_SPEC.md,
 #                           PLUGINS_SPEC.md
 #
@@ -253,17 +252,14 @@ publish(topic: String, message: String): void
 #   - MAINTAINER_AUDIT_SERVICES_APIS.md
 #   - MAINTAINER_AUDIT_NETWORKING_P2P_1.md
 #   - MAINTAINER_AUDIT_NETWORKING_P2P_2.md
-#   - MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md
 
 # maintainer binding decisions in doc/specs/decisions/:
 #   - MAINTAINER_DECISION_CAR_MIGRATION.md
 #   - MAINTAINER_DECISION_CONFIG_LIFECYCLE.md
-#   - MAINTAINER_DECISION_DOCKER_BASE.md
 #   - MAINTAINER_DECISION_INTEROP_SCOPE.md
 #   - MAINTAINER_DECISION_IPLDCODEC_RECONCILIATION.md
 #   - MAINTAINER_DECISION_PLUGIN_SECURITY.md
 # Aggregate resolution report:
-#   - doc/specs/RESOLUTIONS_AGGREGATE.md
 
 # v2.0 Protocol Compliance & Core Data Layer
 # P0: Standard CAR v1/v2 format, UnixFS basic directories, DAG-CBOR, IPLD selectors
@@ -283,7 +279,7 @@ publish(topic: String, message: String): void
 # P2: Badger / Pebble datastore backends (deferred)
 
 # v2.2 Operations, Modularity & Ecosystem
-# P0: CLI / daemon binary, Docker & multi-arch images, interoperability test suite
+# P0: CLI / daemon binary and interoperability test suite
 # P1: Kubernetes manifests & Helm chart, package modularization (dart_ipfs_core),
 #     plugin ecosystem phase 1
 # P2: WASM build, FUSE mount, reference WebUI (deferred / modified)

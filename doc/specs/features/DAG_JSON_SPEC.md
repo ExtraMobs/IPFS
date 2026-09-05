@@ -154,7 +154,7 @@ The decoder must parse a JSON string into an `IPLDNode` and must strictly valida
 
 ### 7.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job or local Docker Compose stack that runs the latest Kubo and Helia stable versions and exercises:
+Create a CI job or local interoperability harness that runs the latest Kubo and Helia stable versions and exercises:
 
 - **DAG get/put:** Dart_ipfs stores a DAG-JSON node; Kubo `dag get` returns the same canonical JSON string and CID. Reverse direction also works.
 - **RPC responses:** Dart_ipfs RPC endpoints that return JSON use the DAG-JSON reserved namespace for bytes and CIDs, matching Kubo's behavior.

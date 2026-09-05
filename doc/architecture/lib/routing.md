@@ -1,7 +1,7 @@
 ---
 module: routing
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.717716
+generated: 2026-09-02T08:21:38.636106
 ---
 
 # Module `routing` (`lib/src/routing/`)
@@ -25,6 +25,7 @@ Handles content routing operations for an IPFS node.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -53,12 +54,14 @@ Handles content routing operations for an IPFS node.
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
@@ -77,7 +80,6 @@ Handles content routing operations for an IPFS node.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
-    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **provide** (method) — Announces that the local node provides a given CID.
   - calls: toBase58, peerId, addProvider, info, error
@@ -149,7 +151,6 @@ Response from a routing request.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -193,8 +194,6 @@ Response from a routing request.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -296,6 +295,7 @@ Response from a routing request.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -316,13 +316,14 @@ Handles delegated routing operations following the IPFS Delegated Routing V1 HTT
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
-    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/routing/content_routing.dart` (ContentRouting.findProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 - **dispose** (method) — Closes the HTTP client
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -352,8 +353,10 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -367,7 +370,6 @@ Client for the InterPlanetary Network Indexer (IPNI) protocol.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
-    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/routing/content_routing.dart` (ContentRouting.findProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 
@@ -426,6 +428,7 @@ A single provider entry returned from an IPNI query.
 - **toJson** (method) — Serializes this provider to the IPNI JSON representation.
   - calls: List, toList, map, toJson
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -451,6 +454,7 @@ Metadata attached to an IPNI provider entry.
 - **toJson** (method) — Serializes this metadata entry to the IPNI JSON representation.
   - calls: isNotEmpty
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -515,7 +519,6 @@ The result of an IPNI provider query.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -559,8 +562,6 @@ The result of an IPNI provider query.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -662,6 +663,7 @@ The result of an IPNI provider query.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -691,8 +693,10 @@ Client for the Reframe delegated routing protocol.
   - calls: remove
 - **dispose** (method) — Disposes the client and closes the underlying HTTP client.
   - calls: close
-  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 19 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/services/gateway/gateway_server.dart` (GatewayServer.stop)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (LetsEncryptAutoTlsProvider.dispose)
     - `lib/src/services/gateway/gateway_tls_manager.dart` (GatewayTlsManager.dispose)
@@ -706,7 +710,6 @@ Client for the Reframe delegated routing protocol.
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.findProviders)
     - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.findProviders)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.findProviders)
-    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/routing/content_routing.dart` (ContentRouting.findProviders)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDhtFindProviders)
 
@@ -763,6 +766,7 @@ A single provider entry returned from a Reframe query.
 - **toJson** (method) — Serializes this provider to the Reframe JSON representation.
   - calls: List
   - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/builders/build_cfg.dart` (BuildCfg.config)
     - `lib/src/core/config/ipfs_config.dart` (IPFSConfig.toJson)
     - `lib/src/core/config/network_config.dart` (NetworkConfig.toJson)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.serialize)
@@ -827,7 +831,6 @@ The result of a Reframe provider query.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -871,8 +874,6 @@ The result of a Reframe provider query.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -974,6 +975,7 @@ The result of a Reframe provider query.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)

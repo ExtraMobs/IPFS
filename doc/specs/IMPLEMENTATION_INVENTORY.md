@@ -18,7 +18,6 @@ This inventory assesses the implementation status of the 26 tracked feature spec
 | **DAG_CBOR_SPEC** | P0 | Complete | `lib/src/core/cbor/enhanced_cbor_handler.dart`, `lib/src/core/ipld/codecs/standard_codecs.dart` | Tag-42 CIDs, canonical map ordering, big-int tags 2/3, strict decoding, `-2^64` boundary fix. |
 | **DAG_JSON_SPEC** | P1 | Complete | `lib/src/core/ipld/dag_json_handler.dart`, `lib/src/core/ipld/codecs/standard_codecs.dart` | Spec-compliant DAG-JSON codec: reserved namespace handling, canonical key sorting, unpadded base64url bytes, strict decoding. |
 | **DHT_INTEGRATION_SPEC** | P0 | Complete | `lib/src/protocols/dht/dht_client.dart`, `lib/src/protocols/dht/dht_envelope.dart` | `DHTEnvelope` framing, iterative Kademlia `findProviders`/`findPeer`/`getValue`, provider validation, metrics, request/response correlation. |
-| **DOCKER_SPEC** | P0 | Complete | `Dockerfile` | Multi-stage Dockerfile with hardened runtime; multi-arch support documented. |
 | **IPLD_SELECTORS_SPEC** | P0 | Complete | `lib/src/core/ipld/selectors/selector_ast.dart`, `lib/src/core/ipld/selectors/selector_executor.dart`, `lib/src/core/ipfs_node/ipld_handler.dart` | Official selector vocabulary, transparent link following, GraphSync integration. |
 | **METRICS_SPEC** | P0 | Complete | `lib/src/core/metrics/metrics_collector.dart`, `lib/src/services/gateway/gateway_server.dart`, `lib/src/services/rpc/rpc_server.dart` | Prometheus counters/gauges/histograms, `/metrics` endpoint, lifecycle wiring, request instrumentation. |
 | **MFS_SPEC** | P0 | Complete | `lib/src/core/mfs/mfs_manager.dart`, `lib/src/services/rpc/mfs_handlers.dart`, `lib/src/services/rpc/rpc_server.dart` | flush, mv, chcid, stat/ls, write offset/truncate, RPC routes, lifecycle registration. |
@@ -134,7 +133,7 @@ Using Dart SDK 3.12.2:
 ## Recommended Next Phase
 
 All tracked specifications are implemented. The next recommended phase is verification, hardening, and optional feature completion:
-1. Confirm UNIXFS HAMT CID parity with a live Kubo/Helia round-trip once Docker or a test node is available.
+1. Confirm UNIXFS HAMT CID parity with a live Kubo/Helia round-trip once a test node is available.
 2. Verify `dart_ipfs_core` and `dart_ipfs_quic` can be published (`dart pub publish --dry-run` is clean; swap path dependencies for published version constraints at release time).
 3. Complete the native QUIC transport in `packages/dart_ipfs_quic` following `doc/specs/QUIC_TRANSPORT_RFC.md`: UDP I/O loop, libp2p `Transport` wrapper, and libp2p TLS 1.3 certificate handshake.
 4. Harden production operational tooling: container image signing/SBOM, interop test stabilization, and reference WebUI build CI.

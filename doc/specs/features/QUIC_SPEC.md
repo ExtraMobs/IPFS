@@ -182,7 +182,7 @@ Capability queries such as `supportsQuic` and transport-specific dial status are
 ### 7.4 CI Integration
 
 - Add QUIC-specific tests to the existing transport test suite.
-- Run Kubo Docker container in CI and execute the interop matrix above on PRs touching `lib/src/transport`.
+- Run Kubo in CI and execute the interop matrix above on PRs touching `lib/src/transport`.
 
 ---
 

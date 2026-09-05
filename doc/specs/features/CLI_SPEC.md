@@ -5,7 +5,7 @@
 **Target Release:** dart_ipfs v2.2  
 **Status:** Draft specification for implementation  
 **Maintainer Priority:** P0 APPROVED  
-**Source:** `OPERATIONS_ECOSYSTEM_SPEC` section 4.1
+**Source:** Maintainer-approved operations backlog
 
 ---
 
@@ -53,7 +53,7 @@ Out of scope for v2.2:
 | Binary | No `bin/ipfs.dart` exists. | There is no standalone executable or daemon entry point. |
 | UX | Users must embed `IPFSNode` directly in Dart/Flutter code. | No ad-hoc file addition, retrieval, or peer management UX. |
 | Config loading | The `IPFSConfig` model exists in `lib/src/core/config/ipfs_config.dart` and supports both JSON and YAML. | The CLI has no `$IPFS_PATH/config.json` default or first-run initialization. |
-| Compilation | No release tooling compiles the project to a native binary. | Docker and CI cannot ship a small AOT executable. |
+| Compilation | No release tooling compiles the project to a native binary. | CI cannot ship a small AOT executable. |
 | RPC reuse | RPC handlers under `lib/src/services/rpc/` exist but are only invoked by tests or the library API. | The CLI cannot act as a local client of the in-process node. |
 
 Key files to leverage:
@@ -73,7 +73,6 @@ Key files to leverage:
 - Create `bin/ipfs.dart`.
 - Add `package:args` to `pubspec.yaml` dependencies and use `CommandRunner` with typed subcommand classes.
 - Add a `tool/compile_cli.dart` script that invokes `dart compile exe bin/ipfs.dart -o build/ipfs`.
-- The compiled binary must be the default entrypoint for the Docker image (see `DOCKER_SPEC.md`).
 
 ### 4.2 Repository and Configuration Defaults
 
@@ -124,7 +123,6 @@ Key files to leverage:
 7. `dart run bin/ipfs.dart swarm peers` lists connected peers or an empty array.
 8. All subcommands return the documented exit codes and respect `--help`.
 9. `dart compile exe bin/ipfs.dart -o build/ipfs` produces a working native binary.
-10. The Docker image entrypoint invokes the CLI binary with `daemon` as the default command.
 11. On first run, the CLI creates the repo directory and writes a default `config.json` that `IPFSConfig.fromFile` can load.
 12. `daemon` validates that `--api-addr`, `--gateway-addr`, and `--swarm-addr` are syntactically valid multiaddrs before binding.
 13. The `example/cli_dashboard/bin/main.dart` example is treated as a reference UI only; it is not shipped as a competing daemon entry point.
@@ -156,15 +154,9 @@ Key files to leverage:
 - Verify exit codes and stdout/stderr separation.
 - Test JSON output mode with `--enc=json`.
 
-### 7.3 Docker Smoke Tests
-
-- Build the CLI into the Docker image and verify `docker run --rm <image> version`.
-- Run `docker run --rm <image> daemon --api-addr /ip4/0.0.0.0/tcp/5001` and confirm `/api/v0/id` responds.
-
-### 7.4 CI Pipeline
+### 7.3 CI Pipeline
 
 - Add or extend `.github/workflows/lint.yml` to run `dart analyze`, `dart format`, and `dart test` on changes to `bin/` and `lib/src/services/rpc/`.
-- Add CLI smoke tests to `.github/workflows/docker.yml`.
 
 ---
 
@@ -176,9 +168,8 @@ Key files to leverage:
   - A single version source (`lib/src/version.dart`) kept in sync with `pubspec.yaml`.
   - RPC handlers for `id`, `add`, `cat`, `ls`, `pin`, `swarm`, `config`, and `version` (reuse from `lib/src/services/rpc/`).
   - Gateway and libp2p services functional enough for `daemon` startup.
-- **Order:** CLI is the first P0 deliverable in v2.2 because Docker and interop tests depend on it.
+- **Order:** CLI is the first P0 deliverable in v2.2 because interop tests depend on it.
 - **Downstream consumers:**
-  - `DOCKER_SPEC.md` — the runtime image entrypoint.
   - `INTEROP_TESTS_SPEC.md` — the CLI is used to seed and operate nodes in the test network.
   - `KUBERNETES_SPEC.md` — the container command is `ipfs daemon`.
 

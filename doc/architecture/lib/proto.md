@@ -1,7 +1,7 @@
 ---
 module: proto
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.518931
+generated: 2026-09-02T08:21:38.346001
 ---
 
 # Module `proto` (`lib/src/proto/`)
@@ -41,8 +41,9 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryEntry.toLink)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_envelope.dart` (DHTEnvelope.toBytes)
@@ -71,7 +72,8 @@ Base class for protobuf message types with serialization helpers.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
     - `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
@@ -310,6 +312,7 @@ Base message wrapper for all IPFS messages
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -556,6 +559,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **payload** (method)
   - calls: $_setBytes
@@ -567,6 +571,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasPayload** (method)
   - calls: $_has
@@ -639,7 +644,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -700,7 +705,7 @@ Base message wrapper for all IPFS messages
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -978,6 +983,7 @@ Network events
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -1325,7 +1331,7 @@ Network events
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -1349,6 +1355,7 @@ Network events
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -1383,7 +1390,7 @@ Network events
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -1407,6 +1414,7 @@ Network events
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -1499,7 +1507,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -1777,6 +1787,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -2021,6 +2032,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
@@ -2054,6 +2066,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
@@ -2076,6 +2089,7 @@ _Directly tested._
   - calls: $_getIZ
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag)
@@ -2085,6 +2099,7 @@ _Directly tested._
   - calls: $_setSignedInt32
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag)
@@ -2107,10 +2122,12 @@ _Directly tested._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/reprovider.dart` (Reprovider.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest)
@@ -2121,6 +2138,9 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
@@ -2137,10 +2157,12 @@ _Directly tested._
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/reprovider.dart` (Reprovider.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest)
@@ -2151,6 +2173,9 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
@@ -2162,12 +2187,14 @@ _Directly tested._
   - calls: $_getN
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **wantType** (method)
   - calls: $_setField
   - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasWantType** (method)
@@ -2180,6 +2207,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **sendDontHave** (method)
@@ -2188,6 +2216,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleWantBlock)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.handleHave)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasSendDontHave** (method)
@@ -2412,6 +2441,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -2659,6 +2689,7 @@ _Directly tested._
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getStatus)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.hasWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -2668,6 +2699,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore)
@@ -2681,11 +2713,13 @@ _Directly tested._
     - `lib/src/utils/keystore.dart` (Keystore.exportKeysForMigration)
 - **full** (method)
   - calls: $_getBF
-  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **full** (method)
   - calls: $_setBool
-  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **hasFull** (method)
   - calls: $_has
@@ -2909,6 +2943,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -3158,7 +3193,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -3182,6 +3217,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -3216,7 +3252,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -3240,6 +3276,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -3491,6 +3528,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -3713,9 +3751,11 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3741,6 +3781,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3757,9 +3800,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setBytes
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -3785,6 +3830,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -3830,7 +3878,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -3891,7 +3939,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -4147,6 +4195,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -4405,6 +4454,7 @@ _Directly tested._
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
 - **blockPresences** (method)
   - calls: $_getList
@@ -4439,6 +4489,7 @@ _Directly tested._
   - referenced by (by name):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.fromData)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.add)
@@ -4452,7 +4503,6 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_directory.dart` (createSymlink)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.navigateDirectory)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleBlockPut)
@@ -4493,7 +4543,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -4567,7 +4619,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -4856,6 +4910,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -5103,7 +5158,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -5164,7 +5219,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -5204,11 +5259,13 @@ _Directly tested._
   - calls: $_clearField
 - **peer** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **peer** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasPeer** (method)
   - calls: $_has
@@ -5486,6 +5543,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -5733,7 +5791,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -5794,7 +5852,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -5834,11 +5892,13 @@ _Directly tested._
   - calls: $_clearField
 - **peer** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **peer** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 6 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 7 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
 - **hasPeer** (method)
   - calls: $_has
@@ -6106,6 +6166,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -6337,8 +6398,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -6361,6 +6424,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -6376,8 +6440,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -6400,6 +6466,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -6412,7 +6479,11 @@ _Directly tested._
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviderInfos)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
 
 ### class `Reservation` extends $pb.GeneratedMessage
 
@@ -6631,6 +6702,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -6887,7 +6959,11 @@ _Directly tested._
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviderInfos)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
 
 ### class `Limit` extends $pb.GeneratedMessage
 
@@ -7106,6 +7182,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -7349,7 +7426,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -7373,6 +7450,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -7407,7 +7485,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -7431,6 +7509,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -7534,7 +7613,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -7605,7 +7686,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -7673,7 +7756,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -7991,6 +8076,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -8245,12 +8331,12 @@ _Directly tested._
   - calls: $_clearField
 - **maxMessageSize** (method)
   - calls: $_getIZ
-  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.publish)
 - **maxMessageSize** (method)
   - calls: $_setUnsignedInt32
-  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/validation/message_validator.dart` (MessageValidator.validateMessage)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_handler.dart` (GossipsubHandler.publish)
 - **hasMaxMessageSize** (method)
@@ -8495,6 +8581,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -8975,6 +9062,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -9478,6 +9566,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -10038,6 +10127,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -10472,7 +10562,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -10758,6 +10850,7 @@ Functionality to set a bit at a specific index
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -11214,6 +11307,7 @@ Functionality to clear a bit at a specific index
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -11670,6 +11764,7 @@ Functionality to get a bit at a specific index
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -12126,6 +12221,7 @@ Response message for bit value
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -12407,6 +12503,7 @@ Response message for bit value
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -12499,6 +12596,7 @@ Response message for bit value
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -12752,6 +12850,7 @@ Response message for bit value
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -13295,6 +13394,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -13524,7 +13624,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -13548,6 +13648,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -13582,7 +13683,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -13606,6 +13707,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -13641,9 +13743,11 @@ _Directly tested._
   - calls: $_clearField
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -13669,6 +13773,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -13685,9 +13792,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -13713,6 +13822,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -13994,6 +14106,7 @@ Response message for adding a block
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -14526,6 +14639,7 @@ Response message for retrieving a block
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -14770,6 +14884,7 @@ Response message for retrieving a block
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
@@ -14803,6 +14918,7 @@ Response message for retrieving a block
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
@@ -15097,6 +15213,7 @@ Response message for removing a block
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -15447,7 +15564,6 @@ The BlockStore service definition
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
-    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.wantBlock)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
@@ -15497,7 +15613,6 @@ The BlockStore service definition
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
-    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.wantBlock)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
@@ -15590,7 +15705,6 @@ _No known direct test._
     - `lib/src/core/unixfs/unixfs_node.dart` (unixfsGetNode)
     - `lib/src/proto/generated/core/blockstore.pbgrpc.dart` (BlockStoreServiceBase.getBlock_Pre)
     - `lib/src/proto/generated/core/blockstore.pbserver.dart` (BlockStoreServiceBase.handleCall)
-    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.wantBlock)
     - `lib/src/services/block_store_service.dart` (BlockStoreService.getBlock)
     - `lib/src/services/gateway/gateway_content_handler.dart` (GatewayContentHandler.getBlockByCid)
     - `lib/src/services/gateway/gateway_trustless_handler.dart` (GatewayTrustlessHandler.serveRawBlock)
@@ -15839,6 +15953,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -16065,7 +16180,6 @@ _Directly tested._
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
@@ -16074,7 +16188,6 @@ _Directly tested._
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **hasVersion** (method)
@@ -16096,9 +16209,8 @@ _Directly tested._
     - `lib/src/core/security/denylist_service.dart` (DenylistService.blockCidString)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblock)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
@@ -16118,9 +16230,8 @@ _Directly tested._
     - `lib/src/core/security/denylist_service.dart` (DenylistService.blockCidString)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblock)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
@@ -16134,6 +16245,7 @@ _Directly tested._
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -16151,6 +16263,7 @@ _Directly tested._
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -16239,7 +16352,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -16519,6 +16634,7 @@ PBLink represents a link between two DAG nodes
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -17137,6 +17253,7 @@ PBNode represents a DAG node
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -17384,7 +17501,7 @@ PBNode represents a DAG node
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -17408,6 +17525,7 @@ PBNode represents a DAG node
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -17442,7 +17560,7 @@ PBNode represents a DAG node
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -17466,6 +17584,7 @@ PBNode represents a DAG node
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -17753,6 +17872,7 @@ Extended link with additional metadata (uses standard PBLink)
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -18044,7 +18164,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -18105,7 +18225,7 @@ Extended link with additional metadata (uses standard PBLink)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -18213,7 +18333,9 @@ Link types for different DAG structures
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -18491,6 +18613,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -18713,9 +18836,11 @@ _No known direct test._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -18741,6 +18866,9 @@ _No known direct test._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -18757,9 +18885,11 @@ _No known direct test._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -18785,6 +18915,9 @@ _No known direct test._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -18832,7 +18965,7 @@ _No known direct test._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -18856,6 +18989,7 @@ _No known direct test._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -18890,7 +19024,7 @@ _No known direct test._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -18914,6 +19048,7 @@ _No known direct test._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -18974,7 +19109,7 @@ _No known direct test._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -19035,7 +19170,7 @@ _No known direct test._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -19408,6 +19543,7 @@ Represents statistics about the IPFS node.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -19771,7 +19907,9 @@ Enum representing the different types of nodes in the IPFS network.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -20040,6 +20178,7 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -20314,9 +20453,11 @@ Represents a log entry for an operation performed on the IPFS node.
   - calls: $_clearField
 - **cid** (method) — The CID involved in the operation (optional).
   - calls: $_getN
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -20342,6 +20483,9 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -20358,9 +20502,11 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -20386,6 +20532,9 @@ Represents a log entry for an operation performed on the IPFS node.
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -20638,6 +20787,7 @@ Represents a collection of operation log entries.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -20885,6 +21035,7 @@ Represents a collection of operation log entries.
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getStatus)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.hasWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -20894,6 +21045,7 @@ Represents a collection of operation log entries.
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore)
@@ -21159,6 +21311,7 @@ Represents a peer in the IPFS network.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -21390,8 +21543,10 @@ Represents a peer in the IPFS network.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -21414,6 +21569,7 @@ Represents a peer in the IPFS network.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -21429,8 +21585,10 @@ Represents a peer in the IPFS network.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -21453,6 +21611,7 @@ Represents a peer in the IPFS network.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -21469,6 +21628,7 @@ Represents a peer in the IPFS network.
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
@@ -21751,6 +21911,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -21973,9 +22134,11 @@ _Directly tested._
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getN
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -22001,6 +22164,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -22017,9 +22183,11 @@ _Directly tested._
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setField
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -22045,6 +22213,9 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -22092,7 +22263,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -22153,7 +22324,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -22275,7 +22446,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -22549,6 +22722,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -23091,6 +23265,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -23609,6 +23784,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -24055,6 +24231,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -24541,6 +24718,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -24995,6 +25173,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -25531,6 +25710,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -25762,8 +25942,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -25786,6 +25968,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -25801,8 +25984,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -25825,6 +26010,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -26078,6 +26264,7 @@ Defines a message representing a peer's unique identifier.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -26309,8 +26496,10 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -26333,6 +26522,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -26348,8 +26538,10 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -26372,6 +26564,7 @@ Defines a message representing a peer's unique identifier.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -26600,6 +26793,7 @@ Defines a message representing a node in a data structure.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -26913,7 +27107,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -26937,6 +27131,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -26971,7 +27166,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -26995,6 +27190,7 @@ Defines a message representing a node in a data structure.
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -27248,6 +27444,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -27479,8 +27676,10 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -27503,6 +27702,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -27518,8 +27718,10 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -27542,6 +27744,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -27768,6 +27971,7 @@ Defines a message representing a PeerId specifically for keys.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -28224,6 +28428,7 @@ Defines a message representing a PeerId specifically for keys.
     - `lib/src/core/peer/peer_record.dart` (PeerRecordVerifier.verifyEnvelope)
     - `lib/src/core/peer/peer_record_pb.dart` (PeerRecordPb.==)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleId)
@@ -28298,7 +28503,9 @@ Defines an enum representing the color of a node in a tree structure.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -28368,7 +28575,9 @@ The current connection status of the peer.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -28677,6 +28886,7 @@ Represents a peer participating in the DHT.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -28908,8 +29118,10 @@ Represents a peer participating in the DHT.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -28932,6 +29144,7 @@ Represents a peer participating in the DHT.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -28947,8 +29160,10 @@ Represents a peer participating in the DHT.
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -28971,6 +29186,7 @@ Represents a peer participating in the DHT.
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -28983,7 +29199,11 @@ Represents a peer participating in the DHT.
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviderInfos)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
 
 ### class `Record` extends $pb.GeneratedMessage
 
@@ -29204,6 +29424,7 @@ Represents a record stored in the DHT.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -29450,7 +29671,7 @@ Represents a record stored in the DHT.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -29472,6 +29693,7 @@ Represents a record stored in the DHT.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -29514,7 +29736,7 @@ Represents a record stored in the DHT.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -29536,6 +29758,7 @@ Represents a record stored in the DHT.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -29621,6 +29844,7 @@ Represents a record stored in the DHT.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -29713,6 +29937,7 @@ Represents a record stored in the DHT.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -29996,6 +30221,7 @@ Represents a request to find providers for a key.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -30242,7 +30468,7 @@ Represents a request to find providers for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -30264,6 +30490,7 @@ Represents a request to find providers for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -30306,7 +30533,7 @@ Represents a request to find providers for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -30328,6 +30555,7 @@ Represents a request to find providers for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -30586,6 +30814,7 @@ Represents a response to a FindProviders request.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -30813,7 +31042,7 @@ Represents a response to a FindProviders request.
 - **closerPeers** (method) — Optional: Whether or not closer peers were found during the search.
   - calls: $_getBF
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
@@ -30822,7 +31051,7 @@ Represents a response to a FindProviders request.
 - **closerPeers** (method)
   - calls: $_setBool
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
@@ -31052,6 +31281,7 @@ Represents a request to provide a record for a key.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -31298,7 +31528,7 @@ Represents a request to provide a record for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -31320,6 +31550,7 @@ Represents a request to provide a record for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -31362,7 +31593,7 @@ Represents a request to provide a record for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -31384,6 +31615,7 @@ Represents a request to provide a record for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -31638,6 +31870,7 @@ Represents a response to a Provide request.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -32126,6 +32359,7 @@ Represents a request to find a value for a key.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -32372,7 +32606,7 @@ Represents a request to find a value for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -32394,6 +32628,7 @@ Represents a request to find a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -32436,7 +32671,7 @@ Represents a request to find a value for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -32458,6 +32693,7 @@ Represents a request to find a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -32702,6 +32938,7 @@ Represents a response to a FindValue request.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -32983,6 +33220,7 @@ Represents a response to a FindValue request.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -33075,6 +33313,7 @@ Represents a response to a FindValue request.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -33113,7 +33352,7 @@ Represents a response to a FindValue request.
 - **closerPeers** (method) — Optional: The peers that are closer to the key (if no direct value is found).
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
@@ -33339,6 +33578,7 @@ Represents a request to store a value for a key.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -33585,7 +33825,7 @@ Represents a request to store a value for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -33607,6 +33847,7 @@ Represents a request to store a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -33649,7 +33890,7 @@ Represents a request to store a value for a key.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -33671,6 +33912,7 @@ Represents a request to store a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -33756,6 +33998,7 @@ Represents a request to store a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -33848,6 +34091,7 @@ Represents a request to store a value for a key.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -34103,6 +34347,7 @@ Represents a response to a PutValue request.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -34591,6 +34836,7 @@ Represents a request to find a peer in the DHT by their ID.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -35113,6 +35359,7 @@ Represents a response to a FindNode request.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -35336,7 +35583,7 @@ Represents a response to a FindNode request.
 - **closerPeers** (method) — Repeated: The peers that are closer to the requested peer ID.
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
@@ -35682,6 +35929,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -36204,6 +36452,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -36806,6 +37055,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -37268,6 +37518,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -37740,6 +37991,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -38198,6 +38450,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -38684,6 +38937,7 @@ NetworkEvent represents different network events related to the IPFS node.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -39188,7 +39442,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -39232,8 +39485,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -39335,6 +39586,7 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -39384,7 +39636,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -39428,8 +39679,6 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -39531,6 +39780,7 @@ NetworkEvent represents different network events related to the IPFS node.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -39862,6 +40112,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -40390,6 +40641,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -40922,6 +41174,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -41490,6 +41743,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -42022,6 +42276,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -42550,6 +42805,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -43078,6 +43334,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -43300,9 +43557,11 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43328,6 +43587,9 @@ Event message definitions:
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -43344,9 +43606,11 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43372,6 +43636,9 @@ Event message definitions:
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -43690,6 +43957,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -43912,9 +44180,11 @@ Event message definitions:
     - `lib/src/proto/generated/google/protobuf/java_features.pb.dart` (Java_features.java)
 - **cid** (method)
   - calls: $_getSZ
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43940,6 +44210,9 @@ Event message definitions:
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -43956,9 +44229,11 @@ Event message definitions:
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleDagImport)
 - **cid** (method)
   - calls: $_setString
-  - referenced by (by name) (name shared by 41 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 43 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/block_proto_codec.dart` (blockFromProto)
     - `lib/src/core/data_structures/block.dart` (Block.==)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
     - `lib/src/core/data_structures/car.dart` (CarSection.==)
     - `lib/src/core/data_structures/car.dart` (CarWriter.closeStream)
@@ -43984,6 +44259,9 @@ Event message definitions:
     - `lib/src/core/unixfs/unixfs_resolver.dart` (UnixFSPathResolver.resolve)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendDontHave)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendHave)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addBlockPresence)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/bitswap/message.dart` (Wantlist.addEntry)
@@ -44302,6 +44580,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -44756,6 +45035,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -45212,6 +45492,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -45458,7 +45739,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -45480,6 +45761,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -45522,7 +45804,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -45544,6 +45826,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -45629,6 +45912,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -45721,6 +46005,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -46056,6 +46341,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -46302,7 +46588,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -46324,6 +46610,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -46366,7 +46653,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -46388,6 +46675,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -46630,6 +46918,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -46876,7 +47165,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -46898,6 +47187,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -46940,7 +47230,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -46962,6 +47252,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -47047,6 +47338,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -47139,6 +47431,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -47392,6 +47685,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -47638,7 +47932,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -47660,6 +47954,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -47702,7 +47997,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -47724,6 +48019,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -48048,6 +48344,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -48294,7 +48591,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -48316,6 +48613,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -48358,7 +48656,7 @@ Event message definitions:
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -48380,6 +48678,7 @@ Event message definitions:
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -48626,6 +48925,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -49090,6 +49390,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -49636,6 +49937,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -50092,6 +50394,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -50548,6 +50851,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -50994,6 +51298,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -51452,6 +51757,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -51906,6 +52212,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -52360,6 +52667,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -52814,6 +53122,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -53272,6 +53581,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -53804,6 +54114,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -54348,6 +54659,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -54868,6 +55180,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -55306,6 +55619,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -55744,6 +56058,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -56250,6 +56565,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -56696,6 +57012,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -57186,6 +57503,7 @@ Event message definitions:
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -57514,7 +57832,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -57644,7 +57964,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -58223,6 +58545,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -58470,7 +58793,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -58531,7 +58854,7 @@ _Directly tested._
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -58595,7 +58918,7 @@ _Directly tested._
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -58617,6 +58940,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -58659,7 +58983,7 @@ _Directly tested._
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -58681,6 +59005,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -58751,7 +59076,7 @@ _Directly tested._
 - **closerPeers** (method)
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
@@ -58760,7 +59085,7 @@ _Directly tested._
 - **providerPeers** (method)
   - calls: $_getList
   - referenced by (by name):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (AddProviderMessage.toDHTMessage)
@@ -58769,11 +59094,11 @@ _Directly tested._
 - **clusterLevelRaw** (method)
   - calls: $_getIZ
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
 - **clusterLevelRaw** (method)
   - calls: $_setSignedInt32
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
 - **hasClusterLevelRaw** (method)
   - calls: $_has
 - **clearClusterLevelRaw** (method)
@@ -58996,6 +59321,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -59227,8 +59553,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -59251,6 +59579,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -59266,8 +59595,10 @@ _Directly tested._
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -59290,6 +59621,7 @@ _Directly tested._
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -59302,7 +59634,11 @@ _Directly tested._
   - calls: $_getList
   - referenced by (by name) (name shared by 5 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviderInfos)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
 - **connection** (method)
   - calls: $_getN
 - **connection** (method)
@@ -59357,7 +59693,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -59417,7 +59755,7 @@ _Directly tested._
 - **GET_PROVIDERS** (static field)
   - calls: _
   - referenced by (by name):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.handleIncomingMessage)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findProviders)
@@ -59465,7 +59803,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -59752,6 +60092,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -60351,6 +60692,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -60808,6 +61150,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -61280,6 +61623,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -61728,6 +62072,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -62204,6 +62549,7 @@ Represents a node in a Red-Black Tree.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -62450,7 +62796,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -62472,6 +62818,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -62514,7 +62861,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -62536,6 +62883,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -62623,6 +62971,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -62715,6 +63064,7 @@ Represents a node in a Red-Black Tree.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -63035,6 +63385,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -63473,6 +63824,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -63991,6 +64343,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -64513,6 +64866,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -65031,6 +65385,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -65278,6 +65633,7 @@ _No known direct test._
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getStatus)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.hasWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -65287,6 +65643,7 @@ _No known direct test._
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore)
@@ -65547,6 +65904,7 @@ Request message for storing provider information
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -65793,7 +66151,7 @@ Request message for storing provider information
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -65815,6 +66173,7 @@ Request message for storing provider information
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -65857,7 +66216,7 @@ Request message for storing provider information
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -65879,6 +66238,7 @@ Request message for storing provider information
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -66151,6 +66511,7 @@ Response message for store provider operation
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -66639,6 +67000,7 @@ Request to retrieve provider information
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -66885,7 +67247,7 @@ Request to retrieve provider information
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -66907,6 +67269,7 @@ Request to retrieve provider information
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -66949,7 +67312,7 @@ Request to retrieve provider information
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -66971,6 +67334,7 @@ Request to retrieve provider information
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -67225,6 +67589,7 @@ Response containing provider information
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -67499,7 +67864,9 @@ Status of the store operation
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -67799,6 +68166,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -68088,6 +68456,7 @@ _No known direct test._
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -68180,6 +68549,7 @@ _No known direct test._
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -68462,6 +68832,7 @@ Api is a light-weight descriptor for an API Interface.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -68752,7 +69123,6 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
@@ -68761,7 +69131,6 @@ Api is a light-weight descriptor for an API Interface.
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **hasVersion** (method)
@@ -69008,6 +69377,7 @@ Method represents a method of an API interface.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -69550,6 +69920,7 @@ Declares an API Interface to be included in this interface. The including
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -70129,6 +70500,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -70422,7 +70794,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -70695,6 +71069,7 @@ The protocol compiler can output a FileDescriptorSet containing the .proto
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -71139,6 +71514,7 @@ Describes a complete .proto file.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -71695,6 +72071,7 @@ Describes a complete .proto file.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -71920,6 +72297,7 @@ Describes a complete .proto file.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -71949,6 +72327,7 @@ Describes a complete .proto file.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -72219,6 +72598,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -72444,6 +72824,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -72473,6 +72854,7 @@ Range of reserved tag numbers. Reserved tag numbers may not be used by
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -72733,6 +73115,7 @@ Describes a message type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -73257,6 +73640,7 @@ Describes a message type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -73520,7 +73904,7 @@ Describes a message type.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -73581,7 +73965,7 @@ Describes a message type.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -73853,6 +74237,7 @@ Describes a message type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -74315,6 +74700,7 @@ Describes a field within a message.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -74650,7 +75036,7 @@ Describes a field within a message.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -74711,7 +75097,7 @@ Describes a field within a message.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -75019,6 +75405,7 @@ Describes a oneof.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -75529,6 +75916,7 @@ Range of reserved numeric values. Reserved values may not be used by
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -75754,6 +76142,7 @@ Range of reserved numeric values. Reserved values may not be used by
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -75783,6 +76172,7 @@ Range of reserved numeric values. Reserved values may not be used by
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -76043,6 +76433,7 @@ Describes an enum type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -76384,6 +76775,7 @@ Describes an enum type.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -76649,6 +77041,7 @@ Describes a value within an enum.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -77167,6 +77560,7 @@ Describes a service.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -77682,6 +78076,7 @@ Describes a method of a service.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -78222,6 +78617,7 @@ Describes a method of a service.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -78824,6 +79220,7 @@ Describes a method of a service.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -79314,6 +79711,7 @@ Describes a method of a service.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -79595,6 +79993,7 @@ Describes a method of a service.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -79687,6 +80086,7 @@ Describes a method of a service.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -79950,6 +80350,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -80420,6 +80821,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -80956,6 +81358,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -81406,6 +81809,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -81880,6 +82284,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -82356,6 +82761,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -82814,6 +83220,7 @@ Information about the support window of a feature.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -83282,6 +83689,7 @@ The name of the uninterpreted option.  Each string represents a segment in
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -83738,6 +84146,7 @@ A message representing a option the parser does not recognize. This only
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -84268,6 +84677,7 @@ TODO Enums in C++ gencode (and potentially other languages) are
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -84756,6 +85166,7 @@ A map from every known edition with a unique set of defaults to its
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -85224,6 +85635,7 @@ A compiled specification for the defaults of a set of features.  These
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -85680,6 +86092,7 @@ A compiled specification for the defaults of a set of features.  These
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -86151,6 +86564,7 @@ Encapsulates information about the original source file from which a
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -86591,6 +87005,7 @@ Encapsulates information about the original source file from which a
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -87078,6 +87493,7 @@ Describes the relationship between generated code and its original source
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -87366,7 +87782,9 @@ The full set of known editions.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87433,7 +87851,9 @@ The verification state of the extension range.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87531,7 +87951,9 @@ The verification state of the extension range.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87599,7 +88021,9 @@ The verification state of the extension range.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87669,7 +88093,9 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87741,7 +88167,9 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87809,7 +88237,9 @@ Generated classes can be optimized for speed or code size.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87879,7 +88309,9 @@ If set to RETENTION_SOURCE, the option will be omitted from the binary.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -87963,7 +88395,9 @@ This indicates the types of entities that the field may apply to when used
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88033,7 +88467,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88103,7 +88539,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88171,7 +88609,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88239,7 +88679,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88307,7 +88749,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88375,7 +88819,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88443,7 +88889,9 @@ Is this method side-effect-free (or safe in HTTP parlance), or idempotent,
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -88513,7 +88961,9 @@ Represents the identified object's effect on the element in the original
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -89093,6 +89543,7 @@ A Duration represents a signed, fixed-length span of time represented
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -89602,6 +90053,7 @@ A generic empty message that you can re-use to avoid defining duplicated
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -90069,6 +90521,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -90532,6 +90985,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -90823,7 +91277,9 @@ The UTF8 validation strategy to use.  See go/editions-utf8-validation for
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -91096,6 +91552,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -91569,6 +92026,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -92013,6 +92471,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -92543,6 +93002,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -92795,7 +93255,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -92863,7 +93325,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -93163,6 +93627,7 @@ A Timestamp represents a point in time independent of any time zone or local
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -93658,6 +94123,7 @@ A protocol buffer message type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -94192,6 +94658,7 @@ A single field of a message type.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -94796,6 +95263,7 @@ Enum type definition.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -95326,6 +95794,7 @@ Enum value definition.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -95836,6 +96305,7 @@ A protocol buffer option, which can be attached to a message, field,
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -96177,6 +96647,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -96269,6 +96740,7 @@ A protocol buffer option, which can be attached to a message, field,
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -96354,7 +96826,9 @@ The syntax in which a protocol buffer element is defined.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -96456,7 +96930,9 @@ Basic field types.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -96528,7 +97004,9 @@ Whether a field is optional, required, or repeated.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -96850,6 +97328,7 @@ Wrapper message for `double`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -97131,6 +97610,7 @@ Wrapper message for `double`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -97223,6 +97703,7 @@ Wrapper message for `double`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -97478,6 +97959,7 @@ Wrapper message for `float`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -97759,6 +98241,7 @@ Wrapper message for `float`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -97851,6 +98334,7 @@ Wrapper message for `float`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -98106,6 +98590,7 @@ Wrapper message for `int64`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -98387,6 +98872,7 @@ Wrapper message for `int64`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -98479,6 +98965,7 @@ Wrapper message for `int64`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -98734,6 +99221,7 @@ Wrapper message for `uint64`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -99015,6 +99503,7 @@ Wrapper message for `uint64`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -99107,6 +99596,7 @@ Wrapper message for `uint64`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -99362,6 +99852,7 @@ Wrapper message for `int32`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -99643,6 +100134,7 @@ Wrapper message for `int32`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -99735,6 +100227,7 @@ Wrapper message for `int32`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -99990,6 +100483,7 @@ Wrapper message for `uint32`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -100271,6 +100765,7 @@ Wrapper message for `uint32`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -100363,6 +100858,7 @@ Wrapper message for `uint32`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -100618,6 +101114,7 @@ Wrapper message for `bool`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -100899,6 +101396,7 @@ Wrapper message for `bool`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -100991,6 +101489,7 @@ Wrapper message for `bool`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -101246,6 +101745,7 @@ Wrapper message for `string`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -101527,6 +102027,7 @@ Wrapper message for `string`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -101619,6 +102120,7 @@ Wrapper message for `string`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -101874,6 +102376,7 @@ Wrapper message for `bytes`.
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -102155,6 +102658,7 @@ Wrapper message for `bytes`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -102247,6 +102751,7 @@ Wrapper message for `bytes`.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -102599,6 +103104,7 @@ Main Graphsync Message
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -103065,6 +103571,7 @@ Request for graph traversal
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -103296,8 +103803,10 @@ Request for graph traversal
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -103320,6 +103829,7 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -103335,8 +103845,10 @@ Request for graph traversal
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -103359,6 +103871,7 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -103423,6 +103936,7 @@ Request for graph traversal
   - calls: $_getIZ
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag)
@@ -103432,6 +103946,7 @@ Request for graph traversal
   - calls: $_setSignedInt32
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag)
@@ -103459,10 +103974,12 @@ Request for graph traversal
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/reprovider.dart` (Reprovider.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest)
@@ -103473,6 +103990,9 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
@@ -103489,10 +104009,12 @@ Request for graph traversal
     - `lib/src/core/security/security_manager.dart` (SecurityManager.stop)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.stop)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/reprovider.dart` (Reprovider.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_protocol.dart` (GraphsyncProtocol.createCancelRequest)
@@ -103503,6 +104025,9 @@ Request for graph traversal
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.start)
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.stop)
     - `lib/src/transport/circuit_relay_service.dart` (CircuitRelayService.stop)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
     - `lib/src/transport/quic/quic_listener.dart` (QuicListener.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.close)
     - `lib/src/transport/quic/quic_p2p_stream.dart` (QuicP2PStream.closeRead)
@@ -103754,6 +104279,7 @@ Response to graph request
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -103985,8 +104511,10 @@ Response to graph request
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -104009,6 +104537,7 @@ Response to graph request
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -104024,8 +104553,10 @@ Response to graph request
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toProto)
     - `lib/src/core/types/peer_types.dart` (IPFSPeer.toKadPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
+    - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.findProviders)
     - `lib/src/protocols/dht/dht_protocol.dart` (DHTProtocol.handleFindNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (findClosestNode)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (splitNode)
@@ -104048,6 +104579,7 @@ Response to graph request
     - `lib/src/transport/circuit_relay_client_io.dart` (CircuitRelayClient.connectThroughRelay)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.peerID)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/pnet/pnet_transport_conn.dart` (PnetTransportConn.id)
     - `lib/src/transport/webrtc/webrtc_transport.dart` (WebRTCTransport.dial)
     - `lib/src/transport/webtransport/webtransport_session.dart` (WebTransportSession.openBidirectionalStream)
@@ -104311,6 +104843,7 @@ Block data with prefix
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -104560,7 +105093,7 @@ Block data with prefix
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -104584,6 +105117,7 @@ Block data with prefix
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -104618,7 +105152,7 @@ Block data with prefix
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -104642,6 +105176,7 @@ Block data with prefix
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -104741,7 +105276,9 @@ Standard response status codes
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -105062,6 +105599,7 @@ Main message wrapping all IPLD value types
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -105710,6 +106248,7 @@ Represents an ordered sequence of IPLD values
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -105962,7 +106501,9 @@ Represents an ordered sequence of IPLD values
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -106206,6 +106747,7 @@ Represents key-value associations
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -106453,6 +106995,7 @@ Represents key-value associations
     - `lib/src/core/storage/memory_datastore.dart` (MemoryDatastore.query)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.sendWantlist)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getStatus)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.hasWantlist)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -106462,6 +107005,7 @@ Represents key-value associations
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.peerCount)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/pubsub/gossipsub/peer_score.dart` (PeerScore.computeScore)
@@ -106693,6 +107237,7 @@ Individual map entry
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -106939,7 +107484,7 @@ Individual map entry
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -106961,6 +107506,7 @@ Individual map entry
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -107003,7 +107549,7 @@ Individual map entry
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -107025,6 +107571,7 @@ Individual map entry
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -107110,6 +107657,7 @@ Individual map entry
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -107202,6 +107750,7 @@ Individual map entry
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -107459,6 +108008,7 @@ Represents a CID link
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -107685,7 +108235,6 @@ Represents a CID link
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **version** (method)
@@ -107694,7 +108243,6 @@ Represents a CID link
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
     - `lib/src/core/data_structures/car.dart` (CarHeader.==)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.version)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/services/content_service.dart` (ContentService.storeContent)
     - `lib/src/services/rpc/rpc_handlers.dart` (RPCHandlers.handleVersion)
 - **hasVersion** (method)
@@ -107706,6 +108254,7 @@ Represents a CID link
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -107723,6 +108272,7 @@ Represents a CID link
   - referenced by (by name) (name shared by 4 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/cbor/enhanced_cbor_handler.dart` (EnhancedCBORHandler.convertToMerkleLink)
     - `lib/src/core/cid_proto_codec.dart` (cidFromProto)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.put)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.importCAR)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.exportCAR)
@@ -107754,9 +108304,8 @@ Represents a CID link
     - `lib/src/core/security/denylist_service.dart` (DenylistService.blockCidString)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblock)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
@@ -107776,9 +108325,8 @@ Represents a CID link
     - `lib/src/core/security/denylist_service.dart` (DenylistService.blockCidString)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblock)
     - `lib/src/core/security/denylist_service.dart` (DenylistService.unblockCidString)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
@@ -107891,7 +108439,9 @@ Enumeration of all possible IPLD kinds
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -108201,6 +108751,7 @@ _Directly tested._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -108482,6 +109033,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -108574,6 +109126,7 @@ _Directly tested._
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -108732,7 +109285,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -108756,6 +109309,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -108790,7 +109344,7 @@ _Directly tested._
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -108814,6 +109368,7 @@ _Directly tested._
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -108890,7 +109445,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -109159,6 +109716,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -109643,6 +110201,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -110171,6 +110730,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -110712,6 +111272,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -110959,7 +111520,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -111020,7 +111581,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -111067,7 +111628,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -111091,6 +111652,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -111125,7 +111687,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/core/crypto/ecdsa_signer.dart` (EcdsaSigner.decodePublicKeyPb)
     - `lib/src/core/crypto/rsa_signer.dart` (RsaSigner.decodePublicKeyPb)
     - `lib/src/core/data_structures/block.dart` (Block.==)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.get)
     - `lib/src/core/data_structures/directory.dart` (IPFSDirectoryManager.build)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.fromBytes)
     - `lib/src/core/data_structures/merkle_dag_node.dart` (MerkleDAGNode.toBytes)
@@ -111149,6 +111711,7 @@ Data represents a UnixFS Data object, which can be a file, directory, symlink, e
     - `lib/src/core/responses/response_handler.dart` (ResponseHandler.toGetBlockResponse)
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.symlinkTarget)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
@@ -111493,6 +112056,7 @@ Metadata represents metadata about a UnixFS node
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -111809,6 +112373,7 @@ _Directly tested._
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_node.dart` (UnixFSNode.isFile)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.readBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.readString)
@@ -111871,7 +112436,9 @@ _Directly tested._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)
@@ -112153,6 +112720,7 @@ _No known direct test._
   - calls: _
   - referenced by (by name) (name shared by 207 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeBytes)
+    - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.appendBytes)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.writeString)
     - `lib/src/platform/platform_io.dart` (IpfsPlatformIO.createDirectory)
     - `lib/src/proto/generated/base_messages.pb.dart` (IPFSMessage.createEmptyInstance)
@@ -112467,7 +113035,9 @@ _No known direct test._
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connections)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.getAllPeers)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.stop)

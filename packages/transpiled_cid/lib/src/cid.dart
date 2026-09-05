@@ -343,6 +343,28 @@ class Prefix {
     required this.mhLength,
   });
 
+  /// Decodes the four-varint CID prefix used by Bitswap payload blocks.
+  factory Prefix.fromBytes(Uint8List bytes) {
+    var offset = 0;
+    final (version, versionLength) = readVarint(bytes, offset);
+    offset += versionLength;
+    final (codecCode, codecLength) = readVarint(bytes, offset);
+    offset += codecLength;
+    final (mhCode, mhCodeLength) = readVarint(bytes, offset);
+    offset += mhCodeLength;
+    final (mhLength, lengthLength) = readVarint(bytes, offset);
+    offset += lengthLength;
+    if (offset != bytes.length) {
+      throw const FormatException('CID prefix has trailing bytes');
+    }
+    return Prefix(
+      version: version,
+      codec: Multicodec.name(codecCode),
+      mhType: Multicodec.name(mhCode),
+      mhLength: mhLength,
+    );
+  }
+
   /// The CID version (0 or 1).
   final int version;
 
@@ -358,7 +380,16 @@ class Prefix {
   /// Hashes [data] with [mhType] and builds a CID with this prefix's
   /// [version] and [codec]. Equivalent to go-cid's `Prefix.Sum(data)`.
   CID sum(Uint8List data) {
-    final mh = MultihashUtils.sum(mhType, data);
+    final full = MultihashUtils.sum(mhType, data);
+    if (mhLength < -1 || mhLength > full.digest.length) {
+      throw RangeError.range(mhLength, -1, full.digest.length, 'mhLength');
+    }
+    final mh = mhLength == -1 || mhLength == full.digest.length
+        ? full
+        : MultihashUtils.encode(
+            mhType,
+            Uint8List.fromList(full.digest.sublist(0, mhLength)),
+          );
     if (version == 0) {
       return CID.v0(Uint8List.fromList(mh.digest));
     }

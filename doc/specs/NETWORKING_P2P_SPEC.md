@@ -1260,7 +1260,7 @@ class GatewayServer {
 
 ### 6.4 CI Integration
 
-- Add a new GitHub Actions workflow `interop.yml` that starts Kubo and Helia Docker containers.
+- Add a new GitHub Actions workflow `interop.yml` that starts Kubo and Helia test nodes.
 - Run interop tests nightly and on PRs touching `lib/src/transport`, `lib/src/protocols/dht`, `lib/src/protocols/ipns`, `lib/src/protocols/pubsub`, `lib/src/protocols/graphsync`, `lib/src/protocols/bitswap`, `lib/src/services/gateway`.
 - Enforce coverage thresholds with `coverage` package.
 

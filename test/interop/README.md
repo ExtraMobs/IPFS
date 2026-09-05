@@ -1,5 +1,8 @@
 # Interop Test Infrastructure
 
+See [INTEROP_TESTS.md](INTEROP_TESTS.md) for the isolated local-process
+harness, lifecycle invariants, and instructions for adding protocol tests.
+
 This directory contains infrastructure for testing dart_ipfs against Helia (JavaScript IPFS implementation).
 
 ## Setup

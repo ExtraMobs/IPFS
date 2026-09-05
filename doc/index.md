@@ -17,7 +17,6 @@ Project maintainers approved backlog specs for making dart_ipfs the superior IPF
 - [Protocol Compliance & Core Data Layer](specs/PROTOCOL_COMPLIANCE_SPEC.md)
 - [Networking, Naming & Full P2P](specs/NETWORKING_P2P_SPEC.md)
 - [Services & APIs](specs/SERVICES_APIS_SPEC.md)
-- [Operations, Modularity & Ecosystem](specs/OPERATIONS_ECOSYSTEM_SPEC.md)
 
 ## Per-Feature Deep Specifications
 
@@ -55,7 +54,6 @@ Research-backed, standalone specifications for every approved/modified backlog i
 ### Operations, Modularity & Ecosystem
 
 - [CLI / Daemon Binary](specs/features/CLI_SPEC.md)
-- [Docker Images](specs/features/DOCKER_SPEC.md)
 - [Kubernetes / Helm](specs/features/KUBERNETES_SPEC.md)
 - [Interoperability Test Suite](specs/features/INTEROP_TESTS_SPEC.md)
 - [Package Modularization](specs/features/MODULARIZATION_SPEC.md)
@@ -69,19 +67,16 @@ Each per-feature spec was audited by the five project review lenses (Coherence, 
 - [Services & APIs Audit](specs/audits/MAINTAINER_AUDIT_SERVICES_APIS.md)
 - [Networking & P2P Audit (Part 1)](specs/audits/MAINTAINER_AUDIT_NETWORKING_P2P_1.md)
 - [Networking & P2P Audit (Part 2)](specs/audits/MAINTAINER_AUDIT_NETWORKING_P2P_2.md)
-- [Operations & Ecosystem Audit](specs/audits/MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md)
 
 ## Maintainer Decisions
 Binding architectural decisions produced by the project maintainers to resolve cross-cutting audit findings and unblock implementation.
 
 - [CAR Migration — Delete legacy protobuf CAR and adopt standard CarReader/CarWriter](specs/decisions/MAINTAINER_DECISION_CAR_MIGRATION.md)
 - [IPFSConfig Serialization & Lifecycle Wiring — JSON canonical format, round-trip config, and builder-managed RPC/gateway services](specs/decisions/MAINTAINER_DECISION_CONFIG_LIFECYCLE.md)
-- [Docker Base Image Strategy — Hardened glibc default (`cgr.dev/chainguard/glibc-dynamic`) with experimental static variant](specs/decisions/MAINTAINER_DECISION_DOCKER_BASE.md)
 - [Interop Test Scope — P0 release-blocking CAR/Bitswap/gateway only; DHT/IPNS P1 allowed-to-fail; Helia nightly](specs/decisions/MAINTAINER_DECISION_INTEROP_SCOPE.md)
 - [IPLDCodec Reconciliation — Unified codec interface with `name`/`code` and a `MulticodecRegistry`](specs/decisions/MAINTAINER_DECISION_IPLDCODEC_RECONCILIATION.md)
 - [Plugin Security Model — Trust-based, capability-gated, auditable runtime; no committed signing keys](specs/decisions/MAINTAINER_DECISION_PLUGIN_SECURITY.md)
 
-- [Aggregate Resolution Report](specs/RESOLUTIONS_AGGREGATE.md)
 
 ## API Reference
 

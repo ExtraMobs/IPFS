@@ -1,7 +1,7 @@
 ---
 module: network
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.488488
+generated: 2026-09-02T08:21:38.304860
 ---
 
 # Module `network` (`lib/src/network/`)
@@ -76,6 +76,7 @@ SRV record containing service location information.
 - **priority** (field) — Service priority (lower is higher priority).
   - referenced by (by name) (name shared by 8 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.wantBlock)
+    - `lib/src/protocols/bitswap/message.dart` (Message.addWantlistEntry)
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.tag)
@@ -146,7 +147,7 @@ Query class for mDNS resource records.
     - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -195,6 +196,7 @@ Abstract client for multicast DNS operations.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -223,12 +225,14 @@ Abstract client for multicast DNS operations.
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)
@@ -270,6 +274,7 @@ IO implementation of the mDNS client.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -298,12 +303,14 @@ IO implementation of the mDNS client.
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/protocols/bitswap/bitswap.dart` (Bitswap.stop)
@@ -355,6 +362,7 @@ Stub implementation of the mDNS client for platforms where it's not supported.
   - referenced by (by name) (name shared by 66 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.start)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.start)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.fromBuildCfg)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.start)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.startAll)
@@ -383,12 +391,14 @@ Stub implementation of the mDNS client for platforms where it's not supported.
   - referenced by (by name) (name shared by 59 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/auto_nat_handler.dart` (AutoNATHandler.stop)
     - `lib/src/core/ipfs_node/content_routing_handler.dart` (ContentRoutingHandler.stop)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.close)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.restart)
     - `lib/src/core/ipfs_node/ipfs_web_node.dart` (IPFSWebNode.stop)
     - `lib/src/core/ipfs_node/lifecycle_manager.dart` (LifecycleManager.stopAll)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.start)
     - `lib/src/core/ipfs_node/mdns_handler.dart` (MDNSHandler.stop)
     - `lib/src/core/ipfs_node/network_handler_io.dart` (NetworkHandler.stop)
+    - `lib/src/core/ipfs_node/network_manager.dart` (NetworkManager.stop)
     - `lib/src/core/ipfs_node/pubsub_handler.dart` (PubSubHandler.stop)
     - `lib/src/core/ipfs_node/routing_handler.dart` (RoutingHandler.stop)
     - `lib/src/network/mdns_client_io.dart` (MDnsClientIO.stop)

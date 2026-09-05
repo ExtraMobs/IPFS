@@ -5,13 +5,13 @@
 **Target Release:** dart_ipfs v2.2  
 **Status:** Draft specification for implementation  
 **Maintainer Priority:** P1 APPROVED  
-**Source:** `OPERATIONS_ECOSYSTEM_SPEC` section 4.3
+**Source:** Maintainer-approved operations backlog
 
 ---
 
 ## 1. Goal and Scope
 
-The goal of this specification is to provide declarative Kubernetes deployment artifacts for `dart_ipfs` that build on the Docker image work completed in v2.2. The artifacts must make it possible to deploy a single-node `dart_ipfs` daemon to any Kubernetes cluster using either plain Kustomize manifests or a Helm chart.
+The goal of this specification is to provide declarative Kubernetes deployment artifacts for `dart_ipfs`. The artifacts must make it possible to deploy a single-node `dart_ipfs` daemon to any Kubernetes cluster using either plain Kustomize manifests or a Helm chart.
 
 Scope includes:
 
@@ -59,7 +59,6 @@ Out of scope for v2.2:
 
 Key dependencies:
 
-- A published, multi-arch Docker image from `DOCKER_SPEC.md`.
 - The CLI binary from `CLI_SPEC.md` so the container command is `ipfs daemon`.
 
 ---
@@ -223,7 +222,6 @@ ingress:
 - No privileged containers, no host networking, and no `hostPath` volumes unless in an explicit debug overlay.
 - Secrets for bootstrap keys or RPC auth must be stored in Kubernetes Secrets, not ConfigMaps.
 - NetworkPolicy should restrict ingress to API and gateway ports only; the swarm port may be exposed via a Service but should be documented as externally reachable.
-- Do not mount the Docker socket or grant unnecessary RBAC permissions.
 - Use Pod Security Standards baseline or restricted profile where possible.
 - Gateway ingress must not expose the RPC API. If API access is required, it should be behind an authenticated proxy.
 
@@ -262,10 +260,9 @@ ingress:
 ## 8. Dependencies and Ordering
 
 - **Prerequisites:**
-  - Docker image built and published automatically (see `DOCKER_SPEC.md`).
   - CLI binary stable (see `CLI_SPEC.md`).
   - Chart `appVersion` matches the package version (`1.11.5` at the time of writing).
-- **Order:** Kubernetes is P1 and must start **after** Docker CI is complete and images are auto-published. It is part of the v2.2 rc / optional v2.2.x phase.
+- **Order:** Kubernetes is P1 and is part of the v2.2 rc / optional v2.2.x phase.
 - **Downstream consumers:**
   - Production deployment guides in `doc/deploy.md` (to be created).
   - Potential cloud marketplace listings in v3.0.
@@ -275,7 +272,7 @@ ingress:
 ## 9. Backward Compatibility Notes
 
 - Kubernetes manifests are a new deliverable; there is no prior artifact to migrate from.
-- The Helm chart will follow semantic versioning independent of the application where practical, but the chart's `appVersion` should match the Docker image tag for a given release.
+- The Helm chart will follow semantic versioning independent of the application where practical.
 - Overlays should be additive. Production overlays may set stricter security contexts and resource limits than the base.
 - Future releases (v3.0) may introduce clustering or operator-based deployments. v2.2 manifests must be designed so that a single-replica StatefulSet can be upgraded cleanly without requiring manual data migration.
 - PersistentVolumeClaims must not be deleted during chart upgrades so the IPFS repository survives version updates.

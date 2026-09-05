@@ -40,6 +40,22 @@ enum Libp2pTlsFailureReason {
 
 /// The outcome of verifying a peer's libp2p TLS 1.3 certificate.
 class Libp2pTlsVerificationResult {
+  /// Creates a successful verification result.
+  const Libp2pTlsVerificationResult.ok(this.peerId, this.publicKey)
+    : valid = true,
+      failureReason = null,
+      expectedPeerId = null,
+      failureDetail = null;
+
+  /// Creates a failed verification result.
+  const Libp2pTlsVerificationResult.failed(
+    this.failureReason,
+    this.failureDetail, {
+    this.expectedPeerId,
+  }) : valid = false,
+       peerId = null,
+       publicKey = null;
+
   /// Whether the certificate is valid and the peer identity was established.
   final bool valid;
 
@@ -61,24 +77,6 @@ class Libp2pTlsVerificationResult {
 
   /// A human-readable description of the failure, when [valid] is `false`.
   final String? failureDetail;
-
-  /// Creates a successful verification result.
-  const Libp2pTlsVerificationResult.ok(
-    this.peerId,
-    this.publicKey,
-  )   : valid = true,
-        failureReason = null,
-        expectedPeerId = null,
-        failureDetail = null;
-
-  /// Creates a failed verification result.
-  const Libp2pTlsVerificationResult.failed(
-    this.failureReason,
-    this.failureDetail, {
-    this.expectedPeerId,
-  })  : valid = false,
-        peerId = null,
-        publicKey = null;
 
   @override
   String toString() {
@@ -147,7 +145,7 @@ class Libp2pTlsHandshakeVerifier {
       );
     }
     if (ext == null) {
-      return Libp2pTlsVerificationResult.failed(
+      return const Libp2pTlsVerificationResult.failed(
         Libp2pTlsFailureReason.noExtension,
         'Certificate does not contain the libp2p TLS extension '
         '(OID ${quic_ext.Libp2pExtension.oid}).',
@@ -194,8 +192,10 @@ class Libp2pTlsHandshakeVerifier {
     final signature = Uint8List.fromList(signedKey.signature);
     final bool signatureValid;
     try {
-      signatureValid =
-          await libp2pPublicKey.verify(handshakeMessage, signature);
+      signatureValid = await libp2pPublicKey.verify(
+        handshakeMessage,
+        signature,
+      );
     } catch (e) {
       return Libp2pTlsVerificationResult.failed(
         Libp2pTlsFailureReason.invalidSignature,
@@ -203,7 +203,7 @@ class Libp2pTlsHandshakeVerifier {
       );
     }
     if (!signatureValid) {
-      return Libp2pTlsVerificationResult.failed(
+      return const Libp2pTlsVerificationResult.failed(
         Libp2pTlsFailureReason.invalidSignature,
         'The libp2p TLS extension signature is not valid for the embedded '
         'public key.',
@@ -231,6 +231,9 @@ class Libp2pTlsHandshakeVerifier {
 /// Exception raised when a peer's certificate-derived identity does not match
 /// the expected peer ID.
 class PeerIdMismatchException implements Exception {
+  /// Creates a [PeerIdMismatchException].
+  PeerIdMismatchException(this.expectedPeerId, this.actualPeerId, this.detail);
+
   /// The expected peer ID (e.g. from the dialed multiaddr).
   final libp2p.PeerId expectedPeerId;
 
@@ -240,13 +243,6 @@ class PeerIdMismatchException implements Exception {
   /// A human-readable description of the mismatch.
   final String detail;
 
-  /// Creates a [PeerIdMismatchException].
-  PeerIdMismatchException(
-    this.expectedPeerId,
-    this.actualPeerId,
-    this.detail,
-  );
-
   @override
   String toString() =>
       'PeerIdMismatchException: expected $expectedPeerId, got $actualPeerId. '
@@ -255,14 +251,14 @@ class PeerIdMismatchException implements Exception {
 
 /// Exception raised when the peer's TLS certificate cannot be verified.
 class PeerCertificateVerificationException implements Exception {
+  /// Creates a [PeerCertificateVerificationException].
+  PeerCertificateVerificationException(this.reason, this.detail);
+
   /// The reason verification failed.
   final Libp2pTlsFailureReason reason;
 
   /// A human-readable description of the failure.
   final String detail;
-
-  /// Creates a [PeerCertificateVerificationException].
-  PeerCertificateVerificationException(this.reason, this.detail);
 
   @override
   String toString() => 'PeerCertificateVerificationException($reason): $detail';

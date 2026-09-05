@@ -6,15 +6,33 @@ import 'package:transpiled_boxo/transpiled_boxo.dart';
 
 void main() {
   test('XOR matches boxo vectors', () {
-    expect(xor(Uint8List.fromList([0xff, 0xff, 0xff]),
-        Uint8List.fromList([0xff, 0xff, 0xff])), [0, 0, 0]);
-    expect(xor(Uint8List.fromList([0, 0xff, 0]),
-        Uint8List.fromList([0xff, 0xff, 0xff])), [0xff, 0, 0xff]);
+    expect(
+      xor(
+        Uint8List.fromList([0xff, 0xff, 0xff]),
+        Uint8List.fromList([0xff, 0xff, 0xff]),
+      ),
+      [0, 0, 0],
+    );
+    expect(
+      xor(
+        Uint8List.fromList([0, 0xff, 0]),
+        Uint8List.fromList([0xff, 0xff, 0xff]),
+      ),
+      [0xff, 0, 0xff],
+    );
   });
 
   test('partitions use first and last separator', () {
-    expect(partition('Ready, steady, go!', ', '), ['Ready', ', ', 'steady, go!']);
-    expect(rPartition('Ready, steady, go!', ', '), ['Ready, steady', ', ', 'go!']);
+    expect(partition('Ready, steady, go!', ', '), [
+      'Ready',
+      ', ',
+      'steady, go!',
+    ]);
+    expect(rPartition('Ready, steady, go!', ', '), [
+      'Ready, steady',
+      ', ',
+      'go!',
+    ]);
     expect(partition('abc', '/'), ['abc', '', '']);
   });
 
@@ -31,6 +49,9 @@ void main() {
   });
 
   test('FileExists reports missing paths', () {
-    expect(fileExists('i would be surprised to discover that this file exists'), isFalse);
+    expect(
+      fileExists('i would be surprised to discover that this file exists'),
+      isFalse,
+    );
   });
 }

@@ -6,7 +6,6 @@
 **Subject:** Release-blocking status and minimum protocol coverage of the v2.2 cross-implementation interoperability test suite.  
 **Inputs:**
 - `doc/specs/features/INTEROP_TESTS_SPEC.md` (v1.0-draft)
-- `doc/specs/audits/MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md`
 - `doc/specs/audits/MAINTAINER_AUDIT_NETWORKING_P2P_1.md`
 - `lib/src/protocols/dht/dht_client.dart`
 - `lib/src/protocols/ipns/ipns_handler.dart`
@@ -28,10 +27,9 @@
 
 **Score: 8/10**
 
-The `INTEROP_TESTS_SPEC.md` correctly identifies cross-implementation drift as the highest-risk item in the v2.2 operations backlog (`MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md`, line 181). However, treating **every** listed scenario as P0 release-blocking is incoherent with the current implementation state:
+The `INTEROP_TESTS_SPEC.md` correctly identifies cross-implementation drift as a high-risk item in the v2.2 backlog. However, treating **every** listed scenario as P0 release-blocking is incoherent with the current implementation state:
 
 - The networking specs (`DHT_INTEGRATION_SPEC.md`, `IPNS_SPEC.md`) are themselves marked **CONDITIONAL** and depend on missing primitives (`PeerId` base36 methods, `DHTConfig` server/client mode, iterative DHT queries).
-- The audit explicitly recommends conditioning the interop spec on protocol stability (`MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md`, line 339).
 - A split-tier model (P0 data-exchange tests, P1 naming/routing tests) keeps the suite aligned with the v2.2 release plan while respecting the dependency ordering in `MAINTAINER_AUDIT_NETWORKING_P2P_1.md`, section 6.2.
 
 **Coherence finding:** A P0 interop job is required, but only the CAR, Bitswap, and gateway scenarios should gate the release.
@@ -84,7 +82,7 @@ The recommended split improves efficiency:
 
 A tiered model is explicitly evolutionary:
 
-- The P0 job, Docker Compose network, RPC clients, and pinned Kubo version create the infrastructure needed for stricter gating.
+- The P0 job, RPC clients, and pinned Kubo version create the infrastructure needed for stricter gating.
 - The P1 scenarios remain in the codebase as test stubs, so they can be promoted to P0 once `DHT_INTEGRATION_SPEC.md` and `IPNS_SPEC.md` are fully implemented and the missing primitives (`PeerId` base36, iterative DHT queries, DHT mode configuration) are in place.
 - The nightly Helia workflow gives the project a place to mature Helia interop without destabilizing v2.2.
 - A separate status check for P1 results ensures visibility even when failures do not block the merge.
@@ -134,7 +132,7 @@ A credible v2.2 release must verify the following against Kubo:
 
 The following must be present in the test suite but are not release gates:
 
-4. **DHT provide/find** — `ipfs dht findprovs` and `ipfs dht findpeer` in a private Docker network.
+4. **DHT provide/find** — `ipfs dht findprovs` and `ipfs dht findpeer` in an isolated test network.
 5. **IPNS resolution** — publish a signed IPNS record and resolve it from Kubo, and vice versa.
 6. **Helia Bitswap/CAR** — nightly scaffolding only.
 

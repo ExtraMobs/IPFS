@@ -1,7 +1,7 @@
 ---
 module: utils
 kind: lib/src audit
-generated: 2026-08-25T14:23:03.732927
+generated: 2026-09-02T08:21:38.651758
 ---
 
 # Module `utils` (`lib/src/utils/`)
@@ -57,11 +57,12 @@ Utility class for encoding and decoding IPFS data
 - **toBase58** (method) — Encode bytes to Base58 string with multibase prefix
   - calls: encode
   - referenced by (by name):
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.isValidProviderRecord)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.pingPeer)
     - `lib/src/protocols/dht/reprovider.dart` (ReproviderResult.toJson)
     - `lib/src/routing/content_routing.dart` (ContentRouting.provide)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
     - `lib/src/transport/quic/quic_transport.dart` (QuicConnection.remotePeer)
 - **fromBase58** (method) — Decode Base58 string to bytes with multibase prefix validation
   - calls: isEmpty, ArgumentError, isValidMultibasePrefix, base58Decode, substring, getEncodingFromPrefix, UnsupportedError
@@ -73,6 +74,7 @@ Utility class for encoding and decoding IPFS data
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.updateKeyRepublishTime)
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.getLocalProvidersForCid)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
 - **cidToBytes** (method) — Convert CID to bytes representation
   - calls: toBytes
   - referenced by (by name):
@@ -275,7 +277,10 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.length)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionCount)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.addConnection)
@@ -283,7 +288,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
     - `lib/src/protocols/dht/connection_statistics.dart` (ConnectionStatistics.updateConnectionDuration)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -308,6 +313,9 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
     - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestInStates)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numHeard)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numWaiting)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.queueLength)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.acquire)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -432,9 +440,12 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/core/unixfs/unixfs_directory.dart` (createSymlink)
     - `lib/src/protocols/autonat/autonat_protocol.dart` (AutoNATService.performDialback)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.want)
+    - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.getBlock)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.initialize)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getValue)
@@ -489,7 +500,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/transport/webtransport/webtransport_transport.dart` (WebTransportTransport.isSessionLimitReached)
 - **put** (method) — Adds or updates an entry.
   - calls: containsKey, _moveToFront, value, _Node, length, _removeLRU, _addToFront
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -508,12 +519,13 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/utils/generic_lru_cache.dart` (TimedLRUCache.put)
 - **get** (method) — Gets an entry, returning null if not found.
   - calls: _moveToFront, value
-  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.isOnline)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -571,7 +583,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.hasKey)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.hasBlock)
@@ -594,6 +606,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.hasPeer)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.tryAdd)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.get)
@@ -640,6 +653,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.remove)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (TaggedConnection.removeTag)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.removeConnection)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
@@ -709,7 +723,9 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
     - `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.clear)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.clear)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.stop)
@@ -774,7 +790,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.exists)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.delete)
     - `lib/src/platform/platform_web.dart` (IpfsPlatformWeb.listDirectory)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -796,6 +812,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/dht/kademlia_tree/protocol_messages.dart` (GetProvidersMessage.toDHTMessage)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.deleteNode)
     - `lib/src/protocols/dht/red_black_tree/deletion.dart` (Deletion.searchNode)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -872,6 +889,7 @@ Generic LRU cache with O(1) get/put operations.
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.republishValues)
     - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.findValue)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestNInStates)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
     - `lib/src/protocols/dht/red_black_tree.dart` (RedBlackTree.search)
     - `lib/src/protocols/dht/xor_distance_metric.dart` (XorDistanceMetric.calculateDistance)
@@ -928,7 +946,7 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/protocols/ipns/ipns_record.dart` (IPNSRecord.fromIpnsEntry)
 - **put** (method)
   - calls: put, now
-  - referenced by (by name) (name shared by 9 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 11 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.putBlock)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.persistPinnedCIDs)
     - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.init)
@@ -946,12 +964,13 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/utils/generic_lru_cache.dart` (GenericLRUCache.getOrComputeSync)
 - **get** (method)
   - calls: difference, now, remove, get
-  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.isOnline)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -1027,6 +1046,7 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.remove)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (TaggedConnection.removeTag)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.removeConnection)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeer)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.removePeerFromBucket)
     - `lib/src/protocols/dht/kademlia_tree/value_store.dart` (ValueStore.retrieve)
@@ -1096,7 +1116,9 @@ Timed LRU cache that automatically expires entries.
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.stop)
     - `lib/src/protocols/dht/kademlia_routing_adapter.dart` (KademliaRoutingAdapter.clear)
     - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.clear)
+    - `lib/src/protocols/dht/kademlia_routing_table.dart` (KademliaRoutingTable.dispose)
     - `lib/src/protocols/dht/kademlia_tree/helpers.dart` (mergeNodes)
+    - `lib/src/protocols/dht/kademlia_tree.dart` (KademliaTree.dispose)
     - `lib/src/protocols/dht/mock_dht_handler.dart` (MockDHTHandler.stop)
     - `lib/src/protocols/graphsync/graphsync_handler.dart` (GraphsyncHandler.stop)
     - `lib/src/protocols/ipns/ipns_handler.dart` (IPNSHandler.stop)
@@ -1147,8 +1169,9 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/core/unixfs/unixfs_builder.dart` (UnixFSBuilder.build)
     - `lib/src/core/unixfs/unixfs_directory.dart` (UnixFSDirectoryEntry.toLink)
     - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.getRoutingKey)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_envelope.dart` (DHTEnvelope.toBytes)
@@ -1311,7 +1334,10 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.length)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionCount)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.addConnection)
@@ -1319,7 +1345,7 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
     - `lib/src/protocols/dht/connection_statistics.dart` (ConnectionStatistics.updateConnectionDuration)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -1344,6 +1370,9 @@ An immutable wrapper around a [Uint8List] with value-based equality.
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
     - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestInStates)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numHeard)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numWaiting)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.queueLength)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.acquire)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -1556,6 +1585,10 @@ A hierarchical logging system for IPFS operations.
 
 - **initializeMetrics** (method) — Initializes the global metrics collector for all loggers.
   - calls: MetricsCollector, enableStructuredLogging
+- **flush** (method) — Waits until all queued file log writes have completed.
+  - referenced by (by name) (name shared by 3 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/core/mfs/mfs_manager.dart` (MFSManager.flushAll)
+    - `lib/src/services/rpc/mfs_handlers.dart` (MFSHandlers.handleFilesFlush)
 - **debug** (method) — Log a debug message
   - calls: fine
   - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
@@ -1635,7 +1668,7 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueToPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.storeValueRaw)
@@ -1716,7 +1749,7 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.initialize)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
-    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.disconnect)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.registerProtocolHandler)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.unregisterProtocolHandler)
@@ -1990,7 +2023,6 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.stop)
     - `lib/src/core/ipfs_node/dns_link_handler.dart` (DNSLinkHandler.resolve)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.start)
-    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.stop)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.put)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.get)
     - `lib/src/core/ipfs_node/ipld_handler.dart` (IPLDHandler.getNode)
@@ -2034,8 +2066,6 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.start)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.stop)
     - `lib/src/protocols/bitswap/bitswap_handler.dart` (BitswapHandler.handleWantRequest)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.start)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.stop)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.directConnect)
@@ -2137,6 +2167,7 @@ A hierarchical logging system for IPFS operations.
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.start)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.stop)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -2285,6 +2316,7 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/protocols/dht/dht_handler.dart` (DHTHandler.resolveDNSLink)
     - `lib/src/services/pinning/remote_pinning_service.dart` (RemotePinningService.load)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connect)
+    - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.connectMultiaddr)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessage)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendRequest)
     - `lib/src/transport/libp2p_router.dart` (Libp2pRouter.sendMessageWithResponse)
@@ -2309,7 +2341,8 @@ ECDSA private key for IPFS cryptographic operations.
     - `lib/src/core/security/security_manager.dart` (SecurityManager.getPrivateKey)
     - `lib/src/core/unixfs/unixfs_directory.dart` (computeTsize)
     - `lib/src/core/unixfs/unixfs_directory.dart` (addChildToDirectory)
-    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
     - `lib/src/protocols/dht/delegate_dht_handler.dart` (DelegateDHTHandler.getValue)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.renderDirectory)
     - `lib/src/services/gateway/gateway_directory_handler.dart` (GatewayDirectoryHandler.findIndexHtml)
@@ -2327,12 +2360,13 @@ _Directly tested._
 An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
 
 - **get** (method) — Returns the value for [key] cast to [T], or [defaultValue] if missing or
-  - referenced by (by name) (name shared by 15 declarations -- not resolved to this one specifically, see caveat):
+  - referenced by (by name) (name shared by 17 declarations -- not resolved to this one specifically, see caveat):
     - `lib/src/core/di/service_container.dart` (ServiceContainer.get)
     - `lib/src/core/ipfs_node/content_manager.dart` (ContentManager.get)
     - `lib/src/core/ipfs_node/datastore_handler.dart` (DatastoreHandler.getBlock)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.securityManager)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.denylistService)
+    - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.isOnline)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.bandwidthMetrics)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.dhtPeerCount)
     - `lib/src/core/ipfs_node/ipfs_node.dart` (IPFSNode.addresses)
@@ -2388,7 +2422,7 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.generateKey)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.importSeed)
     - `lib/src/core/crypto/encrypted_keystore.dart` (EncryptedKeystore.hasKey)
-    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.putBlock)
+    - `lib/src/core/data_structures/blockstore.dart` (BlockStore.has)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.removeBlock)
     - `lib/src/core/data_structures/blockstore.dart` (BlockStore.hasBlock)
     - `lib/src/core/data_structures/memory_block_store.dart` (InMemoryBlockStore.hasBlock)
@@ -2411,6 +2445,7 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.put)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.hasPeer)
     - `lib/src/protocols/dht/peer_store.dart` (PeerStore.updatePeer)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.tryAdd)
     - `lib/src/protocols/pubsub/gossipsub/gossipsub_pubsub_adapter.dart` (GossipsubPubSubAdapter.onMessage)
     - `lib/src/routing/ipni_client.dart` (IPNIClient.findProviders)
     - `lib/src/services/gateway/gateway_lru_cache.dart` (GatewayLruCache.get)
@@ -2578,7 +2613,10 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSession.shouldBroadcast)
     - `lib/src/protocols/bitswap/bitswap_session.dart` (BitswapSessionManager.activeSessionCount)
     - `lib/src/protocols/bitswap/ledger.dart` (BitLedger.receivedMessage)
-    - `lib/src/protocols/bitswap/message.dart` (Message.toBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromBytes)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNet)
+    - `lib/src/protocols/bitswap/message.dart` (Message.fromNetStream)
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
     - `lib/src/protocols/bitswap/wantlist.dart` (Wantlist.length)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.connectionCount)
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.addConnection)
@@ -2586,7 +2624,7 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/protocols/connection_manager/cuttlefish_connection_manager.dart` (CuttlefishConnectionManager.getStats)
     - `lib/src/protocols/dcutr/dcutr_handler.dart` (DCUtRHandler.getStatus)
     - `lib/src/protocols/dht/connection_statistics.dart` (ConnectionStatistics.updateConnectionDuration)
-    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProviders)
+    - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findProvidersAsync)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.findPeer)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProvider)
     - `lib/src/protocols/dht/dht_client.dart` (DHTClient.addProviders)
@@ -2611,6 +2649,9 @@ An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
     - `lib/src/protocols/dht/kademlia_tree/lru_cache.dart` (LRUCache.getLRUNodes)
     - `lib/src/protocols/dht/optimistic_provider.dart` (OptimisticProvider.provide)
     - `lib/src/protocols/dht/provider_store.dart` (ProviderStore.gc)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.getClosestInStates)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numHeard)
+    - `lib/src/protocols/dht/query_peerset.dart` (QueryPeerset.numWaiting)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.queueLength)
     - `lib/src/protocols/dht/rate_limiter.dart` (RateLimiter.acquire)
     - `lib/src/protocols/dht/red_black_tree/insertion.dart` (Insertion.insertNode)
@@ -2718,6 +2759,8 @@ _Directly tested._
 
 - **encodeVarint** (function) — Encodes an integer as an unsigned variable-length integer (varint).
   - calls: add, fromList
+  - referenced by (by name) (name shared by 2 declarations -- not resolved to this one specifically, see caveat):
+    - `lib/src/protocols/bitswap/message.dart` (Message.toNet)
 
 ### top-level `decodeVarint` (function)
 

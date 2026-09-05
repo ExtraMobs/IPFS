@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/core/network/conn.dart' as libp2p;
 import 'package:ipfs_libp2p/core/network/common.dart' as libp2p;
+import 'package:ipfs_libp2p/core/network/conn.dart' as libp2p;
 import 'package:ipfs_libp2p/core/network/rcmgr.dart' as libp2p;
 import 'package:ipfs_libp2p/core/network/stream.dart' as libp2p;
 import 'package:quic_lib/quic_lib.dart' as quic_lib;
@@ -31,9 +31,9 @@ abstract class QuicConnectionAdapter {
 /// Internal read request that pairs a completer with the maximum number of
 /// bytes the caller asked for, so the pull path can split fresh deliveries.
 class _ReadRequest {
+  _ReadRequest(this.completer, this.maxLength);
   final Completer<Uint8List> completer;
   final int? maxLength;
-  _ReadRequest(this.completer, this.maxLength);
 }
 
 /// A [P2PStream] implementation backed by a single QUIC bidirectional stream.
@@ -42,6 +42,15 @@ class _ReadRequest {
 /// [QuicConnection]. Writes go to the send side; reads accumulate data from the
 /// receive side. The receive stream is created lazily when the peer sends data.
 class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
+  /// Creates a stream adapter for a QUIC bidirectional stream.
+  QuicP2PStream(
+    this._parentConnection,
+    this._streamId,
+    this._direction,
+    this._protocolId,
+  ) : _id = const Uuid().v4() {
+    _startReading();
+  }
   final QuicConnection _parentConnection;
   final int _streamId;
   final libp2p.Direction _direction;
@@ -56,15 +65,6 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
   final _readBuffer = <Uint8List>[];
   final _readRequests = <_ReadRequest>[];
   Completer<void>? _receiveDone;
-
-  QuicP2PStream(
-    this._parentConnection,
-    this._streamId,
-    this._direction,
-    this._protocolId,
-  ) : _id = const Uuid().v4() {
-    _startReading();
-  }
 
   quic_lib.QuicStream? get _quicStream =>
       _parentConnection.getQuicStream(_streamId);
@@ -140,8 +140,9 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
 
     final request = _readRequests.first;
     final maxLength = request.maxLength;
-    final takeLength =
-        maxLength == null || maxLength > totalLength ? totalLength : maxLength;
+    final takeLength = maxLength == null || maxLength > totalLength
+        ? totalLength
+        : maxLength;
 
     final result = Uint8List(takeLength);
     var offset = 0;
@@ -192,11 +193,11 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
 
   @override
   libp2p.StreamStats stat() => libp2p.StreamStats(
-        direction: _direction,
-        opened: DateTime.now(),
-        limited: false,
-        extra: {'quicStreamId': _streamId},
-      );
+    direction: _direction,
+    opened: DateTime.now(),
+    limited: false,
+    extra: {'quicStreamId': _streamId},
+  );
 
   @override
   libp2p.Conn get conn => _parentConnection;
@@ -216,7 +217,7 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
       if (stream is quic_lib.QuicReceiveStream) {
         break;
       }
-      await Future.delayed(const Duration(milliseconds: 5));
+      await Future<void>.delayed(const Duration(milliseconds: 5));
     }
 
     if (_isClosed || _readClosed) {
@@ -230,8 +231,9 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
     }
     if (bufferedLength > 0) {
       final targetLength = maxLength ?? bufferedLength;
-      final takeLength =
-          targetLength > bufferedLength ? bufferedLength : targetLength;
+      final takeLength = targetLength > bufferedLength
+          ? bufferedLength
+          : targetLength;
       final result = Uint8List(takeLength);
       var offset = 0;
       final remaining = <Uint8List>[];
@@ -260,16 +262,14 @@ class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
     _readRequests.add(_ReadRequest(completer, maxLength));
 
     // Set up a one-time listener if not already attached.
-    _receiveSubscription ??=
-        (_quicStream as quic_lib.QuicReceiveStream?)?.incomingData.listen(
-      (data) {
-        if (_incomingController.isClosed) return;
-        _incomingController.add(Uint8List.fromList(data));
-        _readBuffer.add(Uint8List.fromList(data));
-        _drainReadBuffer();
-      },
-      onDone: _drainReadBuffer,
-    );
+    _receiveSubscription ??= (_quicStream as quic_lib.QuicReceiveStream?)
+        ?.incomingData
+        .listen((data) {
+          if (_incomingController.isClosed) return;
+          _incomingController.add(Uint8List.fromList(data));
+          _readBuffer.add(Uint8List.fromList(data));
+          _drainReadBuffer();
+        }, onDone: _drainReadBuffer);
 
     return completer.future;
   }

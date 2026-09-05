@@ -30,7 +30,7 @@ dependencies:
 
   # Data Storage
   hive: ^2.2.3
-  idb_shim: ^2.9.2 # IndexedDB for web storage
+  idb_shim: ^2.9.8 # IndexedDB for web storage
 
   # Logging
   logging: ^1.3.0
@@ -49,12 +49,15 @@ dependencies:
   markdown: ^7.3.0
   synchronized: ^3.4.0
   multicast_dns: ^0.3.3
-  ipfs_libp2p: ^0.5.6
+  ipfs_libp2p:
+    git:
+      url: https://github.com/ExtraMobs/dart_libp2p.git
+      ref: fdd932b1f4db06240bf09527f25f8a404237aa16
   cipherlib: ^0.7.1
   quic_lib: ^1.13.0
 
   jose: ^0.3.5
-  mime: ^2.0.0
+  mime: ^2.1.0
   http_parser: ^4.1.2
 
   # Per-Go-module ports (in-repo path packages, one per kubo dependency's
@@ -63,6 +66,12 @@ dependencies:
     path: packages/transpiled_base58
   transpiled_cid:
     path: packages/transpiled_cid
+  transpiled_block_format:
+    path: packages/transpiled_block_format
+  transpiled_boxo:
+    path: packages/transpiled_boxo
+  transpiled_datastore:
+    path: packages/transpiled_datastore
   transpiled_libp2p:
     path: packages/transpiled_libp2p
   transpiled_multiaddr:
@@ -77,10 +86,14 @@ dependencies:
     path: packages/transpiled_multihash
   transpiled_varint:
     path: packages/transpiled_varint
+  transpiled_go_car:
+    path: packages/transpiled_go_car
+  transpiled_go_yamux:
+    path: packages/transpiled_go_yamux
 
   # Common packages
   args: ^2.6.0
-  yaml: ^3.1.3
+  yaml: ^3.1.4
   meta: ^1.17.0
   shelf: ^1.4.2
   path: ^1.9.1
@@ -93,7 +106,7 @@ dependencies:
   base32: ^2.2.0
 
 dev_dependencies:
-  analyzer: ^14.1.0 # AST parsing for tool/generate_module_index.dart
+  analyzer: ^14.3.0 # AST parsing for tool/generate_module_index.dart
   test: ^1.28.0 # For unit and integration tests
   lints: ^6.1.0 # For code style analysis
   coverage: ^1.15.0

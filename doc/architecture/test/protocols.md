@@ -1,6 +1,6 @@
 ---
 test-group: protocols
-generated: 2026-08-25T14:23:03.825129
+generated: 2026-09-02T08:21:38.734373
 ---
 
 # `test/protocols/`
@@ -38,6 +38,7 @@ generated: 2026-08-25T14:23:03.825129
 - BitswapHandler
 - start/stop lifecycle
 - wantBlock requests block and completes
+- discovers and connects a provider before sending the want
 - handlePacket processes incoming wantlist
 - handlePacket processes incoming HAVE wantlist
 - wantBlock timeout
@@ -98,6 +99,8 @@ generated: 2026-08-25T14:23:03.825129
 ## `test/protocols/bitswap/bitswap_http_fallback_test.dart`
 
 - BitswapHandler HTTP fallback
+- typed getBlock rejects requests while stopped
+- typed getBlock returns the go-block-format surface over P2P
 - returns cached block without P2P or HTTP
 - uses P2P when available and skips HTTP
 - falls back to HTTP gateway after P2P failure
@@ -177,6 +180,19 @@ generated: 2026-08-25T14:23:03.825129
 - addBlockPresence and getBlockPresences
 - pendingBytes can be set
 - from can be set
+- preserves Bitswap 1.2 want, payload, and presence fields
+- uses the four-varint CIDv0 payload prefix and accepts legacy blocks
+- matches the upstream block-presence CID protobuf vector
+- merges repeated want entries like Boxo
+- rejects invalid outbound CIDs instead of silently omitting them
+- rejects CIDs with trailing bytes like cid.Cast
+- follows Go identity-prefix length semantics
+- rejects an invalid payload prefix and oversized inbound message
+- a 2 MiB block fits the 4 MiB libp2p message limit
+- toNet matches Boxo empty-message framing byte for byte
+- fromNet decodes one frame and reports payload bytes read
+- fromNet rejects truncation, overflow, and oversized payloads
+- fromNetStream reads short chunks and preserves Boxo framing
 - WantlistEntry
 - constructor with defaults
 - constructor with all parameters
@@ -303,12 +319,26 @@ generated: 2026-08-25T14:23:03.825129
 ## `test/protocols/dht/dht_client_test.dart`
 
 - DHTClient integration spec
-- request/response correlation uses envelope request id
+- stop cancels routing-table maintenance timers
+- iterative queries use raw Kademlia request/response
 - findProviders returns validated provider records
-- findProviders drops providers without valid multiaddrs
+- findProvidersAsync preserves providers without multiaddrs
+- findProvidersAsync applies count
+- count zero exhausts and suppresses identical providers
+- findProvidersAsync emits an address upgrade
+- legacy provider wrapper waits for a dialable upgrade
+- cancelling findProvidersAsync stops before the next query
+- timeout drops a late fallback RPC response
+- timed out fallback RPC leaves no cleanup timer
+- stop cancels a pending fallback RPC
 - findProviders expands iteratively via closer peers
+- provider lookup never exceeds alpha concurrent queries
+- beta termination follows up an unqueried top-k peer
 - findPeer iterates until target is discovered
 - addProvider encodes addresses as multiaddr bytes
+- ADD_PROVIDER rejects a provider different from the sender
+- ADD_PROVIDER accepts the sender with a valid address
+- ADD_PROVIDER rejects an invalid address
 - reprovide enumerates stored keys and records metrics
 - addProvider sends to closest peers in batches
 
@@ -356,6 +386,10 @@ generated: 2026-08-25T14:23:03.825129
 
 ## `test/protocols/dht/dht_handler_coverage_test.mocks.dart`
 
+
+## `test/protocols/dht/dht_handler_lifecycle_test.dart`
+
+- stop closes the internally owned datastore
 
 ## `test/protocols/dht/dht_handler_test.dart`
 
@@ -722,6 +756,11 @@ generated: 2026-08-25T14:23:03.825129
 - gc removes expired records
 - multiple CIDs are tracked separately
 - getProviders returns list copy
+
+## `test/protocols/dht/query_peerset_test.dart`
+
+- tracks state, referrer, uniqueness and XOR order
+- matches the upstream qpeerset transition vector
 
 ## `test/protocols/dht/rate_limiter_overflow_test.dart`
 

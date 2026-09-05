@@ -173,7 +173,7 @@ The public API must keep the same conceptual shape as the current in-memory CAR 
 
 ### 7.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job or local Docker Compose stack that runs the latest Kubo and Helia stable versions and exercises:
+Create a CI job or local interoperability harness that runs the latest Kubo and Helia stable versions and exercises:
 
 - **CAR import:** dart_ipfs exports a CAR v1/v2 file; Kubo and Helia import it and the roots match.
 - **CAR export:** Kubo and Helia export a CAR file; dart_ipfs reads all sections and the CIDs match the expected multihashes.

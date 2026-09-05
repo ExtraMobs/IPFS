@@ -35,7 +35,14 @@ Fluxo-alvo:
   em `/ip4/127.0.0.1/tcp/4401`.
 - [ ] Auditar/portar `boxo/bitswap/message` e `bitswap/message/pb`, preservando
   wire format, limites, wantlist, `WANT_BLOCK`/`WANT_HAVE`, payloads,
-  `HAVE`/`DONT_HAVE` e blocos.
+  `HAVE`/`DONT_HAVE` e blocos. A fatia usada pelo runtime foi alinhada em
+  2026-08-31: full wantlist, merge de wants, payload V1/prefixo CID, blocos
+  legados V0, presenças, pending bytes, validação de CID/prefixo e limite de
+  4 MiB, cobertos por testes. `FromNet`/`ToNet` agora preservam framing varint,
+  leitura fragmentada, contagem do payload, limite antes da alocação e erros de
+  truncamento/overflow, incluindo vetor byte-a-byte do frame vazio do Boxo.
+  Permanecem a superfície pública completa do pacote Go, auditoria
+  função-a-função do protobuf gerado e os demais vetores Go↔Dart.
 - [ ] Auditar/portar `boxo/bitswap/network` e `bitswap/network/bsnet`: negociação
   de protocolo, framing, streams persistentes, sender por peer, múltiplas
   mensagens por stream, conexão/desconexão e erros.
@@ -43,8 +50,14 @@ Fluxo-alvo:
   `getter`, `notifications`, `messagequeue`, `peermanager`,
   `blockpresencemanager`, wantlist e somente as partes de sessão/interesse
   exigidas pelo client.
-- [ ] Portar ou adaptar o mínimo de `boxo/blockstore` (`has`/`get`/`put`) ao
+- [x] Portar ou adaptar o mínimo de `boxo/blockstore` (`has`/`get`/`put`) ao
   blockstore Dart existente, sempre verificando CID ↔ dados antes de persistir.
+  `BlockStore` implementa a superfície Dart `Blockstore` sem criar outro
+  backend; escritas e leituras validam o CID completo, com exceções tipadas
+  para ausência e divergência. Quatro testes de contrato e 43 testes existentes
+  do armazenamento passaram em 2026-08-31. O runtime de CID ainda limita a
+  geração de conteúdo a SHA2-256; hashes não suportados são rejeitados com
+  segurança, não persistidos.
 - [x] Com Kubo diretamente conectado, obter por Bitswap um bloco ausente
   localmente, validar seus bytes contra o CID, persistir e reler do blockstore.
   Prova local em 2026-08-31: CID raw
@@ -55,14 +68,36 @@ Fluxo-alvo:
   idênticos nas duas.
 - [x] Manter um teste de interoperabilidade executável e registrar comando,
   CID/fixture e resultado aqui. Testes apenas mockados não concluem o marco.
-  Harness: `test/interop/test/bitswap_test.dart`; CI/comando reproduzível:
-  `docker compose -f test/interop/docker-compose.yml run --rm test-runner dart test --enable-experiment=native-assets --tags p0 --reporter expanded`.
+  Harness: `test/interop/test/bitswap_test.dart`; ele deve ser executado contra
+  processos Kubo e Dart isolados, com endereços configurados pelo ambiente.
+
+Prova local reproduzível de 2026-09-02, sem infraestrutura externa:
+`dart test --preset interop -j 1 test/interop/test/local_kubo_bitswap_test.dart`.
+O harness criou um repositório Kubo temporário, usou Kubo `0.43.0`, conectou o
+nó Dart diretamente ao provider
+`12D3KooWNHCWffmq2CfDAd8zpEigZaRvzVKnkVPkVEDqpUFRcmL4`, baixou por Bitswap o
+bloco raw `bafkreibs723667mosvbz3kzygkbpaxkkg6zld7qmxrbh3ky2mreeoyjlue`
+(41 bytes), validou os bytes/CID, confirmou a persistência no `BlockStore` e
+encerrou ambos os processos removendo somente os repositórios temporários.
+O lifecycle genérico está documentado em `test/interop/INTEROP_TESTS.md`.
 
 ### Marco B — provider descoberto pela rede pública
 
 Fluxo-alvo:
 
 `CID → DHT.findProviders → AddrInfo → conectar provider → Bitswap → validar → blockstore`.
+
+Reconstrução limpa comprovada em 2026-09-02 por
+`test/interop/test/local_kubo_dht_bitswap_test.dart`: um Kubo 0.43.0 com
+`IPFS_PATH` temporário criou e anunciou um bloco raw contendo sua identidade
+de peer. Incorporar a identidade torna o CID único por execução e evita que
+registros temporários de provas anteriores contaminem a busca.
+O nó Dart conhecia somente o endereço desse bootstrap, enviou
+`GET_PROVIDERS` por `/ipfs/kad/1.0.0`, preservou o `AddrInfo`, conectou o
+provider retornado, baixou e validou o bloco por Bitswap, confirmou
+`blockstore.has(cid) == true` e encerrou espontaneamente. O teste terminou com
+exit code 0 em 57 segundos. O repositório do IPFS Desktop não foi consultado
+nem alterado.
 
 - [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
   `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
@@ -108,6 +143,73 @@ provider: `POST /api/v0/block/put?format=raw&mhtype=sha2-256`, seguido de
 `POST /api/v0/routing/provide?arg=<cid>&recursive=false` em qualquer Kubo
 conectado à DHT pública.
 
+Prova final de lifecycle de 2026-09-01: um Kubo `0.43.0` isolado em
+`.tmp-validation/public-provider-kubo` anunciou o bloco raw
+`bafkreiauakmsogmbnftwsbdcfcxnh6cfknjozsze46ovk4qpmndd4do3xy` (58 bytes),
+provider `12D3KooWD3otHYgKUsJpbqEZkUyF1UJYzMW6t8ru2tUwLm3pnHs4`. O comando
+`dart run tool/validate_public_p2p.dart <cid>` partiu só dos bootstrappers,
+descobriu o provider por DHT, baixou por Bitswap, validou/persistiu o CID,
+imprimiu `persisted=true`, `STOP_END` e encerrou espontaneamente com exit code
+0. O repo do provider foi exclusivo desse teste; nenhuma base do IPFS Desktop
+foi usada ou alterada.
+
+### Checklist pública do download de um bloco raw
+
+Upstreams e commits são os fixados em `UPSTREAM_LOCK.md`. Esta checklist fecha
+o mapeamento público do subconjunto; `portado sem teste de paridade` é mantido
+sempre que defaults, erros ou cancelamento não têm prova direta suficiente.
+
+| Símbolo Go | Equivalente Dart | Defaults, erros e adaptação | Prova / status |
+|---|---|---|---|
+| `core.BuildCfg.Online` | `BuildCfg.online` | Zero value `false`; `bool?` apenas permite herdar `IPFSConfig`. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
+| `core.BuildCfg.ExtraOpts` | `BuildCfg.extraOpts` | `nil` vira mapa vazio; referência e mutabilidade do mapa são preservadas; `pubsub`/`ipnsps` mantêm o efeito upstream. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
+| `core.BuildCfg.ShutdownTimeout` | `BuildCfg.shutdownTimeout` | Zero/negativo espera sem deadline; positivo limita o shutdown. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
+| `core.NewNode(ctx, cfg)` | `IPFSNode.fromBuildCfg(cfg)` | Factory inicia antes de completar; `(node,error)` vira `Future<IPFSNode>`/exceção. Lifetime de `context.Context` e erros FX exatos não têm equivalente. | Teste direcionado; **portado sem teste de paridade**. |
+| `(*IpfsNode).Close()` | `IPFSNode.close()` | `Future<void>`/exceção; chamadas repetidas e concorrentes compartilham uma única Future e o mesmo resultado/erro, como `sync.Once`. | Testes de sucesso, concorrência e erro; **portado sem teste de paridade**. |
+| `routing.ContentRouting.FindProvidersAsync(ctx, cid, count)` | `DHTClient.findProvidersAsync(CID, int)` | Canal vira `Stream<AddrInfo>`; `count == 0`, emissão incremental e deduplicação preservados. Cancelamento de subscription não interrompe todo Future/dial já iniciado; `context.Context` permanece uma divergência documentada. | Testes DHT e interop real; **portado sem teste de paridade**. |
+| `peer.AddrInfo` | `transpiled_libp2p.AddrInfo` | Peer ID e lista completa de multiaddrs são preservados; conversores, JSON e `Loggable` foram comparados com vetores upstream. | `transpiled_libp2p`/`addr_info_test.dart`; **portado com paridade comprovada**. |
+| `host.Host.Connect(ctx, AddrInfo)` | `RouterInterface.connect(AddrInfo)` → `BasicHost.connect` | `AddrInfo` permanece tipado até o host. `connectMultiaddr` é compatibilidade legada. O adapter normaliza os endereços informados para `TempAddrTTL` de 2 min após o dial, corrigindo o default de 5 min da dependência. | Testes de router + interop real; **portado sem teste de paridade**. |
+| `bitswap.BlockGetter.GetBlock(ctx, cid)` / `Client.GetBlock` | `BlockGetter.getBlock(CID)` / `BitswapHandler.getBlock` | Retorno não nulo `Future<blocks.Block>`; somente P2P, sem gateway. Deadline vem de `BitswapConfig.p2pTimeout`, pois não há `context.Context`; ausência e CID divergente viram exceções. `getBlockWithFallback`/`wantBlock` são extensões legadas, não substitutas upstream. | Teste da fachada + interop Kubo; **portado sem teste de paridade**. |
+| `blocks.Block` (`RawData`, `Cid`, `String`, `Loggable`) | `transpiled_block_format.Block` | Port literal reutilizado na fronteira pública; o `Block` histórico do runtime fica interno e é convertido para `BasicBlock`. | Vetores/testes do pacote; **portado com paridade comprovada**. |
+| `blockstore.Blockstore.Has` | `Blockstore.has(CID)` | `Future<bool>` e exceção de backend; não colapsa falha em `false`. | Teste de contrato; **portado sem teste de paridade**. |
+| `blockstore.Blockstore.Get` | `Blockstore.get(CID)` | Retorna `transpiled_block_format.Block`; ausência, corrupção e falha de backend permanecem distinguíveis. | Testes de ausência/corrupção/reabertura; **portado sem teste de paridade**. |
+| `blockstore.Blockstore.Put` | `Blockstore.put(blocks.Block)` | Valida CID antes de gravar e propaga erro do backend. Validação sempre ativa é hardening deliberado sobre o default não-debug do Go. | Testes de persistência e CID divergente; **portado sem teste de paridade**. |
+
+Omissões deliberadas deste subconjunto: `BuildCfg.Repo`, `Host`, `Routing`,
+`Permanent`, `DisableEncryptedConnections` e hooks FX; APIs de exclusão,
+enumeração, tamanho, batch e GC do blockstore; `GetBlocks`; Bitswap server;
+gateway, UnixFS e DAG traversal. Nenhum placeholder foi criado para elas.
+
+### Download UnixFS, estatísticas e CAR (2026-09-03)
+
+O runtime expõe `getUnixFs`, `statUnixFs`, `listUnixFsCids`, `exportCar` e
+`importCar`. O teste `local_kubo_large_unixfs_test.dart` gera texto
+determinístico de tamanho exato (50/100/200/500 MiB), adiciona-o em um Kubo
+isolado, baixa todos os blocos por TCP/Noise/Bitswap, confere tamanho lógico e
+CIDs descendentes, testa CAR nos dois sentidos (Dart → Kubo e Kubo → Dart),
+reconstrói o arquivo por streaming e compara todos os bytes.
+
+O diagnóstico inicial com o Yamux externo passou em 50/100/200 MiB, mas falhou
+em 500 MiB após aproximadamente 997 streams do terceiro arquivo: streams
+encerrados permaneciam retidos e `maxStreams=1000` era aplicado. A correção
+final não eleva esse teto arbitrariamente: `go-yamux/v5@v5.1.0` foi fixado em
+`UPSTREAM_LOCK.md`, transpilado para `packages/transpiled_go_yamux` e injetado
+por `GoYamuxMultiplexer`. Como no adapter Go, `MaxIncomingStreams` é
+`math.MaxUint32` e o limite efetivo pertence ao resource manager.
+
+Provas finais sem override local, mantendo `ipfs_libp2p` no SHA Git `fdd932b`:
+bloco raw em 2 s; 50+500 MiB em 5m32s; 100+200 MiB em 3m06s. Todas incluíram
+download P2P, validação de tamanho/CIDs, CAR bidirecional, reconstrução integral
+e shutdown espontâneo. O pacote Yamux tem nove testes, incluindo framing,
+IDs/paridade, FIN/RST, limite de entrada, rejeição antecipada de DATA excessivo
+e 1.101 streams sequenciais sem retenção.
+
+O port Yamux permanece **portado sem teste de paridade**: RTT/ping keepalive,
+write coalescing, pooling e memory manager externo foram omitidos até haver
+consumidor. O `SwarmConn` do fork ainda deve ser auditado/portado para eliminar
+sua própria retenção de wrappers; isso não bloqueou download nem shutdown nas
+provas acima, mas impede declarar paridade completa de go-libp2p.
+
 ### Fora do caminho crítico deste objetivo
 
 Não bloquear o primeiro bloco raw por PubSub, gateway, Bitswap server/decision
@@ -122,7 +224,52 @@ para reconstruir arquivos ou diretórios completos.
 - `Destino em lib/src/` fica em branco até o pacote ser realmente mapeado — preencher ao decidir onde o port mora no `dart_ipfs`.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
 
-## Estado em aberto (2026-08-25)
+## Estado em aberto (atualizado em 2026-09-05)
+
+- **Reconstrução limpa do runtime de download concluída (2026-09-05)**: por
+  decisão explícita do mantenedor, o código de
+  produção atribuído no Git às identidades `joseeduardox@gmail.com` e
+  `jxoesneon` será retirado. O runtime mínimo será recomposto a partir dos
+  ports `ExtraMobs`, dos upstreams travados e de `ipfs_libp2p`, preservando
+  somente `BuildCfg/NewNode/Close → FindProvidersAsync → AddrInfo/Host.Connect
+  → Bitswap BlockGetter/GetBlock → blocks.Block → Blockstore Has/Get/Put`.
+  As provas direcionadas e de interoperabilidade Kubo passaram novamente.
+
+  Progresso da reconstrução em 2026-09-02: o marco de provider conhecido foi
+  recomposto sem código Dart atribuído às identidades removidas. O runtime
+  novo usa `ipfs_libp2p` para TCP/Noise/Yamux, o protobuf literal do Boxo para
+  `/ipfs/bitswap/1.2.0`, `transpiled_cid`, `transpiled_block_format` e um
+  blockstore sobre `transpiled_datastore`. O teste local com Kubo `0.43.0`
+  baixou novamente o CID raw
+  `bafkreibs723667mosvbz3kzygkbpaxkkg6zld7qmxrbh3ky2mreeoyjlue` (41 bytes),
+  validou e persistiu o bloco e encerrou espontaneamente. A resposta Bitswap
+  chega em um stream aberto pelo provider, como em `boxo/bitswap/network/bsnet`;
+  o handler inbound foi necessário para a prova. A reconstrução de
+  `FindProvidersAsync`/DHT também foi comprovada, seguida por Bitswap, validação
+  do CID, persistência e encerramento espontâneo.
+
+- **Cleanup P2P concluído em 2026-09-01**: a prova final acima combinou
+  `persisted=true`, `STOP_END` e saída espontânea. As causas eram recursos com
+  ownership incompleto: tentativas TCP não drenadas no `ipfs_libp2p`, storage e
+  cliente HTTP internos do `DHTHandler`, e a fila assíncrona de logs, que
+  mantinha o `IO Service` vivo depois de `stop()`. O logger agora agrupa escritas
+  e `IPFSNode.stop()` aguarda `Logger.flush()`. O patch TCP está no fork
+  `ExtraMobs/dart_libp2p`, fixado pelo SHA imutável
+  `fdd932b1f4db06240bf09527f25f8a404237aa16`; os overrides locais foram
+  removidos. `.tmp-validation/` foi removido; `go-ipfs-reference/` permanece
+  fonte local externa e não deve ser commitado.
+  Verificação final atual: 108 testes passaram e 5 foram ignorados com `-j 1`.
+  `dart analyze --no-fatal-warnings` não reportou erros; permanecem 59
+  warnings/infos.
+
+- **Dependências Dart atualizadas em 2026-09-01**: limites mínimos diretos
+  elevados para `idb_shim ^2.9.8`, `mime ^2.1.0`, `yaml ^3.1.4` e
+  `analyzer ^14.3.0`. `dart pub upgrade` também resolveu as atualizações
+  transitivas compatíveis. Os pins de segurança `xml ^7.0.1` e
+  `dart_udx ^2.0.3` permanecem obrigatórios no projeto e em `test/interop`.
+  `ipfs_libp2p` continua com versão de pacote `0.5.6`, agora resolvida pelo SHA
+  Git reproduzível acima. `dart pub outdated` não encontrou atualização
+  resolvível no projeto nem em `test/interop`.
 
 - **Auditoria de `FindProvidersAsync` em andamento (2026-08-31)**: o download
   público funciona; a API incremental, deduplicação/upgrade,
@@ -141,7 +288,13 @@ para reconstruir arquivos ou diretórios completos.
   confirmou `bytes=59 persisted=true`. O harness não encerrou sozinho depois
   do sucesso e precisou ser interrompido: consultas/recursos pendentes no
   cleanup continuam como lacuna de cancelamento, mas ocorreram depois da
-  validação e persistência do bloco.
+  validação e persistência do bloco. Depois dessa prova, as RPCs passaram a
+  respeitar `DHTConfig.requestTimeout`, requests correlacionados são removidos
+  em timeout/erro, respostas tardias são descartadas e `stop()` sinaliza as
+  operações pendentes; testes direcionados e de lifecycle passam. Em
+  2026-09-01, duas consultas não alcançaram o provider dentro do prazo e
+  terminaram sem bloco, mas encerraram espontaneamente. A repetição conclusiva
+  posterior está registrada na prova final acima.
 
 - **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`
@@ -164,9 +317,9 @@ Isto é o que uma sessão futura precisa saber pra continuar de onde paramos —
 - **`core/routing` + parte de `go-libp2p-routing-helpers` portados (2026-08-25/26)**: `core/routing` e as peças mecânicas/autocontidas de `go-libp2p-routing-helpers` (`Bootstrap`, `NullRouter`, `LimitedValueStore`, `Compose`) estão prontas; `query.go` agora também está pronto. O WIP de `Parallel`/`Tiered`/composable está funcional e testado de forma direcionada, mas permanece não confiável até fechar a paridade indicada no aviso acima.
 - **`go-libp2p-record` portado (2026-08-25)**: novo pacote `packages/transpiled_libp2p_record/` (ver a linha da tabela abaixo pra detalhe técnico). Primeiro pacote novo desde a reorganização de módulos que não é `transpiled_libp2p` nem um dos multiformats -- confirma que a convenção de pacote-por-módulo-Go se sustenta pra módulos menores também.
 - **`core/record` + `core/peer/pb` portados (2026-08-25)**: `Record`/`Envelope`/`PeerRecord` completos em `packages/transpiled_libp2p/lib/src/core/record/` e `core/peer/peer_record.dart` (ver as linhas das tabelas abaixo pra detalhe técnico). Achado de metodologia relevante pra qualquer port futuro que precise imitar o `init()` do Go: uma variável de nível de biblioteca em Dart (`final bool _x = _setup();`) **não** roda só por importar o arquivo -- inicialização de topo em Dart é preguiçosa (só roda no primeiro acesso a essa variável). O registro automático do `PeerRecord` em `Envelope` teve que ser movido pro construtor (idempotente, com guarda contra recursão), não um "top-level init". Isso já causou um teste falhar nesta sessão antes de ser corrigido -- vale revisar qualquer port futuro que dependa do padrão `init()`/registro automático do Go.
-- **Tarefa aberta, ainda não iniciada**: mapear a API pública do guarda-chuva contra a composição programática de `kubo/core` (`builder.go`, `core.go` e serviços reutilizáveis). `bin/ipfs.dart` é apenas uma ferramenta original e não é referência de arquitetura nem alvo de paridade. Falta decidir, por etapa (usando a ordem acima), o que em `lib/src/` é cola de integração genuína reaproveitável (por exemplo `core/ipfs_node/` e `services/`) e o que precisa ser substituído por port real.
+- **Auditoria de `kubo/core` iniciada em 2026-09-02**: o subconjunto de `BuildCfg`/`NewNode`/`IpfsNode.Close` foi alinhado sobre o runtime existente, sem criar um segundo nó. `Online`, `ExtraOpts`, `ShutdownTimeout`, início antes do retorno e shutdown idempotente/concurrentemente compartilhado estão implementados e testados. `ExtraOpts` preserva a mutabilidade observável do mapa Go; `stop` preserva uma única Future e seu resultado/erro, como `sync.Once`. Permanecem sem equivalente Dart o lifetime `context.Context`, o desembrulho exato dos erros FX, `Repo`, `Host`, `Routing`, `Permanent`, `DisableEncryptedConnections` e hooks FX; nenhum placeholder foi criado.
 - **Correção de escopo após auditoria de callers (2026-08-25)**: o plano antigo marcava toda a árvore FUSE, `plugin/loader` e todas as migrações como “daemon-CLI only”. Isso era amplo demais. `core/core.go` importa `fuse/mount`, `core/coreapi` importa `internal/fusemount`, `repo/fsrepo` usa `repo/fsrepo/migrations`, e o exemplo oficial `kubo-as-a-library` usa `plugin/loader`. Essas unidades voltaram para `não iniciado`. Implementações FUSE chamadas somente por `cmd`/`core/commands`, os binários `main` de migração e `ipfsfetcher` continuam fora após busca dos imports reais.
-- **Limpeza de identidade do fork (concluída)**: removidos `README.md`/`CONTRIBUTING.md`/`CHANGELOG.md`/`LICENSE`/`SECURITY.md`/`ROADMAP.md`/`ENGINEERING_NOTES.md`/`CODE_OF_CONDUCT.md`/`FUNDING.yml`/workflow de publish automático no pub.dev/Docker+Helm+K8s (apontavam pro registry do autor original) — eram 100% conteúdo do projeto `jxoesneon/IPFS` upstream, sem valor de código pra este fork. `pubspec.yaml`/`melos.yaml` e os docs técnicos que restaram agora apontam pro fork real (`github.com/ExtraMobs/IPFS`). Esses arquivos precisam ser reescritos do zero quando o fork tiver uma identidade própria definida — não foram recriados ainda, de propósito.
+- **Limpeza de identidade do fork (concluída)**: removidos documentos e automações de publicação herdados do projeto `jxoesneon/IPFS`, sem valor para este fork. Os metadados técnicos restantes apontam para o fork real (`github.com/ExtraMobs/IPFS`).
 - **Limitação conhecida dos planos do Claude Code**: o arquivo de plano (`C:\Users\Administrador\.claude\plans\...`) não é versionado neste repositório — vive só na instalação local do Claude Code, e pode ser sobrescrito por um plano mais novo com o mesmo nome (já aconteceu nesta sessão: o plano original de metodologia foi substituído pelo plano de reorganização de pacotes). Esta seção existe justamente pra não depender só do arquivo de plano pra continuidade entre sessões.
 
 
@@ -237,7 +390,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 |---|---|---|---|
 | `(root)` |  | não iniciado |  |
 | `config` |  | não iniciado |  |
-| `core` |  | não iniciado |  |
+| `core` | `lib/src/core/builders/build_cfg.dart`; `lib/src/core/ipfs_node/{ipfs_node,bootstrap_handler}.dart` | **portado sem teste de paridade** | Subconjunto de `BuildCfg`/`NewNode` e `IpfsNode`: `Online`, `ShutdownTimeout`, `Identity`, `IsOnline`, `Close` e `HasActiveDHTClient`. Bootstrap alinha defaults e supervisão básica do Boxo, mas ainda não persiste peers de backup nem chama `routing.Bootstrap`. A façade restante é implementação original não auditada; checklist completa deve ser fechada antes de elevar o status. |
 | `core/connmgr` | `packages/transpiled_libp2p/lib/src/core/connmgr/{manager,decay,gater,null,presets}.dart` | portado sem teste de paridade | Checklist Go → Dart: `SupportsDecay`→`supportsDecay`; `ConnManager`, `TagInfo`, `GetConnLimiter`; `Decayer`, `DecayingTag`, `DecayingValue`, `DecayFn`, `BumpFn`; `ConnectionGater`; `NullConnMgr`; `DecayNone`/`DecayFixed`/`DecayLinear`/`DecayExpireWhenInactive`/`BumpSumUnbounded`/`BumpSumBounded`/`BumpOverwrite`→lowerCamelCase. `context.Context` foi omitido e erros viram exceções. A semântica aparentemente invertida de `DecayExpireWhenInactive` (`time.Until(LastVisit) >= after`) foi preservada exatamente conforme o SHA travado, embora pareça bug upstream; não corrigir silenciosamente. Interfaces e presets têm 4 testes direcionados; implementação concreta `p2p/net/connmgr` continua pendente. |
 | `core/control` | `packages/transpiled_libp2p/lib/src/core/control/disconnect.dart` | portado sem teste de paridade | `DisconnectReason` preservado como alias de `int`; zero continua significando “sem razão”. É o único símbolo do pacote no SHA travado e é consumido por `ConnectionGater`. |
 | `core/crypto` | `packages/transpiled_libp2p/lib/src/core/crypto/key_types.dart` (`Key`/`PrivKey`/`PubKey`/`KeyType`) + `rsa_key.dart`, `secp256k1_key.dart`, `ecdsa_key.dart` | **portado com paridade comprovada** (RSA, Secp256k1, ECDSA todos com vetor real Go) | **RSA**: `MinRsaKeyBits=2048`, PKCS1 DER privado/PKIX DER público via ASN.1 do `package:pointycastle`, sign/verify SHA-256+PKCS1v1.5 via `pc.RSASigner`. Validado contra `crypto/rsa`+`crypto/x509` do Go (`go-ipfs-reference/noise_vectors/rsa_vectors.go`): DER round-trip exato, assinatura Dart bate byte a byte com a do Go (PKCS1v1.5 é determinístico) -- `test/rsa_key_parity_test.dart`. **Secp256k1**: raw = escalar de 32 bytes big-endian / ponto comprimido SEC1 de 33 bytes (mesmo formato de `github.com/decred/dcrd/dcrec/secp256k1/v4`, a lib que `core/crypto/secp256k1.go` encapsula); assinatura DER com nonce determinístico RFC6979 (SHA-256/HMAC) via `pc.ECDSASigner` em modo `DET-ECDSA`, canonicalizada pra S-baixo (`ECSignature.normalize`) igual ao `Signature.Serialize()` do dcrd. Validado contra `github.com/decred/dcrd/dcrec/secp256k1/v4/ecdsa` (`go-ipfs-reference/secp256k1_vectors/main.go`): **a assinatura RFC6979 do Dart bate byte a byte com a do Go** (achado notável -- confirma que a variante de nonce RFC6979 do dcrd, que pula a redução `bits2octets` por já operar sobre hash de 256 bits ~ ordem da curva, coincide na prática com a implementação padrão do pointycastle) -- `test/secp256k1_key_parity_test.dart`. **ECDSA**: hardcoded pra NIST P-256 igual ao Go (`elliptic.P256()`); raw privado = SEC1 `ECPrivateKey` (RFC 5915, `x509.MarshalECPrivateKey` -- SEQUENCE com version/OCTET STRING d/[0] EXPLICIT OID da curva/[1] EXPLICIT BIT STRING do ponto, os dois campos opcionais do RFC 5915 sempre presentes por serem os que o Go sempre emite); raw público = PKIX `SubjectPublicKeyInfo` com AlgorithmIdentifier `{id-ecPublicKey, namedCurve OID}` (não NULL como no RSA) envolvendo o ponto não-comprimido. `ecdsa.Sign` do Go usa nonce aleatorizado (não RFC6979), então a paridade aqui é provada por verificação cruzada, não assinatura idêntica: Dart aceita uma assinatura real do Go, e as codificações DER/SEC1 batem byte a byte. Validado contra `crypto/ecdsa`+`crypto/x509` do Go (`go-ipfs-reference/ecdsa_vectors/main.go`) -- `test/ecdsa_key_parity_test.dart`. Em todos os três: geração de chave via `pc.*KeyGenerator`+`FortunaRandom`, seed real via `Random.secure()` do Dart. **Ed25519** (`ed25519_key.dart`): não é um port novo -- envolve o `Ed25519Signer` já existente (usado por IPNS) na mesma abstração `PrivKey`/`PubKey`, já que ele usava `package:cryptography` diretamente sem conformar à interface. Raw privado = 64 bytes `seed‖publicKey` (formato de `ed25519.PrivateKey` do Go); como `package:cryptography` só expõe a seed de 32 bytes de forma síncrona, a concatenação é feita uma vez, de forma assíncrona, na fábrica (`generateEd25519KeyPair`/`unmarshalEd25519PrivateKey`), mantendo `raw()` síncrono como nos outros três tipos. Validado contra `crypto/ed25519` do Go (`go-ipfs-reference/ed25519_vectors/main.go`): assinatura EdDSA determinística bate byte a byte -- `test/ed25519_key_parity_test.dart`. **`key_codec.dart`** (novo, sem arquivo Go correspondente 1:1 -- é a contraparte de `MarshalPublicKey`/`UnmarshalPublicKey`/`MarshalPrivateKey`/`UnmarshalPrivateKey` de `core/crypto/key.go`): despacha por `KeyType` entre os quatro tipos concretos, usado por qualquer código que recebe uma chave de identidade de tipo desconhecido (ex.: o payload do handshake Noise) -- `test/key_codec_test.dart`. Com isso, os quatro tipos de chave do protobuf `crypto.pb.KeyType` (RSA/Ed25519/Secp256k1/ECDSA) têm cobertura uniforme. O gap real que impede conexão com peers não-Ed25519 continua sendo o handshake Noise (`p2p/security/noise`, hardcoded pra Ed25519 -- ver nota acima), não este pacote; os tipos de chave aqui são pré-requisito pro payload de assinatura do Noise, não a correção em si. |
@@ -304,7 +457,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `p2p/host/peerstore/test` |  | não iniciado |  |
 | `p2p/host/pstoremanager` |  | não iniciado |  |
 | `p2p/host/relaysvc` |  | não iniciado |  |
-| `p2p/host/resource-manager` |  | não iniciado |  |
+| `p2p/host/resource-manager` | `packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/{limit,resource_manager}.dart` | **portado sem teste de paridade** | Subconjunto reutilizável: `Limit`/`BaseLimit`/`Limiter`/`FixedLimiter`, contabilidade de streams/conexões/memória/FD, escopos DAG e spans, `openStream`, `SetProtocol`, `SetService` e `Done`, com rollback transacional. `context.Context`, tracing/métricas, allowlist, rate limiting por IP, GC de mapas e configuração JSON não foram portados; `openConnection`/`setPeer` cobre apenas a contabilidade necessária à interface atual. Testes direcionados em `packages/transpiled_libp2p/test/resource_manager_test.dart` cobrem ciclos de 1100+, concorrência, limites, rollback e estatísticas zeradas.` |
 | `p2p/host/resource-manager/obs` |  | não iniciado |  |
 | `p2p/host/routed` |  | não iniciado |  |
 | `p2p/http` |  | não iniciado |  |
@@ -402,7 +555,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `core/corerepo` |  | não iniciado |  |
 | `core/coreunix` |  | não iniciado |  |
 | `core/mock` |  | não iniciado |  |
-| `core/node` |  | não iniciado |  |
+| `core/node` | `lib/src/core/builders/build_cfg.dart`; `lib/src/core/builders/ipfs_node_builder.dart`; `lib/src/core/ipfs_node/ipfs_node.dart` | **portado sem teste de paridade** | Subconjunto auditado de `BuildCfg`/`NewNode`/`IpfsNode.Close`: `Online`, `ExtraOpts` (`pubsub`/`ipnsps`) e `ShutdownTimeout` preservam defaults e comportamento observável; `ExtraOpts` mantém mutabilidade e referência do mapa Go. `fromBuildCfg` inicia o nó antes de completar; `Close`/`stop` memoriza uma única Future, equivalente ao `sync.Once`. Permanecem sem equivalente o lifetime `context.Context`, erros FX exatos, `Repo`, `Host`, `Routing`, `Permanent`, `DisableEncryptedConnections` e hooks FX. |
 | `core/node/helpers` |  | não iniciado |  |
 | `core/node/libp2p` |  | não iniciado |  |
 | `core/node/libp2p/fd` |  | não iniciado |  |
@@ -472,7 +625,12 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 ### `boxo`
 
-**Nota de cobertura (2026-08-25)**: é o módulo com mais implementação original já existente de toda esta lista, mas espalhada e não mapeada linha a linha contra os 114 pacotes reais do boxo -- por isso as linhas abaixo continuam em branco em vez de marcadas uma a uma. O que já existe e funciona: `lib/src/protocols/bitswap/` (7 arquivos, 1974 linhas, ~ `bitswap`+`bitswap/client`+`bitswap/server`+`bitswap/message`), `lib/src/core/unixfs/` (8, 1181, ~ pacote `unixfs` do próprio boxo -- que na verdade vive em `go-unixfsnode`, não clonado), `lib/src/services/gateway/` (23 arquivos, ~ `gateway`), `lib/src/core/data_structures/car.dart` (835 linhas, ~ `car`/`ipld/car`, mas o formato real vem do módulo separado `go-car/v2`, também não clonado), `lib/src/core/mfs/` (~ `mfs`), `lib/src/protocols/ipns/` (~ parte de `ipns`/`namesys`). Nenhum foi comparado função-a-função com o boxo real ainda -- status real de todos: `implementação original não auditada`, não `não iniciado`.
+**Nota de cobertura (atualizada em 2026-09-05)**: a implementação original
+continua parcialmente não auditada, mas as fatias usadas pelo download atual
+foram separadas em ports internos. `go-unixfsnode` e `go-car/v2` estão clonados
+e fixados em `UPSTREAM_LOCK.md`; chunking/UnixFS ficam em `transpiled_boxo` e
+CAR v1 streaming em `transpiled_go_car`. Não extrapolar essa prova para a
+superfície completa dos pacotes Go.
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
@@ -511,9 +669,9 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `blockservice` |  | não iniciado |  |
 | `blockservice/internal` |  | não iniciado |  |
 | `blockservice/test` |  | não iniciado |  |
-| `blockstore` |  | não iniciado |  |
+| `blockstore` | `lib/src/blockstore/blockstore.dart` | **portado sem teste de paridade** | Subconjunto `Has/Get/Put` usado pelo runtime, com validação de CID e testes de contrato; a superfície completa permanece pendente. |
 | `bootstrap` |  | não iniciado |  |
-| `chunker` |  | não iniciado |  |
+| `chunker` | `packages/transpiled_boxo/lib/src/chunker.dart` | **portado sem teste de paridade** | Subconjunto necessário ao importer UnixFS, validado no E2E de 50/100/200/500 MiB. |
 | `chunker/gen` |  | não iniciado |  |
 | `dag/walker` |  | não iniciado |  |
 | `datastore/dshelp` |  | não iniciado |  |
@@ -547,8 +705,8 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `ipld/unixfs` |  | não iniciado |  |
 | `ipld/unixfs/file` |  | não iniciado |  |
 | `ipld/unixfs/hamt` |  | não iniciado |  |
-| `ipld/unixfs/importer` |  | não iniciado |  |
-| `ipld/unixfs/importer/balanced` |  | não iniciado |  |
+| `ipld/unixfs/importer` | `packages/transpiled_boxo/lib/src/unixfs.dart` | **portado sem teste de paridade** | Subconjunto usado para importar e reconstruir arquivos UnixFS. |
+| `ipld/unixfs/importer/balanced` | `packages/transpiled_boxo/lib/src/unixfs.dart` | **portado sem teste de paridade** | Importer balanced exercitado nos E2E grandes e na interoperabilidade CAR com Kubo. |
 | `ipld/unixfs/importer/helpers` |  | não iniciado |  |
 | `ipld/unixfs/importer/trickle` |  | não iniciado |  |
 | `ipld/unixfs/internal` |  | não iniciado |  |
@@ -648,7 +806,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 
 | Pacote Go | Destino em `lib/src/` | Status | Notas |
 |---|---|---|---|
-| `(root)` | `lib/src/protocols/dht/` (40 arquivos, 7171 linhas) | implementação original não auditada | Cliente DHT completo e em uso -- `dht_client.dart`, `dht_handler.dart`, `provider_store.dart`, `peer_store.dart`, `reprovider.dart`, `optimistic_provider.dart`, `rate_limiter.dart` -- mas escrito do zero, nunca comparado função-a-função com este módulo. Depende de `go-libp2p-kbucket`+`record`+`routing-helpers`+`boxo`+`go-datastore` (nenhum ainda portado) -- é o último módulo da ordem de construção recomendada, não o primeiro (ver "Estado em aberto" acima). |
+| `(root)` | `lib/src/protocols/dht/` | implementação original não auditada | Cliente DHT em uso e provado no fluxo `FindProvidersAsync → Bitswap`, mas ainda sem auditoria completa função-a-função. Ports parciais de `go-libp2p-kbucket`, `record`, `routing-helpers`, Boxo e `go-datastore` já existem; sua integração/paridade integral continua futura. |
 | `amino` |  | não iniciado |  |
 | `crawler` |  | não iniciado |  |
 | `dual` |  | não iniciado |  |
@@ -670,7 +828,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `provider/internal/timeseries` |  | não iniciado |  |
 | `provider/keystore` |  | não iniciado |  |
 | `provider/stats` |  | não iniciado |  |
-| `qpeerset` | `lib/src/protocols/dht/query_peerset.dart` | **portado com paridade comprovada** | `PeerState` e `QueryPeerset` com `TryAdd`→`tryAdd`, `SetState`→`setState`, `GetState`→`getState`, `GetReferrer`→`getReferrer`, filtros ordenados por distância, `NumHeard`/`NumWaiting`; vetores de `qpeerset_test.go` reproduzidos em `test/protocols/dht/query_peerset_test.dart`. A função de distância é injetada pelo routing table existente em vez de recriar outro `XORKeySpace`. Integrado ao `FindProvidersAsync` com `alpha` padrão 10, `beta` 3, starvation e follow-up top-K. |
+| `qpeerset` | `lib/src/protocols/dht/query_peerset.dart` | **portado com paridade comprovada** | `PeerState` e `QueryPeerset` com inserção/duplicata, referrer, estados `heard`/`waiting`/`queried`/`unreachable`, ordenação XOR, filtros, contadores e limites. `test/protocols/dht/query_peerset_test.dart` reproduz integralmente o vetor de transições e limites de `qpeerset_test.go`; nenhuma correção de implementação foi necessária. |
 | `records` |  | não iniciado |  |
 | `rtrefresh` |  | não iniciado |  |
 
@@ -683,7 +841,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `internal/gologshim` |  | fora do escopo | Shim de logging, não lógica de protocolo. |
 | `internal/merkle` |  | não iniciado | Só um `example.go`, não lógica central. |
 | `partialmessages` |  | não iniciado | Depende de `Host`/`Stream` -- fora do escopo desta rodada, ver nota da linha `(root)`. |
-| `partialmessages/bitmap` | `packages/transpiled_libp2p_pubsub/lib/src/partialmessages/bitmap.dart` | **portado com paridade comprovada** | `Bitmap`/`NewBitmapWithOnesCount`/`Merge`/`IsZero`/`OnesCount`/`Set`/`Get`/`Clear`/`And`/`Or`/`Xor`/`Flip` (`bitmap.go`). **Bug real encontrado no próprio Go upstream, corrigido no port**: `Bitmap` é `[]byte` e `Set` recebe o receiver POR VALOR; o `append` que cresce o slice dentro de `Set` é invisível pro `Bitmap` do chamador (nunca retornado), então crescer via `Set` além do tamanho atual não tem efeito duradouro nenhum -- parece um bug latente do Go, não um comportamento intencional. Portado como classe Dart envolvendo um `Uint8List` que cresce o armazenamento COMPARTILHADO, corrigindo esse problema (crescimento fica visível pra qualquer titular do mesmo objeto `Bitmap`, coisa que a semântica de valor do slice do Go não permitia sem reatribuição). Sem `bitmap_test.go` no Go upstream -- testes escritos contra o contrato documentado de cada método (`test/partialmessages/bitmap_test.dart`, 8 testes). |
+| `partialmessages/bitmap` | `packages/transpiled_libp2p_pubsub/lib/src/partialmessages/bitmap.dart` | **portado sem teste de paridade** | Superfície pública portada, mas `Set` preserva crescimento no objeto Dart enquanto o slice recebido por valor no Go não expõe esse crescimento ao chamador. A correção é deliberada e testada, porém constitui divergência observável; não declarar paridade byte/comportamental. |
 | `pb` |  | não iniciado | Mensagens protobuf do RPC do pubsub -- útil só quando `PubSub`/`GossipSubRouter` forem portados de verdade. |
 | `timecache` | `packages/transpiled_libp2p_pubsub/lib/src/timecache/{time_cache,first_seen_cache,last_seen_cache,util}.dart` | **portado com paridade comprovada** | `TimeCache`/`Strategy`/`NewTimeCache`/`NewTimeCacheWithStrategy` (`time_cache.go`), `FirstSeenCache` (`first_seen_cache.go`), `LastSeenCache` (`last_seen_cache.go`), `background`/`sweep` (`util.go`, `sweep` mantido como função pura tomando `now` explicitamente -- o que também é o que torna a lógica de expiração testável deterministicamente sem depender de relógio real ou fake). `sync.RWMutex`/`sync.Mutex` do Go não portados (mesmo raciocínio do `go-libp2p-kbucket`: isolate único cooperativo do Dart não precisa). Testado contra vetores reais de `first_seen_cache_test.go`/`last_seen_cache_test.go` (`TestFirstSeenCacheFound/Expire/NotFoundAfterExpire`, `TestLastSeenCacheFound/Expire/SlideForward/NotFoundAfterExpire`) -- o Go usa `testing/synctest` (tempo virtual instantâneo dentro de uma "bolha"); este port usa delays reais curtos (`Future.delayed` na casa de 100-500ms) em vez de adicionar `package:fake_async` como dependência nova só pra isso, com margens generosas pra evitar flakiness -- mesmo comportamento reproduzido, só mais lento (ordem de segundos, não instantâneo). Mais o teste da própria função pura `sweep` com `DateTime` controlado, sem qualquer espera. 17 testes ao todo neste pacote. |
 
@@ -705,7 +863,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `keytransform` |  | não iniciado | Decorator de datastore (reescreve chaves) -- usado por `namespace`. |
 | `mount` |  | não iniciado |  |
 | `namespace` |  | não iniciado | Provável dependência real de `go-libp2p-kad-dht`/boxo (namespacing de chaves da DHT/blockstore) -- revisitar quando começar `go-libp2p-kad-dht`. |
-| `query` | `packages/transpiled_datastore/lib/src/query/{query,filter,order,query_impl}.dart` | **portado com paridade comprovada** | `Query`/`Entry`/`Result`→`QueryResult`/`Results`/`Iterator`→`QueryIterator`/`ResultsFromIterator`/`ResultsWithEntries`/`ResultsReplaceQuery`/`Query.String` (`query.go`), `Filter`/`Op`→`FilterOp`/`FilterValueCompare`/`FilterKeyCompare`/`FilterKeyPrefix` (`filter.go`), `Order`/`OrderByFunction`/`OrderByValue(Descending)`/`OrderByKey(Descending)`/`Less`→`queryLess`/`Compare`→`queryCompare`/`Sort`→`querySort` (`order.go`), `NaiveFilter`/`NaiveLimit`/`NaiveOffset`/`NaiveOrder`/`NaiveQueryApply`/`ResultEntriesFrom` (`query_impl.go`). O caminho de construção de `Results` baseado em canal do Go (`results`/`ResultsWithContext`, pra produtores concorrentes) não foi portado -- só o caminho pull-based (`resultsIter`/`Iterator`), suficiente pro isolate único e cooperativo do Dart (mesmo raciocínio já usado pra remover `sync.RWMutex` no `go-libp2p-kbucket`); ver o comentário de cabeçalho de `query.dart`. Testado contra vetores reais de `filter_test.go` (`TestFilterKeyCompare`, `TestFilterKeyPrefix`), `order_test.go` (`TestOrderByKey`), `query_test.go` (`TestNaiveQueryApply`, `TestLimit`, `TestOffset`, `TestResultsFromIterator`+`TestResultsFromIteratorNoClose`, `TestStringer`) -- `TestResultsFromIteratorUsingChan` não portado (exercita só a API de canal do Go que este port não tem). |
+| `query` | `packages/transpiled_datastore/lib/src/query/{query,filter,order,query_impl}.dart` | **portado sem teste de paridade** | Superfície inclui `Results.next`/`done`, `ResultsWithContext`→`resultsWithContext` e os buffers públicos, usando `Stream`/`Future` para canais e cancelamento. Os 25 testes passam, incluindo produção assíncrona e cancelamento; a equivalência concorrente completa com todos os vetores Go ainda precisa ser comprovada antes de elevar o status. |
 | `retrystore` |  | não iniciado |  |
 | `scoped` |  | não iniciado |  |
 | `scoped/generate` |  | não iniciado |  |

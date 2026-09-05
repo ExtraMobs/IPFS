@@ -200,7 +200,7 @@ The AST must be immutable and equality must be value-based. Unknown selector key
 
 ### 7.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job or local Docker Compose stack that runs the latest Kubo and Helia stable versions and exercises:
+Create a CI job or local interoperability harness that runs the latest Kubo and Helia stable versions and exercises:
 
 - **Selector fixtures:** A known selector fixture is executed against the same DAG in both dart_ipfs and a reference implementation; the selected CID sets are identical.
 - **GraphSync:** A Kubo or Helia GraphSync client requests a selector from a dart_ipfs node. The client can decode the response and reconstruct the selected DAG. The reverse (dart_ipfs client requesting from Kubo/Helia) is tested where supported.

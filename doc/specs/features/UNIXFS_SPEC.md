@@ -201,7 +201,7 @@ A HAMT-sharded directory is used when a directory exceeds a configured fanout th
 
 ### 7.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job or local Docker Compose stack that runs the latest Kubo and Helia stable versions and exercises:
+Create a CI job or local interoperability harness that runs the latest Kubo and Helia stable versions and exercises:
 
 - **Directory CID parity:** Kubo `ipfs add -r` a directory; dart_ipfs imports the resulting DAG and the root CID matches. Dart_ipfs builds a directory; Kubo `ipfs cat /ipfs/<cid>/path` returns the same files.
 - **CAR round-trip:** Export a UnixFS directory from Kubo as a CAR, import it into dart_ipfs, export it again, and compare the CAR bytes to the original.

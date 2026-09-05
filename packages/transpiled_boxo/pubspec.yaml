@@ -14,6 +14,8 @@ dependencies:
     path: ../transpiled_base58
   transpiled_multihash:
     path: ../transpiled_multihash
+  transpiled_varint:
+    path: ../transpiled_varint
 
 dev_dependencies:
   test: ^1.28.0

@@ -154,7 +154,7 @@ The implementation must define an `IPLDNode` type or set of types that directly 
 
 ### 7.3 Interoperability Tests with Kubo and Helia
 
-Create a CI job or local Docker Compose stack that runs the latest Kubo and Helia stable versions and exercises:
+Create a CI job or local interoperability harness that runs the latest Kubo and Helia stable versions and exercises:
 
 - **DAG put/get:** Dart_ipfs stores a DAG-CBOR node; Kubo `dag get` returns the same bytes and CID. Reverse direction also works.
 - **CAR headers:** CAR v1/v2 headers produced by dart_ipfs are accepted by Kubo and Helia. The header is a DAG-CBOR map with the correct key ordering.

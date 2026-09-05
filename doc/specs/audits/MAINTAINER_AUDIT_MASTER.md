@@ -15,7 +15,7 @@ All 26 per-feature specifications were audited by the maintainers. The specs are
 1. **File-path drift in current-state descriptions.** Many specs reference `lib/src/codec/...` paths that do not exist; the actual code lives under `lib/src/core/...`.
 2. **Unresolved dependency on the non-standard CAR class.** The existing `lib/src/core/data_structures/car.dart` implements a custom protobuf-based CAR format, which blocks trustless gateway, MFS import/export, and standard CAR work until it is replaced.
 3. **Protobuf-generated `IPLDNode` model not acknowledged.** The codecs and selectors must map onto the mutable protobuf `IPLDNode` in `lib/src/proto/generated/ipld/data_model.pb.dart`.
-4. **IPFSConfig / lifecycle model gaps.** The CLI, Docker, and plugin specs assume configuration and lifecycle wiring that is incomplete in the current codebase.
+4. **IPFSConfig / lifecycle model gaps.** The CLI and plugin specs assume configuration and lifecycle wiring that is incomplete in the current codebase.
 5. **A few specs over-promise for v2.0/v2.1.** AutoTLS full ACME, WebTransport native listener, and plugin sandboxing are either premature or mischaracterized.
 
 No spec was rejected (Safety > 3 everywhere). The highest-scoring specs are **METRICS_SPEC.md**, **GOSSIPSUB_SPEC.md**, **DHT_INTEGRATION_SPEC.md**, **CIRCUIT_RELAY_SPEC.md**, **BITSWAP_HTTP_FALLBACK_SPEC.md**, and **GATEWAY_TLS_SPEC.md**, all of which are close to unconditional PASS after minor corrections.
@@ -47,7 +47,6 @@ No spec was rejected (Safety > 3 everywhere). The highest-scoring specs are **ME
 | BITSWAP_HTTP_FALLBACK_SPEC.md | Networking | 7 | 8 | 7 | 7 | 7 | PASS |
 | GATEWAY_TLS_SPEC.md | Networking | 7 | 8 | 8 | 7 | 8 | PASS |
 | CLI_SPEC.md | Operations | 7 | 8 | 7 | 7 | 8 | PASS |
-| DOCKER_SPEC.md | Operations | 7 | 8 | 8 | 7 | 8 | PASS |
 | KUBERNETES_SPEC.md | Operations | 7 | 7 | 8 | 7 | 7 | PASS |
 | INTEROP_TESTS_SPEC.md | Operations | 6 | 9 | 6 | 6 | 9 | CONDITIONAL |
 | MODULARIZATION_SPEC.md | Operations | 7 | 6 | 8 | 6 | 7 | CONDITIONAL |
@@ -124,14 +123,12 @@ See: <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_NETWO
 
 ### 3.4 Operations, Modularity & Ecosystem (6 specs)
 
-CLI, Docker, and Kubernetes specs are ready for implementation. Interop, modularization, and plugins are conditional because they depend on stabilizing other layers or over-promise sandboxing.
+CLI and Kubernetes specs are ready for implementation. Interop, modularization, and plugins are conditional because they depend on stabilizing other layers or over-promise sandboxing.
 
 **Top blockers:**
 - `IPFSNodeBuilder` (`lib/src/core/builders/ipfs_node_builder.dart:135-136`) registers `LifecycleManager` but not `RPCServer` or `GatewayServer`; the CLI `daemon` command must manage these explicitly.
 - `IPFSConfig.toJson()` (`lib/src/core/config/ipfs_config.dart:300-322`) omits gateway, metrics, keystore, and customConfig, breaking CLI `config` commands and plugin settings.
-- `IPFSConfig.fromFile` reads YAML, but CLI/Docker examples reference `config.json`.
-- Version string drift: `rpc_handlers.dart` and `gateway_server.dart` hard-code `dart_ipfs/0.1.0`; `pubspec.yaml` is `1.11.5`; `Dockerfile` is `1.2.4-secure`.
-- `pubspec.yaml` includes `sodium: ^4.0.2+1`, which wraps `libsodium`. The Docker spec's proposed distroless base will fail unless a glibc base is chosen or libsodium is statically linked.
+- `IPFSConfig.fromFile` reads YAML, while the CLI and Kubernetes examples reference `config.json`.
 - `PLUGINS_SPEC.md` incorrectly claims Dart Isolates provide a security sandbox; they share the same OS process and can use FFI/network/filesystem.
 - `PLUGINS_SPEC.md` proposes committing `tool/plugin_dev_key.pem` to the repo; this must never be committed.
 - `INTEROP_TESTS_SPEC.md` makes DHT provide/find and IPNS resolution P0 release-blocking, but those protocols are still stabilizing. They should be P1 allowed-to-fail until networking specs are proven.
@@ -143,8 +140,6 @@ CLI, Docker, and Kubernetes specs are ready for implementation. Interop, modular
 3. Correct plugin security model (do not claim Isolates are a sandbox; do not commit dev keys).
 4. Move interop DHT/IPNS tests to P1 allowed-to-fail.
 5. Choose monorepo tooling before extraction begins.
-
-See: <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md" />
 
 ---
 
@@ -160,10 +155,8 @@ The following issues affect multiple specs and should be resolved before impleme
 | Non-deterministic `mtime` in `DagPbCodec` | UNIXFS, CAR_FORMAT | Remove `DateTime.now()` from DAG-PB encoding. |
 | Protobuf-generated `IPLDNode` model | DAG_CBOR, DAG_JSON, IPLD_SELECTORS, GRAPHSSYNC | Document how codecs/selectors map onto the mutable protobuf model. |
 | Missing `PeerId` base36 primitives | IPNS, SUBDOMAIN_GATEWAY | Add `toBase36`/`fromBase36` to `PeerId`. |
-| IPFSConfig incomplete serialization | CLI, DOCKER, KUBERNETES, PLUGINS | Fix `toJson`/`fromFile` and add missing config sections. |
-| Lifecycle wiring for RPC/Gateway servers | CLI, DOCKER, KUBERNETES | Extend `IPFSNodeBuilder` lifecycle or document CLI daemon management. |
-| `libsodium` native dependency conflicts with distroless base | DOCKER, KUBERNETES | Choose glibc base or remove/inline libsodium dependency. |
-| Version string drift across codebase | CLI, DOCKER, INTEROP_TESTS | Use a single source of truth (pubspec.yaml). |
+| IPFSConfig incomplete serialization | CLI, KUBERNETES, PLUGINS | Fix `toJson`/`fromFile` and add missing config sections. |
+| Lifecycle wiring for RPC/Gateway servers | CLI, KUBERNETES | Extend `IPFSNodeBuilder` lifecycle or document CLI daemon management. |
 
 ---
 
@@ -198,8 +191,7 @@ The following issues affect multiple specs and should be resolved before impleme
 9. **MFS completeness** (after clarifying flush semantics)
 10. **Trustless gateway** (after standard CAR)
 11. **CLI / daemon** (after config/lifecycle fixes)
-12. **Docker images** (after libsodium base decision)
-13. **Interop tests** (after P0 networking stabilizes)
+12. **Interop tests** (after P0 networking stabilizes)
 
 ---
 
@@ -211,7 +203,6 @@ Detailed findings, scores, and recommendations are in the per-category reports:
 - <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_SERVICES_APIS.md" />
 - <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_NETWORKING_P2P_1.md" />
 - <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_NETWORKING_P2P_2.md" />
-- <ref_file file="C:\Users\josee\IPFS\doc\specs\audits\MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md" />
 
 ---
 

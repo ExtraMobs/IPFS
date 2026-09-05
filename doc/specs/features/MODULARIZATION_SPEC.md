@@ -5,7 +5,7 @@
 **Target Release:** dart_ipfs v2.2.x / release-candidate (not a v2.2.0 blocker)  
 **Status:** Deferred by maintainer decision (2026-07-09)  
 **Maintainer Priority:** P1 MODIFIED  
-**Source:** `OPERATIONS_ECOSYSTEM_SPEC` section 4.5
+**Source:** Maintainer-approved operations backlog
 
 ---
 
@@ -202,7 +202,7 @@ export 'package:dart_ipfs_core/dart_ipfs_core.dart'
 - **Order:** Modularization is a P1 item and is part of the v2.2.x / release-candidate phase. It should not delay the v2.2.0 P0 release. The workspace tooling decision (Melos) is made before any files are moved.
 - **Downstream consumers:**
   - `PLUGINS_SPEC.md` — the plugin API depends on stable `BlockStore` and key interfaces from `dart_ipfs_core`.
-  - `CLI_SPEC.md` and `DOCKER_SPEC.md` — these should remain functional regardless of whether modularization lands.
+  - `CLI_SPEC.md` — it should remain functional regardless of whether modularization lands.
 
 ---
 

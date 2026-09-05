@@ -61,7 +61,7 @@ class RoutingTable {
     required this.local,
     required this.maxLatency,
     required this.metrics,
-    this.usefulnessGracePeriod = Duration.zero,
+    required this.usefulnessGracePeriod,
     this.diversityFilter,
   }) : _buckets = [Bucket()];
 
@@ -94,6 +94,10 @@ class RoutingTable {
   final Map<int, DateTime> _cplRefreshedAt = {};
 
   DhtId get _localId => convertPeerId(local);
+
+  /// Shuts down the routing table. This port owns no background process, so
+  /// the faithful idempotent close operation is a no-op.
+  void close() {}
 
   /// The Cpls this table is tracking for refresh, indexed by Cpl. Exposed
   /// (rather than kept private) so the `table_refresh.dart` extension can
@@ -145,7 +149,11 @@ class RoutingTable {
   /// [PeerRejectedHighLatencyException] or
   /// [PeerRejectedNoCapacityException] if it couldn't be added. Equivalent
   /// to go-libp2p-kbucket's `RoutingTable.TryAddPeer`.
-  bool tryAddPeer(PeerId id, {required bool queryPeer, required bool isReplaceable}) {
+  bool tryAddPeer(
+    PeerId id, {
+    required bool queryPeer,
+    required bool isReplaceable,
+  }) {
     final bucketId = _bucketIdForPeer(id);
     var bucket = _buckets[bucketId];
 

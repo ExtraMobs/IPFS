@@ -253,7 +253,6 @@ final config = IPFSConfig(
 ```bash
 # Start required services (Kubo, Helia) before running tests
 cd test/interop/kubo
-docker-compose up -d
 
 cd test/interop/helia
 npm install

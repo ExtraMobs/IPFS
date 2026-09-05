@@ -11,7 +11,6 @@
 - `lib/src/services/gateway/gateway_server.dart`
 - `doc/specs/features/CLI_SPEC.md`
 - `doc/specs/features/KUBERNETES_SPEC.md`
-- `doc/specs/audits/MAINTAINER_AUDIT_OPERATIONS_ECOSYSTEM.md`
 
 ---
 
@@ -49,7 +48,7 @@ It omits:
 The constructor already accepts these fields, so `fromJson()` is lossy when `toJson()` is used for `config show` / `config replace`.
 
 ### 2.2 Format mismatch
-`IPFSConfig.fromFile()` uses `loadYaml()` and round-trips YAML through JSON. The CLI and Kubernetes specs reference `config.json` as the default repository config. This creates ambiguity for Docker, K8s, and first-run CLI initialization.
+`IPFSConfig.fromFile()` uses `loadYaml()` and round-trips YAML through JSON. The CLI and Kubernetes specs reference `config.json` as the default repository config. This creates ambiguity for K8s and first-run CLI initialization.
 
 ### 2.3 Lifecycle wiring gap
 `IPFSNodeBuilder.build()` at `lib/src/core/builders/ipfs_node_builder.dart:135-136` registers `LifecycleManager` but does not register `RPCServer` or `GatewayServer`. Both server classes already expose `start()` and `stop()` methods, but they do not implement `ILifecycle`. The CLI `daemon` command and Kubernetes readiness probes assume these services are running after `IPFSNode.start()` completes.
@@ -63,7 +62,7 @@ The constructor already accepts these fields, so `fromJson()` is lossy when `toJ
 | maintainers Lens | Score | Rationale |
 |--------------|-------|-----------|
 | **Coherence** | 8 | Dart's `jsonEncode`/`jsonDecode` is the native transport serialization for the in-memory model. `IPFSConfig.fromJson` / `toJson` already define the runtime contract. YAML is currently only a pre-parse step. |
-| **Capability** | 9 | JSON is the format assumed by `CLI_SPEC.md`, `KUBERNETES_SPEC.md`, and Docker/Kubernetes ConfigMaps. YAML would force downstream specs to convert or maintain two templates. |
+| **Capability** | 9 | JSON is the format assumed by `CLI_SPEC.md`, `KUBERNETES_SPEC.md`, and Kubernetes ConfigMaps. YAML would force downstream specs to convert or maintain two templates. |
 | **Safety** | 7 | JSON is less prone to accidental type coercion than YAML. However, YAML must remain supported for backward compatibility. Accepting both increases parsing surface slightly; strict validation mitigates this. |
 | **Efficiency** | 9 | No rewrite needed: `fromFile()` can sniff the extension, parse YAML when needed, and always produce a `Map<String, dynamic>` for `fromJson()`. JSON becomes the new default writer. |
 | **Evolution** | 8 | A single canonical JSON format with YAML read-fallback is easier to document and version than two parallel schemas. Plugin settings can be stored under `customConfig` as JSON. |
@@ -75,7 +74,7 @@ The constructor already accepts these fields, so `fromJson()` is lossy when `toJ
 | maintainers Lens | Score | Rationale |
 |--------------|-------|-----------|
 | **Coherence** | 9 | Every constructor field should round-trip unless it is intentionally non-serializable. The model is already structured; the fix is additive. |
-| **Capability** | 9 | CLI `config show`, `config replace`, Docker/K8s templating, and plugin settings all require `gateway`, `metrics`, `customConfig`, and path fields. |
+| **Capability** | 9 | CLI `config show`, `config replace`, K8s templating, and plugin settings all require `gateway`, `metrics`, `customConfig`, and path fields. |
 | **Safety** | 6 | `keystore` must not be serialized as a nested key blob. Only `keystorePath` should be written; cryptographic keys remain on disk or in the encrypted keystore. `libp2pIdentitySeed` is a Uint8List and should be base64-encoded with a clear comment that it is sensitive. `customConfig` may contain plugin settings or secrets, so the CLI must reject saving API keys/tokens into it. |
 | **Efficiency** | 9 | The work is limited to adding keys to the existing map literals and `fromJson` constructor calls. No new config classes are required. |
 | **Evolution** | 8 | `customConfig` provides a forward-compatible extension bucket for plugin settings and future Kubo parity fields without schema changes. |
@@ -108,7 +107,7 @@ A round-trip unit test must verify that `IPFSConfig.fromJson(config.toJson())` i
 | maintainers Lens | Score | Rationale |
 |--------------|-------|-----------|
 | **Coherence** | 8 | `LifecycleManager` already exists and is the intended owner of `start()`/`stop()` order. Both `RPCServer` and `GatewayServer` already have matching `start()`/`stop()` methods. The only missing step is making them implement `ILifecycle` and registering them in the builder. |
-| **Capability** | 9 | CLI `daemon`, Docker health checks, and Kubernetes readiness probes all expect the node object to bring up both services. Centralizing this in the builder gives K8s a single contract. |
+| **Capability** | 9 | CLI `daemon` and Kubernetes readiness probes both expect the node object to bring up both services. Centralizing this in the builder gives K8s a single contract. |
 | **Safety** | 7 | Registration in the builder guarantees deterministic shutdown order (reverse registration). If the CLI manages them separately, two owners can race on `stop()`. The CLI should still be able to override listen addresses via `--api-addr` and `--gateway-addr`, but lifecycle ownership remains in the builder. |
 | **Efficiency** | 8 | The change is small: add `implements ILifecycle` to both server classes and register them in `IPFSNodeBuilder.build()` when their respective config sections are enabled. |
 | **Evolution** | 8 | Future services (WebUI server, metrics HTTP server, TLS gateway) can follow the same pattern. The builder becomes the single source of truth for service composition. |
@@ -125,8 +124,8 @@ The builder, not the CLI, owns the lifecycle wiring. Both server classes must fo
 
 | maintainers Lens | Score | Rationale |
 |--------------|-------|-----------|
-| **Coherence** | 9 | Matches Kubo semantics and the existing CLI/Docker/K8s specs. `$IPFS_PATH` is the natural repo root. |
-| **Capability** | 9 | Required for Docker volume mounts and K8s ConfigMaps. `--config` override is standard for CLI tooling and integration tests. |
+| **Coherence** | 9 | Matches Kubo semantics and the existing CLI/K8s specs. `$IPFS_PATH` is the natural repo root. |
+| **Capability** | 9 | Required for K8s ConfigMaps. `--config` override is standard for CLI tooling and integration tests. |
 | **Safety** | 7 | Using `$IPFS_PATH` keeps repo data, keys, and config co-located, reducing the risk of mixing config files across nodes. Secrets remain in the keystore or K8s Secrets, not in the config file. |
 | **Efficiency** | 9 | One new path resolution helper and a default-fallback in `bin/ipfs.dart`. The YAML fallback in `fromFile` already handles extension sniffing. |
 | **Evolution** | 8 | A single `IPFS_PATH` convention supports future repo migrations, snapshots, and plugin data directories. |
