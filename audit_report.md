@@ -2,7 +2,7 @@
 
 > Relatório gerado automaticamente por `tool/audit_ast_nomenclature.py`.
 > **Símbolos Dart Auditados:** 4742 | **Símbolos Go Indexados:** 29657
-> **Status Geral:** ❌ **0 Erros** | ⚠️ **138 Avisos** | ℹ️ **1504 Notas de Cobertura**
+> **Status Geral:** ❌ **0 Erros** | ⚠️ **122 Avisos** | ℹ️ **1504 Notas de Cobertura**
 
 ## 1. Resumo Executivo das 23 Regras
 
@@ -30,7 +30,7 @@
 | `RULE_MISSING_GO_METHODS` | 20. Auditoria de Métodos do Upstream Go Ausentes | `INFO` | 83 | ⚠️ Atenção |
 | `RULE_MISSING_GO_FUNCTIONS` | 21. Auditoria de Funções Top-Level do Upstream Go Ausentes | `INFO` | 19 | ⚠️ Atenção |
 | `RULE_PUBSPEC_DEPENDENCIES` | 22. Validação de Dependências em pubspec.yaml | `WARNING` | 0 | ✅ Conforme |
-| `RULE_EXPOSED_NON_PUBLIC_MEMBERS` | 23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão) | `WARNING` | 16 | ⚠️ Atenção |
+| `RULE_EXPOSED_NON_PUBLIC_MEMBERS` | 23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão) | `ERROR` | 0 | ✅ Conforme |
 
 ## 2. Detalhamento dos Apontamentos
 
@@ -3306,38 +3306,3 @@
   - *Sugestão:* `Avaliar porte das funções: DefaultConfig, VerifyConfig, Server, Client`
 - ℹ️ `[INFO]` **[`lib:1`](lib#L1)** — Pacote 'lib' possui 478 função(ões) livre(s) do Go pendente(s) no módulo 'kubo': GetUserAgentVersion, SetUserAgentSuffix, ImplicitAgentSuffix, GetVersionInfo, SeedInitDocs....
   - *Sugestão:* `Avaliar porte das funções: GetUserAgentVersion, SetUserAgentSuffix, ImplicitAgentSuffix, GetVersionInfo, SeedInitDocs, ConvertAuthSecret, GetAutoConfClient, ValidateAutoConfWithRepo, ParseBootstrapPeers, BootstrapPeerStrings...`
-
-### 23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão) (16 ocorrências)
-
-- ⚠️ `[AVISO]` **[`packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart:51`](packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart#L51)** — Membro público 'bcstWants' expõe tipo não-público '_RecallWantlist'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_bcstWants')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart:52`](packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart#L52)** — Membro público 'peerWants' expõe tipo não-público '_RecallWantlist'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_peerWants')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart:478`](packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart#L478)** — Membro público 'pending' expõe tipo não-público '_WantEntry'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_pending')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart:479`](packages/transpiled_boxo/lib/src/bitswap/client/internal/messagequeue/messagequeue.dart#L479)** — Membro público 'sent' expõe tipo não-público '_WantEntry'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_sent')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:117`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L117)** — Membro público 'edges' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_edges')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:360`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L360)** — Membro público 'peers' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_peers')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:369`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L369)** — Membro público 'peers' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_peers')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:385`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L385)** — Membro público 'peerId' expõe tipo não-público '_PeerScope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_peerId')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:470`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L470)** — Membro público 'owned' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_owned')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:545`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L545)** — Membro público 'systemScopeImpl' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_systemScopeImpl')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:546`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L546)** — Membro público 'transientScopeImpl' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_transientScopeImpl')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:547`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L547)** — Membro público 'systemScope' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_systemScope')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:548`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L548)** — Membro público 'transientScope' expõe tipo não-público '_Scope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_transientScope')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:549`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L549)** — Membro público 'peers' expõe tipo não-público '_PeerScope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_peers')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:550`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L550)** — Membro público 'protocols' expõe tipo não-público '_ProtocolScope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_protocols')`
-- ⚠️ `[AVISO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart:551`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/resource_manager.dart#L551)** — Membro público 'services' expõe tipo não-público '_ServiceScope'. AGENTS.md exige implementar seguindo o mesmo nível de visibilidade e permissão do Upstream Go, ou menor se não for possível.
-  - *Sugestão:* `Tipar com interface pública de menor permissão ou tornar o membro privado ('_services')`

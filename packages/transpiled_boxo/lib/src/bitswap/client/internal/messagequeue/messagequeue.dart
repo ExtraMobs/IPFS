@@ -48,8 +48,8 @@ class MessageQueue implements PeerQueue {
   final StreamController<void> _outgoingWork = StreamController<void>.broadcast();
   final StreamController<List<Cid>> _responses = StreamController<List<Cid>>.broadcast();
 
-  final _RecallWantlist bcstWants = _RecallWantlist();
-  final _RecallWantlist peerWants = _RecallWantlist();
+  final _RecallWantlist _bcstWants = _RecallWantlist();
+  final _RecallWantlist _peerWants = _RecallWantlist();
   final Set<Cid> cancels = {};
   int priority = _maxPriority;
 
@@ -110,7 +110,7 @@ class MessageQueue implements PeerQueue {
     if (wantHaves.isEmpty) return;
 
     for (final c in wantHaves) {
-      bcstWants.add(c, priority, pb.WantType.have);
+      _bcstWants.add(c, priority, pb.WantType.have);
       priority--;
       cancels.remove(c);
     }
@@ -122,12 +122,12 @@ class MessageQueue implements PeerQueue {
     if (wantBlocks.isEmpty && wantHaves.isEmpty) return;
 
     for (final c in wantHaves) {
-      peerWants.add(c, priority, pb.WantType.have);
+      _peerWants.add(c, priority, pb.WantType.have);
       priority--;
       cancels.remove(c);
     }
     for (final c in wantBlocks) {
-      peerWants.add(c, priority, pb.WantType.block);
+      _peerWants.add(c, priority, pb.WantType.block);
       priority--;
       cancels.remove(c);
     }
@@ -143,11 +143,11 @@ class MessageQueue implements PeerQueue {
     var workReady = false;
 
     for (final c in cancelKs) {
-      final wasSentBcst = bcstWants.sent.containsKey(c);
-      final wasSentPeer = peerWants.sent.containsKey(c);
+      final wasSentBcst = _bcstWants._sent.containsKey(c);
+      final wasSentPeer = _peerWants._sent.containsKey(c);
 
-      bcstWants.remove(c);
-      peerWants.remove(c);
+      _bcstWants.remove(c);
+      _peerWants.remove(c);
 
       if (wasSentBcst || wasSentPeer) {
         cancels.add(c);
@@ -161,7 +161,7 @@ class MessageQueue implements PeerQueue {
   }
 
   bool hasMessage() {
-    return bcstWants.pending.isNotEmpty || peerWants.pending.isNotEmpty || cancels.isNotEmpty;
+    return _bcstWants._pending.isNotEmpty || _peerWants._pending.isNotEmpty || cancels.isNotEmpty;
   }
 
   void responseReceived(List<Cid> ks) {
@@ -246,7 +246,7 @@ class MessageQueue implements PeerQueue {
   }
 
   void _rebroadcastWantlist(DateTime now, Duration interval) {
-    final toRebroadcast = bcstWants.refresh(now, interval) + peerWants.refresh(now, interval);
+    final toRebroadcast = _bcstWants.refresh(now, interval) + _peerWants.refresh(now, interval);
     if (toRebroadcast > 0) {
       unawaited(_sendMessage());
       log.info('Rebroadcasting wants amount=$toRebroadcast peer=$p');
@@ -310,7 +310,7 @@ class MessageQueue implements PeerQueue {
     for (final entry in wantlist) {
       if (entry.wantType == pb.WantType.block && entry.sendDontHave) {
         final c = entry.cid;
-        if (peerWants.sent.containsKey(c)) {
+        if (_peerWants._sent.containsKey(c)) {
           wants.add(c);
         }
       }
@@ -324,19 +324,19 @@ class MessageQueue implements PeerQueue {
     DateTime? earliest;
 
     for (final c in ks) {
-      if (bcstWants.sentAt.containsKey(c)) {
-        final at = bcstWants.sentAt[c]!;
+      if (_bcstWants._sentAt.containsKey(c)) {
+        final at = _bcstWants._sentAt[c]!;
         if ((earliest == null || at.isBefore(earliest)) && now.difference(at) < maxValidLatency) {
           earliest = at;
         }
-        bcstWants.clearSentAt(c);
+        _bcstWants.clearSentAt(c);
       }
-      if (peerWants.sentAt.containsKey(c)) {
-        final at = peerWants.sentAt[c]!;
+      if (_peerWants._sentAt.containsKey(c)) {
+        final at = _peerWants._sentAt[c]!;
         if ((earliest == null || at.isBefore(earliest)) && now.difference(at) < maxValidLatency) {
           earliest = at;
         }
-        peerWants.clearSentAt(c);
+        _peerWants.clearSentAt(c);
       }
     }
 
@@ -351,21 +351,21 @@ class MessageQueue implements PeerQueue {
   }
 
   int _pendingWorkCount() {
-    return bcstWants.pending.length + peerWants.pending.length + cancels.length;
+    return _bcstWants._pending.length + _peerWants._pending.length + cancels.length;
   }
 
   _ExtractRes _extractOutgoingMessage(bool supportsHave) {
-    var peerEntries = peerWants.pending.values.toList();
-    final bcstEntries = bcstWants.pending.values.toList();
+    var peerEntries = _peerWants._pending.values.toList();
+    final bcstEntries = _bcstWants._pending.values.toList();
     final cancelList = cancels.toList();
 
     if (!supportsHave) {
       peerEntries = peerEntries.where((e) => e.wantType != pb.WantType.have).toList();
       // Wait, we also need to remove them from peerWants pending if they are removed?
       // "doing this here under the lock makes everything else simpler."
-      final toRemove = peerWants.pending.values.where((e) => e.wantType == pb.WantType.have).map((e) => e.cid).toList();
+      final toRemove = _peerWants._pending.values.where((e) => e.wantType == pb.WantType.have).map((e) => e.cid).toList();
       for (final c in toRemove) {
-        peerWants.removeType(c, pb.WantType.have);
+        _peerWants.removeType(c, pb.WantType.have);
       }
     }
 
@@ -402,7 +402,7 @@ class MessageQueue implements PeerQueue {
 
     for (var i = 0; i < sentPeerEntries; i++) {
       final e = peerEntries[i];
-      if (!peerWants.markSent(e)) {
+      if (!_peerWants.markSent(e)) {
         msg.remove(e.cid);
         // e.cid = undefined ... we just null it in a wrapper or handle it differently
       }
@@ -410,7 +410,7 @@ class MessageQueue implements PeerQueue {
 
     for (var i = 0; i < sentBcstEntries; i++) {
       final e = bcstEntries[i];
-      if (!bcstWants.markSent(e)) {
+      if (!_bcstWants.markSent(e)) {
         msg.remove(e.cid);
       }
     }
@@ -428,14 +428,14 @@ class MessageQueue implements PeerQueue {
       final now = DateTime.now();
       for (var i = 0; i < sentPeerEntries; i++) {
         final e = peerEntries[i];
-        if (peerWants.sent.containsKey(e.cid)) { // approximate check if it wasn't nullified
-          peerWants.setSentAt(e.cid, now);
+        if (_peerWants._sent.containsKey(e.cid)) { // approximate check if it wasn't nullified
+          _peerWants.setSentAt(e.cid, now);
         }
       }
       for (var i = 0; i < sentBcstEntries; i++) {
         final e = bcstEntries[i];
-        if (bcstWants.sent.containsKey(e.cid)) {
-          bcstWants.setSentAt(e.cid, now);
+        if (_bcstWants._sent.containsKey(e.cid)) {
+          _bcstWants.setSentAt(e.cid, now);
           bcastInc?.call();
         }
       }
@@ -475,65 +475,65 @@ enum MessageEvent {
 }
 
 class _RecallWantlist {
-  final Map<Cid, _WantEntry> pending = {};
-  final Map<Cid, _WantEntry> sent = {};
-  final Map<Cid, DateTime> sentAt = {};
+  final Map<Cid, _WantEntry> _pending = {};
+  final Map<Cid, _WantEntry> _sent = {};
+  final Map<Cid, DateTime> _sentAt = {};
 
   void add(Cid c, int priority, pb.WantType wtype) {
-    pending[c] = _WantEntry(c, priority, wtype);
+    _pending[c] = _WantEntry(c, priority, wtype);
   }
 
   void remove(Cid c) {
-    pending.remove(c);
-    sent.remove(c);
-    sentAt.remove(c);
+    _pending.remove(c);
+    _sent.remove(c);
+    _sentAt.remove(c);
   }
 
   void removeType(Cid c, pb.WantType wtype) {
-    if (pending[c]?.wantType == wtype) {
-      pending.remove(c);
+    if (_pending[c]?.wantType == wtype) {
+      _pending.remove(c);
     }
-    if (sent[c]?.wantType == wtype) {
-      sent.remove(c);
+    if (_sent[c]?.wantType == wtype) {
+      _sent.remove(c);
     }
-    if (!sent.containsKey(c)) {
-      sentAt.remove(c);
+    if (!_sent.containsKey(c)) {
+      _sentAt.remove(c);
     }
   }
 
   bool markSent(_WantEntry e) {
-    if (pending[e.cid]?.wantType == e.wantType) {
-      pending.remove(e.cid);
-      sent[e.cid] = e;
+    if (_pending[e.cid]?.wantType == e.wantType) {
+      _pending.remove(e.cid);
+      _sent[e.cid] = e;
       return true;
     }
     return false;
   }
 
   void setSentAt(Cid c, DateTime at) {
-    if (sent.containsKey(c)) {
-      sentAt.putIfAbsent(c, () => at);
+    if (_sent.containsKey(c)) {
+      _sentAt.putIfAbsent(c, () => at);
     }
   }
 
   void clearSentAt(Cid c) {
-    sentAt.remove(c);
+    _sentAt.remove(c);
   }
 
   int refresh(DateTime now, Duration interval) {
     var refreshed = 0;
     final keysToRefresh = <Cid>[];
     
-    for (final want in sent.values) {
-      final at = sentAt[want.cid];
+    for (final want in _sent.values) {
+      final at = _sentAt[want.cid];
       if (at != null && now.difference(at) >= interval) {
         keysToRefresh.add(want.cid);
       }
     }
 
     for (final wantCid in keysToRefresh) {
-      final want = sent.remove(wantCid)!;
-      pending[wantCid] = want;
+      final want = _sent.remove(wantCid)!;
+      _pending[wantCid] = want;
       refreshed++;
     }
 

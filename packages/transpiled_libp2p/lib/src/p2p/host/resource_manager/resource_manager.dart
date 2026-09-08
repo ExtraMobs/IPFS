@@ -108,13 +108,13 @@ final class _Resources {
 
 class _Scope implements ResourceScope, ResourceScopeSpan {
   _Scope(this._resources, {this.owner, List<_Scope>? edges, this.scopeName})
-    : edges = edges ?? const [] {
-    for (final edge in this.edges) edge.refCount++;
+    : _edges = edges ?? const [] {
+    for (final edge in _edges) edge.refCount++;
   }
 
   final _Resources _resources;
   final _Scope? owner;
-  List<_Scope> edges;
+  List<_Scope> _edges;
   final String? scopeName;
   bool closed = false;
   int refCount = 0;
@@ -157,7 +157,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
   }
 
   void _releaseEdges(ScopeStat stat) {
-    for (final edge in edges) edge._releaseForChild(stat);
+    for (final edge in _edges) edge._releaseForChild(stat);
   }
 
   @override
@@ -179,7 +179,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
     }
     final done = <_Scope>[];
     try {
-      for (final edge in edges) {
+      for (final edge in _edges) {
         edge._ensureOpen();
         edge._resources.memoryAdd(size, priority);
         done.add(edge);
@@ -203,7 +203,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
     if (owner != null) {
       owner!.releaseMemory(size);
     } else {
-      for (final edge in edges) edge._releaseMemoryForChild(size);
+      for (final edge in _edges) edge._releaseMemoryForChild(size);
     }
   }
 
@@ -238,7 +238,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
       owner!.refCount = owner!.refCount > 0 ? owner!.refCount - 1 : 0;
     } else {
       _releaseEdges(current);
-      for (final edge in edges)
+      for (final edge in _edges)
         edge.refCount = edge.refCount > 0 ? edge.refCount - 1 : 0;
     }
     _resources.release(current);
@@ -273,7 +273,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
     }
     final done = <_Scope>[];
     try {
-      for (final edge in edges) {
+      for (final edge in _edges) {
         edge._ensureOpen();
         edge._resources.streamAdd(direction);
         done.add(edge);
@@ -290,7 +290,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
     if (owner != null) {
       owner!.removeStream(direction);
     } else {
-      for (final edge in edges) edge._removeStreamForChild(direction);
+      for (final edge in _edges) edge._removeStreamForChild(direction);
     }
   }
 
@@ -307,7 +307,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
         owner!.addConn(direction, useFd);
         return;
       }
-      for (final edge in edges) {
+      for (final edge in _edges) {
         edge._ensureOpen();
         edge._resources.connAdd(direction, useFd);
         done.add(edge);
@@ -326,7 +326,7 @@ class _Scope implements ResourceScope, ResourceScopeSpan {
     if (owner != null) {
       owner!.removeConn(direction, useFd);
     } else {
-      for (final edge in edges) edge._removeConnForChild(direction, useFd);
+      for (final edge in _edges) edge._removeConnForChild(direction, useFd);
     }
   }
 
@@ -357,7 +357,7 @@ final class _ProtocolScope extends _Scope implements ProtocolScope {
   _ProtocolScope(this.id, super.resources, {super.edges})
     : super(scopeName: 'protocol:$id');
   final ProtocolId id;
-  final Map<PeerId, _Scope> peers = {};
+  final Map<PeerId, _Scope> _peers = {};
   @override
   ProtocolId protocol() => id;
 }
@@ -366,7 +366,7 @@ final class _ServiceScope extends _Scope implements ServiceScope {
   _ServiceScope(this.id, super.resources, {super.edges})
     : super(scopeName: 'service:$id');
   final String id;
-  final Map<PeerId, _Scope> peers = {};
+  final Map<PeerId, _Scope> _peers = {};
   @override
   String name() => id;
 }
@@ -376,13 +376,13 @@ final class _StreamScope extends _Scope
   _StreamScope(
     this.manager,
     this.direction,
-    this.peerId,
+    this._peerId,
     super.resources, {
     super.edges,
   });
   final ResourceManagerImpl manager;
   final Direction direction;
-  final _PeerScope peerId;
+  final _PeerScope _peerId;
   _ProtocolScope? proto;
   _ServiceScope? service;
   _Scope? peerProto;
@@ -393,7 +393,7 @@ final class _StreamScope extends _Scope
   @override
   ServiceScope? serviceScope() => service;
   @override
-  PeerScope peerScope() => peerId;
+  PeerScope peerScope() => _peerId;
 
   @override
   void setProtocol(ProtocolId protocol) {
@@ -401,7 +401,7 @@ final class _StreamScope extends _Scope
     if (proto != null)
       throw StateError('stream scope already attached to a protocol');
     final nextProto = manager._protocol(protocol);
-    final nextPeerProto = manager._protocolPeer(nextProto, peerId.id);
+    final nextPeerProto = manager._protocolPeer(nextProto, _peerId.id);
     final current = stat();
     try {
       nextProto._reserveForChild(current);
@@ -415,12 +415,12 @@ final class _StreamScope extends _Scope
           : 0;
       rethrow;
     }
-    final old = edges;
-    final next = [peerId, nextPeerProto, nextProto, manager.systemScopeImpl];
+    final old = _edges;
+    final next = [_peerId, nextPeerProto, nextProto, manager._systemScopeImpl];
     _replaceEdges(old, next, owned: {nextPeerProto, nextProto});
     // The stream's resources move from transient to the protocol scopes; its
     // local counters remain unchanged.
-    manager.transientScopeImpl._releaseForChild(current);
+    manager._transientScopeImpl._releaseForChild(current);
     proto = nextProto;
     peerProto = nextPeerProto;
   }
@@ -434,7 +434,7 @@ final class _StreamScope extends _Scope
       throw StateError('stream scope not attached to a protocol');
     }
     final nextService = manager._service(name);
-    final nextPeerService = manager._servicePeer(nextService, peerId.id);
+    final nextPeerService = manager._servicePeer(nextService, _peerId.id);
     final current = stat();
     try {
       nextService._reserveForChild(current);
@@ -450,14 +450,14 @@ final class _StreamScope extends _Scope
           : 0;
       rethrow;
     }
-    final old = edges;
+    final old = _edges;
     final next = [
-      peerId,
+      _peerId,
       peerProto!,
       nextPeerService,
       proto!,
       nextService,
-      manager.systemScopeImpl,
+      manager._systemScopeImpl,
     ];
     _replaceEdges(old, next, owned: {nextPeerService, nextService});
     service = nextService;
@@ -477,7 +477,7 @@ final class _StreamScope extends _Scope
     for (final edge in next) {
       if (!old.contains(edge) && !owned.contains(edge)) edge.refCount++;
     }
-    edges = next;
+    _edges = next;
   }
 }
 
@@ -509,16 +509,16 @@ final class _ConnectionScope extends _Scope
       next.refCount = next.refCount > 0 ? next.refCount - 1 : 0;
       rethrow;
     }
-    final old = edges;
+    final old = _edges;
     next.refCount++; // The edge consumes a reference; the lookup reference is below.
-    edges = [next, manager.systemScopeImpl];
+    _edges = [next, manager._systemScopeImpl];
     for (final edge in old) {
-      if (!edges.contains(edge)) {
+      if (!_edges.contains(edge)) {
         edge._releaseForChild(current);
         edge.refCount = edge.refCount > 0 ? edge.refCount - 1 : 0;
       }
     }
-    manager.transientScopeImpl._releaseForChild(current);
+    manager._transientScopeImpl._releaseForChild(current);
     next.refCount = next.refCount > 0 ? next.refCount - 1 : 0;
     peer = next;
   }
@@ -528,36 +528,36 @@ final class _ConnectionScope extends _Scope
 final class ResourceManagerImpl implements ResourceManager {
   ResourceManagerImpl({Limiter? limiter})
     : limiter = limiter ?? FixedLimiter() {
-    systemScopeImpl = _Scope(
+    _systemScopeImpl = _Scope(
       _Resources(this.limiter.getSystemLimits()),
       scopeName: 'system',
     );
-    transientScopeImpl = _Scope(
+    _transientScopeImpl = _Scope(
       _Resources(this.limiter.getTransientLimits()),
-      edges: [systemScopeImpl],
+      edges: [_systemScopeImpl],
       scopeName: 'transient',
     );
-    systemScopeImpl.refCount++;
-    transientScopeImpl.refCount++;
+    _systemScopeImpl.refCount++;
+    _transientScopeImpl.refCount++;
   }
 
   final Limiter limiter;
-  late final _Scope systemScopeImpl;
-  late final _Scope transientScopeImpl;
-  _Scope get systemScope => systemScopeImpl;
-  _Scope get transientScope => transientScopeImpl;
-  final Map<PeerId, _PeerScope> peers = {};
-  final Map<ProtocolId, _ProtocolScope> protocols = {};
-  final Map<String, _ServiceScope> services = {};
+  late final _Scope _systemScopeImpl;
+  late final _Scope _transientScopeImpl;
+  ResourceScope get systemScope => _systemScopeImpl;
+  ResourceScope get transientScope => _transientScopeImpl;
+  final Map<PeerId, _PeerScope> _peers = {};
+  final Map<ProtocolId, _ProtocolScope> _protocols = {};
+  final Map<String, _ServiceScope> _services = {};
   bool closed = false;
 
   _PeerScope _peer(PeerId id) {
-    final scope = peers.putIfAbsent(
+    final scope = _peers.putIfAbsent(
       id,
       () => _PeerScope(
         id,
         _Resources(limiter.getPeerLimits(id)),
-        edges: [systemScopeImpl],
+        edges: [_systemScopeImpl],
       ),
     );
     scope.refCount++;
@@ -565,12 +565,12 @@ final class ResourceManagerImpl implements ResourceManager {
   }
 
   _ProtocolScope _protocol(ProtocolId id) {
-    final scope = protocols.putIfAbsent(
+    final scope = _protocols.putIfAbsent(
       id,
       () => _ProtocolScope(
         id,
         _Resources(limiter.getProtocolLimits(id)),
-        edges: [systemScopeImpl],
+        edges: [_systemScopeImpl],
       ),
     );
     scope.refCount++;
@@ -578,12 +578,12 @@ final class ResourceManagerImpl implements ResourceManager {
   }
 
   _ServiceScope _service(String id) {
-    final scope = services.putIfAbsent(
+    final scope = _services.putIfAbsent(
       id,
       () => _ServiceScope(
         id,
         _Resources(limiter.getServiceLimits(id)),
-        edges: [systemScopeImpl],
+        edges: [_systemScopeImpl],
       ),
     );
     scope.refCount++;
@@ -591,7 +591,7 @@ final class ResourceManagerImpl implements ResourceManager {
   }
 
   _Scope _protocolPeer(_ProtocolScope parent, PeerId id) {
-    final scope = parent.peers.putIfAbsent(
+    final scope = parent._peers.putIfAbsent(
       id,
       () => _Scope(
         _Resources(limiter.getProtocolPeerLimits(parent.id)),
@@ -603,7 +603,7 @@ final class ResourceManagerImpl implements ResourceManager {
   }
 
   _Scope _servicePeer(_ServiceScope parent, PeerId id) {
-    final scope = parent.peers.putIfAbsent(
+    final scope = parent._peers.putIfAbsent(
       id,
       () => _Scope(
         _Resources(limiter.getServicePeerLimits(parent.id)),
@@ -616,10 +616,10 @@ final class ResourceManagerImpl implements ResourceManager {
 
   @override
   void viewSystem(ResourceScopeVisitor<ResourceScope> visitor) =>
-      visitor(systemScopeImpl);
+      visitor(_systemScopeImpl);
   @override
   void viewTransient(ResourceScopeVisitor<ResourceScope> visitor) =>
-      visitor(transientScopeImpl);
+      visitor(_transientScopeImpl);
   @override
   void viewService(String name, ResourceScopeVisitor<ServiceScope> visitor) {
     final scope = _service(name);
@@ -662,7 +662,7 @@ final class ResourceManagerImpl implements ResourceManager {
       direction,
       peer,
       _Resources(limiter.getStreamLimits(id)),
-      edges: [peer, transientScopeImpl, systemScopeImpl],
+      edges: [peer, _transientScopeImpl, _systemScopeImpl],
     );
     peer.refCount = peer.refCount > 0 ? peer.refCount - 1 : 0;
     try {
@@ -685,7 +685,7 @@ final class ResourceManagerImpl implements ResourceManager {
       direction,
       useFd,
       _Resources(limiter.getConnLimits()),
-      edges: [transientScopeImpl, systemScopeImpl],
+      edges: [_transientScopeImpl, _systemScopeImpl],
     );
     try {
       scope.addConn(direction, useFd);
@@ -703,7 +703,7 @@ final class ResourceManagerImpl implements ResourceManager {
   void close() {
     if (closed) return;
     closed = true;
-    transientScopeImpl.done();
-    systemScopeImpl.done();
+    _transientScopeImpl.done();
+    _systemScopeImpl.done();
   }
 }

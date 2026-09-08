@@ -1369,14 +1369,38 @@ class AstNomenclatureAuditor:
         # REGRA 23: Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão)
         if target_rule is None or target_rule == 'RULE_EXPOSED_NON_PUBLIC_MEMBERS':
             re_priv_type = re.compile(r'\b_([A-Z][A-Za-z0-9_]*)\b')
+            re_class = re.compile(r'\b(?:class|mixin|enum|extension\s+type)\s+([A-Za-z0-9_]+)')
             for file_path, content, cleaned in self.dart_files:
                 rel_path = str(file_path.relative_to(self.root_dir)).replace('\\', '/')
                 if target_package and target_package not in rel_path:
                     continue
                 if 'packages/boilerplate/' in rel_path:
                     continue
+                current_class = None
+                brace_depth = 0
+                class_depth = 0
                 for l_idx, line in enumerate(cleaned.splitlines(), start=1):
                     clean_l = line.split('//')[0].strip()
+
+                    m_cls = re_class.search(clean_l)
+                    if m_cls:
+                        current_class = m_cls.group(1)
+                        class_depth = brace_depth
+
+                    open_b = clean_l.count('{')
+                    close_b = clean_l.count('}')
+                    brace_depth += open_b - close_b
+                    if current_class and brace_depth <= class_depth and close_b > 0:
+                        current_class = None
+
+                    # Membros de classes privadas já são estritamente privados do ponto de vista de biblioteca
+                    if current_class and current_class.startswith('_'):
+                        continue
+
+                    # Ignora parâmetros de funções/métodos
+                    if clean_l.endswith(','):
+                        continue
+
                     m_priv = re_priv_type.search(clean_l)
                     if not m_priv:
                         continue
