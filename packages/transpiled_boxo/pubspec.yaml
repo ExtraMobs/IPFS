@@ -27,6 +27,8 @@ dependencies:
     path: ../transpiled_datastore
   transpiled_varint:
     path: ../transpiled_varint
+  transpiled_protobuf:
+    path: ../transpiled_protobuf
 
 dev_dependencies:
   test: ^1.28.0

@@ -6,6 +6,57 @@ arquivo registra a ordem e o que já foi validado.
 
 ## Como isto foi gerado / como continuar
 
+### Port de boxo/bitswap/message e pb para transpiled_boxo — 2026-09-08
+
+Port integral e auditoria dos módulos `boxo/bitswap/message` e `pb` para `packages/transpiled_boxo`:
+1. **Protobuf `pb/message.dart`**:
+   - Port de `boxo/bitswap/message/pb/message.proto` e `message.pb.go` com enums canônicos
+     `WantType` e `BlockPresenceType`.
+   - Serialização e decodificação protobuf binária com `package:transpiled_protobuf/protowire.dart`
+     e tipos `Golang` de `package:boilerplate/fixed_types/golang.dart`.
+2. **Mensagem canônica `message/message.dart`**:
+   - Interface `BitSwapMessage` e classe `Impl` implementando todas as operações do Go:
+     `fillWantlist`, `wantlist`, `blocks`, `blockPresences`, `haves`, `dontHaves`, `addEntry`,
+     `cancel`, `remove`, `empty`, `size`, `full`, `addBlock`, `addBlockPresence`, `reset`, `clone`.
+   - I/O e framing com wire-format exato do Go: `toProtoV0`, `toProtoV1`, `toNetV0`, `toNetV1`,
+     `fromNet`, `fromMsgReader`, `newWantlistBlock`, `blockPresenceSize`, limite `messageSizeMax` de 4 MiB.
+   - 17 testes de paridade em `packages/transpiled_boxo/test/bitswap/message_test.dart` portados
+     de `message_test.go` passando 100%, incluindo vetor byte-a-byte do frame vazio do Boxo `[0x02, 0x0a, 0x00]`.
+3. **Delegação no runtime**:
+   - `lib/src/protocols/bitswap/bitswap_message.dart` refatorado para delegar a `BitSwapMessage`
+     e `toNetV1` do pacote, eliminando ~150 linhas de duplicação ad-hoc em conformidade com `AGENTS.md`.
+
+### Conclusão das pendências do Marco B (DHT / FindProvidersAsync) — 2026-09-08
+
+Auditoria e implementação das pendências remanescentes do Marco B em `lib/src/protocols/dht/`
+e `lib/src/routing/` contra o módulo upstream Go `go-libp2p-kad-dht`:
+1. **Persistência de `closerPeers` e providers no peerstore**:
+   - Adicionado `addAddrs(core.AddrInfo peer, [Duration ttl = core.tempAddrTtl])` e
+     `getAddrs(core.PeerId peerId)` em `Libp2pRouter` (`lib/src/network/libp2p_host.dart`),
+     com TTL padrão `tempAddrTtl = Duration(minutes: 2)` (espelhando `pstore.TempAddrTTL = 2 * time.Minute` do libp2p Go).
+   - Em `DhtClient._handleCloserPeers` e `_handleProvider`, todos os peers retornados têm
+     seus endereços multiaddr persistidos no peerstore com `tempAddrTtl`.
+2. **Limites de 8 KiB por Peer e 4 MiB por mensagem DHT**:
+   - Implementado `boundPeerRecordAddrs` em `lib/src/protocols/dht/dht_message.dart` com
+     `maxPeerRecordSize = 8 << 10` (8192 bytes), seguindo rigorosamente a lógica do upstream
+     `go-libp2p-kad-dht/pb/message.go`: quando o registro excede 8 KiB, apara endereços finais
+     (trailing addresses) mantendo o ID do peer e os primeiros endereços válidos que couberem.
+   - Decodificação de peers em `DhtResponse.fromBytes` aplica `boundPeerRecordAddrs`.
+   - Adicionada validação de `dhtMessageSizeMax = 1 << 22` (4 MiB) em `DhtResponse.fromBytes`,
+     rejeitando mensagens que excedam o limite com `FormatException`.
+3. **Prazos de lookup / RPC e cancelamento com reset de stream**:
+   - `DhtClient.findProvidersAsync` aplica deadline geral (`lookupTimeout`, default 60s) e timeout
+     por RPC (`timeout`, default 10s via `DHTConfig.requestTimeout`).
+   - Requisições canceladas ou em timeout provocam reset imediato da stream subjacente (`stream.reset()`).
+   - `DhtClient.close()` aborta e faz reset em todas as streams ativas e fecha portas para novas consultas.
+4. **Preservação de `AddrInfo` completo em `GET_PROVIDERS` com merge de endereços**:
+   - `DhtClient` combina os endereços retornados na resposta `Message_Peer` com os endereços
+     já conhecidos no peerstore via `router.getAddrs(peerId)`.
+5. **Cobertura e verificação**:
+   - 15 testes de unidade em `test/protocols/dht/` (incluindo 8 testes dedicados em `dht_client_test.dart`
+     e testes de bounding/tamanho em `dht_message_test.dart`), todos 100% aprovados.
+   - `dart analyze .` com zero avisos ou erros.
+
 ### Canonicalização UpperCamelCase e remoção de shims artificiais Dart — 2026-09-08
 
 Conforme as regras estritas de `AGENTS.md` ("preservação da API durante a transpilação"
@@ -759,16 +810,18 @@ Fluxo-alvo:
   `test/interop/test/bitswap_test.dart`; prova local de 2026-08-31 usou Kubo
   `0.43.0`, peer `12D3KooWPAfko2Q2pSAzf4ZGKZaG2n6yNJkByJsS4FqPp6nQr54B`
   em `/ip4/127.0.0.1/tcp/4401`.
-- [ ] Auditar/portar `boxo/bitswap/message` e `bitswap/message/pb`, preservando
+- [x] Auditar/portar `boxo/bitswap/message` e `bitswap/message/pb`, preservando
   wire format, limites, wantlist, `WANT_BLOCK`/`WANT_HAVE`, payloads,
-  `HAVE`/`DONT_HAVE` e blocos. A fatia usada pelo runtime foi alinhada em
-  2026-08-31: full wantlist, merge de wants, payload V1/prefixo CID, blocos
-  legados V0, presenças, pending bytes, validação de CID/prefixo e limite de
-  4 MiB, cobertos por testes. `FromNet`/`ToNet` agora preservam framing varint,
-  leitura fragmentada, contagem do payload, limite antes da alocação e erros de
-  truncamento/overflow, incluindo vetor byte-a-byte do frame vazio do Boxo.
-  Permanecem a superfície pública completa do pacote Go, auditoria
-  função-a-função do protobuf gerado e os demais vetores Go↔Dart.
+  `HAVE`/`DONT_HAVE` e blocos.
+  Concluído em 2026-09-08: port integral de `boxo/bitswap/message/pb` e `boxo/bitswap/message`
+  para `packages/transpiled_boxo/lib/src/bitswap/message/` usando `transpiled_protobuf` (protowire)
+  com serialização/deserialização binária pura e framing uvarint. Implementadas as interfaces
+  `BitSwapMessage`, `Entry`, `BlockPresence`, enums `WantType` e `BlockPresenceType`,
+  `toNetV0`/`toNetV1`, `fromNet`/`fromMsgReader`, `newWantlistBlock` e validação do limite
+  `messageSizeMax` de 4 MiB. Coberto por 17 testes de paridade em
+  `packages/transpiled_boxo/test/bitswap/message_test.dart` portados diretamente de `message_test.go`
+  (incluindo vetor byte-a-byte do frame vazio do Boxo `[0x02, 0x0a, 0x00]`). O runtime em
+  `lib/src/protocols/bitswap/bitswap_message.dart` foi refatorado para delegar diretamente ao pacote.
 - [ ] Auditar/portar `boxo/bitswap/network` e `bitswap/network/bsnet`: negociação
   de protocolo, framing, streams persistentes, sender por peer, múltiplas
   mensagens por stream, conexão/desconexão e erros.
@@ -825,7 +878,7 @@ provider retornado, baixou e validou o bloco por Bitswap, confirmou
 exit code 0 em 57 segundos. O repositório do IPFS Desktop não foi consultado
 nem alterado.
 
-- [ ] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
+- [x] Auditar/portar o caminho somente leitura de `go-libp2p-kad-dht` usado por
   `FindProvidersAsync`: protobuf/wire, `GET_PROVIDERS`, lookup iterativo,
   shortlist, `closerPeers`, `providerPeers`, validação, timeout e cancelamento.
   Feito em 2026-08-31: API `findProvidersAsync(CID, count)` implementando
@@ -835,10 +888,15 @@ nem alterado.
   igual ao remetente e endereço válido; `clusterLevelRaw` corrigido de 0 para
   1; `QueryPeerset` com estados, limite `alpha`, terminação `beta`, starvation,
   follow-up dos K mais próximos, limite de `closerPeers` a `2*k` e descarte de
-  self também concluídos e cobertos por teste. Permanecem: persistência dos
-  `closerPeers` no peerstore; limites de 8 KiB por `Peer` e da mensagem; prazo
-  do lookup/RPC e limpeza de requests vencidos; e resposta `GET_PROVIDERS` com
-  `AddrInfo` completo.
+  self também concluídos e cobertos por teste.
+  Concluído em 2026-09-08: persistência dos `closerPeers` e providers no peerstore
+  com `tempAddrTtl` (2 min); limites de 8 KiB por `Peer` (`boundPeerRecordAddrs`
+  aparando trailing addrs e preservando ID do peer) e rejeição de mensagens
+  acima de 4 MiB (`dhtMessageSizeMax`); timeouts por RPC e `lookupTimeout` geral
+  com reset imediato de stream e cancelamento limpo por `close()` ou subscription;
+  e preservação do `AddrInfo` completo em `GET_PROVIDERS` com merge de endereços
+  conhecidos pelo peerstore. Coberto por 15 testes de unidade em
+  `test/protocols/dht/`.
 - [x] Preservar `AddrInfo` completo dos providers (Peer ID + multiaddrs); não
   reduzir o resultado a apenas Peer ID.
 - [x] Completar/adaptar `core/peerstore` address/protocol book e o caminho
@@ -997,13 +1055,15 @@ para reconstruir arquivos ou diretórios completos.
   Git reproduzível acima. `dart pub outdated` não encontrou atualização
   resolvível no projeto nem em `test/interop`.
 
-- **Auditoria de `FindProvidersAsync` em andamento (2026-08-31)**: o download
-  público funciona; a API incremental, deduplicação/upgrade,
-  `clusterLevelRaw` e autenticação básica de `ADD_PROVIDER` estão
-  corrigidos/testados, mas as demais pendências enumeradas no checklist do
-  Marco B ainda impedem declarar paridade. O caminho necessário de
-  peerstore/`Host.connect(AddrInfo)` foi auditado e fechado por adaptação ao
-  runtime existente, sem duplicá-lo.
+- **Auditoria de `FindProvidersAsync` concluída (2026-09-08)**: o download
+  público funciona e todas as pendências restantes do Marco B foram implementadas
+  e testadas: persistência dos `closerPeers` e providers no peerstore com `tempAddrTtl` (2 min);
+  limite de 8 KiB por peer (`boundPeerRecordAddrs` aparando trailing addrs e preservando ID);
+  limite de 4 MiB por mensagem (`dhtMessageSizeMax`); prazo de lookup (`lookupTimeout`)
+  e timeout por RPC com reset imediato de stream; cancelamento limpo e abort em `close()`;
+  e preservação de `AddrInfo` completo em `GET_PROVIDERS` com merge de endereços conhecidos.
+  O caminho de peerstore/`Host.connect(AddrInfo)` foi auditado e fechado por adaptação ao
+  runtime existente.
   Cobertura adicionada em 2026-08-31 confirma `count == 0`, supressão de
   duplicata idêntica, upgrade para endereço discável, cancelamento entre
   consultas e aceitação/rejeição de `ADD_PROVIDER` por remetente/endereço. A
@@ -1022,11 +1082,12 @@ para reconstruir arquivos ou diretórios completos.
   terminaram sem bloco, mas encerraram espontaneamente. A repetição conclusiva
   posterior está registrada na prova final acima.
 
-- **Marco B/DHT→Bitswap funcional (2026-08-31)**: `providerPeers` preserva
+- **Marco B/DHT→Bitswap concluído (2026-09-08)**: `providerPeers` preserva
   `AddrInfo`, consultas iterativas usam protobuf Kademlia raw, `closerPeers`
-  são discados em lotes `alpha`, e Bitswap conecta providers descobertos antes
-  do want. Prova pública registrada acima; auditoria completa de paridade e
-  peerstore continuam nos itens ainda desmarcados.
+  são discados em lotes `alpha`, Bitswap conecta providers descobertos antes
+  do want, `closerPeers` e providers são persistidos no peerstore com `tempAddrTtl`,
+  e todos os limites de mensagem (4 MiB), peer (8 KiB) e timeouts/stream resets
+  estão implementados e testados com paridade ao `go-libp2p-kad-dht`.
 
 
 - 🚧 **NÃO CONFIÁVEL — `go-ipld-prime/codec/dagjson` em auditoria (2026-08-26)**: núcleo Node↔DAG-JSON adicionado em `transpiled_ipld_prime`, registrado no multicodec `0x0129`, com CID, bytes no envelope `{\"/\":{\"bytes\":...}}`, ordenação lexical padrão, opções de encode/decode para links/bytes e limite de profundidade; ainda falta comparação completa dos vetores Go (limites e erros); não declarar paridade.

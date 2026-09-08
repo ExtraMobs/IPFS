@@ -16,9 +16,9 @@ export 'src/chunker.dart'
         errSize,
         errSizeMax,
         FixedSizeChunker,
-        FixedSizeChunker,
         fromString;
 export 'src/dag_pb.dart' show DagPbLink, DagPbNode;
 export 'src/unixfs.dart';
 export 'src/importer.dart';
 export 'src/blockstore.dart';
+export 'src/bitswap/message.dart' hide Entry;

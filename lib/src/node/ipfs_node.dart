@@ -219,6 +219,7 @@ final class IpfsNode {
 
   Future<void> _close() async {
     final close = () async {
+      await _dht?.close();
       await _bitswap?.close();
       await _host?.close();
       await blockstore.close();
