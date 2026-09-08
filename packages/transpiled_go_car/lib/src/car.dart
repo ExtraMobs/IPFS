@@ -1,18 +1,24 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:transpiled_block_format/transpiled_block_format.dart';
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_varint/transpiled_varint.dart';
 
 /// The CAR v1 header and its version field.
 final class CarHeader {
-  CarHeader({required Iterable<CID> roots, this.version = 1})
+  /// Creates a [CarHeader] with the specified root [roots] and CAR [version].
+  CarHeader({required Iterable<Cid> roots, this.version = 1})
     : roots = List.unmodifiable(roots) {
     if (version < 0) throw ArgumentError.value(version, 'version');
   }
 
-  final List<CID> roots;
+  /// The list of root CIDs described by this header.
+  final List<Cid> roots;
+
+  /// The CAR format version number (typically 1).
   final int version;
 
   /// Returns whether headers have the same version and roots, independent of
@@ -29,21 +35,44 @@ final class CarHeader {
   }
 }
 
-/// A length-delimited CAR block section.
-final class CarBlock {
-  CarBlock(this.cid, Uint8List data) : data = Uint8List.fromList(data);
+/// A length-delimited CAR block section implementing [Block].
+final class CarBlock implements Block {
+  /// Creates a [CarBlock] with the given [cid] and payload [data].
+  CarBlock(Cid cid, Uint8List data)
+      : _cid = cid,
+        data = Uint8List.fromList(data);
 
-  final CID cid;
-  final Uint8List data;
-}
-
-/// Raised when a section's CID does not hash to its bytes.
-final class CarIntegrityException implements Exception {
-  const CarIntegrityException(this.cid);
-  final CID cid;
+  final Cid _cid;
 
   @override
-  String toString() => 'CAR block does not match CID: $cid';
+  Cid cid() => _cid;
+
+  /// The raw payload bytes of the block.
+  final Uint8List data;
+
+  @override
+  Uint8List rawData() => data;
+
+  @override
+  String toString() => '[Block ${_cid.encode()}]';
+
+  @override
+  Map<String, Object?> loggable() => {
+        'cid': _cid.encode(),
+        'length': data.length,
+      };
+}
+
+/// Raised when a section's Cid does not hash to its bytes.
+final class CarIntegrityException implements Exception {
+  /// Creates a [CarIntegrityException] for the given [cid].
+  const CarIntegrityException(this.cid);
+
+  /// The Cid that failed integrity validation.
+  final Cid cid;
+
+  @override
+  String toString() => 'CAR block does not match Cid: $cid';
 }
 
 /// Maximum CAR v1 header size used by go-car/v2.17.0 (32 MiB).
@@ -96,24 +125,30 @@ Future<CarHeader> readHeaderFromStream(
 int headerSize(CarHeader header) => writeHeader(header).length;
 
 /// Validates [data] against [cid]'s multihash and throws on mismatch.
-void validateBlock(CID cid, List<int> data) {
+void validateBlock(Cid cid, List<int> data) {
   if (cid.prefix.sum(Uint8List.fromList(data)) != cid) {
     throw CarIntegrityException(cid);
   }
 }
 
-/// Alias for [validateBlock] using the CID-oriented name used by callers.
-void validateCid(CID cid, List<int> data) => validateBlock(cid, data);
+/// Alias for [validateBlock] using the Cid-oriented name used by callers.
+void validateCid(Cid cid, List<int> data) => validateBlock(cid, data);
 
-typedef CarGet = FutureOr<List<int>> Function(CID cid);
-typedef CarLinks = FutureOr<Iterable<CID>> Function(CID cid);
+/// Function signature for retrieving block bytes for a given [cid].
+typedef CarGet = FutureOr<List<int>> Function(Cid cid);
+
+/// Function signature for returning linked CIDs from a given [cid].
+typedef CarLinks = FutureOr<Iterable<Cid>> Function(Cid cid);
+
+/// Function signature for returning linked CIDs from a given [cid] and its block [data].
 typedef CarLinksWithData =
-    FutureOr<Iterable<CID>> Function(CID cid, Uint8List data);
+    FutureOr<Iterable<Cid>> Function(Cid cid, Uint8List data);
 
-/// Streams a depth-first, CID-deduplicated CAR v1 walk.
+/// Streams a depth-first, Cid-deduplicated CAR v1 walk.
 final class CarWriter {
+  /// Creates a [CarWriter] configured with root CIDs and block traversal callbacks.
   CarWriter({
-    required Iterable<CID> roots,
+    required Iterable<Cid> roots,
     required this.get,
     this.links,
     this.linksWithData,
@@ -126,22 +161,31 @@ final class CarWriter {
       throw ArgumentError.value(maxSectionSize, 'maxSectionSize');
   }
 
-  final List<CID> roots;
+  /// Root CIDs to write into the CAR header and traverse.
+  final List<Cid> roots;
+
+  /// Callback to retrieve the raw block bytes for a Cid.
   final CarGet get;
+
+  /// Callback to discover links from a Cid.
   final CarLinks? links;
+
+  /// Callback to discover links using both Cid and block data.
   final CarLinksWithData? linksWithData;
+
+  /// Maximum allowed section size in bytes for each block.
   final int maxSectionSize;
 
   /// Produces header and sections as they become available.
   Stream<Uint8List> stream() async* {
     yield writeHeader(CarHeader(roots: roots));
     final seen = <String>{};
-    Future<Iterable<CID>> children(CID cid, Uint8List data) async {
+    Future<Iterable<Cid>> children(Cid cid, Uint8List data) async {
       if (linksWithData != null) return linksWithData!(cid, data);
       return links!(cid);
     }
 
-    Stream<Uint8List> walk(CID cid) async* {
+    Stream<Uint8List> walk(Cid cid) async* {
       final key = cid.encode();
       if (!seen.add(key)) return;
       final data = Uint8List.fromList(await get(cid));
@@ -182,6 +226,7 @@ final class CarWriter {
 
 /// Reads CAR v1 sections incrementally and validates every block.
 final class CarReader {
+  /// Creates a [CarReader] from either raw [input] bytes (`List<int>`) or a byte [Stream].
   CarReader(
     Object input, {
     this.maxHeaderSize = maxAllowedHeaderSize,
@@ -197,15 +242,20 @@ final class CarReader {
     if (maxHeaderSize < 1)
       throw ArgumentError.value(maxHeaderSize, 'maxHeaderSize');
     if (_bytes != null) {
-      _header = readHeader(_bytes!, maxSectionSize: maxHeaderSize);
+      _header = readHeader(_bytes, maxSectionSize: maxHeaderSize);
       _checkVersion(_header!);
-      _offset = _headerEnd(_bytes!, maxHeaderSize);
+      _offset = _headerEnd(_bytes, maxHeaderSize);
       _checkEmptyRoots(_header!);
     }
   }
 
+  /// Maximum allowed header size in bytes.
   final int maxHeaderSize;
+
+  /// Maximum allowed section size in bytes for each block.
   final int maxSectionSize;
+
+  /// Whether reading will throw an error if the header has no root CIDs.
   final bool errorOnEmptyRoots;
   final Uint8List? _bytes;
   final Stream<List<int>>? _stream;
@@ -214,6 +264,7 @@ final class CarReader {
   _AsyncBytes? _async;
   bool _done = false;
 
+  /// The parsed CAR header, or null if streaming and the header has not been read yet.
   CarHeader? get header => _header;
 
   /// Reads and returns the header, consuming it once for stream input.
@@ -268,6 +319,7 @@ final class CarReader {
     }
   }
 
+  /// Returns a stream of all decoded and validated [CarBlock]s.
   Stream<CarBlock> blocks() async* {
     while (true) {
       final block = await nextAsync();
@@ -288,6 +340,7 @@ final class CarReader {
   }
 }
 
+/// Callback to process or store a decoded [CarBlock].
 typedef CarPut = FutureOr<void> Function(CarBlock block);
 
 /// Loads and validates every CAR block into [put].
@@ -307,7 +360,7 @@ Future<CarHeader> loadCar(
       await put(block);
     } else {
       // Also accept the natural `(cid, data)` callback shape.
-      await (put as dynamic)(block.cid, block.data);
+      await (put as dynamic)(block.cid(), block.data);
     }
   }
   return reader.header!;
@@ -340,7 +393,8 @@ Uint8List _encodeHeader(CarHeader h) {
     out.addByte(0);
     out.add(bytes);
   }
-  out.add(const [0x67, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x01]);
+  out.add(const [0x67, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e]);
+  out.add(_cborLength(0, h.version));
   return out.takeBytes();
 }
 
@@ -352,6 +406,21 @@ Uint8List _cborLength(int major, int length) {
   if (length <= 0xffffffff) {
     return Uint8List.fromList([
       (major << 5) | 26,
+      length >> 24,
+      length >> 16,
+      length >> 8,
+      length,
+    ]);
+  }
+  // Dart's native int exposes the positive signed 64-bit range here; larger
+  // Go uint64 values cannot be represented by this public int field.
+  if (length <= 0x7fffffffffffffff) {
+    return Uint8List.fromList([
+      (major << 5) | 27,
+      length >> 56,
+      length >> 48,
+      length >> 40,
+      length >> 32,
       length >> 24,
       length >> 16,
       length >> 8,
@@ -371,26 +440,26 @@ CarHeader _decodeHeader(Uint8List bytes) {
   final versionValue = value['version'];
   if (rootsValue is! List || versionValue is! int)
     throw const FormatException('invalid CAR header fields');
-  final roots = <CID>[];
+  final roots = <Cid>[];
   for (final root in rootsValue) {
     if (root is! _CborTag || root.tag != 42 || root.value is! Uint8List) {
-      throw const FormatException('invalid CAR root CID');
+      throw const FormatException('invalid CAR root Cid');
     }
     final raw = root.value as Uint8List;
     if (raw.isEmpty || raw[0] != 0)
-      throw const FormatException('invalid CAR root CID bytes');
+      throw const FormatException('invalid CAR root Cid bytes');
     roots.add(_decodeCidExact(raw.sublist(1)));
   }
   return CarHeader(roots: roots, version: versionValue);
 }
 
 CarBlock _decodeBlock(Uint8List section) {
-  final cid = CID.fromBytes(section);
+  final cid = Cid.fromBytes(section);
   final cidLength = cid.toBytes().length;
-  if (cidLength >= section.length)
+  if (cidLength > section.length)
     throw const FormatException('CAR section has no block data');
   if (!_sameBytes(section.sublist(0, cidLength), cid.toBytes()))
-    throw const FormatException('non-canonical CID bytes');
+    throw const FormatException('non-canonical Cid bytes');
   final data = Uint8List.fromList(section.sublist(cidLength));
   validateBlock(cid, data);
   return CarBlock(cid, data);
@@ -404,12 +473,12 @@ bool _sameBytes(List<int> a, List<int> b) {
   return true;
 }
 
-CID _decodeCidExact(Uint8List bytes) {
-  if (bytes.length < 2) throw const FormatException('truncated CID');
-  final cid = CID.fromBytes(bytes);
+Cid _decodeCidExact(Uint8List bytes) {
+  if (bytes.length < 2) throw const FormatException('truncated Cid');
+  final cid = Cid.fromBytes(bytes);
   final size = cid.toBytes().length;
   if (size != bytes.length)
-    throw const FormatException('CID has trailing bytes');
+    throw const FormatException('Cid has trailing bytes');
   return cid;
 }
 

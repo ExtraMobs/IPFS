@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // test/multiaddr_parity_test.dart
 //
 // Parity vectors taken verbatim from go-multiaddr's own multiaddr_test.go
@@ -11,8 +12,8 @@
 // same PeerId as their base58 equivalent.
 import 'dart:typed_data';
 
-import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 import 'package:test/test.dart';
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 
 const _good = [
   '/ip4/1.2.3.4',
@@ -196,7 +197,7 @@ void main() {
   });
 
   group('p2p transcoder cross-base parity', () {
-    test('base58, base32, and base36 CID PeerIds decode to the same value', () {
+    test('base58, base32, and base36 Cid PeerIds decode to the same value', () {
       final fromB58 = Multiaddr.parse(
         '/p2p/QmcgpsyWgH8Y8ajJz1Cu72KnS5uo2Aa2LpzU7kinSupNKC',
       );

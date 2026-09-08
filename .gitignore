@@ -21,6 +21,7 @@ build/
 .svn/
 migrate_working_dir/
 scratch/
+go-ipfs-reference/
 
 # IntelliJ related
 *.iml

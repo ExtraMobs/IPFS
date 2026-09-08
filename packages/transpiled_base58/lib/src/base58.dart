@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/utils/base58.dart
 
 import 'dart:typed_data';
@@ -26,7 +27,7 @@ const String _base58Alphabet =
 /// ```
 ///
 /// See also:
-/// - [CID] which uses multibase encoding including Base58
+/// - [Cid] which uses multibase encoding including Base58
 class Base58 {
   /// Encodes a [bytes] array to a Base58 string.
   ///

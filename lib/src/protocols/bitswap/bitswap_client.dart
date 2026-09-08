@@ -33,7 +33,7 @@ final class BitswapClient implements BlockGetter {
   /// Maximum time allowed for each provider request.
   final Duration timeout;
   final List<AddrInfo> _providers = [];
-  final Map<CID, Completer<blocks.Block>> _pending = {};
+  final Map<Cid, Completer<blocks.Block>> _pending = {};
   final Map<String, P2PStream<dynamic>> _outbound = {};
   final Map<String, Lock> _senderLocks = {};
 
@@ -50,7 +50,7 @@ final class BitswapClient implements BlockGetter {
   }
 
   @override
-  Future<blocks.Block> getBlock(CID cid) async {
+  Future<blocks.Block> getBlock(Cid cid) async {
     if (await blockstore.has(cid)) return blockstore.get(cid);
     final existing = _pending[cid];
     if (existing != null) return existing.future;
@@ -74,7 +74,7 @@ final class BitswapClient implements BlockGetter {
     }
   }
 
-  Future<void> _sendWant(AddrInfo provider, CID cid) async {
+  Future<void> _sendWant(AddrInfo provider, Cid cid) async {
     final key = provider.id.toString();
     await (_senderLocks[key] ??= Lock()).synchronized(() async {
       Object? lastError;

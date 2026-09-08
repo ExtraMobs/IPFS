@@ -5,6 +5,7 @@ dos clones só podem alterar esta tabela junto com a revalidação dos ports afe
 
 | Clone local | Módulo Go | Revisão | Fonte |
 |---|---|---|---|
+| `go-varint` (cache Go, v0.1.0) | `github.com/multiformats/go-varint` | `23576a8fddd196d6bc3b82014ae91d198e47d734` | <https://github.com/multiformats/go-varint.git> |
 | `go-cid` | `github.com/ipfs/go-cid` | `707ffd0177069183ed529f6799b3c2e1d67372c5` | <https://github.com/ipfs/go-cid.git> |
 | `go-multiaddr` | `github.com/multiformats/go-multiaddr` | `7fae00adf671d9d4b931e591f2357a261567fee5` | <https://github.com/multiformats/go-multiaddr.git> |
 | `go-multihash` | `github.com/multiformats/go-multihash` | `b29af1cd12049b4d5fa9a81b0cb0b4a04703fa27` | <https://github.com/multiformats/go-multihash.git> |
@@ -15,6 +16,8 @@ dos clones só podem alterar esta tabela junto com a revalidação dos ports afe
 | `go-yamux` | `github.com/libp2p/go-yamux/v5` | `86999c64954b3109d08aac4d6dc94afa6fbfa302` | <https://github.com/libp2p/go-yamux.git> |
 | `kubo` | `github.com/ipfs/kubo` | `d0fdc246db494877e7fa08a72933c8daa5c3f0e8` | <https://github.com/ipfs/kubo.git> |
 | `boxo` | `github.com/ipfs/boxo` | `25b1db8931508bb069eb6e67243b34d353cbe845` | <https://github.com/ipfs/boxo.git> |
+| `go-codec-dagpb` (cache Go, v1.7.0) | `github.com/ipld/go-codec-dagpb` | `0e35d310d23f0f2ae7eda4c17262d012f67bbf31` | <https://github.com/ipld/go-codec-dagpb.git> |
+| `protobuf` (cache Go, v1.36.11) | `google.golang.org/protobuf` | `96a179180f0ad6bba9b1e7b6e38d0affb0168e9a` | <https://go.googlesource.com/protobuf> |
 | `go-block-format` | `github.com/ipfs/go-block-format` | `190a5a4ed6ae45c01b8ec9e380893d16c6eefe84` | <https://github.com/ipfs/go-block-format.git> |
 | `go-ipld-prime` | `github.com/ipld/go-ipld-prime` | `ab9fe751f33fca77e7b8c4f7bb3dee40f6974313` | <https://github.com/ipld/go-ipld-prime.git> |
 | `go-unixfsnode` | `github.com/ipfs/go-unixfsnode` | `4a71cacb869d29b428bc5f817872e0c0dbeab669` | <https://github.com/ipfs/go-unixfsnode.git> |

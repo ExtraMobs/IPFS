@@ -13,10 +13,10 @@ import '../protocols/dht/dht_message.dart';
 /// Kademlia DHT protocol identifier.
 const String dhtProtocol = '/ipfs/kad/1.0.0';
 
-/// Queries the Kademlia DHT for providers of a CID.
-final class DHTClient implements ContentDiscovery {
+/// Queries the Kademlia DHT for providers of a Cid.
+final class DhtClient implements ContentDiscovery {
   /// Creates a DHT provider finder using [router] and [bootstrapPeers].
-  DHTClient({
+  DhtClient({
     required this.router,
     required this.bootstrapPeers,
     this.timeout = const Duration(seconds: 10),
@@ -34,7 +34,7 @@ final class DHTClient implements ContentDiscovery {
   @override
   /// Finds up to [count] providers for [cid]. A non-positive count streams all
   /// providers discovered by the lookup.
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) {
     if (count < 0) throw RangeError.value(count, 'count');
     late StreamController<AddrInfo> controller;
     var cancelled = false;
@@ -46,7 +46,7 @@ final class DHTClient implements ContentDiscovery {
   }
 
   Future<void> _lookup(
-    CID cid,
+    Cid cid,
     int count,
     StreamController<AddrInfo> output,
     bool Function() cancelled,
@@ -110,7 +110,7 @@ final class DHTClient implements ContentDiscovery {
     }
   }
 
-  Future<DhtResponse> _query(AddrInfo peer, CID cid) async {
+  Future<DhtResponse> _query(AddrInfo peer, Cid cid) async {
     await router.connect(peer);
     final stream = await router.host.newStream(
       router.runtimePeerId(peer.id),
@@ -128,7 +128,7 @@ final class DHTClient implements ContentDiscovery {
 
   Future<({DhtResponse? response, Object? error})> _safeQuery(
     AddrInfo peer,
-    CID cid,
+    Cid cid,
   ) async {
     try {
       return (response: await _query(peer, cid), error: null);

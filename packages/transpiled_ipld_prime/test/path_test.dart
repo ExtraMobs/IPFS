@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-ipld-prime's datamodel/path_test.go: TestParsePath.
 //
 // TestPathSegmentZeroValue is not ported: it specifically exercises Go's

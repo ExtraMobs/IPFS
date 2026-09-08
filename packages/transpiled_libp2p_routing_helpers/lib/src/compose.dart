@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/compose.dart
 //
 // Port of go-libp2p-routing-helpers's composed.go: combines independent
@@ -67,14 +68,14 @@ class Compose implements Routing, PubKeyFetcher, Bootstrap {
   }
 
   @override
-  Future<void> provide(CID cid, bool local) async {
+  Future<void> provide(Cid cid, bool local) async {
     final routing = contentRouting;
     if (routing == null) throw const RoutingNotSupportedException();
     return routing.provide(cid, local);
   }
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) {
     final routing = contentRouting;
     if (routing == null) return const Stream.empty();
     return routing.findProvidersAsync(cid, count);

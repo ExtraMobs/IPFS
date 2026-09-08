@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/basicnode/value_assembler.dart
 //
 // A generic recursion-capable value assembler shared by PlainList's and
@@ -78,37 +79,37 @@ class ValueAssembler implements NodeAssembler {
   @override
   void assignBool(bool v) {
     _markUsed();
-    onDone(newBool(v));
+    onDone(PlainBool(v));
   }
 
   @override
   void assignInt(int v) {
     _markUsed();
-    onDone(newInt(v));
+    onDone(PlainInt(v));
   }
 
   @override
   void assignFloat(double v) {
     _markUsed();
-    onDone(newFloat(v));
+    onDone(PlainFloat(v));
   }
 
   @override
   void assignString(String v) {
     _markUsed();
-    onDone(newString(v));
+    onDone(PlainString(v));
   }
 
   @override
   void assignBytes(Uint8List v) {
     _markUsed();
-    onDone(newBytes(v));
+    onDone(PlainBytes(v));
   }
 
   @override
   void assignLink(Link v) {
     _markUsed();
-    onDone(newLink(v));
+    onDone(PlainLink(v));
   }
 
   @override

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'package:test/test.dart';
 import 'package:transpiled_ipld_prime/fluent.dart';
 import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart' as ipld;
@@ -37,7 +38,7 @@ void main() {
       listEntry(list, floatValue(2.5));
       listEntry(list, stringValue('s'));
       listEntry(list, bytes([1, 2]));
-      listEntry(list, node(ipld.newString('n')));
+      listEntry(list, node(const ipld.PlainString('n')));
     });
     expect(error, isNull);
     expect(built!.length(), 7);

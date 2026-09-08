@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -60,7 +61,7 @@ List<String> rPartition(String subject, String separator) {
 }
 
 /// Computes the default SHA2-256 multihash.
-MultihashInfo hash(Uint8List data) => MultihashUtils.sum(defaultIpfsHash, data);
+DecodedMultihash hash(Uint8List data) => MultihashUtils.sum(defaultIpfsHash, data);
 
 /// Returns whether [value] is a valid base58 multihash.
 bool isValidHash(String value) {

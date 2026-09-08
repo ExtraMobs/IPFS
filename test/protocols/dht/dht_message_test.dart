@@ -7,7 +7,7 @@ import 'package:transpiled_varint/transpiled_varint.dart';
 
 void main() {
   test('GET_PROVIDERS and peer response preserve upstream wire fields', () {
-    final cid = CID.decode(
+    final cid = Cid.decode(
       'bafkreibs723667mosvbz3kzygkbpaxkkg6zld7qmxrbh3ky2mreeoyjlue',
     );
     final request = encodeGetProviders(cid);

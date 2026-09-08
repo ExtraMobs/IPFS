@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/timecache/time_cache.dart
 //
 // Port of go-libp2p-pubsub's timecache/time_cache.go: a cache of recently
@@ -21,6 +22,36 @@ enum TimeCacheStrategy {
 /// A cache of recently seen ids. Equivalent to go-libp2p-pubsub's
 /// `TimeCache`.
 abstract class TimeCache {
+  /// Creates a [TimeCache] using the default ("first seen") strategy.
+  /// Equivalent to go-libp2p-pubsub's `NewTimeCache`.
+  factory TimeCache(Duration ttl) =>
+      TimeCache.withStrategy(TimeCacheStrategy.firstSeen, ttl);
+
+  /// Creates a [TimeCache] using [strategy]. Equivalent to
+  /// go-libp2p-pubsub's `NewTimeCacheWithStrategy`.
+  factory TimeCache.withStrategy(TimeCacheStrategy strategy, Duration ttl) {
+    return switch (strategy) {
+      TimeCacheStrategy.firstSeen => FirstSeenCache(ttl),
+      TimeCacheStrategy.lastSeen => LastSeenCache(ttl),
+    };
+  }
+
+  /// Creates a [FirstSeenCache] with an explicit sweep interval (for
+  /// testing). Equivalent to go-libp2p-pubsub's
+  /// `newFirstSeenCacheWithSweepInterval`.
+  factory TimeCache.firstSeenWithSweepInterval(
+    Duration ttl,
+    Duration sweepInterval,
+  ) => FirstSeenCache(ttl, sweepInterval);
+
+  /// Creates a [LastSeenCache] with an explicit sweep interval (for
+  /// testing). Equivalent to go-libp2p-pubsub's
+  /// `newLastSeenCacheWithSweepInterval`.
+  factory TimeCache.lastSeenWithSweepInterval(
+    Duration ttl,
+    Duration sweepInterval,
+  ) => LastSeenCache(ttl, sweepInterval);
+
   /// Adds [id] into the cache if not already present. Returns `true` if
   /// newly added. Depending on the strategy, may or may not update an
   /// existing entry's expiry.
@@ -34,28 +65,3 @@ abstract class TimeCache {
   /// sweep and releasing resources.
   void done();
 }
-
-/// Creates a [TimeCache] using the default ("first seen") strategy.
-/// Equivalent to go-libp2p-pubsub's `NewTimeCache`.
-TimeCache newTimeCache(Duration ttl) => newTimeCacheWithStrategy(TimeCacheStrategy.firstSeen, ttl);
-
-/// Creates a [TimeCache] using [strategy]. Equivalent to
-/// go-libp2p-pubsub's `NewTimeCacheWithStrategy`.
-TimeCache newTimeCacheWithStrategy(TimeCacheStrategy strategy, Duration ttl) {
-  return switch (strategy) {
-    TimeCacheStrategy.firstSeen => FirstSeenCache(ttl),
-    TimeCacheStrategy.lastSeen => LastSeenCache(ttl),
-  };
-}
-
-/// Creates a [FirstSeenCache] with an explicit sweep interval (for
-/// testing). Equivalent to go-libp2p-pubsub's
-/// `newFirstSeenCacheWithSweepInterval`.
-TimeCache newFirstSeenCacheWithSweepInterval(Duration ttl, Duration sweepInterval) =>
-    FirstSeenCache(ttl, sweepInterval);
-
-/// Creates a [LastSeenCache] with an explicit sweep interval (for
-/// testing). Equivalent to go-libp2p-pubsub's
-/// `newLastSeenCacheWithSweepInterval`.
-TimeCache newLastSeenCacheWithSweepInterval(Duration ttl, Duration sweepInterval) =>
-    LastSeenCache(ttl, sweepInterval);

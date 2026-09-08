@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-ipld-prime/codec/json/marshal_test.go, plus decoder roundtrips.
 import 'dart:typed_data';
 
@@ -31,7 +32,7 @@ void main() {
 
   test('links and bytes are rejected exactly as Go codec', () {
     expect(
-      () => json_codec.encode(newBytes(Uint8List.fromList([1])), _Sink()),
+      () => json_codec.encode(PlainBytes(Uint8List.fromList([1])), _Sink()),
       throwsA(
         predicate(
           (Object e) =>
@@ -40,7 +41,7 @@ void main() {
       ),
     );
     expect(
-      () => json_codec.encode(newLink(_Link()), _Sink()),
+      () => json_codec.encode(PlainLink(_Link()), _Sink()),
       throwsA(
         predicate(
           (Object e) =>

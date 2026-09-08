@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 /// Port of `go-ipld-prime`'s `datamodel` package (the IPLD Data Model's
 /// core interfaces -- `Node`/`NodeBuilder`/`NodeAssembler`, `Kind`, `Path`,
 /// `Link`) and `node/basicnode` (a concrete, general-purpose `Node`
@@ -26,6 +27,8 @@ export 'src/basicnode/map_node.dart'
 export 'src/basicnode/prototypes.dart' show BasicnodePrototype, prototype;
 export 'src/basicnode/scalars.dart'
     show
+        BasicNode,
+        Basicnode,
         PlainBool,
         PlainBoolAssembler,
         PlainBytes,
@@ -44,13 +47,7 @@ export 'src/basicnode/scalars.dart'
         PrototypeFloat,
         PrototypeInt,
         PrototypeLink,
-        PrototypeString,
-        newBool,
-        newBytes,
-        newFloat,
-        newInt,
-        newLink,
-        newString;
+        PrototypeString;
 export 'src/basicnode/stream_bytes.dart' show StreamBytes, newBytesFromReader;
 export 'src/basicnode/value_assembler.dart' show ValueAssembler;
 export 'src/codec/api.dart'

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -172,6 +173,19 @@ void main() {
       expect(() => decoder.add(header), throwsA(isA<YamuxProtocolException>()));
     },
   );
+
+  test('incremental decoder rejects an invalid version from the header', () {
+    final header = Uint8List.fromList([9, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]);
+    expect(
+      () => YamuxFrameDecoder().add(header),
+      throwsA(isA<YamuxProtocolException>()),
+    );
+  });
+
+  test('config follows upstream validation for negative RTT interval', () {
+    const config = YamuxConfig(measureRttInterval: Duration(seconds: -1));
+    expect(config.verify, returnsNormally);
+  });
 
   test(
     'a blocked writer wakes on remote reset and never sends after it',

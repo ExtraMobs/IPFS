@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of compconfig.go, compparallel.go, and compsequential.go.
 import 'dart:async';
 import 'dart:typed_data';
@@ -57,7 +58,7 @@ class SequentialRouter {
 /// Optional batched provider-announcement capability.
 abstract class ProvideManyRouter {
   /// Announces raw CIDs built from [keys].
-  Future<void> provideMany(List<MultihashInfo> keys);
+  Future<void> provideMany(List<DecodedMultihash> keys);
 }
 
 /// Optional readiness hook from compconfig.go.
@@ -82,12 +83,12 @@ Future<T> _run<T>(
   return timeout == Duration.zero ? future : future.timeout(timeout);
 }
 
-Future<void> _provideMany(Routing router, List<MultihashInfo> keys) async {
+Future<void> _provideMany(Routing router, List<DecodedMultihash> keys) async {
   if (router case final ProvideManyRouter provider) {
     return provider.provideMany(keys);
   }
   for (final key in keys) {
-    await router.provide(CID.v1('raw', key), true);
+    await router.provide(Cid.v1('raw', key), true);
   }
 }
 
@@ -167,11 +168,11 @@ class ComposableParallel
   }
 
   @override
-  Future<void> provide(CID cid, bool local) =>
+  Future<void> provide(Cid cid, bool local) =>
       _execute((router) => router.provide(cid, local));
 
   @override
-  Future<void> provideMany(List<MultihashInfo> keys) =>
+  Future<void> provideMany(List<DecodedMultihash> keys) =>
       _execute((router) => _provideMany(router, keys));
 
   @override
@@ -208,7 +209,7 @@ class ComposableParallel
   );
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) {
     var remaining = count;
     return _parallelStreams(
       _entries,
@@ -268,11 +269,11 @@ class ComposableSequential
   }
 
   @override
-  Future<void> provide(CID cid, bool local) =>
+  Future<void> provide(Cid cid, bool local) =>
       _execute((router) => router.provide(cid, local));
 
   @override
-  Future<void> provideMany(List<MultihashInfo> keys) =>
+  Future<void> provideMany(List<DecodedMultihash> keys) =>
       _execute((router) => _provideMany(router, keys));
 
   @override
@@ -308,7 +309,7 @@ class ComposableSequential
   );
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) => _sequentialStreams(
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) => _sequentialStreams(
     _entries,
     (router) => router.findProvidersAsync(cid, count),
     count: count,

@@ -1,9 +1,10 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_multihash/transpiled_multihash.dart';
 
-/// Returned when block data does not match its supplied CID.
+/// Returned when block data does not match its supplied Cid.
 final class ErrWrongHash implements Exception {
   /// Creates the hash mismatch error.
   const ErrWrongHash();
@@ -18,7 +19,7 @@ abstract interface class Block {
   Uint8List rawData();
 
   /// Content identifier for the block.
-  CID cid();
+  Cid cid();
 
   /// Human-readable block representation.
   @override
@@ -28,21 +29,38 @@ abstract interface class Block {
   Map<String, Object?> loggable();
 }
 
-/// A block containing opaque bytes and a CID.
+/// A block containing opaque bytes and a Cid.
 final class BasicBlock implements Block {
   /// Creates a block from [data] and its [cid].
   BasicBlock(this._data, this._cid);
 
+  /// Creates a block using the default CIDv0 SHA-256 format. Equivalent to
+  /// Go's `NewBlock`.
+  factory BasicBlock.fromData(Uint8List data) {
+    final digest = MultihashUtils.sum('sha2-256', data).digest;
+    return BasicBlock(data, Cid.v0(Uint8List.fromList(digest)));
+  }
+
+  /// Creates a block using a Cid prefix. Equivalent to Go's
+  /// `NewBlockWithPrefix`.
+  factory BasicBlock.withPrefix(Uint8List data, Prefix prefix) =>
+      BasicBlock(data, prefix.sum(data));
+
+  /// Creates a block from a precomputed Cid. Equivalent to Go's
+  /// `NewBlockWithCid`.
+  factory BasicBlock.withCid(Uint8List data, Cid cid) =>
+      BasicBlock(data, cid);
+
   final Uint8List _data;
-  final CID _cid;
+  final Cid _cid;
 
   @override
   Uint8List rawData() => _data;
 
   @override
-  CID cid() => _cid;
+  Cid cid() => _cid;
 
-  /// Multihash bytes contained in the CID.
+  /// Multihash bytes contained in the Cid.
   Uint8List multihash() => Uint8List.fromList(_cid.multihash.toBytes());
 
   @override
@@ -50,21 +68,4 @@ final class BasicBlock implements Block {
 
   @override
   Map<String, Object?> loggable() => {'block': _cid.toString()};
-}
-
-/// Creates a block using the default CIDv0 SHA-256 format.
-BasicBlock newBlock(Uint8List data) {
-  final digest = MultihashUtils.sum('sha2-256', data).digest;
-  return BasicBlock(data, CID.v0(Uint8List.fromList(digest)));
-}
-
-/// Creates a block using a CID prefix.
-BasicBlock newBlockWithPrefix(Uint8List data, Prefix prefix) =>
-    BasicBlock(data, prefix.sum(data));
-
-/// Creates a block from a precomputed CID.
-BasicBlock newBlockWithCid(Uint8List data, CID cid) {
-  // Go validates only when boxo/util.Debug is enabled; its default is false.
-  // Keep the normal runtime path allocation-free and accept trusted CIDs.
-  return BasicBlock(data, cid);
 }

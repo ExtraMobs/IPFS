@@ -1,6 +1,7 @@
 name: transpiled_multiaddr
 description: Port of multiformats/go-multiaddr.
 version: 0.1.0
+publish_to: none
 homepage: https://github.com/multiformats/go-multiaddr
 
 environment:

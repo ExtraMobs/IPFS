@@ -17,7 +17,7 @@ void main() {
       return;
     }
     LocalKuboHarness? kubo;
-    IPFSNode? node;
+    IpfsNode? node;
     try {
       kubo = await LocalKuboHarness.start(
         executable: executable,
@@ -30,16 +30,16 @@ void main() {
       final cidText = await kubo.putRawBlock(bytes);
       await kubo.provide(cidText);
       printOnFailure('Kubo providers: ${await kubo.findProviders(cidText)}');
-      node = await IPFSNode.fromBuildCfg(
+      node = await IpfsNode.fromBuildCfg(
         BuildCfg(
           online: true,
-          config: IPFSConfig(
+          config: IpfsConfig(
             offline: false,
             network: NetworkConfig(bootstrapPeers: [kubo.swarmAddress]),
           ),
         ),
       );
-      final cid = CID.decode(cidText);
+      final cid = Cid.decode(cidText);
       final block = await node.getBlockFromDht(cid);
       expect(block.rawData(), orderedEquals(bytes));
       expect(await node.blockstore.has(cid), isTrue);

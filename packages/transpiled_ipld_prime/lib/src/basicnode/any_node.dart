@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/basicnode/any_node.dart
 //
 // Port of go-ipld-prime's node/basicnode/any.go: a builder that can accept
@@ -71,42 +72,42 @@ class AnyBuilder implements NodeBuilder {
   void assignBool(bool v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newBool(v);
+    _scalarNode = PlainBool(v);
   }
 
   @override
   void assignInt(int v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newInt(v);
+    _scalarNode = PlainInt(v);
   }
 
   @override
   void assignFloat(double v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newFloat(v);
+    _scalarNode = PlainFloat(v);
   }
 
   @override
   void assignString(String v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newString(v);
+    _scalarNode = PlainString(v);
   }
 
   @override
   void assignBytes(Uint8List v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newBytes(v);
+    _scalarNode = PlainBytes(v);
   }
 
   @override
   void assignLink(Link v) {
     _checkEmpty();
     _state = _AnyState.scalar;
-    _scalarNode = newLink(v);
+    _scalarNode = PlainLink(v);
   }
 
   @override

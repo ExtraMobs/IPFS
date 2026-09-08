@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/datamodel/link.dart
 //
 // Port of go-ipld-prime's datamodel/link.go: a special kind of scalar
@@ -20,7 +21,7 @@ abstract class Link {
   /// The densest possible encoding of this link, as raw bytes. Not
   /// guaranteed parsable back into a [Link] via
   /// `prototype().buildLink(binary)` -- this may include additional
-  /// framing (e.g. a CID's version/codec/multihash-type bytes) beyond what
+  /// framing (e.g. a Cid's version/codec/multihash-type bytes) beyond what
   /// the hash alone carries.
   List<int> binary();
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of parallel.go. Dart Futures cannot be forcibly cancelled; cancelling a
 // returned stream does cancel its child subscriptions.
 import 'dart:async';
@@ -157,11 +158,11 @@ class Parallel implements Routing, PubKeyFetcher, Bootstrap {
   );
 
   @override
-  Future<void> provide(CID cid, bool local) =>
+  Future<void> provide(Cid cid, bool local) =>
       _put((router) => router.provide(cid, local), _filter(_supportsContent));
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) {
     final selected = _filter(_supportsContent);
     if (selected.isEmpty) return const Stream.empty();
     if (selected.length == 1) {

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
@@ -148,7 +149,7 @@ void main() {
   });
 
   group('PeerId.decode / ToCid / FromCid (go-libp2p TestIDEncoding vector)', () {
-    test('decodes the base58 form and round-trips through CID', () {
+    test('decodes the base58 form and round-trips through Cid', () {
       final p1 = PeerId.decode(_manPeerIdBase58);
       expect(p1.toBase58(), equals(_manPeerIdBase58));
 
@@ -160,7 +161,7 @@ void main() {
       expect(p3, equals(p1));
     });
 
-    test('refuses to decode a non-peer-ID CID', () {
+    test('refuses to decode a non-peer-ID Cid', () {
       // dag-pb (raw file), not libp2p-key -- go-libp2p's own vector.
       expect(
         () => PeerId.decode(
@@ -170,7 +171,7 @@ void main() {
       );
     });
 
-    test('toCid throws for the empty peer ID (no zero-value CID sentinel)', () {
+    test('toCid throws for the empty peer ID (no zero-value Cid sentinel)', () {
       expect(() => PeerId(value: Uint8List(0)).toCid(), throwsA(anything));
     });
   });

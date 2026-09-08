@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-ipld-prime/linking/cid/{linksystem,memorystorage}.go.
 import 'dart:typed_data';
 
@@ -9,11 +10,11 @@ import '../../multicodec/registry.dart';
 import '../linking.dart';
 import 'cid_link.dart';
 
-/// Creates a CID-based link system using the default codec registry.
+/// Creates a Cid-based link system using the default codec registry.
 LinkSystem defaultLinkSystem() =>
     linkSystemUsingMulticodecRegistry(defaultRegistry);
 
-/// Creates a CID-based link system using [registry].
+/// Creates a Cid-based link system using [registry].
 LinkSystem linkSystemUsingMulticodecRegistry(Registry registry) => LinkSystem(
   encoderChooser: (prototype) {
     if (prototype is! CidLinkPrototype) {

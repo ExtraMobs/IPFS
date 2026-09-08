@@ -8,12 +8,23 @@ environment:
   sdk: ^3.10.0
 
 dependencies:
+  boilerplate:
+    path: ../boilerplate
+  transpiled_go_codec_dagpb:
+    path: ../transpiled_go_codec_dagpb
+  transpiled_ipld_prime:
+    path: ../transpiled_ipld_prime
+  base32: ^2.2.0
+  transpiled_block_format:
+    path: ../transpiled_block_format
   transpiled_cid:
     path: ../transpiled_cid
   transpiled_base58:
     path: ../transpiled_base58
   transpiled_multihash:
     path: ../transpiled_multihash
+  transpiled_datastore:
+    path: ../transpiled_datastore
   transpiled_varint:
     path: ../transpiled_varint
 

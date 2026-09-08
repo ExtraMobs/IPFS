@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // tool/generate_prefix_map.dart
 //
 // Port of go-libp2p-kbucket's generate/main.go: for each of the 65536

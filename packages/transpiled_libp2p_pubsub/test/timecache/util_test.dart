@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Tests for lib/src/timecache/util.dart's `sweep` -- a pure function, so
 // its expiry logic can be tested deterministically with controlled
 // DateTime values instead of waiting on a real or virtual clock (Go's own

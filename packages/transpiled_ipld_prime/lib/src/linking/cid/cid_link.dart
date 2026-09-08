@@ -1,16 +1,17 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_ipld_prime/src/datamodel/link.dart';
 import 'package:transpiled_multihash/transpiled_multihash.dart';
 
-/// IPLD link backed by a CID, equivalent to Go's `linking/cid.Link`.
+/// IPLD link backed by a Cid, equivalent to Go's `linking/cid.Link`.
 final class CidLink implements Link {
   /// Creates a link for [cid].
   const CidLink(this.cid);
 
-  /// The CID represented by this link.
-  final CID cid;
+  /// The Cid represented by this link.
+  final Cid cid;
 
   @override
   LinkPrototype prototype() => CidLinkPrototype(cid.prefix);
@@ -22,12 +23,12 @@ final class CidLink implements Link {
   List<int> binary() => cid.toBytes();
 }
 
-/// Builds CID links with a fixed CID prefix.
+/// Builds Cid links with a fixed Cid prefix.
 final class CidLinkPrototype implements LinkPrototype {
   /// Creates a prototype for [prefix].
   const CidLinkPrototype(this.prefix);
 
-  /// The CID shape used for links built by this prototype.
+  /// The Cid shape used for links built by this prototype.
   final Prefix prefix;
 
   @override
@@ -46,8 +47,8 @@ final class CidLinkPrototype implements LinkPrototype {
     }
     final multihash = MultihashUtils.encode(prefix.mhType, digest);
     final cid = prefix.version == 0
-        ? CID.v0(digest)
-        : CID.v1(prefix.codec, multihash);
+        ? Cid.v0(digest)
+        : Cid.v1(prefix.codec, multihash);
     return CidLink(cid);
   }
 }

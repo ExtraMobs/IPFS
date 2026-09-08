@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // A minimal, purpose-built Node/NodeBuilder implementation used ONLY to
 // exercise datamodel's deepEqual/copyNode logic in tests -- NOT a port of
 // go-ipld-prime's node/basicnode (that's real future work; see

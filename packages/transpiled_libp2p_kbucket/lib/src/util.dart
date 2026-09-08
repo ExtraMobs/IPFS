@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/util.dart
 //
 // Port of go-libp2p-kbucket's util.go.
@@ -70,7 +71,7 @@ int randUint16() {
 /// Generates a random peer ID sharing a common prefix of length [cpl] with
 /// [targetId] (the local ID's DHT-keyspace form). Equivalent to
 /// go-libp2p-kbucket's `GenRandPeerIDWithCPL`.
-PeerId genRandPeerIdWithCPL(DhtId targetId, int cpl) {
+PeerId genRandPeerIdWithCpl(DhtId targetId, int cpl) {
   if (cpl > peerIdPreimageMaxCpl) {
     throw ArgumentError(
       'cannot generate peer ID for Cpl greater than $peerIdPreimageMaxCpl',

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 /// The RFC3339Nano-compatible timestamp format used by IPFS.
 const String timeFormatIpfs = 'RFC3339Nano';
 

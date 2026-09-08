@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/cid/multibase.dart
 //
 // Port of go-multibase's Encode/Decode (github.com/multiformats/go-multibase
@@ -15,7 +16,7 @@ import 'package:base_x/base_x.dart' as basex;
 import 'package:convert/convert.dart' as pkgconvert;
 import 'package:multibase/multibase.dart' as mb;
 
-/// Helpers for multibase encoding/decoding used by CID and other multiformats.
+/// Helpers for multibase encoding/decoding used by Cid and other multiformats.
 ///
 /// [decode] and [encodeWithName] cover all 21 encodings go-multibase
 /// actually implements (identity, base2, base16(upper), the 8 base32
@@ -23,7 +24,7 @@ import 'package:multibase/multibase.dart' as mb;
 /// base256emoji), keyed by go-multibase's own prefix characters/names.
 ///
 /// [encode] keeps its narrower `mb.Multibase`-typed signature for existing
-/// callers (CID's own encode path only ever needs base16/32/58btc/64), but
+/// callers (Cid's own encode path only ever needs base16/32/58btc/64), but
 /// is now routed through the same correct implementations as [decode]
 /// rather than through `package:multibase` directly.
 ///
@@ -48,9 +49,7 @@ class MultibaseUtils {
   /// multi-byte `🚀` for base256emoji).
   static Uint8List decode(String input) {
     if (input.isEmpty) {
-      throw const FormatException(
-        'cannot decode multibase for zero length string',
-      );
+      throw const FormatException('cannot decode multibase for zero length string');
     }
     final prefix = input.runes.first;
     final rest = input.substring(String.fromCharCode(prefix).length);
@@ -351,4 +350,52 @@ class MultibaseUtils {
     }
     return out;
   }
+}
+
+class ErrUnsupportedEncoding implements Exception {
+  final Object? cause;
+  const ErrUnsupportedEncoding([this.cause]);
+  @override
+  String toString() => cause == null ? 'unsupported encoding' : 'unsupported encoding: $cause';
+}
+
+extension type const Encoding(int value) {
+  static const Encoding identity = Encoding(0x00);
+  static const Encoding base2 = Encoding(0x30);
+  static const Encoding base8 = Encoding(0x37);
+  static const Encoding base10 = Encoding(0x39);
+  static const Encoding base45 = Encoding(0x52);
+  static const Encoding base16 = Encoding(0x66);
+  static const Encoding base16upper = Encoding(0x46);
+  static const Encoding base32 = Encoding(0x62);
+  static const Encoding base32upper = Encoding(0x42);
+  static const Encoding base32pad = Encoding(0x63);
+  static const Encoding base32padupper = Encoding(0x43);
+  static const Encoding base32hex = Encoding(0x76);
+  static const Encoding base32hexupper = Encoding(0x56);
+  static const Encoding base32hexpad = Encoding(0x74);
+  static const Encoding base32hexpadupper = Encoding(0x54);
+  static const Encoding base36 = Encoding(0x6b);
+  static const Encoding base36upper = Encoding(0x4b);
+  static const Encoding base58btc = Encoding(0x7a);
+  static const Encoding base58flickr = Encoding(0x5a);
+  static const Encoding base64 = Encoding(0x6d);
+  static const Encoding base64url = Encoding(0x75);
+  static const Encoding base64pad = Encoding(0x4d);
+  static const Encoding base64urlpad = Encoding(0x55);
+  static const Encoding base256emoji = Encoding(0x1f680);
+}
+
+String encode(Encoding base, Uint8List data) {
+  return MultibaseUtils._encodeByCode(base.value, data);
+}
+
+(Encoding base, Uint8List data) decode(String data) {
+  if (data.isEmpty) {
+    throw const FormatException('cannot decode multibase for zero length string');
+  }
+  final prefix = data.runes.first;
+  final rest = data.substring(String.fromCharCode(prefix).length);
+  final decoded = MultibaseUtils._decodeByCode(prefix, rest);
+  return (Encoding(prefix), decoded);
 }

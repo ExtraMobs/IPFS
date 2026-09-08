@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-ipld-prime's codec/raw/codec_test.go TestRoundtrip and
 // TestDecodeBuffer. TestRoundtripCidlink remains with linking/cid, which is
 // not ported yet.

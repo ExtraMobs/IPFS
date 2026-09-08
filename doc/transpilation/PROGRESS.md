@@ -6,6 +6,732 @@ arquivo registra a ordem e o que já foi validado.
 
 ## Como isto foi gerado / como continuar
 
+### Canonicalização UpperCamelCase e remoção de shims artificiais Dart — 2026-09-08
+
+Conforme as regras estritas de `AGENTS.md` ("preservação da API durante a transpilação"
+e veto a shims/abstrações artificiais sem contraparte upstream):
+1. **Eliminação do typedef CID**:
+   - Deletado `typedef CID = Cid;` de `packages/transpiled_cid/lib/src/cid.dart`.
+   - Migrados todos os 22 pacotes sob `packages/`, a biblioteca raiz (`lib/`), os
+     testes de unidade/integração (`test/`) e utilitários (`tool/`) para o tipo
+     canônico `Cid`.
+   - Exportação canônica consolidada em `transpiled_cid.dart` e `lib/src/core/cid.dart`.
+2. **Eliminação de shims artificiais exclusivos de Dart**:
+   - `packages/transpiled_multihash`: deletado `typedef MultihashInfo = DecodedMultihash;`
+     e migrados todos os consumidores para `DecodedMultihash`. Removido export redundante.
+   - `packages/transpiled_boxo`: deletado `typedef SizeSplitter = FixedSizeChunker;` e
+     `typedef PBLink = DagPbLink;`, `typedef PBNode = DagPbNode;`. Removido `SizeSplitter`
+     das exportações públicas.
+3. **Correção de acrônimos All-Caps em tipos públicos para UpperCamelCase canônico**:
+   - `IPFSNode` → `IpfsNode` (espelha `core.IpfsNode` do Kubo).
+   - `IPFSConfig` → `IpfsConfig`.
+   - `DHTClient` → `DhtClient`.
+   - `DHTRoutingTable` → `DhtRoutingTable`.
+4. **Verificação integral**:
+   - `dart analyze` na raiz e em todos os 22 pacotes: zero warnings ou erros.
+   - `dart test -j 1` na raiz: 112/112 testes passando (100%).
+   - `dart test` em todos os 22 pacotes: 100% aprovados.
+
+### Auditoria de fidelidade e primitivos Golang — 2026-09-08
+
+Primitivos Golang completados no pacote `boilerplate`: adicionados `Int`,
+`Uint` e `Uintptr` (representações de inteiros de arquitetura 64-bit da spec Go)
+e `Complex64`, `Complex128` (números complexos com partes real e imaginária
+em `Float32`/`Float64`).
+Divisão complexa implementada com o algoritmo de Smith (Algoritmo 116),
+seguindo rigorosamente a rotina `complex128div` de `runtime/complex.go` do Go.
+Oracle diferencial `test/go_complex_vectors.go` comparou bit a bit os padrões
+IEEE 754 de soma, subtração, multiplicação e divisão contra Go 1.25.7, incluindo
+preservação de sinal em zeros negativos. Todos os 29 testes do pacote passaram
+e análise estática retornou limpa.
+Correção de erro em `transpiled_ipld_prime/test/linking_test.dart` decorrente do
+construtor de nome do `Prefix` em runtime (instanciação com `final`).
+Warnings do analisador sanados via subagente nos pacotes `transpiled_go_car`,
+`transpiled_libp2p`, `transpiled_libp2p_kbucket`, `transpiled_libp2p_record` e
+`transpiled_multiaddr_dns` (`publish_to: none`, asserções nulas desnecessárias e
+parâmetros limpos).
+Regra atualizada em `AGENTS.md` fixando o uso do `boilerplate` para eliminação
+de checagens redundantes de limites e reiterando veto a subsistemas não autorizados.
+Revalidação do Objetivo 1 com `local_kubo_bitswap_test.dart`: passou em dois
+segundos contra Kubo isolado.
+
+### Auditoria de fidelidade em andamento — 2026-09-06
+
+CID.fromPrefixBytes removeu parser parcial _codecFromPrefixBytes e delega
+Prefix.fromBytes → Prefix.sum, preservando versão/hash/length em vez de assumir
+SHA256/CIDv1. Parâmetro hashType removido desse helper Dart (não existe no Go;
+nenhum caller local o fornecia). Prefix.Sum conferido no fonte fixado: identity
+força comprimento default; prefixo v0 inválido falha antes do hash e versão
+inválida falha depois dele. Vinte e sete testes CID nativos e dois focados Node
+passaram; análise limpa. Truncamento ainda está embutido no caller como dívida
+preexistente: migrar para multihash.Sum(code,length) com registry/erros Go.
+
+Migração CID assumida pelo principal após quota: codecCode Uint64 é estado
+canônico; codec é somente projeção textual. CID.numeric e Prefix.numeric
+preservam unknown codes; construtores por nome permanecem adaptadores e deixam
+de ser const (conversão de registry em runtime). Nomes inválidos nesses
+construtores agora falham no lookup, não apenas na serialização. CID.fromBytes
+guarda código diretamente; toBytes usa ToUvarint. Igualdade/hash usam código,
+não string unknown. Prefix guarda codecCode/mhTypeCode e CID.prefix os preserva;
+Prefix.sum constrói CID numérico. 25 testes antigos e um teste novo nativo
+passaram; novo teste Node cobre codec 9007199254740993, bytes, igualdade/hash,
+desigualdade de codecs unknown e prefix/sum identity. Download Kubo isolado passou.
+Não é fidelidade integral: Prefix.version/mhLength ainda têm fronteiras int,
+Prefix parsing usa FromUvarint (Go usa ReadUvarint, auditar erros), Sum parcial,
+CID.fromPrefixBytes ainda usa caminho legado e precisa migrar; CID não armazena
+bytes imutáveis como Go. Projeção textual consulta registry só se int exato,
+sem alterar/rejeitar código canônico quando não há nome.
+
+Superfície multihash: Decode → decode e Cast → cast públicos, com
+Cast → Decode → decode interno → readMultihashFromBuf preservado; helper
+MultihashUtils.decode reutiliza o mesmo núcleo, sem segundo parser. Cast
+devolve o buffer original após validação; teste cobre identidade, aliasing e
+rejeição de sufixo. Migração CID delegada foi interrompida por quota do agente;
+não houve entrega do modelo numérico e essa tarefa continua pendente.
+
+Revalidação de integração após modelo multihash: suíte raiz 112 aprovados e
+cinco skips do preset normal; 155 testes multiaddr e 27 PeerId aprovados.
+Multiaddr tinha quatro warnings por dependências path sem publish_to:none e
+um info de imports no teste; corrigidos sem alterar protocolo.
+Auditoria CID do agente confirmou perda estrutural: codec guardado apenas como
+nome, unknown perde valor e igualdade; Prefix também usa nomes. Próxima migração
+deve preservar código Uint64 canônico, bytes/igualdade e Prefix conjuntamente,
+com prova native/Node de códigos >2^53. Auditoria não é implementação concluída.
+
+Tabela Codes migrou para Map<Golang.Uint64,String>; decoder faz lookup direto,
+sem busca linear/conversão nativa. Names reutiliza as chaves tipadas na
+inicialização, mantendo mapas mutáveis independentes como Go. Teste registra
+código 9007199254740993, codifica e decodifica preservando nome e valor no Node.
+Três testes focados Node e 21 testes nativos multihash passaram; análise limpa.
+Constantes pequenas da tabela são convertidas uma vez na inicialização, sem
+limitar o domínio das inserções públicas posteriores. Auditoria CID numérico
+delegada ao agente menor, ainda sem implementação dessa migração.
+
+EncodeName → encodeName e Names → names portados: lookup ausente usa zero
+(identity), alias sha3 usa 0x14, intervalos Blake2 preservados. A função delega
+encode, como o Go. MultihashUtils.encode agora é adaptador EncodeName → Decode,
+devolvendo modelo interno; removida dependência direta dart_multihash desse
+pacote. Não significa remoção global da árvore de dependências. Vinte testes
+nativos passaram, análise limpa. Compat helper agora copia digest pela
+serialização, conforme Encode Go, em vez de reter entrada como pacote externo.
+Names é mapa mutável tipado; Codes ainda tem chaves int e deve migrar para
+Uint64. Sum continua parcial, sem contrato completo code/length/registry Go.
+
+Encode multihash público: `Encode([]byte,uint64)` →
+`encode(Uint8List,Golang.Uint64)`, com retorno Uint8List (erro Go sempre nil).
+DecodedMultihash.toBytes delega encode; comprimento deriva do digest, não do
+campo length mutável/descritivo. Fluxo Encode → varint.UvarintSize/PutUvarint
+preservado. Agente corrigiu ToUvarint para alocar via uvarintSize e delegar
+putUvarint, port do alias Go para encoding/binary.PutUvarint (stdlib, sem go.mod
+próprio). Buffer curto lança RangeError como adaptação do panic de bounds Go.
+Dez testes varint passaram no nativo e Node; análise limpa. Encode testado no
+nativo/Node com uint64 máximo, zero, comprimento divergente e cópia de digest;
+análise multihash limpa. Encoding aceita uint64 mesmo quando FromUvarint rejeita
+acima de uint63, distinção upstream preservada. Vetor encode derivado do fonte,
+não oracle Go novo; codificação por nome e demais lacunas continuam pendentes.
+
+Modelo multihash interno: DecodedMultihash substitui alias externo; campo
+Code → code usa Uint64, Length → length, size fica getter de compatibilidade,
+MultihashInfo fica alias temporário para preservar consumidores. Digest é view
+Uint8List. Removido narrowing do decoder; toBytes usa toUvarint tipado para
+código e comprimento. Comparações de códigos em peer/multiaddr ajustadas.
+Agente portou ToUvarint/UvarintSize; nove testes nativos/Node passaram, análise
+varint limpa. Dezoito testes multihash nativos e quatro Node passaram; teste
+Node comprova Decode → toBytes para uint63 máximo. Oracle Go nativo e download
+Bitswap/Kubo isolado passaram. Modelo CID ainda limita codec; encode por nome
+e sum ainda delegam parcialmente ao pacote externo. API livre Encode/Decode,
+tipagem de erros e mutabilidade completa dos structs Go permanecem pendentes.
+
+FromUvarint → fromUvarint agora retorna `(Golang.Uint64, int)`, sem narrowing
+no parser. Agente menor implementou e validou oito testes nativos e oito Node,
+incluindo uint63 máximo e 2^53+1; análise limpa. Principal migrou consumidores:
+helper multihash mantém código Uint64, compara length tipado com MaxInt32 e
+buffer antes de conversão. MHFromBytes preserva uint63 completo também em Node.
+Quatro testes multihash Node, 18 nativos (incluindo oracle Go), 25 testes CID
+e download Bitswap/Kubo isolado passaram; análises CID/multihash limpas.
+Fronteiras temporárias restantes estão no modelo externo MultihashInfo.code e
+no codec CID baseado em nome/int, com conversão exata explícita. Não equivalem
+ao domínio Go completo em JS; remover migrando os próprios modelos. APIs
+readVarint/encodeVarint antigas seguem pendentes, não foram reclassificadas.
+
+Delegação CID/multihash: `go-cid.CidFromBytes` → `mh.MHFromBytes`
+(go-multihash b29af1cd) → `readMultihashFromBuf` agora corresponde no caminho
+CIDv1 a `CID.fromBytes` → `mhFromBytes` → `_readMultihashFromBuf`.
+Removida leitura duplicada de hash code/digest length no CID; limite e erros
+do multihash pertencem ao pacote responsável. MHFromBytes → mhFromBytes
+retorna contagem e view dos bytes, permitindo sufixo como o Go. Teste cobre
+contagem, aliasing e contraste com Decode estrito. Três testes focados e
+25 testes CID passaram, análise multihash limpa. Contrato CID completo,
+representação uint64 e tipagem de erros ainda pendentes. Antes desta delegação,
+oracle Go e download Bitswap/Kubo isolado passaram após correção do varint.
+
+Varint JS: teste executado reproduziu FromUvarint(80 80 80 80 10) = 0 em
+Node, em vez de 4294967296. Acumulador e shifts agora usam Golang.Uint64
+conforme o uint64 do FromUvarint Go fixado; sentinelas e limites preservados.
+Teste Node passou após a correção, oito testes nativos passaram, análise limpa.
+Retorno int existente ainda exige fronteira Int64.toIntExact: falha explícita
+substitui perda silenciosa quando não há representação exata no runtime.
+É adaptação TEMPORÁRIA, não resultado final: remover pela migração dos
+contratos CID/multihash para Uint64. readVarint/encodeVarint antigos também
+continuam pendentes; não declarar paridade JS integral pelo teste de bit 32.
+
+Oracle multihash Go executado em 2026-09-07: novo teste verifica o HEAD
+b29af1cd do clone antes de executar `test/go_decode_vectors.go` no módulo
+upstream. Dezenove entradas comparam código decimal, nome, digest e mensagem
+de erro, incluindo unknown code, digest vazio, uint63 máximo, truncamento,
+varints não mínimos, excesso de comprimento e extremos Blake2. Comparação
+passou; análise do pacote limpa. Depende do clone fixado e toolchain Go;
+não é prova JavaScript nem encerra a migração do modelo numérico.
+
+Revalidação em 2026-09-07: parsing multihash deixou de delegar ao decoder
+externo, que rejeitava códigos desconhecidos e digest vazio aceitos pelo Go.
+Fluxo confirmado no fonte b29af1cd: Decode → decode → readMultihashFromBuf →
+uvarint → go-varint.FromUvarint. Dart reutiliza fromUvarint do pacote interno;
+helper preserva limite MaxInt32, digest como view e rejeição de bytes finais.
+Codes → codes inclui tabela upstream e intervalos Blake2. Índice AST local
+go-multihash-index/multihash.md consultado, mas contém apenas cabeçalho;
+resolução feita pelo fonte e imports. Clones efetivos ficam dentro deste
+workspace em go-ipfs-reference, diferente do caminho relativo histórico do lock.
+Quinze testes multihash e 25 testes CID passaram no nativo. Corrigido info de
+ordenação de imports no teste de sum. Vetores novos são derivados do fonte,
+não comparação Go executada. Ainda pendentes: oracle Go, exceções tipadas,
+API pública Decode/DecodedMultihash, uint64 exato no modelo/varint e serialização
+externa de MultihashInfo. Não declarar paridade integral nem suporte Web completo.
+
+Protobuf fixed-width: `AppendFixed32/ConsumeFixed32/SizeFixed32` e
+`AppendFixed64/ConsumeFixed64/SizeFixed64` de `encoding/protowire` (protobuf
+v1.36.11, revisão fixada em UPSTREAM_LOCK) correspondem a
+`appendFixed32/consumeFixed32/sizeFixed32` e equivalentes 64 no pacote
+`transpiled_protobuf`. Append reutiliza os bytes little-endian de
+`Golang.Uint32/Uint64`; consume compõe os valores com shifts dos tipos
+compartilhados. Entrada curta retorna zero e -1; bytes finais não são consumidos.
+Cinco testes do pacote passaram no nativo e em JavaScript/Node; análise limpa.
+O teste fixed usa vetores derivados do fonte Go, não um oracle protobuf Go
+executado. Grupos, field skipping e demais lacunas não estão cobertos por esta
+prova; não representa paridade integral de protobuf nem dos consumidores IPLD.
+Após essa validação, `local_kubo_bitswap_test.dart` foi reexecutado com preset
+interop: um teste passou, baixando bloco raw de provider Kubo conhecido no
+ambiente isolado. Não comprova descoberta pública DHT nem importação UnixFS.
+
+Conversões entre larguras revalidadas com exemplo da spec
+uint32(int8(uint16(0x10f0))) = 0xfffffff0 e 27 resultados adicionais int16 →
+int8/uint8/uint64. Oracle Go passou, confirmando extensão de sinal antes de
+truncamento via toBigInt/fromBigInt, sem copiar padrões unsigned por engano.
+Teste específico de alias Byte e contraste zero-extension também passou no
+nativo e JavaScript. Suíte boilerplate anterior a esse novo teste: 26 aprovados,
+análise pacote limpa. Isso não cobre conversões float→int nem tipos de máquina.
+
+Inteiros64 → floats: Float32/Float64.fromInt64/fromUint64 implementados com
+arredondamento direto ties-to-even sobre BigInt, centralizado no helper interno
+integer_float.dart. Evita o erro de arredondamento duplo do caminho int64 →
+double → float32: vetor 2^62+2^38+1 confirma divergência desse caminho ingênuo.
+Oracle Go compara 20 padrões binários signed/unsigned e passou; regressão do
+arredondamento passou no nativo e JavaScript. Análise boilerplate limpa.
+Conversões float → inteiro e demais larguras ainda pendentes; esse helper não
+é uma implementação geral de números Go constantes nem de arredondamento FMA.
+
+Conversões Float32.fromFloat64/Float64.fromFloat32 adicionadas como factories
+tipadas (Go float32(x)/float64(x)). Oito vetores Go verificam 16 padrões de bits
+de narrowing/widening, incluindo ties-to-even, subnormal, overflow e -0;
+comparação executada passou. Teste focado passou também em JavaScript/Node.
+Conversões inteiros grandes → float ainda pendentes: não encadear toDouble
+ingenuamente sem auditar arredondamento duplo. Não equivale a todas as conversões.
+
+Float64 acrescentado com ByteData(8), operadores aritméticos e comparações
+IEEE. Oracle Go separado: 324 resultados coincidiram bit a bit, salvo NaNs
+comparados por classificação. Vetores incluem menor subnormal, máximo finito,
+zero negativo, infinito e limite de precisão de 53 bits. Dois testes nativos
+passaram; teste focado JavaScript passou e análise boilerplate limpa.
+Ainda faltam conversões cruzadas/inteiro-float e regras de expressões fundidas;
+não alegar paridade de NaN payloads, compilador ou tipos complexos.
+
+Float32 iniciado com ByteData(4), operações básicas e comparações IEEE.
+Spec oficial consultada: Numeric types, Floating-point operators; conversão
+explícita arredonda para binary32, enquanto Go pode fundir certas expressões.
+Oracle Go executado compara 81 pares × 4 operações = 324 resultados binários,
+incluindo subnormal/overflow/zeros/infinito; NaNs comparados por classificação,
+não payload. Dois testes nativos passaram. Isso não comprova todo arredondamento,
+conversões inteiro/float, FMA, Float64 ou complexos. Implementação não utilizada
+ainda pelos ports; limitação e critério de prova registrados no README.
+
+Bool adicionado conforme seções Boolean types/Logical operators da spec Go:
+false inicial, igualdade, negação e curto-circuito. Um byte privado implementa
+armazenamento, sem alegação de layout ABI. Dart não sobrecarrega !/&&/||:
+adaptação not()/and(callback)/or(callback), com toBool explícito em condições.
+Oracle Go ampliado em 20 resultados de tabela verdade/contagem de chamadas;
+comparação passou, assim como testes de propagação de falha do segundo operando.
+Não há conversão numérica automática. Integração dos consumidores ainda pendente.
+
+Agente menor encerrou por quota durante a tarefa 8/16 bits. Principal revisou
+os quatro arquivos já escritos e concluiu exports e alias Byte=Uint8. Matrizes
+Go8/Dart8 e Go16/Dart16 adicionadas pelo principal: cada uma compara 2324
+resultados e ambas passaram. Dois testes focados passaram no nativo e Node;
+análise boilerplate limpa. Estado efetivo: inteiros fixed-width 8/16/32/64,
+Byte/Rune e String disponíveis; bool/floats/complexos e tipos dependentes da
+arquitetura permanecem pendentes, assim como integração integral dos ports.
+
+Centralizada a fronteira Int64 → int Dart em `Int64.toIntExact()`, removendo
+a checagem duplicada do DAG-PB. Trata-se de adaptação explícita ao runtime,
+não conversão Go: mantém UnsupportedError quando não há representação exata.
+Teste com 9007199254740993 confirma aceitação nativa e rejeição JavaScript;
+três testes focados passaram nos dois runtimes. Onze testes DAG-PB passaram,
+análise codec limpa. Migração do datamodel continua sendo o critério para
+eliminar essa fronteira temporária do caminho Tsize.
+
+Rune modelado como typedef Int32, conforme Numeric types da spec Go, sem
+validação Unicode no próprio tipo. String.fromRune aplica conversão para texto
+depois do truncamento int32; string(int64(4294967361)) produz U+FFFD, enquanto
+string(rune(int64(4294967361))) produz A. Oracle Go ampliado para esse contraste.
+Int8/Uint8/Int16/Uint16 delegados ao agente menor e ainda pendentes de revisão;
+não foram apresentados como concluídos nem utilizados nos consumidores.
+
+Revisão principal Uint32/Int32 concluída para operações implementadas:
+armazenamento quatro bytes, conversões truncantes, signed remainder, overflow,
+shifts e comparações conferidos. Nova matriz executável Go32/Dart32 compara
+285 linhas/2324 resultados e passou, junto aos dois testes focados existentes.
+Isso não cobre todos os tipos/conversões nem encerra o objetivo. EncodeTag
+protobuf passou a delegar sua conversão de field number a Golang.Int32, em
+vez de manter toSigned(32) local. README atualizado com os tipos efetivos.
+
+Migração numérica protowire aplicada: ConsumeVarint retorna Golang.Uint64;
+AppendVarint/SizeVarint/DecodeTag recebem esse tipo e EncodeTag o retorna.
+Eliminada representação uint64 como int negativo nativo. Consumidores DAG-PB
+atualizados; Tsize converte explicitamente via Golang.Int64. O datamodel IPLD
+ainda retorna int Dart: conversão verifica exatidão e lança UnsupportedError
+se o runtime perder precisão, proteção temporária com remoção condicionada à
+migração do próprio datamodel. Não é paridade Web integral. Onze testes DAG-PB
+e quatro protobuf nativos passaram; análises desses pacotes limpas.
+Após corrigir os tipos esperados dos vetores, os quatro testes protobuf também
+passaram em JavaScript/Node; download Bitswap/Kubo isolado reexecutado e passou.
+Tipos Uint32/Int32 entregues pelo agente menor, ainda pendentes de revisão
+principal e vetores diferenciais Go específicos antes de uso em novos ports.
+
+Revalidação raiz: 112 testes passaram, cinco ignorados pelo preset normal.
+Diagnóstico Web explícito: `dart test --platform node test/protowire_test.dart`
+no pacote protobuf falhou na compilação do literal 0x7fffffffffffffff, que não
+é representável exatamente como int JavaScript. Não é falha do boilerplate
+nem prova de runtime do parser: o teste não chegou a executar. Próximo passo
+necessário é migrar os contratos uint64 protowire e seus consumidores para
+Golang.Uint64, com conversão Int64 explícita para Tsize, e atualizar os vetores
+sem literais Dart imprecisos. Não declarar suporte Web integral enquanto isso
+não estiver comprovado. Tipos 32-bit ainda em revisão do agente menor.
+
+Manutenção CID: corrigidos quatro warnings de publicação (`publish_to: none`,
+pacote interno com dependências path) e três infos de ordenação de imports.
+Não altera contrato Go nem relaxa regras do analisador. 25 testes CID passaram;
+análise do pacote limpa. Download conhecido via Bitswap/Kubo isolado reexecutado
+após ligação do boilerplate à árvore raiz: passou em dois segundos.
+Implementação Uint32/Int32 delegada a agente menor, com armazenamento de quatro
+bytes e testes Go/Dart próprios; ainda aguardando revisão/validação principal.
+
+Prova ampliada boilerplate: oracle `test/go_integer_matrix.go` executado pelo
+teste Dart compara 285 linhas/2324 resultados de operações signed/unsigned:
+10 operandos int64 e 7 uint64, produto cartesiano, aritmética, bitwise/andNot,
+comparações e shifts 0/1/31/32/63/64/65/1000000. Números Go serializados como
+texto para não perder precisão no JSON. Todas as linhas coincidiram; sete
+testes do pacote passaram e análise limpa. Matriz não cobre panics (testes
+separados), desempenho, outros tipos ou fidelidade completa dos ports.
+
+Boilerplate conversão inteiro → string: `Golang.String.fromCodePoint(BigInt)`
+segue a seção oficial Conversions to and from a string type: escalares válidos
+viram UTF-8; negativos, surrogates e valores acima de 0x10FFFF viram U+FFFD.
+Bounds verificados antes de narrowing para int Dart. Não confundir com
+fromBytes, que continua preservando bytes inválidos. Oracle Go agora compara
+31 resultados (12 novos vetores de conversão, incluindo MaxUint64); seis testes
+nativos passaram e análise limpa. Três testes String JavaScript/Node passaram.
+Essa operação não completa rune/iteração nem as demais famílias de primitivos.
+
+Avaliação de armazenamento String solicitada: mantida uma representação em
+bytes para o domínio Go arbitrário; texto Dart continua adequado em fronteiras
+exclusivamente textuais. README distingue payload UTF-8 de heap efetivo e não
+alega economia universal. Representação híbrida/cache exigiria medição de
+workload e preservação dos mesmos bytes, ainda não implementada. Concatenação
+eliminou lista expansível e cópia intermediária: um único Uint8List destino,
+com construtor privado de ownership. Entradas/saídas públicas continuam copiadas;
+slice continua copiando para não reter buffers pais grandes. Regressão de
+imutabilidade e concatenação vazia adicionada. Nenhuma medição de heap realizada;
+a redução reportada é de alocações explícitas no fluxo fonte, não percentual.
+
+Primeiro consumidor boilerplate integrado: `transpiled_protobuf` agora fornece
+`AppendString → appendString(List<int>, Golang.String)` e
+`ConsumeString → consumeString(Uint8List)`. Delegação a AppendVarint e
+ConsumeBytes preservada conforme wire.go fixado; erro devolve string vazia e
+código negativo. Testes cobrem bytes FF/NUL/C3, truncamento, overflow e cópia.
+Quatro testes protobuf nativos passaram; análise limpa. SDK mínimo desse pacote
+alinhado a 3.10, requerido pelo boilerplate, sem alterar versão de upstream Go.
+Encoder DAG-PB passou a chamar AppendString com conversão explícita do texto
+Dart existente. Isso NÃO resolve Name arbitrário no IPLD: asString/assignString,
+chaves de mapas, copy/equal, JSON/DAG-JSON e traversal ainda usam String Dart.
+Auditoria independente delimitou esses consumidores; migração transversal
+continua necessária. Não implementar fallback silencioso ou cache de bytes
+que possa se perder em um NodeAssembler genérico.
+
+Boilerplate String: bytes imutáveis arbitrários, len/index/slice em bytes,
+concatenação e ordenação lexicográfica preservadas; conversão Dart explícita
+estrita. Fontes oficiais lidas: String types, Index expressions e Slice
+expressions da spec Go 1.25.7; agente menor confirmou comparação/conversões.
+Ainda sem rune/iteração e sem integração ao IPLD/DAG-PB. Quatro testes nativos
+e três testes compilados para JavaScript/Node passaram; análise limpa.
+Os testes Node cobrem Uint64/Int64 e String, não navegador/Wasm nem todos os
+primitivos. Oracle Go ampliado de 14 resultados numéricos para 19 resultados,
+incluindo byte inválido, recorte dentro de UTF-8 e ordem U+E000/U+10000.
+
+Boilerplate: Int64 acrescentado reutilizando os oito bytes imutáveis Uint64.
+Divisão signed usa truncamento para zero e resto usa remainder (não módulo
+euclidiano Dart); MinInt64 / -1 trunca ao padrão de bits esperado. Acrescentado
+andNot para Go &^. Teste diferencial executa Go 1.25.7 via Process.run e
+compara 14 resultados decimais com Dart; passou, incluindo overflow, shifts,
+conversão signed → unsigned e resto negativo. Especificação oficial consultada
+na distribuição Go e referenciada no README do pacote. São provas delimitadas,
+não conclusão do objetivo. Demais primitivos e migração permanecem pendentes.
+
+Pedido explícito novo: pacote `boilerplate`, schema `fixed_types.Golang`.
+Regra adicionada ao AGENTS: centralizar comportamento primitivo sem remover
+validações de protocolo. Primeiro tipo criado: Uint64, oito bytes privados,
+conversão módulo 2^64, operações aritméticas/bitwise/shifts e comparação.
+BigInt da biblioteca padrão é temporário para cálculo exato; o estado é
+Uint8List, sem int nativo como representação pública do domínio unsigned.
+Referência lida: spec Go instalada com go1.25.7, seções Integer operators e
+Integer overflow. Teste inicial de limites derivado da spec; ainda falta prova
+diferencial executada em Go, testes Web e migração dos consumidores.
+Não é implementação completa de primitivos: Int8/16/32/64, Uint8/16/32,
+int/uint/uintptr dependentes da arquitetura, byte/rune, bool, string de bytes,
+floats e complexos permanecem pendentes. Também faltam conversões entre tipos,
+bit-clear e demais casos de divisão/shifts. Não declarar paridade integral.
+Namespace lógico traduzido para `package:boilerplate/fixed_types/golang.dart`
+com alias `Golang`: Dart não possui tipos aninhados em classes/namespaces.
+
+Etapa anterior interrompida: FromUvarint portado no pacote varint existente,
+com sentinelas de overflow/underflow/não mínimo, e go-varint v0.1.0 fixado.
+CIDv1 passou a usá-lo em codec/código hash/tamanho; testes varint (7) e CID
+(25) passaram. ReadVarint antigo ainda é usado por protobuf e não foi
+endurecido globalmente. Análise CID revelou quatro warnings de publicação com
+path dependencies e três infos de imports; continuam pendentes.
+
+Encoder DAG-PB: `AppendEncode → protowire.SizeTag/SizeBytes/SizeVarint` e
+`AppendTag/AppendVarint/AppendBytes` agora preservam a delegação upstream;
+removidos `_field/_varint` e tags codificadas manualmente. Links são coletados
+e validados em ordem de entrada antes de sort estável, como `marshal.go`;
+Tsize negativo usa a mensagem `Link has negative Tsize value [n]`.
+Regressão com dois links inválidos cuja ordem lexical difere da entrada
+confirma a precedência. 11 testes codec e 17 Boxo passaram; análise codec limpa.
+Revalidação após essa alteração: análise raiz limpa e teste interop isolado
+`local_kubo_large_unixfs_test.dart`, fixture 50 MiB, passou em 38 segundos.
+Esse teste valida download/DAG/CAR de fixture Kubo, não paridade de todo port.
+AppendString continua representado por UTF-8 estrito/AppendBytes: não é
+paridade para strings Go arbitrárias. Auditoria independente constatou que
+`Node.asString/assignString` e `PlainString` armazenam somente String Dart;
+nenhum utilitário de bytes de string já existente foi localizado. Uma solução
+sem perda deve ser tratada no datamodel compartilhado e todos seus consumidores,
+não num cache privado do codec. Mudança transversal ainda não implementada.
+Rastreamento CID: índice `go-cid-index/(root).md` → `CidFromBytes` em `cid.go`
+→ `varint.FromUvarint` e `mh.MHFromBytes`. Dart `CID.fromBytes` ainda usa
+`readVarint` e `MultihashUtils.decode` (delegação externa), não esses contratos
+auditados. Não alegar que o erro de CID pode ser corrigido apenas renomeando
+a exceção do codec. Portar/auditar os callees antes dessa mudança.
+
+Atualização da integração protowire: DAG-PB agora delega ConsumeTag,
+ConsumeVarint, ConsumeBytes, ParseError, AppendVarint e AppendBytes ao
+pacote `transpiled_protobuf`, em vez de duplicar as primitivas. Os wrappers
+privados restantes apenas adaptam offsets/coleções. Tags constantes do encoder
+e AppendString/Size ainda precisam de alinhamento explícito à delegação Go.
+Corrigida a precedência dos erros PBNode (tag inválida, campo desconhecido,
+Data duplicado antes de consumir payload) e PBLink (duplicatas antes de
+ordenação e wire type), com mensagens upstream e dois testes de regressão.
+Auditoria independente por agente menor confirmou esses desvios e apontou
+pendências reais: strings Go com bytes UTF-8 inválidos e diagnóstico de CID
+inválido ainda não preservados. Não converter bytes inválidos com replacement.
+Provas desta etapa: 10 testes do codec, 3 protowire e 17 decoder/importer
+Boxo passaram; download conhecido via Bitswap/Kubo isolado passou novamente.
+Isso não comprova DHT público nem fidelidade integral dos módulos.
+Dependência de desenvolvimento lints declarada nos dois novos pacotes para
+resolver o include herdado, sem enfraquecer regras de análise.
+
+Rastreamento AST aplicado ao codec após a nova regra de `AGENTS.md`:
+`boxo-index/ipld_merkledag.md` localiza `DecodeProtobuf → unmarshal` e
+`EncodeProtobuf → marshalImmutable`. O gerador `go_module_index.go` declara
+explicitamente análise por nomes, sem `go/types`; não é mapa semântico completo
+de módulos. Confirmação em `coding.go` e imports:
+`Boxo.DecodeProtobuf/unmarshal → dagpb.DecodeBytes → go-codec-dagpb v1.7.0 →
+transpiled_go_codec_dagpb.decodeBytes`, chamado por `DagPbNode.fromBytes`;
+`Boxo.marshalImmutable → dagpb.AppendEncode → mesmo módulo → appendEncode`,
+chamado por `DagPbNode.toBytes`. Revisões estão em `UPSTREAM_LOCK.md`.
+Próxima fronteira encontrada: `go-codec-dagpb → protobuf/encoding/protowire`;
+as rotinas locais `_v/_bytes/_varint` ainda substituem essa delegação, portanto
+não têm status de transpilação integral. `transpiled_varint.readVarint` foi
+inspecionado e não é substituto auditado: pertence a outro módulo e não possui
+a mesma checagem de overflow do décimo byte. Não reutilizar só por nome/formato.
+Versão efetiva confirmada no `go.mod` Boxo e `.info` do cache Go:
+`google.golang.org/protobuf v1.36.11`, revisão fixada em `UPSTREAM_LOCK.md`.
+Chamadas rastreadas em `go-codec-dagpb/{marshal,unmarshal}.go`:
+`ConsumeTag/ConsumeBytes/ConsumeVarint/ParseError`,
+`AppendTag/AppendBytes/AppendVarint/AppendString` e
+`SizeTag/SizeBytes/SizeVarint`. Próximo port delimitado em
+`packages/transpiled_protobuf/`, apenas wire reutilizável necessário ao codec;
+substituir os helpers locais, sem geração de mensagens. Mantenedor avisado
+antes de implementar. Atualização: criado `transpiled_protobuf/lib/protowire.dart`.
+Checklist Go → Dart nesta fatia: `ConsumeVarint/ConsumeTag/ConsumeBytes`,
+`DecodeTag/EncodeTag`, `AppendVarint/AppendTag/AppendBytes`,
+`SizeVarint/SizeTag/SizeBytes` e `ParseError` mantêm nomes lowerCamelCase.
+Três testes passaram e `dart analyze` do pacote não reportou problemas.
+São testes derivados da leitura do upstream, ainda sem execução diferencial Go.
+Adaptações: uint64 usa o padrão de bits de int no Dart nativo; append recebe
+lista expansível; erros de ParseError usam FormatException sem reproduzir
+o prefixo interno Go. Web ainda não validado. AppendString/ConsumeString
+continuam omitidos até resolver strings Go com UTF-8 inválido; grupos, fixed
+e demais APIs ainda não foram portados. O codec ainda não está integrado a
+esse pacote: os helpers duplicados continuam pendentes de substituição.
+O formatter reportou include de lints não resolvido no pacote novo; corrigir
+a configuração antes de considerar a análise com todos os lints comprovada.
+
+O objetivo atual abrange a fidelidade de todo código já transpilado, não apenas
+interoperabilidade. O commit `7137d32d` é o marco funcional anterior à auditoria.
+A contagem anterior de “32” misturava símbolos e linhas de pacotes sobrepostas;
+não constitui um inventário de 32 módulos independentes.
+
+### Auditoria Geral de Fidelidade de APIs Públicas (Dart vs Upstream Go)
+
+Auditoria exaustiva realizada comparando todos os pacotes Dart transpilados em `packages/` e `lib/` contra os repositórios oficiais e índices AST Go travados em `UPSTREAM_LOCK.md`:
+
+1. **Tipos Públicos em `UpperCamelCase`**:
+   - Conformidade total em todos os 22 pacotes.
+   - `packages/transpiled_cid`: Declarada classe principal canônica `class Cid`. O shim `typedef CID = Cid;` foi completamente removido e toda a base migrada para `Cid`.
+   - Tipos canônicos upstream expostos: `Code` (`transpiled_multicodec`), `Encoding` (`transpiled_multibase`), `Multihash` (`transpiled_multihash`).
+2. **Funções, Métodos e Campos Públicos em `lowerCamelCase`**:
+   - Conformidade total nas APIs públicas.
+   - Refatorações executadas:
+     - `packages/transpiled_boxo`: Em `lib/src/unixfs.dart`, as funções legadas em PascalCase (`WrapData`, `FilePBData`, `FolderPBData`, `UnwrapData`, `DataSize`) foram completamente deletadas, mantendo exclusivamente as variantes canônicas `lowerCamelCase` (`wrapData`, `filePbData`, `folderPbData`, `unwrapData`, `dataSize`).
+     - `packages/transpiled_libp2p`: Em `peerstore.dart`, as constantes duplicadas em PascalCase (`AddressTTL`, `TempAddrTTL`, etc.) foram deletadas, restando apenas as canônicas `lowerCamelCase` (`addressTtl`, `tempAddrTtl`, etc.); `idFromP2PAddr` renomeado para `idFromP2pAddr`.
+     - `packages/transpiled_libp2p_kbucket`: `genRandPeerIdWithCPL` renomeado para `genRandPeerIdWithCpl`.
+3. **Construtores `NewX` do Go vs Construtores/Factories Dart**:
+   - Regra `AGENTS.md`: *"construtores NewX do Go viram construtores ou factories Dart quando isso preservar o contrato, sem criar funções newX artificiais"*.
+   - Violações sanadas:
+     - `packages/transpiled_block_format`: funções artificiais `newBlock`, `newBlockWithPrefix` e `newBlockWithCid` deletadas; factories canônicas `BasicBlock.fromData(data)`, `BasicBlock.withPrefix(data, prefix)` e `BasicBlock.withCid(data, cid)` consolidadas.
+     - `packages/transpiled_boxo`: `Entry.ref(cid, priority)` em `Wantlist` e `FixedSizeChunker.size`/`defaultSize` consolidados; funções artificiais `newRefEntry` (em client), `newSizeSplitter` e `defaultSplitter` deletadas. O forwarder legado `bitswap/wantlist` foi mantido com `@Deprecated` pois existe como deprecated no upstream Go (`boxo/bitswap/wantlist/forward.go`).
+     - `packages/transpiled_libp2p_pubsub`: funções livres `newTimeCache*` deletadas em favor das factories canônicas `TimeCache(ttl)`, `TimeCache.withStrategy(strategy, ttl)`, `TimeCache.firstSeenWithSweepInterval` e `TimeCache.lastSeenWithSweepInterval`.
+     - `packages/transpiled_ipld_prime`: funções livres `newBool`, `newBytes`, `newFloat`, `newInt`, `newLink`, `newString` deletadas; adicionada a classe `Basicnode` (`BasicNode`) com métodos estáticos (`ofBool`, `ofInt`, etc.) e uso direto dos construtores `Plain*`.
+4. **Retornos `(T, error)` do Go para Retorno `T` com Exceção Tipada e Restauração de Contratos**:
+   - Conformidade funcional: métodos retornam `T` ou `Future<T>` com exceções de domínio tipadas.
+   - Exceções tipadas implementadas:
+     - `packages/transpiled_cid`: `ErrInvalidCid`, `ErrCidTooShort`, `ErrInvalidEncoding`.
+     - `packages/transpiled_multibase`: `ErrUnsupportedEncoding`.
+     - `packages/transpiled_multihash`: `ErrTooShort`, `ErrInconsistentLen` (implementando `FormatException` para paridade de mensagem `multihash length inconsistent: expected %d; got %d`).
+   - Contrato crítico restaurado: em `packages/transpiled_multibase`, implementada a função top-level canônica `(Encoding, Uint8List) decode(String data)` retornando a tupla exata de encoding e bytes do Go.
+5. **Adoção do Boilerplate (`fixed_types.Golang.<Type>`)**:
+   - Adotado e ativo em: `transpiled_protobuf`, `transpiled_varint`, `transpiled_multihash`, `transpiled_cid`, `transpiled_go_codec_dagpb`, `transpiled_multicodec`, `transpiled_boxo`.
+6. **Fronteiras e Duplicações de Responsabilidade**:
+   - `packages/transpiled_go_car`: `CarBlock` atualizado para implementar `Block` de `transpiled_block_format`, eliminando adaptações ad-hoc no nó raiz (`ipfs_node.dart`).
+   - `transpiled_multicodec`, `transpiled_multibase` e `transpiled_multihash`: expostas funções top-level canônicas `encode`, `decode`, `sum`, `code`, `name` e constantes upstream.
+
+
+- `BuildCfg.Online`: corrigido para zero value `false` independente da
+  configuração; efeitos de `ExtraOpts` e lifecycle completo continuam pendentes.
+- Boxo balanced: corrigida a perda de níveis internos unários: somente a
+  expansão da raiz recebe o nó anterior; a recursão cria nós internos vazios,
+  como `fillNodeRec` do Boxo fixado. Corrigidas também as folhas vazias UnixFS
+  e raw. Cinco vetores CID derivados do Go passaram; suíte do pacote: 23 testes
+  passaram (agente), incluindo 7 testes do importer reexecutados pelo principal.
+  Removido o teto arbitrário de 174 para `BalancedUnixFsImporter.maxLinks`:
+  `helpers.DagBuilderParams.Maxlinks` é preservado sem esse teto no Go.
+  Teste de regressão com 175 links passou; dois novos vetores do Boxo fixado
+  também coincidiram: bytes `i % 256`, chunk 1, tamanho 176/maxLinks 175 →
+  `QmbHp4zy1iwf1yRf2BZYToNsYf15AV8XjXcF1LyGjM3dZY`; tamanho 257/maxLinks 256 →
+  `QmYYtJRCNxnSCF6QBMSGw9VQ5LNRQwiBpfbEuo4QG8XNHm`. Gerador diagnóstico:
+  `go run ./.tmp-validation/balanced_vectors.go` no clone Boxo. Nove testes do
+  importer/parser passaram, contendo sete vetores CID Go.
+  O caso `maxLinks == 1` com múltiplos chunks exige
+  análise de progresso do loop e justificativa de eventual proteção Dart;
+  não foi executado um teste potencialmente infinito nesta auditoria.
+- Chunker: corrigida a localização do teto `ChunkSizeLimit`: no upstream,
+  `parseSizeString` o verifica, mas `NewSizeSplitter` não. Removida a restrição
+  do construtor Dart; mantida no parser, com teste de chamada direta acima do
+  teto e EOF curto. Importer + blockstore: 20 testes passaram nesta reexecução.
+  Ainda não há paridade integral do construtor: conversão Go `int64 → uint32`
+  e comportamento de tamanho zero/negativo precisam de auditoria/adaptação
+  explícita; a proteção Dart para tamanho não positivo permanece.
+  `fromString` agora segue a sintaxe decimal de `strconv.Atoi`: rejeita hex,
+  espaços e newline, aceita sinal `+` e zeros iniciais; separação por hífen
+  reproduz o erro de formato de `parseSizeString`. Testes positivos/negativos
+  adicionados. Tipos de erro Go ainda pendentes.
+  `chunk.DefaultBlockSize` agora corresponde ao campo global mutável Dart
+  `defaultBlockSize`, inicialmente 256 KiB, como `chunker/parse.go`. Para ler
+  o default no momento da construção, os parâmetros opcionais `size` de
+  `FixedSizeChunker`/`fromBytes` e `chunkSize` de `BalancedUnixFsImporter`/
+  `buildDagFromReader` passaram a `int?`; `null` significa usar o default atual,
+  sem alterar os campos `int` das instâncias existentes. Adaptação necessária
+  porque defaults de parâmetros Dart precisam ser constantes. Dez testes do
+  importer/parser passaram, incluindo mudança/restauração do global e override
+  explícito; análise raiz limpa. `helpers.DefaultLinksPerBlock` também passou
+  a global mutável Dart `defaultLinksPerBlock` (inicialmente 174); parâmetros
+  `maxLinks` do importer e wrapper são `int?`, resolvidos na construção pelo
+  mesmo motivo. Teste confirma instâncias anteriores e overrides preservados.
+  `chunk.ErrSize/ErrSizeMax` → constantes públicas `errSize/errSizeMax` de
+  `FormatException`: mensagens e identidade das sentinelas preservadas, sem
+  classe de erro adicional desnecessária. Onze testes passaram, incluindo
+  comparação `same` das duas exceções. Erros numéricos `strconv.NumError`
+  ainda não têm representação equivalente completa.
+  `helpers.NewLeafNode` agora tem sua verificação de tamanho preservada no
+  caminho de folhas: bytes de entrada acima do limite falham antes de envolver
+  em raw/UnixFS, sem aplicar esse limite aos nós internos. O símbolo mutável
+  `helpers.BlockSizeLimit` → `importerBlockSizeLimit` evita colisão com a
+  constante `chunk.BlockSizeLimit` exportada no mesmo barrel Dart; default
+  2 MiB preservado. `helpers.ErrSizeLimitExceeded` → `errSizeLimitExceeded`,
+  com mensagem `object size limit exceeded`. Teste de limite exato, excedido,
+  raw/PB, nó interno e entrada vazia com limite negativo passou; 12 testes do
+  importer/parser aprovados. Adaptação de lifecycle Dart: `importStream`
+  libera em `finally` o `StreamIterator` que criou. O Go `Layout` consome
+  `io.Reader` sob demanda e não assume fechamento do reader do chamador;
+  cancelar aqui libera a inscrição criada pelo port, não chama um `close`
+  arbitrário na fonte. Um teste com stream ainda aberto e falha no callback
+  de bloco confirmou cancelamento antes de devolver o erro original. Treze
+  testes do importer/parser passaram. Cancelamento externo durante uma leitura
+  pendente e falhas do próprio cleanup ainda não têm paridade comprovada.
+- Yamux: validação de versão/tipo no header antecipada e `VerifyConfig`
+  preservando intervalo RTT negativo (somente zero é inválido). Reexecução em
+  2026-09-06: 11 testes passaram. Isso não comprova as APIs ainda omitidas.
+- CAR v1: `WriteHeader` agora serializa a versão fornecida, incluindo o vetor
+  `4294967296` com CBOR de 8 bytes; leitura aceita payload vazio após o CID,
+  inclusive em stream fragmentado, como `util.ReadNode`. Oito testes passaram
+  e foram reexecutados pelo agente principal. Limitação ainda existente:
+  `CarHeader.version` usa `int` Dart e não cobre todo o domínio `uint64` Go;
+  isso não constitui paridade integral do tipo público.
+- Blockstore: implementação movida para `transpiled_boxo`; `Put` e `PutMany`
+  agora ignoram falhas do pré-`Has`, mas propagam erros de escrita. `PutMany`
+  usa `Batch/Commit`, inclusive para lote vazio, com fast-path de um bloco,
+  conforme `boxo/blockstore/blockstore.go`. A validação de CID permanece na
+  integração raiz. `NewBlockstore(ds.Batching)` vira
+  `Blockstore(Batching)` no pacote Boxo; `Has/Get/GetSize/Put/PutMany` mantêm
+  nomes em lowerCamelCase. `WriteThrough` e `NoPrefix` viram argumentos
+  nomeados com defaults `false`, sem factories artificiais de opções.
+  A integração raiz mantém criação em memória, `close`, cópias defensivas e
+  validação antecipada de todos os blocos; seu parâmetro `Datastore?` passa a
+  `Batching?`, pois o contrato upstream exige batch. Essa mudança de assinatura
+  não adiciona fallback silencioso para backends sem batching.
+  Continuam fora desta fatia e sem alegação de paridade: `Provider`,
+  `DeleteBlock`, enumeração, wrappers de validação/GC e cancelamento por contexto.
+  Provas da migração: seis testes da integração (incluindo corrupção na leitura
+  e validação do lote inteiro antes de gravar), suíte raiz com 112 aprovados e
+  5 ignorados, análise raiz limpa e análise focada de `src/blockstore.dart`
+  limpa. `local_kubo_bitswap_test.dart` com preset interop passou novamente:
+  download de bloco de provider conhecido em Kubo isolado. Os testes do pacote
+  foram reforçados após revisão das asserções de prefixo e `writeThrough`:
+  12 passaram na reexecução do principal, incluindo chave exata sem prefixo,
+  equivalência CIDv0/v1 por multihash e propagação do erro de escrita direta.
+- DAG-PB: `DagPbNode.toBytes` agora ordena links por bytes UTF-8, mantendo a
+  ordem original entre nomes iguais, conforme `ProtoNode.GetPBNode` e
+  `sortLinks` do Boxo. A lista de entrada não é modificada. Comparação por
+  UTF-16 de `String.compareTo` não seria equivalente para U+10000/U+E000;
+  teste cobre esse par, ASCII e nomes repetidos. Quatorze testes do importer/
+  DAG-PB passaram, incluindo os sete CIDs Go anteriores. Vetor binário Go
+  de links nomeados confirmado byte a byte: `EncodeProtobuf(true)` para nomes
+  `z,a,a,U+10000,U+E000`, tamanhos `1,2,3,4,5`, CID filho
+  `QmciCHWD9Q47VPX6naY3XsPZGnqVqbedAniGCcaHjBaCri`. Gerador diagnóstico
+  `go-ipfs-reference/boxo/.tmp-validation/dagpb_unicode_links.go`; teste usa
+  o CID completo e hex upstream, não apenas round-trip Dart. Validação completa
+  do decoder pendente: Boxo delega a `go-codec-dagpb.DecodeBytes`, não ao
+  unmarshal protobuf permissivo.
+  Fonte agora fixada em `UPSTREAM_LOCK.md`: `go-codec-dagpb v1.7.0`, revisão
+  `0e35d310d23f0f2ae7eda4c17262d012f67bbf31`, selecionada pelo `go.mod` Boxo;
+  checksum `h1:hpuvQjCSVSLnTnHXn+QAMR0mLmb1gA6wl10LExo2Ts0=` confirmado em
+  `go.sum`, revisão confirmada no `.info` do cache Go. Leitura de `unmarshal.go`
+  confirmou: campos desconhecidos são erros, Data duplicado é erro, Links não
+  podem ser interrompidos por Data e depois retomados; PBLink exige Hash/CID,
+  proíbe duplicatas e exige ordem Hash/Name/Tsize (opcionais podem faltar).
+  O port deve respeitar a fronteira `go.mod` em
+  `packages/transpiled_go_codec_dagpb/`, substituindo o decoder parcial Boxo;
+  mantenedor avisado antes da criação desse pacote. Implementação delegada,
+  ainda sem integração nem alegação de paridade. A API existente de
+  `transpiled_ipld_prime` já fornece `Node`, `NodeAssembler`, `Encoder` e
+  `Decoder`; reutilizá-la evita outra superfície original para o codec.
+  Prova executável dos erros upstream:
+  `go run ./.tmp-validation/dagpb_decode_vectors.go` no clone Boxo confirmou
+  aceitação de vazio, `0a00` e `0a0101`; rejeição de `0a000a00` (Data duplicado),
+  `1a00` (campo desconhecido), `1200`/`12021800` (Hash ausente) e `12020a00`
+  (CID vazio). Esses vetores deverão ser executados contra o novo decoder Dart.
+  Regressão adicionada em `packages/transpiled_boxo/test/dag_pb_decoder_test.dart`:
+  executada antes da integração, terminou com 1 aprovado e 1 falha esperada de
+  diagnóstico (`0a000a00` foi aceito pelo Dart, rejeitado pelo Go). Não ignorar
+  esse teste nem alegar suíte Boxo verde até integrar o decoder estrito.
+  Adapter Boxo preparado: `DagPbNode.fromBytes` delega a
+  `codec.decodeBytes(AnyBuilder, bytes)` e converte o Node resultante sem
+  reordenar links. Dependência de pacote adicionada; a compilação fica pendente
+  da entrega de `transpiled_go_codec_dagpb` pelo agente. Fixture de wire order
+  corrigido para CID completo (antes usava multihash truncado de dois bytes).
+  Não houve revalidação verde após essa ligação parcial.
+  Atualização: pacote entregue, `dart pub get` raiz concluído e integração
+  compilando após correção de `Iterable → List`. Dezessete testes focados de
+  decoder/importer passaram, incluindo rejeições Go antes aceitas pelo Dart,
+  Data antes/depois dos Links e rejeição de Links interrompidos por Data.
+  Revisão do novo encoder/schema ainda em andamento; a serialização Boxo
+  continua no adapter antigo até essa revisão. Não equivale a paridade completa.
+  Atualização seguinte: `DagPbNode.toBytes` passou a construir o Node IPLD
+  usado por `codec.appendEncode`, eliminando sua ordenação/serialização manual
+  duplicada. Dezessete testes passaram com encode e decode delegados, incluindo
+  hex Go Unicode e sete CIDs balanced. `DagPbLink` standalone ainda contém
+  codec protobuf legado; a validação de schema do encoder público novo e os
+  testes diretos do novo pacote continuam em revisão pelo agente.
+  Após limite de uso do agente, revisão principal adicionou rejeição de campos
+  desconhecidos no encoder (mapas Node/Link), exigência de `CidLink` e rejeição
+  de comprimentos uint64 que se tornam negativos no `int` Dart antes do slice.
+  Três testes diretos do codec e 17 testes de integração decoder/importer
+  passaram. Ainda faltam auditoria completa dos erros/schema e preservação de
+  strings Go com bytes UTF-8 inválidos; não declarar paridade integral.
+  Duplicatas consecutivas Hash/Name/Tsize agora são rejeitadas explicitamente
+  pelo codec, antes do assembler, como `unmarshalLink`; antes Name/Tsize
+  dependiam da rejeição incidental do assembler. Quatro testes diretos passaram.
+  Removida comparação impossível `int > 0x7fffffffffffffff`: `Tsize` no Go é
+  convertido de uint64 para int64 antes de `AssignInt`, e o decoder Dart nativo
+  já carrega esse padrão de bits. Ainda exige vetores nos extremos numéricos.
+  Extremos agora confrontados executando Go:
+  `go run ./.tmp-validation/dagpb_integer_vectors.go` confirmou `2^63-1`
+  → `9223372036854775807`, `2^63` → `-9223372036854775808`, `2^64-1` → `-1`
+  no NodeAssembler; varint de `2^64` é rejeitado. Os mesmos bytes passaram no
+  teste Dart (cinco testes diretos aprovados). Isso comprova conversão no
+  decoder VM, não reencoding dos valores negativos nem semântica Dart Web.
+  Análise separada do novo pacote (não coberto pela análise raiz): corrigidos
+  quatro avisos de documentação pública e um info de const no teste.
+  `dart analyze` em `packages/transpiled_go_codec_dagpb` retornou
+  `No issues found!`; cinco testes diretos passaram novamente. Sem mudança
+  de contrato/wire nessa limpeza; paridade funcional não inferida do analyzer.
+  Contratos `Encode`/`AppendEncode` derivados de `marshal.go` cobertos:
+  preservação do prefixo, Data vazio presente versus ausente, propagação do
+  erro do sink sem fechá-lo. Sete testes diretos passaram e análise do pacote
+  limpa. Dart retorna novo buffer em `appendEncode`; preserva conteúdo, sem
+  reproduzir a reutilização opcional de capacidade de slices Go.
+  Corrigida propagação de falhas em `unmarshalLink`: somente falhas de parsing
+  de CID são convertidas em erro de Hash; falhas de `NodeAssembler.assignLink`
+  agora propagam intactas, como no Go. Teste com assembler que rejeita CID
+  válido passou; oito testes diretos aprovados e análise do pacote limpa.
+  Revalidação após delegar encode/decode ao novo codec: suíte Boxo 45 testes
+  aprovados; análise raiz `No issues found!`; `local_kubo_bitswap_test.dart`
+  passou; `KUBO_LARGE_FIXTURE_SIZES=50` com
+  `local_kubo_large_unixfs_test.dart` passou em 33 segundos (UnixFS/CAR e
+  download por provider Kubo isolado). Esses E2E não provam o lookup público
+  nem as superfícies do codec ainda não auditadas.
+- DHT, Host e Bitswap: a implementação de integração atual ainda não comprova
+  transpilação dos fluxos `runLookupWithFollowup`, `BasicHost.Connect/dialPeer`
+  e `Client.GetBlock/GetBlocks`. A checklist histórica abaixo não deve ser
+  interpretada como prova de paridade dessas implementações atuais.
+
+Novos subsistemas exigem aviso prévio ao mantenedor. A implementação de
+sessões/cancelamento Bitswap e do lookup DHT upstream foi identificada como
+trabalho necessário; não está concluída por alterações pontuais nem por E2E.
+
+Revalidação após as correções de limites/defaults/lifecycle do importer:
+`dart test -j 1` em `packages/transpiled_boxo` terminou com 41 aprovados;
+suíte raiz: 112 aprovados e 5 ignorados. A prova
+`dart test --preset interop -j 1 test/interop/test/local_kubo_bitswap_test.dart`
+passou novamente contra Kubo isolado (um teste, download de provider conhecido).
+Isso não prova lookup DHT nem encerra a auditoria de fidelidade.
+
+Validação anterior desta rodada: `dart test -j 1` na raiz terminou com 110 testes
+passando e 5 ignorados; `dart analyze` na raiz retornou `No issues found!`
+(não inclui os pacotes excluídos da análise raiz). A regressão
+`$env:KUBO_LARGE_FIXTURE_SIZES='50'; dart test --preset interop -j 1 test/interop/test/local_kubo_large_unixfs_test.dart`
+passou em 48 segundos com repositório Kubo isolado. Esse E2E valida o fluxo de
+50 MiB e CAR; a forma do balanced Dart é comprovada pelos vetores específicos,
+não por importar um DAG produzido pelo Kubo. O objetivo global segue incompleto.
+
 - Todos os 17 repositórios Go de referência estão clonados (`git clone --depth 1`) em `B:\Syncthing\Desenvolvimento\Projetos\Pessoal\go-ipfs-reference\` — **fora** do repositório git do `dart_ipfs`, então não aparecem aqui.
 - URLs e commits exatos dessas fontes estão fixados em
   [`UPSTREAM_LOCK.md`](UPSTREAM_LOCK.md).
@@ -161,11 +887,11 @@ sempre que defaults, erros ou cancelamento não têm prova direta suficiente.
 
 | Símbolo Go | Equivalente Dart | Defaults, erros e adaptação | Prova / status |
 |---|---|---|---|
-| `core.BuildCfg.Online` | `BuildCfg.online` | Zero value `false`; `bool?` apenas permite herdar `IPFSConfig`. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
-| `core.BuildCfg.ExtraOpts` | `BuildCfg.extraOpts` | `nil` vira mapa vazio; referência e mutabilidade do mapa são preservadas; `pubsub`/`ipnsps` mantêm o efeito upstream. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
+| `core.BuildCfg.Online` | `BuildCfg.online` | Zero value `false` e independente da configuração do repositório, como o campo Go. A auditoria de 2026-09-05 corrigiu a inferência Dart anterior que ativava a rede quando `IPFSConfig.offline == false`. | Vetores derivados de `core/node/builder.go` em `build_cfg_test.dart`; **portado com paridade comprovada**. |
+| `core.BuildCfg.ExtraOpts` | `BuildCfg.extraOpts` | `nil` vira mapa vazio não-nulo; referência e mutabilidade do mapa fornecido são preservadas. O armazenamento do campo está coberto, mas os efeitos `pubsub`/`ipnsps` de `core/node/groups.go` ainda não estão ligados ao construtor Dart. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
 | `core.BuildCfg.ShutdownTimeout` | `BuildCfg.shutdownTimeout` | Zero/negativo espera sem deadline; positivo limita o shutdown. | `build_cfg_test.dart`; **portado sem teste de paridade**. |
 | `core.NewNode(ctx, cfg)` | `IPFSNode.fromBuildCfg(cfg)` | Factory inicia antes de completar; `(node,error)` vira `Future<IPFSNode>`/exceção. Lifetime de `context.Context` e erros FX exatos não têm equivalente. | Teste direcionado; **portado sem teste de paridade**. |
-| `(*IpfsNode).Close()` | `IPFSNode.close()` | `Future<void>`/exceção; chamadas repetidas e concorrentes compartilham uma única Future e o mesmo resultado/erro, como `sync.Once`. | Testes de sucesso, concorrência e erro; **portado sem teste de paridade**. |
+| `(*IpfsNode).Close()` | `IPFSNode.close()` | `Future<void>`/exceção; chamadas repetidas e concorrentes compartilham uma única Future, como `sync.Once`. O caminho de erro de um hook de shutdown ainda não possui seam equivalente ao FX para prova direta. | Teste direcionado de sucesso/idempotência; **portado sem teste de paridade**. |
 | `routing.ContentRouting.FindProvidersAsync(ctx, cid, count)` | `DHTClient.findProvidersAsync(CID, int)` | Canal vira `Stream<AddrInfo>`; `count == 0`, emissão incremental e deduplicação preservados. Cancelamento de subscription não interrompe todo Future/dial já iniciado; `context.Context` permanece uma divergência documentada. | Testes DHT e interop real; **portado sem teste de paridade**. |
 | `peer.AddrInfo` | `transpiled_libp2p.AddrInfo` | Peer ID e lista completa de multiaddrs são preservados; conversores, JSON e `Loggable` foram comparados com vetores upstream. | `transpiled_libp2p`/`addr_info_test.dart`; **portado com paridade comprovada**. |
 | `host.Host.Connect(ctx, AddrInfo)` | `RouterInterface.connect(AddrInfo)` → `BasicHost.connect` | `AddrInfo` permanece tipado até o host. `connectMultiaddr` é compatibilidade legada. O adapter normaliza os endereços informados para `TempAddrTTL` de 2 min após o dial, corrigindo o default de 5 min da dependência. | Testes de router + interop real; **portado sem teste de paridade**. |
@@ -317,7 +1043,7 @@ Isto é o que uma sessão futura precisa saber pra continuar de onde paramos —
 - **`core/routing` + parte de `go-libp2p-routing-helpers` portados (2026-08-25/26)**: `core/routing` e as peças mecânicas/autocontidas de `go-libp2p-routing-helpers` (`Bootstrap`, `NullRouter`, `LimitedValueStore`, `Compose`) estão prontas; `query.go` agora também está pronto. O WIP de `Parallel`/`Tiered`/composable está funcional e testado de forma direcionada, mas permanece não confiável até fechar a paridade indicada no aviso acima.
 - **`go-libp2p-record` portado (2026-08-25)**: novo pacote `packages/transpiled_libp2p_record/` (ver a linha da tabela abaixo pra detalhe técnico). Primeiro pacote novo desde a reorganização de módulos que não é `transpiled_libp2p` nem um dos multiformats -- confirma que a convenção de pacote-por-módulo-Go se sustenta pra módulos menores também.
 - **`core/record` + `core/peer/pb` portados (2026-08-25)**: `Record`/`Envelope`/`PeerRecord` completos em `packages/transpiled_libp2p/lib/src/core/record/` e `core/peer/peer_record.dart` (ver as linhas das tabelas abaixo pra detalhe técnico). Achado de metodologia relevante pra qualquer port futuro que precise imitar o `init()` do Go: uma variável de nível de biblioteca em Dart (`final bool _x = _setup();`) **não** roda só por importar o arquivo -- inicialização de topo em Dart é preguiçosa (só roda no primeiro acesso a essa variável). O registro automático do `PeerRecord` em `Envelope` teve que ser movido pro construtor (idempotente, com guarda contra recursão), não um "top-level init". Isso já causou um teste falhar nesta sessão antes de ser corrigido -- vale revisar qualquer port futuro que dependa do padrão `init()`/registro automático do Go.
-- **Auditoria de `kubo/core` iniciada em 2026-09-02**: o subconjunto de `BuildCfg`/`NewNode`/`IpfsNode.Close` foi alinhado sobre o runtime existente, sem criar um segundo nó. `Online`, `ExtraOpts`, `ShutdownTimeout`, início antes do retorno e shutdown idempotente/concurrentemente compartilhado estão implementados e testados. `ExtraOpts` preserva a mutabilidade observável do mapa Go; `stop` preserva uma única Future e seu resultado/erro, como `sync.Once`. Permanecem sem equivalente Dart o lifetime `context.Context`, o desembrulho exato dos erros FX, `Repo`, `Host`, `Routing`, `Permanent`, `DisableEncryptedConnections` e hooks FX; nenhum placeholder foi criado.
+- **Auditoria de `kubo/core` iniciada em 2026-09-02 e revisada contra `d0fdc246` em 2026-09-05**: o subconjunto de `BuildCfg`/`NewNode`/`IpfsNode.Close` foi alinhado sobre o runtime existente, sem criar um segundo nó. A revisão corrigiu `Online`: como no Go, agora seu default é sempre `false` e não é inferido da configuração. `ExtraOpts` preserva referência/mutabilidade, mas seus efeitos `pubsub`/`ipnsps` ainda não estão portados. `ShutdownTimeout`, início antes do retorno e shutdown idempotente estão implementados; os caminhos FX de erro/contexto não têm prova direta. Permanecem sem equivalente Dart o lifetime `context.Context`, o desembrulho exato dos erros FX, `Repo`, `Host`, `Routing`, `Permanent`, `DisableEncryptedConnections` e hooks FX; nenhum placeholder foi criado.
 - **Correção de escopo após auditoria de callers (2026-08-25)**: o plano antigo marcava toda a árvore FUSE, `plugin/loader` e todas as migrações como “daemon-CLI only”. Isso era amplo demais. `core/core.go` importa `fuse/mount`, `core/coreapi` importa `internal/fusemount`, `repo/fsrepo` usa `repo/fsrepo/migrations`, e o exemplo oficial `kubo-as-a-library` usa `plugin/loader`. Essas unidades voltaram para `não iniciado`. Implementações FUSE chamadas somente por `cmd`/`core/commands`, os binários `main` de migração e `ipfsfetcher` continuam fora após busca dos imports reais.
 - **Limpeza de identidade do fork (concluída)**: removidos documentos e automações de publicação herdados do projeto `jxoesneon/IPFS`, sem valor para este fork. Os metadados técnicos restantes apontam para o fork real (`github.com/ExtraMobs/IPFS`).
 - **Limitação conhecida dos planos do Claude Code**: o arquivo de plano (`C:\Users\Administrador\.claude\plans\...`) não é versionado neste repositório — vive só na instalação local do Claude Code, e pode ser sobrescrito por um plano mais novo com o mesmo nome (já aconteceu nesta sessão: o plano original de metodologia foi substituído pelo plano de reorganização de pacotes). Esta seção existe justamente pra não depender só do arquivo de plano pra continuidade entre sessões.
@@ -390,7 +1116,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 |---|---|---|---|
 | `(root)` |  | não iniciado |  |
 | `config` |  | não iniciado |  |
-| `core` | `lib/src/core/builders/build_cfg.dart`; `lib/src/core/ipfs_node/{ipfs_node,bootstrap_handler}.dart` | **portado sem teste de paridade** | Subconjunto de `BuildCfg`/`NewNode` e `IpfsNode`: `Online`, `ShutdownTimeout`, `Identity`, `IsOnline`, `Close` e `HasActiveDHTClient`. Bootstrap alinha defaults e supervisão básica do Boxo, mas ainda não persiste peers de backup nem chama `routing.Bootstrap`. A façade restante é implementação original não auditada; checklist completa deve ser fechada antes de elevar o status. |
+| `core` | `lib/src/core/builders/build_cfg.dart`; `lib/src/node/ipfs_node.dart` | **portado sem teste de paridade** | Subconjunto de `BuildCfg`/`NewNode` e `IpfsNode.Close`. `BuildCfg.Online` tem paridade comprovada após correção do default em 2026-09-05. `ExtraOpts` não aciona ainda `pubsub`/`ipnsps`; `NewNode` não replica lifetime/contexto, hooks/erros FX nem todo bootstrap; timeout e erro de `Close` carecem de prova direta. A façade restante é implementação original não auditada. |
 | `core/connmgr` | `packages/transpiled_libp2p/lib/src/core/connmgr/{manager,decay,gater,null,presets}.dart` | portado sem teste de paridade | Checklist Go → Dart: `SupportsDecay`→`supportsDecay`; `ConnManager`, `TagInfo`, `GetConnLimiter`; `Decayer`, `DecayingTag`, `DecayingValue`, `DecayFn`, `BumpFn`; `ConnectionGater`; `NullConnMgr`; `DecayNone`/`DecayFixed`/`DecayLinear`/`DecayExpireWhenInactive`/`BumpSumUnbounded`/`BumpSumBounded`/`BumpOverwrite`→lowerCamelCase. `context.Context` foi omitido e erros viram exceções. A semântica aparentemente invertida de `DecayExpireWhenInactive` (`time.Until(LastVisit) >= after`) foi preservada exatamente conforme o SHA travado, embora pareça bug upstream; não corrigir silenciosamente. Interfaces e presets têm 4 testes direcionados; implementação concreta `p2p/net/connmgr` continua pendente. |
 | `core/control` | `packages/transpiled_libp2p/lib/src/core/control/disconnect.dart` | portado sem teste de paridade | `DisconnectReason` preservado como alias de `int`; zero continua significando “sem razão”. É o único símbolo do pacote no SHA travado e é consumido por `ConnectionGater`. |
 | `core/crypto` | `packages/transpiled_libp2p/lib/src/core/crypto/key_types.dart` (`Key`/`PrivKey`/`PubKey`/`KeyType`) + `rsa_key.dart`, `secp256k1_key.dart`, `ecdsa_key.dart` | **portado com paridade comprovada** (RSA, Secp256k1, ECDSA todos com vetor real Go) | **RSA**: `MinRsaKeyBits=2048`, PKCS1 DER privado/PKIX DER público via ASN.1 do `package:pointycastle`, sign/verify SHA-256+PKCS1v1.5 via `pc.RSASigner`. Validado contra `crypto/rsa`+`crypto/x509` do Go (`go-ipfs-reference/noise_vectors/rsa_vectors.go`): DER round-trip exato, assinatura Dart bate byte a byte com a do Go (PKCS1v1.5 é determinístico) -- `test/rsa_key_parity_test.dart`. **Secp256k1**: raw = escalar de 32 bytes big-endian / ponto comprimido SEC1 de 33 bytes (mesmo formato de `github.com/decred/dcrd/dcrec/secp256k1/v4`, a lib que `core/crypto/secp256k1.go` encapsula); assinatura DER com nonce determinístico RFC6979 (SHA-256/HMAC) via `pc.ECDSASigner` em modo `DET-ECDSA`, canonicalizada pra S-baixo (`ECSignature.normalize`) igual ao `Signature.Serialize()` do dcrd. Validado contra `github.com/decred/dcrd/dcrec/secp256k1/v4/ecdsa` (`go-ipfs-reference/secp256k1_vectors/main.go`): **a assinatura RFC6979 do Dart bate byte a byte com a do Go** (achado notável -- confirma que a variante de nonce RFC6979 do dcrd, que pula a redução `bits2octets` por já operar sobre hash de 256 bits ~ ordem da curva, coincide na prática com a implementação padrão do pointycastle) -- `test/secp256k1_key_parity_test.dart`. **ECDSA**: hardcoded pra NIST P-256 igual ao Go (`elliptic.P256()`); raw privado = SEC1 `ECPrivateKey` (RFC 5915, `x509.MarshalECPrivateKey` -- SEQUENCE com version/OCTET STRING d/[0] EXPLICIT OID da curva/[1] EXPLICIT BIT STRING do ponto, os dois campos opcionais do RFC 5915 sempre presentes por serem os que o Go sempre emite); raw público = PKIX `SubjectPublicKeyInfo` com AlgorithmIdentifier `{id-ecPublicKey, namedCurve OID}` (não NULL como no RSA) envolvendo o ponto não-comprimido. `ecdsa.Sign` do Go usa nonce aleatorizado (não RFC6979), então a paridade aqui é provada por verificação cruzada, não assinatura idêntica: Dart aceita uma assinatura real do Go, e as codificações DER/SEC1 batem byte a byte. Validado contra `crypto/ecdsa`+`crypto/x509` do Go (`go-ipfs-reference/ecdsa_vectors/main.go`) -- `test/ecdsa_key_parity_test.dart`. Em todos os três: geração de chave via `pc.*KeyGenerator`+`FortunaRandom`, seed real via `Random.secure()` do Dart. **Ed25519** (`ed25519_key.dart`): não é um port novo -- envolve o `Ed25519Signer` já existente (usado por IPNS) na mesma abstração `PrivKey`/`PubKey`, já que ele usava `package:cryptography` diretamente sem conformar à interface. Raw privado = 64 bytes `seed‖publicKey` (formato de `ed25519.PrivateKey` do Go); como `package:cryptography` só expõe a seed de 32 bytes de forma síncrona, a concatenação é feita uma vez, de forma assíncrona, na fábrica (`generateEd25519KeyPair`/`unmarshalEd25519PrivateKey`), mantendo `raw()` síncrono como nos outros três tipos. Validado contra `crypto/ed25519` do Go (`go-ipfs-reference/ed25519_vectors/main.go`): assinatura EdDSA determinística bate byte a byte -- `test/ed25519_key_parity_test.dart`. **`key_codec.dart`** (novo, sem arquivo Go correspondente 1:1 -- é a contraparte de `MarshalPublicKey`/`UnmarshalPublicKey`/`MarshalPrivateKey`/`UnmarshalPrivateKey` de `core/crypto/key.go`): despacha por `KeyType` entre os quatro tipos concretos, usado por qualquer código que recebe uma chave de identidade de tipo desconhecido (ex.: o payload do handshake Noise) -- `test/key_codec_test.dart`. Com isso, os quatro tipos de chave do protobuf `crypto.pb.KeyType` (RSA/Ed25519/Secp256k1/ECDSA) têm cobertura uniforme. O gap real que impede conexão com peers não-Ed25519 continua sendo o handshake Noise (`p2p/security/noise`, hardcoded pra Ed25519 -- ver nota acima), não este pacote; os tipos de chave aqui são pré-requisito pro payload de assinatura do Noise, não a correção em si. |
@@ -555,7 +1281,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `core/corerepo` |  | não iniciado |  |
 | `core/coreunix` |  | não iniciado |  |
 | `core/mock` |  | não iniciado |  |
-| `core/node` | `lib/src/core/builders/build_cfg.dart`; `lib/src/core/builders/ipfs_node_builder.dart`; `lib/src/core/ipfs_node/ipfs_node.dart` | **portado sem teste de paridade** | Subconjunto auditado de `BuildCfg`/`NewNode`/`IpfsNode.Close`: `Online`, `ExtraOpts` (`pubsub`/`ipnsps`) e `ShutdownTimeout` preservam defaults e comportamento observável; `ExtraOpts` mantém mutabilidade e referência do mapa Go. `fromBuildCfg` inicia o nó antes de completar; `Close`/`stop` memoriza uma única Future, equivalente ao `sync.Once`. Permanecem sem equivalente o lifetime `context.Context`, erros FX exatos, `Repo`, `Host`, `Routing`, `Permanent`, `DisableEncryptedConnections` e hooks FX. |
+| `core/node` | `lib/src/core/builders/build_cfg.dart`; `lib/src/node/ipfs_node.dart` | **portado sem teste de paridade** | Subconjunto auditado de `BuildCfg`/`NewNode`/`IpfsNode.Close` contra `d0fdc246`: `Online` preserva o zero value e a independência da configuração; `ExtraOpts` mantém mutabilidade/referência, mas ainda não produz os efeitos `pubsub`/`ipnsps`; `ShutdownTimeout` preserva o valor e aplica deadline apenas quando positivo. `fromBuildCfg` inicia antes de completar e `Close` memoriza uma única Future. Permanecem sem prova/equivalente o lifetime `context.Context`, erros e hooks FX, efeitos completos de `ExtraOpts`, timeout/erro injetável de shutdown, `Repo`, `Host`, `Routing`, `Permanent` e `DisableEncryptedConnections`. |
 | `core/node/helpers` |  | não iniciado |  |
 | `core/node/libp2p` |  | não iniciado |  |
 | `core/node/libp2p/fd` |  | não iniciado |  |

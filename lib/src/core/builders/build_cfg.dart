@@ -14,15 +14,14 @@ class BuildCfg {
   /// A zero-value Kubo `BuildCfg` is offline. When [config] is omitted, the
   /// same default is used here.
   BuildCfg({
-    IPFSConfig? config,
-    bool? online,
+    IpfsConfig? config,
+    this.online = false,
     Map<String, bool>? extraOpts,
     this.shutdownTimeout = Duration.zero,
-  }) : online = online ?? !(config?.offline ?? true),
-       _config = config ?? IPFSConfig(offline: !(online ?? false)),
+  }) : _config = config ?? IpfsConfig(offline: !online),
        extraOpts = extraOpts ?? <String, bool>{};
 
-  final IPFSConfig _config;
+  final IpfsConfig _config;
 
   /// Whether the constructed node has networking enabled.
   final bool online;
@@ -39,7 +38,7 @@ class BuildCfg {
   final Duration shutdownTimeout;
 
   /// The application configuration used to construct the node.
-  IPFSConfig get config {
+  IpfsConfig get config {
     if (_config.offline == !online) return _config;
     return _config.copyWith(offline: !online);
   }

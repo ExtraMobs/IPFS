@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 import 'package:test/test.dart';

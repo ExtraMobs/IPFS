@@ -1,6 +1,7 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // The Go package exposes a broad net.Conn surface; this port intentionally
 // keeps the transport adapter small and documents the behavior at its boundary.
-// ignore_for_file: public_member_api_docs, curly_braces_in_flow_control_structures,
+// ignore_for_file: duplicate_ignore, public_member_api_docs, curly_braces_in_flow_control_structures,
 // ignore_for_file: prefer_initializing_formals, prefer_null_aware_operators
 
 import 'dart:async';
@@ -161,13 +162,25 @@ final class YamuxFrameDecoder {
     }
   }
 
+  void _checkHeader(Uint8List header) {
+    final d = ByteData.sublistView(header);
+    final version = d.getUint8(0);
+    if (version != yamuxProtocolVersion) {
+      throw YamuxProtocolException('invalid protocol version: $version');
+    }
+    final type = d.getUint8(1);
+    if (type > YamuxMessageType.goAway.index) {
+      throw YamuxProtocolException('invalid message type: $type');
+    }
+    _checkLength(type, d.getUint32(8, Endian.big));
+  }
+
   List<YamuxFrame> add(List<int> chunk) {
     if (chunk.isNotEmpty) {
       // Check a header completed by this fragment before retaining its body.
       if (_buffered >= yamuxHeaderSize) {
         final header = _peek(yamuxHeaderSize);
-        final d = ByteData.sublistView(header);
-        _checkLength(d.getUint8(1), d.getUint32(8, Endian.big));
+        _checkHeader(header);
       } else if (_buffered + chunk.length >= yamuxHeaderSize) {
         final header = Uint8List(yamuxHeaderSize);
         final old = _peek(_buffered);
@@ -177,8 +190,7 @@ final class YamuxFrameDecoder {
           yamuxHeaderSize,
           chunk.sublist(0, yamuxHeaderSize - _buffered),
         );
-        final d = ByteData.sublistView(header);
-        _checkLength(d.getUint8(1), d.getUint32(8, Endian.big));
+        _checkHeader(header);
       }
       _chunks.add(Uint8List.fromList(chunk));
       _buffered += chunk.length;
@@ -187,6 +199,10 @@ final class YamuxFrameDecoder {
     while (_buffered >= yamuxHeaderSize) {
       final header = _peek(yamuxHeaderSize);
       final d = ByteData.sublistView(header);
+      final version = d.getUint8(0);
+      if (version != yamuxProtocolVersion) {
+        throw YamuxProtocolException('invalid protocol version: $version');
+      }
       final type = d.getUint8(1);
       if (type > YamuxMessageType.goAway.index) {
         throw YamuxProtocolException('invalid message type: $type');
@@ -251,7 +267,7 @@ final class YamuxConfig {
     if (enableKeepAlive && keepAliveInterval <= Duration.zero) {
       throw YamuxConfigException('keep-alive interval must be positive');
     }
-    if (measureRttInterval <= Duration.zero) {
+    if (measureRttInterval == Duration.zero) {
       throw YamuxConfigException('measure-rtt interval must be positive');
     }
     if (initialStreamWindowSize < yamuxInitialStreamWindow) {

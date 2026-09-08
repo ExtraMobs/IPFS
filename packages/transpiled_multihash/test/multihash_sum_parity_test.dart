@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // test/multihash_sum_parity_test.dart
 //
 // Parity vectors for MultihashUtils.sum(), taken verbatim from go-multihash's
@@ -9,8 +10,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:transpiled_multihash/transpiled_multihash.dart';
 import 'package:test/test.dart';
+import 'package:transpiled_multihash/transpiled_multihash.dart';
 
 String _hex(Uint8List bytes) =>
     bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();

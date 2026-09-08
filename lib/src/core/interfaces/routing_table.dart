@@ -28,7 +28,7 @@ abstract class DistanceMetric {
 /// Provides methods for peer management and distance-based peer selection.
 /// This abstraction allows different routing table implementations to be used
 /// while maintaining a consistent API for DHT protocol handlers.
-abstract class DHTRoutingTable {
+abstract class DhtRoutingTable {
   /// The distance metric used by this routing table.
   DistanceMetric get distanceMetric;
 

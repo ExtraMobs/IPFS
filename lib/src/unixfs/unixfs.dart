@@ -16,8 +16,8 @@ final class UnixFsStat {
     required this.numBlocks,
   });
 
-  /// CID of the UnixFS node.
-  final CID cid;
+  /// Cid of the UnixFS node.
+  final Cid cid;
 
   /// Logical file size in bytes.
   final int size;
@@ -36,21 +36,21 @@ final class UnixFsStat {
 }
 
 /// Decodes the child CIDs of a raw or DAG-PB block.
-List<CID> unixFsLinks(CID cid, Uint8List data) {
+List<Cid> unixFsLinks(Cid cid, Uint8List data) {
   if (cid.codec == 'raw') return const [];
   if (cid.codec != 'dag-pb') {
-    throw FormatException('unsupported UnixFS CID codec: ${cid.codec}');
+    throw FormatException('unsupported UnixFS Cid codec: ${cid.codec}');
   }
   return [
     for (final link in DagPbNode.fromBytes(data).links)
-      CID.fromBytes(link.hash),
+      Cid.fromBytes(link.hash),
   ];
 }
 
 /// Streams file bytes in UnixFS link order without materializing the file.
 Stream<Uint8List> readUnixFs(
-  CID root,
-  Future<blocks.Block> Function(CID cid) getBlock,
+  Cid root,
+  Future<blocks.Block> Function(Cid cid) getBlock,
 ) async* {
   final block = await getBlock(root);
   final bytes = block.rawData();
@@ -59,7 +59,7 @@ Stream<Uint8List> readUnixFs(
     return;
   }
   if (root.codec != 'dag-pb') {
-    throw FormatException('unsupported UnixFS CID codec: ${root.codec}');
+    throw FormatException('unsupported UnixFS Cid codec: ${root.codec}');
   }
   final dag = DagPbNode.fromBytes(bytes);
   final fs = UnixFsData.fromBytes(dag.data);
@@ -68,17 +68,17 @@ Stream<Uint8List> readUnixFs(
   }
   if (fs.data.isNotEmpty) yield fs.data;
   for (final link in dag.links) {
-    yield* readUnixFs(CID.fromBytes(link.hash), getBlock);
+    yield* readUnixFs(Cid.fromBytes(link.hash), getBlock);
   }
 }
 
-/// Walks a UnixFS DAG depth-first, deduplicating blocks by CID.
-Stream<CID> walkUnixFs(
-  CID root,
-  Future<blocks.Block> Function(CID cid) getBlock,
+/// Walks a UnixFS DAG depth-first, deduplicating blocks by Cid.
+Stream<Cid> walkUnixFs(
+  Cid root,
+  Future<blocks.Block> Function(Cid cid) getBlock,
 ) async* {
-  final seen = <CID>{};
-  Stream<CID> walk(CID cid) async* {
+  final seen = <Cid>{};
+  Stream<Cid> walk(Cid cid) async* {
     if (!seen.add(cid)) return;
     yield cid;
     final block = await getBlock(cid);

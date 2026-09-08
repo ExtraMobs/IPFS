@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Adapted from go-libp2p core/routing/query_test.go and
 // query_race_test.go at e20bb60ffc4b4ee33640e5fe8f45fccce893cecd.
 import 'dart:async';

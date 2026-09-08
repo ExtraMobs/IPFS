@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/core/crypto/ed25519_signer.dart
 //
 // SEC-004: Unified Ed25519 signing service for IPNS and other signatures.

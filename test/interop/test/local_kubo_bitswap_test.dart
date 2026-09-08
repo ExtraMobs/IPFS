@@ -22,7 +22,7 @@ void main() {
       }
 
       LocalKuboHarness? kubo;
-      IPFSNode? node;
+      IpfsNode? node;
       try {
         kubo = await LocalKuboHarness.start(executable: executable);
         final bytes = Uint8List.fromList(
@@ -32,10 +32,10 @@ void main() {
         final kuboVersion = await kubo.version();
         printOnFailure('Kubo $kuboVersion provider=${kubo.peerId} cid=$cid');
 
-        node = await IPFSNode.fromBuildCfg(
+        node = await IpfsNode.fromBuildCfg(
           BuildCfg(
             online: true,
-            config: const IPFSConfig(
+            config: const IpfsConfig(
               offline: false,
               network: NetworkConfig(bootstrapPeers: []),
             ),
@@ -43,7 +43,7 @@ void main() {
         );
         await node.connect(addrInfoFromString(kubo.swarmAddress));
 
-        final parsedCid = CID.decode(cid);
+        final parsedCid = Cid.decode(cid);
         final downloaded = await node.getBlock(parsedCid);
         expect(downloaded.rawData(), orderedEquals(bytes));
 

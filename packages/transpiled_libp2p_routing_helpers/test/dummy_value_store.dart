@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Small in-memory ValueStore fixture for tests, in the spirit of
 // go-libp2p-routing-helpers's own dummy_test.go dummyValueStore (not a
 // port of it -- purpose-built for this port's own tests).

@@ -12,9 +12,9 @@ Future<void> main(List<String> args) async {
     return;
   }
 
-  final cid = CID.decode(args[0]);
-  final node = await IPFSNode.fromBuildCfg(
-    BuildCfg(online: true, config: const IPFSConfig(offline: false)),
+  final cid = Cid.decode(args[0]);
+  final node = await IpfsNode.fromBuildCfg(
+    BuildCfg(online: true, config: const IpfsConfig(offline: false)),
   );
   try {
     await node.connect(addrInfoFromString(args[1]));

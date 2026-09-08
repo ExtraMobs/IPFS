@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/multiaddr/transcoders.dart
 //
 // Port of go-multiaddr's per-protocol Transcoder implementations
@@ -386,17 +387,17 @@ void _garlic32Validate(Uint8List b) {
 }
 
 // ---------------------------------------------------------------------------
-// p2p (libp2p PeerId: base58 multihash, or a CID with the libp2p-key codec)
+// p2p (libp2p PeerId: base58 multihash, or a Cid with the libp2p-key codec)
 // ---------------------------------------------------------------------------
 
 void _p2pVal(Uint8List multihashBytes) {
   final mh = MultihashUtils.decode(multihashBytes);
   // Peer IDs require either a sha2-256 or an identity multihash:
   // https://github.com/libp2p/specs/blob/master/peer-ids/peer-ids.md#peer-ids
-  if (mh.code != 0x12 && mh.code != 0x00) {
+  if (mh.code.toBigInt() != BigInt.from(0x12) && mh.code.toBigInt() != BigInt.zero) {
     throw _err('invalid multihash code ${mh.code} expected sha-256 or identity');
   }
-  if (mh.code == 0x12 && mh.size != 32) {
+  if (mh.code.toBigInt() == BigInt.from(0x12) && mh.size != 32) {
     throw _err('invalid digest length ${mh.size} for sha256 addr: expected 32');
   }
 }
@@ -407,7 +408,7 @@ Uint8List _p2pStB(String s) {
     _p2pVal(decoded);
     return decoded;
   }
-  final cid = CID.decode(s);
+  final cid = Cid.decode(s);
   if (cid.codec != 'libp2p-key') {
     throw _err('failed to parse p2p addr: $s has the invalid codec ${cid.codec}');
   }
@@ -535,7 +536,7 @@ const transcoderGarlic32 = Transcoder(
   _garlic32Validate,
 );
 
-/// Transcoder for `p2p` (a PeerId: base58 multihash, or a `libp2p-key` CID).
+/// Transcoder for `p2p` (a PeerId: base58 multihash, or a `libp2p-key` Cid).
 const transcoderP2P = Transcoder(_p2pStB, _p2pBtS, _p2pVal);
 
 /// Transcoder for `unix` (UTF-8 filesystem path, must start with `/`).

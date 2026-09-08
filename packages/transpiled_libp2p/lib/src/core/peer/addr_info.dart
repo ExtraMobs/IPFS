@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/core/peer/addr_info.dart
 //
 // Port of go-libp2p's core/peer/addrinfo.go and addrinfo_serde.go: a small
@@ -92,7 +93,7 @@ bool _addrsEqual(List<Multiaddr> a, List<Multiaddr> b) {
 /// Extracts the peer ID from a p2p [Multiaddr]'s trailing `/p2p/...`
 /// component. Throws [InvalidPeerIdSourceException] if there isn't one.
 /// Equivalent to go-libp2p's `IDFromP2PAddr`.
-PeerId idFromP2PAddr(Multiaddr? m) {
+PeerId idFromP2pAddr(Multiaddr? m) {
   if (m == null || m.components.isEmpty) {
     throw const InvalidPeerIdSourceException();
   }

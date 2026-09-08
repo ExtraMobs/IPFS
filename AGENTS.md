@@ -67,6 +67,66 @@ fica no pacote raiz, sob `lib/`.
 
 ## Ordem obrigatória: transpilar antes de adaptar
 
+### Tipos primitivos Go compartilhados
+
+Use `packages/boilerplate/`, módulo lógico `fixed_types.Golang.<tipo>`, para
+centralizar a representação em bytes e a semântica dos tipos primitivos Go.
+Em Dart, importe `package:boilerplate/fixed_types/golang.dart` com prefixo
+`Golang`; namespaces de tipos aninhados não existem na linguagem Dart.
+O caminho e o prefixo representam o schema solicitado, sem factories dinâmicas
+que eliminem a checagem estática dos tipos.
+
+Antes de duplicar máscaras, limites, overflow, shifts ou conversões numéricas
+em um port, use o tipo correspondente já validado nesse módulo. Se faltar,
+implemente e teste sua semântica ali primeiro, pela especificação Go e vetores
+executados em Go. Não atribua fidelidade a tipos ainda não implementados.
+O objetivo desse pacote de tipagem simulada como no Golang é reduzir
+drasticamente as verificações de limites e comportamentos dentro dessa
+transpilação, garantindo que o próprio tipo encapsule as regras da linguagem Go
+(overflow módulo 2^N, truncamento, shifts, divisão/resto e extensão de sinal).
+Overflow permitido e conversões truncantes Go não devem virar exceções de
+faixa arbitrárias. Preserve também divisão, resto, sinal e zero value.
+Conversões para tipos Dart devem ser explícitas e não perder precisão.
+
+Essa camada de adaptação não corresponde a um go.mod upstream e é exceção
+deliberada ao prefixo `transpiled_`. Ela não absorve codecs nem regras IPFS.
+Validações de dados não confiáveis, limites de protocolo e segurança continuam
+nos módulos responsáveis. Migre os consumidores com testes de paridade;
+não remova verificações apenas porque existe um wrapper de tipo.
+É expressamente proibido implementar subsistemas novos sem aviso e
+aprovação prévia do mantenedor.
+
+### Rastrear chamadas antes de implementar
+
+Antes de portar, corrigir ou adaptar qualquer função, todo agente deve:
+
+1. consultar o índice AST Go produzido pela ferramenta do projeto (localização
+   e uso em `doc/transpilation/PROGRESS.md`) para localizar o símbolo upstream
+   e identificar as funções e métodos chamados por ele;
+2. resolver cada chamada relevante ao fluxo em análise até sua declaração,
+   pacote e módulo proprietário (`go.mod`), conferindo a revisão em
+   `UPSTREAM_LOCK.md`. Use imports e aliases; quando o índice sintático não
+   resolver métodos, interfaces ou nomes ambíguos, use `gopls`/`go/types` e
+   confirme no código. Não invente um destino para chamadas dinâmicas;
+3. procurar o símbolo Go correspondente nos índices, notas de paridade e
+   pacotes Dart existentes. Reutilize o port auditado; se ainda não estiver
+   auditado, confira-o contra o upstream antes de reutilizar ou corrigir;
+4. preservar a delegação: se a função Go chama outra função para realizar uma
+   operação, a função Dart deve chamar o port correspondente, não copiar ou
+   reimplementar a operação dentro do chamador. Uma dependência ausente deve
+   ser portada no pacote da sua própria fronteira de `go.mod`, nunca embutida
+   no pacote consumidor. Avise o mantenedor antes de implementar subsistema
+   novo;
+5. registrar em `PROGRESS.md` o rastreamento relevante
+   `chamador Go → símbolo chamado → módulo/revisão → símbolo/pacote Dart`,
+   indicando reutilização, lacunas e ambiguidades ainda não resolvidas.
+
+O índice AST é ponto de partida, não prova isolada de resolução semântica ou
+paridade. Se estiver indisponível ou desatualizado, registre essa condição e
+use as declarações upstream e resolução semântica como alternativa verificável.
+Qualquer fusão de funções ou eliminação de uma delegação exige justificativa
+concreta de incompatibilidade Dart, conforme as regras de preservação da API.
+
 Ao encontrar uma lacuna, limite ou defeito em código Dart correspondente a
 Kubo, Boxo ou go-libp2p, siga obrigatoriamente esta ordem:
 
@@ -94,7 +154,17 @@ responsabilidade, os valores padrão e o comportamento observável. Adapte
 somente o necessário às convenções e ao sistema de tipos do Dart:
 
 - tipos públicos usam `UpperCamelCase` e funções, métodos e campos públicos
-  usam `lowerCamelCase`;
+  usam `lowerCamelCase`, tratando acrônimos como palavras comuns (ex.: `Cid`,
+  `IpfsNode`, `IpfsConfig`, `DhtClient`, `idFromP2pAddr`), sem blocos em All-Caps;
+- proibido criar `typedef`s, aliases ou shims artificiais em Dart para acomodar
+  compatibilidade retroativa ou nomes legados (ex.: `typedef CID = Cid;`,
+  `typedef MultihashInfo = DecodedMultihash;`). Consumidores devem ser migrados
+  na raiz para os tipos canônicos. Exceções são apenas os tipos primitivos da
+  especificação Go em `packages/boilerplate/` ou type aliases declarados no
+  próprio repositório upstream Go;
+- a anotação `@Deprecated` só é permitida se o símbolo correspondente no
+  upstream Go estiver explicitamente marcado com `// Deprecated:`. É proibido
+  manter símbolos deprecados inventados exclusivamente no Dart;
 - construtores `NewX` do Go viram construtores ou factories Dart quando isso
   preservar o contrato, sem criar funções `newX` artificiais;
 - retornos `(valor, error)` viram retorno do valor com exceção tipada;

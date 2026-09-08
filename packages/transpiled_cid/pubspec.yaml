@@ -1,12 +1,15 @@
 name: transpiled_cid
 description: Port of go-cid.
 version: 0.1.0
+publish_to: none
 homepage: https://github.com/ipfs/go-cid
 
 environment:
   sdk: ^3.10.0
 
 dependencies:
+  boilerplate:
+    path: ../boilerplate
   crypto: ^3.0.7
   multibase: ^1.0.0
   transpiled_multibase:

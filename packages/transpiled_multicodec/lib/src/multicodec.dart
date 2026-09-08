@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/cid/multicodec.dart
 //
 // Port of go-multicodec's code table (github.com/multiformats/go-multicodec
@@ -11,6 +12,26 @@
 // See the multicodec table: https://github.com/multiformats/multicodec
 
 /// Name/code lookups over the full go-multicodec registry.
+import 'package:boilerplate/fixed_types/golang.dart' as Golang;
+
+extension type const Code(int value) {
+  Golang.Uint64 toUint64() => Golang.Uint64(value);
+
+  static const Code raw = Code(0x55);
+  static const Code dagPb = Code(0x70);
+  static const Code dagCbor = Code(0x71);
+  static const Code libp2pKey = Code(0x72);
+  static const Code sha2_256 = Code(0x12);
+}
+
+Code code(String codecName) {
+  return Code(Multicodec.code(codecName));
+}
+
+String name(Code codecCode) {
+  return Multicodec.name(codecCode.value);
+}
+
 class Multicodec {
   // Private constructor to prevent instantiation.
   Multicodec._();

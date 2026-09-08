@@ -13,7 +13,7 @@ import '../lib/local_kubo_harness.dart';
 /// Optional hook for the future Dart UnixFS implementation.
 ///
 /// The callback owns the returned file. It receives the isolated Kubo handle,
-/// exact fixture, and Kubo root CID, then returns the Dart-exported file for
+/// exact fixture, and Kubo root Cid, then returns the Dart-exported file for
 /// streaming comparison.
 typedef DartUnixFsExporter = Future<File> Function(
   LocalKuboHarness kubo,
@@ -48,16 +48,16 @@ Future<File> _downloadExportImport(
   String encodedCid,
   File kuboCar,
 ) async {
-  final cid = CID.decode(encodedCid);
+  final cid = Cid.decode(encodedCid);
   final output = File('${fixture.path}.dart');
   final car = File('${fixture.path}.dart.car');
-  IPFSNode? online;
-  IPFSNode? offline;
+  IpfsNode? online;
+  IpfsNode? offline;
   try {
-    online = await IPFSNode.fromBuildCfg(
+    online = await IpfsNode.fromBuildCfg(
       BuildCfg(
         online: true,
-        config: const IPFSConfig(
+        config: const IpfsConfig(
           offline: false,
           network: NetworkConfig(bootstrapPeers: []),
           bitswap: BitswapConfig(p2pTimeout: Duration(minutes: 2)),
@@ -79,7 +79,7 @@ Future<File> _downloadExportImport(
       kuboCids.toSet(),
     );
 
-    offline = await IPFSNode.fromBuildCfg(BuildCfg());
+    offline = await IpfsNode.fromBuildCfg(BuildCfg());
     final header = await offline.importCar(kuboCar.openRead());
     expect(header.roots, [cid]);
     final outputSink = output.openWrite();
@@ -121,7 +121,7 @@ Future<void> runLargeUnixfsInterop({
       final car = await kubo.exportCar(cid);
       created.add(car);
 
-      expect(stat['CID'], cid);
+      expect(stat['Cid'], cid);
       expect(refs, isNotEmpty);
       expect(await car.length(), greaterThan(0));
       if (dartExport != null) {

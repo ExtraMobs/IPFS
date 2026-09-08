@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 /// Port of `go-libp2p-kbucket` (partial -- `peerdiversity/filter.go` is
 /// deferred, it depends on `go-cidranger`/`go-libp2p-asn-util`, neither
 /// cloned yet; see doc/transpilation/PROGRESS.md).
@@ -22,7 +23,7 @@ export 'src/util.dart'
         commonPrefixLen,
         convertKey,
         convertPeerId,
-        genRandPeerIdWithCPL,
+        genRandPeerIdWithCpl,
         peerIdPreimageMaxCpl,
         randUint16,
         xor;

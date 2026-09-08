@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-datastore's test/basic_tests.go: the shared conformance suite
 // every Datastore implementation is checked against upstream. This isn't
 // production code -- it's a reusable *test* helper, exactly like Go's own

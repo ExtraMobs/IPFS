@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/core/peer/peer_id.dart
 //
 // Port of go-libp2p's core/peer (peer.go): a peer ID is a multihash of a
@@ -33,7 +34,7 @@ class NoPublicKeyException implements Exception {
   String toString() => 'public key is not embedded in peer ID';
 }
 
-/// Thrown when a multiaddr/CID doesn't encode a valid peer ID. Equivalent
+/// Thrown when a multiaddr/Cid doesn't encode a valid peer ID. Equivalent
 /// to go-libp2p's `ErrInvalidAddr` (multiaddr context) and the `FromCid`
 /// wrong-codec error.
 class InvalidPeerIdSourceException implements Exception {
@@ -84,7 +85,7 @@ class PeerId implements Comparable<PeerId> {
   }
 
   /// Decodes an encoded peer ID, accepting either the legacy base58
-  /// (`Qm...`/`1...`) multihash form or a CID string (of type
+  /// (`Qm...`/`1...`) multihash form or a Cid string (of type
   /// `libp2p-key`). Equivalent to go-libp2p's `Decode`.
   factory PeerId.decode(String s) {
     if (s.startsWith('Qm') || s.startsWith('1')) {
@@ -92,15 +93,15 @@ class PeerId implements Comparable<PeerId> {
       MultihashUtils.decode(bytes); // throws if not a valid multihash
       return PeerId(value: bytes);
     }
-    return PeerId.fromCid(CID.decode(s));
+    return PeerId.fromCid(Cid.decode(s));
   }
 
-  /// Converts a `libp2p-key`-codec CID to a peer ID. Equivalent to
+  /// Converts a `libp2p-key`-codec Cid to a peer ID. Equivalent to
   /// go-libp2p's `FromCid`.
-  factory PeerId.fromCid(CID cid) {
+  factory PeerId.fromCid(Cid cid) {
     if (cid.codec != 'libp2p-key') {
       throw InvalidPeerIdSourceException(
-        'can\'t convert CID of type "${cid.codec}" to a peer ID',
+        'can\'t convert Cid of type "${cid.codec}" to a peer ID',
       );
     }
     return PeerId(value: Uint8List.fromList(cid.multihash.toBytes()));
@@ -188,16 +189,16 @@ class PeerId implements Comparable<PeerId> {
     return '<peer.ID ${pid.substring(0, 2)}*${pid.substring(pid.length - 6)}>';
   }
 
-  /// Encodes this peer ID as a `libp2p-key`-codec CID (multibase base32).
+  /// Encodes this peer ID as a `libp2p-key`-codec Cid (multibase base32).
   /// Equivalent to go-libp2p's `ToCid`.
   ///
   /// Unlike Go, which returns a zero-value (undefined) `cid.Cid` for the
   /// empty peer ID rather than an error, this throws -- this codebase's
-  /// `CID` type has no zero-value sentinel by design (see
+  /// `Cid` type has no zero-value sentinel by design (see
   /// doc/transpilation/PROGRESS.md's go-cid row).
-  CID toCid() {
+  Cid toCid() {
     final mh = MultihashUtils.decode(value);
-    return CID.v1('libp2p-key', mh);
+    return Cid.v1('libp2p-key', mh);
   }
 
   /// Whether this ID was derived from public key [pk]. Equivalent to
@@ -221,7 +222,7 @@ class PeerId implements Comparable<PeerId> {
   /// `ID.ExtractPublicKey`.
   PubKey extractPublicKey() {
     final decoded = MultihashUtils.decode(value);
-    if (decoded.code != 0x00) {
+    if (decoded.code.toBigInt() != BigInt.zero) {
       // 0x00 == multihash `identity`.
       throw const NoPublicKeyException();
     }
@@ -305,15 +306,15 @@ class PeerId implements Comparable<PeerId> {
   }
 }
 
-/// Converts a peer ID to a `libp2p-key`-codec CID. Equivalent to
+/// Converts a peer ID to a `libp2p-key`-codec Cid. Equivalent to
 /// go-libp2p's package-level `ToCid` function (kept alongside [PeerId.toCid]
 /// for call sites that prefer the free-function form).
-CID peerIdToCid(PeerId id) => id.toCid();
+Cid peerIdToCid(PeerId id) => id.toCid();
 
-/// Converts a `libp2p-key`-codec CID to a peer ID. Equivalent to
+/// Converts a `libp2p-key`-codec Cid to a peer ID. Equivalent to
 /// go-libp2p's package-level `FromCid` function (kept alongside
 /// [PeerId.fromCid] for call sites that prefer the free-function form).
-PeerId peerIdFromCid(CID cid) => PeerId.fromCid(cid);
+PeerId peerIdFromCid(Cid cid) => PeerId.fromCid(cid);
 
 bool _listsEqual(List<int> a, List<int> b) {
   if (a.length != b.length) return false;

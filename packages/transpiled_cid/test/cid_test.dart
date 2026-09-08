@@ -1,45 +1,46 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:transpiled_cid/transpiled_cid.dart';
-import 'package:transpiled_multihash/transpiled_multihash.dart';
-import 'package:transpiled_multicodec/transpiled_multicodec.dart';
 import 'package:test/test.dart';
+import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:transpiled_multicodec/transpiled_multicodec.dart';
+import 'package:transpiled_multihash/transpiled_multihash.dart';
 
 void main() {
-  group('CID', () {
-    test('creates CID v0 from 32-byte SHA2-256 hash', () {
+  group('Cid', () {
+    test('creates Cid v0 from 32-byte SHA2-256 hash', () {
       final hash = Uint8List(32);
       for (var i = 0; i < 32; i++) {
         hash[i] = i;
       }
-      final cid = CID.v0(hash);
+      final cid = Cid.v0(hash);
       expect(cid.version, equals(0));
       expect(cid.codec, equals('dag-pb'));
       expect(cid.encode(), startsWith('Qm'));
     });
 
-    test('creates CID v1 from content', () async {
+    test('creates Cid v1 from content', () async {
       final data = Uint8List.fromList(utf8.encode('hello world'));
-      final cid = await CID.fromContent(data);
+      final cid = await Cid.fromContent(data);
       expect(cid.version, equals(1));
       expect(cid.codec, equals('raw'));
       expect(cid.encode(), startsWith('b'));
     });
 
-    test('round-trips CID through string encoding', () async {
+    test('round-trips Cid through string encoding', () async {
       final data = Uint8List.fromList(utf8.encode('round-trip'));
-      final cid = await CID.fromContent(data);
-      final decoded = CID.decode(cid.encode());
+      final cid = await Cid.fromContent(data);
+      final decoded = Cid.decode(cid.encode());
       expect(decoded, equals(cid));
       expect(decoded.multihash.toBytes(), equals(cid.multihash.toBytes()));
     });
 
-    test('round-trips CID v1 through bytes', () async {
+    test('round-trips Cid v1 through bytes', () async {
       final data = Uint8List.fromList(utf8.encode('byte-trip'));
-      final cid = await CID.fromContent(data, codec: 'dag-cbor');
+      final cid = await Cid.fromContent(data, codec: 'dag-cbor');
       final bytes = cid.toBytes();
-      final decoded = CID.fromBytes(bytes);
+      final decoded = Cid.fromBytes(bytes);
       expect(decoded, equals(cid));
     });
 
@@ -48,7 +49,7 @@ void main() {
       for (var i = 0; i < 32; i++) {
         hash[i] = i;
       }
-      final cid = CID.v0(hash);
+      final cid = Cid.v0(hash);
       final bytes = cid.toBytes();
       expect(bytes.length, equals(34));
       expect(bytes[0], equals(0x12));
@@ -57,25 +58,25 @@ void main() {
 
     test('toPrefixBytes omits digest', () async {
       final data = Uint8List.fromList(utf8.encode('prefix-test'));
-      final cid = await CID.fromContent(data);
+      final cid = await Cid.fromContent(data);
       final prefix = cid.toPrefixBytes();
       final bytes = cid.toBytes();
       expect(prefix.length, lessThan(bytes.length));
       expect(bytes.sublist(0, prefix.length), equals(prefix));
     });
 
-    test('CID v1 encodes with different bases', () async {
+    test('Cid v1 encodes with different bases', () async {
       final data = Uint8List.fromList(utf8.encode('base-test'));
-      final cid = await CID.fromContent(data);
+      final cid = await Cid.fromContent(data);
       final base32 = cid.encodeWithBaseName('base32');
       final base64 = cid.encodeWithBaseName('base64');
       expect(base32, isNot(equals(base64)));
-      expect(CID.decode(base32), equals(cid));
-      expect(CID.decode(base64), equals(cid));
+      expect(Cid.decode(base32), equals(cid));
+      expect(Cid.decode(base64), equals(cid));
     });
 
-    test(' CID v0 rejects non-32-byte hash', () {
-      expect(() => CID.v0(Uint8List(16)), throwsArgumentError);
+    test(' Cid v0 rejects non-32-byte hash', () {
+      expect(() => Cid.v0(Uint8List(16)), throwsArgumentError);
     });
   });
 
@@ -97,10 +98,10 @@ void main() {
     });
   });
 
-  group('CID gap-closing additions (Phase 1)', () {
+  group('Cid gap-closing additions (Phase 1)', () {
     test('fromContent with version:0 produces a CIDv0', () async {
       final data = Uint8List.fromList(utf8.encode('cidv0-content'));
-      final cid = await CID.fromContent(data, version: 0);
+      final cid = await Cid.fromContent(data, version: 0);
       expect(cid.version, equals(0));
       expect(cid.codec, equals('dag-pb'));
       expect(cid.encode(), startsWith('Qm'));
@@ -109,44 +110,47 @@ void main() {
     test('fromContent rejects unsupported hashType', () async {
       final data = Uint8List.fromList(utf8.encode('x'));
       expect(
-        () => CID.fromContent(data, hashType: 'sha3-256'),
+        () => Cid.fromContent(data, hashType: 'sha3-256'),
         throwsUnsupportedError,
       );
     });
 
     test('computeForData matches fromContent for the same input', () async {
       final data = Uint8List.fromList(utf8.encode('compute-for-data'));
-      final a = await CID.computeForData(data, format: 'dag-cbor');
-      final b = await CID.fromContent(data, codec: 'dag-cbor');
+      final a = await Cid.computeForData(data, format: 'dag-cbor');
+      final b = await Cid.fromContent(data, codec: 'dag-cbor');
       expect(a, equals(b));
     });
 
     test('computeForDataSync matches the async fromContent digest', () async {
       final data = Uint8List.fromList(utf8.encode('sync-vs-async'));
-      final sync = CID.computeForDataSync(data);
-      final async = await CID.fromContent(data);
+      final sync = Cid.computeForDataSync(data);
+      final async = await Cid.fromContent(data);
       expect(sync, equals(async));
     });
 
-    test('fromPrefixBytes reconstructs the same CID given matching data', () async {
-      final data = Uint8List.fromList(utf8.encode('prefix-reconstruction'));
-      final original = await CID.fromContent(data, codec: 'dag-cbor');
-      final rebuilt = await CID.fromPrefixBytes(
-        original.toPrefixBytes(),
-        data,
-      );
-      expect(rebuilt, equals(original));
-    });
+    test(
+      'fromPrefixBytes reconstructs the same Cid given matching data',
+      () async {
+        final data = Uint8List.fromList(utf8.encode('prefix-reconstruction'));
+        final original = await Cid.fromContent(data, codec: 'dag-cbor');
+        final rebuilt = await Cid.fromPrefixBytes(
+          original.toPrefixBytes(),
+          data,
+        );
+        expect(rebuilt, equals(original));
+      },
+    );
 
     test('validate accepts a well-formed CIDv1', () async {
       final data = Uint8List.fromList(utf8.encode('valid'));
-      final cid = await CID.fromContent(data);
+      final cid = await Cid.fromContent(data);
       expect(cid.validate(), isTrue);
     });
 
     test('validate rejects a CIDv0 with a non-dag-pb codec', () {
       final hash = Uint8List(32);
-      final malformed = CID(
+      final malformed = Cid(
         version: 0,
         multihash: MultihashUtils.sha256(hash),
         codec: 'raw',

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/core/routing/routing.dart
 //
 // Port of go-libp2p's core/routing/routing.go: the interfaces for peer
@@ -37,15 +38,15 @@ class RoutingNotSupportedException implements Exception {
 abstract class ContentProviding {
   /// Adds [cid] to the content routing system. If [local] is `true`, it
   /// also announces it; otherwise it's just kept in local accounting.
-  Future<void> provide(CID cid, bool local);
+  Future<void> provide(Cid cid, bool local);
 }
 
-/// Retrieves providers for a given CID using the routing system.
+/// Retrieves providers for a given Cid using the routing system.
 /// Equivalent to go-libp2p's `ContentDiscovery`.
 abstract class ContentDiscovery {
   /// Searches for peers able to provide [cid]. When [count] is 0, returns
   /// an unbounded number of results.
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count);
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count);
 }
 
 /// A value-provider layer of indirection used to find who has what

@@ -1,7 +1,11 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 import 'dart:convert';
 
 import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:transpiled_go_codec_dagpb/transpiled_go_codec_dagpb.dart'
+    as codec;
+import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart' as ipld;
 import 'package:transpiled_varint/transpiled_varint.dart';
 
 List<int> _field(int number, List<int> value) => <int>[
@@ -15,11 +19,11 @@ List<int> _varintField(int number, int value) => <int>[
   ...encodeVarint(value),
 ];
 
-/// A DAG-PB link using the complete binary CID stored by Boxo.
+/// A DAG-PB link using the complete binary Cid stored by Boxo.
 class DagPbLink {
   DagPbLink({required this.hash, this.name = '', this.tsize = 0});
 
-  factory DagPbLink.fromCid(CID cid, {String name = '', int? tsize}) =>
+  factory DagPbLink.fromCid(Cid cid, {String name = '', int? tsize}) =>
       DagPbLink(hash: cid.toBytes(), name: name, tsize: tsize ?? 0);
 
   final Uint8List hash;
@@ -76,43 +80,50 @@ class DagPbNode {
   final List<DagPbLink> links;
 
   factory DagPbNode.fromBytes(Uint8List bytes) {
-    var offset = 0;
-    var data = Uint8List(0);
-    final links = <DagPbLink>[];
-    while (offset < bytes.length) {
-      final (tag, tagLength) = readVarint(bytes, offset);
-      offset += tagLength;
-      if ((tag & 7) != 2)
-        throw const FormatException('invalid DAG-PB node wire type');
-      final (length, lengthLength) = readVarint(bytes, offset);
-      offset += lengthLength;
-      if (offset + length > bytes.length)
-        throw const FormatException('truncated DAG-PB node');
-      final value = Uint8List.fromList(bytes.sublist(offset, offset + length));
-      offset += length;
-      switch (tag >> 3) {
-        case 1:
-          data = value;
-          break;
-        case 2:
-          links.add(DagPbLink.fromBytes(value));
-          break;
+    final builder = ipld.AnyBuilder();
+    codec.decodeBytes(builder, bytes);
+    final node = builder.build();
+    ipld.Node? optional(ipld.Node source, String key) {
+      try {
+        final value = source.lookupByString(key);
+        return value.isAbsent() ? null : value;
+      } on ipld.NotExistsException {
+        return null;
       }
+    }
+
+    final data = optional(node, 'Data')?.asBytes() ?? Uint8List(0);
+    final links = <DagPbLink>[];
+    final encodedLinks = node.lookupByString('Links');
+    for (var i = 0; i < encodedLinks.length(); i++) {
+      final link = encodedLinks.lookupByIndex(i);
+      final cidLink = link.lookupByString('Hash').asLink() as ipld.CidLink;
+      links.add(
+        DagPbLink.fromCid(
+          cidLink.cid,
+          name: optional(link, 'Name')?.asString() ?? '',
+          tsize: optional(link, 'Tsize')?.asInt() ?? 0,
+        ),
+      );
     }
     return DagPbNode(data: data, links: links);
   }
 
   Uint8List toBytes() {
-    final out = <int>[];
-    // go-codec-dagpb encodes Links before Data; this order affects every CID.
-    for (final link in links) {
-      out.addAll(_field(2, link.toBytes()));
-    }
-    if (data.isNotEmpty) out.addAll(_field(1, data));
-    return Uint8List.fromList(out);
+    return codec.appendEncode(
+      Uint8List(0),
+      ipld.PlainMap({
+        'Links': ipld.PlainList([
+          for (final link in links)
+            ipld.PlainMap({
+              'Hash': ipld.PlainLink(ipld.CidLink(Cid.fromBytes(link.hash))),
+              'Name': ipld.PlainString(link.name),
+              'Tsize': ipld.PlainInt(link.tsize),
+            }),
+        ]),
+        if (data.isNotEmpty) 'Data': ipld.PlainBytes(data),
+      }),
+    );
   }
 }
 
-/// Go package names retained as aliases for callers familiar with merkledag/pb.
-typedef PBLink = DagPbLink;
-typedef PBNode = DagPbNode;

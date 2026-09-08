@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:transpiled_cid/transpiled_cid.dart';
@@ -62,9 +63,9 @@ class Tiered implements Routing, PubKeyFetcher, Bootstrap {
   @override
   Future<AddrInfo> findPeer(PeerId id) => _get((router) => router.findPeer(id));
   @override
-  Future<void> provide(CID cid, bool local) => _parallel.provide(cid, local);
+  Future<void> provide(Cid cid, bool local) => _parallel.provide(cid, local);
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) =>
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) =>
       _parallel.findProvidersAsync(cid, count);
   @override
   Future<void> bootstrap() => _parallel.bootstrap();

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/basicnode/scalars.dart
 //
 // Port of go-ipld-prime's node/basicnode/{bool,int,float,string,bytes,link}.go.
@@ -17,9 +18,40 @@ import '../datamodel/node.dart';
 import '../datamodel/node_builder.dart';
 import 'base_node.dart';
 
-/// A boxed [bool] conforming to [Node]. Equivalent to go-ipld-prime's
-/// `NewBool` + `plainBool`.
-Node newBool(bool value) => PlainBool(value);
+/// Static factory methods for basicnode scalar nodes. Equivalent to
+/// go-ipld-prime's `node/basicnode.New{Bool,Int,Float,String,Bytes,Link}`.
+abstract final class Basicnode {
+  const Basicnode._();
+
+  /// Creates a boolean node. Equivalent to go-ipld-prime's `basicnode.NewBool`.
+  static PlainBool ofBool(bool value) => PlainBool(value);
+
+  /// Creates an integer node. Equivalent to go-ipld-prime's `basicnode.NewInt`.
+  static PlainInt ofInt(int value) => PlainInt(value);
+
+  /// Creates a float node. Equivalent to go-ipld-prime's `basicnode.NewFloat`.
+  static PlainFloat ofFloat(double value) => PlainFloat(value);
+
+  /// Creates a string node. Equivalent to go-ipld-prime's `basicnode.NewString`.
+  static PlainString ofString(String value) => PlainString(value);
+
+  /// Creates a bytes node. Equivalent to go-ipld-prime's `basicnode.NewBytes`.
+  static PlainBytes ofBytes(Uint8List value) => PlainBytes(value);
+
+  /// Creates a link node. Equivalent to go-ipld-prime's `basicnode.NewLink`.
+  static PlainLink ofLink(Link value) => PlainLink(value);
+
+  /// Convenience aliases.
+  static PlainBool boolNode(bool value) => PlainBool(value);
+  static PlainInt intNode(int value) => PlainInt(value);
+  static PlainFloat floatNode(double value) => PlainFloat(value);
+  static PlainString stringNode(String value) => PlainString(value);
+  static PlainBytes bytesNode(Uint8List value) => PlainBytes(value);
+  static PlainLink linkNode(Link value) => PlainLink(value);
+}
+
+/// Compatibility alias matching UpperCamelCase conventions.
+typedef BasicNode = Basicnode;
 
 /// A boxed [bool] conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainBool`.
@@ -69,10 +101,6 @@ class PlainBoolAssembler extends BaseAssembler implements NodeBuilder {
   void reset() => _value = null;
 }
 
-/// A boxed [int] conforming to [Node] (matches go-ipld-prime's `Kind_Int`,
-/// which covers the platform int64 range). Equivalent to go-ipld-prime's
-/// `NewInt` + `plainInt`.
-Node newInt(int value) => PlainInt(value);
 
 /// A boxed integer conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainInt`.
@@ -150,10 +178,6 @@ class PlainIntAssembler extends BaseAssembler implements NodeBuilder {
 }
 
 /// A boxed [double] conforming to [Node]. Equivalent to go-ipld-prime's
-/// `NewFloat` + `plainFloat`.
-Node newFloat(double value) => PlainFloat(value);
-
-/// A boxed [double] conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainFloat`.
 class PlainFloat extends BaseNode {
   /// Creates the node.
@@ -204,10 +228,6 @@ class PlainFloatAssembler extends BaseAssembler implements NodeBuilder {
 }
 
 /// A boxed [String] conforming to [Node]. Equivalent to go-ipld-prime's
-/// `NewString` + `plainString`.
-Node newString(String value) => PlainString(value);
-
-/// A boxed [String] conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainString`.
 class PlainString extends BaseNode {
   /// Creates the node.
@@ -256,10 +276,6 @@ class PlainStringAssembler extends BaseAssembler implements NodeBuilder {
   @override
   void reset() => _value = null;
 }
-
-/// A boxed byte string conforming to [Node]. Equivalent to go-ipld-prime's
-/// `NewBytes` + `plainBytes`.
-Node newBytes(Uint8List value) => PlainBytes(value);
 
 /// A boxed byte string conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainBytes`.
@@ -348,10 +364,6 @@ class PlainBytesAssembler extends BaseAssembler implements NodeBuilder {
   @override
   void reset() => _value = null;
 }
-
-/// A boxed [Link] conforming to [Node]. Equivalent to go-ipld-prime's
-/// `NewLink` + `plainLink`.
-Node newLink(Link value) => PlainLink(value);
 
 /// A boxed [Link] conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainLink`.

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // test/secp256k1_key_parity_test.dart
 //
 // Parity test for lib/src/crypto/secp256k1_key.dart against a real key

@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Parity cases from go-boxo's bitswap/client/wantlist/wantlist_test.go.
 import 'package:test/test.dart';
 import 'package:transpiled_boxo/transpiled_boxo.dart';
@@ -7,9 +8,9 @@ final _testCids = [
   'QmQL8LqkEgYXaDHdNYCG2mmpow7Sp8Z8Kt3QS688vyBeC7',
   'QmcBDsdjgSXU7BP4A4V8LJCXENE5xVwnhrhRGVTJr9YCVj',
   'QmQakgd2wDxc3uUF4orGdEm28zUT9Mmimp5pyPG2SFS9Gj',
-].map(CID.decode).toList(growable: false);
+].map(Cid.decode).toList(growable: false);
 
-void _expectHasCid(Wantlist wantlist, CID cid) {
+void _expectHasCid(Wantlist wantlist, Cid cid) {
   final entry = wantlist.get(cid);
   expect(entry, isNotNull);
   expect(entry!.cid, equals(cid));
@@ -114,8 +115,8 @@ void main() {
     expect(wantlist.entries(), hasLength(1));
   });
 
-  test('NewRefEntry and WantType wire values', () {
-    final entry = newRefEntry(_testCids[0], 5);
+  test('Entry.ref and WantType wire values', () {
+    final entry = Entry.ref(_testCids[0], 5);
     expect(entry.cid, _testCids[0]);
     expect(entry.priority, 5);
     expect(entry.wantType, WantType.block);

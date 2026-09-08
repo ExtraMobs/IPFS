@@ -9,7 +9,7 @@ import 'package:transpiled_varint/transpiled_varint.dart';
 const int bitswapMessageSizeMax = 1 << 22;
 
 /// Creates a varint-framed Bitswap `WANT_BLOCK` message.
-Uint8List encodeWantBlock(CID cid, {int priority = 1}) {
+Uint8List encodeWantBlock(Cid cid, {int priority = 1}) {
   final entry = BytesBuilder()
     ..add(_bytesField(1, cid.toBytes()))
     ..add(_varintField(2, priority))
@@ -48,7 +48,7 @@ final class BitswapMessage {
   factory BitswapMessage.fromBytes(Uint8List bytes) {
     final payload = <({Uint8List prefix, Uint8List data})>[];
     final legacy = <Uint8List>[];
-    final dontHaves = <CID>[];
+    final dontHaves = <Cid>[];
     final reader = _ProtoReader(bytes);
     while (!reader.isDone) {
       final (field, wire) = reader.tag();
@@ -84,7 +84,7 @@ final class BitswapMessage {
           }
         }
         if (type == 1 && cidBytes != null) {
-          dontHaves.add(CID.fromBytes(cidBytes));
+          dontHaves.add(Cid.fromBytes(cidBytes));
         }
       } else {
         reader.skip(wire);
@@ -100,17 +100,17 @@ final class BitswapMessage {
   final List<Uint8List> legacyBlocks;
 
   /// CIDs explicitly reported as unavailable.
-  final List<CID> dontHaves;
+  final List<Cid> dontHaves;
 }
 
 /// Extracts and validates a requested block from a decoded message.
-blocks.Block? blockFromMessage(BitswapMessage message, CID requested) {
+blocks.Block? blockFromMessage(BitswapMessage message, Cid requested) {
   for (final payload in message.payload) {
     final cid = Prefix.fromBytes(payload.prefix).sum(payload.data);
     if (cid == requested) return blocks.BasicBlock(payload.data, cid);
   }
   for (final data in message.legacyBlocks) {
-    final block = blocks.newBlock(data);
+    final block = blocks.BasicBlock.fromData(data);
     if (block.cid() == requested) return block;
   }
   if (message.dontHaves.contains(requested)) {

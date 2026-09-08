@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
@@ -5,19 +6,19 @@ import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_ipld_prime/linking.dart';
 import 'package:transpiled_ipld_prime/linking_cid.dart';
 import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart'
-    show newBytes, prototype;
+    show PlainBytes, prototype;
 
 void main() {
-  const linkPrototype = CidLinkPrototype(
+  final linkPrototype = CidLinkPrototype(
     Prefix(version: 1, codec: 'raw', mhType: 'sha2-256', mhLength: 32),
   );
 
-  test('stores, loads, returns raw bytes and computes the same CID', () {
+  test('stores, loads, returns raw bytes and computes the same Cid', () {
     final system = defaultLinkSystem();
     final store = MemoryStore();
     system.setReadStorage(store);
     system.setWriteStorage(store);
-    final node = newBytes(Uint8List.fromList(<int>[1, 2, 3]));
+    final node = PlainBytes(Uint8List.fromList(<int>[1, 2, 3]));
     final link = system.store(const LinkContext(), linkPrototype, node);
 
     expect(system.computeLink(linkPrototype, node).binary(), link.binary());
@@ -39,7 +40,7 @@ void main() {
     final link = system.store(
       const LinkContext(),
       linkPrototype,
-      newBytes(Uint8List.fromList(<int>[1])),
+      PlainBytes(Uint8List.fromList(<int>[1])),
     );
     store.bag[String.fromCharCodes(link.binary())] = Uint8List.fromList(<int>[
       2,
@@ -51,7 +52,7 @@ void main() {
     );
   });
 
-  test('CID memory shares content by multihash', () {
+  test('Cid memory shares content by multihash', () {
     final memory = Memory();
     final system = defaultLinkSystem()
       ..storageReadOpener = memory.openRead
@@ -59,7 +60,7 @@ void main() {
     final link = system.store(
       const LinkContext(),
       linkPrototype,
-      newBytes(Uint8List.fromList(<int>[7])),
+      PlainBytes(Uint8List.fromList(<int>[7])),
     );
     expect(system.loadRaw(const LinkContext(), link), <int>[7]);
   });

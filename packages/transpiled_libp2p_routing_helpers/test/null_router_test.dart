@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Parity vectors from go-libp2p-routing-helpers's own null_test.go
 // (go-ipfs-reference/go-libp2p-routing-helpers/null_test.go, TestNull).
 import 'dart:typed_data';
@@ -26,7 +27,7 @@ void main() {
     });
 
     test('provide always throws RoutingNotSupportedException', () async {
-      final cid = await CID.fromContent(Uint8List(0));
+      final cid = await Cid.fromContent(Uint8List(0));
       expect(
         () => n.provide(cid, false),
         throwsA(isA<RoutingNotSupportedException>()),
@@ -34,7 +35,7 @@ void main() {
     });
 
     test('findProvidersAsync always returns an empty stream', () async {
-      final cid = await CID.fromContent(Uint8List(0));
+      final cid = await Cid.fromContent(Uint8List(0));
       final results = await n.findProvidersAsync(cid, 10).toList();
       expect(results, isEmpty);
     });

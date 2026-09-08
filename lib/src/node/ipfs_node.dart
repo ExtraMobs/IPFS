@@ -10,7 +10,7 @@ import 'package:ipfs_libp2p/p2p/host/resource_manager/limiter.dart';
 import 'package:ipfs_libp2p/p2p/host/resource_manager/resource_manager_impl.dart';
 import 'package:ipfs_libp2p/p2p/transport/tcp_transport.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
-import 'package:transpiled_boxo/transpiled_boxo.dart';
+import 'package:transpiled_boxo/transpiled_boxo.dart' hide Blockstore;
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_go_car/transpiled_go_car.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
@@ -26,13 +26,13 @@ import '../transport/noise/dart_ipfs_noise_security.dart';
 import '../unixfs/unixfs.dart';
 
 /// Embedded IPFS node containing the currently ported reusable runtime.
-final class IPFSNode {
-  IPFSNode._({
+final class IpfsNode {
+  IpfsNode._({
     required this.config,
     required this.blockstore,
     required runtime.Host? host,
     required BitswapClient? bitswap,
-    required DHTClient? dht,
+    required DhtClient? dht,
     required Duration shutdownTimeout,
   }) : _host = host,
        _bitswap = bitswap,
@@ -40,11 +40,11 @@ final class IPFSNode {
        _shutdownTimeout = shutdownTimeout;
 
   /// Kubo `core.NewNode` equivalent for the supported Dart subset.
-  static Future<IPFSNode> fromBuildCfg(BuildCfg buildCfg) async {
+  static Future<IpfsNode> fromBuildCfg(BuildCfg buildCfg) async {
     final config = buildCfg.config;
     final blockstore = Blockstore();
     if (!buildCfg.online) {
-      return IPFSNode._(
+      return IpfsNode._(
         config: config,
         blockstore: blockstore,
         host: null,
@@ -81,13 +81,13 @@ final class IPFSNode {
     final bootstrapPeers = config.network.bootstrapPeers
         .map(addrInfoFromString)
         .toList();
-    final dht = DHTClient(router: router, bootstrapPeers: bootstrapPeers);
+    final dht = DhtClient(router: router, bootstrapPeers: bootstrapPeers);
     final bitswap = BitswapClient(
       router: router,
       blockstore: blockstore,
       timeout: config.bitswap.p2pTimeout,
     )..start();
-    return IPFSNode._(
+    return IpfsNode._(
       config: config,
       blockstore: blockstore,
       host: host,
@@ -98,14 +98,14 @@ final class IPFSNode {
   }
 
   /// Effective node configuration.
-  final IPFSConfig config;
+  final IpfsConfig config;
 
   /// Validating blockstore used by Bitswap.
   final Blockstore blockstore;
 
   final runtime.Host? _host;
   final BitswapClient? _bitswap;
-  final DHTClient? _dht;
+  final DhtClient? _dht;
   final Duration _shutdownTimeout;
   Future<void>? _closeFuture;
 
@@ -120,21 +120,21 @@ final class IPFSNode {
   }
 
   /// Retrieves and persists one block through Bitswap.
-  Future<blocks.Block> getBlock(CID cid) {
+  Future<blocks.Block> getBlock(Cid cid) {
     final bitswap = _bitswap;
     if (bitswap == null) throw StateError('IPFS node is offline');
     return bitswap.getBlock(cid);
   }
 
   /// Discovers providers through the IPFS Kademlia DHT.
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) {
     final dht = _dht;
     if (dht == null) throw StateError('IPFS node is offline');
     return dht.findProvidersAsync(cid, count);
   }
 
   /// Discovers providers and downloads the first valid Bitswap block.
-  Future<blocks.Block> getBlockFromDht(CID cid) async {
+  Future<blocks.Block> getBlockFromDht(Cid cid) async {
     Object? lastError;
     await for (final provider in findProvidersAsync(cid, 0)) {
       if (provider.addrs.isEmpty) continue;
@@ -149,10 +149,10 @@ final class IPFSNode {
   }
 
   /// Streams a regular UnixFS file, fetching every missing block by Bitswap.
-  Stream<Uint8List> getUnixFs(CID cid) => readUnixFs(cid, _getContentBlock);
+  Stream<Uint8List> getUnixFs(Cid cid) => readUnixFs(cid, _getContentBlock);
 
   /// Returns logical and stored sizes for a UnixFS root.
-  Future<UnixFsStat> statUnixFs(CID cid) async {
+  Future<UnixFsStat> statUnixFs(Cid cid) async {
     final root = await _getContentBlock(cid);
     final bytes = root.rawData();
     if (cid.codec == 'raw') {
@@ -183,10 +183,10 @@ final class IPFSNode {
   }
 
   /// Lists the root and all nested CIDs in depth-first order.
-  Stream<CID> listUnixFsCids(CID cid) => walkUnixFs(cid, _getContentBlock);
+  Stream<Cid> listUnixFsCids(Cid cid) => walkUnixFs(cid, _getContentBlock);
 
   /// Streams a CAR v1 containing the complete UnixFS DAG.
-  Stream<Uint8List> exportCar(CID cid) => CarWriter(
+  Stream<Uint8List> exportCar(Cid cid) => CarWriter(
     roots: [cid],
     get: (child) async => (await _getContentBlock(child)).rawData(),
     linksWithData: unixFsLinks,
@@ -195,11 +195,10 @@ final class IPFSNode {
   /// Validates and imports a CAR v1 into this node's blockstore.
   Future<CarHeader> importCar(Object input) => loadCar(
     input,
-    (CarBlock block) =>
-        blockstore.put(blocks.BasicBlock(block.data, block.cid)),
+    (CarBlock block) => blockstore.put(block),
   );
 
-  Future<blocks.Block> _getContentBlock(CID cid) async {
+  Future<blocks.Block> _getContentBlock(Cid cid) async {
     if (await blockstore.has(cid)) return blockstore.get(cid);
     try {
       return await getBlock(cid);

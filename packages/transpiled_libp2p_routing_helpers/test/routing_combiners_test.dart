@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -23,7 +24,7 @@ class _Router implements Routing {
   Future<AddrInfo> findPeer(PeerId id) async =>
       throw const RoutingNotFoundException();
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) async* {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) async* {
     for (final id in providers.take(count == 0 ? providers.length : count)) {
       yield AddrInfo(id: id, addrs: const []);
     }
@@ -41,7 +42,7 @@ class _Router implements Routing {
   }
 
   @override
-  Future<void> provide(CID cid, bool local) async {}
+  Future<void> provide(Cid cid, bool local) async {}
   @override
   Future<void> putValue(
     String key,
@@ -88,7 +89,7 @@ void main() {
   test('Parallel provider lookup deduplicates and honors count', () async {
     final one = PeerId(value: Uint8List.fromList([1]));
     final two = PeerId(value: Uint8List.fromList([2]));
-    final cid = CID.computeForDataSync(Uint8List(0));
+    final cid = Cid.computeForDataSync(Uint8List(0));
     final found = await Parallel(
       routers: [
         _Router(providers: [one, two]),
@@ -121,7 +122,7 @@ void main() {
 
   test('Parallel merges query events for value and provider streams', () async {
     final peer = PeerId(value: Uint8List.fromList([7]));
-    final cid = CID.computeForDataSync(Uint8List(0));
+    final cid = Cid.computeForDataSync(Uint8List(0));
     final registration = registerForQueryEvents();
     final events = registration.events.toList();
 
@@ -260,7 +261,7 @@ void main() {
     'Composable provider lookup preserves duplicates like upstream',
     () async {
       final peer = PeerId(value: Uint8List.fromList([9]));
-      final cid = CID.computeForDataSync(Uint8List(0));
+      final cid = Cid.computeForDataSync(Uint8List(0));
       final found = await ComposableParallel([
         ParallelRouter(router: _Router(providers: [peer])),
         ParallelRouter(router: _Router(providers: [peer])),
@@ -318,7 +319,7 @@ void main() {
     expect(sequential, isEmpty);
   });
 
-  test('ProvideMany uses batch support and raw-CID fallback', () async {
+  test('ProvideMany uses batch support and raw-Cid fallback', () async {
     final keys = [
       MultihashUtils.sum('sha2-256', Uint8List.fromList([1])),
       MultihashUtils.sum('sha2-256', Uint8List.fromList([2])),
@@ -376,7 +377,7 @@ class _EventRouter extends _Router {
   }
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) async* {
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) async* {
     publishQueryEvent(QueryEvent(type: eventType));
     yield* super.findProvidersAsync(cid, count);
   }
@@ -461,19 +462,19 @@ class _PublicKeyStore implements ValueStore, PubKeyFetcher {
 }
 
 class _BatchRouter extends _Router implements ProvideManyRouter {
-  final List<List<MultihashInfo>> batches = [];
+  final List<List<DecodedMultihash>> batches = [];
 
   @override
-  Future<void> provideMany(List<MultihashInfo> keys) async {
+  Future<void> provideMany(List<DecodedMultihash> keys) async {
     batches.add(keys);
   }
 }
 
 class _ProvidingRouter extends _Router {
-  final List<CID> provided = [];
+  final List<Cid> provided = [];
 
   @override
-  Future<void> provide(CID cid, bool local) async {
+  Future<void> provide(Cid cid, bool local) async {
     expect(local, isTrue);
     provided.add(cid);
   }

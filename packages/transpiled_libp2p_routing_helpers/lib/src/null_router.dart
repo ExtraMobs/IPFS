@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/null_router.dart
 //
 // Port of go-libp2p-routing-helpers's null.go. Named NullRouter rather
@@ -36,11 +37,11 @@ class NullRouter implements Routing, Bootstrap {
   }) => Stream.error(const RoutingNotFoundException());
 
   @override
-  Future<void> provide(CID cid, bool local) async =>
+  Future<void> provide(Cid cid, bool local) async =>
       throw const RoutingNotSupportedException();
 
   @override
-  Stream<AddrInfo> findProvidersAsync(CID cid, int count) =>
+  Stream<AddrInfo> findProvidersAsync(Cid cid, int count) =>
       const Stream.empty();
 
   @override

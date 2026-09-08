@@ -113,7 +113,7 @@ class LocalKuboHarness {
   }
 
   /// Adds a UnixFS file without using the HTTP gateway and returns its root
-  /// CID. Kubo receives the file path directly, so the file is never loaded
+  /// Cid. Kubo receives the file path directly, so the file is never loaded
   /// into Dart memory.
   Future<String> addFile(File file) async {
     if (!await file.exists()) {
@@ -131,14 +131,14 @@ class LocalKuboHarness {
         .map((line) => line.trim())
         .where((line) => line.isNotEmpty)
         .toList();
-    if (lines.isEmpty) throw StateError('Kubo add returned no CID');
+    if (lines.isEmpty) throw StateError('Kubo add returned no Cid');
     return lines.last;
   }
 
   /// Returns Kubo's UnixFS root statistics parsed from `dag stat`.
   Future<Map<String, dynamic>> stat(String cid) async {
     final result = await _run(['dag', 'stat', '--progress=false', cid]);
-    final stats = <String, dynamic>{'CID': cid};
+    final stats = <String, dynamic>{'Cid': cid};
     for (final line in '${result.stdout}'.split(RegExp(r'\r?\n'))) {
       final separator = line.indexOf(':');
       if (separator < 1) continue;

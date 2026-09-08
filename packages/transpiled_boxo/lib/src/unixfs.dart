@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:transpiled_varint/transpiled_varint.dart';
@@ -154,7 +155,7 @@ class UnixFsData {
     final out = <int>[..._uvarint(1, type.wireValue)];
     if (data.isNotEmpty) out.addAll(_bytesField(2, data));
     // Boxo initializes Filesize even when it is zero; preserving that field is
-    // important for CID compatibility with empty and leaf File nodes.
+    // important for Cid compatibility with empty and leaf File nodes.
     out.addAll(_uvarint(3, filesize));
     for (final size in blocksizes) out.addAll(_uvarint(4, size));
     if (hashType != null) out.addAll(_uvarint(5, hashType!));
@@ -193,11 +194,3 @@ int dataSize(Uint8List bytes) {
   }
   return node.type == UnixFsDataType.symlink ? node.data.length : node.filesize;
 }
-
-/// Compatibility aliases for the names used by the Go package.
-Uint8List WrapData(Uint8List data) => wrapData(data);
-Uint8List FilePBData(Uint8List data, int totalSize) =>
-    filePbData(data, totalSize);
-Uint8List FolderPBData() => folderPbData();
-Uint8List UnwrapData(Uint8List bytes) => unwrapData(bytes);
-int DataSize(Uint8List bytes) => dataSize(bytes);

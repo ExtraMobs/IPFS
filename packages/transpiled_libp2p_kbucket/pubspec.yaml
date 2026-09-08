@@ -1,6 +1,7 @@
 name: transpiled_libp2p_kbucket
 description: Port of go-libp2p-kbucket.
 version: 0.1.0
+publish_to: none
 homepage: https://github.com/libp2p/go-libp2p-kbucket
 
 environment:

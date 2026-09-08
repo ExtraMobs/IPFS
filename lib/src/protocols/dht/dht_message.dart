@@ -12,7 +12,7 @@ const int dhtMessageSizeMax = 1 << 22;
 const int dhtPeerSizeMax = 8 << 10;
 
 /// Encodes a DHT `GET_PROVIDERS` request for [cid].
-Uint8List encodeGetProviders(CID cid) {
+Uint8List encodeGetProviders(Cid cid) {
   final payload = BytesBuilder()
     ..add(_varintField(1, 3))
     ..add(_bytesField(2, Uint8List.fromList(cid.multihash.toBytes())))

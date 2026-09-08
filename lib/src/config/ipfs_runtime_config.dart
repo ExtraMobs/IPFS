@@ -23,9 +23,9 @@ final class NetworkConfig {
 }
 
 /// Reusable configuration for an embedded IPFS node.
-final class IPFSConfig {
+final class IpfsConfig {
   /// Creates node settings.
-  const IPFSConfig({
+  const IpfsConfig({
     this.offline = true,
     this.network = const NetworkConfig(),
     this.bitswap = const BitswapConfig(),
@@ -41,11 +41,11 @@ final class IPFSConfig {
   final BitswapConfig bitswap;
 
   /// Returns a copy with selected values replaced.
-  IPFSConfig copyWith({
+  IpfsConfig copyWith({
     bool? offline,
     NetworkConfig? network,
     BitswapConfig? bitswap,
-  }) => IPFSConfig(
+  }) => IpfsConfig(
     offline: offline ?? this.offline,
     network: network ?? this.network,
     bitswap: bitswap ?? this.bitswap,

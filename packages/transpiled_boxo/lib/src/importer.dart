@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -8,7 +9,14 @@ import 'chunker.dart';
 import 'dag_pb.dart';
 import 'unixfs.dart';
 
-const int defaultLinksPerBlock = 174;
+/// Mutable Boxo helper default, read by newly constructed importers.
+int defaultLinksPerBlock = 174;
+
+/// Boxo helpers' mutable BlockSizeLimit, separate from the chunker constant.
+int importerBlockSizeLimit = blockSizeLimit;
+
+/// Boxo helpers' ErrSizeLimitExceeded sentinel.
+const errSizeLimitExceeded = FormatException('object size limit exceeded');
 
 /// A block emitted by the importer. [fileSize] is logical UnixFS file data;
 /// [cumulativeSize] is the DAG-PB link Tsize value.
@@ -20,36 +28,38 @@ class UnixFsBlock {
     required this.fileSize,
     required this.cumulativeSize,
   });
-  final CID cid;
+  final Cid cid;
   final Uint8List data;
   final bool raw;
   final int fileSize;
   final int cumulativeSize;
 }
 
-/// The root CID and, when requested, retained emitted blocks.
+/// The root Cid and, when requested, retained emitted blocks.
 class UnixFsImportResult {
   UnixFsImportResult(this.root, Iterable<UnixFsBlock> blocks)
     : blocks = List.unmodifiable(blocks);
-  final CID root;
+  final Cid root;
   final List<UnixFsBlock> blocks;
 }
 
 /// Imports a regular file into Boxo's balanced UnixFS layout.
 class BalancedUnixFsImporter {
   BalancedUnixFsImporter({
-    this.chunkSize = defaultBlockSize,
-    this.maxLinks = defaultLinksPerBlock,
+    int? chunkSize,
+    int? maxLinks,
     this.cidVersion = 0,
     this.rawLeaves = false,
     this.retainBlocks = false,
     this.onBlock,
-  }) : assert(chunkSize > 0),
-       assert(maxLinks > 0 && maxLinks <= defaultLinksPerBlock),
+  }) : chunkSize = chunkSize ?? defaultBlockSize,
+       maxLinks = maxLinks ?? defaultLinksPerBlock,
        assert(cidVersion == 0 || cidVersion == 1) {
-    if (chunkSize <= 0) throw ArgumentError.value(chunkSize, 'chunkSize');
-    if (maxLinks <= 0 || maxLinks > defaultLinksPerBlock) {
-      throw ArgumentError.value(maxLinks, 'maxLinks', 'must be 1..174');
+    if (this.chunkSize <= 0) {
+      throw ArgumentError.value(this.chunkSize, 'chunkSize');
+    }
+    if (this.maxLinks <= 0) {
+      throw ArgumentError.value(this.maxLinks, 'maxLinks', 'must be positive');
     }
     if (cidVersion != 0 && cidVersion != 1) {
       throw ArgumentError.value(cidVersion, 'cidVersion', 'must be 0 or 1');
@@ -75,10 +85,33 @@ class BalancedUnixFsImporter {
       blocks: blocks,
       onBlock: onBlock,
     );
+    try {
+      return await _import(reader, blocks);
+    } finally {
+      await reader.cancel();
+    }
+  }
+
+  Future<UnixFsImportResult> _import(
+    _LeafReader reader,
+    List<UnixFsBlock> blocks,
+  ) async {
     final first = await reader.next();
     if (first == null) {
+      if (0 > importerBlockSizeLimit) throw errSizeLimitExceeded;
+      if (rawLeaves) {
+        final root = await reader.make(
+          Uint8List(0),
+          raw: true,
+          fileSize: 0,
+          links: const [],
+          cumulativeSize: 0,
+        );
+        return UnixFsImportResult(root.cid, blocks);
+      }
+      final data = UnixFsData(UnixFsDataType.file, filesize: 0).toBytes();
       final root = await reader.make(
-        Uint8List(0),
+        data,
         raw: false,
         fileSize: 0,
         links: const [],
@@ -102,10 +135,11 @@ class BalancedUnixFsImporter {
   Future<UnixFsBlock> _fill(
     int depth,
     _LeafReader reader,
-    UnixFsBlock initial,
+    UnixFsBlock? initial,
   ) async {
-    final children = <UnixFsBlock>[initial];
-    final sizes = <int>[initial.fileSize];
+    final children = <UnixFsBlock>[];
+    if (initial != null) children.add(initial);
+    final sizes = [for (final child in children) child.fileSize];
     while (children.length < maxLinks && await reader.ensure()) {
       if (depth == 1) {
         final child = await reader.next();
@@ -113,11 +147,7 @@ class BalancedUnixFsImporter {
         children.add(child);
         sizes.add(child.fileSize);
       } else {
-        final child = await _fill(
-          depth - 1,
-          reader,
-          await reader.nextInternal(),
-        );
+        final child = await _fill(depth - 1, reader, null);
         children.add(child);
         sizes.add(child.fileSize);
       }
@@ -172,6 +202,7 @@ class _LeafReader {
   final List<UnixFsBlock> blocks;
   final FutureOr<void> Function(UnixFsBlock block)? onBlock;
   late final StreamIterator<Uint8List> _iterator = StreamIterator(_chunks);
+  Future<void> cancel() => _iterator.cancel();
   Uint8List? _pending;
 
   bool get hasNext => _pending != null;
@@ -187,6 +218,7 @@ class _LeafReader {
     if (!await ensure()) return null;
     final bytes = _pending!;
     _pending = null;
+    if (bytes.length > importerBlockSizeLimit) throw errSizeLimitExceeded;
     if (!raw) {
       final data = UnixFsData(
         UnixFsDataType.file,
@@ -210,8 +242,6 @@ class _LeafReader {
     );
   }
 
-  Future<UnixFsBlock> nextInternal() async => (await next())!;
-
   Future<UnixFsBlock> make(
     Uint8List payload, {
     required bool raw,
@@ -222,7 +252,7 @@ class _LeafReader {
     final bytes = raw
         ? payload
         : DagPbNode(data: payload, links: links).toBytes();
-    final cid = await CID.fromContent(
+    final cid = await Cid.fromContent(
       bytes,
       codec: raw ? 'raw' : 'dag-pb',
       version: raw ? 1 : version,
@@ -243,8 +273,8 @@ class _LeafReader {
 /// Boxo's balanced reader importer with Dart stream input.
 Future<UnixFsImportResult> buildDagFromReader(
   Stream<List<int>> input, {
-  int chunkSize = defaultBlockSize,
-  int maxLinks = defaultLinksPerBlock,
+  int? chunkSize,
+  int? maxLinks,
   int cidVersion = 0,
   bool rawLeaves = false,
   bool retainBlocks = false,

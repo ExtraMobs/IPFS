@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/table_refresh.dart
 //
 // Port of go-libp2p-kbucket's table_refresh.go, as extension methods on
@@ -33,7 +34,7 @@ extension RoutingTableRefresh on RoutingTable {
   /// Generates a random peer ID for the given common-prefix-length.
   /// Equivalent to go-libp2p-kbucket's `RoutingTable.GenRandPeerID`.
   DhtId genRandPeerId(int targetCpl) =>
-      genRandPeerIdWithCPL(convertPeerId(local), targetCpl).value;
+      genRandPeerIdWithCpl(convertPeerId(local), targetCpl).value;
 
   /// Generates a random key matching a provided common-prefix-length
   /// against the local identity. The returned key matches the first

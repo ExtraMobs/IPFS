@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:typed_data';
 
 import 'package:test/test.dart';
@@ -7,8 +8,8 @@ import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart';
 void main() {
   test('DAG-JSON encodes and decodes ordinary nodes and bytes', () {
     final node = PlainMap({
-      'n': newInt(3),
-      'b': newBytes(Uint8List.fromList([1, 2])),
+      'n': const PlainInt(3),
+      'b': PlainBytes(Uint8List.fromList([1, 2])),
     });
     final out = <int>[];
     encodeDagJson(node, outSink(out));
@@ -20,11 +21,11 @@ void main() {
   });
 
   test('DAG-JSON matches Go link and padded-bytes forms', () {
-    final cid = CID.decode(
+    final cid = Cid.decode(
       'bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi',
     );
     final out = <int>[];
-    encodeDagJson(newLink(CidLink(cid)), outSink(out));
+    encodeDagJson(PlainLink(CidLink(cid)), outSink(out));
     expect(
       String.fromCharCodes(out),
       '{"/":"bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi"}',
@@ -38,7 +39,7 @@ void main() {
     final out = <int>[];
     expect(
       () => encodeDagJsonWithOptions(
-        newBytes(Uint8List.fromList([1])),
+        PlainBytes(Uint8List.fromList([1])),
         outSink(out),
         const DagJsonEncodeOptions(encodeBytes: false),
       ),

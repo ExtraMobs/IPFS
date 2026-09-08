@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 /// Time-to-live values used by libp2p peer address books.
 ///
 /// Go's [time.Duration] is nanoseconds; Dart's [Duration] stores
@@ -14,16 +15,3 @@ const Duration ownObservedAddrTtl = Duration(minutes: 30);
 /// Permanent TTLs are distinct, as in go-libp2p (`math.MaxInt64 - iota`).
 const Duration permanentAddrTtl = Duration(microseconds: 9223372036854775);
 const Duration connectedAddrTtl = Duration(microseconds: 9223372036854774);
-
-/// Go-exported spelling retained for source-level parity.
-const AddressTTL = addressTtl;
-/// Go-exported spelling retained for source-level parity.
-const TempAddrTTL = tempAddrTtl;
-/// Go-exported spelling retained for source-level parity.
-const RecentlyConnectedAddrTTL = recentlyConnectedAddrTtl;
-/// Go-exported spelling retained for source-level parity.
-const OwnObservedAddrTTL = ownObservedAddrTtl;
-/// Go-exported spelling retained for source-level parity.
-const PermanentAddrTTL = permanentAddrTtl;
-/// Go-exported spelling retained for source-level parity.
-const ConnectedAddrTTL = connectedAddrTtl;

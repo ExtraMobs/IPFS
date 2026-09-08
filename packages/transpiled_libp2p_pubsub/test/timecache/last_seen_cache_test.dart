@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-libp2p-pubsub's timecache/last_seen_cache_test.go:
 // TestLastSeenCacheFound, TestLastSeenCacheExpire,
 // TestLastSeenCacheSlideForward, TestLastSeenCacheNotFoundAfterExpire.
@@ -8,7 +9,7 @@ import 'package:transpiled_libp2p_pubsub/transpiled_libp2p_pubsub.dart';
 
 void main() {
   test('TestLastSeenCacheFound', () {
-    final tc = newLastSeenCacheWithSweepInterval(const Duration(minutes: 1), const Duration(minutes: 1));
+    final tc = TimeCache.lastSeenWithSweepInterval(const Duration(minutes: 1), const Duration(minutes: 1));
     addTearDown(tc.done);
 
     tc.add('test');
@@ -16,7 +17,7 @@ void main() {
   });
 
   test('TestLastSeenCacheExpire', () async {
-    final tc = newLastSeenCacheWithSweepInterval(
+    final tc = TimeCache.lastSeenWithSweepInterval(
       const Duration(milliseconds: 150),
       const Duration(milliseconds: 100),
     );
@@ -34,7 +35,7 @@ void main() {
   });
 
   test('TestLastSeenCacheSlideForward', () async {
-    final tc = newLastSeenCacheWithSweepInterval(
+    final tc = TimeCache.lastSeenWithSweepInterval(
       const Duration(milliseconds: 300),
       const Duration(milliseconds: 100),
     );
@@ -62,7 +63,7 @@ void main() {
   });
 
   test('TestLastSeenCacheNotFoundAfterExpire', () async {
-    final tc = newLastSeenCacheWithSweepInterval(
+    final tc = TimeCache.lastSeenWithSweepInterval(
       const Duration(milliseconds: 150),
       const Duration(milliseconds: 100),
     );

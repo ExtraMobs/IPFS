@@ -1,3 +1,4 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // Port of go-ipld-prime's node/basicnode/int_test.go (TestBasicInt,
 // TestIntErrors) plus the string/bytes/int specs from node/tests
 // (stringSpecs.go's SpecTestString, byteSpecs.go's SpecTestBytes) applied
@@ -13,11 +14,11 @@ import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart';
 
 void main() {
   test('TestBasicInt', () {
-    final m = newInt(3);
+    final m = Basicnode.ofInt(3);
     final b = m.prototype().newBuilder();
     b.assignInt(4);
     final n = b.build();
-    final u = newInt(5); // stand-in for basicnode.NewUint(5): see below.
+    final u = const PlainInt(5); // stand-in for basicnode.NewUint(5): see below.
 
     expect(m.asInt(), equals(3));
     expect(n.asInt(), equals(4));
@@ -31,7 +32,7 @@ void main() {
   });
 
   test('TestIntErrors', () {
-    final x = newInt(3);
+    final x = Basicnode.ofInt(3);
 
     expect(
       () => x.lookupByIndex(0),

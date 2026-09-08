@@ -1,6 +1,10 @@
+// ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 // lib/src/cid/cid.dart
 import 'dart:typed_data';
 
+// Logical schema fixed_types.Golang.
+// ignore: library_prefixes
+import 'package:boilerplate/fixed_types/golang.dart' as Golang;
 import 'package:crypto/crypto.dart';
 import 'package:multibase/multibase.dart' as mb;
 
@@ -9,7 +13,17 @@ import 'package:transpiled_multicodec/transpiled_multicodec.dart';
 import 'package:transpiled_multihash/transpiled_multihash.dart';
 import 'package:transpiled_varint/transpiled_varint.dart';
 
-/// A Content Identifier (CID) for content-addressed data in IPFS.
+// Optional textual projection onto the existing int-based registry. The
+// original Uint64 remains authoritative even when no native lookup is possible.
+String _codecName(Golang.Uint64 code) {
+  final exact = code.toBigInt();
+  final native = exact.toInt();
+  return BigInt.from(native) == exact && Multicodec.supportsByCode(native)
+      ? Multicodec.name(native)
+      : 'unknown';
+}
+
+/// A Content Identifier (Cid) for content-addressed data in IPFS.
 ///
 /// CIDs are self-describing content addresses that combine a cryptographic hash
 /// of the content with metadata about the hashing algorithm and data encoding.
@@ -20,24 +34,34 @@ import 'package:transpiled_varint/transpiled_varint.dart';
 /// Example:
 /// ```dart
 /// final data = Uint8List.fromList(utf8.encode('Hello IPFS'));
-/// final cid = await CID.fromContent(data);
+/// final cid = await Cid.fromContent(data);
 /// print(cid.encode()); // bafkrei...
 /// ```
-class CID {
-  /// Creates a CID with the specified components.
-  const CID({
+
+class Cid {
+  Uint8List bytes() => toBytes();
+  /// Creates a Cid with the specified components.
+  Cid({
     required this.version,
     required this.multihash,
-    this.codec,
+    String? codec,
+    this.multibaseType,
+  }) : codecCode = Golang.Uint64(Multicodec.code(codec ?? 'raw'));
+
+  /// Creates a Cid retaining the numeric codec, including unregistered codes.
+  const Cid.numeric({
+    required this.version,
+    required this.multihash,
+    required this.codecCode,
     this.multibaseType,
   });
 
   /// Creates a CIDv0 from a 32-byte SHA2-256 hash.
-  factory CID.v0(Uint8List hashBytes) {
+  factory Cid.v0(Uint8List hashBytes) {
     if (hashBytes.length != 32) {
       throw ArgumentError('CIDv0 requires a 32-byte SHA2-256 hash');
     }
-    return CID(
+    return Cid(
       version: 0,
       multihash: MultihashUtils.sha256(hashBytes),
       codec: 'dag-pb',
@@ -46,12 +70,12 @@ class CID {
   }
 
   /// Creates a CIDv1 from a codec name and a multihash info.
-  factory CID.v1(
+  factory Cid.v1(
     String codec,
-    MultihashInfo multihash, {
+    DecodedMultihash multihash, {
     mb.Multibase base = mb.Multibase.base32,
   }) {
-    return CID(
+    return Cid(
       version: 1,
       codec: codec,
       multihash: multihash,
@@ -59,12 +83,12 @@ class CID {
     );
   }
 
-  /// Creates a CID by hashing [data].
+  /// Creates a Cid by hashing [data].
   ///
   /// [codec] defaults to `raw` and is ignored when [version] is 0 (always
   /// `dag-pb`, per the CIDv0 spec). [hashType] defaults to `sha2-256`; no
   /// other hash function is currently supported.
-  static Future<CID> fromContent(
+  static Future<Cid> fromContent(
     Uint8List data, {
     String codec = 'raw',
     String hashType = 'sha2-256',
@@ -75,64 +99,46 @@ class CID {
     }
     final digest = Uint8List.fromList(sha256.convert(data).bytes);
     if (version == 0) {
-      return CID.v0(digest);
+      return Cid.v0(digest);
     }
     final mh = MultihashUtils.sha256(digest);
-    return CID.v1(codec, mh);
+    return Cid.v1(codec, mh);
   }
 
-  /// Computes a CID for [data] (async convenience wrapper over
+  /// Computes a Cid for [data] (async convenience wrapper over
   /// [fromContent], kept for API parity with call sites that expect this
   /// name).
-  static Future<CID> computeForData(Uint8List data, {String format = 'raw'}) {
+  static Future<Cid> computeForData(Uint8List data, {String format = 'raw'}) {
     return fromContent(data, codec: format);
   }
 
-  /// Computes a CID for [data] synchronously (SHA2-256, CIDv1 only).
+  /// Computes a Cid for [data] synchronously (SHA2-256, CIDv1 only).
   ///
   /// Prefer [fromContent] when `hashType`/`version` flexibility or async
   /// hashing is needed; this exists for call sites that cannot await.
-  static CID computeForDataSync(Uint8List data, {String codec = 'raw'}) {
+  static Cid computeForDataSync(Uint8List data, {String codec = 'raw'}) {
     final digest = Uint8List.fromList(sha256.convert(data).bytes);
     final mh = MultihashUtils.sha256(digest);
-    return CID.v1(codec, mh);
+    return Cid.v1(codec, mh);
   }
 
-  /// Reconstructs a CID from a [prefix] (version + codec + multihash
+  /// Reconstructs a Cid from a [prefix] (version + codec + multihash
   /// function + hash length) and the raw block [data].
   ///
-  /// The digest is computed from [data] using [hashType]; the codec comes
-  /// from [prefix], not from [data]'s content. Used by Bitswap/GraphSync to
-  /// let a receiver reconstruct a CID from [Block.toPrefixBytes] plus the
+  /// Version, codec, hash function and digest length all come from [prefix].
+  /// Used by Bitswap/GraphSync to
+  /// let a receiver reconstruct a Cid from [Block.toPrefixBytes] plus the
   /// block bytes.
-  static Future<CID> fromPrefixBytes(
-    Uint8List prefix,
-    Uint8List data, {
-    String hashType = 'sha2-256',
-  }) async {
-    final codec = _codecFromPrefixBytes(prefix);
-    return fromContent(data, codec: codec, hashType: hashType);
-  }
+  static Future<Cid> fromPrefixBytes(Uint8List prefix, Uint8List data) async =>
+      Prefix.fromBytes(prefix).sum(data);
 
-  static String _codecFromPrefixBytes(Uint8List prefix) {
-    if (prefix.isEmpty) return 'raw';
-    if (prefix[0] == 0x01) {
-      final (codecCode, _) = readVarint(prefix, 1);
-      return Multicodec.supportsByCode(codecCode)
-          ? Multicodec.name(codecCode)
-          : 'unknown';
-    }
-    // CIDv0 is always dag-pb.
-    return 'dag-pb';
-  }
-
-  /// Parses a CID from its raw binary representation.
-  static CID fromBytes(Uint8List bytes) {
+  /// Parses a Cid from its raw binary representation.
+  static Cid fromBytes(Uint8List bytes) {
     if (bytes.isEmpty) throw ArgumentError('Empty bytes');
 
     // CIDv0: 34 bytes starting with 0x12 0x20 (sha2-256, 32-byte digest)
     if (bytes.length >= 34 && bytes[0] == 0x12 && bytes[1] == 0x20) {
-      return CID(
+      return Cid(
         version: 0,
         multihash: MultihashUtils.decode(bytes.sublist(0, 34)),
         codec: 'dag-pb',
@@ -143,39 +149,31 @@ class CID {
     // CIDv1: first byte is 0x01
     if (bytes[0] == 0x01) {
       var index = 1;
-      final (codecCode, codecLen) = readVarint(bytes, index);
+      final (codecCode, codecLen) = fromUvarint(
+        Uint8List.sublistView(bytes, index),
+      );
       index += codecLen;
 
-      final mhStart = index;
-      final (hashCode, codeLen) = readVarint(bytes, index);
-      index += codeLen;
-      final (digestLen, lenLen) = readVarint(bytes, index);
-      index += lenLen;
-      final mhEnd = index + digestLen;
-      if (mhEnd > bytes.length) {
-        throw const FormatException('Invalid CID bytes: multihash truncated');
-      }
-      final mh = MultihashUtils.decode(bytes.sublist(mhStart, mhEnd));
+      final (_, multihashBytes) = mhFromBytes(
+        Uint8List.sublistView(bytes, index),
+      );
+      final mh = MultihashUtils.decode(multihashBytes);
 
-      final codecStr = Multicodec.supportsByCode(codecCode)
-          ? Multicodec.name(codecCode)
-          : 'unknown';
-
-      return CID(
+      return Cid.numeric(
         version: 1,
         multihash: mh,
-        codec: codecStr,
+        codecCode: codecCode,
         multibaseType: mb.Multibase.base32,
       );
     }
 
-    throw const FormatException('Invalid CID version');
+    throw const FormatException('Invalid Cid version');
   }
 
-  /// Decodes a CID from its string representation.
-  static CID decode(String cidStr) {
+  /// Decodes a Cid from its string representation.
+  static Cid decode(String cidStr) {
     if (cidStr.isEmpty) {
-      throw ArgumentError('Empty CID string');
+      throw ArgumentError('Empty Cid string');
     }
 
     if (cidStr.startsWith('Qm')) {
@@ -188,22 +186,25 @@ class CID {
     return fromBytes(decoded);
   }
 
-  /// The CID version (0 or 1).
+  /// The Cid version (0 or 1).
   final int version;
 
   /// The multihash containing the hash algorithm and digest.
-  final MultihashInfo multihash;
+  final DecodedMultihash multihash;
 
   /// The content codec (e.g., 'dag-pb', 'raw', 'dag-cbor').
-  final String? codec;
+  String get codec => _codecName(codecCode);
+
+  /// Canonical numeric codec; names never determine parsed Cid identity.
+  final Golang.Uint64 codecCode;
 
   /// The multibase encoding type for string representation.
   final mb.Multibase? multibaseType;
 
-  /// Encodes the CID to its string representation.
+  /// Encodes the Cid to its string representation.
   String encode() => encodeWithBase(multibaseType);
 
-  /// Encodes the CID using the requested [base].
+  /// Encodes the Cid using the requested [base].
   ///
   /// CIDv0 is always returned as base58btc regardless of the requested base.
   /// CIDv1 defaults to base32 when [base] is null.
@@ -219,13 +220,13 @@ class CID {
     return MultibaseUtils.encode(baseType, bytes);
   }
 
-  /// Encodes the CID using the base identified by [baseName].
+  /// Encodes the Cid using the base identified by [baseName].
   String encodeWithBaseName(String baseName) {
     final base = _multibaseFromName(baseName);
     return encodeWithBase(base);
   }
 
-  /// Returns the raw binary representation of the CID.
+  /// Returns the raw binary representation of the Cid.
   Uint8List toBytes() {
     if (version == 0) {
       return multihash.toBytes();
@@ -233,21 +234,12 @@ class CID {
 
     final builder = BytesBuilder();
     builder.addByte(0x01);
-    int codecCode;
-    try {
-      codecCode = Multicodec.code(codec ?? 'raw');
-    } catch (_) {
-      // Multicodec.code throws ArgumentError; callers of this API expect
-      // FormatException for CID-encoding-shaped failures (matches the
-      // umbrella CID's pre-Phase-2 behavior).
-      throw FormatException('Unsupported codec during CID encoding: $codec');
-    }
-    builder.add(encodeVarint(codecCode));
+    builder.add(toUvarint(codecCode));
     builder.add(multihash.toBytes());
     return builder.toBytes();
   }
 
-  /// Returns the CID prefix bytes (version + codec + multihash function + hash
+  /// Returns the Cid prefix bytes (version + codec + multihash function + hash
   /// length), omitting the digest itself.
   Uint8List toPrefixBytes() {
     final bytes = toBytes();
@@ -258,16 +250,16 @@ class CID {
     return Uint8List.fromList(bytes.sublist(0, bytes.length - digestLength));
   }
 
-  /// This CID's shape -- version, codec, hash function, and hash length --
+  /// This Cid's shape -- version, codec, hash function, and hash length --
   /// without the digest content. Equivalent to go-cid's `Cid.Prefix()`.
-  Prefix get prefix => Prefix(
+  Prefix get prefix => Prefix.numeric(
     version: version,
-    codec: version == 0 ? 'dag-pb' : (codec ?? 'raw'),
-    mhType: multihash.name,
+    codecCode: version == 0 ? Golang.Uint64(0x70) : codecCode,
+    mhTypeCode: multihash.code,
     mhLength: multihash.size,
   );
 
-  /// Validates the CID's structural invariants (version, codec, multihash
+  /// Validates the Cid's structural invariants (version, codec, multihash
   /// size). Does not verify the multihash against any content -- for that,
   /// hash the content and compare, e.g. via [Block.validate] on the
   /// consuming side.
@@ -278,22 +270,22 @@ class CID {
     return true;
   }
 
-  /// Returns the encoded CID string.
+  /// Returns the encoded Cid string.
   @override
   String toString() => encode();
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CID &&
+      other is Cid &&
           runtimeType == other.runtimeType &&
           version == other.version &&
-          codec == other.codec &&
+          codecCode == other.codecCode &&
           _bytesEqual(multihash.toBytes(), other.multihash.toBytes());
 
   @override
   int get hashCode =>
-      Object.hash(version, codec, Object.hashAll(multihash.toBytes()));
+      Object.hash(version, codecCode, Object.hashAll(multihash.toBytes()));
 
   static bool _bytesEqual(Uint8List a, Uint8List b) {
     if (a.length != b.length) return false;
@@ -330,70 +322,109 @@ class CID {
   }
 }
 
-/// A CID's shape -- version, codec, hash function, and hash length --
-/// without any digest content. Lets you describe the kind of CID to produce
+/// A Cid's shape -- version, codec, hash function, and hash length --
+/// without any digest content. Lets you describe the kind of Cid to produce
 /// once and reuse it to hash many different pieces of data. Equivalent to
 /// go-cid's `Prefix` type.
 class Prefix {
   /// Creates a prefix.
-  const Prefix({
+  Prefix({
     required this.version,
-    required this.codec,
-    required this.mhType,
+    required String codec,
+    required String mhType,
+    required this.mhLength,
+  }) : codecCode = Golang.Uint64(Multicodec.code(codec)),
+       mhTypeCode = Golang.Uint64(Multicodec.code(mhType));
+
+  /// Creates a prefix preserving numeric codec and hash function codes.
+  const Prefix.numeric({
+    required this.version,
+    required this.codecCode,
+    required this.mhTypeCode,
     required this.mhLength,
   });
 
-  /// Decodes the four-varint CID prefix used by Bitswap payload blocks.
+  /// Decodes the four-varint Cid prefix used by Bitswap payload blocks.
   factory Prefix.fromBytes(Uint8List bytes) {
     var offset = 0;
-    final (version, versionLength) = readVarint(bytes, offset);
+    final (version, versionLength) = fromUvarint(
+      Uint8List.sublistView(bytes, offset),
+    );
     offset += versionLength;
-    final (codecCode, codecLength) = readVarint(bytes, offset);
+    final (codecCode, codecLength) = fromUvarint(
+      Uint8List.sublistView(bytes, offset),
+    );
     offset += codecLength;
-    final (mhCode, mhCodeLength) = readVarint(bytes, offset);
+    final (mhCode, mhCodeLength) = fromUvarint(
+      Uint8List.sublistView(bytes, offset),
+    );
     offset += mhCodeLength;
-    final (mhLength, lengthLength) = readVarint(bytes, offset);
+    final (mhLength, lengthLength) = fromUvarint(
+      Uint8List.sublistView(bytes, offset),
+    );
     offset += lengthLength;
     if (offset != bytes.length) {
-      throw const FormatException('CID prefix has trailing bytes');
+      throw const FormatException('Cid prefix has trailing bytes');
     }
-    return Prefix(
-      version: version,
-      codec: Multicodec.name(codecCode),
-      mhType: Multicodec.name(mhCode),
-      mhLength: mhLength,
+    return Prefix.numeric(
+      version: Golang.Int64.fromUint64(version).toIntExact(),
+      codecCode: codecCode,
+      mhTypeCode: mhCode,
+      mhLength: Golang.Int64.fromUint64(mhLength).toIntExact(),
     );
   }
 
-  /// The CID version (0 or 1).
+  /// The Cid version (0 or 1).
   final int version;
 
   /// The content codec (e.g. `dag-pb`, `raw`, `dag-cbor`).
-  final String codec;
+  String get codec => _codecName(codecCode);
+
+  /// Numeric content codec, including unknown registry values.
+  final Golang.Uint64 codecCode;
 
   /// The multihash function name (e.g. `sha2-256`).
-  final String mhType;
+  String get mhType => codes[mhTypeCode] ?? '';
+
+  /// Numeric multihash function, including unknown registry values.
+  final Golang.Uint64 mhTypeCode;
 
   /// The digest length in bytes.
   final int mhLength;
 
-  /// Hashes [data] with [mhType] and builds a CID with this prefix's
+  /// Hashes [data] with [mhType] and builds a Cid with this prefix's
   /// [version] and [codec]. Equivalent to go-cid's `Prefix.Sum(data)`.
-  CID sum(Uint8List data) {
-    final full = MultihashUtils.sum(mhType, data);
-    if (mhLength < -1 || mhLength > full.digest.length) {
-      throw RangeError.range(mhLength, -1, full.digest.length, 'mhLength');
+  Uint8List bytes() {
+    final builder = BytesBuilder();
+    builder.add(toUvarint(Golang.Uint64(version)));
+    builder.add(toUvarint(codecCode));
+    builder.add(toUvarint(mhTypeCode));
+    builder.add(toUvarint(Golang.Uint64(mhLength)));
+    return builder.toBytes();
+  }
+
+  Cid sum(Uint8List data) {
+    final length = mhTypeCode == Golang.Uint64() ? -1 : mhLength;
+    if (version == 0 &&
+        (mhTypeCode != Golang.Uint64(0x12) ||
+            (mhLength != 32 && mhLength != -1))) {
+      throw const FormatException('invalid v0 prefix');
     }
-    final mh = mhLength == -1 || mhLength == full.digest.length
+    final full = MultihashUtils.sum(mhType, data);
+    if (length > full.digest.length) {
+      throw RangeError.range(length, 0, full.digest.length, 'mhLength');
+    }
+    final mh = length < 0 || length == full.digest.length
         ? full
         : MultihashUtils.encode(
             mhType,
-            Uint8List.fromList(full.digest.sublist(0, mhLength)),
+            Uint8List.fromList(full.digest.sublist(0, length)),
           );
     if (version == 0) {
-      return CID.v0(Uint8List.fromList(mh.digest));
+      return Cid.v0(Uint8List.fromList(mh.digest));
     }
-    return CID.v1(codec, mh);
+    if (version != 1) throw const FormatException('invalid cid version');
+    return Cid.numeric(version: 1, codecCode: codecCode, multihash: mh);
   }
 
   @override
@@ -401,10 +432,30 @@ class Prefix {
       identical(this, other) ||
       other is Prefix &&
           version == other.version &&
-          codec == other.codec &&
-          mhType == other.mhType &&
+          codecCode == other.codecCode &&
+          mhTypeCode == other.mhTypeCode &&
           mhLength == other.mhLength;
 
   @override
-  int get hashCode => Object.hash(version, codec, mhType, mhLength);
+  int get hashCode => Object.hash(version, codecCode, mhTypeCode, mhLength);
+}
+
+class ErrInvalidCid implements Exception {
+  final Object? cause;
+  const ErrInvalidCid([this.cause]);
+  @override
+  String toString() => cause == null ? 'invalid cid' : 'invalid cid: $cause';
+}
+
+class ErrCidTooShort implements Exception {
+  const ErrCidTooShort();
+  @override
+  String toString() => 'cid too short';
+}
+
+class ErrInvalidEncoding implements Exception {
+  final Object? cause;
+  const ErrInvalidEncoding([this.cause]);
+  @override
+  String toString() => cause == null ? 'invalid base encoding' : 'invalid base encoding: $cause';
 }
