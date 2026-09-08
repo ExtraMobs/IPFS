@@ -270,6 +270,9 @@ class Cid {
     return true;
   }
 
+  /// Returns true if this Cid is defined. Equivalent to go-cid's `Cid.Defined()`.
+  bool get defined => validate();
+
   /// Returns the encoded Cid string.
   @override
   String toString() => encode();

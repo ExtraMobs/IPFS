@@ -22,3 +22,6 @@ export 'src/unixfs.dart';
 export 'src/importer.dart';
 export 'src/blockstore.dart';
 export 'src/bitswap/message.dart' hide Entry;
+export 'src/bitswap/network.dart';
+export 'src/bitswap/client.dart' hide Entry, Wantlist, WantType;
+

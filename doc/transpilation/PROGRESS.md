@@ -6,6 +6,29 @@ arquivo registra a ordem e o que já foi validado.
 
 ## Como isto foi gerado / como continuar
 
+### Port de boxo/bitswap/network e boxo/bitswap/client para transpiled_boxo — 2026-09-08
+
+Port integral e auditoria dos módulos de rede e cliente do Bitswap para `packages/transpiled_boxo`:
+1. **Rede Bitswap (`boxo/bitswap/network` e `bsnet`)**:
+   - `network/interface.dart`: interfaces `BitSwapNetwork`, `Receiver`, `MessageSender`, `MessageSenderOpts`, `Stats`, `Pinger`, `PeerTagger`.
+   - `network/connecteventmanager.dart`: `ConnectEventManager` com estados `disconnected`, `responsive`, `unresponsive` e fila assíncrona de eventos.
+   - `network/bsnet/`: `defaultProtocols` (`/ipfs/bitswap/1.2.0`, `1.1.0`, `1.0.0`, `/ipfs/bitswap`), `Settings`, `NetOpt`, e `IpfsNetwork` gerenciando streams e framing de mensagens (`BitSwapMessage.fromMsgReader` e `toNetV1`/`toNetV0`).
+   - Testes de paridade em `packages/transpiled_boxo/test/bitswap/network/connecteventmanager_test.dart` portados de `connecteventmanager_test.go`.
+2. **Cliente Bitswap (`boxo/bitswap/client/internal`)**:
+   - `notifications/`: `PubSub` e `NotificationsPubSub` com publish e subscribe por CID e encerramento limpo.
+   - `blockpresencemanager/`: `BlockPresenceManager` com garantia de não substituição de HAVE por DONT_HAVE e filtro `allPeersDoNotHaveBlock`.
+   - `getter/`: `syncGetBlock` e `asyncGetBlocks`.
+   - `messagequeue/`: `DontHaveTimeoutConfig`, `DontHaveTimeoutManager` e `MessageQueue` com particionamento `maxMessageSize = 2 MiB`, deduplicação e backoff.
+   - `peermanager/`: `PeerWantManager` com tracking de want-blocks e want-haves por peer, índice reverso e `PeerManager` com pool de peers.
+   - `client.dart`: classe `Client` integrando `Receiver`, `BlockGetter`, blockstore e wantlist.
+   - Testes de paridade em `packages/transpiled_boxo/test/bitswap/client/` cobrindo todos os módulos.
+3. **Validação**:
+   - `dart analyze .`: 0 erros e 0 warnings.
+   - `dart test -j 1` em `packages/transpiled_boxo`: 84/84 testes passando (100%).
+   - `dart test -j 1` na raiz: 124/124 testes passando (100%).
+   - `local_kubo_bitswap_test.dart`: 100% aprovado (2s).
+   - `local_kubo_dht_bitswap_test.dart`: 100% aprovado (12s).
+
 ### Port de boxo/bitswap/message e pb para transpiled_boxo — 2026-09-08
 
 Port integral e auditoria dos módulos `boxo/bitswap/message` e `pb` para `packages/transpiled_boxo`:
@@ -822,13 +845,25 @@ Fluxo-alvo:
   `packages/transpiled_boxo/test/bitswap/message_test.dart` portados diretamente de `message_test.go`
   (incluindo vetor byte-a-byte do frame vazio do Boxo `[0x02, 0x0a, 0x00]`). O runtime em
   `lib/src/protocols/bitswap/bitswap_message.dart` foi refatorado para delegar diretamente ao pacote.
-- [ ] Auditar/portar `boxo/bitswap/network` e `bitswap/network/bsnet`: negociação
+- [x] Auditar/portar `boxo/bitswap/network` e `bitswap/network/bsnet`: negociação
   de protocolo, framing, streams persistentes, sender por peer, múltiplas
   mensagens por stream, conexão/desconexão e erros.
-- [ ] Auditar/portar o subconjunto de download de `boxo/bitswap/client`:
+  Concluído em 2026-09-08: `BitSwapNetwork`, `MessageSender`, `Receiver`, `ConnectEventManager`
+  (estados disconnected, responsive, unresponsive e fila de mudanças assíncrona),
+  `IpfsNetwork` com suporte a `/ipfs/bitswap/1.2.0`, `1.1.0`, `1.0.0` e `/ipfs/bitswap`,
+  framing via `BitSwapMessage.fromMsgReader` e `toNetV1`/`toNetV0`, e reenvios com backoff.
+  Coberto por testes de paridade em `packages/transpiled_boxo/test/bitswap/network/`.
+- [x] Auditar/portar o subconjunto de download de `boxo/bitswap/client`:
   `getter`, `notifications`, `messagequeue`, `peermanager`,
   `blockpresencemanager`, wantlist e somente as partes de sessão/interesse
   exigidas pelo client.
+  Concluído em 2026-09-08: `notifications` (`PubSub` com publish/subscribe por CID e shutdown seguro),
+  `blockpresencemanager` (`BlockPresenceManager` com garantia HAVE sobre DONT_HAVE e `allPeersDoNotHaveBlock`),
+  `getter` (`syncGetBlock` e `asyncGetBlocks`), `messagequeue` (`MessageQueue` com particionamento
+  `maxMessageSize = 2 MiB`, deduplicação e `DontHaveTimeoutManager`), `peermanager` (`PeerManager` e
+  `PeerWantManager` com tracking de want-blocks e want-haves por peer, índice reverso e broadcast),
+  e classe `Client` integrando `Receiver`, `BlockGetter` e wantlists.
+  Coberto por testes de paridade em `packages/transpiled_boxo/test/bitswap/client/`.
 - [x] Portar ou adaptar o mínimo de `boxo/blockstore` (`has`/`get`/`put`) ao
   blockstore Dart existente, sempre verificando CID ↔ dados antes de persistir.
   `BlockStore` implementa a superfície Dart `Blockstore` sem criar outro

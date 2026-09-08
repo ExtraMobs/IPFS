@@ -29,6 +29,8 @@ dependencies:
     path: ../transpiled_varint
   transpiled_protobuf:
     path: ../transpiled_protobuf
+  transpiled_libp2p:
+    path: ../transpiled_libp2p
 
 dev_dependencies:
   test: ^1.28.0
