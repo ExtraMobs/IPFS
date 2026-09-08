@@ -132,6 +132,3 @@ final class _Spec implements SelectorSpec {
   Selector selector() => compileSelector(_node);
 }
 
-/// Equivalent to Go's `builder.NewSelectorSpecBuilder`.
-SelectorSpecBuilder newSelectorSpecBuilder(NodePrototype prototype) =>
-    SelectorSpecBuilder(prototype);

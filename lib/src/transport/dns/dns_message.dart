@@ -77,7 +77,7 @@ Uint8List _encodeName(String name) {
 }
 
 /// One parsed resource record's relevant fields: enough to serve
-/// `BasicResolver.lookupIPAddr`/`lookupTXT`.
+/// `BasicResolver.lookupIpAddr`/`lookupTxt`.
 class DnsRecord {
   /// Builds a record with the given [type] and text [data].
   const DnsRecord({required this.type, required this.data});

@@ -268,10 +268,11 @@ abstract interface class Exportable {
 /// and decoding messages sent on the Bitswap protocol.
 abstract interface class BitSwapMessage implements Exportable {
   factory BitSwapMessage([bool full]) = Impl;
+  factory BitSwapMessage.fromProto(pb.Message pbm) => _newMessageFromProto(pbm);
 
   /// Decodes raw protobuf bytes into a [BitSwapMessage].
   static BitSwapMessage fromBytes(Uint8List bytes) =>
-      newMessageFromProto(pb.Message.decode(bytes));
+      BitSwapMessage.fromProto(pb.Message.decode(bytes));
 
   List<Entry> fillWantlist(List<Entry> out);
   List<Entry> wantlist();
@@ -541,12 +542,6 @@ class Impl implements BitSwapMessage {
   }
 }
 
-/// Creates a new empty bitswap message, equivalent to Go's `New(full)`.
-BitSwapMessage newMessage([bool full = false]) => BitSwapMessage(full);
-
-/// Alias matching Go's `message.New`.
-BitSwapMessage newBitSwapMessage([bool full = false]) => BitSwapMessage(full);
-
 /// Returns the size in bytes of a BlockPresence entry in protobuf.
 int blockPresenceSize(Cid c) => pb.BlockPresence(
       cid: c.toBytes(),
@@ -554,7 +549,7 @@ int blockPresenceSize(Cid c) => pb.BlockPresence(
     ).size();
 
 /// Creates a block from payload bytes and Cid prefix.
-block_format.Block newWantlistBlock(
+block_format.Block wantlistBlock(
   Uint8List bs, [
   Cid? c,
   Prefix? prefix,
@@ -571,14 +566,13 @@ block_format.Block newWantlistBlock(
   final blockCid = pref.sum(bs);
   if (c != null) {
     if (blockCid != c) {
-      throw const block_format.ErrWrongHash();
+      throw const block_format.WrongHashException();
     }
   }
   return block_format.BasicBlock.withCid(bs, blockCid);
 }
 
-/// Constructs a [BitSwapMessage] from a decoded protobuf message.
-BitSwapMessage newMessageFromProto(pb.Message pbm) {
+BitSwapMessage _newMessageFromProto(pb.Message pbm) {
   final m = Impl(pbm.wantlist != null && pbm.wantlist!.full);
 
   final wl = pbm.wantlist;
@@ -599,7 +593,7 @@ BitSwapMessage newMessageFromProto(pb.Message pbm) {
 
   for (final b in pbm.payload) {
     final pref = Prefix.fromBytes(b.prefix);
-    final blk = newWantlistBlock(b.data, null, pref);
+    final blk = wantlistBlock(b.data, null, pref);
     m.addBlock(blk);
   }
 
@@ -641,7 +635,7 @@ BitSwapMessage newMessageFromProto(pb.Message pbm) {
   final msg = r.readMsg();
   final pbm = pb.Message.decode(msg);
   r.releaseMsg(msg);
-  final m = newMessageFromProto(pbm);
+  final m = BitSwapMessage.fromProto(pbm);
   return (m, msg.length);
 }
 

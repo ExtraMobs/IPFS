@@ -2,7 +2,7 @@
 library;
 
 export 'package:transpiled_block_format/transpiled_block_format.dart'
-    show BasicBlock, Block, ErrWrongHash;
+    show BasicBlock, Block, WrongHashException;
 export 'package:transpiled_cid/transpiled_cid.dart' show Cid, Prefix;
 export 'package:transpiled_libp2p/transpiled_libp2p.dart'
     show AddrInfo, PeerId, addrInfoFromString;

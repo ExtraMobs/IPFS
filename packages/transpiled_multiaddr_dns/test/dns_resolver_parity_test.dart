@@ -207,20 +207,20 @@ void main() {
       resolver.withDomainResolver('custom.test', custom1);
       resolver.withDomainResolver('more.custom.test', custom2);
 
-      expect(await resolver.lookupIPAddr('example.com'), equals(['1.2.3.4']));
-      expect(await resolver.lookupIPAddr('custom.test'), equals(['2.3.4.5']));
+      expect(await resolver.lookupIpAddr('example.com'), equals(['1.2.3.4']));
+      expect(await resolver.lookupIpAddr('custom.test'), equals(['2.3.4.5']));
       expect(
-        await resolver.lookupIPAddr('another.custom.test'),
+        await resolver.lookupIpAddr('another.custom.test'),
         equals(['3.4.5.6']),
       );
       // more.custom.test has its own resolver (custom2), overriding
       // custom1's entry for the same name.
       expect(
-        await resolver.lookupIPAddr('more.custom.test'),
+        await resolver.lookupIpAddr('more.custom.test'),
         equals(['4.5.6.8']),
       );
       expect(
-        await resolver.lookupIPAddr('some.more.custom.test'),
+        await resolver.lookupIpAddr('some.more.custom.test'),
         equals(['5.6.8.9']),
       );
     });

@@ -11,9 +11,6 @@ import '../datamodel/node.dart';
 import 'base_node.dart';
 import 'scalars.dart' show PrototypeBytes;
 
-/// A bytes-kind [Node] backed by [reader] instead of an in-memory byte
-/// list. Equivalent to go-ipld-prime's `NewBytesFromReader` + `streamBytes`.
-Node newBytesFromReader(ByteReadSeeker reader) => StreamBytes(reader);
 
 /// A bytes-kind [Node] backed by a [ByteReadSeeker]. Equivalent to
 /// go-ipld-prime's `streamBytes`.

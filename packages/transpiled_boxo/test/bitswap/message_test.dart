@@ -50,7 +50,7 @@ void main() {
     );
 
     expect(wantlistContains(protoMessage.wantlist, str), isTrue);
-    final m = newMessageFromProto(protoMessage);
+    final m = BitSwapMessage.fromProto(protoMessage);
     expect(wantlistContains(m.toProtoV0().wantlist, str), isTrue);
   });
 
@@ -425,19 +425,19 @@ void main() {
     );
     final expectedCid = prefix.sum(data);
 
-    final blk = newWantlistBlock(data, null, prefix);
+    final blk = wantlistBlock(data, null, prefix);
     expect(blk.cid(), equals(expectedCid));
     expect(blk.rawData(), equals(data));
 
     // Calling with matching Cid succeeds
-    final blk2 = newWantlistBlock(data, expectedCid, prefix);
+    final blk2 = wantlistBlock(data, expectedCid, prefix);
     expect(blk2.cid(), equals(expectedCid));
 
     // Calling with mismatching Cid throws ErrWrongHash
     final wrongCid = mkFakeCid('different');
     expect(
-      () => newWantlistBlock(data, wrongCid, prefix),
-      throwsA(isA<blocks.ErrWrongHash>()),
+      () => wantlistBlock(data, wrongCid, prefix),
+      throwsA(isA<blocks.WrongHashException>()),
     );
   });
 
@@ -448,12 +448,12 @@ void main() {
         entries: [pb.Entry(block: Uint8List(0))],
       ),
     );
-    expect(() => newMessageFromProto(badWl), throwsFormatException);
+    expect(() => BitSwapMessage.fromProto(badWl), throwsFormatException);
 
     // Missing CID in block presence throws
     final badBp = pb.Message(
       blockPresences: [pb.BlockPresence(cid: Uint8List(0))],
     );
-    expect(() => newMessageFromProto(badBp), throwsFormatException);
+    expect(() => BitSwapMessage.fromProto(badBp), throwsFormatException);
   });
 }

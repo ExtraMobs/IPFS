@@ -19,8 +19,8 @@ typedef Wantlist = client.Wantlist;
 
 /// Deprecated: use [client.Wantlist.new] instead.
 @Deprecated('Use client.Wantlist instead')
-Wantlist newWantlist() => client.Wantlist();
+Wantlist wantlist() => client.Wantlist();
 
 /// Deprecated: use [client.Entry.ref] instead.
 @Deprecated('Use client.Entry.ref instead')
-Entry newRefEntry(Cid cid, int priority) => client.Entry.ref(cid, priority);
+Entry refEntry(Cid cid, int priority) => client.Entry.ref(cid, priority);

@@ -352,9 +352,9 @@ class MultibaseUtils {
   }
 }
 
-class ErrUnsupportedEncoding implements Exception {
+class UnsupportedEncodingException implements Exception {
   final Object? cause;
-  const ErrUnsupportedEncoding([this.cause]);
+  const UnsupportedEncodingException([this.cause]);
   @override
   String toString() => cause == null ? 'unsupported encoding' : 'unsupported encoding: $cause';
 }

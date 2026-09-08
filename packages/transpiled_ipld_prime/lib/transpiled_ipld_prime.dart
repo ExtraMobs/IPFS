@@ -27,7 +27,6 @@ export 'src/basicnode/map_node.dart'
 export 'src/basicnode/prototypes.dart' show BasicnodePrototype, prototype;
 export 'src/basicnode/scalars.dart'
     show
-        BasicNode,
         Basicnode,
         PlainBool,
         PlainBoolAssembler,
@@ -48,7 +47,7 @@ export 'src/basicnode/scalars.dart'
         PrototypeInt,
         PrototypeLink,
         PrototypeString;
-export 'src/basicnode/stream_bytes.dart' show StreamBytes, newBytesFromReader;
+export 'src/basicnode/stream_bytes.dart' show StreamBytes;
 export 'src/basicnode/value_assembler.dart' show ValueAssembler;
 export 'src/codec/api.dart'
     show BudgetExhaustedException, Decoder, Encoder, MapSortMode;

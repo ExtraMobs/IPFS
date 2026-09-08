@@ -144,7 +144,7 @@ void main() {
       addTearDown(() => conn.close());
 
       final stream = await conn.newStream(Context());
-      expect(stream, isA<QuicP2PStream>());
+      expect(stream, isA<QuicP2pStream>());
       expect(stream.id(), isNotEmpty);
       expect(stream.isWritable, isTrue);
       expect(stream.isClosed, isFalse);
@@ -369,7 +369,7 @@ void main() {
 
       final streams = await conn.streams;
       expect(streams, hasLength(1));
-      expect(streams.first, isA<QuicP2PStream>());
+      expect(streams.first, isA<QuicP2pStream>());
     });
 
     test('quicConnection exposes underlying delegate', () async {
@@ -452,13 +452,13 @@ void main() {
       addTearDown(() => conn.close());
 
       final stream = await conn.newStream(Context());
-      expect(stream, isA<QuicP2PStream>());
+      expect(stream, isA<QuicP2pStream>());
       expect(stream.stat().extra, containsPair('quicStreamId', 7));
       expect(fakeAdapter.isEstablished, isTrue);
     });
   });
 
-  group('QuicP2PStream', () {
+  group('QuicP2pStream', () {
     test('implements P2PStream', () async {
       final quicConn = _createQuicConnection();
       quicConn.stateMachine.transitionTo(quic_lib.ConnectionState.handshaking);
@@ -473,7 +473,7 @@ void main() {
       addTearDown(() => conn.close());
 
       final stream = await conn.newStream(Context());
-      expect(stream, isA<QuicP2PStream>());
+      expect(stream, isA<QuicP2pStream>());
       expect(stream.protocol(), '');
       await stream.setProtocol('/test/1.0.0');
       expect(stream.protocol(), '/test/1.0.0');

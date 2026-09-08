@@ -24,13 +24,13 @@ class SystemResolver implements BasicResolver {
   final UdpDnsClient _client;
 
   @override
-  Future<List<String>> lookupIPAddr(String name) async {
+  Future<List<String>> lookupIpAddr(String name) async {
     final addrs = await InternetAddress.lookup(name);
     return [for (final a in addrs) a.address];
   }
 
   @override
-  Future<List<String>> lookupTXT(String name) async {
+  Future<List<String>> lookupTxt(String name) async {
     final records = await _client.lookup(name, DnsRecordType.txt);
     return [for (final r in records) r.data];
   }

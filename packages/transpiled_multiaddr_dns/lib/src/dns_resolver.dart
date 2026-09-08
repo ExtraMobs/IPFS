@@ -23,10 +23,10 @@ import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 /// IP-address value, so this file has no `dart:io` dependency.
 abstract class BasicResolver {
   /// Resolves [name] to zero or more IPv4/IPv6 address strings.
-  Future<List<String>> lookupIPAddr(String name);
+  Future<List<String>> lookupIpAddr(String name);
 
   /// Resolves the TXT records for [name].
-  Future<List<String>> lookupTXT(String name);
+  Future<List<String>> lookupTxt(String name);
 }
 
 /// A [BasicResolver] backed by fixed maps, for tests. Equivalent to
@@ -45,10 +45,10 @@ class MockResolver implements BasicResolver {
   final Map<String, List<String>> txt;
 
   @override
-  Future<List<String>> lookupIPAddr(String name) async => ip[name] ?? const [];
+  Future<List<String>> lookupIpAddr(String name) async => ip[name] ?? const [];
 
   @override
-  Future<List<String>> lookupTXT(String name) async => txt[name] ?? const [];
+  Future<List<String>> lookupTxt(String name) async => txt[name] ?? const [];
 }
 
 /// Checks if [s] is a fully qualified domain name: ends with an unescaped
@@ -167,12 +167,12 @@ class Resolver implements BasicResolver {
   }
 
   @override
-  Future<List<String>> lookupIPAddr(String name) =>
-      _resolverFor(name).lookupIPAddr(name);
+  Future<List<String>> lookupIpAddr(String name) =>
+      _resolverFor(name).lookupIpAddr(name);
 
   @override
-  Future<List<String>> lookupTXT(String name) =>
-      _resolverFor(name).lookupTXT(name);
+  Future<List<String>> lookupTxt(String name) =>
+      _resolverFor(name).lookupTxt(name);
 
   /// Resolves the first `/dns4/`, `/dns6/`, `/dns/`, or `/dnsaddr/`
   /// component in [maddr]. Call again on each returned address to resolve
@@ -204,7 +204,7 @@ class Resolver implements BasicResolver {
       final v4only = code == _dns4Code;
       final v6only = code == _dns6Code;
 
-      final records = await rslv.lookupIPAddr(value);
+      final records = await rslv.lookupIpAddr(value);
       for (final ip in records) {
         final isV6 = ip.contains(':');
         if (isV6) {
@@ -216,7 +216,7 @@ class Resolver implements BasicResolver {
         }
       }
     } else if (code == _dnsaddrCode) {
-      final records = await rslv.lookupTXT('_dnsaddr.$value');
+      final records = await rslv.lookupTxt('_dnsaddr.$value');
 
       final length = postDNS == null ? 0 : _componentCount(postDNS);
 

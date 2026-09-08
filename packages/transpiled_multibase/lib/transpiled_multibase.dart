@@ -2,4 +2,4 @@
 /// Port of `multiformats/go-multibase`.
 library;
 
-export 'src/multibase.dart' show MultibaseUtils, Encoding, encode, decode, ErrUnsupportedEncoding;
+export 'src/multibase.dart' show MultibaseUtils, Encoding, encode, decode, UnsupportedEncodingException;

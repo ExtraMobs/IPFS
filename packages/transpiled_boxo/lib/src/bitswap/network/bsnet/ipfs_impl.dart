@@ -15,7 +15,7 @@ const sendLatency = Duration(seconds: 2);
 const minSendRate = (100 * 1000) ~/ 8; // 100kbit/s
 
 class IpfsNetwork implements BitSwapNetwork {
-  final P2PHost _host;
+  final P2pHost _host;
   ConnectEventManager? _connectEvtMgr;
 
   final ProtocolId _protocolBitswapNoVers;
@@ -40,7 +40,7 @@ class IpfsNetwork implements BitSwapNetwork {
     _connectEvtMgr = settings.connEvtMgr;
   }
 
-  factory IpfsNetwork.newFromIpfsHost(P2PHost host, [List<NetOpt>? opts]) {
+  factory IpfsNetwork.fromIpfsHost(P2pHost host, [List<NetOpt>? opts]) {
     final settings = Settings()
       ..supportedProtocols = List.from(defaultProtocols);
     if (opts != null) {
@@ -85,7 +85,7 @@ class IpfsNetwork implements BitSwapNetwork {
     return timeout;
   }
 
-  void _closeStreamAsync(P2PStream s, Duration timeout) {
+  void _closeStreamAsync(P2pStream s, Duration timeout) {
     unawaited(() async {
       try {
         await s.close();
@@ -154,7 +154,7 @@ class IpfsNetwork implements BitSwapNetwork {
   }
 
   @override
-  P2PHost host() => _host;
+  P2pHost host() => _host;
 
   @override
   Stats stats() => _stats;
@@ -190,12 +190,12 @@ class IpfsNetwork implements BitSwapNetwork {
     return true;
   }
 
-  Future<P2PStream> _newStreamToPeer(PeerId p) {
+  Future<P2pStream> _newStreamToPeer(PeerId p) {
     return _host.newStream(p, _supportedProtocols);
   }
 
   Future<void> _msgToStream(
-      P2PStream s, BitSwapMessage msg, Duration timeout) async {
+      P2pStream s, BitSwapMessage msg, Duration timeout) async {
     s.setWriteDeadline(DateTime.now().add(timeout));
 
     if (s.protocol == _protocolBitswapOneOne ||
@@ -211,7 +211,7 @@ class IpfsNetwork implements BitSwapNetwork {
     _stats.messagesSent++;
   }
 
-  void _handleNewStream(P2PStream s) async {
+  void _handleNewStream(P2pStream s) async {
     try {
       if (_receivers.isEmpty) {
         s.reset();
@@ -256,11 +256,11 @@ class _StreamMessageSender implements MessageSender {
   final PeerId to;
   final IpfsNetwork bsnet;
   final MessageSenderOpts opts;
-  P2PStream? stream;
+  P2pStream? stream;
 
   _StreamMessageSender(this.to, this.bsnet, this.opts);
 
-  Future<P2PStream> _connect() async {
+  Future<P2pStream> _connect() async {
     if (stream != null) return stream!;
     // wait connection if needed
     final s = await bsnet._newStreamToPeer(to);

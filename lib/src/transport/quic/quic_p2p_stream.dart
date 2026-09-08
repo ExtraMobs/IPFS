@@ -10,7 +10,7 @@ import 'package:uuid/uuid.dart';
 
 import 'quic_transport.dart';
 
-/// Adapter interface for the underlying QUIC connection used by [QuicP2PStream].
+/// Adapter interface for the underlying QUIC connection used by [QuicP2pStream].
 ///
 /// This abstraction removes the need for dynamic access to `streamManager` and
 /// other QUIC connection internals, and allows tests to inject a fake connection.
@@ -41,9 +41,9 @@ class _ReadRequest {
 /// The stream opens a bidirectional QUIC stream via the underlying
 /// [QuicConnection]. Writes go to the send side; reads accumulate data from the
 /// receive side. The receive stream is created lazily when the peer sends data.
-class QuicP2PStream implements libp2p.P2PStream<Uint8List> {
+class QuicP2pStream implements libp2p.P2PStream<Uint8List> {
   /// Creates a stream adapter for a QUIC bidirectional stream.
-  QuicP2PStream(
+  QuicP2pStream(
     this._parentConnection,
     this._streamId,
     this._direction,

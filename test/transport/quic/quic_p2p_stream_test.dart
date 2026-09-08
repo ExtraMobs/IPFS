@@ -34,7 +34,7 @@ QuicConnection _createConnection(quic_lib.Libp2pQuicConnection libp2pConn) {
 }
 
 void main() {
-  group('QuicP2PStream', () {
+  group('QuicP2pStream', () {
     test('exposes metadata and stat', () async {
       final quicConn = _createQuicConnection();
       quicConn.stateMachine.transitionTo(quic_lib.ConnectionState.handshaking);
@@ -42,7 +42,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       expect(stream.id(), isNotEmpty);
       expect(stream.protocol(), '');
       await stream.setProtocol('/test/1.0.0');
@@ -61,7 +61,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       final streamId = stream.stat().extra['quicStreamId'] as int;
       final sendStream = quicConn.streamManager.getStream(streamId)!;
       final written = <Uint8List>[];
@@ -80,7 +80,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       await stream.close();
       expect(stream.isClosed, isTrue);
       expect(stream.isWritable, isFalse);
@@ -97,7 +97,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       await stream.close();
       await stream.close();
       expect(stream.isClosed, isTrue);
@@ -110,7 +110,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       await stream.close();
       await expectLater(
         () => stream.read(),
@@ -125,7 +125,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       await stream.reset();
       expect(stream.isClosed, isTrue);
     });
@@ -137,7 +137,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       await stream.setDeadline(DateTime.now());
       await stream.setReadDeadline(DateTime.now());
       await stream.setWriteDeadline(DateTime.now());
@@ -150,7 +150,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(quicConn));
       addTearDown(() => conn.close());
 
-      final stream = await conn.newStream(Context()) as QuicP2PStream;
+      final stream = await conn.newStream(Context()) as QuicP2pStream;
       expect(stream.stream, isA<Stream<Uint8List>>());
     });
 
@@ -165,7 +165,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List.fromList([1, 2, 3]));
       final data = await stream.read();
       expect(data, equals(Uint8List.fromList([1, 2, 3])));
@@ -182,7 +182,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final readFuture = stream.read();
       receiveStream.deliver(Uint8List.fromList([4, 5, 6]));
       final data = await readFuture;
@@ -200,7 +200,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List(0), fin: true);
       final data = await stream.read();
       expect(data, equals(Uint8List(0)));
@@ -217,7 +217,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List.fromList([1, 2]));
       await stream.read();
       await stream.closeRead();
@@ -235,7 +235,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.outbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.outbound, '');
       await stream.closeWrite();
       expect(stream.isWritable, isFalse);
     });
@@ -247,7 +247,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.outbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.outbound, '');
       await expectLater(
         () => stream.write(Uint8List.fromList([1])),
         throwsStateError,
@@ -265,7 +265,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List.fromList([1, 2, 3, 4, 5]));
       await Future.delayed(Duration(milliseconds: 20));
       final data = await stream.read(2);
@@ -286,7 +286,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final readFuture = stream.read(2);
       receiveStream.deliver(Uint8List.fromList([1, 2, 3, 4, 5]));
       final data = await readFuture;
@@ -306,7 +306,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List.fromList([1]));
       await stream.read();
       await stream.reset();
@@ -324,7 +324,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final errors = <Object>[];
       stream.stream.listen(
         (_) {},
@@ -340,7 +340,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       expect(stream.scope(), isA<NullScope>());
     });
 
@@ -357,7 +357,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final readFuture = stream.read();
       // Allow the read() wait loop to spin once before the stream appears.
       await Future.delayed(const Duration(milliseconds: 8));
@@ -372,7 +372,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final readFuture = stream.read();
       await Future.delayed(const Duration(milliseconds: 8));
       await stream.close();
@@ -393,7 +393,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       receiveStream.deliver(Uint8List.fromList([1, 2]));
       receiveStream.deliver(Uint8List.fromList([3, 4, 5]));
       await Future.delayed(const Duration(milliseconds: 20));
@@ -408,7 +408,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       expect(stream.incoming, same(stream));
     });
 
@@ -423,7 +423,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final first = stream.read(2);
       final second = stream.read(2);
       receiveStream.deliver(Uint8List.fromList([1, 2, 3, 4]));
@@ -442,7 +442,7 @@ void main() {
       final conn = _createConnection(quic_lib.Libp2pQuicConnection(fakeConn));
       addTearDown(() => conn.close());
 
-      final stream = QuicP2PStream(conn, 0, Direction.inbound, '');
+      final stream = QuicP2pStream(conn, 0, Direction.inbound, '');
       final emptyFuture = stream.read(0);
       receiveStream.deliver(Uint8List.fromList([1, 2, 3]));
       final empty = await emptyFuture;

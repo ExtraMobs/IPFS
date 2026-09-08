@@ -45,7 +45,7 @@ void main() {
   });
 
   test('RFC3339 round trip is UTC', () {
-    final parsed = parseRFC3339(formatRFC3339(DateTime.now()));
+    final parsed = parseRfc3339(formatRfc3339(DateTime.now()));
     expect(parsed.isUtc, isTrue);
   });
 

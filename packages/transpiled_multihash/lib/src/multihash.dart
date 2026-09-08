@@ -11,8 +11,8 @@ import 'package:transpiled_varint/transpiled_varint.dart' as varint;
 import 'package:convert/convert.dart' as pkgconvert;
 import 'package:base_x/base_x.dart' as basex;
 
-class ErrTooShort implements FormatException {
-  const ErrTooShort([this.message = 'multihash too short. must be >= 2 bytes']);
+class TooShortException implements FormatException {
+  const TooShortException([this.message = 'multihash too short. must be >= 2 bytes']);
   @override
   final String message;
   @override
@@ -23,8 +23,8 @@ class ErrTooShort implements FormatException {
   String toString() => message;
 }
 
-class ErrInconsistentLen implements FormatException {
-  const ErrInconsistentLen([
+class InconsistentLenException implements FormatException {
+  const InconsistentLenException([
     this.expected,
     this.got,
     String? message,
@@ -224,7 +224,7 @@ DecodedMultihash _decode(Uint8List bytes) {
     length: digest.length,
   );
   if (consumed != bytes.length) {
-    throw ErrInconsistentLen(decoded.length, consumed);
+    throw InconsistentLenException(decoded.length, consumed);
   }
   return decoded;
 }
@@ -272,7 +272,7 @@ final Map<Golang.Uint64, String> codes = <int, String>{
 /// Port of readMultihashFromBuf; digest aliases the caller's byte buffer.
 (int, Golang.Uint64, Uint8List) _readMultihashFromBuf(Uint8List bytes) {
   if (bytes.length < 2) {
-    throw const ErrTooShort();
+    throw const TooShortException();
   }
   final (code, codeSize) = varint.fromUvarint(bytes);
   final (length, lengthSize) = varint.fromUvarint(

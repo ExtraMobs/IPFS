@@ -169,7 +169,7 @@ class RoutingTable {
       return false;
     }
 
-    if (metrics.latencyEWMA(id) > maxLatency) {
+    if (metrics.latencyEwma(id) > maxLatency) {
       throw const PeerRejectedHighLatencyException();
     }
 

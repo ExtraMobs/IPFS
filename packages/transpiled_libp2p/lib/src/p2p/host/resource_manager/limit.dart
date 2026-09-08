@@ -25,7 +25,7 @@ abstract interface class Limit {
   int getMemoryLimit() => memoryLimit;
   int getStreamTotalLimit() => streamTotalLimit;
   int getConnTotalLimit() => connTotalLimit;
-  int getFDLimit() => fdLimit;
+  int getFdLimit() => fdLimit;
 }
 
 /// Concrete limits for streams, connections, file descriptors and memory.
@@ -102,7 +102,7 @@ final class BaseLimit implements Limit {
   int getConnTotalLimit() => connTotalLimit;
 
   @override
-  int getFDLimit() => fdLimit;
+  int getFdLimit() => fdLimit;
 
   BaseLimit apply(BaseLimit other) => BaseLimit(
     streams: streams == 0 ? other.streams : streams,

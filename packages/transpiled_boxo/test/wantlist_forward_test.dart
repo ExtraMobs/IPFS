@@ -8,9 +8,9 @@ import 'package:transpiled_cid/transpiled_cid.dart';
 void main() {
   test('deprecated forward aliases client wantlist', () {
     final cid = Cid.decode('QmQL8LqkEgYXaDHdNYCG2mmpow7Sp8Z8Kt3QS688vyBeC7');
-    final wantlist = newWantlist();
-    expect(wantlist, isA<Wantlist>());
-    expect(wantlist.add(cid, 1, WantType.block), isTrue);
-    expect(newRefEntry(cid, 2).cid, equals(cid));
+    final wl = wantlist();
+    expect(wl, isA<Wantlist>());
+    expect(wl.add(cid, 1, WantType.block), isTrue);
+    expect(refEntry(cid, 2).cid, equals(cid));
   });
 }

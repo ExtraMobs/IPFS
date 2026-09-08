@@ -97,7 +97,7 @@ final class Slice {
             if (n == 0) break;
             at += n;
           }
-          return newBytesFromReader(_MemoryReader(data));
+          return StreamBytes(_MemoryReader(data));
         }
         final value = node.asBytes();
         final bounds = _bounds(value.length);
@@ -671,13 +671,13 @@ final class _RecursiveParseParent {
 }
 
 abstract interface class SegmentIterator {
+  factory SegmentIterator(Node node) => node.kind() == Kind.list
+      ? _ListSegmentIterator(node.listIterator()!)
+      : _MapSegmentIterator(node.mapIterator()!);
+
   bool get done;
   (PathSegment, Node) next();
 }
-
-SegmentIterator newSegmentIterator(Node node) => node.kind() == Kind.list
-    ? _ListSegmentIterator(node.listIterator()!)
-    : _MapSegmentIterator(node.mapIterator()!);
 
 final class _ListSegmentIterator implements SegmentIterator {
   _ListSegmentIterator(this._iterator);

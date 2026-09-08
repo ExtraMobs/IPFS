@@ -5,9 +5,9 @@ import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_multihash/transpiled_multihash.dart';
 
 /// Returned when block data does not match its supplied Cid.
-final class ErrWrongHash implements Exception {
+final class WrongHashException implements Exception {
   /// Creates the hash mismatch error.
-  const ErrWrongHash();
+  const WrongHashException();
 
   @override
   String toString() => 'data did not match given hash';

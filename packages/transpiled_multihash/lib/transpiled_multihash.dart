@@ -33,5 +33,5 @@ export 'src/multihash.dart'
         dbl_sha2_256,
         md5,
         sum,
-        ErrTooShort,
-        ErrInconsistentLen;
+        TooShortException,
+        InconsistentLenException;

@@ -308,7 +308,7 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
       await Future<void>.delayed(const Duration(milliseconds: 10));
     }
     final streamId = openBidirectionalStream();
-    return QuicP2PStream(this, streamId, libp2p.Direction.outbound, '');
+    return QuicP2pStream(this, streamId, libp2p.Direction.outbound, '');
   }
 
   @override
@@ -321,7 +321,7 @@ class QuicConnection implements libp2p.TransportConn, QuicConnectionAdapter {
     for (final stream in quicConn.streamManager.streams) {
       if (stream is quic_lib.QuicReceiveStream) {
         result.add(
-          QuicP2PStream(this, stream.streamId, libp2p.Direction.inbound, ''),
+          QuicP2pStream(this, stream.streamId, libp2p.Direction.inbound, ''),
         );
       }
     }

@@ -4,4 +4,4 @@
 library;
 
 export '../src/bitswap/wantlist/forward.dart'
-    show Entry, Wantlist, newRefEntry, newWantlist;
+    show Entry, Wantlist, refEntry, wantlist;

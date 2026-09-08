@@ -366,9 +366,6 @@ class Prefix {
       Uint8List.sublistView(bytes, offset),
     );
     offset += lengthLength;
-    if (offset != bytes.length) {
-      throw const FormatException('Cid prefix has trailing bytes');
-    }
     return Prefix.numeric(
       version: Golang.Int64.fromUint64(version).toIntExact(),
       codecCode: codecCode,
@@ -443,22 +440,22 @@ class Prefix {
   int get hashCode => Object.hash(version, codecCode, mhTypeCode, mhLength);
 }
 
-class ErrInvalidCid implements Exception {
+class InvalidCidException implements Exception {
   final Object? cause;
-  const ErrInvalidCid([this.cause]);
+  const InvalidCidException([this.cause]);
   @override
   String toString() => cause == null ? 'invalid cid' : 'invalid cid: $cause';
 }
 
-class ErrCidTooShort implements Exception {
-  const ErrCidTooShort();
+class CidTooShortException implements Exception {
+  const CidTooShortException();
   @override
   String toString() => 'cid too short';
 }
 
-class ErrInvalidEncoding implements Exception {
+class InvalidEncodingException implements Exception {
   final Object? cause;
-  const ErrInvalidEncoding([this.cause]);
+  const InvalidEncodingException([this.cause]);
   @override
   String toString() => cause == null ? 'invalid base encoding' : 'invalid base encoding: $cause';
 }

@@ -3,10 +3,10 @@
 const String timeFormatIpfs = 'RFC3339Nano';
 
 /// Parses an RFC3339 timestamp and normalizes it to UTC.
-DateTime parseRFC3339(String value) => DateTime.parse(value).toUtc();
+DateTime parseRfc3339(String value) => DateTime.parse(value).toUtc();
 
 /// Formats [value] as UTC RFC3339Nano, omitting insignificant zeroes.
-String formatRFC3339(DateTime value) {
+String formatRfc3339(DateTime value) {
   final text = value.toUtc().toIso8601String();
   if (!text.contains('.')) return text;
   final z = text.endsWith('Z') ? 'Z' : '';

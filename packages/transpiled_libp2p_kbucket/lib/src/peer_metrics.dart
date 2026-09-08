@@ -13,5 +13,5 @@ import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 abstract class PeerMetrics {
   /// The exponentially-weighted moving average latency last recorded for
   /// [id], or [Duration.zero] if none has been recorded.
-  Duration latencyEWMA(PeerId id);
+  Duration latencyEwma(PeerId id);
 }

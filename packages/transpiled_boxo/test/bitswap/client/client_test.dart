@@ -48,7 +48,7 @@ class FakeNetwork implements BitSwapNetwork {
   }
 
   @override
-  P2PHost host() => throw UnimplementedError();
+  P2pHost host() => throw UnimplementedError();
 
   @override
   Stats stats() => Stats();

@@ -6,7 +6,7 @@ import 'package:test/test.dart' hide Matcher;
 import 'package:transpiled_ipld_prime/transpiled_ipld_prime.dart';
 
 void main() {
-  final specs = newSelectorSpecBuilder(prototype.any);
+  final specs = SelectorSpecBuilder(prototype.any);
 
   test('builder round-trips every selector clause', () {
     final edge = specs.exploreRecursiveEdge();

@@ -10,7 +10,7 @@ import 'package:transpiled_libp2p_kbucket/transpiled_libp2p_kbucket.dart';
 
 class _NoOpMetrics implements PeerMetrics {
   @override
-  Duration latencyEWMA(PeerId id) => Duration.zero;
+  Duration latencyEwma(PeerId id) => Duration.zero;
 }
 
 PeerId _randPeerId() {

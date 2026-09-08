@@ -224,7 +224,7 @@ final class Progress {
 
     final interests = selector.interests();
     if (interests == null) {
-      final iterator = newSegmentIterator(node);
+      final iterator = SegmentIterator(node);
       while (!iterator.done) {
         final (segment, value) = iterator.next();
         recurse(value, segment);
@@ -376,7 +376,7 @@ final class Progress {
     final builder = node.prototype().newBuilder();
     final list = builder.beginList(node.length());
     final interests = selector.interests();
-    final iterator = newSegmentIterator(node);
+    final iterator = SegmentIterator(node);
     while (!iterator.done) {
       final (segment, original) = iterator.next();
       var value = original;
@@ -407,7 +407,7 @@ final class Progress {
     final builder = node.prototype().newBuilder();
     final map = builder.beginMap(node.length());
     final interests = selector.interests();
-    final iterator = newSegmentIterator(node);
+    final iterator = SegmentIterator(node);
     while (!iterator.done) {
       final (segment, original) = iterator.next();
       map.assembleKey().assignString(segment.toString());
@@ -686,7 +686,7 @@ List<Link> selectLinks(Node node) {
     switch (value.kind()) {
       case Kind.map:
       case Kind.list:
-        final iterator = newSegmentIterator(value);
+        final iterator = SegmentIterator(value);
         while (!iterator.done) {
           collect(iterator.next().$2);
         }

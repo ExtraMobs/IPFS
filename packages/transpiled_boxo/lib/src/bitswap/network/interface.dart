@@ -3,7 +3,7 @@ import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:transpiled_boxo/bitswap/message.dart';
 
 /// Abstração flexível de stream
-abstract interface class P2PStream {
+abstract interface class P2pStream {
   String get protocol;
   Future<void> write(List<int> data);
   void setWriteDeadline(DateTime deadline);
@@ -13,9 +13,9 @@ abstract interface class P2PStream {
 }
 
 /// Abstração flexível de host
-abstract interface class P2PHost {
-  void setStreamHandler(String protocol, void Function(P2PStream) handler);
-  Future<P2PStream> newStream(PeerId peer, List<String> protocols);
+abstract interface class P2pHost {
+  void setStreamHandler(String protocol, void Function(P2pStream) handler);
+  Future<P2pStream> newStream(PeerId peer, List<String> protocols);
   void removeStreamHandler(String protocol);
   Future<void> connect(AddrInfo peer);
   List<PeerId> get peers;
@@ -38,7 +38,7 @@ abstract interface class BitSwapNetwork implements Pinger, PeerTagger {
 
   Future<MessageSender> newMessageSender(PeerId peer, MessageSenderOpts opts);
 
-  P2PHost host();
+  P2pHost host();
 
   Stats stats();
 

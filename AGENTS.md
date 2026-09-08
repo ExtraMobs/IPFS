@@ -156,6 +156,8 @@ somente o necessário às convenções e ao sistema de tipos do Dart:
 - tipos públicos usam `UpperCamelCase` e funções, métodos e campos públicos
   usam `lowerCamelCase`, tratando acrônimos como palavras comuns (ex.: `Cid`,
   `IpfsNode`, `IpfsConfig`, `DhtClient`, `idFromP2pAddr`), sem blocos em All-Caps;
+- constantes públicas usam `lowerCamelCase` (ex.: `maxBlockSize`, `defaultTimeout`),
+  sendo proibido o uso de `SCREAMING_SNAKE_CASE`;
 - proibido criar `typedef`s, aliases ou shims artificiais em Dart para acomodar
   compatibilidade retroativa ou nomes legados (ex.: `typedef CID = Cid;`,
   `typedef MultihashInfo = DecodedMultihash;`). Consumidores devem ser migrados
@@ -166,12 +168,18 @@ somente o necessário às convenções e ao sistema de tipos do Dart:
   upstream Go estiver explicitamente marcado com `// Deprecated:`. É proibido
   manter símbolos deprecados inventados exclusivamente no Dart;
 - construtores `NewX` do Go viram construtores ou factories Dart quando isso
-  preservar o contrato, sem criar funções `newX` artificiais;
-- retornos `(valor, error)` viram retorno do valor com exceção tipada;
+  preservar o contrato, sem criar funções `newX` artificiais e sem prefixar
+  construtores nomeados com `new` redundante (ex.: usar `IpfsNetwork.fromIpfsHost`,
+  não `IpfsNetwork.newFromIpfsHost`);
+- retornos `(valor, error)` viram retorno do valor com exceção tipada, sendo
+  vedado retornar tuplas de erro Go `(T?, Exception?)` ou wrappers `Result<T, E>`
+  em APIs públicas de biblioteca;
 - variádicos, canais, goroutines e `context.Context` usam o equivalente Dart
   mais próximo (`List<T>`, `Stream`, `Future`, cancelamento), somente quando o
   comportamento exigir;
-- símbolos internos do Go não precisam virar API pública Dart.
+- símbolos internos do Go não precisam virar API pública Dart. Classes ou funções
+  auxiliares não existentes no Go upstream devem ser privadas (prefixo `_`) para
+  evitar expansão arbitrária de API pública.
 
 Toda renomeação não mecânica, fusão, remoção ou mudança de assinatura pública
 deve ser registrada em `doc/transpilation/PROGRESS.md` junto ao símbolo Go
@@ -183,3 +191,129 @@ nas notas do pacote em `PROGRESS.md`, incluindo omissões deliberadas e suas
 razões. Paridade exige preservar também wire format, ordenação, defaults e
 erros observáveis relevantes; sem essa auditoria, use no máximo o status
 `portado sem teste de paridade`.
+
+## Auditoria automatizada de AST, nomenclatura e fronteiras
+
+Para garantir fidelidade contínua e prevenir regressões sintáticas ou de API, todo
+agente deve validar seu código contra o auditor AST do projeto:
+`tool/audit_ast_nomenclature.py`.
+
+A ferramenta compara o índice AST do Go (`go-ipfs-reference/*-index/`) e as
+definições de tipos upstream com as declarações Dart em `packages/` e `lib/`,
+auditando automaticamente as 19 regras contratuais:
+
+1. **`RULE_ALL_CAPS`**: Tipos públicos em `UpperCamelCase` e membros/funções em
+   `lowerCamelCase`, tratando acrônimos como palavras comuns (ex.: `Cid`, `IpfsNode`,
+   `DhtClient`, `idFromP2pAddr`), sem blocos em All-Caps.
+2. **`RULE_LOWER_CAMEL`**: Membros, métodos e funções públicas devem usar
+   estritamente `lowerCamelCase`, nunca `PascalCase`.
+3. **`RULE_NO_TYPEDEF_SHIMS`**: Veto a `typedef`s e shims artificiais em Dart para
+   compatibilidade retroativa, exceto os tipos primitivos em `packages/boilerplate/`
+   ou type aliases declarados no próprio repositório upstream Go.
+4. **`RULE_NO_UNAUTHORIZED_DEPRECATED`**: Veto a anotações `@Deprecated` inventadas
+   em Dart sem a anotação `// Deprecated:` correspondente no Go upstream.
+5. **`RULE_NO_NEW_X_FUNCTIONS`**: Veto a funções livres `newX(...)` que deveriam
+   ser construtores ou factories de classe.
+6. **`RULE_CONSTANT_CASING`**: Veto a constantes públicas em `SCREAMING_SNAKE_CASE`
+   (ex.: `MAX_PACKET_SIZE`). No Dart oficial e no projeto, devem ser `lowerCamelCase`
+   (`maxPacketSize`).
+7. **`RULE_REDUNDANT_CONSTRUCTOR_NAMES`**: Veto a construtores nomeados prefixados
+   com `new` ou repetindo o nome da classe (ex.: `IpfsNetwork.newFromIpfsHost` ➔
+   `IpfsNetwork.fromIpfsHost`; `Blockstore.newBlockstore` ➔ `Blockstore`).
+8. **`RULE_NO_GO_STYLE_ERROR_TUPLES`**: Veto a retornos públicos de tuplas com erro
+   `(T?, Exception?)` ou wrappers `Result<T, E>`. Retornos `(valor, error)` do Go
+   devem virar retorno direto do valor com exceção tipada via `throw`.
+9. **`RULE_NO_CLI_IN_LIBRARIES`**: Veto a dependências e códigos de CLI em bibliotecas
+   reutilizáveis `packages/transpiled_*` (`package:args/*`, `exitCode`, chamadas `exit()`).
+10. **`RULE_ENFORCE_BOILERPLATE_TYPES`**: Uso obrigatório de `fixed_types.Golang.*`
+    para centralizar semântica de tipos primitivos Go e máscaras manuais de 32/64 bits.
+11. **`RULE_MODULE_BOUNDARY_LEAK`**: Veto a violação de fronteira de módulo `go.mod`,
+    impedindo que um pacote declare tipos que pertencem a outro módulo upstream com
+    pacote dedicado próprio.
+12. **`RULE_INVENTED_PUBLIC_SYMBOLS`**: Alerta sobre tipos e abstrações públicas
+    criadas em Dart sem símbolo exportado correspondente no upstream Go, orientando
+    torná-los privados (`_Nome`) ou documentar sua necessidade.
+13. **`RULE_EXCEPTION_NAMING`**: Nomenclatura e padrão de exceções Dart, exigindo
+    que classes de erro usem o sufixo `Exception` e implementem `Exception`, vetando
+    o prefixo legado `Err` do Go (ex.: `ErrTooShort` ➔ `TooShortException`).
+14. **`RULE_NO_PRODUCTION_MOCKS`**: Veto a classes e implementações de teste
+    (`Mock*`, `Dummy*`, `Stub*`, `Fake*`) no código de produção em `lib/`, devendo
+    residir estritamente sob `test/`.
+15. **`RULE_RESTRICTED_PLATFORM_IMPORTS`**: Veto a importação de `dart:io` em pacotes
+    de codecs e multiformatos puros (`cid`, `multihash`, `multibase`, etc.),
+    garantindo compatibilidade universal Web/Wasm.
+16. **`RULE_NO_PRINT_IN_LIBRARIES`**: Veto a chamadas soltas a `print(...)` em pacotes
+    de bibliotecas reutilizáveis.
+17. **`RULE_NO_ARTIFICIAL_CONCURRENCY`**: Veto a primitivas de concorrência específicas
+    do Go (`Chan`, `WaitGroup`, `Mutex`) em APIs públicas, exigindo as primitivas
+    idiomáticas Dart (`Stream`, `Future`, `Completer`).
+18. **`RULE_MISSING_GO_TYPES`**: Auditoria de tipos e interfaces do Upstream Go
+    ainda não portados para o pacote Dart correspondente.
+19. **`RULE_MISSING_GO_FIELDS`**: Auditoria de campos de structs do Upstream Go
+    ainda não declarados na classe Dart correspondente.
+20. **`RULE_MISSING_GO_METHODS`**: Auditoria de métodos do Upstream Go ainda não
+    implementados na classe Dart correspondente.
+21. **`RULE_MISSING_GO_FUNCTIONS`**: Auditoria de funções top-level do Upstream Go
+    ainda não portadas para o pacote Dart correspondente.
+22. **`RULE_PUBSPEC_DEPENDENCIES`**: Veto a dependências exclusivas de CLI (`args`, `dcli`)
+    em `dependencies` de pacotes de bibliotecas reutilizáveis sob `packages/`,
+    garantindo que utilitários de console residam estritamente sob `dev_dependencies`
+    ou na raiz.
+23. **`RULE_EXPOSED_NON_PUBLIC_MEMBERS`**: Veto a membros públicos que expõem
+    tipos não-públicos (privados `_` ou de pacotes `internal/`), exigindo paridade
+    estrita com o mesmo nível de visibilidade e permissão do Upstream Go, ou menor
+    se não for possível. Membros públicos devem retornar interfaces públicas ou
+    serem tornados privados (`_`) caso sejam detalhes internos de implementação.
+
+### Nível de visibilidade, permissão e tipos não-públicos
+
+Ao portar e adaptar código onde membros públicos interagem com tipos não-públicos
+(privados `unexported` ou pacotes `internal/` do Go), todo agente deve seguir o
+**Princípio do Menor Privilégio e Paridade de Permissão**:
+
+1. **Paridade com a Menor Permissão Possível:** Se um membro público da biblioteca
+   precisa expor um objeto que no Go era um tipo interno, o tipo Dart deve conceder
+   estritamente o mesmo nível de visibilidade e permissão do Upstream Go, ou menor
+   se não for possível (ex.: interface somente-leitura ou `unmodifiable`). É vedado
+   expor classes concretas mutáveis internas com campos desprotegidos.
+2. **Veto a Tipos Privados em Assinaturas Públicas (`library_private_types_in_public_api`):**
+   Membros públicos (métodos, getters, setters, campos) de classes públicas nunca devem
+   ter tipo de retorno ou parâmetros com prefixo `_` (ex.: `_Scope get scope`,
+   `_RecallWantlist bcstWants`).
+3. **Mapeamento Caso a Caso dos Cenários Conhecidos:**
+   - **Cenário A: Getters/Métodos de Interfaces Públicas (ex.: `ResourceManager` em `transpiled_libp2p`):**
+     Getters como `systemScope`, `transientScope`, `peers`, `protocols` e `services`
+     devem ser tipados com suas interfaces públicas canônicas (`Scope`, `PeerScope`,
+     `ProtocolScope`, `ServiceScope`), e **nunca** com as classes de implementação
+     privadas (`_Scope`, `_PeerScope`).
+   - **Cenário B: Campos Internos de Classes de Submódulos (ex.: `MessageQueue` em `transpiled_boxo`):**
+     Campos de classes internas que armazenam estado auxiliar (ex.: `bcstWants`,
+     `peerWants`, `pending`, `sent`) devem ser tornados privados (`_bcstWants`,
+     `_peerWants`, `_pending`, `_sent`), eliminando a exposição indevida.
+   - **Cenário C: Estruturas Auxiliares Expostas Transitivamente (ex.: `ExploreRecursiveEdge` em `transpiled_ipld_prime`):**
+     Promover a classe para pública (`ExploreRecursiveEdge`) ou expor apenas a
+     interface necessária com campos imutáveis/somente-leitura.
+
+### Comandos de verificação recomendados
+
+Antes de concluir qualquer alteração de código ou transpilação, o agente deve
+executar o script e assegurar que nenhuma nova violação ou regressão foi introduzida:
+
+- **Resumo quantitativo global:**
+  `python tool/audit_ast_nomenclature.py --summary-only`
+- **Auditoria detalhada do pacote alterado:**
+  `python tool/audit_ast_nomenclature.py --package <nome_do_pacote>`
+- **Auditoria por regra específica:**
+  `python tool/audit_ast_nomenclature.py --rule <NOME_DA_REGRA>`
+- **Auditoria de cobertura incluindo símbolos não-públicos (privados/internos):**
+  `python tool/audit_ast_nomenclature.py --include-non-public`
+- **Filtrar por severidade (ERROR, WARNING, INFO):**
+  `python tool/audit_ast_nomenclature.py --severity ERROR`
+- **Exportar relatório completo em Markdown:**
+  `python tool/audit_ast_nomenclature.py --markdown --output audit_report.md`
+- **Atualizar relatório sintético de progresso da AST (`PROGRESS_RELATORY.md`):**
+  `python tool/audit_ast_nomenclature.py --progress`
+- **Correção automática mecânica determinística:**
+  `python tool/audit_ast_nomenclature.py --fix`
+- **Saída estruturada em JSON (integração e CI):**
+  `python tool/audit_ast_nomenclature.py --json`

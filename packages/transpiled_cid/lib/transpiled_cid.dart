@@ -6,6 +6,6 @@ export 'src/cid.dart'
     show
         Cid,
         Prefix,
-        ErrInvalidCid,
-        ErrCidTooShort,
-        ErrInvalidEncoding;
+        InvalidCidException,
+        CidTooShortException,
+        InvalidEncodingException;

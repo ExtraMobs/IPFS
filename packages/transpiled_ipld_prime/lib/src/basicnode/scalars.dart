@@ -50,9 +50,6 @@ abstract final class Basicnode {
   static PlainLink linkNode(Link value) => PlainLink(value);
 }
 
-/// Compatibility alias matching UpperCamelCase conventions.
-typedef BasicNode = Basicnode;
-
 /// A boxed [bool] conforming to [Node]. Equivalent to go-ipld-prime's
 /// `plainBool`.
 class PlainBool extends BaseNode {
