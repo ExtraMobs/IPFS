@@ -293,6 +293,15 @@ Ao portar e adaptar código onde membros públicos interagem com tipos não-púb
    - **Cenário C: Estruturas Auxiliares Expostas Transitivamente (ex.: `ExploreRecursiveEdge` em `transpiled_ipld_prime`):**
      Promover a classe para pública (`ExploreRecursiveEdge`) ou expor apenas a
      interface necessária com campos imutáveis/somente-leitura.
+4. **Fidelidade Integral da Implementação Não-Pública:**
+   Tudo o que for acessado ou exposto através de métodos não-públicos (ou da cadeia
+   interna de execução de métodos públicos) **deve ser implementado com estrita
+   fidelidade ao upstream Golang**. O fato de um membro, tipo ou método ser privado
+   (`_` em Dart, `unexported` ou `internal/` no Go) afeta estritamente sua visibilidade
+   e escopo de acesso, **sendo expressamente proibido degradar a lógica interna**,
+   criar simplificações arbitrárias, stubs parciais ou mocks em código de produção.
+   Toda a cadeia de chamadas internas, estados, limites e algoritmos subjacentes
+   deve reproduzir fielmente a implementação do módulo Go correspondente.
 
 ### Comandos de verificação recomendados
 
