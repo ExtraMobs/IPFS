@@ -69,7 +69,7 @@ Future<void> waitCem(ConnectEventManager cem) async {
 }
 
 bool _hasPending(ConnectEventManager cem) {
-  return cem.peers.values.any((s) => s.pending);
+  return cem.hasPendingPeers;
 }
 
 PeerId randomPeerId(int id) {
@@ -187,7 +187,7 @@ void main() {
 
     cem.disconnected(p);
     await waitCem(cem);
-    expect(cem.peers, isEmpty);
+    expect(cem.hasPeers, isFalse);
     expect(connListener.events, expectedEvents);
   });
 }

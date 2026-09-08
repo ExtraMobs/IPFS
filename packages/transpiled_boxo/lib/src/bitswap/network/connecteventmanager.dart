@@ -14,7 +14,7 @@ enum State {
   unresponsive,
 }
 
-class PeerState {
+class _PeerState {
   State newState = State.disconnected;
   State curState = State.disconnected;
   bool pending = false;
@@ -22,14 +22,15 @@ class PeerState {
 
 class ConnectEventManager {
   List<ConnectionListener> _connListeners;
-  final Map<PeerId, PeerState> _peers = {};
+  final Map<PeerId, _PeerState> _peers = {};
 
   bool _workerStarted = false;
   final ListQueue<PeerId> _changeQueue = ListQueue();
   bool _stop = false;
 
   int get changeQueueLength => _changeQueue.length;
-  Map<PeerId, PeerState> get peers => _peers;
+  bool get hasPeers => _peers.isNotEmpty;
+  bool get hasPendingPeers => _peers.values.any((s) => s.pending);
 
   Completer<void>? _waiter;
   final Completer<void> _done = Completer<void>();
@@ -70,7 +71,7 @@ class ConnectEventManager {
   void _setState(PeerId p, State newState) {
     var state = _peers[p];
     if (state == null) {
-      state = PeerState();
+      state = _PeerState();
       _peers[p] = state;
     }
     state.newState = newState;

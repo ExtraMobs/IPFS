@@ -387,7 +387,6 @@ final class ExploreInterpretAs implements Selector, Reifiable {
 }
 
 Selector compileSelector(Node node) => ParseContext().parseSelector(node);
-@Deprecated('Use compileSelector.')
 Selector parseSelector(Node node) => compileSelector(node);
 
 final class ParseContext {

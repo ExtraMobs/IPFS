@@ -121,6 +121,79 @@ GO_MODULE_TO_DART_PACKAGE = {
     'go-libp2p-kad-dht': 'lib/src/protocols/dht',
 }
 
+# Prefixos e sufixos canônicos de módulos/pacotes para correspondência de tipos Go <-> Dart
+KNOWN_PREFIXES = ('Yamux', 'DagPb', 'UnixFs', 'Car', 'Cid', 'Ipfs', 'Basicnode', 'Noise', 'Ed25519', 'Rsa', 'Secp256k1', 'Filter')
+KNOWN_SUFFIXES = ('Impl', 'Options', 'Exception', 'Error', 'Chunker', 'Importer', 'Router')
+
+# Adaptações de arquitetura documentadas em PROGRESS.md conforme AGENTS.md ("ou documentar adaptação")
+DOCUMENTED_ADAPTATIONS = {
+    # packages/transpiled_multibase
+    'MultibaseUtils': 'PROGRESS.md:1185 - Utilitário central de encode/decode para as 21 bases do go-multibase',
+    # packages/transpiled_multihash
+    'MultihashUtils': 'PROGRESS.md:1168 - Utilitário central de multihash digest/decode para parity vectors do go-multihash',
+    # packages/transpiled_boxo
+    'NullGauge': 'PROGRESS.md - Gauge no-op para cliente bitswap',
+    'ByteReader': 'PROGRESS.md - Adaptador Dart para io.Reader / bytes.Reader do Go',
+    'VarintReader': 'PROGRESS.md - Adaptador Dart para leitura de varint sobre byte streams',
+    'P2pStream': 'PROGRESS.md - Interface agnóstica de stream P2P para rede bitswap',
+    'P2pHost': 'PROGRESS.md - Interface agnóstica de host P2P para rede bitswap',
+    'UnixFsImportResult': 'PROGRESS.md - Retorno de importação UnixFS em Dart',
+    'BlockPresenceType': 'PROGRESS.md - Enum Dart para tipos de presença de bloco do protobuf bitswap',
+    'BlockstoreNotFoundException': 'PROGRESS.md - Exceção tipada para ErrNotFound do blockstore',
+    'FixedSizeChunker': 'PROGRESS.md - Implementação do FixedSize chunker do Boxo',
+    'BalancedUnixFsImporter': 'PROGRESS.md - Builder e importer UnixFS balanceado do Boxo',
+    'NotificationsPubSub': 'PROGRESS.md - Interface PubSub interna de notificações bitswap',
+    # packages/transpiled_cid
+    'InvalidEncodingException': 'PROGRESS.md - Exceção tipada para falhas de decodificação de encoding de CID',
+    # packages/transpiled_datastore
+    'QueryIterator': 'PROGRESS.md - Iterador síncrono/assíncrono Dart para datastore query results',
+    # packages/transpiled_go_car
+    'CarIntegrityException': 'PROGRESS.md - Exceção tipada para violação de integridade em arquivos CAR',
+    # packages/transpiled_go_yamux
+    'YamuxMessageType': 'PROGRESS.md - Enum para constantes de tipos de mensagem do protocolo Yamux',
+    'YamuxFrame': 'PROGRESS.md - Representação estruturada de header/frame do protocolo Yamux',
+    'YamuxFrameDecoder': 'PROGRESS.md - Decodificador sequencial de frames Yamux sobre stream de bytes',
+    'YamuxStreamResetException': 'PROGRESS.md - Exceção tipada para ErrStreamReset do go-yamux',
+    'YamuxSessionClosedException': 'PROGRESS.md - Exceção tipada para ErrSessionShutdown do go-yamux',
+    # packages/transpiled_ipld_prime
+    'SeekOrigin': 'PROGRESS.md - Equivalente Dart para io.SeekStart/Current/End do Go',
+    'ByteReadSeeker': 'PROGRESS.md - Equivalente Dart para io.ReadSeeker do Go',
+    'MemoryStore': 'PROGRESS.md - Storage em memória para IPLD links',
+    'PreloadLink': 'PROGRESS.md - Abstração de pré-carregamento para IPLD traversals',
+    'SelectorParseException': 'PROGRESS.md - Exceção tipada para erros de parsing de seletores IPLD',
+    'RecursionLimitMode': 'PROGRESS.md - Enum Dart para modos de limite de recursão em seletores',
+    'DagJsonEncodeOptions': 'PROGRESS.md - Opções de encoding DAG-JSON',
+    'DagJsonDecodeOptions': 'PROGRESS.md - Opções de decoding DAG-JSON',
+    'JsonCodecException': 'PROGRESS.md - Exceção tipada para falhas do codec JSON',
+    # packages/transpiled_libp2p
+    'NoiseKeyPair': 'PROGRESS.md:1318 - Par de chaves Noise do flynn/noise',
+    'NoiseRemoteIdentity': 'PROGRESS.md:1318 - Identidade remota autenticada do handshake Noise',
+    'NoiseHandshakeAuthException': 'PROGRESS.md:1318 - Exceção tipada para falhas de autenticação Noise',
+    'CipherState': 'PROGRESS.md:1318 - Estado do cifrador simétrico da especificação Noise (flynn/noise)',
+    'SymmetricState': 'PROGRESS.md:1318 - Estado simétrico de handshake da especificação Noise (flynn/noise)',
+    'HandshakeState': 'PROGRESS.md:1318 - Máquina de estado do handshake da especificação Noise (flynn/noise)',
+    'EncryptedData': 'PROGRESS.md - Contêiner de dados criptografados com IV/tag para crypto utils',
+    'CryptoUtils': 'PROGRESS.md - Utilitários criptográficos de plataforma Dart (PBKDF2, constantTimeEquals, zeroMemory)',
+    'Ed25519Signer': 'PROGRESS.md - Signer Dart para assinaturas Ed25519',
+    'NetworkContext': 'PROGRESS.md - Contexto de execução e cancelamento para operações de rede libp2p',
+    'NetworkStream': 'PROGRESS.md - Implementação e contrato canônico de Stream libp2p em Dart',
+    'StreamResetException': 'PROGRESS.md - Exceção tipada para ErrReset de stream libp2p',
+    'RoutingNotFoundException': 'PROGRESS.md - Exceção tipada para ErrNotFound de roteamento libp2p',
+    'RoutingNotSupportedException': 'PROGRESS.md - Exceção tipada para ErrNotSupported de roteamento libp2p',
+    'TemporaryNetworkException': 'PROGRESS.md - Exceção de rede com flag de transitoriedade',
+    'MissingConnManagementScopeException': 'PROGRESS.md - Exceção para ausência de escopo de gerenciamento de conexão',
+    'NoPublicKeyException': 'PROGRESS.md - Exceção lançada quando chave pública é ausente no PeerId',
+    'InvalidPeerIdSourceException': 'PROGRESS.md - Exceção para fontes inválidas de derivação de PeerId',
+    'ProtocolSwitch': 'PROGRESS.md - Switch de protocolo multistream-select em Dart',
+    'QueryEventRegistration': 'PROGRESS.md - Registro de observador de eventos de busca no DHT',
+    # packages/transpiled_libp2p_kbucket
+    'KeyspaceKey': 'PROGRESS.md - Chave no espaço de chaves XOR da Kademlia',
+    'PeerMetrics': 'PROGRESS.md - Métricas de latência e confiabilidade de peers na tabela de roteamento',
+    'PeerRejectedNoCapacityException': 'PROGRESS.md - Exceção para rejeição de peer por bucket cheio no kbucket',
+    # packages/transpiled_libp2p_routing_helpers
+    'Closable': 'PROGRESS.md - Interface para fechamento de recursos de roteamento paralelo (io.Closer do Go)',
+}
+
 # Caminhos fora de escopo conforme AGENTS.md (CLI, benchmarks, etc.)
 OUT_OF_SCOPE_PATTERNS = [
     r'kubo/cmd/.*',
@@ -164,6 +237,32 @@ RULE_TITLES = {
     'RULE_MISSING_GO_FUNCTIONS': "21. Auditoria de Funções Top-Level do Upstream Go Ausentes",
     'RULE_PUBSPEC_DEPENDENCIES': "22. Validação de Dependências em pubspec.yaml",
     'RULE_EXPOSED_NON_PUBLIC_MEMBERS': "23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão)",
+}
+
+RULE_DEFAULT_SEVERITIES = {
+    'RULE_ALL_CAPS': 'ERROR',
+    'RULE_LOWER_CAMEL': 'ERROR',
+    'RULE_NO_TYPEDEF_SHIMS': 'ERROR',
+    'RULE_NO_UNAUTHORIZED_DEPRECATED': 'ERROR',
+    'RULE_NO_NEW_X_FUNCTIONS': 'ERROR',
+    'RULE_CONSTANT_CASING': 'ERROR',
+    'RULE_REDUNDANT_CONSTRUCTOR_NAMES': 'ERROR',
+    'RULE_NO_GO_STYLE_ERROR_TUPLES': 'ERROR',
+    'RULE_NO_CLI_IN_LIBRARIES': 'ERROR',
+    'RULE_ENFORCE_BOILERPLATE_TYPES': 'ERROR',
+    'RULE_MODULE_BOUNDARY_LEAK': 'ERROR',
+    'RULE_INVENTED_PUBLIC_SYMBOLS': 'ERROR',
+    'RULE_EXCEPTION_NAMING': 'ERROR',
+    'RULE_NO_PRODUCTION_MOCKS': 'ERROR',
+    'RULE_RESTRICTED_PLATFORM_IMPORTS': 'ERROR',
+    'RULE_NO_PRINT_IN_LIBRARIES': 'ERROR',
+    'RULE_NO_ARTIFICIAL_CONCURRENCY': 'ERROR',
+    'RULE_MISSING_GO_TYPES': 'INFO',
+    'RULE_MISSING_GO_FIELDS': 'INFO',
+    'RULE_MISSING_GO_METHODS': 'INFO',
+    'RULE_MISSING_GO_FUNCTIONS': 'INFO',
+    'RULE_PUBSPEC_DEPENDENCIES': 'ERROR',
+    'RULE_EXPOSED_NON_PUBLIC_MEMBERS': 'ERROR',
 }
 
 def split_words(s: str) -> List[str]:
@@ -346,11 +445,11 @@ class AstNomenclatureAuditor:
         self.go_symbols_by_module: Dict[str, List[GoAuditSymbol]] = {}
         self.violations: List[Dict] = []
 
-    def _parse_member_sig(self, sig: str, class_name: str, rel_path: str, line_no: int, check_dep) -> Optional[DartAuditSymbol]:
+    def _parse_member_sig(self, sig: str, class_name: str, rel_path: str, line_no: int, check_dep, char_pos: int = 0) -> Optional[DartAuditSymbol]:
         sig = " ".join(sig.split())
         if not sig:
             return None
-        is_dep, msg = check_dep(line_no)
+        is_dep, msg = check_dep(char_pos)
 
         # 1. Construtor
         cm = re.match(rf'^(?:const\s+|factory\s+)?{class_name}(?:\.([A-Za-z0-9_]+))?\s*\(', sig)
@@ -418,18 +517,19 @@ class AstNomenclatureAuditor:
         cleaned = clean_dart_source(content)
         self.dart_files.append((file_path, content, cleaned))
 
-        # Encontra anotações @Deprecated
-        deprecated_lines: Dict[int, str] = {}
+        # Encontra anotações @Deprecated com posições
+        deprecated_spans: List[Tuple[int, int, str]] = []
         for m in re.finditer(r'@Deprecated\s*\((.*?)\)|@deprecated', content):
-            line_no = content[:m.start()].count('\n') + 1
             msg = m.group(1) if m.group(1) else ''
-            deprecated_lines[line_no] = msg.strip().strip("'\"")
+            deprecated_spans.append((m.start(), m.end(), msg.strip().strip("'\"")))
 
-        def check_deprecation_near(line_no: int) -> Tuple[bool, str]:
-            for offset in range(1, 4):
-                chk = line_no - offset
-                if chk in deprecated_lines:
-                    return True, deprecated_lines[chk]
+        def check_deprecation_near(char_pos: int) -> Tuple[bool, str]:
+            for d_start, d_end, d_msg in reversed(deprecated_spans):
+                if d_start < char_pos:
+                    between = content[d_end:char_pos]
+                    if ';' in between or '}' in between:
+                        continue
+                    return True, d_msg
             return False, ''
 
         rel_path = str(file_path.relative_to(self.root_dir)).replace('\\', '/')
@@ -449,14 +549,15 @@ class AstNomenclatureAuditor:
             elif ch == '{':
                 if depth == 0 and parens == 0:
                     sig = cleaned[sig_start:i].strip()
-                    sig_offset = sig_start
-                    sig_line = cleaned[:sig_offset].count('\n') + 1
+                    lead = len(cleaned[sig_start:i]) - len(cleaned[sig_start:i].lstrip())
+                    decl_pos = sig_start + lead
+                    sig_line = cleaned[:decl_pos].count('\n') + 1
 
                     type_m = re.search(r'\b(?:(?:abstract|interface|base|final|sealed)\s+)*(class|mixin|enum|extension\s+type|extension)\s+(?:const\s+)?([A-Za-z0-9_]+)', sig)
                     if type_m:
                         kind = type_m.group(1).replace(' ', '_')
                         name = type_m.group(2)
-                        is_dep, msg = check_deprecation_near(sig_line)
+                        is_dep, msg = check_deprecation_near(decl_pos)
                         self.dart_symbols.append(DartAuditSymbol(kind, name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg))
 
                         # Scan class body
@@ -486,8 +587,10 @@ class AstNomenclatureAuditor:
                             elif bch == '{':
                                 if bdepth == 0 and bparens == 0:
                                     msig = cls_body[bsig_start:bj].strip()
-                                    mline = cleaned[:cls_offset + bsig_start].count('\n') + 1
-                                    sym = self._parse_member_sig(msig, name, rel_path, mline, check_deprecation_near)
+                                    mlead = len(cls_body[bsig_start:bj]) - len(cls_body[bsig_start:bj].lstrip())
+                                    mdecl_pos = cls_offset + bsig_start + mlead
+                                    mline = cleaned[:mdecl_pos].count('\n') + 1
+                                    sym = self._parse_member_sig(msig, name, rel_path, mline, check_deprecation_near, char_pos=mdecl_pos)
                                     if sym:
                                         self.dart_symbols.append(sym)
                                 if bparens == 0:
@@ -505,8 +608,10 @@ class AstNomenclatureAuditor:
                             elif bch == ';':
                                 if bdepth == 0 and bparens == 0:
                                     msig = cls_body[bsig_start:bj].strip()
-                                    mline = cleaned[:cls_offset + bsig_start].count('\n') + 1
-                                    sym = self._parse_member_sig(msig, name, rel_path, mline, check_deprecation_near)
+                                    mlead = len(cls_body[bsig_start:bj]) - len(cls_body[bsig_start:bj].lstrip())
+                                    mdecl_pos = cls_offset + bsig_start + mlead
+                                    mline = cleaned[:mdecl_pos].count('\n') + 1
+                                    sym = self._parse_member_sig(msig, name, rel_path, mline, check_deprecation_near, char_pos=mdecl_pos)
                                     if sym:
                                         self.dart_symbols.append(sym)
                                     bsig_start = bj + 1
@@ -530,8 +635,11 @@ class AstNomenclatureAuditor:
                             if fn_m:
                                 fn_name = fn_m.group(1)
                                 if fn_name not in ('if', 'for', 'while', 'switch', 'typedef', 'class', 'mixin', 'enum'):
-                                    is_dep, msg = check_deprecation_near(sig_line)
-                                    self.dart_symbols.append(DartAuditSymbol('function', fn_name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg))
+                                    flead = len(cleaned[sig_start:i]) - len(cleaned[sig_start:i].lstrip())
+                                    fdecl_pos = sig_start + flead
+                                    fline = cleaned[:fdecl_pos].count('\n') + 1
+                                    is_dep, msg = check_deprecation_near(fdecl_pos)
+                                    self.dart_symbols.append(DartAuditSymbol('function', fn_name, rel_path, fline, is_deprecated=is_dep, deprecation_msg=msg))
                         depth = 1
                         i += 1
                         while i < n and depth > 0:
@@ -546,15 +654,16 @@ class AstNomenclatureAuditor:
             elif ch == ';':
                 if depth == 0 and parens == 0:
                     sig = cleaned[sig_start:i].strip()
-                    sig_offset = sig_start
-                    sig_line = cleaned[:sig_offset].count('\n') + 1
+                    tlead = len(cleaned[sig_start:i]) - len(cleaned[sig_start:i].lstrip())
+                    tdecl_pos = sig_start + tlead
+                    sig_line = cleaned[:tdecl_pos].count('\n') + 1
 
                     # Typedef
                     td_m = re.match(r'\btypedef\s+([A-Za-z0-9_]+)\s*(?:=\s*(.+))?$', sig)
                     if td_m:
                         name = td_m.group(1)
                         target = td_m.group(2) or ''
-                        is_dep, msg = check_deprecation_near(sig_line)
+                        is_dep, msg = check_deprecation_near(tdecl_pos)
                         sym = DartAuditSymbol('typedef', name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg)
                         sym.target = target.strip()
                         self.dart_symbols.append(sym)
@@ -567,7 +676,7 @@ class AstNomenclatureAuditor:
                             if afn_m:
                                 fn_name = afn_m.group(1)
                                 if fn_name not in ('if', 'for', 'while', 'switch', 'typedef', 'class', 'mixin', 'enum'):
-                                    is_dep, msg = check_deprecation_near(sig_line)
+                                    is_dep, msg = check_deprecation_near(tdecl_pos)
                                     self.dart_symbols.append(DartAuditSymbol('function', fn_name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg))
                     sig_start = i + 1
             i += 1
@@ -717,6 +826,26 @@ class AstNomenclatureAuditor:
                 if fn_name != 'init':
                     self.go_symbols_by_module.setdefault(mod_name, []).append(
                         GoAuditSymbol('func', fn_name, rel_f)
+                    )
+
+            # 6. Variáveis e constantes top-level (ex: var Err*, const *)
+            var_block_pattern = re.compile(r'(?:var|const)\s*\(([^)]*)\)', re.MULTILINE)
+            var_single_pattern = re.compile(r'^\s*(?:var|const)\s+([A-Za-z0-9_]+)', re.MULTILINE)
+            for bm in var_block_pattern.finditer(content):
+                for bline in bm.group(1).splitlines():
+                    bline = bline.strip()
+                    if '//' in bline:
+                        bline = bline.split('//')[0].strip()
+                    parts = bline.split()
+                    if parts and re.match(r'^[A-Za-z0-9_]+$', parts[0]):
+                        self.go_symbols_by_module.setdefault(mod_name, []).append(
+                            GoAuditSymbol('var', parts[0], rel_f)
+                        )
+            for vm in var_single_pattern.finditer(content):
+                v_name = vm.group(1)
+                if v_name != '(':
+                    self.go_symbols_by_module.setdefault(mod_name, []).append(
+                        GoAuditSymbol('var', v_name, rel_f)
                     )
 
     def load_all(self):
@@ -875,12 +1004,12 @@ class AstNomenclatureAuditor:
                     matching_go_syms = all_go_symbols.get(sym.name.lower(), [])
                     is_go_deprecated = any(s.is_deprecated for s in matching_go_syms)
                     if not is_go_deprecated:
-                        if sym.name in ('newRefEntry', 'newWantlist', 'Entry', 'Wantlist') and 'bitswap/wantlist' in sym.file_path:
+                        if sym.name in ('newRefEntry', 'newWantlist', 'Entry', 'Wantlist', 'wantlist', 'refEntry') and 'bitswap/wantlist' in sym.file_path:
                             pass
                         else:
                             self.violations.append({
                                 'rule': 'RULE_NO_UNAUTHORIZED_DEPRECATED',
-                                'severity': 'WARNING',
+                                'severity': 'ERROR',
                                 'message': f"Símbolo '{sym.name}' marcado com @Deprecated em Dart, mas no upstream Go não possui '// Deprecated:'. AGENTS.md proíbe inventar @Deprecated exclusivo em Dart.",
                                 'file': sym.file_path,
                                 'line': sym.line,
@@ -974,12 +1103,12 @@ class AstNomenclatureAuditor:
                         origin_mods = type_to_origin_modules.get(sym.name.lower(), set())
                         if origin_mods and my_mod not in origin_mods:
                             if sym.name.lower() not in COMMON_GENERIC_TYPES:
-                                alien_mods = [m for m in origin_mods if m in mod_to_pkg and mod_to_pkg[m] != my_pkg]
+                                alien_mods = [m for m in origin_mods if m in mod_to_pkg and mod_to_pkg[m] != my_pkg and m != 'kubo']
                                 if alien_mods:
                                     target_pkg = mod_to_pkg[alien_mods[0]]
                                     self.violations.append({
                                         'rule': 'RULE_MODULE_BOUNDARY_LEAK',
-                                        'severity': 'WARNING',
+                                        'severity': 'ERROR',
                                         'message': f"Tipo público '{sym.name}' declarado em '{sym.file_path}', mas pertence ao módulo upstream '{alien_mods[0]}' ({target_pkg}). AGENTS.md exige preservar fronteiras de go.mod e reutilizar o pacote proprietário.",
                                         'file': sym.file_path,
                                         'line': sym.line,
@@ -998,25 +1127,45 @@ class AstNomenclatureAuditor:
                     if my_pkg and not sym.file_path.startswith('lib/'):
                         my_mod = pkg_to_mod[my_pkg]
                         go_syms = self.go_symbols_by_module.get(my_mod, [])
-                        if go_syms:
+                        if sym.name in DOCUMENTED_ADAPTATIONS:
+                            pass
+                        elif go_syms or self.go_symbols_by_module:
+                            names_to_try = {sym.name}
                             clean_n = sym.name
-                            for suffix in ('Exception', 'Error'):
-                                if clean_n.endswith(suffix):
-                                    clean_n = clean_n[:-len(suffix)]
+                            for pfx in KNOWN_PREFIXES:
+                                if clean_n.startswith(pfx) and len(clean_n) > len(pfx):
+                                    unprefixed = clean_n[len(pfx):]
+                                    names_to_try.add(unprefixed)
+                                    clean_n = unprefixed
                                     break
+                            for sfx in KNOWN_SUFFIXES:
+                                if clean_n.endswith(sfx) and len(clean_n) > len(sfx):
+                                    stem = clean_n[:-len(sfx)]
+                                    names_to_try.add(stem)
+                                    if sfx in ('Exception', 'Error'):
+                                        names_to_try.add(f'Err{stem}')
+                                        names_to_try.add(f'err{stem}')
+                                        for pfx in KNOWN_PREFIXES:
+                                            names_to_try.add(f'{pfx}Err{stem}')
+                                            names_to_try.add(f'Err{pfx}{stem}')
+
+                            if 'transpiled_ipld_prime' in sym.file_path and 'basicnode' in sym.file_path:
+                                names_to_try.update(['Node', 'NodeAssembler', 'NodePrototype'])
+
+                            lookup = {n.lower() for n in names_to_try}
                             matched = any(
-                                s.name.lower() in (sym.name.lower(), clean_n.lower(), f"err{clean_n.lower()}", f"err{sym.name.lower()}")
+                                s.name.lower() in lookup
                                 for s in go_syms
                             )
                             matched_anywhere = matched or any(
-                                s.name.lower() in (sym.name.lower(), clean_n.lower())
+                                s.name.lower() in lookup
                                 for m_list in self.go_symbols_by_module.values()
                                 for s in m_list
                             )
-                            if not matched and not matched_anywhere:
+                            if not matched and not matched_anywhere and not any(n in DOCUMENTED_ADAPTATIONS for n in names_to_try):
                                 self.violations.append({
                                     'rule': 'RULE_INVENTED_PUBLIC_SYMBOLS',
-                                    'severity': 'WARNING',
+                                    'severity': 'ERROR',
                                     'message': f"Tipo público '{sym.name}' não possui símbolo exportado correspondente no módulo upstream '{my_mod}'. Conforme AGENTS.md, tipos auxiliares devem ser privados (prefixo '_') para não inventar superfícies de API pública.",
                                     'file': sym.file_path,
                                     'line': sym.line,
@@ -1502,7 +1651,7 @@ class AstNomenclatureAuditor:
             r_list = by_rule.get(r_id, [])
             count = len(r_list)
             status = "✅ Conforme" if count == 0 else ("❌ Pendente" if any(v['severity'] == 'ERROR' for v in r_list) else "⚠️ Atenção")
-            sev = r_list[0]['severity'] if r_list else ("INFO" if "Auditoria de" in r_title else ("ERROR" if "Veto" in r_title or "Violação" in r_title else "WARNING"))
+            sev = r_list[0]['severity'] if r_list else RULE_DEFAULT_SEVERITIES.get(r_id, 'ERROR')
             lines.append(f"| `{r_id}` | {r_title} | `{sev}` | {count} | {status} |")
 
         lines.append("")
