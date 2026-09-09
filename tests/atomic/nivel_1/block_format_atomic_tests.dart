@@ -1,4 +1,4 @@
-// testes/nivel_1/block_format_atomic_tests.dart
+// tests/atomic/nivel_1/block_format_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo block_format (transpiled_block_format).
 
 import 'dart:typed_data';

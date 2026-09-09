@@ -1,4 +1,4 @@
-// testes/nivel_1/multihash_atomic_tests.dart
+// tests/atomic/nivel_1/multihash_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo multihash (transpiled_multihash).
 
 import 'dart:typed_data';

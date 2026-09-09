@@ -29,7 +29,7 @@ com o código-fonte Dart (em packages/ e lib/), verificando conformidade estrita
   21. RULE_MISSING_GO_FUNCTIONS: Auditoria de funções top-level do Upstream Go ainda não portadas para o pacote Dart.
   22. RULE_PUBSPEC_DEPENDENCIES: Veto a dependências de CLI (args, dcli) em dependencies de bibliotecas em pubspec.yaml.
   23. RULE_EXPOSED_NON_PUBLIC_MEMBERS: Veto a membros públicos expondo tipos não-públicos (privados '_' ou de 'internal/'), exigindo paridade com mesmo nível de visibilidade e permissão (ou menor).
-  24. RULE_MISSING_ATOMIC_TESTS: Auditoria de testes atômicos 1 para 1 em testes/<nivel>/<nome_modulo>_atomic_tests.dart.
+  24. RULE_MISSING_ATOMIC_TESTS: Auditoria de testes atômicos 1 para 1 em tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart.
 
 Uso:
   python tool/audit_ast_nomenclature.py
@@ -240,7 +240,7 @@ RULE_TITLES = {
     'RULE_MISSING_GO_FUNCTIONS': "21. Auditoria de Funções Top-Level do Upstream Go Ausentes",
     'RULE_PUBSPEC_DEPENDENCIES': "22. Validação de Dependências em pubspec.yaml",
     'RULE_EXPOSED_NON_PUBLIC_MEMBERS': "23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão)",
-    'RULE_MISSING_ATOMIC_TESTS': "24. Auditoria de Testes Atômicos 1 para 1 (testes/<nivel>/<nome_modulo>_atomic_tests.dart)",
+    'RULE_MISSING_ATOMIC_TESTS': "24. Auditoria de Testes Atômicos 1 para 1 (tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart)",
 }
 
 RULE_DEFAULT_SEVERITIES = {
@@ -1082,13 +1082,15 @@ class AstNomenclatureAuditor:
     def scan_all_atomic_tests(self) -> Tuple[Set[str], Dict[str, List[str]]]:
         """
         Varre todos os arquivos de testes atômicos nas pastas:
-          - testes/<nivel>/<nome_modulo>_atomic_tests.dart
+          - tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart
           - tests/<nivel>/<nome_modulo>_atomic_tests.dart
+          - testes/<nivel>/<nome_modulo>_atomic_tests.dart
           - test/atomic_audit/**
         """
         test_roots = [
-            self.root_dir / 'testes',
+            self.root_dir / 'tests' / 'atomic',
             self.root_dir / 'tests',
+            self.root_dir / 'testes',
             self.root_dir / 'test' / 'atomic_audit'
         ]
         all_tested: Set[str] = set()
@@ -1114,7 +1116,7 @@ class AstNomenclatureAuditor:
     def audit_atomic_tests(self, target_package: Optional[str] = None):
         """
         Audita se cada símbolo público (função, método, getter, setter, operador)
-        possui um teste atômico correspondente em testes/<nivel>/<nome_modulo>_atomic_tests.dart.
+        possui um teste atômico correspondente em tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart.
         A falta de um teste com asserções reais é tratada como ERRO bloqueante.
         """
         all_tested, symbol_to_files = self.scan_all_atomic_tests()
@@ -1167,13 +1169,13 @@ class AstNomenclatureAuditor:
                 self.violations.append({
                     'rule': 'RULE_MISSING_ATOMIC_TESTS',
                     'severity': 'ERROR',
-                    'message': f"Símbolo público '{primary_key}' ({sym.kind}) em '{sym.file_path}:{sym.line}' não possui teste atômico correspondente em testes/<nivel>/<nome_modulo>_atomic_tests.dart",
+                    'message': f"Símbolo público '{primary_key}' ({sym.kind}) em '{sym.file_path}:{sym.line}' não possui teste atômico correspondente em tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart",
                     'file': sym.file_path,
                     'line': sym.line,
                     'symbol': primary_key,
                     'kind': sym.kind,
                     'package': pkg_name,
-                    'suggested': f"Criar test('{sym.name}()', () {{ ... expect(...) ... }}) em testes/<nivel>/{clean_mod}_atomic_tests.dart"
+                    'suggested': f"Criar test('{sym.name}()', () {{ ... expect(...) ... }}) em tests/atomic/<nivel>/{clean_mod}_atomic_tests.dart"
                 })
 
     def audit_rules(self, target_package: Optional[str] = None, target_rule: Optional[str] = None, target_severity: Optional[str] = None, include_non_public: bool = False):
@@ -1981,7 +1983,7 @@ class AstNomenclatureAuditor:
             pct_tst = (t_tst / t_aud * 100) if t_aud > 0 else 0
             lines.append("## 3. Cobertura da Árvore AST de Testes Atômicos 1 para 1")
             lines.append("")
-            lines.append("> Convenção determinística: `testes/<nivel>/<nome_modulo>_atomic_tests.dart`")
+            lines.append("> Convenção determinística: `tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart`")
             lines.append(f"- **Símbolos Públicos Auditáveis:** {t_aud:,}")
             lines.append(f"- **Testados:** {t_tst:,} ({pct_tst:.1f}%)")
             lines.append(f"- **Pendentes (ERROS Bloqueantes):** {t_mis:,} ({100.0 - pct_tst:.1f}%)")
@@ -2029,7 +2031,7 @@ class AstNomenclatureAuditor:
 
                 out_lines.append("=" * 80)
                 out_lines.append("  COBERTURA DA ÁRVORE AST DE TESTES ATÔMICOS 1 PARA 1")
-                out_lines.append("  Convenção: testes/<nivel>/<nome_modulo>_atomic_tests.dart")
+                out_lines.append("  Convenção: tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart")
                 out_lines.append("=" * 80)
                 out_lines.append(f"Total de símbolos executáveis públicos auditados: {t_aud}")
                 out_lines.append(f"Testes atômicos 1 para 1 encontrados:          {t_tst} ({pct_tst:.1f}%)")
@@ -2267,7 +2269,7 @@ def main():
     parser.add_argument('--progress', action='store_true', help="Gera o relatório sintético de progresso da AST em PROGRESS_RELATORY.md")
     parser.add_argument('--progress-file', default='PROGRESS_RELATORY.md', help="Arquivo de saída para o relatório de progresso (padrão: PROGRESS_RELATORY.md)")
     parser.add_argument('--fix', action='store_true', help="Aplicar correções mecânicas determinísticas e seguras")
-    parser.add_argument('--tests', action='store_true', help="Audita a árvore AST de testes atômicos 1 para 1 em testes/<nivel>/<nome_modulo>_atomic_tests.dart")
+    parser.add_argument('--tests', action='store_true', help="Audita a árvore AST de testes atômicos 1 para 1 em tests/atomic/<nivel>/<nome_modulo>_atomic_tests.dart")
 
     args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
