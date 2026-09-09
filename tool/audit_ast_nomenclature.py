@@ -425,7 +425,11 @@ class DartAuditSymbol:
         self.return_type = return_type
 
     def is_public(self) -> bool:
-        return not self.name.startswith('_')
+        if self.name.startswith('_'):
+            return False
+        if self.parent_type and self.parent_type.startswith('_'):
+            return False
+        return True
 
 
 class GoAuditSymbol:
