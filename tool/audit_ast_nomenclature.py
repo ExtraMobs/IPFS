@@ -1033,7 +1033,7 @@ class AstNomenclatureAuditor:
                         continue
 
                     tname = tm.group(2).strip()
-                    cleaned_tname = re.sub(r'\[.*?\]', '', tname).strip()
+                    cleaned_tname = re.sub(r'\[(?!\s*\]|\s*\]=).*?\]', '', tname).strip()
 
                     active_class = None
                     for depth, gname in reversed(group_stack):
@@ -1055,7 +1055,7 @@ class AstNomenclatureAuditor:
                     # Normalização do member
                     member = re.sub(r'^(?:get|set|method|getter|setter)\s+', '', member, flags=re.IGNORECASE)
 
-                    op_m = re.search(r'\b(operator\s*(?:==|!=|<=|>=|<|>|\+|\*|/|%|~|&|\||\^|\[\]=?|-))', member)
+                    op_m = re.search(r'\b(operator\s*(?:==|!=|<=|>=|>>>|<<<|<<|>>|<|>|\+|\*|~/|/|%|~|&|\||\^|\[\]=?|-))', member)
                     if op_m:
                         norm_op = re.sub(r'\s+', ' ', op_m.group(1))
                         member = norm_op
