@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 /// A disposable, localhost-only Kubo process for VM interop tests.
 ///
@@ -110,6 +111,21 @@ class LocalKuboHarness {
     } finally {
       if (await input.exists()) await input.delete();
     }
+  }
+
+  /// Connects this Kubo daemon to a remote multiaddr via `ipfs swarm connect`.
+  Future<void> swarmConnect(String multiaddr) async {
+    await _run(['swarm', 'connect', multiaddr]);
+  }
+
+  /// Retrieves a raw block from the swarm via `ipfs block get`.
+  Future<Uint8List> getRawBlock(String cid) async {
+    final result = await _run(['block', 'get', cid], stdoutEncoding: null);
+    final stdout = result.stdout;
+    if (stdout is Uint8List) return stdout;
+    if (stdout is List<int>) return Uint8List.fromList(stdout);
+    if (stdout is String) return Uint8List.fromList(stdout.codeUnits);
+    throw StateError('Unexpected stdout type: ${stdout.runtimeType}');
   }
 
   /// Adds a UnixFS file without using the HTTP gateway and returns its root
@@ -290,13 +306,17 @@ class LocalKuboHarness {
     }
   }
 
-  Future<ProcessResult> _run(List<String> args) async {
+  Future<ProcessResult> _run(
+    List<String> args, {
+    Encoding? stdoutEncoding = systemEncoding,
+  }) async {
     final result = await Process.run(
       executable,
       args,
       environment: {'IPFS_PATH': repository.path},
       includeParentEnvironment: true,
       runInShell: false,
+      stdoutEncoding: stdoutEncoding,
     );
     if (result.exitCode != 0) {
       throw ProcessException(

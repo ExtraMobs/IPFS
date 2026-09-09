@@ -17,6 +17,13 @@ Uint8List encodeWantBlock(Cid cid, {int priority = 1}) {
   return buf.bytes();
 }
 
+/// Encodes a [BitSwapMessage] into a varint-framed wire format byte buffer.
+Uint8List encodeBitswapMessage(BitSwapMessage message) {
+  final buf = Buffer();
+  message.toNetV1(buf);
+  return buf.bytes();
+}
+
 /// Reads one varint-framed Bitswap protobuf message and decodes to [BitSwapMessage].
 Future<BitSwapMessage> readBitswapMessage(P2PStream<dynamic> stream) async {
   var length = 0;

@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:ipfs_libp2p/core/network/context.dart';
 import 'package:ipfs_libp2p/core/network/stream.dart';
+import 'package:ipfs_libp2p/core/peer/peer_id.dart' as runtime;
 import 'package:synchronized/synchronized.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
+import 'package:transpiled_boxo/bitswap/message.dart';
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
@@ -138,16 +141,67 @@ final class BitswapClient implements BlockGetter {
             }
           }
         }
-        // Boxo's block server sends each response with one-shot SendMessage.
-        // This download-only client can release that inbound stream as soon as
-        // the response satisfies a pending block, while retaining the loop for
-        // unrelated or partial protocol messages.
+        // Respond to remote peer wantlists (Bitswap Server / Seeding)
+        final wants = message.wantlist();
+        if (wants.isNotEmpty) {
+          final response = BitSwapMessage(false);
+          var hasResponse = false;
+          for (final want in wants) {
+            if (want.cancel) continue;
+            if (await blockstore.has(want.cid)) {
+              final block = await blockstore.get(want.cid);
+              if (want.wantType == WantType.have) {
+                response.addBlockPresence(want.cid, BlockPresenceType.have);
+                hasResponse = true;
+              } else {
+                response.addBlock(block);
+                hasResponse = true;
+              }
+            } else if (want.sendDontHave) {
+              response.addBlockPresence(want.cid, BlockPresenceType.dontHave);
+              hasResponse = true;
+            }
+          }
+          if (hasResponse) {
+            final responseBytes = encodeBitswapMessage(response);
+            try {
+              await stream.write(responseBytes);
+            } catch (_) {}
+            try {
+              final remotePeer = stream.conn.remotePeer;
+              await _sendResponseToPeer(remotePeer, responseBytes);
+            } catch (_) {}
+          }
+        }
         if (completed) return;
       }
-    } on FormatException {
-      // EOF/reset ends Boxo's inbound message loop.
+    } catch (_) {
+      // EOF, reset, or session shutdown cleanly ends inbound message loop.
     } finally {
-      await stream.close();
+      try {
+        await stream.close();
+      } catch (_) {}
     }
+  }
+
+  Future<void> _sendResponseToPeer(runtime.PeerId peer, Uint8List bytes) async {
+    final key = peer.toBase58();
+    await (_senderLocks[key] ??= Lock()).synchronized(() async {
+      var stream = _outbound[key];
+      if (stream == null || stream.isClosed) {
+        stream = await router.host.newStream(
+          peer,
+          const [bitswapProtocol],
+          Context(timeout: timeout),
+        );
+        _outbound[key] = stream;
+      }
+      await stream.setWriteDeadline(DateTime.now().add(timeout));
+      try {
+        await stream.write(bytes);
+      } finally {
+        await stream.setDeadline(null);
+      }
+    });
   }
 }

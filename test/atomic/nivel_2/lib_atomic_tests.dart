@@ -408,6 +408,13 @@ void main() {
     expect(bytes, isNotEmpty);
   });
 
+  test('encodeBitswapMessage() - codifica mensagem bitswap com framing varint', () {
+    final msg = BitSwapMessage(false);
+    msg.addEntry(sampleCid, 1, WantType.block, true);
+    final bytes = encodeBitswapMessage(msg);
+    expect(bytes, isNotEmpty);
+  });
+
   test('readBitswapMessage() - le mensagem bitswap emoldurada em varint', () async {
     final payload = encodeWantBlock(sampleCid);
     final stream = _FakeP2PStream(payload);
@@ -655,6 +662,40 @@ void main() {
       );
       final header = await node.importCar(Uint8List.fromList(carBytes));
       expect(header.roots, contains(sampleCid));
+      await node.close();
+    });
+
+    test('peerId() - lanca erro se o node estiver offline', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      expect(() => node.peerId, throwsStateError);
+      await node.close();
+    });
+
+    test('listenAddresses() - retorna lista vazia se offline', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      expect(node.listenAddresses, isEmpty);
+      await node.close();
+    });
+
+    test('swarmAddresses() - lanca erro se offline pois depende do peerId', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      expect(() => node.swarmAddresses, throwsStateError);
+      await node.close();
+    });
+
+    test('putBlock() - persiste bloco no blockstore local', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      final blk = blocks.BasicBlock(sampleRawData, sampleCid);
+      await node.putBlock(blk);
+      expect(await node.blockstore.has(sampleCid), isTrue);
+      await node.close();
+    });
+
+    test('putRawBlock() - divide dados brutos, persiste no blockstore e retorna cid', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      final cid = await node.putRawBlock(sampleRawData);
+      expect(cid.version, equals(0));
+      expect(await node.blockstore.has(cid), isTrue);
       await node.close();
     });
 

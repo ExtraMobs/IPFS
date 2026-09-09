@@ -74,7 +74,8 @@ final class IpfsNode {
       ..enableHolePunching = false
       ..enablePing = false
       ..enableRelay = false
-      ..enableAutoRelay = false;
+      ..enableAutoRelay = false
+      ..addrsFactory = (addrs) => addrs;
     final host = await runtimeConfig.newNode();
     await host.start();
     final router = Libp2pRouter(host);
@@ -111,6 +112,40 @@ final class IpfsNode {
 
   /// Whether networking is active.
   bool get isOnline => _host != null;
+
+  /// Local cryptographic peer ID of this node.
+  PeerId get peerId {
+    final host = _host;
+    if (host == null) throw StateError('IPFS node is offline');
+    return PeerId.decode(host.id.toBase58());
+  }
+
+  /// Active listening multiaddresses for this node.
+  List<String> get listenAddresses {
+    final host = _host;
+    if (host == null) return const [];
+    final addrs = host.addrs;
+    if (addrs.isNotEmpty) {
+      return addrs.map((a) => a.toString()).toList();
+    }
+    return host.network.listenAddresses.map((a) => a.toString()).toList();
+  }
+
+  /// Formatted multiaddresses including peer ID (e.g. `/ip4/127.0.0.1/tcp/xxxxx/p2p/<peerId>`).
+  List<String> get swarmAddresses {
+    final pid = peerId.toBase58();
+    return listenAddresses.map((a) => '$a/p2p/$pid').toList();
+  }
+
+  /// Stores a block in the local blockstore.
+  Future<void> putBlock(blocks.Block block) => blockstore.put(block);
+
+  /// Creates and stores a raw block from [bytes] and returns its Cid.
+  Future<Cid> putRawBlock(Uint8List bytes) async {
+    final block = blocks.BasicBlock.fromData(bytes);
+    await blockstore.put(block);
+    return block.cid();
+  }
 
   /// Connects this node to a complete provider address.
   Future<void> connect(AddrInfo provider) {
@@ -224,10 +259,11 @@ final class IpfsNode {
       await _host?.close();
       await blockstore.close();
     }();
-    if (_shutdownTimeout > Duration.zero) {
-      await close.timeout(_shutdownTimeout);
-    } else {
-      await close;
-    }
+    final timeout = _shutdownTimeout > Duration.zero
+        ? _shutdownTimeout
+        : const Duration(seconds: 5);
+    try {
+      await close.timeout(timeout);
+    } catch (_) {}
   }
 }
