@@ -13,4 +13,5 @@ export 'src/partialmessages/bitmap.dart' show Bitmap;
 export 'src/timecache/first_seen_cache.dart' show FirstSeenCache;
 export 'src/timecache/last_seen_cache.dart' show LastSeenCache;
 export 'src/timecache/time_cache.dart' show TimeCache, TimeCacheStrategy;
-export 'src/timecache/util.dart' show backgroundSweepInterval, sweep;
+export 'src/timecache/util.dart'
+    show backgroundSweepInterval, startBackgroundSweep, sweep;

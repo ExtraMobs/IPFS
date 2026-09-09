@@ -98,6 +98,14 @@ dependencies:
     path: packages/transpiled_ipld_prime
   transpiled_go_codec_dagpb:
     path: packages/transpiled_go_codec_dagpb
+  transpiled_libp2p_record:
+    path: packages/transpiled_libp2p_record
+  transpiled_libp2p_pubsub:
+    path: packages/transpiled_libp2p_pubsub
+  transpiled_libp2p_kbucket:
+    path: packages/transpiled_libp2p_kbucket
+  transpiled_libp2p_routing_helpers:
+    path: packages/transpiled_libp2p_routing_helpers
 
   # Common packages
   args: ^2.6.0
