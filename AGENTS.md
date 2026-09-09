@@ -23,7 +23,20 @@ Comprovada a hospedagem e o servimento P2P de dados (seeding) por CID para outro
 - **Marco C.2 (Anúncio e Descoberta via DHT)**:
   `Dart anuncia CID na DHT via provide → Kubo findprovs → Kubo descobre nó Dart → conecta → Bitswap → valida bloco` (100% comprovado via `local_kubo_dht_serving_test.dart`).
 
-Todo agente que atuar no projeto deve seguir a ordem e os critérios da checklist do Objetivo 2 no topo de `doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essa checklist fica atrás dela, salvo correção necessária para manter a suíte verde ou instrução explícita do usuário. Gateway HTTP(S) não conta como P2P e só entra no escopo quando o usuário o pedir explicitamente.
+### Objetivo 3 — Transpilação Completa da libp2p e NAT Traversal (Próximo Marco / Em andamento)
+
+Implementação nativa da `go-libp2p` integral em `packages/transpiled_libp2p/` com paridade Go, eliminando shims e dependências externas via git, e aplicação de NAT Traversal completo no nó embutido (`IpfsNode`):
+
+- **Marco D.1 (Transpilação Completa de `go-libp2p` em `packages/transpiled_libp2p/`)**:
+  Portar os subsistemas de host, rede e identificação (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `IdentifyPush`, `connmgr`), substituindo a dependência externa `ipfs_libp2p` e mantendo conformidade com as 24 regras do auditor AST e 100% de cobertura de testes atômicos.
+- **Marco D.2 (NAT Traversal — AutoNAT e Circuit Relay v2)**:
+  Implementar detecção autônoma de reachability (`AutoNAT` v1/v2), cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` com handshake `RESERVE`) e gerenciamento autônomo de reservas (`AutoRelay`), publicando endereços `/p2p-circuit` no Swarm e na DHT.
+- **Marco D.3 (Otimizações de Acesso — Hole Punching DCUtR e UPnP)**:
+  Implementar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade) e `NATManager` (UPnP / NAT-PMP) para abertura automática de portas em roteadores locais.
+- **Marco D.4 (Validação Global WAN Ponta a Ponta)**:
+  Comprovar alcance e consumo P2P a partir de nós externos na internet pública (ex.: `check.ipfs.network` discando e recuperando blocos através de endereço relay `/p2p-circuit`).
+
+Todo agente que atuar no projeto deve seguir a ordem e os critérios das checklists dos Objetivos no topo de `doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essas checklists fica atrás delas, salvo correção necessária para manter a suíte verde ou instrução explícita do usuário. Gateway HTTP(S) não conta como P2P e só entra no escopo quando o usuário o pedir explicitamente.
 
 ## Fora do escopo
 

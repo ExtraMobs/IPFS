@@ -36,7 +36,22 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
      - [x] Implementar encoding de `ADD_PROVIDER` em `dht_message.dart`.
      - [x] Implementar `provide(Cid cid)` em `DhtClient` e `IpfsNode`.
      - [x] Teste de integração real (`local_kubo_dht_serving_test.dart`): Dart anuncia CID via DHT `provide`, Kubo descobre nó Dart via `ipfs routing findprovs <cid>`, conecta e baixa o bloco via Bitswap (100% comprovado em 3s).
-4. **Suíte de Testes de Paridade**:
+4. **Objetivo 3 — Transpilação Completa da libp2p e NAT Traversal**:
+   - **Status**: ⏳ **Próximo Marco / Em Planejamento e Execução**.
+   - **Marco D.1 (Transpilação Completa de `go-libp2p` em `packages/transpiled_libp2p/`)**:
+     - [ ] Transpilar subsistemas de host e conexões (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `connmgr`).
+     - [ ] Substituir e eliminar a dependência externa `ipfs_libp2p` do `pubspec.yaml`, integrando o nó raiz exclusivamente com `packages/transpiled_libp2p/`.
+     - [ ] 100% de conformidade com as 24 regras do auditor AST e cobertura atômica 1 para 1 (`RULE_MISSING_ATOMIC_TESTS`).
+   - **Marco D.2 (NAT Traversal — AutoNAT e Circuit Relay v2)**:
+     - [ ] Portar `AutoNAT` v1/v2 para detecção de reachability pública vs. privada.
+     - [ ] Portar cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` e handshake `RESERVE` com `/hop`).
+     - [ ] Portar `AutoRelay` com renovação de reservas dinâmicas e injeção automática de endereços `/p2p-circuit` no Swarm e DHT.
+   - **Marco D.3 (Otimizações de Conexão Direta — DCUtR Hole Punching e UPnP)**:
+     - [ ] Portar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade).
+     - [ ] Portar `NATManager` (UPnP / NAT-PMP) para abertura de portas locais em roteadores residenciais.
+   - **Marco D.4 (Validação Global WAN Ponta a Ponta)**:
+     - [ ] Prova de recuperação e descoberta a partir de nós na internet pública (ex.: `check.ipfs.network` discando e recuperando blocos do nó Dart via endereço relay `/p2p-circuit`).
+5. **Suíte de Testes de Paridade**:
    - `packages/boilerplate`: 29 testes (aritmética, overflow, shifts, matriz IEEE 754, divisão complexa de Smith).
    - `packages/transpiled_boxo`: 84 testes (bitswap message/pb, network, connecteventmanager, client, getter, notifications, messagequeue, peermanager, blockpresencemanager, wantlist, util).
    - `packages/transpiled_libp2p`: 198 testes (crypto RSA, Secp256k1, ECDSA, Ed25519, peer ID, addr info, peer record, envelope, query event, connmgr, resource manager, noise).
