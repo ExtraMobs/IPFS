@@ -134,6 +134,14 @@ export 'src/core/event/network.dart';
 export 'src/core/event/reachability.dart';
 export 'src/core/event/protocol.dart';
 export 'src/core/event/identify.dart';
+export 'src/core/event/bus.dart';
+export 'src/p2p/host/eventbus/basic.dart';
+export 'src/core/host/host.dart';
+export 'src/core/peerstore/peerstore.dart';
+export 'src/p2p/host/peerstore/pstoremem/peerstore.dart';
+export 'src/p2p/protocol/multistream.dart';
+export 'src/p2p/host/blank/blank_host.dart';
+export 'src/p2p/host/routed/routed_host.dart';
 export 'src/p2p/security/noise/noise_framing.dart'
     show
         decryptFrame,

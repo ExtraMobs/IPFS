@@ -188,6 +188,9 @@ DOCUMENTED_ADAPTATIONS = {
     'NoPublicKeyException': 'PROGRESS.md - Exceção lançada quando chave pública é ausente no PeerId',
     'InvalidPeerIdSourceException': 'PROGRESS.md - Exceção para fontes inválidas de derivação de PeerId',
     'ProtocolSwitch': 'PROGRESS.md - Switch de protocolo multistream-select em Dart',
+    'MultistreamMuxer': 'PROGRESS.md - Multiplexador de protocolos multistream-select (msmux.MultistreamMuxer do Go)',
+    'ItemNotFoundException': 'PROGRESS.md - Exceção tipada para ErrNotFound de core/peerstore',
+    'MemoryPeerstore': 'PROGRESS.md - Implementação concreta em memória de Peerstore (pstoremem do Go)',
     'QueryEventRegistration': 'PROGRESS.md - Registro de observador de eventos de busca no DHT',
     # packages/transpiled_libp2p_kbucket
     'KeyspaceKey': 'PROGRESS.md - Chave no espaço de chaves XOR da Kademlia',
