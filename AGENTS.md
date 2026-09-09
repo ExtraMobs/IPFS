@@ -6,24 +6,24 @@ necessárias para executar um nó IPFS embutido em aplicações Dart ou Flutter.
 Kubo, Boxo e go-libp2p são referências de comportamento, não superfícies de
 produto que devam ser reproduzidas integralmente.
 
-## Objetivo prioritário do projeto
+## Objetivos do projeto
 
-Até ser concluído e marcado como tal em `doc/transpilation/PROGRESS.md`, o
-primeiro objetivo é comprovar o download P2P de um bloco por CID interoperando
-com Kubo:
+### Objetivo 1 — Primeiro download P2P por CID (Concluído)
 
-`Kubo conhecido → TCP/Noise → /ipfs/bitswap/1.2.0 → WANT_BLOCK → bloco validado pelo CID → blockstore`.
+Comprovado o download P2P de um bloco por CID interoperando com Kubo:
+- **Marco A (Provider Conhecido)**: `Kubo conhecido → TCP/Noise → /ipfs/bitswap/1.2.0 → WANT_BLOCK → bloco validado pelo CID → blockstore` (100% comprovado via `local_kubo_bitswap_test.dart`).
+- **Marco B (Provider Descoberto via DHT)**: `CID → DHT.findProviders → AddrInfo → conectar provider → Bitswap → validar → blockstore` (100% comprovado via `local_kubo_dht_bitswap_test.dart`).
 
-Depois da prova com provider conhecido, estenda o mesmo fluxo para:
+### Objetivo 2 — Hospedagem e servimento P2P de blocos por CID (Objetivo Atual)
 
-`CID → DHT.findProviders → AddrInfo → conectar provider → Bitswap → validar → blockstore`.
+Comprovar a hospedagem e o servimento P2P de dados (seeding) por CID para outro nó (Kubo):
 
-Todo agente que atuar na transpilação deve seguir a ordem e os critérios da
-checklist "Objetivo 1 — primeiro download P2P por CID" no topo de
-`doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essa
-checklist fica atrás dela, salvo correção necessária para manter a suíte verde
-ou instrução explícita do usuário. Gateway HTTP(S) não conta como download P2P
-e só entra no escopo quando o usuário o pedir explicitamente.
+- **Marco C.1 (Provider Conhecido)**:
+  `Dart local (bloco no blockstore) → TCP/Noise → /ipfs/bitswap/1.2.0 → responder WANT_BLOCK/WANT_HAVE → Kubo recebe e valida bloco`.
+- **Marco C.2 (Anúncio e Descoberta via DHT)**:
+  `Dart anuncia CID na DHT via provide → Kubo findprovs → Kubo descobre nó Dart → conecta → Bitswap → valida bloco`.
+
+Todo agente que atuar no projeto deve seguir a ordem e os critérios da checklist do Objetivo 2 no topo de `doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essa checklist fica atrás dela, salvo correção necessária para manter a suíte verde ou instrução explícita do usuário. Gateway HTTP(S) não conta como P2P e só entra no escopo quando o usuário o pedir explicitamente.
 
 ## Fora do escopo
 
