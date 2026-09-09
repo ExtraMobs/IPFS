@@ -1,4 +1,5 @@
 // lib/src/data_structures/typed_map.dart
+import 'package:collection/collection.dart';
 
 /// An immutable, type-safe wrapper around a plain [Map<String, dynamic>].
 ///
@@ -37,8 +38,8 @@ class TypedMap {
       identical(this, other) ||
       other is TypedMap &&
           runtimeType == other.runtimeType &&
-          _map == other._map;
+          const MapEquality<String, dynamic>().equals(_map, other._map);
 
   @override
-  int get hashCode => _map.hashCode;
+  int get hashCode => const MapEquality<String, dynamic>().hash(_map);
 }

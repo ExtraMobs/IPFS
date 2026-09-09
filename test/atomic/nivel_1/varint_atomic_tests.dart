@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/varint_atomic_tests.dart
+// test/atomic/nivel_1/varint_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo varint (transpiled_varint).
 
 import 'dart:typed_data';

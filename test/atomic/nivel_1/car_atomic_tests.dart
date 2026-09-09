@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/car_atomic_tests.dart
+// test/atomic/nivel_1/car_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo go_car (transpiled_go_car).
 
 import 'dart:async';

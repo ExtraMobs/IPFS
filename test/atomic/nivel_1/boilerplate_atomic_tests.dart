@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/boilerplate_atomic_tests.dart
+// test/atomic/nivel_1/boilerplate_atomic_tests.dart
 // Testes atomicos 1 para 1 para o modulo boilerplate (fixed_types/golang)
 
 import 'dart:typed_data';

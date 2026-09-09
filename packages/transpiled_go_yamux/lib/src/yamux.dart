@@ -370,6 +370,7 @@ final class YamuxSession {
   final Queue<Completer<YamuxStream>> _acceptWaiters =
       Queue<Completer<YamuxStream>>();
   final Completer<void> _closed = Completer<void>();
+  Future<void>? _closeFuture;
   late final StreamSubscription<List<int>> _subscription;
   Future<void> _writeTail = Future<void>.value();
   Object? _shutdownReason;
@@ -442,10 +443,12 @@ final class YamuxSession {
     );
   }
 
-  Future<void> close({Object? reason}) async {
-    if (_closed.isCompleted) return;
+  Future<void> close({Object? reason}) => _closeFuture ??= _close(reason);
+
+  Future<void> _close(Object? reason) async {
     _shutdownReason = reason ?? YamuxSessionClosedException();
     _goAway = true;
+    _closed.complete();
     await _subscription.cancel();
     for (final stream in List<YamuxStream>.from(_streams.values)) {
       stream._forceClose(_shutdownReason!);
@@ -454,11 +457,7 @@ final class YamuxSession {
     while (_acceptWaiters.isNotEmpty) {
       _acceptWaiters.removeFirst().completeError(_closedError);
     }
-    try {
-      await transport.close();
-    } finally {
-      _closed.complete();
-    }
+    await transport.close();
   }
 
   Object get _closedError => _shutdownReason ?? YamuxSessionClosedException();

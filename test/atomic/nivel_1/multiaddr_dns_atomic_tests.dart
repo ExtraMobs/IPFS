@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/multiaddr_dns_atomic_tests.dart
+// test/atomic/nivel_1/multiaddr_dns_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo multiaddr_dns (transpiled_multiaddr_dns).
 
 import 'package:test/test.dart';

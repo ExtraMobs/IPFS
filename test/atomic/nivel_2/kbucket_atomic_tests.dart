@@ -1,4 +1,4 @@
-// tests/atomic/nivel_2/kbucket_atomic_tests.dart
+// test/atomic/nivel_2/kbucket_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo kbucket (transpiled_libp2p_kbucket).
 
 import 'dart:typed_data';

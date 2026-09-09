@@ -20,7 +20,7 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
      - `RULE_EXPOSED_NON_PUBLIC_MEMBERS`: Membros públicos nunca expõem tipos privados (`_Tipo`) ou tipos internos.
      - **Fidelidade Integral em Cadeias Não-Públicas**: Formalizado no `AGENTS.md` que toda a cadeia de execução interna (métodos privados `_`, estados e algoritmos auxiliares) deve ser implementada com estrita fidelidade ao Golang, sendo expressamente vetado o uso de mocks ou stubs simplificados em produção.
    - **Auditoria de Testes Atômicos 1 para 1 (Regra 24 — `--tests`)**:
-     - `RULE_MISSING_ATOMIC_TESTS`: Exige que cada função, método, getter, setter e operador público possua um teste atômico correspondente em `testes/<nivel>/<nome_modulo>_atomic_tests.dart` com asserções reais (`expect(...)`). Testes vazios, stubs ou apenas `fail()` são sumariamente rejeitados. A ausência de teste é tratada como erro bloqueante (`ERROR`).
+     - `RULE_MISSING_ATOMIC_TESTS`: Exige que cada função, método, getter, setter e operador público possua um teste atômico correspondente em `test/atomic/<nivel>/<nome_modulo>_atomic_tests.dart` com asserções reais (`expect(...)`). Testes vazios, stubs ou apenas `fail()` são sumariamente rejeitados. A ausência de teste é tratada como erro bloqueante (`ERROR`).
 2. **Objetivo 1 — Primeiro Download P2P por CID**:
    - **Status**: ✅ **100% Concluído e Comprovado**.
    - **Marco A (Provider Conhecido)**: Kubo isolado ➔ TCP/Noise ➔ `/ipfs/bitswap/1.2.0` ➔ `WANT_BLOCK` ➔ validação de CID ➔ `Blockstore` (`local_kubo_bitswap_test.dart` em 2s).
@@ -64,6 +64,46 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
 - **Verificar apenas erros bloqueantes:** `python tool/audit_ast_nomenclature.py --severity ERROR`
 
 ## Como isto foi gerado / como continuar
+
+### Migração e retomada dos testes atômicos — 2026-09-09
+
+- A árvore de testes atômicos foi movida para `test/atomic/<nivel>/`, incluindo
+  o arquivo local não rastreado `nivel_2/lib_atomic_tests.dart`. O auditor da
+  regra 24 consulta exclusivamente essa árvore. `dart_test.yaml` descobre tanto
+  `*_test.dart` quanto `*_atomic_tests.dart` por meio do glob nativo do runner.
+- Validação da migração: os 28 testes atômicos de CID passam; a execução por
+  diretório `dart test test/atomic/nivel_1 --name 'bytes\(\) - delega'` descobre
+  e executa o teste atômico selecionado. O primeiro levantamento após mover os
+  arquivos encontrou 910/2.073 símbolos cobertos e 1.163 pendências; esses
+  números são uma linha de base, não conclusão dos lotes em andamento.
+- Localização confirmada neste checkout: `go-ipfs-reference/` contém os clones
+  e índices; `../go-ipfs-reference/` citado em `UPSTREAM_LOCK.md` não existe.
+  A divergência é de caminho local, sem alteração das revisões autoritativas.
+- Rastreamento libp2p, revisão `e20bb60ffc4b4ee33640e5fe8f45fccce893cecd`:
+  `core/discovery/options.go: Options.Apply → Option` (chamada dinâmica; closures
+  `TTL`/`Limit`) → `DiscoveryOptions.apply`/`ttl`/`limit` em `transpiled_libp2p`;
+  `core/protocol/id.go: ConvertFromStrings/ConvertToStrings → make/append`
+  (builtins Go) → `convertFromStrings`/`convertToStrings` no mesmo pacote.
+  Índices consultados: `libp2p-index/core_discovery.md` e `core_protocol.md`.
+  Cinco testes iniciais passam em `test/atomic/nivel_1/libp2p_atomic_tests.dart`.
+- Os testes de `lib` expuseram três defeitos reais: hash por identidade em
+  `ImmutableBytes`, igualdade/hash por identidade em `TypedMap`, e corrida no
+  encerramento de Yamux. Os helpers originais Dart não têm símbolo Go:
+  usam agora `Object.hashAll` e `MapEquality` da dependência já instalada,
+  respectivamente. Testes verificam deduplicação em conjuntos, lookup por
+  bytes equivalentes e independência da ordem das entradas no mapa.
+- Yamux: `session.go: Session.close` (revisão
+  `86999c64954b3109d08aac4d6dc94afa6fbfa302`) marca shutdown/fecha `shutdownCh`
+  antes de I/O, serializando com `shutdownLock`. O índice Yamux não está
+  disponível neste checkout; foram consultadas as declarações upstream.
+  `YamuxSession.close` preserva esse comportamento com Future compartilhado
+  e sinalização antes do primeiro `await`. O teste de `GoYamuxMultiplexer.close`
+  exercita chamadas concorrentes e fechamento propagado pelo transporte.
+- O teste de `GoYamuxMultiplexer.acceptStream` agora abre um stream real em
+  memória e verifica bytes recebidos. Os testes QUIC corrigem expectativas
+  inválidas: ALPN ausente lança `StateError`; certificado DER vazio lança
+  `FormatException` nas dependências chamadas pelo adaptador. Nenhuma validação
+  de segurança foi removida.
 
 ### Auditoria AST, Governança de Nomenclatura e Fidelidade Não-Pública (Regras 4, 11, 12 e 23) — 2026-09-08
 

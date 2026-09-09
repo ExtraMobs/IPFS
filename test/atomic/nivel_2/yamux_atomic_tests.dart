@@ -1,4 +1,4 @@
-// tests/atomic/nivel_2/yamux_atomic_tests.dart
+// test/atomic/nivel_2/yamux_atomic_tests.dart
 // Testes atomicos 1 para 1 para o modulo transpiled_go_yamux (37 simbolos).
 
 import 'dart:async';

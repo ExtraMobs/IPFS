@@ -27,7 +27,7 @@ class ImmutableBytes {
           _bytesEqual(_bytes, other._bytes);
 
   @override
-  int get hashCode => _bytes.hashCode;
+  int get hashCode => Object.hashAll(_bytes);
 
   static bool _bytesEqual(Uint8List a, Uint8List b) {
     if (a.length != b.length) return false;

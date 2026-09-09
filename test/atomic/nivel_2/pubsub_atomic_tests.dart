@@ -1,4 +1,4 @@
-// tests/atomic/nivel_2/pubsub_atomic_tests.dart
+// test/atomic/nivel_2/pubsub_atomic_tests.dart
 // Testes atomicos 1 para 1 para o modulo libp2p_pubsub (transpiled_libp2p_pubsub).
 
 import 'dart:typed_data';

@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/protobuf_atomic_tests.dart
+// test/atomic/nivel_1/protobuf_atomic_tests.dart
 // Testes atomicos 1 para 1 para o modulo protobuf (transpiled_protobuf).
 
 import 'dart:typed_data';

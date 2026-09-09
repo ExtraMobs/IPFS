@@ -1,4 +1,4 @@
-// tests/atomic/nivel_1/base58_atomic_tests.dart
+// test/atomic/nivel_1/base58_atomic_tests.dart
 // Testes atômicos 1 para 1 para o módulo base58 (transpiled_base58).
 
 import 'dart:typed_data';
