@@ -29,9 +29,13 @@ com o código-fonte Dart (em packages/ e lib/), verificando conformidade estrita
   21. RULE_MISSING_GO_FUNCTIONS: Auditoria de funções top-level do Upstream Go ainda não portadas para o pacote Dart.
   22. RULE_PUBSPEC_DEPENDENCIES: Veto a dependências de CLI (args, dcli) em dependencies de bibliotecas em pubspec.yaml.
   23. RULE_EXPOSED_NON_PUBLIC_MEMBERS: Veto a membros públicos expondo tipos não-públicos (privados '_' ou de 'internal/'), exigindo paridade com mesmo nível de visibilidade e permissão (ou menor).
+  24. RULE_MISSING_ATOMIC_TESTS: Auditoria de testes atômicos 1 para 1 em testes/<nivel>/<nome_modulo>_atomic_tests.dart.
 
 Uso:
   python tool/audit_ast_nomenclature.py
+  python tool/audit_ast_nomenclature.py --tests
+  python tool/audit_ast_nomenclature.py --tests --package transpiled_cid
+  python tool/audit_ast_nomenclature.py --scaffold transpiled_cid --level nivel_1
   python tool/audit_ast_nomenclature.py --package transpiled_boxo
   python tool/audit_ast_nomenclature.py --rule RULE_MISSING_GO_TYPES
   python tool/audit_ast_nomenclature.py --rule RULE_MISSING_GO_FIELDS
@@ -237,6 +241,7 @@ RULE_TITLES = {
     'RULE_MISSING_GO_FUNCTIONS': "21. Auditoria de Funções Top-Level do Upstream Go Ausentes",
     'RULE_PUBSPEC_DEPENDENCIES': "22. Validação de Dependências em pubspec.yaml",
     'RULE_EXPOSED_NON_PUBLIC_MEMBERS': "23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão)",
+    'RULE_MISSING_ATOMIC_TESTS': "24. Auditoria de Testes Atômicos 1 para 1 (testes/<nivel>/<nome_modulo>_atomic_tests.dart)",
 }
 
 RULE_DEFAULT_SEVERITIES = {
@@ -263,6 +268,7 @@ RULE_DEFAULT_SEVERITIES = {
     'RULE_MISSING_GO_FUNCTIONS': 'INFO',
     'RULE_PUBSPEC_DEPENDENCIES': 'ERROR',
     'RULE_EXPOSED_NON_PUBLIC_MEMBERS': 'ERROR',
+    'RULE_MISSING_ATOMIC_TESTS': 'ERROR',
 }
 
 def split_words(s: str) -> List[str]:
@@ -444,6 +450,7 @@ class AstNomenclatureAuditor:
         self.dart_files: List[Tuple[Path, str, str]] = []  # (file_path, content, cleaned)
         self.go_symbols_by_module: Dict[str, List[GoAuditSymbol]] = {}
         self.violations: List[Dict] = []
+        self.atomic_test_stats: Optional[Dict] = None
 
     def _parse_member_sig(self, sig: str, class_name: str, rel_path: str, line_no: int, check_dep, char_pos: int = 0) -> Optional[DartAuditSymbol]:
         sig = " ".join(sig.split())
@@ -881,6 +888,309 @@ class AstNomenclatureAuditor:
                     seen.add(key)
                     unique_syms.append(s)
             self.go_symbols_by_module[mod] = unique_syms
+
+    def parse_atomic_test_file(self, content: str) -> Set[str]:
+        """
+        Extrai do arquivo de teste todos os símbolos testados.
+        Reconhece escopos de chaves de groups:
+          - group('Classe', () { test('metodo', ...); test('getter', ...); });
+          - test('Classe.metodo', ...);
+          - test('funcaoTopLevel', ...);
+        Retorna um conjunto de strings normalizadas:
+          'BitSwapMessage.addEntry', 'BitSwapMessage.empty', 'parseSelector', etc.
+        """
+        tested = set()
+        group_pattern = re.compile(r'\bgroup\s*\(\s*([\'"])(.*?)\1')
+        test_pattern = re.compile(r'\btest\s*\(\s*([\'"])(.*?)\1')
+
+        i = 0
+        n = len(content)
+        brace_depth = 0
+        group_stack = []  # list of (depth, group_name)
+
+        TOP_LEVEL_GROUP_KEYWORDS = ('top-level', 'toplevel', 'top_level', 'functions', 'funções', 'auxiliary', 'top level')
+
+        while i < n:
+            # Pula comentários de linha
+            if content[i:i+2] == '//':
+                eol = content.find('\n', i)
+                i = eol if eol != -1 else n
+                continue
+            # Pula comentários de bloco
+            if content[i:i+2] == '/*':
+                eoc = content.find('*/', i)
+                i = eoc + 2 if eoc != -1 else n
+                continue
+
+            # Pula strings regulares
+            if content[i] in ("'", '"'):
+                quote = content[i]
+                if content[i:i+3] == quote * 3:
+                    end_quote = content.find(quote * 3, i + 3)
+                    i = end_quote + 3 if end_quote != -1 else n
+                else:
+                    j = i + 1
+                    while j < n:
+                        if content[j] == '\\':
+                            j += 2
+                            continue
+                        if content[j] == quote:
+                            j += 1
+                            break
+                        if content[j] == '\n':
+                            break
+                        j += 1
+                    i = j
+                continue
+
+            # Verifica chamada group(...)
+            if content[i:i+5] == 'group' and (i == 0 or not content[i-1].isalnum()) and not content[i+5].isalnum():
+                gm = group_pattern.match(content, i)
+                if gm:
+                    gname = gm.group(2).strip()
+                    clean_gname = re.sub(r'\[.*?\]', '', gname).strip()
+                    clean_gname = clean_gname.split()[0] if clean_gname else ''
+                    brace_pos = content.find('{', gm.end())
+                    if brace_pos != -1:
+                        group_stack.append((brace_depth + 1, clean_gname))
+                    i = gm.end()
+                    continue
+
+            # Verifica chamada test(...)
+            if content[i:i+4] == 'test' and (i == 0 or not content[i-1].isalnum()) and not content[i+4].isalnum():
+                tm = test_pattern.match(content, i)
+                if tm:
+                    tname = tm.group(2).strip()
+                    cleaned_tname = re.sub(r'\[.*?\]', '', tname).strip()
+
+                    active_class = None
+                    for depth, gname in reversed(group_stack):
+                        if gname and gname[0].isupper() and not any(kw in gname.lower() for kw in TOP_LEVEL_GROUP_KEYWORDS):
+                            active_class = gname
+                            break
+
+                    cls = None
+                    member = cleaned_tname
+                    if '.' in cleaned_tname and not cleaned_tname.startswith('operator'):
+                        parts = cleaned_tname.split('.', 1)
+                        cand_cls = parts[0].strip().split()[-1]
+                        if not any(kw in cand_cls.lower() for kw in TOP_LEVEL_GROUP_KEYWORDS):
+                            cls = cand_cls
+                        member = parts[1].strip()
+                    elif active_class:
+                        cls = active_class
+
+                    # Normalização do member
+                    member = re.sub(r'^(?:get|set|method|getter|setter)\s+', '', member, flags=re.IGNORECASE)
+
+                    op_m = re.search(r'\b(operator\s*(?:==|!=|<=|>=|<|>|\+|\*|/|%|~|&|\||\^|\[\]=?|-))', member)
+                    if op_m:
+                        norm_op = re.sub(r'\s+', ' ', op_m.group(1))
+                        member = norm_op
+                    else:
+                        member = re.sub(r'\(.*?\).*$', '', member)
+                        member = member.strip().split()[0] if member.strip() else ''
+
+                    if member:
+                        if cls:
+                            tested.add(f"{cls}.{member}")
+                        else:
+                            tested.add(member)
+                    i = tm.end()
+                    continue
+
+            # Rastreia chaves
+            if content[i] == '{':
+                brace_depth += 1
+            elif content[i] == '}':
+                brace_depth = max(0, brace_depth - 1)
+                while group_stack and group_stack[-1][0] > brace_depth:
+                    group_stack.pop()
+
+            i += 1
+
+        return tested
+
+    def scan_all_atomic_tests(self) -> Tuple[Set[str], Dict[str, List[str]]]:
+        """
+        Varre todos os arquivos de testes atômicos nas pastas:
+          - testes/<nivel>/<nome_modulo>_atomic_tests.dart
+          - tests/<nivel>/<nome_modulo>_atomic_tests.dart
+          - test/atomic_audit/**
+        """
+        test_roots = [
+            self.root_dir / 'testes',
+            self.root_dir / 'tests',
+            self.root_dir / 'test' / 'atomic_audit'
+        ]
+        all_tested: Set[str] = set()
+        symbol_to_files: Dict[str, List[str]] = {}
+
+        for tr in test_roots:
+            if not tr.exists():
+                continue
+            for f in tr.rglob('*.dart'):
+                if '_atomic_test' in f.name:
+                    rel_p = str(f.relative_to(self.root_dir)).replace('\\', '/')
+                    try:
+                        content = f.read_text(encoding='utf-8', errors='ignore')
+                    except Exception:
+                        continue
+                    syms = self.parse_atomic_test_file(content)
+                    for s in syms:
+                        all_tested.add(s)
+                        symbol_to_files.setdefault(s, []).append(rel_p)
+
+        return all_tested, symbol_to_files
+
+    def audit_atomic_tests(self, target_package: Optional[str] = None):
+        """
+        Audita se cada símbolo público (função, método, getter, setter, operador)
+        possui um teste atômico correspondente em testes/<nivel>/<nome_modulo>_atomic_tests.dart.
+        A falta de um teste é tratada como ERRO bloqueante.
+        """
+        all_tested, symbol_to_files = self.scan_all_atomic_tests()
+
+        self.atomic_test_stats = {
+            'total_auditable': 0,
+            'total_tested': 0,
+            'total_missing': 0,
+            'by_package': {},
+            'missing_by_package': {}
+        }
+
+        for sym in self.dart_symbols:
+            if target_package and target_package not in sym.file_path:
+                continue
+
+            # Considera apenas funções, métodos, getters, setters, operadores públicos
+            if not sym.is_public() or sym.kind not in ('function', 'method', 'getter', 'setter', 'operator'):
+                continue
+
+            # Construtor default redundante com nome da classe é testado via factory ou instanciação
+            if sym.parent_type and sym.name == sym.parent_type:
+                continue
+
+            pkg_name = sym.file_path.split('/')[1] if sym.file_path.startswith('packages/') else 'lib'
+
+            # Chave canônica do símbolo
+            if sym.parent_type:
+                primary_key = f"{sym.parent_type}.{sym.name}"
+            else:
+                primary_key = sym.name
+
+            pkg_stats = self.atomic_test_stats['by_package'].setdefault(pkg_name, {'total': 0, 'tested': 0, 'missing': 0})
+            pkg_stats['total'] += 1
+            self.atomic_test_stats['total_auditable'] += 1
+
+            is_tested = (primary_key in all_tested)
+            if not is_tested and not sym.parent_type:
+                is_tested = (sym.name in all_tested)
+
+            if is_tested:
+                pkg_stats['tested'] += 1
+                self.atomic_test_stats['total_tested'] += 1
+            else:
+                pkg_stats['missing'] += 1
+                self.atomic_test_stats['total_missing'] += 1
+                self.atomic_test_stats['missing_by_package'].setdefault(pkg_name, []).append(sym)
+
+                clean_mod = pkg_name.replace('transpiled_', '')
+                self.violations.append({
+                    'rule': 'RULE_MISSING_ATOMIC_TESTS',
+                    'severity': 'ERROR',
+                    'message': f"Símbolo público '{primary_key}' ({sym.kind}) em '{sym.file_path}:{sym.line}' não possui teste atômico correspondente em testes/<nivel>/<nome_modulo>_atomic_tests.dart",
+                    'file': sym.file_path,
+                    'line': sym.line,
+                    'symbol': primary_key,
+                    'kind': sym.kind,
+                    'package': pkg_name,
+                    'suggested': f"Criar test('{sym.name}()', () {{ ... }}) em testes/<nivel>/{clean_mod}_atomic_tests.dart"
+                })
+
+    def generate_atomic_test_scaffold(self, target: str, level: str = 'nivel_1') -> Optional[Path]:
+        """
+        Gera o esqueleto inicial determinístico de testes atômicos para um pacote ou módulo.
+        Ex: target='transpiled_cid' ou 'cid' gera testes/nivel_1/cid_atomic_tests.dart.
+        """
+        clean_target = target.replace('transpiled_', '').strip().lower()
+        matching_symbols = []
+        target_pkg = None
+
+        for sym in self.dart_symbols:
+            if not sym.is_public() or sym.kind not in ('function', 'method', 'getter', 'setter', 'operator'):
+                continue
+            if sym.parent_type and sym.name == sym.parent_type:
+                continue
+
+            pkg_name = sym.file_path.split('/')[1] if sym.file_path.startswith('packages/') else 'lib'
+            clean_pkg = pkg_name.replace('transpiled_', '').lower()
+
+            if clean_target in clean_pkg or clean_target in sym.file_path.lower():
+                matching_symbols.append(sym)
+                if not target_pkg:
+                    target_pkg = pkg_name
+
+        if not matching_symbols:
+            print(f"⚠️ [SCAFFOLD] Nenhum símbolo público encontrado para o alvo '{target}'.")
+            return None
+
+        out_dir = self.root_dir / 'testes' / level
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_file = out_dir / f"{clean_target}_atomic_tests.dart"
+
+        by_class: Dict[str, List[DartAuditSymbol]] = {}
+        top_level: List[DartAuditSymbol] = []
+
+        for s in matching_symbols:
+            if s.parent_type:
+                by_class.setdefault(s.parent_type, []).append(s)
+            else:
+                top_level.append(s)
+
+        lines = [
+            f"// testes/{level}/{clean_target}_atomic_tests.dart",
+            f"// Testes atômicos 1 para 1 para o módulo {clean_target} ({target_pkg or 'lib'}).",
+            "// Gerado automaticamente pelo auditor AST (tool/audit_ast_nomenclature.py --scaffold).",
+            "",
+            "import 'package:test/test.dart';",
+        ]
+
+        if target_pkg and target_pkg != 'lib':
+            lines.append(f"import 'package:{target_pkg}/{target_pkg}.dart';")
+        else:
+            lines.append("import 'package:dart_ipfs/ipfs.dart';")
+
+        lines.extend([
+            "",
+            "void main() {",
+        ])
+
+        for cls_name, methods in sorted(by_class.items()):
+            lines.append(f"  group('{cls_name} [Atomic Audit]', () {{")
+            for m in methods:
+                lines.append(f"    test('{m.name}()', () {{")
+                lines.append(f"      // TODO: Implementar asserção atômica 1:1 para {cls_name}.{m.name}")
+                lines.append("    });")
+                lines.append("")
+            lines.append("  });")
+            lines.append("")
+
+        if top_level:
+            lines.append("  group('Top-Level Functions [Atomic Audit]', () {")
+            for fn in top_level:
+                lines.append(f"    test('{fn.name}()', () {{")
+                lines.append(f"      // TODO: Implementar asserção atômica 1:1 para {fn.name}")
+                lines.append("    });")
+                lines.append("")
+            lines.append("  });")
+            lines.append("")
+
+        lines.append("}")
+        lines.append("")
+
+        out_file.write_text("\n".join(lines), encoding='utf-8')
+        return out_file
 
     def audit_rules(self, target_package: Optional[str] = None, target_rule: Optional[str] = None, target_severity: Optional[str] = None, include_non_public: bool = False):
         self.violations.clear()
@@ -1679,6 +1989,29 @@ class AstNomenclatureAuditor:
                         lines.append(f"  - *Sugestão:* `{item['suggested']}`")
                 lines.append("")
 
+        if self.atomic_test_stats:
+            stats = self.atomic_test_stats
+            t_aud = stats['total_auditable']
+            t_tst = stats['total_tested']
+            t_mis = stats['total_missing']
+            pct_tst = (t_tst / t_aud * 100) if t_aud > 0 else 0
+            lines.append("## 3. Cobertura da Árvore AST de Testes Atômicos 1 para 1")
+            lines.append("")
+            lines.append("> Convenção determinística: `testes/<nivel>/<nome_modulo>_atomic_tests.dart`")
+            lines.append(f"- **Símbolos Públicos Auditáveis:** {t_aud:,}")
+            lines.append(f"- **Testados:** {t_tst:,} ({pct_tst:.1f}%)")
+            lines.append(f"- **Pendentes (ERROS Bloqueantes):** {t_mis:,} ({100.0 - pct_tst:.1f}%)")
+            lines.append("")
+            lines.append("| Pacote / Módulo | Total Auditáveis | Testados | Faltando | % Cobertura |")
+            lines.append("| :--- | :---: | :---: | :---: | :---: |")
+            for pkg, p_data in sorted(stats['by_package'].items(), key=lambda x: x[0]):
+                p_tot = p_data['total']
+                p_tst = p_data['tested']
+                p_mis = p_data['missing']
+                p_pct = (p_tst / p_tot * 100) if p_tot > 0 else 0
+                lines.append(f"| `{pkg}` | {p_tot} | {p_tst} | {p_mis} | **{p_pct:.1f}%** |")
+            lines.append("")
+
         return "\n".join(lines)
 
     def print_report(self, json_output: bool = False, summary_only: bool = False, markdown_output: bool = False, output_file: Optional[str] = None):
@@ -1702,6 +2035,31 @@ class AstNomenclatureAuditor:
             out_lines.append(f"Total de símbolos Go indexados:   {sum(len(s) for s in self.go_symbols_by_module.values())}")
             out_lines.append(f"Total de apontamentos:            {total} ({len(errors)} erros, {len(warnings)} avisos, {len(infos)} notas de cobertura)")
             out_lines.append("=" * 80 + "\n")
+
+            if self.atomic_test_stats:
+                stats = self.atomic_test_stats
+                t_aud = stats['total_auditable']
+                t_tst = stats['total_tested']
+                t_mis = stats['total_missing']
+                pct_tst = (t_tst / t_aud * 100) if t_aud > 0 else 0
+
+                out_lines.append("=" * 80)
+                out_lines.append("  COBERTURA DA ÁRVORE AST DE TESTES ATÔMICOS 1 PARA 1")
+                out_lines.append("  Convenção: testes/<nivel>/<nome_modulo>_atomic_tests.dart")
+                out_lines.append("=" * 80)
+                out_lines.append(f"Total de símbolos executáveis públicos auditados: {t_aud}")
+                out_lines.append(f"Testes atômicos 1 para 1 encontrados:          {t_tst} ({pct_tst:.1f}%)")
+                out_lines.append(f"Testes atômicos pendentes (ERROS):             {t_mis} ({100.0 - pct_tst:.1f}%)")
+                out_lines.append("-" * 80)
+                out_lines.append(f"{'Pacote / Módulo':<35} {'Auditáveis':>12} {'Testados':>10} {'Faltando':>10} {'% Cobertura':>12}")
+                out_lines.append("-" * 80)
+                for pkg, p_data in sorted(stats['by_package'].items(), key=lambda x: x[0]):
+                    p_tot = p_data['total']
+                    p_tst = p_data['tested']
+                    p_mis = p_data['missing']
+                    p_pct = (p_tst / p_tot * 100) if p_tot > 0 else 0
+                    out_lines.append(f"{pkg:<35} {p_tot:>12} {p_tst:>10} {p_mis:>10} {p_pct:>11.1f}%")
+                out_lines.append("=" * 80 + "\n")
 
             if total > 0:
                 by_rule = {}
@@ -1925,18 +2283,33 @@ def main():
     parser.add_argument('--progress', action='store_true', help="Gera o relatório sintético de progresso da AST em PROGRESS_RELATORY.md")
     parser.add_argument('--progress-file', default='PROGRESS_RELATORY.md', help="Arquivo de saída para o relatório de progresso (padrão: PROGRESS_RELATORY.md)")
     parser.add_argument('--fix', action='store_true', help="Aplicar correções mecânicas determinísticas e seguras")
+    parser.add_argument('--tests', action='store_true', help="Audita a árvore AST de testes atômicos 1 para 1 em testes/<nivel>/<nome_modulo>_atomic_tests.dart")
+    parser.add_argument('--scaffold', help="Gera o esqueleto determinístico de testes atômicos para um pacote/módulo (ex: transpiled_cid ou cid)")
+    parser.add_argument('--level', default='nivel_1', help="Nível do teste para geração via --scaffold (padrão: nivel_1)")
 
     args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
 
     auditor = AstNomenclatureAuditor(root_dir)
     auditor.load_all()
+
+    if args.scaffold:
+        out_f = auditor.generate_atomic_test_scaffold(args.scaffold, level=args.level)
+        if out_f:
+            print(f"✨ [SCAFFOLD] Esqueleto determinístico de testes gerado com sucesso em: {out_f}")
+
     auditor.audit_rules(
         target_package=args.package,
         target_rule=args.rule,
         target_severity=args.severity,
         include_non_public=args.include_non_public
     )
+
+    if args.tests or args.rule == 'RULE_MISSING_ATOMIC_TESTS':
+        auditor.audit_atomic_tests(target_package=args.package)
+        if args.severity:
+            target_sev = args.severity.upper()
+            auditor.violations = [v for v in auditor.violations if v['severity'] == target_sev]
 
     if args.fix:
         fixes = auditor.apply_autofixes()

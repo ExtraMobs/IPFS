@@ -200,7 +200,7 @@ agente deve validar seu código contra o auditor AST do projeto:
 
 A ferramenta compara o índice AST do Go (`go-ipfs-reference/*-index/`) e as
 definições de tipos upstream com as declarações Dart em `packages/` e `lib/`,
-auditando automaticamente as 19 regras contratuais:
+auditando automaticamente as 24 regras contratuais:
 
 1. **`RULE_ALL_CAPS`**: Tipos públicos em `UpperCamelCase` e membros/funções em
    `lowerCamelCase`, tratando acrônimos como palavras comuns (ex.: `Cid`, `IpfsNode`,
@@ -264,6 +264,10 @@ auditando automaticamente as 19 regras contratuais:
     estrita com o mesmo nível de visibilidade e permissão do Upstream Go, ou menor
     se não for possível. Membros públicos devem retornar interfaces públicas ou
     serem tornados privados (`_`) caso sejam detalhes internos de implementação.
+24. **`RULE_MISSING_ATOMIC_TESTS`**: Auditoria de testes atômicos 1 para 1
+    (`testes/<nivel>/<nome_modulo>_atomic_tests.dart`), exigindo que cada função,
+    método, getter, setter e operador público possua um teste atômico correspondente.
+    A ausência de teste é apontada como erro bloqueante (`ERROR`).
 
 ### Nível de visibilidade, permissão e tipos não-públicos
 
@@ -312,6 +316,12 @@ executar o script e assegurar que nenhuma nova violação ou regressão foi intr
   `python tool/audit_ast_nomenclature.py --summary-only`
 - **Auditoria detalhada do pacote alterado:**
   `python tool/audit_ast_nomenclature.py --package <nome_do_pacote>`
+- **Auditoria de testes atômicos 1 para 1:**
+  `python tool/audit_ast_nomenclature.py --tests`
+- **Auditoria de testes atômicos por pacote:**
+  `python tool/audit_ast_nomenclature.py --tests --package <nome_do_pacote>`
+- **Geração determinística de esqueleto de testes atômicos (scaffold):**
+  `python tool/audit_ast_nomenclature.py --scaffold <nome_modulo_ou_pacote> --level nivel_1`
 - **Auditoria por regra específica:**
   `python tool/audit_ast_nomenclature.py --rule <NOME_DA_REGRA>`
 - **Auditoria de cobertura incluindo símbolos não-públicos (privados/internos):**

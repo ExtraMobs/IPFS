@@ -10,8 +10,8 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
 
 ### O que já está auditado (Conformidade Garantida e Testada)
 
-1. **Auditoria AST Automatizada (23 Regras Contratuais do `AGENTS.md`)**:
-   - **Resultado Oficial**: `0 ERROS` e `0 AVISOS` em todos os 4.743 símbolos Dart auditados contra os 33.298 símbolos Go indexados.
+1. **Auditoria AST Automatizada (24 Regras Contratuais do `AGENTS.md`)**:
+   - **Resultado Oficial**: `0 ERROS` e `0 AVISOS` em todos os 4.743 símbolos Dart auditados contra os 33.298 símbolos Go indexados nas 23 regras de conformidade de código.
    - **Regras Bloqueantes Promovidas a `ERROR`**:
      - `RULE_NO_UNAUTHORIZED_DEPRECATED` (Regra 4): Nenhuma anotação `@Deprecated` existe sem anotação equivalente no Go upstream.
      - `RULE_MODULE_BOUNDARY_LEAK` (Regra 11): Nenhuma classe de um pacote transpila tipos pertencentes a outro módulo `go.mod`.
@@ -19,6 +19,9 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - **Governança de Membros Não-Públicos (Regra 23)**:
      - `RULE_EXPOSED_NON_PUBLIC_MEMBERS`: Membros públicos nunca expõem tipos privados (`_Tipo`) ou tipos internos.
      - **Fidelidade Integral em Cadeias Não-Públicas**: Formalizado no `AGENTS.md` que toda a cadeia de execução interna (métodos privados `_`, estados e algoritmos auxiliares) deve ser implementada com estrita fidelidade ao Golang, sendo expressamente vetado o uso de mocks ou stubs simplificados em produção.
+   - **Auditoria de Testes Atômicos 1 para 1 (Regra 24 — `--tests`)**:
+     - `RULE_MISSING_ATOMIC_TESTS`: Exige que cada função, método, getter, setter e operador público possua um teste atômico correspondente em `testes/<nivel>/<nome_modulo>_atomic_tests.dart`. A ausência de um teste atômico é tratada como erro bloqueante (`ERROR`).
+     - Suporte a geração automática de esqueleto via `--scaffold <modulo> --level <nivel>`.
 2. **Objetivo 1 — Primeiro Download P2P por CID**:
    - **Status**: ✅ **100% Concluído e Comprovado**.
    - **Marco A (Provider Conhecido)**: Kubo isolado ➔ TCP/Noise ➔ `/ipfs/bitswap/1.2.0` ➔ `WANT_BLOCK` ➔ validação de CID ➔ `Blockstore` (`local_kubo_bitswap_test.dart` em 2s).
@@ -30,7 +33,7 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - `packages/transpiled_ipld_prime`: 62 testes (datamodel, basicnode, selector, traversal, linking, codecs json/raw).
    - `packages/transpiled_multiaddr`: 152 testes.
    - `packages/transpiled_multibase`: 116 testes.
-   - `packages/transpiled_cid`: 27 testes.
+   - `packages/transpiled_cid`: 27 testes + 28 testes atômicos 1:1 (`testes/nivel_1/cid_atomic_tests.dart`).
    - Demais pacotes (`transpiled_multihash`, `transpiled_datastore`, `transpiled_multiaddr_dns`, `transpiled_libp2p_kbucket`, `transpiled_libp2p_record`, `transpiled_libp2p_pubsub`, `transpiled_go_yamux`, etc.): 100% aprovados.
    - Testes de integração na raiz: 124/124 testes passando.
 
@@ -45,6 +48,7 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
 | **Campos de Structs** | 3.033 | 229 | 2.804 | 7.6% | Auditável via `--rule RULE_MISSING_GO_FIELDS` |
 | **Funções Top-Level** | 2.753 | 194 | 2.559 | 7.0% | Auditável via `--rule RULE_MISSING_GO_FUNCTIONS` |
 | **TOTAL NO ESCOPO** | **16.376** | **1.582** | **14.794** | **9.7%** | Relatório em `PROGRESS_RELATORY.md` |
+| **Testes Atômicos 1 para 1** | **2.277** | **37** | **2.240** | **1.6%** | Auditável via `--tests` (falta = `ERROR`) |
 
 > [!NOTE]
 > Conforme a regra de escopo do `AGENTS.md`, Kubo, Boxo e go-libp2p são referências de biblioteca para um nó embutido. Os ~90% de símbolos restantes pertencem a subsistemas opcionais (Gateway HTTP, FUSE, Circuit Relay v2, WebRTC, CLI, Tracing) e **não constituem pendências impeditivas** para o nó P2P.
@@ -52,6 +56,9 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
 ### Como Auditar (Comandos Oficiais)
 
 - **Resumo global de conformidade:** `python tool/audit_ast_nomenclature.py --summary-only`
+- **Auditoria de testes atômicos 1 para 1:** `python tool/audit_ast_nomenclature.py --tests`
+- **Auditoria de testes atômicos por pacote:** `python tool/audit_ast_nomenclature.py --tests --package transpiled_cid`
+- **Geração de esqueleto de testes atômicos:** `python tool/audit_ast_nomenclature.py --scaffold transpiled_cid --level nivel_1`
 - **Atualizar relatório de cobertura AST:** `python tool/audit_ast_nomenclature.py --progress` (gera `PROGRESS_RELATORY.md`)
 - **Exportar auditoria descritiva:** `python tool/audit_ast_nomenclature.py --markdown --output audit_report.md`
 - **Auditar pacote específico:** `python tool/audit_ast_nomenclature.py --package transpiled_boxo`
