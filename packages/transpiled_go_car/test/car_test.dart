@@ -115,7 +115,7 @@ void main() {
 
       final byteReader = CarReader(bytes);
       final byteBlock = byteReader.next()!;
-      expect(byteBlock.cid, expectedCid);
+      expect(byteBlock.cid(), expectedCid);
       expect(byteBlock.data, isEmpty);
       expect(byteReader.next(), isNull);
 
@@ -124,7 +124,7 @@ void main() {
       ]);
       final streamReader = CarReader(stream);
       final streamBlock = await streamReader.nextAsync();
-      expect(streamBlock!.cid, expectedCid);
+      expect(streamBlock!.cid(), expectedCid);
       expect(streamBlock.data, isEmpty);
       expect(await streamReader.nextAsync(), isNull);
     },

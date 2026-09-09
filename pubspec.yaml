@@ -90,6 +90,14 @@ dependencies:
     path: packages/transpiled_go_car
   transpiled_go_yamux:
     path: packages/transpiled_go_yamux
+  boilerplate:
+    path: packages/boilerplate
+  transpiled_protobuf:
+    path: packages/transpiled_protobuf
+  transpiled_ipld_prime:
+    path: packages/transpiled_ipld_prime
+  transpiled_go_codec_dagpb:
+    path: packages/transpiled_go_codec_dagpb
 
   # Common packages
   args: ^2.6.0
