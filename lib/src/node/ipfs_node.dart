@@ -14,6 +14,7 @@ import 'package:transpiled_boxo/transpiled_boxo.dart' hide Blockstore;
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_go_car/transpiled_go_car.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart' as core_ma;
 
 import '../blockstore/blockstore.dart';
 import '../config/ipfs_runtime_config.dart';
@@ -168,6 +169,17 @@ final class IpfsNode {
     return dht.findProvidersAsync(cid, count);
   }
 
+  /// Announces this node as a provider of [cid] to the DHT.
+  Future<void> provide(Cid cid) async {
+    final dht = _dht;
+    if (dht == null) throw StateError('IPFS node is offline');
+    final self = AddrInfo(
+      id: peerId,
+      addrs: listenAddresses.map(core_ma.Multiaddr.parse).toList(),
+    );
+    await dht.provide(cid, self);
+  }
+
   /// Discovers providers and downloads the first valid Bitswap block.
   Future<blocks.Block> getBlockFromDht(Cid cid) async {
     Object? lastError;
@@ -259,11 +271,12 @@ final class IpfsNode {
       await _host?.close();
       await blockstore.close();
     }();
-    final timeout = _shutdownTimeout > Duration.zero
-        ? _shutdownTimeout
-        : const Duration(seconds: 5);
-    try {
-      await close.timeout(timeout);
-    } catch (_) {}
+    if (_shutdownTimeout > Duration.zero) {
+      try {
+        await close.timeout(_shutdownTimeout);
+      } catch (_) {}
+    } else {
+      await close;
+    }
   }
 }

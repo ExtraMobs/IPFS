@@ -83,6 +83,60 @@ final class DhtClient implements ContentDiscovery {
     return controller.stream;
   }
 
+  /// Announces [provider] as a provider of [cid] via DHT ADD_PROVIDER to candidate peers.
+  Future<void> provide(Cid cid, AddrInfo provider) async {
+    if (_closed) throw StateError('DhtClient is closed');
+    final candidates = <AddrInfo>[];
+    for (final p in bootstrapPeers) {
+      if (p.id != provider.id && !candidates.any((c) => c.id == p.id)) {
+        candidates.add(p);
+      }
+    }
+
+    try {
+      final conns = router.host.network.conns;
+      for (final conn in conns) {
+        final remote = conn.remotePeer;
+        try {
+          final pid = PeerId.decode(remote.toBase58());
+          if (pid != provider.id && !candidates.any((c) => c.id == pid)) {
+            final addrs = await router.getAddrs(pid);
+            candidates.add(AddrInfo(id: pid, addrs: addrs));
+          }
+        } catch (_) {}
+      }
+    } catch (_) {}
+
+    if (candidates.isEmpty) return;
+
+    final msgBytes = encodeAddProvider(cid, provider);
+    await Future.wait(
+      candidates.map((peer) => _sendAddProvider(peer, msgBytes)),
+    );
+  }
+
+  Future<void> _sendAddProvider(AddrInfo peer, Uint8List msgBytes) async {
+    P2PStream<dynamic>? stream;
+    try {
+      await router.connect(peer).timeout(timeout);
+      stream = await router.host.newStream(
+        router.runtimePeerId(peer.id),
+        const [dhtProtocol, '/ipfs/lan/kad/1.0.0'],
+        Context(timeout: timeout),
+      ).timeout(timeout);
+      _activeStreams.add(stream);
+      await stream.setWriteDeadline(DateTime.now().add(timeout));
+      await stream.write(msgBytes).timeout(timeout);
+      await stream.close();
+    } catch (_) {
+      try {
+        await stream?.reset();
+      } catch (_) {}
+    } finally {
+      if (stream != null) _activeStreams.remove(stream);
+    }
+  }
+
   Future<void> _lookup(
     Cid cid,
     int count,

@@ -24,6 +24,22 @@ Uint8List encodeGetProviders(Cid cid) {
   return Uint8List.fromList([...encodeVarint(bytes.length), ...bytes]);
 }
 
+/// Encodes a DHT `ADD_PROVIDER` request for [cid] advertising [provider].
+Uint8List encodeAddProvider(Cid cid, AddrInfo provider) {
+  final payload = BytesBuilder()
+    ..add(_varintField(1, 2))
+    ..add(_bytesField(2, Uint8List.fromList(cid.multihash.toBytes())))
+    ..add(
+      _bytesField(
+        9,
+        encodePeerRecord(id: provider.id, addrs: provider.addrs),
+      ),
+    );
+  final bytes = payload.takeBytes();
+  return Uint8List.fromList([...encodeVarint(bytes.length), ...bytes]);
+}
+
+
 int _varintLength(int value) {
   if (value < 0) return 10;
   var length = 0;

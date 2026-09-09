@@ -225,8 +225,8 @@ class LocalKuboHarness {
   }
 
   /// Resolves providers through Kubo for interop diagnostics.
-  Future<String> findProviders(String cid) async =>
-      '${(await _run(['routing', 'findprovs', cid])).stdout}'.trim();
+  Future<String> findProviders(String cid, {int count = 1}) async =>
+      '${(await _run(['routing', 'findprovs', '-n', '$count', cid])).stdout}'.trim();
 
   /// Returns Kubo's live swarm and Bitswap diagnostics after a failed proof.
   Future<String> diagnostics() async {

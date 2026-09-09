@@ -443,6 +443,13 @@ void main() {
     expect(bytes, isNotEmpty);
   });
 
+  test('encodeAddProvider() - codifica requisicao add provider para a dht', () {
+    final maddr = Multiaddr.parse('/ip4/127.0.0.1/tcp/4001');
+    final provider = libp2p.AddrInfo(id: samplePeerId, addrs: [maddr]);
+    final bytes = encodeAddProvider(sampleCid, provider);
+    expect(bytes, isNotEmpty);
+  });
+
   test('boundPeerRecordAddrs() - delimita enderecos para caber no limite maximo', () {
     final maddr = Multiaddr.parse('/ip4/127.0.0.1/tcp/4001');
     final bounded = boundPeerRecordAddrs(
@@ -699,6 +706,12 @@ void main() {
       await node.close();
     });
 
+    test('provide() - lanca erro se o node estiver offline', () async {
+      final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
+      expect(() => node.provide(sampleCid), throwsStateError);
+      await node.close();
+    });
+
     test('close() - encerra componentes do ipfs node', () async {
       final node = await IpfsNode.fromBuildCfg(BuildCfg(online: false));
       await node.close();
@@ -722,6 +735,16 @@ void main() {
       final client = DhtClient(router: router, bootstrapPeers: []);
       expect(() => client.findProvidersAsync(sampleCid, -1), throwsRangeError);
       await client.close();
+    });
+
+    test('provide() - lanca erro se cliente dht estiver fechado ou conclui sem candidatos', () async {
+      final host = _FakeHost();
+      final router = Libp2pRouter(host);
+      final client = DhtClient(router: router, bootstrapPeers: []);
+      final provider = libp2p.AddrInfo(id: samplePeerId, addrs: []);
+      await client.provide(sampleCid, provider);
+      await client.close();
+      expect(() => client.provide(sampleCid, provider), throwsStateError);
     });
   });
 

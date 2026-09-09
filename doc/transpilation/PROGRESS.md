@@ -26,16 +26,16 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - **Marco A (Provider Conhecido)**: Kubo isolado ➔ TCP/Noise ➔ `/ipfs/bitswap/1.2.0` ➔ `WANT_BLOCK` ➔ validação de CID ➔ `Blockstore` (`local_kubo_bitswap_test.dart` em 2s).
    - **Marco B (Provider Descoberto via DHT pública)**: CID ➔ `DHT.findProvidersAsync` ➔ `AddrInfo` completo ➔ conexão ➔ Bitswap ➔ validação ➔ `Blockstore` (`local_kubo_dht_bitswap_test.dart` em 12s e testes públicos com bootstrappers).
 3. **Objetivo 2 — Hospedagem e Servimento P2P de Blocos por CID (Seeding / Providing)**:
-   - **Status**: 🟡 **A Iniciar**.
+   - **Status**: ✅ **100% Concluído e Comprovado**.
    - **Marco C.1 (Servidor Bitswap / Provider Conhecido)**:
-     - [ ] Expor peerId e listenAddresses no IpfsNode.
-     - [ ] Ingestão e persistência de blocos via IpfsNode.putBlock / putRawBlock no Blockstore.
-     - [ ] Responder de Bitswap em BitswapClient._handleIncoming: atender a WANT_BLOCK e WANT_HAVE a partir do Blockstore.
-     - [ ] Teste de integração real (local_kubo_serving_test.dart): Kubo conecta via swarm connect ao nó Dart, executa ipfs block get <cid> e valida os bytes recebidos.
+     - [x] Expor `peerId`, `listenAddresses` e `swarmAddresses` no `IpfsNode`.
+     - [x] Ingestão e persistência de blocos via `IpfsNode.putBlock` / `putRawBlock` no `Blockstore`.
+     - [x] Resposta de Bitswap em `BitswapClient._handleIncoming`: atender a `WANT_BLOCK` e `WANT_HAVE` a partir do `Blockstore`.
+     - [x] Teste de integração real (`local_kubo_serving_test.dart`): Kubo conecta via `swarm connect` ao nó Dart, executa `ipfs block get <cid>` e valida os bytes recebidos (100% comprovado em 2s).
    - **Marco C.2 (Anúncio e Descoberta via DHT)**:
-     - [ ] Implementar encoding de ADD_PROVIDER em dht_message.dart.
-     - [ ] Implementar provide(Cid cid) em DhtClient e IpfsNode.
-     - [ ] Teste de integração real (local_kubo_dht_serving_test.dart): Kubo descobre nó Dart via ipfs routing findprovs <cid>, conecta e baixa o bloco.
+     - [x] Implementar encoding de `ADD_PROVIDER` em `dht_message.dart`.
+     - [x] Implementar `provide(Cid cid)` em `DhtClient` e `IpfsNode`.
+     - [x] Teste de integração real (`local_kubo_dht_serving_test.dart`): Dart anuncia CID via DHT `provide`, Kubo descobre nó Dart via `ipfs routing findprovs <cid>`, conecta e baixa o bloco via Bitswap (100% comprovado em 3s).
 4. **Suíte de Testes de Paridade**:
    - `packages/boilerplate`: 29 testes (aritmética, overflow, shifts, matriz IEEE 754, divisão complexa de Smith).
    - `packages/transpiled_boxo`: 84 testes (bitswap message/pb, network, connecteventmanager, client, getter, notifications, messagequeue, peermanager, blockpresencemanager, wantlist, util).
