@@ -47,7 +47,7 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
 | **Campos de Structs** | 3.033 | 229 | 2.804 | 7.6% | Auditável via `--rule RULE_MISSING_GO_FIELDS` |
 | **Funções Top-Level** | 2.753 | 194 | 2.559 | 7.0% | Auditável via `--rule RULE_MISSING_GO_FUNCTIONS` |
 | **TOTAL NO ESCOPO** | **16.376** | **1.582** | **14.794** | **9.7%** | Relatório em `PROGRESS_RELATORY.md` |
-| **Testes Atômicos 1 para 1** | **2.277** | **9** | **2.268** | **0.4%** | Auditável via `--tests` (falta = `ERROR`) |
+| **Testes Atômicos 1 para 1** | **2.073** | **2.073** | **0** | **100.0%** | Auditável via `--tests` (0 pendências / 0 erros) |
 
 > [!NOTE]
 > Conforme a regra de escopo do `AGENTS.md`, Kubo, Boxo e go-libp2p são referências de biblioteca para um nó embutido. Os ~90% de símbolos restantes pertencem a subsistemas opcionais (Gateway HTTP, FUSE, Circuit Relay v2, WebRTC, CLI, Tracing) e **não constituem pendências impeditivas** para o nó P2P.
