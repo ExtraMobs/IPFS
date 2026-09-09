@@ -35,7 +35,6 @@ Uso:
   python tool/audit_ast_nomenclature.py
   python tool/audit_ast_nomenclature.py --tests
   python tool/audit_ast_nomenclature.py --tests --package transpiled_cid
-  python tool/audit_ast_nomenclature.py --scaffold transpiled_cid --level nivel_1
   python tool/audit_ast_nomenclature.py --package transpiled_boxo
   python tool/audit_ast_nomenclature.py --rule RULE_MISSING_GO_TYPES
   python tool/audit_ast_nomenclature.py --rule RULE_MISSING_GO_FIELDS
@@ -889,15 +888,78 @@ class AstNomenclatureAuditor:
                     unique_syms.append(s)
             self.go_symbols_by_module[mod] = unique_syms
 
+    @staticmethod
+    def _extract_block_body(content: str, start_pos: int) -> Tuple[str, int]:
+        """Localiza o próximo '{' e extrai o corpo até fechar a chave correspondente."""
+        open_brace = content.find('{', start_pos)
+        if open_brace == -1:
+            return "", start_pos
+
+        i = open_brace + 1
+        depth = 1
+        n = len(content)
+        while i < n and depth > 0:
+            if content[i:i+2] == '//':
+                eol = content.find('\n', i)
+                i = eol if eol != -1 else n
+                continue
+            if content[i:i+2] == '/*':
+                eoc = content.find('*/', i)
+                i = eoc + 2 if eoc != -1 else n
+                continue
+            if content[i] in ("'", '"'):
+                quote = content[i]
+                if content[i:i+3] == quote * 3:
+                    eq = content.find(quote * 3, i + 3)
+                    i = eq + 3 if eq != -1 else n
+                else:
+                    j = i + 1
+                    while j < n:
+                        if content[j] == '\\':
+                            j += 2
+                            continue
+                        if content[j] == quote:
+                            j += 1
+                            break
+                        if content[j] == '\n':
+                            break
+                        j += 1
+                    i = j
+                continue
+
+            if content[i] == '{':
+                depth += 1
+            elif content[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    return content[open_brace + 1:i], i + 1
+            i += 1
+        return "", start_pos
+
+    @staticmethod
+    def _is_valid_test_body(body: str) -> bool:
+        """
+        Verifica se o corpo do teste contém asserções reais (expect, expectLater, assert, throwsA)
+        e não é meramente vazio, comentários, ou apenas fail().
+        """
+        cleaned = re.sub(r'//.*', '', body)
+        cleaned = re.sub(r'/\*.*?\*/', '', cleaned, flags=re.DOTALL)
+        cleaned = cleaned.strip()
+
+        if not cleaned:
+            return False
+
+        # Rejeita se for apenas fail(...)
+        if re.match(r'^\s*fail\s*\([^)]*\)\s*;\s*$', cleaned):
+            return False
+
+        # Exige asserções reais
+        return bool(re.search(r'\b(expect|expectLater|assert|throwsA)\s*\(', cleaned))
+
     def parse_atomic_test_file(self, content: str) -> Set[str]:
         """
-        Extrai do arquivo de teste todos os símbolos testados.
-        Reconhece escopos de chaves de groups:
-          - group('Classe', () { test('metodo', ...); test('getter', ...); });
-          - test('Classe.metodo', ...);
-          - test('funcaoTopLevel', ...);
-        Retorna um conjunto de strings normalizadas:
-          'BitSwapMessage.addEntry', 'BitSwapMessage.empty', 'parseSelector', etc.
+        Extrai do arquivo de teste todos os símbolos testados que possuem asserções reais.
+        Testes vazios, com apenas TODO ou fail() são rejeitados e não computam como testados.
         """
         tested = set()
         group_pattern = re.compile(r'\bgroup\s*\(\s*([\'"])(.*?)\1')
@@ -960,6 +1022,12 @@ class AstNomenclatureAuditor:
             if content[i:i+4] == 'test' and (i == 0 or not content[i-1].isalnum()) and not content[i+4].isalnum():
                 tm = test_pattern.match(content, i)
                 if tm:
+                    # Inspeciona o corpo do teste para assegurar asserções reais (sem stubs)
+                    body_text, _ = self._extract_block_body(content, tm.end())
+                    if not self._is_valid_test_body(body_text):
+                        i = tm.end()
+                        continue
+
                     tname = tm.group(2).strip()
                     cleaned_tname = re.sub(r'\[.*?\]', '', tname).strip()
 
@@ -1047,7 +1115,7 @@ class AstNomenclatureAuditor:
         """
         Audita se cada símbolo público (função, método, getter, setter, operador)
         possui um teste atômico correspondente em testes/<nivel>/<nome_modulo>_atomic_tests.dart.
-        A falta de um teste é tratada como ERRO bloqueante.
+        A falta de um teste com asserções reais é tratada como ERRO bloqueante.
         """
         all_tested, symbol_to_files = self.scan_all_atomic_tests()
 
@@ -1105,92 +1173,8 @@ class AstNomenclatureAuditor:
                     'symbol': primary_key,
                     'kind': sym.kind,
                     'package': pkg_name,
-                    'suggested': f"Criar test('{sym.name}()', () {{ ... }}) em testes/<nivel>/{clean_mod}_atomic_tests.dart"
+                    'suggested': f"Criar test('{sym.name}()', () {{ ... expect(...) ... }}) em testes/<nivel>/{clean_mod}_atomic_tests.dart"
                 })
-
-    def generate_atomic_test_scaffold(self, target: str, level: str = 'nivel_1') -> Optional[Path]:
-        """
-        Gera o esqueleto inicial determinístico de testes atômicos para um pacote ou módulo.
-        Ex: target='transpiled_cid' ou 'cid' gera testes/nivel_1/cid_atomic_tests.dart.
-        """
-        clean_target = target.replace('transpiled_', '').strip().lower()
-        matching_symbols = []
-        target_pkg = None
-
-        for sym in self.dart_symbols:
-            if not sym.is_public() or sym.kind not in ('function', 'method', 'getter', 'setter', 'operator'):
-                continue
-            if sym.parent_type and sym.name == sym.parent_type:
-                continue
-
-            pkg_name = sym.file_path.split('/')[1] if sym.file_path.startswith('packages/') else 'lib'
-            clean_pkg = pkg_name.replace('transpiled_', '').lower()
-
-            if clean_target in clean_pkg or clean_target in sym.file_path.lower():
-                matching_symbols.append(sym)
-                if not target_pkg:
-                    target_pkg = pkg_name
-
-        if not matching_symbols:
-            print(f"⚠️ [SCAFFOLD] Nenhum símbolo público encontrado para o alvo '{target}'.")
-            return None
-
-        out_dir = self.root_dir / 'testes' / level
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out_file = out_dir / f"{clean_target}_atomic_tests.dart"
-
-        by_class: Dict[str, List[DartAuditSymbol]] = {}
-        top_level: List[DartAuditSymbol] = []
-
-        for s in matching_symbols:
-            if s.parent_type:
-                by_class.setdefault(s.parent_type, []).append(s)
-            else:
-                top_level.append(s)
-
-        lines = [
-            f"// testes/{level}/{clean_target}_atomic_tests.dart",
-            f"// Testes atômicos 1 para 1 para o módulo {clean_target} ({target_pkg or 'lib'}).",
-            "// Gerado automaticamente pelo auditor AST (tool/audit_ast_nomenclature.py --scaffold).",
-            "",
-            "import 'package:test/test.dart';",
-        ]
-
-        if target_pkg and target_pkg != 'lib':
-            lines.append(f"import 'package:{target_pkg}/{target_pkg}.dart';")
-        else:
-            lines.append("import 'package:dart_ipfs/ipfs.dart';")
-
-        lines.extend([
-            "",
-            "void main() {",
-        ])
-
-        for cls_name, methods in sorted(by_class.items()):
-            lines.append(f"  group('{cls_name} [Atomic Audit]', () {{")
-            for m in methods:
-                lines.append(f"    test('{m.name}()', () {{")
-                lines.append(f"      // TODO: Implementar asserção atômica 1:1 para {cls_name}.{m.name}")
-                lines.append("    });")
-                lines.append("")
-            lines.append("  });")
-            lines.append("")
-
-        if top_level:
-            lines.append("  group('Top-Level Functions [Atomic Audit]', () {")
-            for fn in top_level:
-                lines.append(f"    test('{fn.name}()', () {{")
-                lines.append(f"      // TODO: Implementar asserção atômica 1:1 para {fn.name}")
-                lines.append("    });")
-                lines.append("")
-            lines.append("  });")
-            lines.append("")
-
-        lines.append("}")
-        lines.append("")
-
-        out_file.write_text("\n".join(lines), encoding='utf-8')
-        return out_file
 
     def audit_rules(self, target_package: Optional[str] = None, target_rule: Optional[str] = None, target_severity: Optional[str] = None, include_non_public: bool = False):
         self.violations.clear()
@@ -2284,20 +2268,12 @@ def main():
     parser.add_argument('--progress-file', default='PROGRESS_RELATORY.md', help="Arquivo de saída para o relatório de progresso (padrão: PROGRESS_RELATORY.md)")
     parser.add_argument('--fix', action='store_true', help="Aplicar correções mecânicas determinísticas e seguras")
     parser.add_argument('--tests', action='store_true', help="Audita a árvore AST de testes atômicos 1 para 1 em testes/<nivel>/<nome_modulo>_atomic_tests.dart")
-    parser.add_argument('--scaffold', help="Gera o esqueleto determinístico de testes atômicos para um pacote/módulo (ex: transpiled_cid ou cid)")
-    parser.add_argument('--level', default='nivel_1', help="Nível do teste para geração via --scaffold (padrão: nivel_1)")
 
     args = parser.parse_args()
     root_dir = Path(__file__).resolve().parent.parent
 
     auditor = AstNomenclatureAuditor(root_dir)
     auditor.load_all()
-
-    if args.scaffold:
-        out_f = auditor.generate_atomic_test_scaffold(args.scaffold, level=args.level)
-        if out_f:
-            print(f"✨ [SCAFFOLD] Esqueleto determinístico de testes gerado com sucesso em: {out_f}")
-
     auditor.audit_rules(
         target_package=args.package,
         target_rule=args.rule,

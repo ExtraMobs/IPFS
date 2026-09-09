@@ -320,8 +320,6 @@ executar o script e assegurar que nenhuma nova violação ou regressão foi intr
   `python tool/audit_ast_nomenclature.py --tests`
 - **Auditoria de testes atômicos por pacote:**
   `python tool/audit_ast_nomenclature.py --tests --package <nome_do_pacote>`
-- **Geração determinística de esqueleto de testes atômicos (scaffold):**
-  `python tool/audit_ast_nomenclature.py --scaffold <nome_modulo_ou_pacote> --level nivel_1`
 - **Auditoria por regra específica:**
   `python tool/audit_ast_nomenclature.py --rule <NOME_DA_REGRA>`
 - **Auditoria de cobertura incluindo símbolos não-públicos (privados/internos):**
