@@ -36,6 +36,16 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - Demais pacotes (`transpiled_multihash`, `transpiled_datastore`, `transpiled_multiaddr_dns`, `transpiled_libp2p_kbucket`, `transpiled_libp2p_record`, `transpiled_libp2p_pubsub`, `transpiled_go_yamux`, etc.): 100% aprovados.
    - Testes de integração na raiz: 124/124 testes passando.
 
+### Pontos de Atenção e Roadmap Técnico
+
+1. **Ponto de Atenção: Refinamento de API de Alto Nível para Consumo (App / Flutter)**:
+   - **Camada de Conveniência (High-Level Facade)**: Implementar métodos de conveniência no IpfsNode para consumo direto por aplicações:
+     - ipfs.add(Uint8List bytes | Stream<List<int>> stream) ➔ chunking UnixFS, hashing multihash, persistência no blockstore e retorno do Cid.
+     - ipfs.cat(Cid cid) ➔ resolução recursiva de nós DAG-PB/UnixFS e streaming ordenado de bytes (Stream<List<int>>).
+     - ipfs.ls(Cid cid) ➔ inspeção e listagem de nós e links de diretório UnixFS.
+   - **Isolamento de Ciclo de Vida em Background (Isolates)**: Suporte para execução do nó P2P em um Isolate dedicado do Dart, garantindo que operações de I/O de rede e criptografia pesada (Noise/Ed25519) não causem travamentos na thread principal (UI thread a 60/120 fps no Flutter).
+   - **Servidor Bitswap / Hospedagem Ativa de Arquivos (Seeder / Provider)**: O Objetivo 1 focou no cliente Bitswap (download P2P). Para que nós externos consigam baixar arquivos hospedados exclusivamente no nó Dart, o receptor de stream (_handleIncoming) precisa responder a mensagens de wantlist enviando blocos locais do Blockstore e anunciando periodicamente na DHT (DHT.provide).
+
 ### O que é auditável (Superfície Upstream Go e Cobertura AST)
 
 O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das declarações do upstream. A ferramenta de auditoria permite verificar instantaneamente o que falta portar e se qualquer alteração fere o contrato:
