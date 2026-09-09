@@ -307,6 +307,35 @@ Ao portar e adaptar código onde membros públicos interagem com tipos não-púb
    Toda a cadeia de chamadas internas, estados, limites e algoritmos subjacentes
    deve reproduzir fielmente a implementação do módulo Go correspondente.
 
+### Diretrizes para Testes Atômicos 1 para 1 (Regra 24)
+
+Todo código público portado ou adaptado deve possuir cobertura de testes atômicos 1 para 1 sob a pasta `testes/<nivel>/<nome_modulo>_atomic_tests.dart`.
+
+1. **Definição Autônoma do Nível pelo Agente:**
+   O agente ou desenvolvedor que implementar o teste é o responsável por definir em qual nível o teste deve residir, conforme os requisitos de ambiente da função/classe:
+   - **`testes/nivel_1/` (Puro / Unitário):** Funções puras, codecs, parsing, algoritmos em memória e manipulação de bytes sem dependências externas ou I/O.
+   - **`testes/nivel_2/` (Emulação Local / Memória):** Datastores em memória, tabelas de roteamento (Kademlia buckets), multiplexadores e trocas locais sem daemons externos.
+   - **`testes/nivel_3/` (Integração Real / Daemon Ativo):** Fluxos que exigem sockets de rede reais, handshakes criptográficos completos ou o daemon do Kubo ativo na máquina.
+
+2. **Veto a Stubs, Placeholders e Esqueletos Vazios:**
+   É expressamente proibido criar testes com corpos vazios, apenas comentários `// TODO`, ou meras chamadas a `fail()`. O auditor AST inspeciona o corpo da closure do teste e rejeita qualquer teste que não contenha asserções reais (`expect(...)`, `expectLater(...)`, `assert(...)`, `throwsA(...)`). Testes em formato de stub não computam como testados e continuam gerando erro bloqueante (`ERROR`).
+
+3. **Múltiplos Testes por Símbolo (Caminho Feliz, Erros e Bordas):**
+   Para símbolos que executam ações ou possuem ramificações lógicas, é permitido e fortemente incentivado escrever múltiplos testes (ex.: sucesso, falha com exceção tipada, valores-limite). A convenção obrigatória para manter a resolução AST de múltiplos testes é prefixar o teste com o nome do método ou membro:
+   ```dart
+   group('Classe [Atomic Audit]', () {
+     test('metodo() - caso de sucesso com entrada válida', () {
+       final obj = Classe();
+       expect(obj.metodo('valido'), isTrue);
+     });
+
+     test('metodo() - lança FormatException quando entrada é vazia', () {
+       final obj = Classe();
+       expect(() => obj.metodo(''), throwsA(isA<FormatException>()));
+     });
+   });
+   ```
+
 ### Comandos de verificação recomendados
 
 Antes de concluir qualquer alteração de código ou transpilação, o agente deve
