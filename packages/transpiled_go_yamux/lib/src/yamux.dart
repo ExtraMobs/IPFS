@@ -457,6 +457,13 @@ final class YamuxSession {
     while (_acceptWaiters.isNotEmpty) {
       _acceptWaiters.removeFirst().completeError(_closedError);
     }
+    // Paridade com go-yamux (session.go): `<-s.sendDoneCh` antes de
+    // `s.conn.Close()`, para não fechar por cima de um quadro escrito pela
+    // metade. `connectionWriteTimeout` é a válvula de segurança do upstream;
+    // sem ela um transporte já morto travaria o shutdown para sempre.
+    try {
+      await _writeTail.timeout(config.connectionWriteTimeout);
+    } catch (_) {}
     await transport.close();
   }
 
