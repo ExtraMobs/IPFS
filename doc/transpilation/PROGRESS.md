@@ -1465,7 +1465,70 @@ para reconstruir arquivos ou diretórios completos.
 - `Destino em lib/src/` fica em branco até o pacote ser realmente mapeado — preencher ao decidir onde o port mora no `dart_ipfs`.
 - Ordem das tabelas = ordem de prioridade do plano (Tier 1 primeiro: multiformats puros).
 
-## Estado em aberto (atualizado em 2026-09-05)
+## Estado em aberto (atualizado em 2026-09-10)
+
+- **`internal_poll.Fd` construído e testado, mas NÃO plugado — validação em
+  produção pendente e a ser conduzida com orientação do mantenedor
+  (2026-09-10)**: `packages/boilerplate/lib/internal_poll/golang/` porta a
+  semântica de tempo de vida do `internal/poll.FD` do Go sobre `RawSocket`.
+
+  *Por que existe.* A interface `net.Conn` do Go documenta que "multiple
+  goroutines may invoke methods on a Conn simultaneously", e o `Close` pode
+  correr com um `Write` em voo. O `Socket` do `dart:io` não oferece
+  equivalente: ele é um `IOSink`, e um `flush()` pendente marca o sink como
+  *bound*, de modo que um `close()` concorrente lança
+  `StateError('StreamSink is bound to a stream')`. Em produção isso derrubou o
+  daemon depois de cerca de 45 minutos no ar. O `RawSocket`, por outro lado,
+  oferece as primitivas que o `poll.FD` pressupõe — `write` parcial não
+  bloqueante, `read` que devolve `null` sem dados, e eventos de prontidão —,
+  o que torna o port viável em vez de imitação.
+
+  *Estado atual.* Completo e verde: `FdMutex` (flag de fechado, travas
+  exclusivas de leitura e escrita, filas FIFO de espera) e `Fd` (escrita com
+  contrapressão, leitura guiada por evento, `close` em três fases). Cobertura
+  em `packages/boilerplate/test/internal_poll_fd_test.dart`,
+  `internal_poll_fd_mutex_test.dart` e nos atômicos de Regra 24 em
+  `test/atomic/nivel_1/` e `nivel_2/`.
+
+  *Não tem nenhum chamador de produção.* Só testes importam o subsistema. O
+  `_TcpRawConn` em
+  `packages/transpiled_libp2p/lib/src/p2p/transport/tcp/tcp_transport.dart`
+  continua com a serialização improvisada (`_serialized`), que foi o paliativo
+  aplicado antes de o port existir e que não tem cobertura automatizada.
+
+  *Três armadilhas do `dart:io` descobertas por instrumentação*, cada uma
+  documentada no ponto do código que depende dela: `writeEventsEnabled` é
+  *one-shot* e precisa ser religado a cada espera; ler depois do `readClosed`
+  devolve `null` mas dispara evento de erro que envenena o descritor; e ler
+  antes do primeiro evento de prontidão faz o mesmo.
+
+  *Decisões deliberadas de não portar, cada uma com evidência por mutação.* A
+  contagem de referências (`incref`/`decref`) do upstream foi construída e
+  removida: o propósito que o próprio Go declara é manter uma operação em voo
+  operando no fd correto durante um close concorrente, porque `fd.Sysfd` é um
+  **inteiro** que o kernel pode reciclar para outra conexão. `RawSocket` é
+  referência de objeto, esse desfecho não é expressável, e nenhum teste
+  distinguia a contagem de sua ausência. A espera explícita de `close` pelos
+  futures das operações em voo, que a substituiu, foi removida pelo mesmo
+  motivo: medida com 64 operações enfileiradas na trava de escrita, a mutação
+  continuou passando, porque um `await` sobre operação assíncrona real devolve
+  o controle ao event loop, que drena a fila de microtasks inteira antes do
+  próximo evento. O `close` foi tornado **idempotente**, divergindo do
+  `FD.Close` do Go de propósito: lá o erro de fechamento duplo é valor de
+  retorno que o idioma `defer conn.Close()` descarta, aqui seria exceção
+  lançada num `finally` de teardown — ou seja, reintroduziria a própria classe
+  de falha que o tipo existe para eliminar.
+
+  *O que resta validar, e por que precisa do mantenedor.* Plugar o `Fd` no
+  `_TcpRawConn`, substituindo o `_serialized`, muda o caminho de escrita de
+  **toda conexão TCP do nó** — inclusive o que carrega bloco de Bitswap e
+  mensagem de DHT. Teste unitário não cobre esse risco. O critério de aceitação
+  proposto é o mesmo que provou o Marco E.3: preset `interop` verde, mais uma
+  execução viva contra a DHT pública com o nó no ar por tempo suficiente para
+  reproduzir a falha de 45 minutos que motivou o subsistema. Como isso exige
+  decidir janela de execução, endereço anunciado e critério de parada, a
+  plugagem deve ser tratada como alteração própria e conduzida sob orientação
+  do mantenedor, e não emendada a outra tarefa.
 
 - **Reconstrução limpa do runtime de download concluída (2026-09-05)**: por
   decisão explícita do mantenedor, o código de
