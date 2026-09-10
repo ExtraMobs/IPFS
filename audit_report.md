@@ -1,8 +1,8 @@
 # Relatório de Auditoria de AST e Nomenclatura (Dart <-> Go)
 
 > Relatório gerado automaticamente por `tool/audit_ast_nomenclature.py`.
-> **Símbolos Dart Auditados:** 4743 | **Símbolos Go Indexados:** 33298
-> **Status Geral:** ❌ **0 Erros** | ⚠️ **0 Avisos** | ℹ️ **1504 Notas de Cobertura**
+> **Símbolos Dart Auditados:** 5197 | **Símbolos Go Indexados:** 33298
+> **Status Geral:** ❌ **0 Erros** | ⚠️ **0 Avisos** | ℹ️ **1483 Notas de Cobertura**
 
 ## 1. Resumo Executivo das 23 Regras
 
@@ -25,16 +25,17 @@
 | `RULE_RESTRICTED_PLATFORM_IMPORTS` | 15. Veto a dart:io em Pacotes de Codecs/Formatos Puros | `ERROR` | 0 | ✅ Conforme |
 | `RULE_NO_PRINT_IN_LIBRARIES` | 16. Veto a chamadas print(...) em Bibliotecas Reutilizáveis | `ERROR` | 0 | ✅ Conforme |
 | `RULE_NO_ARTIFICIAL_CONCURRENCY` | 17. Veto a Primitivas Artificiais de Concorrência Go | `ERROR` | 0 | ✅ Conforme |
-| `RULE_MISSING_GO_TYPES` | 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes | `INFO` | 1383 | ⚠️ Atenção |
-| `RULE_MISSING_GO_FIELDS` | 19. Auditoria de Campos de Structs do Upstream Go Ausentes | `INFO` | 19 | ⚠️ Atenção |
-| `RULE_MISSING_GO_METHODS` | 20. Auditoria de Métodos do Upstream Go Ausentes | `INFO` | 83 | ⚠️ Atenção |
+| `RULE_MISSING_GO_TYPES` | 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes | `INFO` | 1342 | ⚠️ Atenção |
+| `RULE_MISSING_GO_FIELDS` | 19. Auditoria de Campos de Structs do Upstream Go Ausentes | `INFO` | 22 | ⚠️ Atenção |
+| `RULE_MISSING_GO_METHODS` | 20. Auditoria de Métodos do Upstream Go Ausentes | `INFO` | 100 | ⚠️ Atenção |
 | `RULE_MISSING_GO_FUNCTIONS` | 21. Auditoria de Funções Top-Level do Upstream Go Ausentes | `INFO` | 19 | ⚠️ Atenção |
 | `RULE_PUBSPEC_DEPENDENCIES` | 22. Validação de Dependências em pubspec.yaml | `ERROR` | 0 | ✅ Conforme |
 | `RULE_EXPOSED_NON_PUBLIC_MEMBERS` | 23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão) | `ERROR` | 0 | ✅ Conforme |
+| `RULE_MISSING_ATOMIC_TESTS` | 24. Auditoria de Testes Atômicos 1 para 1 (test/atomic/<nivel>/<nome_modulo>_atomic_tests.dart) | `ERROR` | 0 | ✅ Conforme |
 
 ## 2. Detalhamento dos Apontamentos
 
-### 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes (1383 ocorrências)
+### 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes (1342 ocorrências)
 
 - ℹ️ `[INFO]` **[`packages/transpiled_boxo:1`](packages/transpiled_boxo#L1)** — Tipo público Go 'Option' (type) do módulo 'boxo' ainda não foi portado para o pacote 'packages/transpiled_boxo'.
   - *Sugestão:* `Portar 'Option' para 'packages/transpiled_boxo' ou documentar se for omitido deliberadamente`
@@ -1194,8 +1195,6 @@
   - *Sugestão:* `Portar 'ProtocolMeta' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'WellKnownHandler' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'WellKnownHandler' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Host' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Host' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerMetadataGetter' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'PeerMetadataGetter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerMeta' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1206,14 +1205,10 @@
   - *Sugestão:* `Portar 'QUICListener' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'QUICTransport' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'QUICTransport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Listener' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Listener' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'RefCountedQUICTransport' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'RefCountedQUICTransport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'SourceIPSelector' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'SourceIPSelector' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'TcpTransport' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'TcpTransport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ContextDialer' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ContextDialer' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'DialerForAddr' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1250,8 +1245,6 @@
   - *Sugestão:* `Portar 'Echo' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'EchoStatus' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'EchoStatus' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Transport' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Transport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'SessionTransport' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'SessionTransport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'EarlyDataHandler' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1272,8 +1265,6 @@
   - *Sugestão:* `Portar 'Request' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Result' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Result' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AutoNAT' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AutoNAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'MetricsTracer' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'MetricsTracer' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AutoNATOption' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1304,28 +1295,16 @@
   - *Sugestão:* `Portar 'EventTracer' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Evt' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Evt' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'IDService' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'IDService' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PingService' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'PingService' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Identify' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Identify' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'HolePunch' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'HolePunch' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'HolePunch_Type' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'HolePunch_Type' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Client' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Client' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'NetAddr' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'NetAddr' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Listener' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Listener' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Reservation' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Reservation' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ReservationError' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ReservationError' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'HopMessage' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'HopMessage' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'StopMessage' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'StopMessage' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Peer' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1336,8 +1315,6 @@
   - *Sugestão:* `Portar 'HopMessage_Type' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'StopMessage_Type' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'StopMessage_Type' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ReservationVoucher' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'ReservationVoucher' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ACLFilter' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ACLFilter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ReservationAddressFilterFunc' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1418,8 +1395,6 @@
   - *Sugestão:* `Portar 'DialError' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'TransportError' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'TransportError' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Swarm' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Swarm' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ResolverFromMaDNS' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ResolverFromMaDNS' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'DialBackoff' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1438,8 +1413,6 @@
   - *Sugestão:* `Portar 'NAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'TransportTest' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'TransportTest' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Transport' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Transport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ClientPeerIDAuth' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ClientPeerIDAuth' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ServerPeerIDAuth' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1450,20 +1423,10 @@
   - *Sugestão:* `Portar 'PeerIDAuthHandshakeClient' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerIDAuthHandshakeServer' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'PeerIDAuthHandshakeServer' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AmbientAutoNAT' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AmbientAutoNAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'StaticAutoNAT' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'StaticAutoNAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Error' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Error' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AutoNAT' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AutoNAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Client' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Client' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AddrFunc' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'AddrFunc' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AutoRelay' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AutoRelay' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ClockWithInstantTimer' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ClockWithInstantTimer' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerSource' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1472,18 +1435,10 @@
   - *Sugestão:* `Portar 'ObservedAddrsManager' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'MetricsTracker' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'MetricsTracker' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'BasicHost' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'BasicHost' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'HostOpts' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'HostOpts' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AddrsFactory' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AddrsFactory' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'NAT' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'NAT' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'NATManager' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'NATManager' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'BlankHost' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'BlankHost' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Manager' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Manager' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerstoreManager' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1526,8 +1481,6 @@
   - *Sugestão:* `Portar 'TraceReporter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'TraceEvtTyp' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'TraceEvtTyp' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'RoutedHost' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'RoutedHost' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ProtoBookOption' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'ProtoBookOption' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AddrSubManager' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1628,20 +1581,12 @@
   - *Sugestão:* `Portar 'PrivKeyUnmarshaller' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'GenSharedKey' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'GenSharedKey' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Emitter' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Emitter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Subscription' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Subscription' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Bus' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Bus' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'GenericDHTEvent' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'GenericDHTEvent' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'RawJSON' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'RawJSON' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'EvtNATDeviceTypeChanged' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'EvtNATDeviceTypeChanged' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Host' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Host' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'BandwidthCounter' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'BandwidthCounter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Reporter' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1658,20 +1603,6 @@
   - *Sugestão:* `Portar 'ID' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'IDSlice' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'IDSlice' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Peerstore' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Peerstore' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerMetadata' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'PeerMetadata' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'AddrBook' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'AddrBook' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'CertifiedAddrBook' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'CertifiedAddrBook' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'KeyBook' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'KeyBook' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Metrics' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Metrics' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ProtoBook' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'ProtoBook' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Error' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Error' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PSK' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -1688,24 +1619,12 @@
   - *Sugestão:* `Portar 'SecureTransport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'MockClock' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'MockClock' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'DialUpdate' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'DialUpdate' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'CapableConn' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'CapableConn' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Transport' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Transport' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Resolver' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Resolver' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'SkipResolver' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'SkipResolver' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'TransportNetwork' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'TransportNetwork' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'GatedMaListener' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'GatedMaListener' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Upgrader' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'Upgrader' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'DialUpdater' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
-  - *Sugestão:* `Portar 'DialUpdater' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'DialUpdateKind' (type) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'DialUpdateKind' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'PeerRecord_AddressInfo' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -2803,7 +2722,7 @@
 - ℹ️ `[INFO]` **[`lib:1`](lib#L1)** — Tipo público Go 'PinningService' (struct) do módulo 'kubo' ainda não foi portado para o pacote 'lib'.
   - *Sugestão:* `Portar 'PinningService' para 'lib' ou documentar se for omitido deliberadamente`
 
-### 19. Auditoria de Campos de Structs do Upstream Go Ausentes (19 ocorrências)
+### 19. Auditoria de Campos de Structs do Upstream Go Ausentes (22 ocorrências)
 
 - ℹ️ `[INFO]` **[`packages/transpiled_boxo/lib/src/bitswap/message/pb/message.dart:255`](packages/transpiled_boxo/lib/src/bitswap/message/pb/message.dart#L255)** — Classe 'Block' possui 2 campo(s) do Go pendente(s) no módulo 'boxo': From, Delay.
   - *Sugestão:* `Avaliar implementação dos campos: From, Delay`
@@ -2827,13 +2746,19 @@
   - *Sugestão:* `Avaliar implementação dos campos: Abbreviate, Indentation, StartingIndent, AlwaysMarkStrings, ElidePreludeTypeInfo, UseMapComplexStyleAlways, UseMapComplexStyleOnType, Ctx`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart:84`](packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart#L84)** — Classe 'Progress' possui 1 campo(s) do Go pendente(s) no módulo 'go-ipld-prime': Link.
   - *Sugestão:* `Avaliar implementação dos campos: Link`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/identify/id.dart:24`](packages/transpiled_libp2p/lib/src/p2p/protocol/identify/id.dart#L24)** — Classe 'IdService' possui 3 campo(s) do Go pendente(s) no módulo 'go-libp2p': Host, UserAgent, ProtocolVersion.
+  - *Sugestão:* `Avaliar implementação dos campos: Host, UserAgent, ProtocolVersion`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/reservation.dart:16`](packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/reservation.dart#L16)** — Classe 'Reservation' possui 1 campo(s) do Go pendente(s) no módulo 'go-libp2p': Expire.
+  - *Sugestão:* `Avaliar implementação dos campos: Expire`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart:17`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart#L17)** — Classe 'Limit' possui 4 campo(s) do Go pendente(s) no módulo 'go-libp2p': RPS, Burst, Duration, Data.
   - *Sugestão:* `Avaliar implementação dos campos: RPS, Burst, Duration, Data`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart:221`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart#L221)** — Classe 'Limiter' possui 3 campo(s) do Go pendente(s) no módulo 'go-libp2p': NetworkPrefixLimits, GlobalLimit, SubnetRateLimiter.
   - *Sugestão:* `Avaliar implementação dos campos: NetworkPrefixLimits, GlobalLimit, SubnetRateLimiter`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/host/host.dart:24`](packages/transpiled_libp2p/lib/src/core/host/host.dart#L24)** — Classe 'Host' possui 10 campo(s) do Go pendente(s) no módulo 'go-libp2p': StreamHost, ListenAddrs, TLSConfig, InsecureAllowHTTP....
+  - *Sugestão:* `Avaliar implementação dos campos: StreamHost, ListenAddrs, TLSConfig, InsecureAllowHTTP, ServerPeerIDAuth, ClientPeerIDAuth, ServeMux, DefaultClientRoundTripper, WellKnownHandler, EnableCompatibilityWithLegacyWellKnownEndpoint`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:351`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L351)** — Classe 'Stats' possui 4 campo(s) do Go pendente(s) no módulo 'go-libp2p': TotalIn, TotalOut, RateIn, RateOut.
   - *Sugestão:* `Avaliar implementação dos campos: TotalIn, TotalOut, RateIn, RateOut`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:445`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L445)** — Classe 'Conn' possui 2 campo(s) do Go pendente(s) no módulo 'go-libp2p': Scope, DefaultMessageType.
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:464`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L464)** — Classe 'Conn' possui 2 campo(s) do Go pendente(s) no módulo 'go-libp2p': Scope, DefaultMessageType.
   - *Sugestão:* `Avaliar implementação dos campos: Scope, DefaultMessageType`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/peer/peer_record.dart:40`](packages/transpiled_libp2p/lib/src/core/peer/peer_record.dart#L40)** — Classe 'PeerRecord' possui 1 campo(s) do Go pendente(s) no módulo 'go-libp2p': Addresses.
   - *Sugestão:* `Avaliar implementação dos campos: Addresses`
@@ -2844,7 +2769,7 @@
 - ℹ️ `[INFO]` **[`packages/transpiled_multiaddr/lib/src/protocol.dart:41`](packages/transpiled_multiaddr/lib/src/protocol.dart#L41)** — Classe 'Protocol' possui 1 campo(s) do Go pendente(s) no módulo 'go-multiaddr': VCode.
   - *Sugestão:* `Avaliar implementação dos campos: VCode`
 
-### 20. Auditoria de Métodos do Upstream Go Ausentes (83 ocorrências)
+### 20. Auditoria de Métodos do Upstream Go Ausentes (100 ocorrências)
 
 - ℹ️ `[INFO]` **[`packages/transpiled_block_format/lib/src/blocks.dart:33`](packages/transpiled_block_format/lib/src/blocks.dart#L33)** — Classe 'BasicBlock' possui 1 método(s) do Go pendente(s) no módulo 'go-block-format': String.
   - *Sugestão:* `Avaliar paridade e implementação de: String`
@@ -2938,6 +2863,28 @@
   - *Sugestão:* `Avaliar paridade e implementação de: Match`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart:392`](packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart#L392)** — Classe 'ParseContext' possui 1 método(s) do Go pendente(s) no módulo 'go-ipld-prime': PushParent.
   - *Sugestão:* `Avaliar paridade e implementação de: PushParent`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/transport/tcp/tcp_transport.dart:13`](packages/transpiled_libp2p/lib/src/p2p/transport/tcp/tcp_transport.dart#L13)** — Classe 'TcpTransport' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': UseReuseport, String.
+  - *Sugestão:* `Avaliar paridade e implementação de: UseReuseport, String`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/holepunch/holepunch.dart:193`](packages/transpiled_libp2p/lib/src/p2p/protocol/holepunch/holepunch.dart#L193)** — Classe 'HolePuncher' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': DirectConnect.
+  - *Sugestão:* `Avaliar paridade e implementação de: DirectConnect`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/identify/pb/identify_message.dart:10`](packages/transpiled_libp2p/lib/src/p2p/protocol/identify/pb/identify_message.dart#L10)** — Classe 'Identify' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': Reset, String, ProtoMessage, ProtoReflect....
+  - *Sugestão:* `Avaliar paridade e implementação de: Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetProtocolVersion, GetAgentVersion, GetPublicKey, GetListenAddrs, GetObservedAddr, GetProtocols, GetSignedPeerRecord`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/client.dart:14`](packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/client.dart#L14)** — Classe 'Client' possui 9 método(s) do Go pendente(s) no módulo 'go-libp2p': GetReachability, Listener, SkipResolve, Dial....
+  - *Sugestão:* `Avaliar paridade e implementação de: GetReachability, Listener, SkipResolve, Dial, Listen, Protocols, Proxy, DialBack, DialBack`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/reservation.dart:16`](packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/client/reservation.dart#L16)** — Classe 'Reservation' possui 8 método(s) do Go pendente(s) no módulo 'go-libp2p': Reset, String, ProtoMessage, ProtoReflect....
+  - *Sugestão:* `Avaliar paridade e implementação de: Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetExpire, GetAddrs, GetVoucher`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/pb/circuit_message.dart:52`](packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/pb/circuit_message.dart#L52)** — Classe 'HopMessage' possui 10 método(s) do Go pendente(s) no módulo 'go-libp2p': Reset, String, ProtoMessage, ProtoReflect....
+  - *Sugestão:* `Avaliar paridade e implementação de: Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetType, GetPeer, GetReservation, GetLimit, GetStatus`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/proto/protocol.dart:16`](packages/transpiled_libp2p/lib/src/p2p/protocol/circuitv2/proto/protocol.dart#L16)** — Classe 'ReservationVoucher' possui 8 método(s) do Go pendente(s) no módulo 'go-libp2p': Reset, String, ProtoMessage, ProtoReflect....
+  - *Sugestão:* `Avaliar paridade e implementação de: Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetRelay, GetPeer, GetExpiration`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/net/swarm/swarm.dart:17`](packages/transpiled_libp2p/lib/src/p2p/net/swarm/swarm.dart#L17)** — Classe 'Swarm' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': Done, Peerstore, StreamHandler, LocalPeer....
+  - *Sugestão:* `Avaliar paridade e implementação de: Done, Peerstore, StreamHandler, LocalPeer, Backoff, String, ResourceManager, AddCertHashes, ListenClose, AddListenAddr, TransportForDialing, TransportForListening`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/autonat/autonat.dart:13`](packages/transpiled_libp2p/lib/src/p2p/host/autonat/autonat.dart#L13)** — Classe 'AutoNat' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': Start, GetReachability.
+  - *Sugestão:* `Avaliar paridade e implementação de: Start, GetReachability`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/autonat/autonat.dart:32`](packages/transpiled_libp2p/lib/src/p2p/host/autonat/autonat.dart#L32)** — Classe 'AmbientAutoNat' possui 4 método(s) do Go pendente(s) no módulo 'go-libp2p': Listen, ListenClose, Connected, Disconnected.
+  - *Sugestão:* `Avaliar paridade e implementação de: Listen, ListenClose, Connected, Disconnected`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/basic/basic_host.dart:27`](packages/transpiled_libp2p/lib/src/p2p/host/basic/basic_host.dart#L27)** — Classe 'BasicHost' possui 7 método(s) do Go pendente(s) no módulo 'go-libp2p': Start, IDService, AllAddrs, ConfirmedAddrs....
+  - *Sugestão:* `Avaliar paridade e implementação de: Start, IDService, AllAddrs, ConfirmedAddrs, SetAutoNat, GetAutoNat, Reachability`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart:17`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart#L17)** — Classe 'Limit' possui 7 método(s) do Go pendente(s) no módulo 'go-libp2p': Reset, String, ProtoMessage, ProtoReflect....
   - *Sugestão:* `Avaliar paridade e implementação de: Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetDuration, GetData`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart:139`](packages/transpiled_libp2p/lib/src/p2p/host/resource_manager/limit.dart#L139)** — Classe 'ResourceLimits' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': ToMaybeNilPtr.
@@ -2962,36 +2909,48 @@
   - *Sugestão:* `Avaliar paridade e implementação de: Equals`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/crypto/secp256k1_key.dart:61`](packages/transpiled_libp2p/lib/src/core/crypto/secp256k1_key.dart#L61)** — Classe 'Secp256k1PublicKey' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': Equals.
   - *Sugestão:* `Avaliar paridade e implementação de: Equals`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/host/host.dart:24`](packages/transpiled_libp2p/lib/src/core/host/host.dart#L24)** — Classe 'Host' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': PeerID, Serve, SetHTTPHandler, SetHTTPHandlerAtPath....
+  - *Sugestão:* `Avaliar paridade e implementação de: PeerID, Serve, SetHTTPHandler, SetHTTPHandlerAtPath, NamespaceRoundTripper, NamespacedClient, RoundTrip, NewConstrainedRoundTripper, SetPeerMetadata, AddPeerMetadata, GetPeerMetadata, RemovePeerMetadata`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:226`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L226)** — Classe 'StreamError' possui 3 método(s) do Go pendente(s) no módulo 'go-libp2p': Error, Is, Unwrap.
   - *Sugestão:* `Avaliar paridade e implementação de: Error, Is, Unwrap`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:267`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L267)** — Classe 'ConnError' possui 3 método(s) do Go pendente(s) no módulo 'go-libp2p': Error, Is, Unwrap.
   - *Sugestão:* `Avaliar paridade e implementação de: Error, Is, Unwrap`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:417`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L417)** — Classe 'Dialer' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': Dial, DialContext.
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:436`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L436)** — Classe 'Dialer' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': Dial, DialContext.
   - *Sugestão:* `Avaliar paridade e implementação de: Dial, DialContext`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:445`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L445)** — Classe 'Conn' possui 44 método(s) do Go pendente(s) no módulo 'go-libp2p': As, Close, CloseWithError, IsClosed....
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:464`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L464)** — Classe 'Conn' possui 44 método(s) do Go pendente(s) no módulo 'go-libp2p': As, Close, CloseWithError, IsClosed....
   - *Sugestão:* `Avaliar paridade e implementação de: As, Close, CloseWithError, IsClosed, OpenStream, AcceptStream, LocalPeer, RemotePeer, RemotePublicKey, LocalMultiaddr, RemoteMultiaddr, Transport, Scope, ConnState, LocalMultiaddr, RemoteMultiaddr, Read, Write, Close, LocalAddr, RemoteAddr, SetDeadline, SetReadDeadline, SetWriteDeadline, LocalPeer, RemotePeer, RemotePublicKey, ConnState, Stat, Read, LocalAddr, RemoteAddr, ID, NewStream, GetStreams, Stat, As, IsClosed, ID, CloseWithError, String, NewStream, GetStreams, Scope`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:535`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L535)** — Classe 'ResourceScope' possui 19 método(s) do Go pendente(s) no módulo 'go-libp2p': Limit, SetLimit, ReserveMemoryForChild, ReleaseMemoryForChild....
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:554`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L554)** — Classe 'ResourceScope' possui 19 método(s) do Go pendente(s) no módulo 'go-libp2p': Limit, SetLimit, ReserveMemoryForChild, ReleaseMemoryForChild....
   - *Sugestão:* `Avaliar paridade e implementação de: Limit, SetLimit, ReserveMemoryForChild, ReleaseMemoryForChild, AddStream, AddStreamForChild, RemoveStream, RemoveStreamForChild, AddConn, AddConnForChild, RemoveConn, RemoveConnForChild, ReserveForChild, ReleaseForChild, ReleaseResources, Done, IncRef, DecRef, IsUnused`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:550`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L550)** — Classe 'ProtocolScope' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': SetLimit.
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:569`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L569)** — Classe 'ProtocolScope' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': SetLimit.
   - *Sugestão:* `Avaliar paridade e implementação de: SetLimit`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:554`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L554)** — Classe 'PeerScope' possui 6 método(s) do Go pendente(s) no módulo 'go-libp2p': ReserveMemory, ReleaseMemory, Check, Stat....
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:573`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L573)** — Classe 'PeerScope' possui 6 método(s) do Go pendente(s) no módulo 'go-libp2p': ReserveMemory, ReleaseMemory, Check, Stat....
   - *Sugestão:* `Avaliar paridade e implementação de: ReserveMemory, ReleaseMemory, Check, Stat, BeginSpan, SetLimit`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:573`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L573)** — Classe 'StreamScope' possui 4 método(s) do Go pendente(s) no módulo 'go-libp2p': ProtocolScope, SetProtocol, ServiceScope, PeerScope.
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:592`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L592)** — Classe 'StreamScope' possui 4 método(s) do Go pendente(s) no módulo 'go-libp2p': ProtocolScope, SetProtocol, ServiceScope, PeerScope.
   - *Sugestão:* `Avaliar paridade e implementação de: ProtocolScope, SetProtocol, ServiceScope, PeerScope`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:590`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L590)** — Classe 'ResourceManager' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': ListServices, ListProtocols, ListPeers, Stat....
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:609`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L609)** — Classe 'ResourceManager' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': ListServices, ListProtocols, ListPeers, Stat....
   - *Sugestão:* `Avaliar paridade e implementação de: ListServices, ListProtocols, ListPeers, Stat, GetConnLimit, GetAllowlist, ViewSystem, ViewTransient, ViewService, ViewProtocol, ViewPeer, OpenConnectionNoIP`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:658`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L658)** — Classe 'NullScope' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': VerifySourceAddress.
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:677`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L677)** — Classe 'NullScope' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': VerifySourceAddress.
   - *Sugestão:* `Avaliar paridade e implementação de: VerifySourceAddress`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/peer/addr_info.dart:15`](packages/transpiled_libp2p/lib/src/core/peer/addr_info.dart#L15)** — Classe 'AddrInfo' possui 3 método(s) do Go pendente(s) no módulo 'go-libp2p': String, MarshalJSON, UnmarshalJSON.
   - *Sugestão:* `Avaliar paridade e implementação de: String, MarshalJSON, UnmarshalJSON`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/peer/peer_record.dart:40`](packages/transpiled_libp2p/lib/src/core/peer/peer_record.dart#L40)** — Classe 'PeerRecord' possui 9 método(s) do Go pendente(s) no módulo 'go-libp2p': Equal, Reset, String, ProtoMessage....
   - *Sugestão:* `Avaliar paridade e implementação de: Equal, Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetPeerId, GetSeq, GetAddresses`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/peerstore/peerstore.dart:78`](packages/transpiled_libp2p/lib/src/core/peerstore/peerstore.dart#L78)** — Classe 'Metrics' possui 14 método(s) do Go pendente(s) no módulo 'go-libp2p': AllowConn, BlockConn, AllowStream, BlockStream....
+  - *Sugestão:* `Avaliar paridade e implementação de: AllowConn, BlockConn, AllowStream, BlockStream, AllowPeer, BlockPeer, AllowProtocol, BlockProtocol, BlockProtocolPeer, AllowService, BlockService, BlockServicePeer, AllowMemory, BlockMemory`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/record/envelope.dart:57`](packages/transpiled_libp2p/lib/src/core/record/envelope.dart#L57)** — Classe 'Envelope' possui 10 método(s) do Go pendente(s) no módulo 'go-libp2p': Equal, Reset, String, ProtoMessage....
   - *Sugestão:* `Avaliar paridade e implementação de: Equal, Reset, String, ProtoMessage, ProtoReflect, Descriptor, GetPublicKey, GetPayloadType, GetPayload, GetSignature`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/routing/query.dart:47`](packages/transpiled_libp2p/lib/src/core/routing/query.dart#L47)** — Classe 'QueryEvent' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': MarshalJSON, UnmarshalJSON.
   - *Sugestão:* `Avaliar paridade e implementação de: MarshalJSON, UnmarshalJSON`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/routing/routing.dart:92`](packages/transpiled_libp2p/lib/src/core/routing/routing.dart#L92)** — Classe 'Routing' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': FindPeer.
   - *Sugestão:* `Avaliar paridade e implementação de: FindPeer`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/transport/transport.dart:32`](packages/transpiled_libp2p/lib/src/core/transport/transport.dart#L32)** — Classe 'CapableConn' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p': ConnState.
+  - *Sugestão:* `Avaliar paridade e implementação de: ConnState`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/transport/transport.dart:42`](packages/transpiled_libp2p/lib/src/core/transport/transport.dart#L42)** — Classe 'Listener' possui 7 método(s) do Go pendente(s) no módulo 'go-libp2p': Addr, Multiaddrs, ConnContext, ServeHTTP....
+  - *Sugestão:* `Avaliar paridade e implementação de: Addr, Multiaddrs, ConnContext, ServeHTTP, Addr, String, Multiaddrs`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/transport/transport.dart:49`](packages/transpiled_libp2p/lib/src/core/transport/transport.dart#L49)** — Classe 'Transport' possui 14 método(s) do Go pendente(s) no módulo 'go-libp2p': ListenOrder, String, Close, CloseVirtualListener....
+  - *Sugestão:* `Avaliar paridade e implementação de: ListenOrder, String, Close, CloseVirtualListener, Resolve, AddCertHashes, LocalPeer, SecureInbound, SecureOutbound, ID, WithSessionOptions, DialContext, NewConn, Config`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/transport/transport.dart:83`](packages/transpiled_libp2p/lib/src/core/transport/transport.dart#L83)** — Classe 'Upgrader' possui 6 método(s) do Go pendente(s) no módulo 'go-libp2p': UpgradeListener, GateMaListener, UpgradeGatedMaListener, UpgradeListener....
+  - *Sugestão:* `Avaliar paridade e implementação de: UpgradeListener, GateMaListener, UpgradeGatedMaListener, UpgradeListener, GateMaListener, UpgradeGatedMaListener`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p_kbucket/lib/src/keyspace.dart:56`](packages/transpiled_libp2p_kbucket/lib/src/keyspace.dart#L56)** — Classe 'KeySpace' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p-kbucket': Equal.
   - *Sugestão:* `Avaliar paridade e implementação de: Equal`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p_kbucket/lib/src/sorting.dart:18`](packages/transpiled_libp2p_kbucket/lib/src/sorting.dart#L18)** — Classe 'PeerDistanceSorter' possui 1 método(s) do Go pendente(s) no módulo 'go-libp2p-kbucket': Len.
@@ -3027,7 +2986,7 @@
   - *Sugestão:* `Avaliar porte das funções: RawKey, KeyWithNamespaces, NewAutoBatching, WithWrite, GetWrite, WithRead, GetRead, WrapDatastore, New, NewFailstore...`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime:1`](packages/transpiled_ipld_prime#L1)** — Pacote 'packages/transpiled_ipld_prime' possui 391 função(ões) livre(s) do Go pendente(s) no módulo 'go-ipld-prime': EncodeStreaming, DecodeStreaming, DecodeUsingPrototype, DecodeStreamingUsingPrototype, Marshal....
   - *Sugestão:* `Avaliar porte das funções: EncodeStreaming, DecodeStreaming, DecodeUsingPrototype, DecodeStreamingUsingPrototype, Marshal, MarshalStreaming, Unmarshal, UnmarshalStreaming, ParsePath, ParsePathSegment...`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Pacote 'packages/transpiled_libp2p' possui 501 função(ões) livre(s) do Go pendente(s) no módulo 'go-libp2p': ChainOptions, New, NewWithoutDefaults, SetDefaultServiceLimits, ListenAddrStrings....
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Pacote 'packages/transpiled_libp2p' possui 482 função(ões) livre(s) do Go pendente(s) no módulo 'go-libp2p': ChainOptions, New, NewWithoutDefaults, SetDefaultServiceLimits, ListenAddrStrings....
   - *Sugestão:* `Avaliar porte das funções: ChainOptions, New, NewWithoutDefaults, SetDefaultServiceLimits, ListenAddrStrings, ListenAddrs, Security, Muxer, QUICReuse, Transport...`
 - ℹ️ `[INFO]` **[`lib/src/protocols/dht:1`](lib/src/protocols/dht#L1)** — Pacote 'lib/src/protocols/dht' possui 235 função(ões) livre(s) do Go pendente(s) no módulo 'go-libp2p-kad-dht': New, NewDHT, NewDHTClient, GetDefaultBootstrapPeerAddrInfos, PublicQueryFilter....
   - *Sugestão:* `Avaliar porte das funções: New, NewDHT, NewDHTClient, GetDefaultBootstrapPeerAddrInfos, PublicQueryFilter, PublicRoutingTableFilter, PrivateQueryFilter, PrivateRoutingTableFilter, ValueDatastore, ProviderDatastore...`
