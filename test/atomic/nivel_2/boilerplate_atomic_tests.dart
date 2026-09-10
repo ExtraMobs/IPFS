@@ -39,11 +39,12 @@ void main() {
       await p.server.close();
     });
 
-    test('close() - fecha o descritor e falha no fechamento duplo', () async {
+    test('close() - fecha o descritor e e idempotente', () async {
       final p = await _par();
       await p.fd.close();
       expect(p.fd.isClosed, isTrue);
-      expect(() => p.fd.close(), throwsA(isA<NetClosingException>()));
+      await p.fd.close();
+      expect(p.fd.isClosed, isTrue);
       await p.server.close();
     });
 

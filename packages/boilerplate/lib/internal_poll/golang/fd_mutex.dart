@@ -50,9 +50,9 @@ import 'dart:collection';
 /// reciclável, e o próprio VM recusa operações sobre um socket fechado. A
 /// contagem foi removida em vez de mantida por fidelidade: mutação confirmou
 /// que nenhum teste a distinguia de sua ausência. O propósito que ela serve —
-/// não destruir o recurso enquanto uma operação ainda se desenrola — é
-/// preservado no `Fd`, por uma via que Dart torna observável: `close` espera
-/// pelos futures das operações em voo antes de destruir o socket.
+/// não destruir o recurso enquanto uma operação ainda se desenrola — continua
+/// atendido no `Fd`, mas pelo runtime e não por bookkeeping: ver o comentário
+/// de `Fd.close`, que explica por que o `await` de `_destroy` já garante isso.
 final class FdMutex {
   bool _closed = false;
   bool _rLocked = false;

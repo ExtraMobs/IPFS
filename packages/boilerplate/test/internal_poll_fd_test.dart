@@ -158,22 +158,19 @@ void main() {
       await servidor.fechar();
     });
 
-    // Nota de honestidade sobre o alcance destes dois testes, apurada por
-    // mutação: eles NÃO conseguem distinguir a espera explícita de `close`
-    // pelas operações em voo de uma versão que destrua o socket sem esperar.
-    // A razão é dupla, e vale registrar porque é contraintuitiva. Primeiro,
-    // toda operação acordada pela eviction passa por `_throwIfBroken` antes de
-    // tocar no socket, então mesmo destruindo cedo nada opera sobre o
-    // descritor morto. Segundo, `_destroy` tem `await`s próprios, e as
-    // microtasks que eles liberam bastam para as operações assentarem de
-    // qualquer jeito — a garantia sairia certa por acidente.
+    // Nota sobre o alcance destes testes, apurada por mutação e mantida porque
+    // registra uma decisão de projeto que parece faltar quando se lê o código.
     //
-    // O que a espera explícita compra, e o motivo de ela existir mesmo assim:
-    // a garantia deixa de depender daquele acidente. Se um dia `_destroy`
-    // deixar de suspender, ou se `_throwIfBroken` for removido por parecer
-    // redundante, o contrato "nenhum callback dispara depois que close
-    // retorna" continua valendo. É a diferença entre um invariante declarado e
-    // um que emerge do arranjo atual das suspensões.
+    // Este port NÃO tem contagem de referências nem espera explícita pelos
+    // futures das operações em voo. As duas foram construídas e depois
+    // removidas, pelo mesmo motivo: nenhum teste consegue distinguir sua
+    // presença de sua ausência, nem com 64 operações enfileiradas. O `await` de
+    // `_destroy` devolve o controle ao event loop, que drena a fila de
+    // microtasks inteira antes do próximo evento — então toda operação
+    // acordada pelo fechamento assenta ali, quantas forem.
+    //
+    // O que sobrou é verificado: remover o `await _destroyed.future` do fim de
+    // `close` faz o teste abaixo cair.
     test('close deixa a operação em voo notificada e o descritor destruído',
         () async {
       final servidor = await _ServidorMudo.abrir();
@@ -315,19 +312,110 @@ void main() {
       await servidor.fechar();
     });
 
-    test('fechar duas vezes falha, como no upstream', () async {
+    test('fechar duas vezes é seguro e espera a mesma destruição', () async {
       final servidor = await _ServidorMudo.abrir();
       servidor.aceitarSemLer();
       final raw = await RawSocket.connect('127.0.0.1', servidor.port);
       final fd = Fd(raw);
 
       await fd.close();
-      await expectLater(
-        fd.close(),
-        throwsA(isA<NetClosingException>()),
-        reason: 'FD.Close do Go devolve errClosing no segundo fechamento; '
-            'isso difere do RawSocket.close() do dart:io, que é idempotente, '
-            'e quem precisar de idempotência consulta isClosed antes',
+      await fd.close();
+      await fd.close();
+      expect(
+        fd.isClosed,
+        isTrue,
+        reason: 'close é idempotente como o resto do dart:io. O FD.Close do Go '
+            'devolve errClosing no segundo fechamento, mas lá isso é valor de '
+            'retorno que o idioma `defer conn.Close()` descarta; em Dart seria '
+            'exceção lançada num finally de teardown, que é a falha que este '
+            'tipo existe para eliminar',
+      );
+
+      await servidor.fechar();
+    });
+
+    test('segundo fechamento concorrente espera a destruição em curso',
+        () async {
+      final servidor = await _ServidorMudo.abrir();
+      servidor.aceitarSemLer();
+      final raw = await RawSocket.connect('127.0.0.1', servidor.port);
+      final fd = Fd(raw);
+
+      var escritaTerminou = false;
+      unawaited(
+        fd.write(Uint8List(16 * 1024 * 1024)).then(
+              (_) => escritaTerminou = true,
+              onError: (Object _) => escritaTerminou = true,
+            ),
+      );
+      await _pump(10);
+      expect(escritaTerminou, isFalse);
+
+      // Os dois partem juntos, sem que o segundo saiba do primeiro — que é a
+      // forma real da corrida: o FIN do par dispara um teardown enquanto a
+      // camada de cima fecha a conexão explicitamente.
+      final primeiro = fd.close();
+      final segundo = fd.close();
+      await Future.wait(<Future<void>>[primeiro, segundo]);
+
+      expect(
+        escritaTerminou,
+        isTrue,
+        reason: 'o segundo fechamento tem de dar a mesma promessa do primeiro: '
+            'ao voltar, nada desta conexão dispara mais',
+      );
+
+      await servidor.fechar();
+    });
+  });
+
+  group('Fd - fechamento com muitas operações em voo', () {
+    // Este teste existe para responder a uma pergunta específica: a espera de
+    // `close` pelos futures em voo é load-bearing, ou a folga de microtasks
+    // que os `await` internos de `_destroy` liberam já bastaria?
+    //
+    // Com uma operação só, mutação mostrou que bastaria — a garantia saía
+    // certa por acidente. Com muitas operações enfileiradas na trava de
+    // escrita, cada uma precisando de vários saltos para desenrolar, a folga
+    // do `_destroy` é fixa e a demanda cresce. O resultado desta medição está
+    // registrado abaixo do teste.
+    test('close espera por TODAS as operações enfileiradas', () async {
+      final servidor = await _ServidorMudo.abrir();
+      servidor.aceitarSemLer();
+      final raw = await RawSocket.connect('127.0.0.1', servidor.port);
+      final fd = Fd(raw);
+
+      const quantas = 64;
+      final assentadas = <int>[];
+
+      // A primeira estaciona na contrapressão e segura a trava; as demais
+      // ficam na fila do FdMutex, sem nunca tocar no socket.
+      unawaited(
+        fd.write(Uint8List(16 * 1024 * 1024)).then(
+              (_) => assentadas.add(0),
+              onError: (Object _) => assentadas.add(0),
+            ),
+      );
+      await _pump(10);
+      for (var i = 1; i <= quantas; i++) {
+        unawaited(
+          fd.write(Uint8List.fromList([i])).then(
+                (_) => assentadas.add(i),
+                onError: (Object _) => assentadas.add(i),
+              ),
+        );
+      }
+      await _pump(10);
+      expect(assentadas, isEmpty, reason: 'nenhuma pode ter assentado ainda');
+
+      await fd.close();
+
+      expect(
+        assentadas.length,
+        quantas + 1,
+        reason: 'ao retornar de close, TODAS as operações registradas já têm '
+            'de ter assentado — nenhuma pode notificar o chamador depois do '
+            'teardown',
       );
 
       await servidor.fechar();

@@ -67,16 +67,6 @@ final class Fd {
   late final StreamSubscription<RawSocketEvent> _subscription;
   final Completer<void> _destroyed = Completer<void>();
 
-  /// Operações que já entraram e ainda não assentaram.
-  ///
-  /// Faz o papel que no upstream cabe à contagem de referências, mas com o
-  /// propósito reexpresso no que Dart torna observável: [close] espera por
-  /// estes futures antes de destruir o socket, o que dá ao chamador a garantia
-  /// de que **nenhum callback desta conexão dispara depois que `close`
-  /// retorna**. Um erro que chega atrasado, já depois do teardown, é a classe
-  /// de falha que este tipo existe para eliminar.
-  final Set<Future<void>> _inFlight = <Future<void>>{};
-
   Completer<void>? _readWaiter;
   Completer<void>? _writeWaiter;
 
@@ -89,8 +79,8 @@ final class Fd {
 
   /// Se o descritor já foi marcado como fechado.
   ///
-  /// Permite ao chamador evitar o erro de fechamento duplo, que este port
-  /// preserva por fidelidade (ver [close]).
+  /// [close] é idempotente, então isto não é necessário para fechar em
+  /// segurança; serve a quem precisa distinguir se o fechamento partiu daqui.
   bool get isClosed => _fdmu.isClosed;
 
   /// Se o par já sinalizou fim de leitura (`RawSocketEvent.readClosed`).
@@ -111,11 +101,7 @@ final class Fd {
   ///
   /// Diferente do `flush()` do `IOSink`, o future só completa quando **estes**
   /// bytes foram entregues ao kernel, o que dá contrapressão real por chamada.
-  Future<int> write(Uint8List buffer) {
-    return _track(() => _write(buffer));
-  }
-
-  Future<int> _write(Uint8List buffer) async {
+  Future<int> write(Uint8List buffer) async {
     if (!await _fdmu.rwlock(false)) throw errClosing(isFile: _isFile);
     try {
       var written = 0;
@@ -143,11 +129,7 @@ final class Fd {
   /// Port de `FD.Read`. Devolve uma lista vazia quando o par fechou a direção
   /// de leitura, que é o equivalente do `io.EOF` do Go neste ponto. Lança o
   /// sentinela de fechamento se o descritor for fechado durante a espera.
-  Future<Uint8List> read([int? len]) {
-    return _track(() => _read(len));
-  }
-
-  Future<Uint8List> _read([int? len]) async {
+  Future<Uint8List> read([int? len]) async {
     if (!await _fdmu.rwlock(true)) throw errClosing(isFile: _isFile);
     try {
       while (true) {
@@ -199,49 +181,56 @@ final class Fd {
   ///    operação nova falhe de imediato, e desperta quem espera por trava.
   /// 2. `evict` desbloqueia quem está parado esperando prontidão de I/O; essas
   ///    esperas terminam com o sentinela de fechamento.
-  /// 3. O socket só é destruído **depois que as operações em voo assentaram**.
+  /// 3. `_destroy` cancela a inscrição e fecha o socket.
   ///
-  /// A terceira fase é onde este port se afasta do upstream de propósito. O Go
-  /// usa contagem de referências para adiar o `close(2)` enquanto alguém ainda
-  /// puder passar `fd.Sysfd` para uma syscall — o perigo lá é o kernel reciclar
-  /// aquele inteiro para outra conexão. `RawSocket` é objeto, não número
-  /// reciclável, e esse desfecho não é expressável. O propósito, porém,
-  /// atravessa numa forma que Dart torna observável e que vale mais aqui:
-  /// esperar pelos futures das operações garante que **nenhum callback desta
-  /// conexão dispara depois que `close` retorna**.
+  /// Ao retornar, **nenhum callback desta conexão dispara mais** — nem de uma
+  /// operação estacionada, nem de uma que ainda estava na fila da trava. Vale a
+  /// pena registrar por que isso sai de graça, porque é contraintuitivo e foi
+  /// medido: o `await` de `_destroy` sobre `_subscription.cancel()` devolve o
+  /// controle ao event loop, que drena a fila de microtasks **inteira** antes
+  /// do próximo evento. Toda operação acordada pelas fases 1 e 2 assenta ali,
+  /// independentemente de quantas sejam.
   ///
-  /// O `catchError` não é cosmético: as operações despertadas pela eviction
-  /// terminam com o sentinela de fechamento, e um `Future.wait` cru abortaria
-  /// no primeiro erro, destruindo o socket antes de as demais assentarem — que
-  /// é exatamente a falha que este método existe para impedir.
+  /// Esse é o motivo de este port NÃO ter contagem de referências nem espera
+  /// explícita pelos futures em voo. Ambas foram construídas e removidas: com
+  /// 64 operações enfileiradas, mutação confirmou que nenhum teste distingue
+  /// sua presença de sua ausência, e a versão com futures ainda cobrava
+  /// alocação por operação no caminho quente. A dependência real está no
+  /// `await` de `_destroy`; torná-lo síncrono quebraria esta garantia.
   ///
-  /// Fechar duas vezes lança o sentinela de fechamento, como no upstream, onde
-  /// `FD.Close` devolve `errClosing` se o descritor já estava fechado. Note que
-  /// isso difere do `RawSocket.close()` do `dart:io`, que é idempotente; quem
-  /// precisar de idempotência deve consultar [isClosed] antes.
+  /// Fechar duas vezes é seguro: o segundo chamador espera pela destruição em
+  /// curso e retorna. Ver o corpo do método para por que este ponto diverge do
+  /// `FD.Close` do Go de propósito.
   Future<void> close() async {
-    if (!_fdmu.close()) throw errClosing(isFile: _isFile);
+    if (!_fdmu.close()) {
+      // Já fechado. Idempotente, e aqui o port se afasta do upstream de
+      // propósito. O `FD.Close` do Go devolve `errClosing` no segundo
+      // fechamento, e lá isso é inofensivo: `Close` DEVOLVE um erro, e o idioma
+      // dominante — `defer conn.Close()` — descarta o retorno. Em Dart viraria
+      // exceção lançada, e o teardown equivalente (`finally { await close(); }`
+      // somado a um fechamento explícito no caminho feliz) transformaria uma
+      // corrida rotineira em erro assíncrono não tratado. Ou seja: preservar o
+      // comportamento do Go reintroduziria exatamente a classe de falha que
+      // este tipo existe para eliminar.
+      //
+      // Todo o `dart:io` fecha assim — `RawSocket.close()` documenta que
+      // "calling it several times is supported", e `IOSink.close()`,
+      // `StreamSubscription.cancel()` e `HttpClient.close()` seguem o mesmo.
+      //
+      // Devolver `_destroyed` em vez de retornar seco dá ao segundo chamador a
+      // mesma promessa que o primeiro recebe: ao voltar daqui, nada desta
+      // conexão dispara mais. Quem precisar distinguir os dois casos consulta
+      // [isClosed] antes.
+      return _destroyed.future;
+    }
     _evict();
-    await Future.wait(_inFlight.map((f) => f.catchError((Object _) {})));
     await _destroy();
-    // Última espera, e não é redundante: `_destroy` completa `_destroyed`, mas
-    // os callbacks que o chamador registrou em [destroyed] são microtasks que
-    // ainda não rodaram. Esperar aqui os deixa correr antes de `close`
-    // retornar, que é a mesma promessa feita às operações em voo — nada desta
-    // conexão dispara depois do retorno.
+    // Esta espera é o que sustenta a promessa de que nada desta conexão dispara
+    // depois do retorno, e ela NÃO é redundante: `_destroy` completa
+    // `_destroyed`, mas os callbacks registrados em [destroyed] ainda são
+    // microtasks não executadas. Verificado por mutação — removê-la faz um
+    // teste cair na hora.
     await _destroyed.future;
-  }
-
-  /// Registra uma operação como em voo enquanto ela dura.
-  Future<T> _track<T>(Future<T> Function() operacao) {
-    final future = operacao();
-    // O `catchError` aqui só existe para o membro do conjunto: sem ele, um
-    // future que termina com erro e cuja única referência é este conjunto
-    // viraria erro não tratado. O erro segue intacto para quem chamou.
-    final rastreado = future.then<void>((_) {}, onError: (Object _) {});
-    _inFlight.add(rastreado);
-    rastreado.whenComplete(() => _inFlight.remove(rastreado));
-    return future;
   }
 
   /// Fecha uma das direções do socket.
