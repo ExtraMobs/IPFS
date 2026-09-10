@@ -1,5 +1,6 @@
 // ignore_for_file: duplicate_ignore, public_member_api_docs, sort_constructors_first, directives_ordering, dangling_library_doc_comments, library_prefixes, constant_identifier_names, depend_on_referenced_packages
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:test/test.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
@@ -110,6 +111,36 @@ class _FakeStream implements NetworkStream {
 
   @override
   Future<void> resetWithError(StreamErrorCode errorCode) async {}
+
+  @override
+  bool get isClosed => false;
+
+  @override
+  Future<Uint8List> read([int? maxLength]) async => Uint8List(0);
+
+  @override
+  Future<void> write(Uint8List data) async {}
+
+  @override
+  Future<void> close() async {}
+
+  @override
+  Future<void> reset() async {}
+
+  @override
+  Future<void> closeWrite() async {}
+
+  @override
+  Future<void> closeRead() async {}
+
+  @override
+  Future<void> setDeadline(DateTime? time) async {}
+
+  @override
+  Future<void> setReadDeadline(DateTime? time) async {}
+
+  @override
+  Future<void> setWriteDeadline(DateTime? time) async {}
 }
 
 class _FakeRouting implements PeerRouting {

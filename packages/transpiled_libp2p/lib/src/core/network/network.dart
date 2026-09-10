@@ -380,11 +380,17 @@ final class AddrDelay {
 
 typedef DialRanker = List<AddrDelay> Function(List<Multiaddr> addresses);
 
+/// Minimum read-write contract needed for stream I/O and protocol negotiation.
+abstract interface class StreamReadWriter {
+  Future<Uint8List> read([int? maxLength]);
+  Future<void> write(Uint8List data);
+}
+
 /// A libp2p stream contract.
 ///
 /// Named `NetworkStream` because Dart's own `Stream` is the native async
 /// stream type used throughout this package.
-abstract interface class NetworkStream {
+abstract interface class NetworkStream implements StreamReadWriter {
   String get id;
   ProtocolId protocol();
   Future<void> setProtocol(ProtocolId id);
@@ -392,6 +398,19 @@ abstract interface class NetworkStream {
   Conn conn();
   StreamScope scope();
   Future<void> resetWithError(StreamErrorCode errorCode);
+
+  bool get isClosed;
+  @override
+  Future<Uint8List> read([int? maxLength]);
+  @override
+  Future<void> write(Uint8List data);
+  Future<void> close();
+  Future<void> reset();
+  Future<void> closeWrite();
+  Future<void> closeRead();
+  Future<void> setDeadline(DateTime? time);
+  Future<void> setReadDeadline(DateTime? time);
+  Future<void> setWriteDeadline(DateTime? time);
 }
 
 typedef StreamHandler = void Function(NetworkStream stream);

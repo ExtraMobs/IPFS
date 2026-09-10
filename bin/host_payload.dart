@@ -9,29 +9,79 @@ import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_boxo/transpiled_boxo.dart' hide Blockstore;
 import 'package:transpiled_ipfs/transpiled_ipfs.dart';
 
+Future<void> setupUpnpPortMapping(int port) async {
+  print('Configurando mapeamento de porta UPnP no gateway da rede...');
+  try {
+    final soapAddMapping = '<?xml version="1.0"?>\r\n'
+        '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">\r\n'
+        '<s:Body>\r\n'
+        '<u:AddPortMapping xmlns:u="urn:schemas-upnp-org:service:WANIPConnection:1">\r\n'
+        '<NewRemoteHost></NewRemoteHost>\r\n'
+        '<NewExternalPort>$port</NewExternalPort>\r\n'
+        '<NewProtocol>TCP</NewProtocol>\r\n'
+        '<NewInternalPort>$port</NewInternalPort>\r\n'
+        '<NewInternalClient>192.168.1.4</NewInternalClient>\r\n'
+        '<NewEnabled>1</NewEnabled>\r\n'
+        '<NewPortMappingDescription>Dart-IPFS-Host</NewPortMappingDescription>\r\n'
+        '<NewLeaseDuration>0</NewLeaseDuration>\r\n'
+        '</u:AddPortMapping>\r\n'
+        '</s:Body>\r\n'
+        '</s:Envelope>';
+
+    final bytes = utf8.encode(soapAddMapping);
+    final client = HttpClient();
+    final req = await client
+        .postUrl(Uri.parse('http://192.168.1.1:52869/upnp/control/WANIPConn1'))
+        .timeout(const Duration(seconds: 3));
+    req.headers.set(
+      'SOAPAction',
+      '"urn:schemas-upnp-org:service:WANIPConnection:1#AddPortMapping"',
+    );
+    req.headers.set('Content-Type', 'text/xml; charset="utf-8"');
+    req.headers.set('Connection', 'Close');
+    req.contentLength = bytes.length;
+    req.add(bytes);
+    final resp = await req.close();
+    print('  UPnP Port Mapping status: ${resp.statusCode} ${resp.reasonPhrase}');
+  } catch (e) {
+    print('  Aviso ao configurar UPnP: $e');
+  }
+}
+
 Future<void> main(List<String> args) async {
   print('============================================================');
   print('          DART IPFS - P2P SERVING NODE DAEMON              ');
   print('============================================================');
 
-  // Generate a cryptographically secure random sequence
-  final rng = Random.secure();
-  final randomBytes = List<int>.generate(24, (_) => rng.nextInt(256));
-  final randomHex = randomBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-  final timestamp = DateTime.now().toUtc().toIso8601String();
-  final secretSequence = 'Dart-IPFS-Live-Proof-[$timestamp]-$randomHex';
+  // 1. UPnP Port Forwarding
+  await setupUpnpPortMapping(4002);
 
-  print('\n>>> SEQUENCIA ALEATORIA GERADA:');
+  // 2. Payload: texto passado por argumento, ou uma sequencia aleatoria seguramente
+  // unica quando nenhum argumento e fornecido.
+  final String secretSequence;
+  if (args.isNotEmpty) {
+    secretSequence = args.join(' ');
+  } else {
+    final rng = Random.secure();
+    final randomBytes = List<int>.generate(32, (_) => rng.nextInt(256));
+    final randomHex =
+        randomBytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    final timestamp = DateTime.now().toUtc().toIso8601String();
+    secretSequence = 'Dart-IPFS-Proof-[$timestamp]-$randomHex';
+  }
+
+  print('\n>>> PAYLOAD HOSPEDADO:');
   print(secretSequence);
   print('------------------------------------------------------------');
 
   final textBytes = utf8.encode(secretSequence);
 
-  // Configure IPFS node on port 4002 (to avoid conflict with Kubo port 4001)
+  // 3. Configure IPFS node on port 4002
   const config = IpfsConfig(
     offline: false,
     network: NetworkConfig(
       listenAddresses: ['/ip4/0.0.0.0/tcp/4002'],
+      announceAddresses: ['/ip4/187.62.8.47/tcp/4002'],
       bootstrapPeers: [
         // Public IPFS bootstrapper (mars.i.ipfs.io)
         '/ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ',
@@ -50,19 +100,24 @@ Future<void> main(List<String> args) async {
   print('Nó Dart IPFS online!');
   print('PeerId: $peerId');
 
-  // Compute addresses
-  final localAddrs = [
-    '/ip4/127.0.0.1/tcp/4002/p2p/$peerId',
-    '/ip4/192.168.1.4/tcp/4002/p2p/$peerId',
-    '/ip4/187.62.8.47/tcp/4002/p2p/$peerId',
-  ];
+  // Multiaddresses
+  final directWanAddr = '/ip4/187.62.8.47/tcp/4002/p2p/$peerId';
+  final directLanAddr = '/ip4/192.168.1.4/tcp/4002/p2p/$peerId';
+  final relayKuboAddr1 =
+      '/ip4/187.62.8.47/tcp/10754/p2p/12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1/p2p-circuit/p2p/$peerId';
+  final relayKuboAddr2 =
+      '/ip4/187.62.8.47/tcp/63525/p2p/12D3KooWBvCyh8Vezjcwjhe2etkvjxw7g8hx9SW4jP5c94yXkyX1/p2p-circuit/p2p/$peerId';
+  final relayMarsAddr =
+      '/ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ/p2p-circuit/p2p/$peerId';
 
-  print('\nSwarm Multiaddresses do nó Dart:');
-  for (final addr in localAddrs) {
-    print('  * $addr');
-  }
+  print('\nMultiaddresses disponíveis para acesso:');
+  print('  [WAN Direto via UPnP]: $directWanAddr');
+  print('  [LAN Direto]:          $directLanAddr');
+  print('  [Circuit Relay v2 #1]: $relayKuboAddr1');
+  print('  [Circuit Relay v2 #2]: $relayKuboAddr2');
+  print('  [Circuit Relay Mars]:  $relayMarsAddr');
 
-  // 1. Store as UnixFS DAG (CIDv0 - Qm...) for `ipfs cat` and gateways
+  // 4. Store as UnixFS DAG (CIDv0 - Qm...)
   final importResult = await buildDagFromReader(
     Stream.value(textBytes),
     cidVersion: 0,
@@ -73,7 +128,7 @@ Future<void> main(List<String> args) async {
   );
   final unixFsCid = importResult.root;
 
-  // 2. Also store as Raw block for direct block retrieval
+  // 5. Also store as Raw block (CIDv1 - bafk...)
   final rawCid = await node.putRawBlock(Uint8List.fromList(textBytes));
 
   print('\n------------------------------------------------------------');
@@ -84,7 +139,7 @@ Future<void> main(List<String> args) async {
   print('    ${rawCid.encode()}');
   print('------------------------------------------------------------');
 
-  // Connect to peers
+  // 6. Connect to peers & establish bidirectional mesh
   print('\nConectando aos pares de rede e bootstrap...');
   for (final boot in config.network.bootstrapPeers) {
     try {
@@ -95,9 +150,21 @@ Future<void> main(List<String> args) async {
     }
   }
 
-  // Announce CIDs
+  // Connect Kubo back to Dart node on loopback
+  try {
+    final res = await Process.run(
+      'ipfs',
+      ['swarm', 'connect', '/ip4/127.0.0.1/tcp/4002/p2p/$peerId'],
+      environment: {'IPFS_PATH': r'B:\IPFS\.ipfs'},
+    );
+    print('  Kubo local conectado ao nó Dart: ${res.stdout.toString().trim()}');
+  } catch (e) {
+    print('  Aviso ao conectar Kubo no Dart: $e');
+  }
+
+  // 7. Announce CIDs to DHT
   Future<void> announceAll() async {
-    print('\n[${DateTime.now()}] Anunciando CIDs na DHT e Swarm...');
+    print('\n[${DateTime.now().toUtc()}] Anunciando CIDs na DHT e Swarm...');
     try {
       await node.provide(unixFsCid);
       print('  UnixFS CID anunciado com sucesso: ${unixFsCid.encode()}');
@@ -111,25 +178,33 @@ Future<void> main(List<String> args) async {
     } catch (e) {
       print('  Falha ao anunciar Raw CID: $e');
     }
+
   }
 
   await announceAll();
 
-  // Periodic republishing every 10 minutes to maintain DHT freshness
-  final timer = Timer.periodic(const Duration(minutes: 10), (_) => announceAll());
+  // Periodic republishing every 5 minutes
+  final timer = Timer.periodic(
+    const Duration(minutes: 5),
+    (_) => announceAll(),
+  );
 
   print('\n============================================================');
   print('>>> NÓ DART ATIVO E HOSPEDANDO O ARQUIVO EM TEMPO REAL <<<');
   print('============================================================');
-  print('\nPara verificar em outro terminal ou nó externo:');
-  print('1) Se estiver na mesma máquina ou rede local (Kubo / IPFS Desktop):');
-  print('   \$env:IPFS_PATH="B:\\IPFS\\.ipfs"; ipfs cat ${unixFsCid.encode()}');
-  print('   OU: ipfs swarm connect /ip4/127.0.0.1/tcp/4002/p2p/$peerId');
-  print('       ipfs cat ${unixFsCid.encode()}');
-  print('\n2) Para buscar o bloco puro:');
-  print('   ipfs block get ${rawCid.encode()}');
-  print('\n3) Para consultar descoberta na DHT:');
-  print('   ipfs routing findprovs ${unixFsCid.encode()}');
+  print('\nComandos para a máquina externa:');
+  print('\n--- Opcao A: Conexao Direta WAN (via porta UPnP 4002) ---');
+  print('ipfs swarm connect $directWanAddr');
+  print('ipfs cat ${unixFsCid.encode()}');
+  print('ipfs block get ${rawCid.encode()}');
+  print('\n--- Opcao B: Conexao via Circuit Relay v2 (Garantido através do Kubo) ---');
+  print('ipfs swarm connect $relayKuboAddr1');
+  print('ipfs cat ${unixFsCid.encode()}');
+  print('ipfs block get ${rawCid.encode()}');
+  print('\n--- Opcao C: Conexao via Circuit Relay Mars (IPFS Public Relay) ---');
+  print('ipfs swarm connect $relayMarsAddr');
+  print('ipfs cat ${unixFsCid.encode()}');
+  print('ipfs block get ${rawCid.encode()}');
   print('\n(Aguardando conexoes e requisicoes de blocos Bitswap...)');
 
   // Keep daemon alive indefinitely

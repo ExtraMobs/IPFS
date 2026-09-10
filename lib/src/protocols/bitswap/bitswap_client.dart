@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/core/network/context.dart';
-import 'package:ipfs_libp2p/core/network/stream.dart';
-import 'package:ipfs_libp2p/core/peer/peer_id.dart' as runtime;
 import 'package:synchronized/synchronized.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_boxo/bitswap/message.dart';
@@ -37,14 +34,23 @@ final class BitswapClient implements BlockGetter {
   final Duration timeout;
   final List<AddrInfo> _providers = [];
   final Map<Cid, Completer<blocks.Block>> _pending = {};
-  final Map<String, P2PStream<dynamic>> _outbound = {};
+  final Map<String, NetworkStream> _outbound = {};
   final Map<String, Lock> _senderLocks = {};
 
   /// Registers the inbound Bitswap stream handler.
-  void start() => router.host.setStreamHandler(
-    bitswapProtocol,
-    (stream, _) => _handleIncoming(stream),
-  );
+  void start() {
+    for (final proto in [
+      bitswapProtocol,
+      '/ipfs/bitswap/1.1.0',
+      '/ipfs/bitswap/1.0.0',
+      '/ipfs/bitswap',
+    ]) {
+      router.host.setStreamHandler(
+        proto,
+        (stream) => _handleIncoming(stream),
+      );
+    }
+  }
 
   /// Connects and registers a provider for subsequent block requests.
   Future<void> connect(AddrInfo provider) async {
@@ -87,9 +93,8 @@ final class BitswapClient implements BlockGetter {
           if (stream == null || stream.isClosed) {
             await router.connect(provider);
             stream = await router.host.newStream(
-              router.runtimePeerId(provider.id),
+              provider.id,
               const [bitswapProtocol],
-              Context(timeout: timeout),
             );
             _outbound[key] = stream;
           }
@@ -123,7 +128,7 @@ final class BitswapClient implements BlockGetter {
     _senderLocks.clear();
   }
 
-  Future<void> _handleIncoming(P2PStream<dynamic> stream) async {
+  Future<void> _handleIncoming(NetworkStream stream) async {
     try {
       while (!stream.isClosed) {
         final message = await readBitswapMessage(stream);
@@ -168,8 +173,11 @@ final class BitswapClient implements BlockGetter {
               await stream.write(responseBytes);
             } catch (_) {}
             try {
-              final remotePeer = stream.conn.remotePeer;
-              await _sendResponseToPeer(remotePeer, responseBytes);
+              final conn = stream.conn();
+              if (conn case final ConnSecurity sec) {
+                final remotePeer = sec.remotePeer();
+                await _sendResponseToPeer(remotePeer, responseBytes);
+              }
             } catch (_) {}
           }
         }
@@ -184,15 +192,14 @@ final class BitswapClient implements BlockGetter {
     }
   }
 
-  Future<void> _sendResponseToPeer(runtime.PeerId peer, Uint8List bytes) async {
-    final key = peer.toBase58();
+  Future<void> _sendResponseToPeer(PeerId peer, Uint8List bytes) async {
+    final key = peer.toString();
     await (_senderLocks[key] ??= Lock()).synchronized(() async {
       var stream = _outbound[key];
       if (stream == null || stream.isClosed) {
         stream = await router.host.newStream(
           peer,
           const [bitswapProtocol],
-          Context(timeout: timeout),
         );
         _outbound[key] = stream;
       }

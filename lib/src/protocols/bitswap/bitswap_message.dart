@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/core/network/stream.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_boxo/bitswap/message.dart';
 import 'package:transpiled_cid/transpiled_cid.dart';
+import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 
 /// Maximum libp2p message size, matching go-libp2p `MessageSizeMax`.
 const int bitswapMessageSizeMax = 1 << 22;
@@ -25,7 +25,7 @@ Uint8List encodeBitswapMessage(BitSwapMessage message) {
 }
 
 /// Reads one varint-framed Bitswap protobuf message and decodes to [BitSwapMessage].
-Future<BitSwapMessage> readBitswapMessage(P2PStream<dynamic> stream) async {
+Future<BitSwapMessage> readBitswapMessage(NetworkStream stream) async {
   var length = 0;
   var shift = 0;
   for (var index = 0; index < 10; index++) {
@@ -54,7 +54,7 @@ blocks.Block? blockFromMessage(BitSwapMessage message, Cid requested) {
   return null;
 }
 
-Future<Uint8List> _readExactly(P2PStream<dynamic> stream, int length) async {
+Future<Uint8List> _readExactly(NetworkStream stream, int length) async {
   final output = BytesBuilder(copy: false);
   while (output.length < length) {
     final chunk = await stream.read(length - output.length);

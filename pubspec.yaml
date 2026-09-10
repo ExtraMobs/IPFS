@@ -32,6 +32,7 @@ dependencies:
   hive: ^2.2.3
   idb_shim: ^2.9.8 # IndexedDB for web storage
 
+
   # Logging
   logging: ^1.3.0
 
@@ -49,18 +50,10 @@ dependencies:
   markdown: ^7.3.0
   synchronized: ^3.4.0
   multicast_dns: ^0.3.3
-  ipfs_libp2p:
-    git:
-      url: https://github.com/ExtraMobs/dart_libp2p.git
-      ref: fdd932b1f4db06240bf09527f25f8a404237aa16
   cipherlib: ^0.7.1
-  quic_lib: ^1.13.0
 
   jose: ^0.3.5
   mime: ^2.1.0
-  http_parser: ^4.1.2
-
-  # Per-Go-module ports (in-repo path packages, one per kubo dependency's
   # go.mod boundary -- see doc/transpilation/PROGRESS.md).
   transpiled_base58:
     path: packages/transpiled_base58

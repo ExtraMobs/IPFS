@@ -199,6 +199,26 @@ class _TestNetworkStream implements NetworkStream {
   StreamScope scope() => const NullScope();
   @override
   Future<void> resetWithError(StreamErrorCode errorCode) async {}
+  @override
+  bool get isClosed => false;
+  @override
+  Future<Uint8List> read([int? maxLength]) async => Uint8List(0);
+  @override
+  Future<void> write(Uint8List data) async {}
+  @override
+  Future<void> close() async {}
+  @override
+  Future<void> reset() async {}
+  @override
+  Future<void> closeWrite() async {}
+  @override
+  Future<void> closeRead() async {}
+  @override
+  Future<void> setDeadline(DateTime? time) async {}
+  @override
+  Future<void> setReadDeadline(DateTime? time) async {}
+  @override
+  Future<void> setWriteDeadline(DateTime? time) async {}
 }
 
 class _TestMultiaddrDnsResolver implements MultiaddrDnsResolver {
@@ -1499,6 +1519,47 @@ group('NoiseHandshakeAuthException [Atomic Audit]', () {
 
     test('resetWithError() - resets stream with error code', () async {
       await expectLater(stream.resetWithError(0), completes);
+    });
+
+    test('isClosed - reports stream closed state', () {
+      expect(stream.isClosed, isFalse);
+    });
+
+    test('read() - reads bytes from stream', () async {
+      final data = await stream.read();
+      expect(data, isNotNull);
+    });
+
+    test('write() - writes bytes to stream', () async {
+      await expectLater(stream.write(Uint8List(0)), completes);
+    });
+
+    test('close() - closes stream', () async {
+      await expectLater(stream.close(), completes);
+    });
+
+    test('reset() - resets stream', () async {
+      await expectLater(stream.reset(), completes);
+    });
+
+    test('closeWrite() - closes write half', () async {
+      await expectLater(stream.closeWrite(), completes);
+    });
+
+    test('closeRead() - closes read half', () async {
+      await expectLater(stream.closeRead(), completes);
+    });
+
+    test('setDeadline() - sets overall deadline', () async {
+      await expectLater(stream.setDeadline(null), completes);
+    });
+
+    test('setReadDeadline() - sets read deadline', () async {
+      await expectLater(stream.setReadDeadline(null), completes);
+    });
+
+    test('setWriteDeadline() - sets write deadline', () async {
+      await expectLater(stream.setWriteDeadline(null), completes);
     });
   });
 

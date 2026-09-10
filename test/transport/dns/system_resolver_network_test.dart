@@ -16,6 +16,7 @@
 library;
 
 import 'package:transpiled_ipfs/src/transport/dns/system_resolver.dart';
+import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 import 'package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart';
 import 'package:test/test.dart';
 

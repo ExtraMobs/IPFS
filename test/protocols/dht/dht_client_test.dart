@@ -1,10 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/core/network/context.dart';
-import 'package:ipfs_libp2p/core/network/stream.dart';
-import 'package:ipfs_libp2p/dart_libp2p.dart' as runtime;
-import 'package:ipfs_libp2p/p2p/host/peerstore/pstoremem/addr_book.dart';
 import 'package:test/test.dart';
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_ipfs/src/network/libp2p_host.dart';
@@ -236,11 +232,11 @@ void main() {
         addrs: [Multiaddr.parse('/ip4/10.0.0.2/tcp/4001')],
       );
 
-      final queriedPeers = <runtime.PeerId>[];
+      final queriedPeers = <PeerId>[];
       fakeHost.streamHandler = (peerId) {
         queriedPeers.add(peerId);
         // First query (to bootstrap) returns peerA and peerB as closer peers
-        if (peerId.toBase58() == bootstrapPeer.id.toBase58()) {
+        if (peerId.toString() == bootstrapPeer.id.toString()) {
           return FakeP2PStream(encodeDhtResponse(closerPeers: [peerA, peerB]));
         }
         // Query to peerA or peerB returns empty response
@@ -258,39 +254,77 @@ void main() {
       await client.findProvidersAsync(targetCid, 0).toList();
 
       // Follow-up must have queried the closer peers
-      final queriedBase58 = queriedPeers.map((p) => p.toBase58()).toSet();
-      expect(queriedBase58, contains(bootstrapPeer.id.toBase58()));
-      expect(queriedBase58.contains(peerA.id.toBase58()) || queriedBase58.contains(peerB.id.toBase58()), isTrue);
+      final queriedBase58 = queriedPeers.map((p) => p.toString()).toSet();
+      expect(queriedBase58, contains(bootstrapPeer.id.toString()));
+      expect(queriedBase58.contains(peerA.id.toString()) || queriedBase58.contains(peerB.id.toString()), isTrue);
     });
   });
 }
 
-class FakeHost implements runtime.Host {
-  FakeHost({required this.selfId});
+class _FakeNetwork implements Network {
+  @override
+  List<Conn> conns() => const [];
+  @override
+  List<Multiaddr> listenAddresses() => const [];
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+class _FakePeerStore extends MemoryPeerstore {
+  _FakePeerStore(this.host);
+  final FakeHost host;
+
+  @override
+  void addAddrs(PeerId p, List<Multiaddr> addrs, Duration ttl) {
+    if (p == host.selfId) {
+      host.addedAddrsForSelf = true;
+    }
+    host.addedAddrsCount++;
+    host.lastAddedTtl = ttl;
+    super.addAddrs(p, addrs, ttl);
+  }
+}
+
+class FakeHost implements Host {
+  FakeHost({required this.selfId}) {
+    peerstore = _FakePeerStore(this);
+  }
 
   final PeerId selfId;
-  final MemoryAddrBook addrBook = MemoryAddrBook();
+  late final _FakePeerStore peerstore;
   Duration? lastAddedTtl;
   bool addedAddrsForSelf = false;
   int addedAddrsCount = 0;
 
-  FakeP2PStream Function(runtime.PeerId peerId)? streamHandler;
+  FakeP2PStream Function(PeerId peerId)? streamHandler;
 
   @override
-  runtime.PeerId get id => runtime.PeerId.decode(selfId.toBase58());
+  PeerId get id => selfId;
 
   @override
-  runtime.Peerstore get peerStore => _FakePeerStore(this);
+  List<Multiaddr> get addrs => const [];
 
   @override
-  Future<void> connect(runtime.AddrInfo pi, {Context? context}) async {}
+  Network get network => _FakeNetwork();
 
   @override
-  Future<P2PStream<dynamic>> newStream(
-    runtime.PeerId p,
-    List<String> protocols, [
-    Context? context,
-  ]) async {
+  ProtocolSwitch get mux => throw UnimplementedError();
+
+  @override
+  ConnManager get connManager => const NullConnMgr();
+
+  @override
+  Bus get eventBus => BasicBus();
+
+  @override
+  Future<void> connect(AddrInfo pi, {NetworkContext context = NetworkContext.empty}) async {}
+
+  @override
+  Future<NetworkStream> newStream(
+    PeerId p,
+    List<ProtocolId> protocols, {
+    NetworkContext context = NetworkContext.empty,
+  }) async {
     final handler = streamHandler;
     if (handler != null) {
       return handler(p);
@@ -299,47 +333,22 @@ class FakeHost implements runtime.Host {
   }
 
   @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakePeerStore implements runtime.Peerstore {
-  _FakePeerStore(this.host);
-  final FakeHost host;
+  void setStreamHandler(ProtocolId pid, StreamHandler handler) {}
 
   @override
-  runtime.AddrBook get addrBook => _FakeAddrBook(host);
+  void setStreamHandlerMatch(ProtocolId pid, bool Function(ProtocolId) match, StreamHandler handler) {}
 
   @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeAddrBook implements runtime.AddrBook {
-  _FakeAddrBook(this.host);
-  final FakeHost host;
+  void removeStreamHandler(ProtocolId pid) {}
 
   @override
-  Future<void> addAddrs(
-    runtime.PeerId p,
-    List<runtime.MultiAddr> addrs,
-    Duration ttl,
-  ) async {
-    if (p.toBase58() == host.selfId.toBase58()) {
-      host.addedAddrsForSelf = true;
-    }
-    host.addedAddrsCount++;
-    host.lastAddedTtl = ttl;
-    await host.addrBook.addAddrs(p, addrs, ttl);
-  }
-
-  @override
-  Future<List<runtime.MultiAddr>> addrs(runtime.PeerId p) =>
-      host.addrBook.addrs(p);
+  Future<void> close() async {}
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class FakeP2PStream implements P2PStream<dynamic> {
+class FakeP2PStream implements NetworkStream {
   FakeP2PStream(Uint8List? responseBytes, {this.delay}) {
     if (responseBytes != null) {
       final framed = [
@@ -353,8 +362,32 @@ class FakeP2PStream implements P2PStream<dynamic> {
   final List<int> _buffer = [];
   int _offset = 0;
   final Duration? delay;
+  @override
   bool isClosed = false;
   bool isReset = false;
+
+  @override
+  String get id => 'fake-stream';
+  @override
+  ProtocolId protocol() => '';
+  @override
+  Future<void> setProtocol(ProtocolId id) async {}
+  @override
+  Stats stat() => Stats(direction: Direction.outbound, opened: DateTime.now());
+  @override
+  Conn conn() => throw UnimplementedError();
+  @override
+  StreamScope scope() => const NullScope();
+  @override
+  Future<void> resetWithError(StreamErrorCode errorCode) => reset();
+  @override
+  Future<void> closeWrite() => close();
+  @override
+  Future<void> closeRead() => close();
+  @override
+  Future<void> setReadDeadline(DateTime? time) => setDeadline(time);
+  @override
+  Future<void> setWriteDeadline(DateTime? time) => setDeadline(time);
 
   @override
   Future<void> setDeadline(DateTime? d) async {}

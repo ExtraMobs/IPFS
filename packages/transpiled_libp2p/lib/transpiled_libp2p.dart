@@ -164,3 +164,21 @@ export 'src/p2p/security/noise/noise_state.dart'
         SymmetricState,
         generateNoiseKeyPair,
         noiseProtocolName;
+export 'src/core/transport/transport.dart';
+export 'src/p2p/protocol/circuitv2/proto/protocol.dart';
+export 'src/p2p/protocol/circuitv2/pb/circuit_message.dart';
+export 'src/p2p/protocol/circuitv2/client/reservation.dart';
+export 'src/p2p/protocol/circuitv2/client/client.dart';
+export 'src/p2p/host/autorelay/autorelay.dart';
+export 'src/p2p/host/autonat/autonat.dart';
+export 'src/p2p/protocol/identify/id.dart';
+export 'src/p2p/protocol/identify/pb/identify_message.dart';
+export 'src/p2p/protocol/multistream_select.dart';
+export 'src/p2p/net/swarm/swarm_stream.dart';
+export 'src/p2p/transport/basic_upgrader.dart';
+export 'src/p2p/transport/tcp/tcp_transport.dart';
+export 'src/p2p/net/swarm/swarm.dart';
+export 'src/p2p/host/basic/nat_manager.dart';
+export 'src/p2p/protocol/holepunch/pb/holepunch_message.dart';
+export 'src/p2p/protocol/holepunch/holepunch.dart';
+export 'src/p2p/host/basic/basic_host.dart';

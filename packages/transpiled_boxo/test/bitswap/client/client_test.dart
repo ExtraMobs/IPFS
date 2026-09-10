@@ -5,7 +5,9 @@ import 'package:test/test.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_datastore/transpiled_datastore.dart';
-import 'package:transpiled_libp2p/transpiled_libp2p.dart' hide Stats;
+// Client tambem existe no circuitv2 do transpiled_libp2p; aqui o alvo e o
+// Client do bitswap, importado logo abaixo.
+import 'package:transpiled_libp2p/transpiled_libp2p.dart' hide Stats, Client;
 import 'package:transpiled_boxo/bitswap/client.dart';
 import 'package:transpiled_boxo/bitswap/message.dart';
 import 'package:transpiled_boxo/bitswap/network.dart';

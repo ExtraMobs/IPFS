@@ -18,11 +18,4 @@ export 'src/core/builders/build_cfg.dart' show BuildCfg;
 export 'src/node/ipfs_node.dart' show IpfsNode;
 export 'src/protocols/bitswap/interface_bitswap_handler.dart' show BlockGetter;
 export 'src/routing/dht_provider_finder.dart' show DhtClient;
-export 'src/transport/go_yamux_adapter.dart'
-    show
-        GoYamuxMultiplexer,
-        goYamuxConfig,
-        goYamuxFactory,
-        goYamuxMaxIncomingStreams,
-        goYamuxProtocolId;
 export 'src/unixfs/unixfs.dart' show UnixFsStat;

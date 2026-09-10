@@ -1,23 +1,11 @@
 // test/atomic/nivel_2/lib_atomic_tests.dart
-// Testes atomicos 1 para 1 para o pacote lib (160 simbolos).
+// Testes atomicos 1 para 1 para o pacote lib.
 
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:async/async.dart';
-import 'package:ipfs_libp2p/core/crypto/keys.dart' as libp2p_keys;
-import 'package:ipfs_libp2p/core/multiaddr.dart' as libp2p_addr;
-import 'package:ipfs_libp2p/core/network/common.dart' as libp2p_common;
-import 'package:ipfs_libp2p/core/network/conn.dart' as libp2p_conn;
-import 'package:ipfs_libp2p/core/network/context.dart' as libp2p_context;
-import 'package:ipfs_libp2p/core/network/rcmgr.dart' as libp2p_rcmgr;
-import 'package:ipfs_libp2p/core/network/stream.dart' as libp2p_stream;
-import 'package:ipfs_libp2p/core/network/transport_conn.dart';
-import 'package:ipfs_libp2p/core/peer/peer_id.dart' as libp2p_peer;
-import 'package:ipfs_libp2p/dart_libp2p.dart' as runtime;
-import 'package:ipfs_libp2p/p2p/host/peerstore/pstoremem/addr_book.dart';
-import 'package:quic_lib/quic_lib.dart' as quic_lib;
 import 'package:test/test.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_boxo/bitswap/message.dart';
@@ -38,12 +26,6 @@ import 'package:transpiled_ipfs/src/transport/dns/dns_bootstrap_resolver.dart';
 import 'package:transpiled_ipfs/src/transport/dns/dns_message.dart';
 import 'package:transpiled_ipfs/src/transport/dns/system_resolver.dart';
 import 'package:transpiled_ipfs/src/transport/dns/udp_dns_client.dart';
-import 'package:transpiled_ipfs/src/transport/go_yamux_adapter.dart';
-import 'package:transpiled_ipfs/src/transport/noise/dart_ipfs_noise_security.dart';
-import 'package:transpiled_ipfs/src/transport/quic/libp2p_tls_extension.dart';
-import 'package:transpiled_ipfs/src/transport/quic/quic_listener.dart';
-import 'package:transpiled_ipfs/src/transport/quic/quic_p2p_stream.dart';
-import 'package:transpiled_ipfs/src/transport/quic/quic_transport.dart';
 import 'package:transpiled_ipfs/src/unixfs/unixfs.dart';
 import 'package:transpiled_ipfs/src/utils/immutable_bytes.dart';
 import 'package:transpiled_ipfs/src/utils/typed_map.dart';
@@ -55,126 +37,6 @@ import 'package:transpiled_varint/transpiled_varint.dart';
 // ---------------------------------------------------------------------------
 // Helpers e Fakes de Teste
 // ---------------------------------------------------------------------------
-
-class _MemoryConn implements TransportConn {
-  _MemoryConn();
-
-  _MemoryConn? _peer;
-  final List<Uint8List> _incoming = [];
-  final List<Completer<Uint8List>> _pendingReads = [];
-  bool _closed = false;
-
-  static (_MemoryConn, _MemoryConn) pair() {
-    final a = _MemoryConn();
-    final b = _MemoryConn();
-    a._peer = b;
-    b._peer = a;
-    return (a, b);
-  }
-
-  @override
-  Future<Uint8List> read([int? length]) {
-    if (_closed) return Future.value(Uint8List(0));
-    if (_incoming.isNotEmpty) {
-      final chunk = _incoming.removeAt(0);
-      if (length == null || chunk.length <= length) return Future.value(chunk);
-      _incoming.insert(0, Uint8List.sublistView(chunk, length));
-      return Future.value(Uint8List.sublistView(chunk, 0, length));
-    }
-    final completer = Completer<Uint8List>();
-    _pendingReads.add(completer);
-    return completer.future;
-  }
-
-  @override
-  Future<void> write(Uint8List data) async {
-    if (_closed) return;
-    if (_peer != null && !_peer!._closed) {
-      final chunk = Uint8List.fromList(data);
-      if (_peer!._pendingReads.isNotEmpty) {
-        _peer!._pendingReads.removeAt(0).complete(chunk);
-      } else {
-        _peer!._incoming.add(chunk);
-      }
-    }
-  }
-
-  @override
-  Future<void> close() async {
-    if (_closed) return;
-    _closed = true;
-    for (final r in _pendingReads) {
-      if (!r.isCompleted) r.complete(Uint8List(0));
-    }
-    _pendingReads.clear();
-    final p = _peer;
-    if (p != null && !p._closed) {
-      p.close();
-    }
-  }
-
-  @override
-  String get id => 'memory';
-  @override
-  Future<libp2p_stream.P2PStream<dynamic>> newStream(
-    libp2p_context.Context context,
-  ) => throw UnimplementedError();
-  @override
-  Future<List<libp2p_stream.P2PStream<dynamic>>> get streams async => const [];
-  @override
-  bool get isClosed => _closed;
-  @override
-  libp2p_peer.PeerId get localPeer => throw UnimplementedError();
-  @override
-  libp2p_peer.PeerId get remotePeer => throw UnimplementedError();
-  @override
-  Future<libp2p_keys.PublicKey?> get remotePublicKey async => null;
-  @override
-  libp2p_conn.ConnState get state => throw UnimplementedError();
-  @override
-  libp2p_addr.MultiAddr get localMultiaddr => throw UnimplementedError();
-  @override
-  libp2p_addr.MultiAddr get remoteMultiaddr => throw UnimplementedError();
-  @override
-  Socket get socket => throw UnimplementedError();
-  @override
-  libp2p_conn.ConnStats get stat => throw UnimplementedError();
-  @override
-  libp2p_rcmgr.ConnScope get scope => libp2p_rcmgr.NullScope();
-  @override
-  void setReadTimeout(Duration timeout) {}
-  @override
-  void setWriteTimeout(Duration timeout) {}
-  @override
-  void notifyActivity() {}
-}
-
-(_MemoryConn, _MemoryConn) _memoryPair() => _MemoryConn.pair();
-
-class _TestQuicConnectionAdapter implements QuicConnectionAdapter {
-  _TestQuicConnectionAdapter({
-    Map<int, quic_lib.QuicStream>? streams,
-    this.isEstablished = true,
-    this.nextStreamId = 0,
-  }) : _streams = streams ?? {};
-
-  final Map<int, quic_lib.QuicStream> _streams;
-  @override
-  bool isEstablished;
-  int nextStreamId;
-  bool isClosed = false;
-
-  @override
-  quic_lib.QuicStream? getQuicStream(int id) => _streams[id];
-
-  @override
-  int openBidirectionalStream() => nextStreamId;
-
-  @override
-  Future<void> close() async {
-    isClosed = true;
-  }
-}
 
 class _TestBlockGetter implements BlockGetter {
   @override
@@ -229,37 +91,67 @@ class _TestDhtRoutingTable implements DhtRoutingTable {
   void clear() => _peers.clear();
 }
 
-class _FakeHost implements runtime.Host {
+class _FakeNetwork implements libp2p.Network {
+  @override
+  List<libp2p.Conn> conns() => const [];
+  @override
+  List<Multiaddr> listenAddresses() => const [];
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+class _FakeHost implements libp2p.Host {
   _FakeHost({libp2p.PeerId? selfId})
       : selfId = selfId ??
             libp2p.PeerId.decode(
               '12D3KooWCryG7Mon9orvQxcS1rYZjotPgpwoJNHHKcLLfE4Hf5mV',
-            );
+            ) {
+    peerstore = libp2p.MemoryPeerstore();
+  }
 
   final libp2p.PeerId selfId;
-  final MemoryAddrBook addrBook = MemoryAddrBook();
+  @override
+  late final libp2p.Peerstore peerstore;
   final Map<String, dynamic> handlers = {};
 
   @override
-  runtime.PeerId get id => runtime.PeerId.decode(selfId.toBase58());
+  libp2p.PeerId get id => selfId;
 
   @override
-  runtime.Peerstore get peerStore => _FakePeerStore(this);
+  List<Multiaddr> get addrs => const [];
 
   @override
-  Future<void> connect(runtime.AddrInfo pi, {libp2p_context.Context? context}) async {}
+  libp2p.Network get network => _FakeNetwork();
 
   @override
-  void setStreamHandler(String protocol, dynamic handler) {
+  libp2p.ProtocolSwitch get mux => throw UnimplementedError();
+
+  @override
+  libp2p.ConnManager get connManager => const libp2p.NullConnMgr();
+
+  @override
+  libp2p.Bus get eventBus => libp2p.BasicBus();
+
+  @override
+  Future<void> connect(libp2p.AddrInfo pi, {libp2p.NetworkContext context = libp2p.NetworkContext.empty}) async {}
+
+  @override
+  void setStreamHandler(libp2p.ProtocolId protocol, libp2p.StreamHandler handler) {
     handlers[protocol] = handler;
   }
 
   @override
-  Future<libp2p_stream.P2PStream<dynamic>> newStream(
-    runtime.PeerId p,
-    List<String> protocols, [
-    libp2p_context.Context? context,
-  ]) async => _FakeP2PStream();
+  void setStreamHandlerMatch(libp2p.ProtocolId pid, bool Function(libp2p.ProtocolId) match, libp2p.StreamHandler handler) {}
+
+  @override
+  void removeStreamHandler(libp2p.ProtocolId pid) {}
+
+  @override
+  Future<libp2p.NetworkStream> newStream(
+    libp2p.PeerId p,
+    List<libp2p.ProtocolId> protocols, {
+    libp2p.NetworkContext context = libp2p.NetworkContext.empty,
+  }) async => _FakeP2PStream();
 
   @override
   Future<void> close() async {}
@@ -268,47 +160,42 @@ class _FakeHost implements runtime.Host {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakePeerStore implements runtime.Peerstore {
-  _FakePeerStore(this.host);
-  final _FakeHost host;
-
-  @override
-  runtime.AddrBook get addrBook => _FakeAddrBook(host);
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeAddrBook implements runtime.AddrBook {
-  _FakeAddrBook(this.host);
-  final _FakeHost host;
-
-  @override
-  Future<void> addAddrs(
-    runtime.PeerId p,
-    List<runtime.MultiAddr> addrs,
-    Duration ttl,
-  ) async {
-    await host.addrBook.addAddrs(p, addrs, ttl);
-  }
-
-  @override
-  Future<List<runtime.MultiAddr>> addrs(runtime.PeerId p) =>
-      host.addrBook.addrs(p);
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-class _FakeP2PStream implements libp2p_stream.P2PStream<dynamic> {
+class _FakeP2PStream implements libp2p.NetworkStream {
   _FakeP2PStream([List<int>? bytes]) : _data = bytes ?? [];
   final List<int> _data;
   int _readOffset = 0;
-  bool _closed = false;
+  @override
+  bool isClosed = false;
+  bool isReset = false;
+
+  @override
+  String get id => 'fake-stream';
+  @override
+  libp2p.ProtocolId protocol() => '';
+  @override
+  Future<void> setProtocol(libp2p.ProtocolId id) async {}
+  @override
+  libp2p.Stats stat() => libp2p.Stats(direction: libp2p.Direction.outbound, opened: DateTime.now());
+  @override
+  libp2p.Conn conn() => throw UnimplementedError();
+  @override
+  libp2p.StreamScope scope() => const libp2p.NullScope();
+  @override
+  Future<void> resetWithError(libp2p.StreamErrorCode errorCode) => reset();
+  @override
+  Future<void> closeWrite() => close();
+  @override
+  Future<void> closeRead() => close();
+  @override
+  Future<void> setReadDeadline(DateTime? time) => setDeadline(time);
+  @override
+  Future<void> setWriteDeadline(DateTime? time) => setDeadline(time);
+  @override
+  Future<void> setDeadline(DateTime? d) async {}
 
   @override
   Future<Uint8List> read([int? maxLength]) async {
-    if (_closed) throw StateError('stream closed');
+    if (isClosed) throw StateError('stream closed');
     if (_readOffset >= _data.length) return Uint8List(0);
     final remaining = _data.length - _readOffset;
     final count = (maxLength == null || remaining < maxLength) ? remaining : maxLength;
@@ -324,12 +211,12 @@ class _FakeP2PStream implements libp2p_stream.P2PStream<dynamic> {
 
   @override
   Future<void> close() async {
-    _closed = true;
+    isClosed = true;
   }
 
   @override
   Future<void> reset() async {
-    _closed = true;
+    isReset = true;
   }
 
   @override
@@ -351,13 +238,6 @@ void main() {
   );
 
   // Top-level functions
-  test('goYamuxFactory() - constroi instancia de multiplexador go yamux', () {
-    final (c1, c2) = _memoryPair();
-    final muxer = goYamuxFactory(c1, true);
-    expect(muxer, isA<GoYamuxMultiplexer>());
-    c1.close();
-    c2.close();
-  });
 
   test('unixFsLinks() - decodifica links filhos de blocos raw ou dag pb', () {
     final links = unixFsLinks(sampleCid, sampleRawData);
@@ -441,6 +321,14 @@ void main() {
   test('encodeGetProviders() - codifica requisicao get providers para a dht', () {
     final bytes = encodeGetProviders(sampleCid);
     expect(bytes, isNotEmpty);
+  });
+
+  test('encodeFindNode() - codifica requisicao find node para a dht', () {
+    final key = Uint8List.fromList(sampleCid.multihash.toBytes());
+    final bytes = encodeFindNode(key);
+    expect(bytes, isNotEmpty);
+    // Campo 1 (type) == 4 (FIND_NODE), apos o varint de tamanho do frame.
+    expect(bytes.sublist(1, 3), equals(Uint8List.fromList([0x08, 0x04])));
   });
 
   test('encodeAddProvider() - codifica requisicao add provider para a dht', () {
@@ -737,6 +625,16 @@ void main() {
       await client.close();
     });
 
+    test('getClosestPeers() - caminha a dht e valida encerramento', () async {
+      final host = _FakeHost();
+      final router = Libp2pRouter(host);
+      final client = DhtClient(router: router, bootstrapPeers: []);
+      final key = Uint8List.fromList(sampleCid.multihash.toBytes());
+      expect(await client.getClosestPeers(key), isEmpty);
+      await client.close();
+      expect(() => client.getClosestPeers(key), throwsStateError);
+    });
+
     test('provide() - lanca erro se cliente dht estiver fechado ou conclui sem candidatos', () async {
       final host = _FakeHost();
       final router = Libp2pRouter(host);
@@ -745,133 +643,6 @@ void main() {
       await client.provide(sampleCid, provider);
       await client.close();
       expect(() => client.provide(sampleCid, provider), throwsStateError);
-    });
-  });
-
-  // GoYamuxMultiplexer
-  group('GoYamuxMultiplexer [Atomic Audit]', () {
-    test('protocolId - retorna identificador do protocolo yamux', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.protocolId, equals('/yamux/1.0.0'));
-      c1.close();
-      c2.close();
-    });
-
-    test('acceptStream() - aceita novo stream de entrada', () async {
-      final (c1, c2) = _memoryPair();
-      final client = GoYamuxMultiplexer(c1, true);
-      final server = GoYamuxMultiplexer(c2, false);
-      final accepted = server.acceptStream();
-      final clientConn = await client.newConnOnTransport(
-        c1, false, libp2p_rcmgr.NullScope(),
-      );
-      final outgoing = await clientConn.openStream(libp2p_context.Context());
-      final incoming = await accepted;
-      expect(incoming.id(), '1');
-      await incoming.setProtocol('/test/1.0.0');
-      await outgoing.write(Uint8List.fromList([1, 2, 3]));
-      expect(await incoming.read(), [1, 2, 3]);
-      await outgoing.close();
-      await incoming.close();
-      await client.close();
-      await server.close();
-    });
-
-    test('streams - lista streams ativos', () async {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(await muxer.streams, isEmpty);
-      await muxer.close();
-      c2.close();
-    });
-
-    test('incomingStreams - stream de fluxos recebidos', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.incomingStreams, isA<Stream<libp2p_stream.P2PStream>>());
-      muxer.close();
-      c2.close();
-    });
-
-    test('close() - encerra sessao do multiplexador', () async {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      await muxer.close();
-      expect(muxer.isClosed, isTrue);
-      c2.close();
-    });
-
-    test('close() - compartilha encerramento concorrente com o transporte', () async {
-      final (c1, c2) = _memoryPair();
-      final client = GoYamuxMultiplexer(c1, true);
-      final server = GoYamuxMultiplexer(c2, false);
-      await Future.wait([client.close(), client.close(), server.close()]);
-      expect(client.isClosed, isTrue);
-      expect(server.isClosed, isTrue);
-    });
-
-    test('isClosed - indica se a conexao foi encerrada', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.isClosed, isFalse);
-      muxer.close();
-      c2.close();
-    });
-
-    test('maxStreams - limite maximo de streams', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.maxStreams, equals(0xffffffff));
-      muxer.close();
-      c2.close();
-    });
-
-    test('numStreams - quantidade de streams ativos', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.numStreams, equals(0));
-      muxer.close();
-      c2.close();
-    });
-
-    test('canCreateStream - indica se novos streams podem ser abertos', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      expect(muxer.canCreateStream, isTrue);
-      muxer.close();
-      c2.close();
-    });
-
-    test('setStreamHandler() - registra handler para novos fluxos', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      muxer.setStreamHandler((stream) async {});
-      expect(muxer.canCreateStream, isTrue);
-      muxer.close();
-      c2.close();
-    });
-
-    test('removeStreamHandler() - remove handler de novos fluxos', () {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      muxer.removeStreamHandler();
-      expect(muxer.canCreateStream, isTrue);
-      muxer.close();
-      c2.close();
-    });
-
-    test('newConnOnTransport() - associa conexao protegida', () async {
-      final (c1, c2) = _memoryPair();
-      final muxer = GoYamuxMultiplexer(c1, true);
-      final muxConn = await muxer.newConnOnTransport(
-        c1,
-        false,
-        libp2p_rcmgr.NullScope(),
-      );
-      expect(muxConn, isNotNull);
-      await muxer.close();
-      c2.close();
     });
   });
 
@@ -983,842 +754,7 @@ void main() {
       );
       expect(() => client.lookup('example.invalid', 16), throwsA(isA<TimeoutException>()));
     });
-  });
 
-  // DartIpfsNoiseException
-  group('DartIpfsNoiseException [Atomic Audit]', () {
-    test('toString() - formata informacoes da excecao noise', () {
-      final ex = DartIpfsNoiseException('falha noise', 'timeout');
-      expect(ex.toString(), contains('DartIpfsNoiseException: falha noise (timeout)'));
-    });
-  });
-
-  // DartIpfsNoiseSecurity
-  group('DartIpfsNoiseSecurity [Atomic Audit]', () {
-    test('protocolId - retorna identificador do protocolo noise', () async {
-      final key = await libp2p.generateEd25519KeyPair();
-      final sec = DartIpfsNoiseSecurity(key);
-      expect(sec.protocolId, equals('/noise'));
-    });
-
-    test('secureOutbound() - lanca excecao com transporte invalido', () async {
-      final key = await libp2p.generateEd25519KeyPair();
-      final sec = DartIpfsNoiseSecurity(key);
-      final (c1, c2) = _memoryPair();
-      await c1.close();
-      await c2.close();
-      expect(() => sec.secureOutbound(c1), throwsA(isA<DartIpfsNoiseException>()));
-    });
-
-    test('secureInbound() - lanca excecao com transporte invalido', () async {
-      final key = await libp2p.generateEd25519KeyPair();
-      final sec = DartIpfsNoiseSecurity(key);
-      final (c1, c2) = _memoryPair();
-      await c1.close();
-      await c2.close();
-      expect(() => sec.secureInbound(c2), throwsA(isA<DartIpfsNoiseException>()));
-    });
-  });
-
-  // Libp2pTlsVerificationResult
-  group('Libp2pTlsVerificationResult [Atomic Audit]', () {
-    test('toString() - formata resultado de verificacao tls', () {
-      final res = Libp2pTlsVerificationResult.failed(
-        Libp2pTlsFailureReason.parseError,
-        'certificado invalido',
-      );
-      expect(res.toString(), contains('Libp2pTlsVerificationResult(valid: false'));
-    });
-  });
-
-  // Libp2pTlsHandshakeVerifier
-  group('Libp2pTlsHandshakeVerifier [Atomic Audit]', () {
-    test('verify() - verifica certificado x509 e extensao libp2p', () async {
-      const verifier = Libp2pTlsHandshakeVerifier();
-      final res = await verifier.verify([1, 2, 3]);
-      expect(res.valid, isFalse);
-    });
-  });
-
-  // PeerIdMismatchException
-  group('PeerIdMismatchException [Atomic Audit]', () {
-    test('toString() - formata excecao de divergencia de peer id', () {
-      final expected = libp2p_peer.PeerId.fromString(samplePeerId.toBase58());
-      final ex = PeerIdMismatchException(expected, expected, 'mismatch detalhe');
-      expect(ex.toString(), contains('PeerIdMismatchException'));
-    });
-  });
-
-  // PeerCertificateVerificationException
-  group('PeerCertificateVerificationException [Atomic Audit]', () {
-    test('toString() - formata excecao de falha de certificado', () {
-      final ex = PeerCertificateVerificationException(
-        Libp2pTlsFailureReason.parseError,
-        'erro ao parsear x509',
-      );
-      expect(ex.toString(), contains('PeerCertificateVerificationException'));
-    });
-  });
-
-  // QuicListener
-  group('QuicListener [Atomic Audit]', () {
-    test('addr - retorna multiaddr de escuta configurado', () {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      expect(listener.addr.toString(), equals('/ip4/127.0.0.1/udp/4002/quic-v1'));
-      listener.close();
-      controller.close();
-    });
-
-    test('connectionStream - stream de conexoes aceitas', () {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      expect(listener.connectionStream, isA<Stream<TransportConn>>());
-      listener.close();
-      controller.close();
-    });
-
-    test('isClosed - indica status de fechamento do listener', () {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      expect(listener.isClosed, isFalse);
-      listener.close();
-      expect(listener.isClosed, isTrue);
-      controller.close();
-    });
-
-    test('accept() - aceita conexao pendente ou encerra', () async {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      await controller.close();
-      final conn = await listener.accept();
-      expect(conn, isNull);
-      await listener.close();
-    });
-
-    test('close() - encerra o listener e cancela subscricoes', () async {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      await listener.close();
-      expect(listener.isClosed, isTrue);
-      await controller.close();
-    });
-
-    test('supportsAddr() - valida compatibilidade de enderecos quic', () {
-      final controller = StreamController<quic_lib.Libp2pQuicConnection>.broadcast();
-      final listener = QuicListener(
-        stream: controller.stream,
-        addr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-      );
-      expect(
-        listener.supportsAddr(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        isTrue,
-      );
-      expect(
-        listener.supportsAddr(libp2p_addr.MultiAddr('/ip4/127.0.0.1/tcp/4001')),
-        isFalse,
-      );
-      listener.close();
-      controller.close();
-    });
-  });
-
-  // QuicConnectionAdapter
-  group('QuicConnectionAdapter [Atomic Audit]', () {
-    test('getQuicStream() - busca stream quic por id', () {
-      final adapter = _TestQuicConnectionAdapter();
-      expect(adapter.getQuicStream(0), isNull);
-    });
-
-    test('isEstablished - indica se handshake esta concluido', () {
-      final adapter = _TestQuicConnectionAdapter(isEstablished: true);
-      expect(adapter.isEstablished, isTrue);
-    });
-
-    test('openBidirectionalStream() - abre novo stream bidirecional', () {
-      final adapter = _TestQuicConnectionAdapter(nextStreamId: 5);
-      expect(adapter.openBidirectionalStream(), equals(5));
-    });
-
-    test('close() - fecha adaptador de conexao quic', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      await adapter.close();
-      expect(adapter.isClosed, isTrue);
-    });
-  });
-
-  // QuicConnection
-  group('QuicConnection [Atomic Audit]', () {
-    test('id - identificador unico da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.id, isNotEmpty);
-      conn.close();
-    });
-
-    test('isClosed - status de encerramento da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.isClosed, isFalse);
-      conn.close();
-      expect(conn.isClosed, isTrue);
-    });
-
-    test('quicConnection - objeto interno da conexao quic', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.quicConnection, equals(adapter));
-      conn.close();
-    });
-
-    test('getQuicStream() - busca stream por id no adaptador', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.getQuicStream(10), isNull);
-      conn.close();
-    });
-
-    test('isEstablished - verifica estado do handshake', () {
-      final adapter = _TestQuicConnectionAdapter(isEstablished: true);
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.isEstablished, isTrue);
-      conn.close();
-    });
-
-    test('openBidirectionalStream() - abre novo fluxo bidirecional', () {
-      final adapter = _TestQuicConnectionAdapter(nextStreamId: 8);
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.openBidirectionalStream(), equals(8));
-      conn.close();
-    });
-
-    test('localPeer - peer id local da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.localPeer, isA<libp2p_peer.PeerId>());
-      conn.close();
-    });
-
-    test('remotePeer - lanca erro antes de verificacao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(() => conn.remotePeer, throwsStateError);
-      conn.close();
-    });
-
-    test('remotePublicKey - chave publica remota nula antes do tls', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(await conn.remotePublicKey, isNull);
-      conn.close();
-    });
-
-    test('verifyPeer() - verifica conformidade de alpn', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.verifyPeer, throwsStateError);
-      conn.close();
-    });
-
-    test('verifyPeerCertificate() - valida certificado x509 fornecido', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      await expectLater(conn.verifyPeerCertificate([]), throwsFormatException);
-      conn.close();
-    });
-
-    test('verifyPeerFromHandshake() - valida certificado capturado no handshake', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(await conn.verifyPeerFromHandshake(), isFalse);
-      conn.close();
-    });
-
-    test('localMultiaddr - endereco multiaddr local da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.localMultiaddr.toString(), equals('/ip4/127.0.0.1/udp/4002/quic-v1'));
-      conn.close();
-    });
-
-    test('remoteMultiaddr - endereco multiaddr remoto da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.remoteMultiaddr.toString(), equals('/ip4/127.0.0.1/udp/4003/quic-v1'));
-      conn.close();
-    });
-
-    test('state - estado de seguranca e transporte da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.state.transport, equals('quic-v1'));
-      expect(conn.state.security, equals('/tls/1.3'));
-      conn.close();
-    });
-
-    test('stat - estatisticas de conexao direcao e streams', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.stat.stats.direction, equals(libp2p_common.Direction.outbound));
-      conn.close();
-    });
-
-    test('scope - escopo de gerenciamento da conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(conn.scope, isA<libp2p_rcmgr.ConnScope>());
-      conn.close();
-    });
-
-    test('newStream() - cria novo stream p2p sobre quic', () async {
-      final adapter = _TestQuicConnectionAdapter(isEstablished: true, nextStreamId: 1);
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = await conn.newStream(libp2p_context.Context());
-      expect(stream, isA<libp2p_stream.P2PStream<dynamic>>());
-      await stream.close();
-      await conn.close();
-    });
-
-    test('streams - lista streams de entrada ativos', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(await conn.streams, isEmpty);
-      conn.close();
-    });
-
-    test('close() - encerra conexao quic', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      await conn.close();
-      expect(conn.isClosed, isTrue);
-    });
-
-    test('read() - lanca unsupported error para leitura crua', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(() => conn.read(), throwsUnsupportedError);
-      conn.close();
-    });
-
-    test('write() - lanca unsupported error para escrita crua', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(() => conn.write(Uint8List(0)), throwsUnsupportedError);
-      conn.close();
-    });
-
-    test('socket - lanca unsupported error para socket nativo', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      expect(() => conn.socket, throwsUnsupportedError);
-      conn.close();
-    });
-
-    test('setReadTimeout() - operacao segura de timeout de leitura', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      conn.setReadTimeout(const Duration(seconds: 1));
-      expect(conn.isClosed, isFalse);
-      conn.close();
-    });
-
-    test('setWriteTimeout() - operacao segura de timeout de escrita', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      conn.setWriteTimeout(const Duration(seconds: 1));
-      expect(conn.isClosed, isFalse);
-      conn.close();
-    });
-
-    test('notifyActivity() - notifica atividade na conexao', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      conn.notifyActivity();
-      expect(conn.isClosed, isFalse);
-      conn.close();
-    });
-  });
-
-  // QuicP2pStream
-  group('QuicP2pStream [Atomic Audit]', () {
-    test('id() - retorna identificador unico do stream', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.id(), isNotEmpty);
-      stream.close();
-      conn.close();
-    });
-
-    test('protocol() - retorna protocolo negociado no stream', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.protocol(), equals('/test/1.0.0'));
-      stream.close();
-      conn.close();
-    });
-
-    test('setProtocol() - atualiza protocolo associado ao stream', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.setProtocol('/novo/1.0.0');
-      expect(stream.protocol(), equals('/novo/1.0.0'));
-      await stream.close();
-      await conn.close();
-    });
-
-    test('stat() - retorna estatisticas do stream', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.stat().direction, equals(libp2p_common.Direction.outbound));
-      stream.close();
-      conn.close();
-    });
-
-    test('conn - referencia a conexao quic pai', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.conn, equals(conn));
-      stream.close();
-      conn.close();
-    });
-
-    test('scope() - escopo de gerenciamento de recursos', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.scope(), isA<libp2p_rcmgr.StreamManagementScope>());
-      stream.close();
-      conn.close();
-    });
-
-    test('read() - lanca erro se o stream estiver fechado', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.close();
-      expect(() => stream.read(), throwsStateError);
-      await conn.close();
-    });
-
-    test('write() - lanca erro se o stream estiver fechado', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.close();
-      expect(() => stream.write(Uint8List(0)), throwsStateError);
-      await conn.close();
-    });
-
-    test('incoming - retorna referencia para o stream recebido', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.incoming, equals(stream));
-      stream.close();
-      conn.close();
-    });
-
-    test('stream - expoe stream de bytes recebidos', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.stream, isA<Stream<Uint8List>>());
-      stream.close();
-      conn.close();
-    });
-
-    test('close() - fecha stream para leitura e escrita', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.close();
-      expect(stream.isClosed, isTrue);
-      await conn.close();
-    });
-
-    test('closeWrite() - fecha lado de escrita do stream', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.closeWrite();
-      expect(stream.isWritable, isFalse);
-      await stream.close();
-      await conn.close();
-    });
-
-    test('closeRead() - fecha lado de leitura do stream', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.closeRead();
-      expect(stream.isClosed, isFalse);
-      await stream.close();
-      await conn.close();
-    });
-
-    test('reset() - reseta stream abruptamente', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.reset();
-      expect(stream.isClosed, isTrue);
-      await conn.close();
-    });
-
-    test('setDeadline() - configura limite de tempo geral', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.setDeadline(DateTime.now());
-      expect(stream.isClosed, isFalse);
-      await stream.close();
-      await conn.close();
-    });
-
-    test('setReadDeadline() - configura limite de tempo de leitura', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.setReadDeadline(DateTime.now());
-      expect(stream.isClosed, isFalse);
-      await stream.close();
-      await conn.close();
-    });
-
-    test('setWriteDeadline() - configura limite de tempo de escrita', () async {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      await stream.setWriteDeadline(DateTime.now());
-      expect(stream.isClosed, isFalse);
-      await stream.close();
-      await conn.close();
-    });
-
-    test('isClosed - indica status de fechamento do stream', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.isClosed, isFalse);
-      stream.close();
-      conn.close();
-    });
-
-    test('isWritable - indica se escrita ainda e permitida', () {
-      final adapter = _TestQuicConnectionAdapter();
-      final conn = QuicConnection(
-        quic_lib.Libp2pQuicConnection(adapter),
-        localAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1'),
-        remoteAddr: libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4003/quic-v1'),
-        isServer: false,
-      );
-      final stream = QuicP2pStream(conn, 1, libp2p_common.Direction.outbound, '/test/1.0.0');
-      expect(stream.isWritable, isTrue);
-      stream.close();
-      conn.close();
-    });
-  });
-
-  // QuicTransport
-  group('QuicTransport [Atomic Audit]', () {
-    test('protocols - lista protocolos suportados pelo transporte', () {
-      final transport = QuicTransport();
-      expect(transport.protocols, contains('/ip4/udp/quic-v1'));
-      expect(transport.protocols, contains('/ip6/udp/quic-v1'));
-    });
-
-    test('canDial() - valida compatibilidade de discagem quic', () {
-      final transport = QuicTransport();
-      expect(
-        transport.canDial(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        isTrue,
-      );
-      expect(
-        transport.canDial(libp2p_addr.MultiAddr('/ip4/127.0.0.1/tcp/4001')),
-        isFalse,
-      );
-    });
-
-    test('canListen() - valida compatibilidade de escuta quic', () {
-      final transport = QuicTransport();
-      expect(
-        transport.canListen(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        isTrue,
-      );
-    });
-
-    test('dial() - lanca erro quando transporte esta descartado', () async {
-      final transport = QuicTransport();
-      await transport.dispose();
-      expect(
-        () => transport.dial(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        throwsStateError,
-      );
-    });
-
-    test('listen() - lanca erro quando transporte esta descartado', () async {
-      final transport = QuicTransport();
-      await transport.dispose();
-      expect(
-        () => transport.listen(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        throwsStateError,
-      );
-    });
-
-    test('dispose() - descarta recursos do transporte', () async {
-      final transport = QuicTransport();
-      await transport.dispose();
-      expect(
-        transport.canDial(libp2p_addr.MultiAddr('/ip4/127.0.0.1/udp/4002/quic-v1')),
-        isTrue,
-      );
-    });
   });
 
   // BitswapClient

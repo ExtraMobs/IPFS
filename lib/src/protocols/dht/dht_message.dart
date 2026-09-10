@@ -24,6 +24,16 @@ Uint8List encodeGetProviders(Cid cid) {
   return Uint8List.fromList([...encodeVarint(bytes.length), ...bytes]);
 }
 
+/// Encodes a DHT `FIND_NODE` request for [key].
+Uint8List encodeFindNode(Uint8List key) {
+  final payload = BytesBuilder()
+    ..add(_varintField(1, 4))
+    ..add(_bytesField(2, key))
+    ..add(_varintField(10, 1));
+  final bytes = payload.takeBytes();
+  return Uint8List.fromList([...encodeVarint(bytes.length), ...bytes]);
+}
+
 /// Encodes a DHT `ADD_PROVIDER` request for [cid] advertising [provider].
 Uint8List encodeAddProvider(Cid cid, AddrInfo provider) {
   final payload = BytesBuilder()

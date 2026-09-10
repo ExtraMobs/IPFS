@@ -2,8 +2,6 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
-import 'package:ipfs_libp2p/core/network/context.dart';
-import 'package:ipfs_libp2p/core/network/stream.dart';
 import 'package:transpiled_cid/transpiled_cid.dart';
 import 'package:transpiled_libp2p/transpiled_libp2p.dart';
 import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
@@ -14,6 +12,9 @@ import '../protocols/dht/query_peerset.dart';
 
 /// Kademlia DHT protocol identifier.
 const String dhtProtocol = '/ipfs/kad/1.0.0';
+
+/// Protocols offered when opening a DHT stream, WAN first then LAN.
+const List<String> _kadProtocols = [dhtProtocol, '/ipfs/lan/kad/1.0.0'];
 
 /// Queries the Kademlia DHT for providers of a Cid.
 final class DhtClient implements ContentDiscovery {
@@ -50,7 +51,7 @@ final class DhtClient implements ContentDiscovery {
   final int bucketSize;
 
   bool _closed = false;
-  final Set<P2PStream<dynamic>> _activeStreams = {};
+  final Set<NetworkStream> _activeStreams = {};
 
   /// Closes the DHT client, aborting in-flight queries and resetting streams.
   Future<void> close() async {
@@ -83,30 +84,26 @@ final class DhtClient implements ContentDiscovery {
     return controller.stream;
   }
 
-  /// Announces [provider] as a provider of [cid] via DHT ADD_PROVIDER to candidate peers.
+  /// Announces [provider] as a provider of [cid] via DHT ADD_PROVIDER, sending
+  /// the record to the [bucketSize] peers closest to the CID multihash.
   Future<void> provide(Cid cid, AddrInfo provider) async {
     if (_closed) throw StateError('DhtClient is closed');
+    final key = Uint8List.fromList(cid.multihash.toBytes());
+
     final candidates = <AddrInfo>[];
-    for (final p in bootstrapPeers) {
-      if (p.id != provider.id && !candidates.any((c) => c.id == p.id)) {
-        candidates.add(p);
-      }
+    for (final peerId in await getClosestPeers(key)) {
+      if (peerId == provider.id) continue;
+      candidates.add(AddrInfo(id: peerId, addrs: await router.getAddrs(peerId)));
     }
 
-    try {
-      final conns = router.host.network.conns;
-      for (final conn in conns) {
-        final remote = conn.remotePeer;
-        try {
-          final pid = PeerId.decode(remote.toBase58());
-          if (pid != provider.id && !candidates.any((c) => c.id == pid)) {
-            final addrs = await router.getAddrs(pid);
-            candidates.add(AddrInfo(id: pid, addrs: addrs));
-          }
-        } catch (_) {}
+    // The walk reached nobody: fall back to announcing to the bootstrap set.
+    if (candidates.isEmpty) {
+      for (final p in bootstrapPeers) {
+        if (p.id != provider.id && !candidates.any((c) => c.id == p.id)) {
+          candidates.add(p);
+        }
       }
-    } catch (_) {}
-
+    }
     if (candidates.isEmpty) return;
 
     final msgBytes = encodeAddProvider(cid, provider);
@@ -115,14 +112,25 @@ final class DhtClient implements ContentDiscovery {
     );
   }
 
+  /// Returns the [bucketSize] peers closest to [key] in the XOR keyspace,
+  /// found by walking the DHT iteratively.
+  Future<List<PeerId>> getClosestPeers(Uint8List key) async {
+    if (_closed) throw StateError('DhtClient is closed');
+    final peers = await _walk(
+      key: key,
+      request: encodeFindNode(key),
+      isCancelled: () => _closed,
+    );
+    return peers.getClosestNInStates(bucketSize, {PeerState.queried});
+  }
+
   Future<void> _sendAddProvider(AddrInfo peer, Uint8List msgBytes) async {
-    P2PStream<dynamic>? stream;
+    NetworkStream? stream;
     try {
       await router.connect(peer).timeout(timeout);
       stream = await router.host.newStream(
-        router.runtimePeerId(peer.id),
-        const [dhtProtocol, '/ipfs/lan/kad/1.0.0'],
-        Context(timeout: timeout),
+        peer.id,
+        _kadProtocols,
       ).timeout(timeout);
       _activeStreams.add(stream);
       await stream.setWriteDeadline(DateTime.now().add(timeout));
@@ -143,186 +151,163 @@ final class DhtClient implements ContentDiscovery {
     StreamController<AddrInfo> output,
     bool Function() isCancelled,
   ) async {
-    final target = Uint8List.fromList(cid.multihash.toBytes());
-    final targetPeer = PeerId(value: target);
-
-    int compareDistance(PeerId target, PeerId a, PeerId b) =>
-        _distance(target.value, a).compareTo(_distance(target.value, b));
-
-    final queryPeers = QueryPeerset(targetPeer, compareDistance);
-    final knownPeers = <PeerId, AddrInfo>{};
     final emitted = <PeerId, AddrInfo>{};
-    final deadline = DateTime.now().add(lookupTimeout);
-
-    PeerId? selfId;
-    try {
-      selfId = PeerId.decode(router.host.id.toBase58());
-    } catch (_) {}
-
-    for (final p in bootstrapPeers) {
-      if (selfId != null && p.id == selfId) continue;
-      knownPeers[p.id] = p;
-      queryPeers.tryAdd(p.id, selfId ?? p.id);
-    }
-
-    bool isStopCondition() => count > 0 && emitted.length >= count;
-
     Object? lastError;
-
     try {
-      while (!isCancelled()) {
-        if (DateTime.now().isAfter(deadline)) break;
-        if (isStopCondition()) break;
-
-        // Termination condition: closest beta peers are all queried.
-        final closestBeta = queryPeers.getClosestNInStates(
-          beta,
-          {PeerState.heard, PeerState.waiting, PeerState.queried},
-        );
-        final isBetaTerminated =
-            closestBeta.length >= beta &&
-            closestBeta.every((p) => queryPeers.getState(p) == PeerState.queried);
-
-        if (isBetaTerminated) break;
-
-        final heardPeers = queryPeers.getClosestNInStates(
-          alpha,
-          {PeerState.heard},
-        );
-
-        // Starvation termination: no heard peers and no outstanding queries.
-        if (heardPeers.isEmpty) {
-          if (queryPeers.numWaiting == 0) break;
-        }
-
-        final batch = heardPeers.take(alpha).toList();
-        for (final p in batch) {
-          queryPeers.setState(p, PeerState.waiting);
-        }
-
-        final responses = await Future.wait([
-          for (final peerId in batch)
-            _safeQuery(knownPeers[peerId]!, cid, isCancelled, deadline),
-        ]);
-
-        for (var i = 0; i < batch.length; i++) {
-          final peerId = batch[i];
-          final result = responses[i];
-          final response = result.response;
-          if (response == null) {
-            queryPeers.setState(peerId, PeerState.unreachable);
-            lastError = result.error;
-            continue;
+      await _walk(
+        key: Uint8List.fromList(cid.multihash.toBytes()),
+        request: encodeGetProviders(cid),
+        isCancelled: isCancelled,
+        stop: () => count > 0 && emitted.length >= count,
+        onError: (error) => lastError = error,
+        onProvider: (provider) {
+          final prev = emitted[provider.id];
+          if (prev == null ||
+              (prev.addrs.isEmpty && provider.addrs.isNotEmpty)) {
+            emitted[provider.id] = provider;
+            output.add(provider);
           }
-          queryPeers.setState(peerId, PeerState.queried);
-
-          if (isCancelled()) break;
-
-          // Closer peers: limit to 2*bucketSize (40), discard self, persist in peerstore
-          for (final peer in response.closerPeers.take(2 * bucketSize)) {
-            if (selfId != null && peer.id == selfId) continue;
-
-            final existing = knownPeers[peer.id];
-            final merged = await _mergeWithPeerstore(existing, peer);
-            knownPeers[peer.id] = merged;
-
-            if (merged.addrs.isNotEmpty) {
-              await router.addAddrs(merged, tempAddrTtl);
-            }
-            queryPeers.tryAdd(peer.id, peerId);
-          }
-
-          // Provider peers: preserve full AddrInfo, persist in peerstore, emit unique
-          for (final provider in response.providerPeers) {
-            if (selfId != null && provider.id == selfId) continue;
-
-            final existing = knownPeers[provider.id];
-            final complete = await _mergeWithPeerstore(existing, provider);
-            knownPeers[provider.id] = complete;
-
-            if (complete.addrs.isNotEmpty) {
-              await router.addAddrs(complete, tempAddrTtl);
-            }
-
-            final prev = emitted[provider.id];
-            if (prev == null ||
-                (prev.addrs.isEmpty && complete.addrs.isNotEmpty)) {
-              emitted[provider.id] = complete;
-              output.add(complete);
-              if (isStopCondition()) return;
-            }
-          }
-        }
-      }
-
-      // Kademlia Follow-up: query unqueried heard peers in top K
-      if (!isCancelled() &&
-          !isStopCondition() &&
-          !DateTime.now().isAfter(deadline)) {
-        final topK = queryPeers.getClosestNInStates(
-          bucketSize,
-          {PeerState.heard, PeerState.waiting, PeerState.queried},
-        );
-        final followUpPeers = topK
-            .where((p) => queryPeers.getState(p) == PeerState.heard)
-            .toList();
-
-        for (final peerId in followUpPeers) {
-          if (isCancelled() ||
-              isStopCondition() ||
-              DateTime.now().isAfter(deadline)) {
-            break;
-          }
-          queryPeers.setState(peerId, PeerState.waiting);
-          final result = await _safeQuery(
-            knownPeers[peerId]!,
-            cid,
-            isCancelled,
-            deadline,
-          );
-          final response = result.response;
-          if (response == null) {
-            queryPeers.setState(peerId, PeerState.unreachable);
-            lastError = result.error;
-            continue;
-          }
-          queryPeers.setState(peerId, PeerState.queried);
-
-          for (final peer in response.closerPeers.take(2 * bucketSize)) {
-            if (selfId != null && peer.id == selfId) continue;
-            final existing = knownPeers[peer.id];
-            final merged = await _mergeWithPeerstore(existing, peer);
-            knownPeers[peer.id] = merged;
-            if (merged.addrs.isNotEmpty) {
-              await router.addAddrs(merged, tempAddrTtl);
-            }
-          }
-
-          for (final provider in response.providerPeers) {
-            if (selfId != null && provider.id == selfId) continue;
-            final existing = knownPeers[provider.id];
-            final complete = await _mergeWithPeerstore(existing, provider);
-            knownPeers[provider.id] = complete;
-            if (complete.addrs.isNotEmpty) {
-              await router.addAddrs(complete, tempAddrTtl);
-            }
-            final prev = emitted[provider.id];
-            if (prev == null ||
-                (prev.addrs.isEmpty && complete.addrs.isNotEmpty)) {
-              emitted[provider.id] = complete;
-              output.add(complete);
-              if (isStopCondition()) return;
-            }
-          }
-        }
-      }
+        },
+      );
 
       if (emitted.isEmpty && lastError != null && !isCancelled()) {
-        output.addError(lastError);
+        output.addError(lastError!);
       }
     } finally {
       await output.close();
     }
+  }
+
+  /// Runs one iterative Kademlia walk towards [key], sending [request] to each
+  /// peer visited, and returns the resulting peerset.
+  Future<QueryPeerset> _walk({
+    required Uint8List key,
+    required Uint8List request,
+    required bool Function() isCancelled,
+    bool Function()? stop,
+    void Function(AddrInfo provider)? onProvider,
+    void Function(Object error)? onError,
+  }) async {
+    int compareDistance(PeerId target, PeerId a, PeerId b) =>
+        _distance(target.value, a).compareTo(_distance(target.value, b));
+
+    final queryPeers = QueryPeerset(PeerId(value: key), compareDistance);
+    final knownPeers = <PeerId, AddrInfo>{};
+    final deadline = DateTime.now().add(lookupTimeout);
+    final selfId = router.host.id;
+
+    for (final p in bootstrapPeers) {
+      if (p.id == selfId) continue;
+      knownPeers[p.id] = p;
+      queryPeers.tryAdd(p.id, selfId);
+    }
+
+    bool isStopped() => stop != null && stop();
+
+    // Persists every peer the response carries and feeds the walk frontier.
+    Future<void> absorb(PeerId from, DhtResponse response) async {
+      for (final peer in response.closerPeers.take(2 * bucketSize)) {
+        if (peer.id == selfId) continue;
+        final merged = await _mergeWithPeerstore(knownPeers[peer.id], peer);
+        knownPeers[peer.id] = merged;
+        if (merged.addrs.isNotEmpty) {
+          await router.addAddrs(merged, tempAddrTtl);
+        }
+        queryPeers.tryAdd(peer.id, from);
+      }
+
+      for (final provider in response.providerPeers) {
+        if (provider.id == selfId) continue;
+        final complete = await _mergeWithPeerstore(
+          knownPeers[provider.id],
+          provider,
+        );
+        knownPeers[provider.id] = complete;
+        if (complete.addrs.isNotEmpty) {
+          await router.addAddrs(complete, tempAddrTtl);
+        }
+        onProvider?.call(complete);
+      }
+    }
+
+    while (!isCancelled() && !isStopped()) {
+      if (DateTime.now().isAfter(deadline)) break;
+
+      // Termination condition: the closest beta peers are all queried.
+      final closestBeta = queryPeers.getClosestNInStates(
+        beta,
+        {PeerState.heard, PeerState.waiting, PeerState.queried},
+      );
+      if (closestBeta.length >= beta &&
+          closestBeta.every(
+            (p) => queryPeers.getState(p) == PeerState.queried,
+          )) {
+        break;
+      }
+
+      // Starvation: nothing left to query, and queries are awaited in batch.
+      final batch = queryPeers.getClosestNInStates(alpha, {PeerState.heard});
+      if (batch.isEmpty) break;
+
+      for (final p in batch) {
+        queryPeers.setState(p, PeerState.waiting);
+      }
+
+      final responses = await Future.wait([
+        for (final peerId in batch)
+          _safeQuery(knownPeers[peerId]!, request, isCancelled, deadline),
+      ]);
+
+      for (var i = 0; i < batch.length; i++) {
+        final peerId = batch[i];
+        final response = responses[i].response;
+        if (response == null) {
+          queryPeers.setState(peerId, PeerState.unreachable);
+          final error = responses[i].error;
+          if (error != null) onError?.call(error);
+          continue;
+        }
+        queryPeers.setState(peerId, PeerState.queried);
+        if (isCancelled()) break;
+        await absorb(peerId, response);
+        if (isStopped()) return queryPeers;
+      }
+    }
+
+    // Kademlia follow-up: query the peers still unqueried inside the top K.
+    if (!isCancelled() && !isStopped() && !DateTime.now().isAfter(deadline)) {
+      final topK = queryPeers.getClosestNInStates(
+        bucketSize,
+        {PeerState.heard, PeerState.waiting, PeerState.queried},
+      );
+      final followUpPeers = topK
+          .where((p) => queryPeers.getState(p) == PeerState.heard)
+          .toList();
+
+      for (final peerId in followUpPeers) {
+        if (isCancelled() || isStopped() || DateTime.now().isAfter(deadline)) {
+          break;
+        }
+        queryPeers.setState(peerId, PeerState.waiting);
+        final result = await _safeQuery(
+          knownPeers[peerId]!,
+          request,
+          isCancelled,
+          deadline,
+        );
+        final response = result.response;
+        if (response == null) {
+          queryPeers.setState(peerId, PeerState.unreachable);
+          final error = result.error;
+          if (error != null) onError?.call(error);
+          continue;
+        }
+        queryPeers.setState(peerId, PeerState.queried);
+        await absorb(peerId, response);
+      }
+    }
+
+    return queryPeers;
   }
 
   Future<AddrInfo> _mergeWithPeerstore(
@@ -340,7 +325,7 @@ final class DhtClient implements ContentDiscovery {
 
   Future<DhtResponse> _query(
     AddrInfo peer,
-    Cid cid,
+    Uint8List request,
     bool Function() isCancelled,
     DateTime deadline,
   ) async {
@@ -355,9 +340,8 @@ final class DhtClient implements ContentDiscovery {
     if (isCancelled()) throw StateError('DHT query cancelled');
 
     final stream = await router.host.newStream(
-      router.runtimePeerId(peer.id),
-      const [dhtProtocol],
-      Context(timeout: rpcTimeout),
+      peer.id,
+      _kadProtocols,
     ).timeout(rpcTimeout);
 
     _activeStreams.add(stream);
@@ -367,7 +351,7 @@ final class DhtClient implements ContentDiscovery {
         throw StateError('DHT query cancelled');
       }
       await stream.setDeadline(DateTime.now().add(rpcTimeout));
-      await stream.write(encodeGetProviders(cid)).timeout(rpcTimeout);
+      await stream.write(request).timeout(rpcTimeout);
       final bytes = await _readFrame(stream).timeout(rpcTimeout);
       return DhtResponse.fromBytes(bytes);
     } catch (e) {
@@ -385,13 +369,13 @@ final class DhtClient implements ContentDiscovery {
 
   Future<({DhtResponse? response, Object? error})> _safeQuery(
     AddrInfo peer,
-    Cid cid,
+    Uint8List request,
     bool Function() isCancelled,
     DateTime deadline,
   ) async {
     try {
       return (
-        response: await _query(peer, cid, isCancelled, deadline),
+        response: await _query(peer, request, isCancelled, deadline),
         error: null,
       );
     } catch (error) {
@@ -410,7 +394,7 @@ BigInt _distance(Uint8List target, PeerId peer) {
   return result;
 }
 
-Future<Uint8List> _readFrame(P2PStream<dynamic> stream) async {
+Future<Uint8List> _readFrame(NetworkStream stream) async {
   var length = 0;
   var shift = 0;
   for (var i = 0; i < 10; i++) {

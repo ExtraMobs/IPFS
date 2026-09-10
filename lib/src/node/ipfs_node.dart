@@ -1,14 +1,5 @@
 import 'dart:typed_data';
 
-import 'package:ipfs_libp2p/config/config.dart' as runtime_config;
-import 'package:ipfs_libp2p/config/defaults.dart' as runtime_defaults;
-import 'package:ipfs_libp2p/config/stream_muxer.dart';
-import 'package:ipfs_libp2p/core/crypto/ed25519.dart' as runtime_ed25519;
-import 'package:ipfs_libp2p/core/host/host.dart' as runtime;
-import 'package:ipfs_libp2p/core/multiaddr.dart';
-import 'package:ipfs_libp2p/p2p/host/resource_manager/limiter.dart';
-import 'package:ipfs_libp2p/p2p/host/resource_manager/resource_manager_impl.dart';
-import 'package:ipfs_libp2p/p2p/transport/tcp_transport.dart';
 import 'package:transpiled_block_format/transpiled_block_format.dart' as blocks;
 import 'package:transpiled_boxo/transpiled_boxo.dart' hide Blockstore;
 import 'package:transpiled_cid/transpiled_cid.dart';
@@ -22,8 +13,6 @@ import '../core/builders/build_cfg.dart';
 import '../network/libp2p_host.dart';
 import '../protocols/bitswap/bitswap_client.dart';
 import '../routing/dht_provider_finder.dart';
-import '../transport/go_yamux_adapter.dart';
-import '../transport/noise/dart_ipfs_noise_security.dart';
 import '../unixfs/unixfs.dart';
 
 /// Embedded IPFS node containing the currently ported reusable runtime.
@@ -31,13 +20,15 @@ final class IpfsNode {
   IpfsNode._({
     required this.config,
     required this.blockstore,
-    required runtime.Host? host,
+    required Host? host,
     required BitswapClient? bitswap,
     required DhtClient? dht,
+    required IdService? idService,
     required Duration shutdownTimeout,
   }) : _host = host,
        _bitswap = bitswap,
        _dht = dht,
+       _idService = idService,
        _shutdownTimeout = shutdownTimeout;
 
   /// Kubo `core.NewNode` equivalent for the supported Dart subset.
@@ -51,34 +42,62 @@ final class IpfsNode {
         host: null,
         bitswap: null,
         dht: null,
+        idService: null,
         shutdownTimeout: buildCfg.shutdownTimeout,
       );
     }
 
     final identityKey = await generateEd25519KeyPair();
-    final runtimeIdentity = await runtime_ed25519
-        .generateEd25519KeyPairFromSeed(
-          Uint8List.fromList(identityKey.raw().sublist(0, 32)),
-        );
-    final resourceManager = ResourceManagerImpl(limiter: FixedLimiter());
-    final runtimeConfig = runtime_config.Config()
-      ..peerKey = runtimeIdentity
-      ..transports.add(TCPTransport(resourceManager: resourceManager))
-      ..securityProtocols.add(DartIpfsNoiseSecurity(identityKey))
-      ..muxers.add(
-        const StreamMuxer(id: goYamuxProtocolId, muxerFactory: goYamuxFactory),
-      )
-      ..listenAddrs.addAll(config.network.listenAddresses.map(MultiAddr.new));
-    await runtime_defaults.applyDefaults(runtimeConfig);
-    runtimeConfig
-      ..enableAutoNAT = false
-      ..enableHolePunching = false
-      ..enablePing = false
-      ..enableRelay = false
-      ..enableAutoRelay = false
-      ..addrsFactory = (addrs) => addrs;
-    final host = await runtimeConfig.newNode();
-    await host.start();
+    final localPeer = PeerId.fromPubKey(identityKey.getPublic());
+    final peerstore = MemoryPeerstore();
+    peerstore.addPrivKey(localPeer, identityKey);
+    peerstore.addPubKey(localPeer, identityKey.getPublic());
+
+    final upgrader = BasicUpgrader(localIdentityKey: identityKey);
+    final tcpTransport = TcpTransport(upgrader: upgrader);
+    final swarm = Swarm(
+      localPeer: localPeer,
+      peerstore: peerstore,
+      transports: [tcpTransport],
+    );
+
+    final listenAddrs = config.network.listenAddresses
+        .map(core_ma.Multiaddr.parse)
+        .toList();
+    await swarm.listen(listenAddrs);
+
+    String? announcedIp;
+    for (final a in config.network.announceAddresses) {
+      try {
+        final parsed = core_ma.Multiaddr.parse(a);
+        for (final c in parsed.components) {
+          if (c.protocol.name == 'ip4') {
+            announcedIp = c.value;
+            break;
+          }
+        }
+      } catch (_) {}
+    }
+
+    final autoRelay = AutoRelay();
+    final natGateway = announcedIp != null
+        ? SimulatedNatGateway(externalIp: announcedIp)
+        : null;
+    final natManager = BasicNatManager(network: swarm, gateway: natGateway);
+    await natManager.start();
+
+    HolePunchService? holePunch;
+    final host = BasicHost(
+      network: swarm,
+      peerstore: peerstore,
+      autoRelay: autoRelay,
+      natManager: natManager,
+      holePunchService: holePunch,
+    );
+
+    holePunch = HolePunchService(host: host);
+    await holePunch.start();
+
     final router = Libp2pRouter(host);
     final bootstrapPeers = config.network.bootstrapPeers
         .map(addrInfoFromString)
@@ -89,12 +108,14 @@ final class IpfsNode {
       blockstore: blockstore,
       timeout: config.bitswap.p2pTimeout,
     )..start();
+    final idService = IdService(host: host)..start();
     return IpfsNode._(
       config: config,
       blockstore: blockstore,
       host: host,
       bitswap: bitswap,
       dht: dht,
+      idService: idService,
       shutdownTimeout: buildCfg.shutdownTimeout,
     );
   }
@@ -105,9 +126,10 @@ final class IpfsNode {
   /// Validating blockstore used by Bitswap.
   final Blockstore blockstore;
 
-  final runtime.Host? _host;
+  final Host? _host;
   final BitswapClient? _bitswap;
   final DhtClient? _dht;
+  final IdService? _idService;
   final Duration _shutdownTimeout;
   Future<void>? _closeFuture;
 
@@ -118,23 +140,26 @@ final class IpfsNode {
   PeerId get peerId {
     final host = _host;
     if (host == null) throw StateError('IPFS node is offline');
-    return PeerId.decode(host.id.toBase58());
+    return host.id;
   }
 
   /// Active listening multiaddresses for this node.
   List<String> get listenAddresses {
+    if (config.network.announceAddresses.isNotEmpty) {
+      return config.network.announceAddresses;
+    }
     final host = _host;
     if (host == null) return const [];
     final addrs = host.addrs;
     if (addrs.isNotEmpty) {
       return addrs.map((a) => a.toString()).toList();
     }
-    return host.network.listenAddresses.map((a) => a.toString()).toList();
+    return host.network.listenAddresses().map((a) => a.toString()).toList();
   }
 
   /// Formatted multiaddresses including peer ID (e.g. `/ip4/127.0.0.1/tcp/xxxxx/p2p/<peerId>`).
   List<String> get swarmAddresses {
-    final pid = peerId.toBase58();
+    final pid = peerId.toString();
     return listenAddresses.map((a) => '$a/p2p/$pid').toList();
   }
 
@@ -268,6 +293,7 @@ final class IpfsNode {
     final close = () async {
       await _dht?.close();
       await _bitswap?.close();
+      await _idService?.close();
       await _host?.close();
       await blockstore.close();
     }();

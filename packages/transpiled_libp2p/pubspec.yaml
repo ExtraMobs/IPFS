@@ -21,6 +21,10 @@ dependencies:
     path: ../transpiled_multibase
   transpiled_multihash:
     path: ../transpiled_multihash
+  transpiled_go_yamux:
+    path: ../transpiled_go_yamux
+  transpiled_varint:
+    path: ../transpiled_varint
 
 dev_dependencies:
   test: ^1.28.0

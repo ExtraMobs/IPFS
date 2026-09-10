@@ -12,11 +12,15 @@ final class NetworkConfig {
   /// Creates network settings.
   const NetworkConfig({
     this.listenAddresses = const ['/ip4/127.0.0.1/tcp/0'],
+    this.announceAddresses = const [],
     this.bootstrapPeers = const [],
   });
 
   /// Addresses on which the libp2p host listens.
   final List<String> listenAddresses;
+
+  /// Public addresses to announce to peers and the DHT.
+  final List<String> announceAddresses;
 
   /// Peers used to enter the public DHT.
   final List<String> bootstrapPeers;
