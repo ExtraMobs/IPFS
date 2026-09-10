@@ -11,7 +11,7 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
 ### O que já está auditado (Conformidade Garantida e Testada)
 
 1. **Auditoria AST Automatizada (24 Regras Contratuais do `AGENTS.md`)**:
-   - **Resultado Oficial**: `0 ERROS` e `0 AVISOS` em todos os 4.743 símbolos Dart auditados contra os 33.298 símbolos Go indexados nas 23 regras de conformidade de código.
+   - **Resultado Oficial**: `0 ERROS` e `0 AVISOS` em todos os 5.197 símbolos Dart auditados contra os 33.298 símbolos Go indexados nas 24 regras de conformidade de código (restam 1.483 notas de cobertura, que são pendências informativas de porte, não violações contratuais).
    - **Regras Bloqueantes Promovidas a `ERROR`**:
      - `RULE_NO_UNAUTHORIZED_DEPRECATED` (Regra 4): Nenhuma anotação `@Deprecated` existe sem anotação equivalente no Go upstream.
      - `RULE_MODULE_BOUNDARY_LEAK` (Regra 11): Nenhuma classe de um pacote transpila tipos pertencentes a outro módulo `go.mod`.
@@ -36,22 +36,94 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
      - [x] Implementar encoding de `ADD_PROVIDER` em `dht_message.dart`.
      - [x] Implementar `provide(Cid cid)` em `DhtClient` e `IpfsNode`.
      - [x] Teste de integração real (`local_kubo_dht_serving_test.dart`): Dart anuncia CID via DHT `provide`, Kubo descobre nó Dart via `ipfs routing findprovs <cid>`, conecta e baixa o bloco via Bitswap (100% comprovado em 3s).
-4. **Objetivo 3 — Transpilação Completa da libp2p e NAT Traversal**:
-   - **Status**: ⏳ **Próximo Marco / Em Planejamento e Execução**.
-   - **Marco D.1 (Transpilação Completa de `go-libp2p` em `packages/transpiled_libp2p/`)**:
-     - [ ] Transpilar subsistemas de host e conexões (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `connmgr`).
-     - [ ] Substituir e eliminar a dependência externa `ipfs_libp2p` do `pubspec.yaml`, integrando o nó raiz exclusivamente com `packages/transpiled_libp2p/`.
-     - [ ] 100% de conformidade com as 24 regras do auditor AST e cobertura atômica 1 para 1 (`RULE_MISSING_ATOMIC_TESTS`).
+4. **Objetivo 3 — Transpilação dos subsistemas de host e rede da libp2p e NAT Traversal**:
+   - **Status**: ✅ **100% Concluído, Auditado e Comprovado na WAN — para o escopo declarado abaixo**.
+   - > [!IMPORTANT]
+     > Este objetivo **não** portou a `go-libp2p` integralmente, e
+     > `packages/transpiled_libp2p/` **não** deve ser tratado como pacote
+     > fechado. A cobertura atual é de **748 de 3.688 símbolos (20,3%)**; tipos
+     > **141/391** (ver `PROGRESS_RELATORY.md`). O nó fala uma única combinação:
+     > **TCP + Noise + yamux**. Não estão portados:
+     > - **Transportes**: `packages/transpiled_libp2p/lib/src/p2p/transport/`
+     >   contém apenas `tcp/` e `basic_upgrader.dart`. Ausentes QUIC,
+     >   WebSocket, WebTransport e WebRTC.
+     > - **Segurança**: apenas Noise. TLS ausente.
+     > - **Multiplexação**: apenas yamux, que vive no pacote próprio
+     >   `transpiled_go_yamux`. mplex ausente.
+     > - **Camada `discovery`**: existem **somente as interfaces** em
+     >   `core/discovery/` (`discovery.dart`, `options.dart`). Sem mDNS, sem
+     >   `RoutingDiscovery`, sem rendezvous e sem backoff.
+     >
+     > A porcentagem mede **superfície de API, não função**: o que foi portado
+     > está comprovado contra Kubo real e contra a rede pública. O
+     > `transpiled_go_yamux` está em 2,4% de símbolos e mesmo assim carrega
+     > todo o tráfego do nó.
+   - **Marco D.1 (Transpilação dos subsistemas de host, rede e identificação de `go-libp2p` em `packages/transpiled_libp2p/`)**:
+     - [x] Transpilar subsistemas de host e conexões (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `IdentifyPush`, `BasicUpgrader`, `TcpTransport`, `connmgr`).
+     - [x] Substituir e eliminar a dependência externa `ipfs_libp2p` do `pubspec.yaml`, integrando o nó raiz exclusivamente com `packages/transpiled_libp2p/`.
+     - [x] 100% de conformidade com as 24 regras do auditor AST e cobertura atômica 1 para 1 (`RULE_MISSING_ATOMIC_TESTS`).
    - **Marco D.2 (NAT Traversal — AutoNAT e Circuit Relay v2)**:
-     - [ ] Portar `AutoNAT` v1/v2 para detecção de reachability pública vs. privada.
-     - [ ] Portar cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` e handshake `RESERVE` com `/hop`).
-     - [ ] Portar `AutoRelay` com renovação de reservas dinâmicas e injeção automática de endereços `/p2p-circuit` no Swarm e DHT.
+     - [x] Portar `AutoNAT` v1/v2 para detecção de reachability pública vs. privada.
+     - [x] Portar cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` e handshake `RESERVE` com `/hop`).
+     - [x] Portar `AutoRelay` com renovação de reservas dinâmicas e injeção automática de endereços `/p2p-circuit` no Swarm e DHT.
    - **Marco D.3 (Otimizações de Conexão Direta — DCUtR Hole Punching e UPnP)**:
-     - [ ] Portar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade).
-     - [ ] Portar `NATManager` (UPnP / NAT-PMP) para abertura de portas locais em roteadores residenciais.
+     - [x] Portar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade) com protocolo completo, RTT sync e simultaneous connect.
+     - [x] Portar `NATManager` (UPnP / NAT-PMP) para abertura automática de portas em roteadores locais e mapeamento de endereços externos.
    - **Marco D.4 (Validação Global WAN Ponta a Ponta)**:
-     - [ ] Prova de recuperação e descoberta a partir de nós na internet pública (ex.: `check.ipfs.network` discando e recuperando blocos do nó Dart via endereço relay `/p2p-circuit`).
-5. **Suíte de Testes de Paridade**:
+     - [x] Prova de recuperação e consumo P2P a partir de nós externos na internet pública (comprovado via backend oficial `check.ipfs.network` em AWS discando diretamente para `/ip4/187.62.8.47/tcp/4002` do nó Dart na WAN e recuperando blocos via Bitswap com `Found: true`).
+5. **Objetivo 4 — Descoberta Global Autônoma na DHT (Full Kademlia Routing & Iterative Providing)**:
+   - **Status**: ✅ **100% Concluído e Comprovado em Rede Real**.
+   - **Diagnóstico do Estado Atual**: O nó Dart deixou de ser "parcialmente público" e passou a ser **totalmente público e autônomo**. Além de ser diretamente discável e de servir blocos na WAN (`Swarm`, `NAT UPnP`, `Bitswap 1.2.0`, `Noise/Yamux`), ele executa por conta própria o ciclo completo de Kademlia Content Routing na Amino DHT: `getClosestPeers` converge para os 20 nós mais próximos do multihash no espaço métrico XOR e `provide` despacha `ADD_PROVIDER` diretamente para esses nós, sem a varredura das conexões já abertas no swarm (muleta do estado "parcialmente público") e sem qualquer intermediação de daemon externo. A **descoberta cega global** está comprovada: um bloco inédito hospedado exclusivamente no nó Dart foi encontrado e recuperado por gateway HTTPS público apenas pelo CID. Consequentemente, a muleta de encaminhamento de anúncio que existia em `bin/host_payload.dart` (chamada `Process.run('ipfs', ['routing', 'provide', ...])`, que delegava o anúncio global ao daemon Kubo local) foi removida por ter se tornado desnecessária.
+   - **Marco E.1 (Busca Iterativa Kademlia e Roteamento XOR)**:
+     - [x] Implementar o encoding de `FIND_NODE` em `dht_message.dart` (`encodeFindNode`), no mesmo padrão de `encodeGetProviders` / `encodeAddProvider`.
+     - [x] Implementar `DhtClient.getClosestPeers(Uint8List key)` com caminhamento iterativo completo na Amino DHT global ($\alpha=3$, $\beta=3$) e fase de follow-up Kademlia, convergindo para os `bucketSize` (20) nós mais próximos da chave no espaço métrico XOR.
+   - **Marco E.2 (Anúncio Autônomo Global na DHT — `provide` iterativo)**:
+     - [x] Reescrever `DhtClient.provide(Cid cid, AddrInfo provider)` sobre `getClosestPeers(cid.multihash)`, despachando a mensagem protobuf `ADD_PROVIDER` para cada um dos 20 nós mais próximos com os endereços WAN anunciados (`/ip4/.../tcp/4002`), mantendo os `bootstrapPeers` apenas como fallback para quando o caminhamento não alcança nenhum peer.
+   - **Marco E.3 (Descoberta Cega Pública Comprovada em Gateways HTTPS)**:
+     - [x] Bloco inédito e irrepetível (256 bytes de `Random.secure()`) gravado **apenas** no blockstore do nó Dart via `putRawBlock`, anunciado por `node.provide(cid)` (`getClosestPeers` ➔ `ADD_PROVIDER` aos 20 mais próximos) e recuperado byte a byte por gateway HTTPS público **apenas pelo CID**, sem fornecimento prévio de multiaddr nem `swarm connect` manual (100% comprovado via `dht_public_discovery_network_test.dart`): CID `QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6` servido por `https://ipfs.io/ipfs/QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6?format=raw` em 72s, a partir do nó `12D3KooWDsMmX7axDC6HTTXUNe4upxEvFbNQjmE2FToVVbBzUK6f` anunciado em `/ip4/187.62.8.47/tcp/4002`.
+     - [x] Confirmação independente: já com o nó Dart encerrado, o daemon Kubo local (processo separado, tabela de roteamento própria) respondeu `ipfs routing findprovs <cid>` com exatamente esse PeerId, provando que os `ADD_PROVIDER` do `provide` autônomo ficaram armazenados na própria Amino DHT pública.
+     - [x] Remoção da muleta de encaminhamento de anúncio (`Process.run('ipfs', ['routing', 'provide', ...])`) em `bin/host_payload.dart`.
+6. **Objetivo 5 — Interoperabilidade Plena de Rede (Full Network Participation)**:
+   - **Status**: 🔜 **Próximo Marco / Não iniciado**.
+   - **Diagnóstico do Estado Atual**: Os Objetivos 1 a 4 provaram que o nó **consome** e **publica** na rede: baixa, serve e anuncia blocos por CID, de forma autônoma e comprovada na internet pública. Este objetivo fecha o ciclo restante: tornar o nó um **participante completo** da rede, e não apenas um cliente dela. O diagnóstico verificado no código: o nó registra **um único** handler de stream, o do Bitswap (`lib/src/protocols/bitswap/bitswap_client.dart:48`). Ele consulta a DHT mas não a serve, não mantém tabela de roteamento viva, não descobre o próprio endereço público nem peers locais, e perde todo o estado de rede a cada reinício.
+   - **Marco F.1 (Tabela de Roteamento Kademlia em Runtime)**:
+     - [ ] Implementar `DhtRoutingTable` — hoje apenas `abstract class` em `lib/src/core/interfaces/routing_table.dart:31` — consumindo o pacote `packages/transpiled_libp2p_kbucket` (`table.dart`, `bucket.dart`, `table_refresh.dart`), que está portado a 48,7% e **sem nenhum consumidor**. K-buckets vivos, população a partir das conexões e do `Identify`, e refresh periódico de buckets. Critério: lookups sucessivos deixam de recomeçar do zero pelos `bootstrapPeers`. É pré-requisito do F.2.
+   - **Marco F.2 (Servidor DHT — handler de `/ipfs/kad/1.0.0`)**:
+     - [ ] Registrar o handler de stream que hoje não existe, respondendo `FIND_NODE`, `GET_PROVIDERS` e `PING` a partir da tabela do F.1, e armazenando `ADD_PROVIDER` de terceiros num provider store com TTL. O encoder `encodeDhtResponse` já existe e está testado em `dht_message.dart`. Critério: um Kubo real consulta o nó Dart e recebe respostas válidas; o nó deixa de ser cliente-only e passa a contribuir com a rede.
+   - **Marco F.3 (Descoberta do Próprio Endereço — `ObservedAddrManager`)**:
+     - [ ] Portar o coletor de endereços observados do `Identify`, que hoje apenas **envia** `observedAddr` sem coletar o que os peers reportam de volta, e alimentar `BasicHost.addrs`. Critério: um nó atrás de NAT sem UPnP descobre e anuncia seu endereço público sozinho, eliminando a dependência de `announceAddresses` fixo.
+   - **Marco F.4 (Descoberta Local — mDNS)**:
+     - [ ] Portar `p2p/discovery/mdns`. Critério: dois nós na mesma LAN se encontram sem bootstrap algum, e um Kubo local descobre o nó Dart por mDNS.
+   - **Marco F.5 (Persistência e Republicação)**:
+     - [ ] Reprovide automático dentro da biblioteca (o Kubo republica a cada 12h e os registros expiram em ~24h na Amino; hoje só `bin/host_payload.dart` tem um timer ad hoc de 5 minutos) e peerstore persistente em datastore (`pstoreds`). Critério: o conteúdo continua descobrível após 24h sem intervenção, e um reinício preserva os peers conhecidos.
+   - **Marco F.6 (Camada `discovery` — implementações)**:
+     - [ ] Implementar `RoutingDiscovery` e `BackoffDiscovery` sobre as interfaces de `packages/transpiled_libp2p/lib/src/core/discovery/`, que hoje contém apenas `discovery.dart` e `options.dart`, sem nenhuma implementação.
+   - **Marco F.7 (Validação de Interoperabilidade Plena)**:
+     - [ ] Comprovar que um Kubo real reconhece o nó Dart como par completo de rede: aparece na tabela de roteamento do Kubo, responde consultas DHT vindas de terceiros, e é descoberto tanto por mDNS na LAN quanto pela DHT na WAN.
+
+   > [!NOTE]
+   > Ampliar a matriz de transporte e segurança — QUIC, WebSocket, WebTransport, WebRTC, TLS e mplex — **não** faz parte deste objetivo. O nó fala hoje uma única combinação, `TCP + Noise + yamux`, e ampliá-la é objetivo próprio, a ser aberto quando o usuário pedir.
+
+7. **Objetivo 6 — Ampliação da Matriz de Transporte e Segurança**:
+   - **Status**: 🔜 **Não iniciado**.
+   - **Diagnóstico do Estado Atual**: Enquanto o Objetivo 5 trata de **como** o nó participa da rede, este trata de **quantos peers ele consegue alcançar**. O nó fala hoje uma única combinação: `TCP + Noise + yamux`. Medido contra um Kubo real: o daemon local publica **8 endereços de swarm** e o nó Dart disca **2** deles (os dois `/tcp/`). Os outros seis — `quic-v1`, `quic-v1/webtransport` e `webrtc-direct`, em IPv4 e IPv6 — são invisíveis. Nós que rodam apenas em navegador (Helia sobre WebTransport ou WebRTC) são inalcançáveis por completo, independentemente de quantos marcos do Objetivo 5 fecharem.
+   - **Bloqueio Arquitetural Removido**: O bloqueio que arquivou a tentativa anterior de portar QUIC **deixou de existir**. Antes, o `Swarm`/`BasicUpgrader` da dependência `ipfs_libp2p` (terceiros, não editável) rodava negociação de segurança e muxer incondicionalmente sobre qualquer transporte. O Marco D.1 eliminou essa dependência: o `BasicUpgrader` agora é código próprio em `packages/transpiled_libp2p/lib/src/p2p/transport/basic_upgrader.dart`. Tornar o upgrade de segurança e muxer **opcional** por transporte é pré-requisito do Marco G.1 e não depende mais de terceiros. A análise original citada em `PROGRESS.md` estava em `doc/specs/QUIC_TRANSPORT_RFC.md`, que **não existe mais** — trate como perdida e refaça-a.
+   - **Marco G.1 (QUIC — `/udp/<porta>/quic-v1`)**:
+     - [ ] Maior ganho de alcance por esforço, e pré-requisito do G.4. Exige, antes do transporte em si, tornar o upgrade de segurança e de muxer **opcional** por transporte no `BasicUpgrader`, já que o QUIC traz TLS 1.3 e multiplexação de streams nativos. Critério: discar e receber conexões `quic-v1` de um Kubo real, com Bitswap e DHT funcionando por cima.
+   - **Marco G.2 (Segurança TLS 1.3 — `/tls/1.0.0`)**:
+     - [ ] Segunda opção de segurança ao lado do Noise, negociada por multistream-select. Critério: handshake TLS bem-sucedido contra um peer real que ofereça TLS.
+   - **Marco G.3 (WebSocket — `/ws` e `/wss`)**:
+     - [ ] O transporte mais barato de acrescentar sobre a base TCP já existente, e o que destrava peers de infraestrutura e ambientes com egresso restrito a HTTP(S). Critério: conexão com um peer público que anuncie `/wss`.
+   - **Marco G.4 (WebTransport — `/quic-v1/webtransport`)**:
+     - [ ] Depende do G.1, por rodar sobre HTTP/3 sobre QUIC, e usa o componente `certhash` do multiaddr para fixação de certificado no navegador. Critério: um nó Helia rodando em navegador conecta no nó Dart e baixa um bloco.
+   - **Marco G.5 (WebRTC Direct — `/udp/<porta>/webrtc-direct`)**:
+     - [ ] Alcance de navegador sem servidor de sinalização, também via `certhash`. Critério: mesmo do G.4, por WebRTC.
+   - **Marco G.6 (Muxer mplex — `/mplex/6.7.0`)**:
+     - [ ] Prioridade baixa e possivelmente descartável: o mplex está depreciado na libp2p em favor do yamux, e o Kubo o removeu dos padrões. Só entra se algum peer real que interesse ainda exigir.
+   - **Marco G.7 (Validação da Matriz Completa)**:
+     - [ ] Comprovar que o nó Dart disca **os 8 endereços** que um Kubo real publica, e que um nó em navegador o alcança. Critério: teste de interoperabilidade que itera sobre a lista de `Addresses.Swarm` do Kubo e conecta em cada uma.
+
+8. **Suíte de Testes de Paridade**:
    - `packages/boilerplate`: 29 testes (aritmética, overflow, shifts, matriz IEEE 754, divisão complexa de Smith).
    - `packages/transpiled_boxo`: 84 testes (bitswap message/pb, network, connecteventmanager, client, getter, notifications, messagequeue, peermanager, blockpresencemanager, wantlist, util).
    - `packages/transpiled_libp2p`: 198 testes (crypto RSA, Secp256k1, ECDSA, Ed25519, peer ID, addr info, peer record, envelope, query event, connmgr, resource manager, noise).
@@ -60,7 +132,10 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - `packages/transpiled_multibase`: 116 testes.
    - `packages/transpiled_cid`: 27 testes.
    - Demais pacotes (`transpiled_multihash`, `transpiled_datastore`, `transpiled_multiaddr_dns`, `transpiled_libp2p_kbucket`, `transpiled_libp2p_record`, `transpiled_libp2p_pubsub`, `transpiled_go_yamux`, etc.): 100% aprovados.
-   - Testes de integração na raiz: 124/124 testes passando.
+   - Testes na raiz (`dart test`): 2.399/2.399 testes passando (100%).
+   - Testes na raiz com tags de rede (`dart test --preset network`): 2.404/2.404 testes passando (100%).
+   - Testes de interoperabilidade com Kubo real (`dart test --preset interop`): 5/5 aprovados (Bitswap download, Bitswap serving, DHT findprovs, DHT provide, UnixFS large file DAGs).
+   - **Atenção:** o `dart test` da raiz **não** executa as suítes dos pacotes transpilados, e `melos` não está disponível no PATH desta máquina. A suíte completa exige rodar, além da raiz, cada pacote em `packages/*/`, mais os presets `interop` e `network`. Um "All tests passed" com contagem de pulados (`~N`) não é prova de suíte verde: as tags `p0`, `p1`, `helia` e `network` são puladas por padrão.
 
 ### Pontos de Atenção e Roadmap Técnico
 
@@ -72,21 +147,48 @@ Este painel consolida o estado oficial da auditoria automatizada entre o upstrea
    - **Isolamento de Ciclo de Vida em Background (Isolates)**: Suporte para execução do nó P2P em um Isolate dedicado do Dart, garantindo que operações de I/O de rede e criptografia pesada (Noise/Ed25519) não causem travamentos na thread principal (UI thread a 60/120 fps no Flutter).
    - **Servidor Bitswap / Hospedagem Ativa de Arquivos (Seeder / Provider)**: O Objetivo 1 focou no cliente Bitswap (download P2P). Para que nós externos consigam baixar arquivos hospedados exclusivamente no nó Dart, o receptor de stream (_handleIncoming) precisa responder a mensagens de wantlist enviando blocos locais do Blockstore e anunciando periodicamente na DHT (DHT.provide).
 
+2. **Lacunas Conhecidas de Descoberta e Participação na Rede (verificadas no código em 2026-09-09)**:
+   - **Origem comum**: o nó registra **um único** handler de stream, o do
+     Bitswap (`lib/src/protocols/bitswap/bitswap_client.dart:48`). Todo o
+     restante da participação na rede é de saída (cliente), não de entrada.
+   - **Servidor DHT ausente**: o nó **não responde** `/ipfs/kad/1.0.0`. Não
+     serve `FIND_NODE` nem `GET_PROVIDERS`, e não armazena `ADD_PROVIDER` de
+     terceiros — é cliente-only. O encoder `encodeDhtResponse` já existe e está
+     testado em `dht_message.dart`; falta o handler de stream e o armazenamento
+     dos registros recebidos.
+   - **Sem routing table em runtime**: `DhtRoutingTable` é apenas
+     `abstract class` em `lib/src/core/interfaces/routing_table.dart:31`. Cada
+     `provide`/`findProviders` recomeça do zero pelos bootstrappers, porque o
+     caminhamento monta um `QueryPeerset` efêmero e o descarta ao final. O
+     pacote `transpiled_libp2p_kbucket` (48,7%, com `table.dart`, `bucket.dart`
+     e `table_refresh.dart`) já existe e **não é consumido por ninguém**.
+   - **`ObservedAddrManager` ausente**: o `Identify` transpilado só **envia**
+     `observedAddr`, não coleta o que os peers reportam de volta. O nó não
+     descobre sozinho seu endereço público e depende de UPnP ou de
+     `announceAddresses` fixo.
+   - **mDNS ausente**: não há descoberta de peers na LAN.
+   - **Reprovide automático ausente na biblioteca**: registros de provider
+     expiram (~24h na Amino; o Kubo reanuncia a cada 12h). Hoje só
+     `bin/host_payload.dart` tem um timer ad hoc de 5 minutos — a biblioteca em
+     si não reanuncia.
+   - **Peerstore não persistente**: não há equivalente a `pstoreds`; a cada
+     reinício o nó perde todos os peers conhecidos.
+
 ### O que é auditável (Superfície Upstream Go e Cobertura AST)
 
 O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das declarações do upstream. A ferramenta de auditoria permite verificar instantaneamente o que falta portar e se qualquer alteração fere o contrato:
 
 | Métrica AST | Total Upstream Go | Implementado em Dart | Falta Portar | Cobertura | Status |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Tipos (Classes / Interfaces)** | 1.663 | 280 | 1.383 | 16.8% | Auditável via `--rule RULE_MISSING_GO_TYPES` |
-| **Métodos** | 8.927 | 879 | 8.048 | 9.8% | Auditável via `--rule RULE_MISSING_GO_METHODS` |
-| **Campos de Structs** | 3.033 | 229 | 2.804 | 7.6% | Auditável via `--rule RULE_MISSING_GO_FIELDS` |
-| **Funções Top-Level** | 2.753 | 194 | 2.559 | 7.0% | Auditável via `--rule RULE_MISSING_GO_FUNCTIONS` |
-| **TOTAL NO ESCOPO** | **16.376** | **1.582** | **14.794** | **9.7%** | Relatório em `PROGRESS_RELATORY.md` |
-| **Testes Atômicos 1 para 1** | **2.073** | **2.073** | **0** | **100.0%** | Auditável via `--tests` (0 pendências / 0 erros) |
+| **Tipos (Classes / Interfaces)** | 1.663 | 321 | 1.342 | 19.3% | Auditável via `--rule RULE_MISSING_GO_TYPES` |
+| **Métodos** | 8.927 | 1.056 | 7.871 | 11.8% | Auditável via `--rule RULE_MISSING_GO_METHODS` |
+| **Campos de Structs** | 3.033 | 253 | 2.780 | 8.3% | Auditável via `--rule RULE_MISSING_GO_FIELDS` |
+| **Funções Top-Level** | 2.753 | 213 | 2.540 | 7.7% | Auditável via `--rule RULE_MISSING_GO_FUNCTIONS` |
+| **TOTAL NO ESCOPO** | **16.376** | **1.843** | **14.533** | **11.3%** | Relatório em `PROGRESS_RELATORY.md` |
+| **Testes Atômicos 1 para 1** | **2.300** | **2.300** | **0** | **100.0%** | Auditável via `--tests` (0 pendências / 0 erros) |
 
 > [!NOTE]
-> Conforme a regra de escopo do `AGENTS.md`, Kubo, Boxo e go-libp2p são referências de biblioteca para um nó embutido. Os ~90% de símbolos restantes pertencem a subsistemas opcionais (Gateway HTTP, FUSE, Circuit Relay v2, WebRTC, CLI, Tracing) e **não constituem pendências impeditivas** para o nó P2P.
+> Conforme a regra de escopo do `AGENTS.md`, Kubo, Boxo e go-libp2p são referências de biblioteca para um nó embutido. Os ~90% de símbolos restantes pertencem a subsistemas opcionais (Gateway HTTP, FUSE, WebRTC, CLI, Tracing) e **não constituem pendências impeditivas** para o nó P2P.
 
 ### Como Auditar (Comandos Oficiais)
 
@@ -100,6 +202,168 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
 - **Verificar apenas erros bloqueantes:** `python tool/audit_ast_nomenclature.py --severity ERROR`
 
 ## Como isto foi gerado / como continuar
+
+### Suíte verde ponta a ponta, quebras herdadas do `core-module-split` e demonstração pública com payload dedicado — 2026-09-09
+
+- **Duas suítes que não compilavam foram consertadas.** Ambas eram quebras
+  pré-existentes, herdadas do refactor `core-module-split` ainda pendente nesta
+  branch, sem qualquer relação com o Objetivo 4. Só apareceram porque a
+  validação foi ampliada para além do `dart test` da raiz.
+  - `test/transport/dns/system_resolver_network_test.dart` falhava já no
+    carregamento com `Error: Type 'Multiaddr' not found`. Causa: o teste usava
+    `Multiaddr` contando que o tipo vazasse pelo barrel
+    `package:transpiled_multiaddr_dns/transpiled_multiaddr_dns.dart`, que
+    exporta apenas `src/dns_resolver.dart`. Correção: import explícito de
+    `package:transpiled_multiaddr/transpiled_multiaddr.dart`. Resultado:
+    `dart test --preset network test/transport/dns/` passa 14/14.
+  - `packages/transpiled_boxo/test/bitswap/client/client_test.dart` falhava no
+    carregamento com `Error: 'Client' is imported from both
+    'package:transpiled_boxo/src/bitswap/client/client.dart' and
+    'package:transpiled_libp2p/src/p2p/protocol/circuitv2/client/client.dart'`.
+    Causa: o Circuit Relay v2 (Marco D.2) introduziu no `transpiled_libp2p` um
+    `Client` que colide com o `Client` do bitswap. Os dois nomes estão corretos e
+    fiéis ao upstream Go (Regra 12), então quem cede é o ponto de importação:
+    o `hide` que o arquivo já usava foi estendido de `hide Stats` para
+    `hide Stats, Client`, mesmo padrão do `hide Blockstore` já empregado em
+    `lib/src/node/ipfs_node.dart`. Resultado: a suíte do `transpiled_boxo` passa
+    84/84.
+- **Descoberta sobre o alcance real da validação.** Constatou-se que `dart test`
+  na raiz **não** executa as suítes dos pacotes transpilados, e que `melos` não
+  está disponível no PATH desta máquina (`melos run test` falha com "não é
+  reconhecido"). Além disso, um "All tests passed" com contagem de pulados
+  (`~N`) **não** é prova de suíte verde, porque as tags `p0`, `p1`, `helia` e
+  `network` são puladas por padrão. Foi exatamente por isso que as duas quebras
+  acima passaram despercebidas. Em consequência, foi acrescentada ao `AGENTS.md`
+  a seção **"Suíte verde é a linha de base, independente de autoria"**, que
+  estabelece: (a) todo teste que falhe ou não compile deve ser corrigido por quem
+  o encontrar, independente de quem introduziu a quebra — o diagnóstico de origem
+  serve para achar a causa raiz, nunca para deixar a falha de pé; (b) reparar um
+  teste para voltar a compilar é trabalho autônomo, mas alterar o que um teste
+  que funciona afirma exige consulta ao usuário; (c) a suíte completa exige
+  rodar, além do `dart test` da raiz, cada pacote em `packages/*/`, mais os
+  presets `interop` e `network`.
+- **Validação final completa, toda verde:** suíte raiz `dart test` 2.399/2.399;
+  `dart test --preset network` 2.404/2.404; todos os pacotes transpilados verdes
+  (incluindo `transpiled_boxo` 84/84); `dart test --preset interop` 5/5 contra
+  Kubo real; `python tool/audit_ast_nomenclature.py --tests --severity ERROR` com
+  0 erros e cobertura de testes atômicos 100%.
+- **`bin/host_payload.dart` passou a aceitar o texto do payload por argumento de
+  linha de comando** (`dart run bin/host_payload.dart 'texto'`), mantendo a
+  sequência aleatória de `Random.secure()` como comportamento padrão quando
+  nenhum argumento é passado. Serve para hospedar um conteúdo específico sob
+  demanda.
+- **Demonstração ponta a ponta com o Objetivo 4 já completo:** um texto
+  específico foi hospedado **exclusivamente** pelo nó Dart e recuperado por
+  gateways HTTPS públicos apenas pelo CID.
+  - Nó `12D3KooWSWepmjLRPDg1mq7uZDqZf8bbk7B6RAHVJdvMccEy9y2e`, anunciado em
+    `/ip4/187.62.8.47/tcp/4002`.
+  - UnixFS CID `QmUvS7exRNx3pDPHsWqyQPjcvZrJ7DJgcLKejd2TX7b2kv`; raw CID
+    `Qmb6HnZinG2Ybtv87SUT1xP5cXy2sQfKbet9Mpc7FJ45CH`.
+  - `ipfs.io` respondeu HTTP 504 na primeira tentativa (o `provide` ainda
+    percorria a DHT) e HTTP 200 com o conteúdo correto na segunda, em menos de um
+    minuto do início ao fim; `gateway.pinata.cloud` também respondeu HTTP 200 com
+    os 514 bytes. Confirma em uso real o que o teste automatizado do Marco E.3 já
+    provava.
+- **`audit_report.md` regenerado** com
+  `python tool/audit_ast_nomenclature.py --markdown --output audit_report.md`,
+  por estar desatualizado em relação às mudanças desta sessão.
+
+### Marco E.3 — descoberta cega pública comprovada em rede real — 2026-09-09
+
+- Fecha o Objetivo 4. Comprovado que um bloco hospedado **exclusivamente** pelo
+  nó Dart é descoberto e recuperado por gateways HTTPS públicos apenas pelo CID,
+  sem multiaddr prévio, sem `swarm connect` manual e sem daemon externo
+  intermediando o anúncio.
+- Teste criado: `test/routing/dht_public_discovery_network_test.dart`, marcado
+  `@Tags(['network'])` (portanto pulado por padrão conforme `dart_test.yaml`).
+  Execução:
+  `dart test --preset network test/routing/dht_public_discovery_network_test.dart`,
+  exigindo a variável de ambiente `DART_IPFS_ANNOUNCE_ADDR` com o multiaddr WAN
+  público do host.
+- Fluxo do teste: sobe um `IpfsNode` online com os bootstrappers públicos da
+  Amino DHT; gera 256 bytes aleatórios com `Random.secure()` (bloco novo e
+  irrepetível, impossível de estar em cache de qualquer gateway ou de estar
+  hospedado por qualquer outro nó do planeta); grava esse bloco **apenas** no
+  blockstore do nó Dart via `putRawBlock`; chama `node.provide(cid)` (que usa
+  `getClosestPeers` → `ADD_PROVIDER` aos 20 mais próximos); e então consulta
+  gateways HTTPS públicos **apenas pelo CID**, via
+  `https://<gateway>/ipfs/<cid>?format=raw`, comparando byte a byte.
+- Resultado da execução, reproduzido em duas rodadas independentes (59 s e 72 s):
+  - PeerId do nó Dart: `12D3KooWDsMmX7axDC6HTTXUNe4upxEvFbNQjmE2FToVVbBzUK6f`.
+  - Endereço anunciado: `/ip4/187.62.8.47/tcp/4002`.
+  - CID gerado na rodada registrada:
+    `QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6`.
+  - Gateway que serviu os bytes exatos:
+    `https://ipfs.io/ipfs/QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6?format=raw`.
+  - Tempo até a descoberta pública: 72 segundos.
+- Confirmação independente adicional: **depois** de o nó Dart já ter sido
+  encerrado pelo teardown do teste, o daemon Kubo local (processo separado,
+  tabela de roteamento própria, `IPFS_PATH=B:\IPFS\.ipfs`) executou
+  `ipfs routing findprovs QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6` e
+  obteve como resposta exatamente
+  `12D3KooWDsMmX7axDC6HTTXUNe4upxEvFbNQjmE2FToVVbBzUK6f`. Como o nó Dart já
+  estava offline, o registro de provider veio da própria Amino DHT pública,
+  provando que as mensagens `ADD_PROVIDER` emitidas pelo `provide` autônomo
+  (Marco E.2) foram de fato armazenadas pelos nós mais próximos da rede global.
+- Muleta removida: `bin/host_payload.dart` continha uma chamada
+  `Process.run('ipfs', ['routing', 'provide', ...])` que delegava o anúncio
+  global ao daemon Kubo local — exatamente o "encaminhamento de anúncio" que o
+  Objetivo 4 existia para eliminar. Essa chamada foi removida, já que o
+  `provide` do nó Dart agora anuncia sozinho.
+- Regressão validada com o `provide` reescrito: os 4 testes de
+  interoperabilidade com Kubo real continuam 100% verdes
+  (`local_kubo_dht_serving_test.dart` / Marco C.2,
+  `local_kubo_dht_bitswap_test.dart` / Marco B,
+  `local_kubo_serving_test.dart` / Marco C.1 e
+  `local_kubo_bitswap_test.dart` / Marco A). Suíte raiz `dart test`:
+  2.399/2.399. `python tool/audit_ast_nomenclature.py --tests --severity ERROR`:
+  0 erros e cobertura de testes atômicos 100%.
+
+### Marcos E.1 e E.2 — busca iterativa Kademlia e `provide` autônomo — 2026-09-09
+
+- Rastreamento upstream do método: `go-libp2p-kad-dht: IpfsDHT.GetClosestPeers`
+  (`lookup.go`, catalogado em
+  `go-ipfs-reference/go-libp2p-kad-dht-index/(root).md:135`) →
+  `DhtClient.getClosestPeers` em `lib/src/routing/dht_provider_finder.dart`.
+  Rastreamento da mensagem: `Message_FIND_NODE`
+  (`go-ipfs-reference/go-libp2p-kad-dht-index/pb.md:251`, usada por
+  `ProtocolMessenger.GetClosestPeers`) → `encodeFindNode` em
+  `lib/src/protocols/dht/dht_message.dart`.
+- `encodeFindNode(Uint8List key)` codifica a mensagem protobuf DHT com campo 1
+  `type` = 4 (`FIND_NODE`), campo 2 `key` e campo 10 `clusterLevelRaw`, seguindo
+  exatamente o mesmo padrão das funções top-level já existentes
+  `encodeGetProviders` e `encodeAddProvider`.
+- O motor de caminhamento iterativo Kademlia, antes acoplado dentro de `_lookup`
+  (específico de `GET_PROVIDERS`), foi extraído para o método privado genérico
+  `_walk({key, request, isCancelled, stop, onProvider, onError})`, que devolve o
+  `QueryPeerset` final. A extração eliminou o bloco duplicado que existia entre o
+  laço principal e a fase de follow-up: a absorção de `closerPeers` e
+  `providerPeers` passou a ser o closure `absorb`. `_lookup` (usado por
+  `findProvidersAsync`, Marco B) ficou um chamador fino de `_walk` com
+  `encodeGetProviders`, preservando o comportamento observável anterior.
+- `_query`/`_safeQuery` passaram a receber os bytes da requisição
+  (`Uint8List request`) em vez de um `Cid`, servindo tanto a `GET_PROVIDERS`
+  quanto a `FIND_NODE`. Os protocolos oferecidos na abertura da stream DHT foram
+  centralizados na constante privada
+  `_kadProtocols = ['/ipfs/kad/1.0.0', '/ipfs/lan/kad/1.0.0']`, usada por `_query`
+  e por `_sendAddProvider`; antes `_query` oferecia apenas o protocolo WAN.
+- `DhtClient.provide(Cid cid, AddrInfo provider)` deixou de anunciar
+  `ADD_PROVIDER` apenas para os `bootstrapPeers` somados aos peers já conectados
+  no swarm (varredura de `router.host.network.conns()`, muleta do estado
+  "parcialmente público") e passou a chamar `getClosestPeers(cid.multihash)`,
+  despachando o anúncio para os 20 peers mais próximos do multihash. Os
+  `bootstrapPeers` permanecem exclusivamente como fallback para o caso em que o
+  caminhamento não alcança nenhum peer.
+- Cobertura da Regra 24: dois testes atômicos novos em
+  `test/atomic/nivel_2/lib_atomic_tests.dart` (`encodeFindNode()` e
+  `DhtClient.getClosestPeers()`). Nenhum teste existente foi alterado.
+- Validação: `dart analyze lib` sem problemas; `dart test` (suíte raiz completa)
+  100% verde; `python tool/audit_ast_nomenclature.py --tests --severity ERROR`
+  retornou "NENHUMA INCONSISTÊNCIA ENCONTRADA", com 0 erros e cobertura de testes
+  atômicos 100% em todos os pacotes.
+- Pendência: o Marco E.3 continua aberto. Até aqui não houve nenhuma validação em
+  rede real da descoberta cega — nem comprovação em gateways públicos — do
+  anúncio autônomo implementado nos Marcos E.1 e E.2.
 
 ### Migração e retomada dos testes atômicos — 2026-09-09
 
@@ -139,7 +403,10 @@ O índice AST do Go (`go-ipfs-reference/*-index/`) cataloga a totalidade das dec
   memória e verifica bytes recebidos. Os testes QUIC corrigem expectativas
   inválidas: ALPN ausente lança `StateError`; certificado DER vazio lança
   `FormatException` nas dependências chamadas pelo adaptador. Nenhuma validação
-  de segurança foi removida.
+  de segurança foi removida. (**Nota de 2026-09-09:** os testes QUIC citados
+  aqui não existem mais — `test/transport/quic/` e `lib/src/transport/quic/`
+  foram removidos no refactor `core-module-split`; ver a nota "Superado em
+  2026-09-09" na seção `go-libp2p`.)
 
 ### Auditoria AST, Governança de Nomenclatura e Fidelidade Não-Pública (Regras 4, 11, 12 e 23) — 2026-09-08
 
@@ -152,7 +419,7 @@ Conclusão da auditoria automatizada de conformidade estrita do `AGENTS.md` via 
    - `RULE_EXPOSED_NON_PUBLIC_MEMBERS` (Regra 23): Veto a tipos privados em assinaturas públicas, adoção do princípio do menor privilégio (Cenários A, B e C).
    - Formalização no `AGENTS.md`: Exigência irrevogável de que qualquer tipo, método ou campo interno/não-público (`unexported`/`internal/`) seja implementado com fidelidade estrita integral ao Golang, vedando mocks, stubs ou simplificações em produção.
 3. **Status e Relatórios**:
-   - Auditoria estrita com **0 erros e 0 avisos** em todos os 4.743 símbolos Dart auditados.
+   - Auditoria estrita com **0 erros e 0 avisos** em todos os símbolos Dart auditados (na data desta entrada eram 4.743; a medição vigente está no Painel Executivo, no topo deste arquivo).
    - Geração automática de `PROGRESS_RELATORY.md` integrada via flag `--progress`.
 
 ### Port de boxo/bitswap/network e boxo/bitswap/client para transpiled_boxo — 2026-09-08
@@ -1185,6 +1452,12 @@ engine, QUIC, UnixFS, DAG traversal, MFS ou pinning. Bitswap server é necessár
 para servir blocos; UnixFS/DAG entram quando o objetivo passar de um bloco raw
 para reconstruir arquivos ou diretórios completos.
 
+> [!NOTE]
+> **Nota de 2026-09-09:** desta lista, o Bitswap server foi concluído
+> (Objetivo 2) e UnixFS/DAG traversal estão em uso. O QUIC continua fora do
+> escopo, mas **não mais pelo motivo registrado à época** (bloqueio no `Swarm`
+> de terceiro) — ver a nota "Superado em 2026-09-09" na seção `go-libp2p`.
+
 ## Status
 
 - `Status` possíveis: `não iniciado` | `em andamento` | `portado sem teste de paridade` | `portado com paridade comprovada` | `implementação original não auditada` | `fora do escopo (<razão confirmada>)`.
@@ -1351,6 +1624,16 @@ Isto é o que uma sessão futura precisa saber pra continuar de onde paramos —
 
 **Ordem de prioridade invertida** (ver plano, `lexical-fluttering-acorn.md`): testei um nó real conectando contra `bootstrap.libp2p.io` e descobri que o handshake Noise da dependência `ipfs_libp2p` (usada hoje pra host/transporte/segurança) rejeitava qualquer peer real que não fosse Ed25519 (causa raiz real detalhada na linha do `p2p/security/noise` abaixo), então portar `core/crypto`/`core/peer` sozinho (Tier 2 original) não destravava conexão real (a checagem está na camada de segurança). Por isso `core/sec`/`p2p/security/{noise,tls}` (Tier 3 original) viraram prioridade antes do resto de `core/crypto`/`core/peer`/`core/record`. Também achado no mesmo teste: discagem QUIC-v1 de saída falha com "No transport found for address" -- investigado a fundo depois (ver `p2p/transport/quic` abaixo): é um bloqueio arquitetural real com o `Swarm` de terceiro, não um gap de implementação simples, e ficou arquivado como pendência deliberada, não corrigido.
 
+> [!NOTE]
+> **Superado em 2026-09-09 — registro histórico, mantido como está.** A premissa
+> desta entrada (o `Swarm`/`BasicUpgrader` pertencerem à dependência de terceiro
+> `ipfs_libp2p`, não editável neste repositório) deixou de valer: o Marco D.1
+> eliminou `ipfs_libp2p` e o `Swarm`/`BasicUpgrader` passaram a ser código
+> próprio em `packages/transpiled_libp2p/`. O pacote `packages/dart_ipfs_quic/`
+> não existe mais e `lib/src/transport/quic/` foi removido no refactor
+> `core-module-split`. Retomar QUIC hoje é uma **decisão nova** sobre o `Swarm`
+> próprio do projeto, não a remoção de um impedimento externo.
+
 **Correção validada contra a rede real (`bootstrap.libp2p.io`)**: com `DartIpfsNoiseSecurity` plugado (ver linha `p2p/security/noise`), um nó `dart_ipfs` real conectou e **manteve conectados os 4 peers de bootstrap padrão por 40s seguidos** (script de teste ad-hoc, mesmo método usado na investigação original) -- os 4 IDs são `Qm...` (multihash sha2-256 legado, não `identity`/inline), o que é exatamente o padrão de peer com chave RSA que travava antes dessa correção. Antes desta sessão, o mesmo teste ficava em 0 peers conectados por 30s.
 
 Um bug concreto de `core/peer` já foi corrigido fora de ordem (motivado pelo mesmo teste): `PeerId.fromPublicKey` em `packages/transpiled_libp2p/lib/src/core/peer/peer_id.dart` calculava `sha256(chave pública crua)` diretamente, em vez de multihash do `PublicKey{Type, Data}` protobuf-marshaled (`identity` multihash quando o marshaled cabe em ≤42 bytes -- sempre o caso pra Ed25519, 36 bytes -- `sha2-256` caso contrário, exatamente `IDFromPublicKey` de `core/peer/peer.go`). Também rejeitava qualquer tipo que não fosse `'Ed25519'`; agora aceita `RSA`/`Secp256k1`/`ECDSA` também (só a derivação do PeerId, não assinatura/verificação -- isso ainda é `core/crypto` de verdade). Um protobuf mínimo de 2 campos (`PublicKey{Type, Data}`, crypto.proto) foi escrito à mão em `peer_id.dart` -- não vale a pena codegen completo pra isso.
@@ -1472,7 +1755,7 @@ Corrigir esse bug expôs um segundo bug real, preexistente: `_encodeBase36`/`_de
 | `p2p/test/backpressure` |  | não iniciado |  |
 | `p2p/test/reconnects` |  | não iniciado |  |
 | `p2p/test/resource-manager` |  | não iniciado |  |
-| `p2p/transport/quic` | `packages/dart_ipfs_quic/` (`QuicTransport`/`QuicConnection`, sobre o `quic_lib` de terceiro) | **bloqueado por arquitetura, documentado, não corrigido** | Corrigido um bug pequeno e real: `QuicTransport.canDial`/`canListen` reivindicava endereços `.../quic-v1/webtransport` que pertencem ao WebTransport, quebrando-o sempre que QUIC também estava habilitado. Além disso: discagem QUIC real quebra com `UnsupportedError` porque o `Swarm`/`BasicUpgrader` do `ipfs_libp2p` roda incondicionalmente negociação de segurança (Noise) + muxer sobre QUALQUER transporte, sem exceção pra transportes autossegurados/automultiplexados como QUIC de verdade -- e pior, `Swarm.newStream()` (usado por DHT/Bitswap/Identify via `Host.newStream()`) exige um `SwarmConn` interno, então uma conexão QUIC só pode ser usada pelo resto da pilha de protocolo se vier do próprio caminho de discagem do `Swarm` (o mesmo que força a negociação que QUIC de verdade não usa). Ser compatível com peers QUIC reais E utilizável pelo DHT/Bitswap/Identify como estão hoje são mutuamente exclusivos sem editar o `ipfs_libp2p` (dependência de terceiro, não editável neste repo -- mesma restrição do Noise). Decisão: arquivado como pendência deliberada, não perseguido agora. Detalhe completo, incluindo as duas rotas possíveis (QUIC só-entre-dart_ipfs vs. reescrever o caminho de stream do DHT/Bitswap/Identify pra contornar o Swarm) em `doc/specs/QUIC_TRANSPORT_RFC.md`, seção "Architectural blocker (2026-08-25)" -- ler antes de retomar. |
+| `p2p/transport/quic` | `packages/dart_ipfs_quic/` (`QuicTransport`/`QuicConnection`, sobre o `quic_lib` de terceiro) | **bloqueado por arquitetura, documentado, não corrigido** | Corrigido um bug pequeno e real: `QuicTransport.canDial`/`canListen` reivindicava endereços `.../quic-v1/webtransport` que pertencem ao WebTransport, quebrando-o sempre que QUIC também estava habilitado. Além disso: discagem QUIC real quebra com `UnsupportedError` porque o `Swarm`/`BasicUpgrader` do `ipfs_libp2p` roda incondicionalmente negociação de segurança (Noise) + muxer sobre QUALQUER transporte, sem exceção pra transportes autossegurados/automultiplexados como QUIC de verdade -- e pior, `Swarm.newStream()` (usado por DHT/Bitswap/Identify via `Host.newStream()`) exige um `SwarmConn` interno, então uma conexão QUIC só pode ser usada pelo resto da pilha de protocolo se vier do próprio caminho de discagem do `Swarm` (o mesmo que força a negociação que QUIC de verdade não usa). Ser compatível com peers QUIC reais E utilizável pelo DHT/Bitswap/Identify como estão hoje são mutuamente exclusivos sem editar o `ipfs_libp2p` (dependência de terceiro, não editável neste repo -- mesma restrição do Noise). Decisão: arquivado como pendência deliberada, não perseguido agora. Detalhe completo, incluindo as duas rotas possíveis (QUIC só-entre-dart_ipfs vs. reescrever o caminho de stream do DHT/Bitswap/Identify pra contornar o Swarm) em `doc/specs/QUIC_TRANSPORT_RFC.md`, seção "Architectural blocker (2026-08-25)" -- ler antes de retomar. **Superado em 2026-09-09 (nota adicionada, entrada original preservada):** a premissa caiu — o Marco D.1 eliminou `ipfs_libp2p`, e `Swarm`/`BasicUpgrader` são hoje código próprio em `packages/transpiled_libp2p/`, editável. O pacote `packages/dart_ipfs_quic/` não existe mais e `lib/src/transport/quic/` foi removido no refactor `core-module-split`. Não há mais bloqueio externo: retomar QUIC é uma decisão nova sobre o `Swarm` do próprio projeto. Status efetivo hoje: **não iniciado**. |
 | `p2p/transport/quic/cmd/client` |  | não iniciado |  |
 | `p2p/transport/quic/cmd/lib` |  | não iniciado |  |
 | `p2p/transport/quic/cmd/server` |  | não iniciado |  |

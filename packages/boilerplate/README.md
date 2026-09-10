@@ -59,8 +59,12 @@ Float32 stores IEEE 754 binary32 in four bytes. Arithmetic uses Dart binary64
 intermediates followed by explicit binary32 conversion. A Go oracle checks 324
 outputs including subnormal values, overflow, signed zero and infinity; NaNs
 are compared by classification, not payload. This is not exhaustive proof of
-all rounding cases or Go compiler FMA choices. Integer/float conversions,
-and complex types remain pending. Go permits implementation-dependent
+all rounding cases or Go compiler FMA choices. Integer/float conversions
+(`test/integer_conversion_test.dart`, `test/float_conversion_test.dart`,
+`test/integer_float_test.dart`) and the complex types (`Complex64`,
+`Complex128`, `test/go_complex_parity_test.dart`) are implemented and checked
+against Go oracles; the full conversion matrix across all type pairs is still
+incomplete, as noted above. Go permits implementation-dependent
 behavior for floating division by zero; this implementation follows IEEE
 infinities/NaN. It does not simulate compiler constant evaluation.
 

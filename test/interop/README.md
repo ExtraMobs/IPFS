@@ -1,11 +1,18 @@
 # Interop Test Infrastructure
 
-See [INTEROP_TESTS.md](INTEROP_TESTS.md) for the isolated local-process
-harness, lifecycle invariants, and instructions for adding protocol tests.
+The interop proofs that actually run today are Kubo-only: the five VM tests
+under `test/interop/test/`, driven by `lib/local_kubo_harness.dart`. See
+[INTEROP_TESTS.md](INTEROP_TESTS.md) for that isolated local-process harness,
+its lifecycle invariants, and instructions for adding protocol tests.
 
-This directory contains infrastructure for testing dart_ipfs against Helia (JavaScript IPFS implementation).
+> **Status:** the Helia (JavaScript IPFS) harness described below is **not
+> present in this repository**. `helia/` contains only `package.json` and
+> `package-lock.json`; the scripts they point at (`helia/server.js` and
+> `../generate_swarm_key.js`) are not committed, and no test carries the
+> `helia` tag today. The steps below document the intended setup, not
+> something that runs as written.
 
-## Setup
+## Setup (planned Helia harness)
 
 ### 1. Install Node.js dependencies
 

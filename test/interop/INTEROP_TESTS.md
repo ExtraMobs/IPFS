@@ -2,13 +2,19 @@
 
 This directory contains VM tests that prove wire-level interoperability with
 an independently installed IPFS implementation. The reusable local process
-helper is `lib/local_kubo_harness.dart`; its P0 consumers cover both a known
-Bitswap provider and DHT provider discovery followed by Bitswap.
+helper is `lib/local_kubo_harness.dart`. Its P0 consumers cover both
+directions: downloading from a known Kubo Bitswap provider
+(`local_kubo_bitswap_test.dart`), DHT provider discovery followed by Bitswap
+(`local_kubo_dht_bitswap_test.dart`), Kubo downloading a block served by the
+Dart node over a direct connection (`local_kubo_serving_test.dart`), and Kubo
+finding that Dart node through the DHT before downloading
+(`local_kubo_dht_serving_test.dart`). The single P1 consumer is the large
+UnixFS proof (`local_kubo_large_unixfs_test.dart`).
 
 ## Invariants
 
-- Tests use direct P2P connections (TCP/Noise/Bitswap). HTTP gateway reads do
-  not count as proof.
+- Tests use direct P2P connections (TCP/Noise/yamux/Bitswap; the node has no
+  QUIC transport). HTTP gateway reads do not count as proof.
 - Every Kubo instance gets a newly-created repository. The harness uses
   `<workspace>/.tmp-validation/kubo-*` when the repository root is available,
   otherwise `Directory.systemTemp`.
@@ -53,8 +59,14 @@ From the repository root:
 ```text
 dart test --preset interop test/interop/test/local_kubo_bitswap_test.dart
 dart test --preset interop test/interop/test/local_kubo_dht_bitswap_test.dart
+dart test --preset interop test/interop/test/local_kubo_serving_test.dart
+dart test --preset interop test/interop/test/local_kubo_dht_serving_test.dart
 dart test --preset interop
 ```
+
+The `p0`, `p1` and `helia` tags are skipped by default (see `dart_test.yaml`),
+so only `--preset interop` actually executes these tests; a plain `dart test`
+reports them as skipped.
 
 The large UnixFS proof accepts `KUBO_LARGE_FIXTURE_SIZES` as a comma-separated
 subset of `50,100,200,500` (MiB), or `all`. It generates exact-size

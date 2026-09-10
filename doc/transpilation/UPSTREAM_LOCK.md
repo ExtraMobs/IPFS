@@ -29,5 +29,10 @@ dos clones só podem alterar esta tabela junto com a revalidação dos ports afe
 | `go-libp2p-record` | `github.com/libp2p/go-libp2p-record` | `24a25767ab0bae0d74df408199f554ce42977892` | <https://github.com/libp2p/go-libp2p-record.git> |
 | `go-libp2p-routing-helpers` | `github.com/libp2p/go-libp2p-routing-helpers` | `246b1c6f74307b0847842d72f2208b69d2b13790` | <https://github.com/libp2p/go-libp2p-routing-helpers.git> |
 
-Os clones correspondentes ficam em `../go-ipfs-reference/<clone local>` e os
-índices AST em `../go-ipfs-reference/<clone local>-index`.
+Os clones correspondentes ficam em `go-ipfs-reference/<clone local>`, na raiz
+deste checkout, e os índices AST em `go-ipfs-reference/<clone local>-index`.
+Duas exceções de nomenclatura: o índice de `go-libp2p` é `libp2p-index` e o de
+`go-multiaddr-dns` é `multiaddr-dns-index`. Os clones `go-block-format`,
+`go-car-v2`, `go-unixfsnode` e `go-yamux` ainda não têm índice AST gerado. As
+entradas marcadas "(cache Go, ...)" vêm do module cache do Go e não têm clone
+local em `go-ipfs-reference/`.

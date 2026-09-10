@@ -23,20 +23,189 @@ Comprovada a hospedagem e o servimento P2P de dados (seeding) por CID para outro
 - **Marco C.2 (Anúncio e Descoberta via DHT)**:
   `Dart anuncia CID na DHT via provide → Kubo findprovs → Kubo descobre nó Dart → conecta → Bitswap → valida bloco` (100% comprovado via `local_kubo_dht_serving_test.dart`).
 
-### Objetivo 3 — Transpilação Completa da libp2p e NAT Traversal (Próximo Marco / Em andamento)
+### Objetivo 3 — Transpilação dos subsistemas de host e rede da libp2p e NAT Traversal (Concluído)
 
-Implementação nativa da `go-libp2p` integral em `packages/transpiled_libp2p/` com paridade Go, eliminando shims e dependências externas via git, e aplicação de NAT Traversal completo no nó embutido (`IpfsNode`):
+Implementação nativa em `packages/transpiled_libp2p/` dos subsistemas de host,
+rede e NAT Traversal necessários ao nó embutido, com paridade Go, eliminando
+shims e dependências externas via git:
 
-- **Marco D.1 (Transpilação Completa de `go-libp2p` em `packages/transpiled_libp2p/`)**:
-  Portar os subsistemas de host, rede e identificação (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `IdentifyPush`, `connmgr`), substituindo a dependência externa `ipfs_libp2p` e mantendo conformidade com as 24 regras do auditor AST e 100% de cobertura de testes atômicos.
+> [!IMPORTANT]
+> Este objetivo **não** portou a `go-libp2p` integralmente, e o pacote não deve
+> ser tratado como fechado. A cobertura atual é de 748 de 3.688 símbolos
+> (**20,3%**; tipos 141/391 — ver `PROGRESS_RELATORY.md`). O nó fala uma única
+> combinação: **TCP + Noise + yamux**. Não estão portados: os transportes QUIC,
+> WebSocket, WebTransport e WebRTC; a segurança TLS; o muxer mplex; e as
+> implementações da camada `discovery` (mDNS, `RoutingDiscovery`, rendezvous —
+> só as interfaces existem em `core/discovery/`). A porcentagem mede superfície
+> de API, não função: o que foi portado está comprovado contra Kubo real e
+> contra a rede pública.
+
+- **Marco D.1 (Transpilação dos subsistemas de host e rede de `go-libp2p`)**:
+  Portar os subsistemas de host, rede e identificação (`BasicHost`, `RoutedHost`, `Network`, `Swarm`, `Identify`, `IdentifyPush`, `connmgr`), substituindo a dependência externa `ipfs_libp2p` e mantendo conformidade com as 24 regras do auditor AST e 100% de cobertura de testes atômicos (100% concluído para esse escopo).
 - **Marco D.2 (NAT Traversal — AutoNAT e Circuit Relay v2)**:
-  Implementar detecção autônoma de reachability (`AutoNAT` v1/v2), cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` com handshake `RESERVE`) e gerenciamento autônomo de reservas (`AutoRelay`), publicando endereços `/p2p-circuit` no Swarm e na DHT.
+  Implementar detecção autônoma de reachability (`AutoNAT` v1/v2), cliente `Circuit Relay v2` (`/libp2p/circuit/relay/0.2.0/stop` com handshake `RESERVE`) e gerenciamento autônomo de reservas (`AutoRelay`), publicando endereços `/p2p-circuit` no Swarm e na DHT (100% concluído).
 - **Marco D.3 (Otimizações de Acesso — Hole Punching DCUtR e UPnP)**:
-  Implementar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade) e `NATManager` (UPnP / NAT-PMP) para abertura automática de portas em roteadores locais.
+  Implementar `/libp2p/dcutr` para sincronização de abertura de portas NAT (direct connection upgrade) e `NATManager` (UPnP / NAT-PMP) para abertura automática de portas em roteadores locais (100% concluído).
 - **Marco D.4 (Validação Global WAN Ponta a Ponta)**:
-  Comprovar alcance e consumo P2P a partir de nós externos na internet pública (ex.: `check.ipfs.network` discando e recuperando blocos através de endereço relay `/p2p-circuit`).
+  Comprovar alcance e consumo P2P a partir de nós externos na internet pública (100% comprovado via `check.ipfs.network` oficial discando diretamente para `/ip4/187.62.8.47/tcp/4002` do nó Dart na WAN e recuperando blocos via Bitswap).
+
+### Objetivo 4 — Descoberta Global Autônoma na DHT (Concluído)
+
+Concluída a transição do estado "parcialmente público" (onde o nó já era diretamente discável e servia blocos via WAN, mas ainda dependia de encaminhamento de anúncio para a descoberta cega) para "totalmente público e autônomo", com o ciclo completo de Kademlia Content Routing na Amino DHT implementado e comprovado em rede real. A muleta de encaminhamento de anúncio (`Process.run('ipfs', ['routing', 'provide', ...])` em `bin/host_payload.dart`) foi removida:
+
+- **Marco E.1 (Busca Iterativa Kademlia e Roteamento XOR)**:
+  Caminhamento iterativo Kademlia em `DhtClient.getClosestPeers(Uint8List key)`, sobre a mensagem `FIND_NODE` codificada por `encodeFindNode`, com cálculo de distância métrica XOR nos K-buckets, concorrência $\alpha=3$, término $\beta=3$, fase de follow-up e convergência para os 20 nós mais próximos da chave na rede pública Amino DHT (100% concluído).
+- **Marco E.2 (Anúncio Autônomo Global na DHT — `provide` iterativo)**:
+  `DhtClient.provide(Cid cid, AddrInfo provider)` reescrito sobre `getClosestPeers(cid.multihash)`: descobre autonomamente os 20 nós mais próximos do hash na Amino DHT e envia a mensagem protobuf `ADD_PROVIDER` com os endereços WAN reais (`/ip4/.../tcp/4002`) para esses 20 nós, sem varrer as conexões abertas no swarm e sem intermediação de daemon externo; os `bootstrapPeers` permanecem apenas como fallback (100% concluído).
+- **Marco E.3 (Descoberta Cega Pública Comprovada em Gateways HTTPS)**:
+  `bloco inédito de Random.secure() → putRawBlock apenas no blockstore Dart → node.provide(cid) → getClosestPeers → ADD_PROVIDER aos 20 mais próximos → gateway HTTPS público recupera os bytes só pelo CID` (100% comprovado via `dht_public_discovery_network_test.dart`, marcado `@Tags(['network'])` e executado com `dart test --preset network`). CID `QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6` servido por `https://ipfs.io/ipfs/QmNM7y6W1DqmTtkJGxLUDQ7bFehpsC59rjc8xesekKHrv6?format=raw` em 72s, a partir do nó `12D3KooWDsMmX7axDC6HTTXUNe4upxEvFbNQjmE2FToVVbBzUK6f` anunciado em `/ip4/187.62.8.47/tcp/4002`, sem multiaddr prévio nem `swarm connect` manual. Confirmação independente: já com o nó Dart offline, o daemon Kubo local respondeu `ipfs routing findprovs <cid>` com exatamente esse PeerId, provando que os `ADD_PROVIDER` ficaram armazenados na própria Amino DHT pública (100% comprovado).
+
+### Objetivo 5 — Interoperabilidade Plena de Rede (Próximo Marco)
+
+Os Objetivos 1 a 4 provaram que o nó **consome** e **publica** na rede: baixa,
+serve e anuncia blocos por CID, de forma autônoma e comprovada na internet
+pública. Este objetivo fecha o ciclo restante: tornar o nó um **participante
+completo** da rede, e não apenas um cliente dela.
+
+O diagnóstico que motiva o objetivo, verificado no código: o nó registra **um
+único** handler de stream, o do Bitswap (`lib/src/protocols/bitswap/bitswap_client.dart:48`).
+Ele consulta a DHT mas não a serve, não mantém tabela de roteamento viva, não
+descobre o próprio endereço público nem peers locais, e perde todo o estado de
+rede a cada reinício.
+
+- **Marco F.1 (Tabela de Roteamento Kademlia em Runtime)**:
+  Implementar `DhtRoutingTable` — hoje apenas `abstract class` em
+  `lib/src/core/interfaces/routing_table.dart:31` — consumindo o pacote
+  `packages/transpiled_libp2p_kbucket` (`table.dart`, `bucket.dart`,
+  `table_refresh.dart`), que está portado a 48,7% e **sem nenhum consumidor**.
+  K-buckets vivos, população a partir das conexões e do `Identify`, e refresh
+  periódico de buckets. Critério: lookups sucessivos deixam de recomeçar do
+  zero pelos `bootstrapPeers`. É pré-requisito do F.2, porque não se responde
+  `FIND_NODE` sem tabela de roteamento.
+- **Marco F.2 (Servidor DHT — handler de `/ipfs/kad/1.0.0`)**:
+  Registrar o handler de stream que hoje não existe, respondendo `FIND_NODE`,
+  `GET_PROVIDERS` e `PING` a partir da tabela do F.1, e armazenando
+  `ADD_PROVIDER` de terceiros num provider store com TTL. O encoder
+  `encodeDhtResponse` já existe e está testado em `dht_message.dart`. Critério:
+  um Kubo real consulta o nó Dart e recebe respostas válidas; o nó deixa de ser
+  cliente-only e passa a contribuir com a rede.
+- **Marco F.3 (Descoberta do Próprio Endereço — `ObservedAddrManager`)**:
+  Portar o coletor de endereços observados do `Identify`, que hoje apenas
+  **envia** `observedAddr` sem coletar o que os peers reportam de volta, e
+  alimentar `BasicHost.addrs`. Critério: um nó atrás de NAT sem UPnP descobre e
+  anuncia seu endereço público sozinho, eliminando a dependência de
+  `announceAddresses` fixo que o Objetivo 4 precisou usar.
+- **Marco F.4 (Descoberta Local — mDNS)**:
+  Portar `p2p/discovery/mdns`. Critério: dois nós na mesma LAN se encontram sem
+  bootstrap algum, e um Kubo local descobre o nó Dart por mDNS.
+- **Marco F.5 (Persistência e Republicação)**:
+  Reprovide automático dentro da biblioteca (o Kubo republica a cada 12h e os
+  registros expiram em ~24h na Amino; hoje só `bin/host_payload.dart` tem um
+  timer ad hoc de 5 minutos) e peerstore persistente em datastore (`pstoreds`).
+  Critério: o conteúdo continua descobrível após 24h sem intervenção, e um
+  reinício preserva os peers conhecidos.
+- **Marco F.6 (Camada `discovery` — implementações)**:
+  Implementar `RoutingDiscovery` e `BackoffDiscovery` sobre as interfaces de
+  `packages/transpiled_libp2p/lib/src/core/discovery/`, que hoje contém apenas
+  `discovery.dart` e `options.dart`, sem nenhuma implementação.
+- **Marco F.7 (Validação de Interoperabilidade Plena)**:
+  Comprovar que um Kubo real reconhece o nó Dart como par completo de rede:
+  aparece na tabela de roteamento do Kubo, responde consultas DHT vindas de
+  terceiros, e é descoberto tanto por mDNS na LAN quanto pela DHT na WAN.
+
+> [!NOTE]
+> Ampliar a matriz de transporte e segurança — QUIC, WebSocket, WebTransport,
+> WebRTC, TLS e mplex — **não** faz parte deste objetivo: é o **Objetivo 6**,
+> logo abaixo. Os dois eixos são disjuntos — o Objetivo 5 mexe em DHT, identify,
+> discovery e persistência, sem encostar no caminho de dial/listen/upgrade, que é
+> onde transporte mora — e podem ser tocados em qualquer ordem.
+
+### Objetivo 6 — Ampliação da Matriz de Transporte e Segurança
+
+Enquanto o Objetivo 5 trata de **como** o nó participa da rede, este trata de
+**quantos peers ele consegue alcançar**. Hoje o nó fala uma única combinação,
+`TCP + Noise + yamux`.
+
+O custo disso, medido contra um Kubo real: o daemon local publica **8 endereços
+de swarm** e o nó Dart disca **2** deles (os dois `/tcp/`). Os outros seis —
+`quic-v1`, `quic-v1/webtransport` e `webrtc-direct`, em IPv4 e IPv6 — são
+invisíveis. Nós que rodam apenas em navegador (Helia sobre WebTransport ou
+WebRTC) são inalcançáveis por completo, independentemente de quantos marcos do
+Objetivo 5 fecharem.
+
+> [!IMPORTANT]
+> **O bloqueio arquitetural do QUIC deixou de existir e isso muda a viabilidade
+> deste objetivo.** A tentativa anterior de portar QUIC foi arquivada porque o
+> `Swarm`/`BasicUpgrader` da dependência de terceiros `ipfs_libp2p` rodava
+> negociação de segurança (Noise) e de muxer incondicionalmente sobre qualquer
+> transporte, sem exceção para transportes autossegurados e automultiplexados —
+> e aquela dependência não era editável neste repositório. O Marco D.1 eliminou
+> essa dependência: o `BasicUpgrader` agora é código nosso, em
+> `packages/transpiled_libp2p/lib/src/p2p/transport/basic_upgrader.dart`.
+> Permitir que um transporte declare que dispensa upgrade de segurança e de
+> muxer é pré-requisito do Marco G.1 e não depende mais de terceiros.
+>
+> A análise original citada pelo `PROGRESS.md` estava em
+> `doc/specs/QUIC_TRANSPORT_RFC.md`, que **não existe mais** — o diretório
+> `doc/specs/` foi removido. Trate a análise como perdida e refaça-a.
+
+- **Marco G.1 (QUIC — `/udp/<porta>/quic-v1`)**:
+  Maior ganho de alcance por esforço, e pré-requisito do G.4. Exige, antes do
+  transporte em si, tornar o upgrade de segurança e de muxer **opcional** por
+  transporte no `BasicUpgrader`, já que o QUIC traz TLS 1.3 e multiplexação de
+  streams nativos. Critério: discar e receber conexões `quic-v1` de um Kubo
+  real, com Bitswap e DHT funcionando por cima.
+- **Marco G.2 (Segurança TLS 1.3 — `/tls/1.0.0`)**:
+  Segunda opção de segurança ao lado do Noise, negociada por multistream-select.
+  Critério: handshake TLS bem-sucedido contra um peer real que ofereça TLS.
+- **Marco G.3 (WebSocket — `/ws` e `/wss`)**:
+  O transporte mais barato de acrescentar sobre a base TCP já existente, e o que
+  destrava peers de infraestrutura e ambientes com egresso restrito a HTTP(S).
+  Critério: conexão com um peer público que anuncie `/wss`.
+- **Marco G.4 (WebTransport — `/quic-v1/webtransport`)**:
+  Depende do G.1, por rodar sobre HTTP/3 sobre QUIC, e usa o componente
+  `certhash` do multiaddr para fixação de certificado no navegador. Critério:
+  um nó Helia rodando em navegador conecta no nó Dart e baixa um bloco.
+- **Marco G.5 (WebRTC Direct — `/udp/<porta>/webrtc-direct`)**:
+  Alcance de navegador sem servidor de sinalização, também via `certhash`.
+  Critério: mesmo do G.4, por WebRTC.
+- **Marco G.6 (Muxer mplex — `/mplex/6.7.0`)**:
+  Prioridade baixa e possivelmente descartável: o mplex está depreciado na
+  libp2p em favor do yamux, e o Kubo o removeu dos padrões. Só entra se algum
+  peer real que interesse ainda exigir.
+- **Marco G.7 (Validação da Matriz Completa)**:
+  Comprovar que o nó Dart disca **os 8 endereços** que um Kubo real publica, e
+  que um nó em navegador o alcança. Critério: teste de interoperabilidade que
+  itera sobre a lista de `Addresses.Swarm` do Kubo e conecta em cada uma.
 
 Todo agente que atuar no projeto deve seguir a ordem e os critérios das checklists dos Objetivos no topo de `doc/transpilation/PROGRESS.md`. Trabalho que não destrava nem valida essas checklists fica atrás delas, salvo correção necessária para manter a suíte verde ou instrução explícita do usuário. Gateway HTTP(S) não conta como P2P e só entra no escopo quando o usuário o pedir explicitamente.
+
+## Estratégia de execução: delegar a multi-agentes de nível mínimo
+
+Sempre que possível, o trabalho de transpilação e de revisão deve ser
+**delegado a subagentes**, e cada subagente deve rodar no **menor nível de
+modelo capaz de executar a tarefa**. O objetivo é duplo: paralelizar para
+agilizar, e economizar tokens do contexto principal, que deve ser reservado
+para julgamento e verificação.
+
+1. **Paralelize por arquivo, nunca por tarefa sobreposta.** Dois agentes jamais
+   podem receber o mesmo arquivo — suas edições se sobrescrevem. Divida o
+   trabalho em escopos de arquivo disjuntos e dispare os agentes na mesma
+   mensagem para que rodem simultaneamente.
+2. **Escolha o menor modelo que resolve.** Use `haiku` para trabalho mecânico ou
+   de localização (buscar símbolos na árvore, conferir se um doc bate com fatos
+   já apurados, rodar uma sequência de verificação definida, aplicar renomeações
+   determinísticas). Reserve `sonnet` para o que exige raciocínio real
+   (decidir o desenho de um port, diagnosticar causa raiz, avaliar fidelidade
+   semântica ao Go). Não use o modelo maior por padrão.
+3. **O prompt carrega toda a verdade.** Um subagente novo não herda contexto
+   nenhum. Passe números exatos, caminhos de arquivo e linhas, o que já foi
+   descartado e por quê. Prompt curto e vago produz trabalho genérico e, pior,
+   detalhes inventados que parecem plausíveis.
+4. **O que não se delega é o julgamento.** Decidir o que deve mudar e conferir o
+   que voltou continuam no contexto principal. O relatório de um subagente
+   descreve o que ele pretendeu fazer; o diff é o que ele fez de fato, e é o
+   diff que vale — confira antes de dar a tarefa por concluída.
 
 ## Fora do escopo
 
@@ -353,10 +522,52 @@ o auditor usa exclusivamente `test/atomic/` para a regra 24.
    });
    ```
 
-### Comandos de verificação recomendados
+### Portão obrigatório de conclusão: auditoria AST com testes
 
-Antes de concluir qualquer alteração de código ou transpilação, o agente deve
-executar o script e assegurar que nenhuma nova violação ou regressão foi introduzida:
+A auditoria AST **não é recomendação, é portão de conclusão**. Nenhuma
+alteração de código ou transpilação pode ser dada por concluída — e o agente
+não pode dizer ao usuário que "está bom", "está verde" ou "está pronto" — antes
+de executar o auditor **incluindo a auditoria de testes** e **resolver tudo o
+que ele apontar**. Relatar pendência do auditor como aceitável, ou deixá-la
+para depois, equivale a não ter concluído a tarefa.
+
+A sequência mínima obrigatória antes de finalizar é:
+
+1. `python tool/audit_ast_nomenclature.py --tests --severity ERROR`
+   — precisa terminar em `NENHUMA INCONSISTÊNCIA ENCONTRADA` e sair com código 0.
+2. `python tool/audit_ast_nomenclature.py --tests`
+   — reveja também os avisos e notas de cobertura; resolva o que for do escopo
+   da alteração em curso em vez de acumular dívida silenciosa.
+3. Rodar a suíte completa conforme a seção "Suíte verde é a linha de base,
+   independente de autoria" (raiz, cada pacote em `packages/*/`, presets
+   `interop` e `network`), corrigindo qualquer falha encontrada.
+4. Regenerar os relatórios versionados que o próprio auditor produz, porque
+   eles ficam obsoletos em silêncio a cada símbolo adicionado ou alterado:
+   - `python tool/audit_ast_nomenclature.py --progress` → `PROGRESS_RELATORY.md`
+   - `python tool/audit_ast_nomenclature.py --markdown --output audit_report.md`
+
+   Esses dois nomes são os **únicos** destinos versionados desses relatórios.
+   O `--output` aceita qualquer caminho, e usar outro nome cria uma cópia que
+   ninguém regenera e que passa a mentir na sessão seguinte — foi exatamente o
+   que aconteceu com um `errors_report.md`, byte a byte idêntico ao
+   `audit_report.md`, sem nenhuma referência no repositório e defasado em
+   centenas de símbolos até ser removido em 2026-09-09. Ao gerar um relatório
+   ad hoc para inspeção pontual, escreva fora da árvore versionada.
+5. Registrar em `doc/transpilation/PROGRESS.md` o rastreamento e as decisões da
+   alteração, conforme já exigido acima.
+
+**Sempre confira as regras que governam os testes antes de escrever ou ajustar
+qualquer teste.** Releia a seção "Diretrizes para Testes Atômicos 1 para 1
+(Regra 24)" deste arquivo em vez de confiar na memória: ela define a pasta e o
+nível corretos, como o auditor associa teste e símbolo (nome do `test(...)` e do
+`group(...)`) e o que ele rejeita (teste vazio, stub ou apenas `fail()`). Todo
+símbolo público novo — função, método, getter, setter ou operador — nasce com
+seu teste atômico correspondente; a ausência é erro bloqueante.
+
+#### Comandos de verificação
+
+Além da sequência obrigatória acima, estes comandos ajudam a isolar problemas
+durante o trabalho:
 
 - **Resumo quantitativo global:**
   `python tool/audit_ast_nomenclature.py --summary-only`
@@ -380,3 +591,42 @@ executar o script e assegurar que nenhuma nova violação ou regressão foi intr
   `python tool/audit_ast_nomenclature.py --fix`
 - **Saída estruturada em JSON (integração e CI):**
   `python tool/audit_ast_nomenclature.py --json`
+
+### Suíte verde é a linha de base, independente de autoria
+
+Todo teste que falhar ou que deixar de compilar deve ser corrigido pelo agente
+que o encontrar, **independente de quem introduziu a quebra**. Constatar que a
+falha é anterior à tarefa em curso, que veio de outro refactor pendente na
+branch ou que pertence a outra frente de trabalho serve para localizar a causa
+raiz — nunca para deixar a falha de pé, nem para devolver a decisão ao usuário
+na forma de "quer que eu corrija?".
+
+A distinção que importa é outra: **reparar** um teste para que volte a compilar
+e executar restaura a intenção que o autor já tinha, e é feito de forma
+autônoma; **alterar o que um teste que funciona afirma** muda essa intenção, e
+aí sim o usuário deve ser consultado antes.
+
+Ao diagnosticar a causa raiz, prefira corrigir onde todos os chamadores passam.
+Em colisão de nomes entre dois módulos Go transpilados (por exemplo `Client`,
+que existe tanto no bitswap do `transpiled_boxo` quanto no circuitv2 do
+`transpiled_libp2p`), os nomes das bibliotecas estão corretos e devem
+permanecer fiéis ao upstream: quem se ajusta é o ponto de importação, com
+`hide` ou prefixo, como já é feito em `lib/src/node/ipfs_node.dart`.
+
+#### A suíte completa não é só `dart test`
+
+`dart test` na raiz cobre apenas o pacote raiz. Os pacotes transpilados têm
+suítes próprias que **não** são executadas por ele, e `melos` pode não estar
+disponível no PATH da máquina. Antes de declarar a suíte verde, execute:
+
+- **Pacote raiz:** `dart test`
+- **Cada pacote transpilado:**
+  `for d in packages/*/; do (cd "$d" && dart test); done`
+  (ou `melos run test`, quando o `melos` estiver instalado)
+- **Interoperabilidade com Kubo real:** `dart test --preset interop`
+- **Testes que exigem rede real:** `dart test --preset network`
+
+Os testes marcados com as tags `p0`, `p1`, `helia` e `network` são pulados por
+padrão. Um resultado "All tests passed" com contagem de pulados (`~N`) não é
+prova de suíte verde: rode os presets correspondentes antes de afirmar que
+está tudo passando.

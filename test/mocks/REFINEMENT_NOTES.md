@@ -1,5 +1,14 @@
 # Mock Refinement Notes
 
+> **Status (histórico):** os mocks descritos abaixo **não existem mais**. Os
+> onze arquivos `.dart` de `test/mocks/` (`in_memory_datastore.dart`,
+> `mock_dht_handler.dart`, `mock_block_store.dart`, `mock_security_manager.dart`,
+> `mock_http_client.dart`, `mock_nat_traversal_service.dart`,
+> `test_helpers.dart` e seus testes) foram removidos no commit `7137d32d`
+> ("refactor: rebuild embedded IPFS P2P runtime"). Este diretório contém hoje
+> apenas estes dois markdowns. O texto a seguir fica como registro histórico da
+> Fase 1; nada nele descreve código presente no repositório.
+
 ## Files Needing Interface Refinement
 
 The following mock files were created in Phase 1 but need interface corrections before use:
