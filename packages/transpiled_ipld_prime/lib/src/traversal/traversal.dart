@@ -127,7 +127,7 @@ final class Progress {
     progress._checkNodeBudget();
     try {
       visit(progress, node);
-    } on SkipMe {
+    } on SkipMeException {
       return;
     }
     switch (node.kind()) {
@@ -311,7 +311,7 @@ final class Progress {
     Node loaded;
     try {
       loaded = progress._loadLink(link, value, parent);
-    } on SkipMe {
+    } on SkipMeException {
       return;
     }
     progress._walkBlock(loaded, next, visit);
@@ -390,7 +390,7 @@ final class Progress {
             progress.lastBlock = LastBlock(path: progress.path, link: link);
             try {
               value = progress._loadLink(link, value, node);
-            } on SkipMe {
+            } on SkipMeException {
               continue;
             }
           }
@@ -422,7 +422,7 @@ final class Progress {
             progress.lastBlock = LastBlock(path: progress.path, link: link);
             try {
               value = progress._loadLink(link, value, node);
-            } on SkipMe {
+            } on SkipMeException {
               continue;
             }
           }
@@ -640,8 +640,8 @@ int _parseIndex(PathSegment segment) {
   }
 }
 
-final class SkipMe implements Exception {
-  const SkipMe();
+final class SkipMeException implements Exception {
+  const SkipMeException();
   @override
   String toString() => 'skip';
 }

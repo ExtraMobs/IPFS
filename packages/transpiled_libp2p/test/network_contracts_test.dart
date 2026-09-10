@@ -5,12 +5,12 @@ import 'package:transpiled_multiaddr/transpiled_multiaddr.dart';
 
 void main() {
   test('network error strings and matches reproduce Go contracts', () {
-    final stream = StreamError(
+    final stream = StreamException(
       errorCode: streamProtocolViolation,
       remote: true,
       transportError: StateError('closed'),
     );
-    final connection = ConnError(errorCode: connShutdown, remote: false);
+    final connection = ConnException(errorCode: connShutdown, remote: false);
 
     expect(
       stream.toString(),
@@ -19,15 +19,15 @@ void main() {
     expect(connection.toString(), 'connection closed (local): code: 0x1006');
     expect(
       stream.matches(
-        StreamError(errorCode: streamProtocolViolation, remote: true),
+        StreamException(errorCode: streamProtocolViolation, remote: true),
       ),
       isTrue,
     );
     expect(
-      connection.matches(ConnError(errorCode: connShutdown, remote: false)),
+      connection.matches(ConnException(errorCode: connShutdown, remote: false)),
       isTrue,
     );
-    expect(() => StreamError(errorCode: -1, remote: false), throwsRangeError);
+    expect(() => StreamException(errorCode: -1, remote: false), throwsRangeError);
   });
 
   test('NAT values and null resource manager reproduce exported behavior', () {

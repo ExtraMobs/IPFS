@@ -415,9 +415,20 @@ auditando automaticamente as 24 regras contratuais:
 12. **`RULE_INVENTED_PUBLIC_SYMBOLS`**: Alerta sobre tipos e abstrações públicas
     criadas em Dart sem símbolo exportado correspondente no upstream Go, orientando
     torná-los privados (`_Nome`) ou documentar sua necessidade.
-13. **`RULE_EXCEPTION_NAMING`**: Nomenclatura e padrão de exceções Dart, exigindo
-    que classes de erro usem o sufixo `Exception` e implementem `Exception`, vetando
-    o prefixo legado `Err` do Go (ex.: `ErrTooShort` ➔ `TooShortException`).
+13. **`RULE_EXCEPTION_NAMING`**: Nomenclatura e padrão de exceções Dart. O gatilho
+    é **estrutural**: toda classe pública que declara `implements Exception` (ou
+    herda de uma exceção) precisa usar o sufixo `Exception`. O prefixo legado `Err`
+    do Go segue vetado à parte, porque uma classe pode carregar o idioma do Go sem
+    declarar a interface (ex.: `ErrTooShort` ➔ `TooShortException`;
+    `ConnError` ➔ `ConnException`).
+
+    Esta regra vale em **qualquer pasta, `packages/boilerplate/` incluído**. A
+    isenção que boilerplate tem em outras regras existe porque elas medem paridade
+    com o upstream Go, e boilerplate não tem upstream; esta mede idioma de Dart, e
+    boilerplate é justamente onde o código deve ser Dart idiomático em vez de Go
+    traduzido. Para que a Regra 12 não brigue com esta, os candidatos de casamento
+    com o Go incluem tanto o valor sentinela `ErrX` quanto o tipo `XError` quando o
+    nome Dart termina em `Exception`.
 14. **`RULE_NO_PRODUCTION_MOCKS`**: Veto a classes e implementações de teste
     (`Mock*`, `Dummy*`, `Stub*`, `Fake*`) no código de produção em `lib/`, devendo
     residir estritamente sob `test/`.

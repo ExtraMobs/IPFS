@@ -888,8 +888,8 @@ void main() {
       expect(c.link, equals(testLink));
     });
 
-    test('SkipMe.toString() - representacao em texto', () {
-      expect(const trav.SkipMe().toString(), equals('skip'));
+    test('SkipMeException.toString() - representacao em texto', () {
+      expect(const trav.SkipMeException().toString(), equals('skip'));
     });
 
     test('BudgetExceededException.toString() - representacao em texto', () {

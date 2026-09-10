@@ -1,7 +1,7 @@
 # Relatório de Auditoria de AST e Nomenclatura (Dart <-> Go)
 
 > Relatório gerado automaticamente por `tool/audit_ast_nomenclature.py`.
-> **Símbolos Dart Auditados:** 5197 | **Símbolos Go Indexados:** 33298
+> **Símbolos Dart Auditados:** 5255 | **Símbolos Go Indexados:** 33298
 > **Status Geral:** ❌ **0 Erros** | ⚠️ **0 Avisos** | ℹ️ **1483 Notas de Cobertura**
 
 ## 1. Resumo Executivo das 23 Regras
@@ -25,9 +25,9 @@
 | `RULE_RESTRICTED_PLATFORM_IMPORTS` | 15. Veto a dart:io em Pacotes de Codecs/Formatos Puros | `ERROR` | 0 | ✅ Conforme |
 | `RULE_NO_PRINT_IN_LIBRARIES` | 16. Veto a chamadas print(...) em Bibliotecas Reutilizáveis | `ERROR` | 0 | ✅ Conforme |
 | `RULE_NO_ARTIFICIAL_CONCURRENCY` | 17. Veto a Primitivas Artificiais de Concorrência Go | `ERROR` | 0 | ✅ Conforme |
-| `RULE_MISSING_GO_TYPES` | 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes | `INFO` | 1342 | ⚠️ Atenção |
+| `RULE_MISSING_GO_TYPES` | 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes | `INFO` | 1345 | ⚠️ Atenção |
 | `RULE_MISSING_GO_FIELDS` | 19. Auditoria de Campos de Structs do Upstream Go Ausentes | `INFO` | 22 | ⚠️ Atenção |
-| `RULE_MISSING_GO_METHODS` | 20. Auditoria de Métodos do Upstream Go Ausentes | `INFO` | 100 | ⚠️ Atenção |
+| `RULE_MISSING_GO_METHODS` | 20. Auditoria de Métodos do Upstream Go Ausentes | `INFO` | 97 | ⚠️ Atenção |
 | `RULE_MISSING_GO_FUNCTIONS` | 21. Auditoria de Funções Top-Level do Upstream Go Ausentes | `INFO` | 19 | ⚠️ Atenção |
 | `RULE_PUBSPEC_DEPENDENCIES` | 22. Validação de Dependências em pubspec.yaml | `ERROR` | 0 | ✅ Conforme |
 | `RULE_EXPOSED_NON_PUBLIC_MEMBERS` | 23. Veto a Membros Públicos que Expõem Tipos Não-Públicos (Menor Permissão) | `ERROR` | 0 | ✅ Conforme |
@@ -35,7 +35,7 @@
 
 ## 2. Detalhamento dos Apontamentos
 
-### 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes (1342 ocorrências)
+### 18. Auditoria de Tipos e Interfaces do Upstream Go Ausentes (1345 ocorrências)
 
 - ℹ️ `[INFO]` **[`packages/transpiled_boxo:1`](packages/transpiled_boxo#L1)** — Tipo público Go 'Option' (type) do módulo 'boxo' ainda não foi portado para o pacote 'packages/transpiled_boxo'.
   - *Sugestão:* `Portar 'Option' para 'packages/transpiled_boxo' ou documentar se for omitido deliberadamente`
@@ -905,6 +905,8 @@
   - *Sugestão:* `Portar 'TypeSystem' para 'packages/transpiled_ipld_prime' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime:1`](packages/transpiled_ipld_prime#L1)** — Tipo público Go 'MultiByteNode' (struct) do módulo 'go-ipld-prime' ainda não foi portado para o pacote 'packages/transpiled_ipld_prime'.
   - *Sugestão:* `Portar 'MultiByteNode' para 'packages/transpiled_ipld_prime' ou documentar se for omitido deliberadamente`
+- ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime:1`](packages/transpiled_ipld_prime#L1)** — Tipo público Go 'SkipMe' (struct) do módulo 'go-ipld-prime' ainda não foi portado para o pacote 'packages/transpiled_ipld_prime'.
+  - *Sugestão:* `Portar 'SkipMe' para 'packages/transpiled_ipld_prime' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime:1`](packages/transpiled_ipld_prime#L1)** — Tipo público Go 'ErrBudgetExceeded' (struct) do módulo 'go-ipld-prime' ainda não foi portado para o pacote 'packages/transpiled_ipld_prime'.
   - *Sugestão:* `Portar 'ErrBudgetExceeded' para 'packages/transpiled_ipld_prime' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime:1`](packages/transpiled_ipld_prime#L1)** — Tipo público Go 'AdvVisitFn' (type) do módulo 'go-ipld-prime' ainda não foi portado para o pacote 'packages/transpiled_ipld_prime'.
@@ -1591,6 +1593,10 @@
   - *Sugestão:* `Portar 'BandwidthCounter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'Reporter' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'Reporter' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'ConnError' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
+  - *Sugestão:* `Portar 'ConnError' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
+- ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'StreamError' (struct) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
+  - *Sugestão:* `Portar 'StreamError' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'MuxedStream' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
   - *Sugestão:* `Portar 'MuxedStream' para 'packages/transpiled_libp2p' ou documentar se for omitido deliberadamente`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p:1`](packages/transpiled_libp2p#L1)** — Tipo público Go 'MuxedConn' (interface) do módulo 'go-libp2p' ainda não foi portado para o pacote 'packages/transpiled_libp2p'.
@@ -2769,7 +2775,7 @@
 - ℹ️ `[INFO]` **[`packages/transpiled_multiaddr/lib/src/protocol.dart:41`](packages/transpiled_multiaddr/lib/src/protocol.dart#L41)** — Classe 'Protocol' possui 1 campo(s) do Go pendente(s) no módulo 'go-multiaddr': VCode.
   - *Sugestão:* `Avaliar implementação dos campos: VCode`
 
-### 20. Auditoria de Métodos do Upstream Go Ausentes (100 ocorrências)
+### 20. Auditoria de Métodos do Upstream Go Ausentes (97 ocorrências)
 
 - ℹ️ `[INFO]` **[`packages/transpiled_block_format/lib/src/blocks.dart:33`](packages/transpiled_block_format/lib/src/blocks.dart#L33)** — Classe 'BasicBlock' possui 1 método(s) do Go pendente(s) no módulo 'go-block-format': String.
   - *Sugestão:* `Avaliar paridade e implementação de: String`
@@ -2855,8 +2861,6 @@
   - *Sugestão:* `Avaliar paridade e implementação de: String`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart:53`](packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart#L53)** — Classe 'Config' possui 3 método(s) do Go pendente(s) no módulo 'go-ipld-prime': Print, Sprint, Fprint.
   - *Sugestão:* `Avaliar paridade e implementação de: Print, Sprint, Fprint`
-- ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart:643`](packages/transpiled_ipld_prime/lib/src/traversal/traversal.dart#L643)** — Classe 'SkipMe' possui 1 método(s) do Go pendente(s) no módulo 'go-ipld-prime': Error.
-  - *Sugestão:* `Avaliar paridade e implementação de: Error`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart:271`](packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart#L271)** — Classe 'RecursionLimit' possui 2 método(s) do Go pendente(s) no módulo 'go-ipld-prime': Mode, Depth.
   - *Sugestão:* `Avaliar paridade e implementação de: Mode, Depth`
 - ℹ️ `[INFO]` **[`packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart:297`](packages/transpiled_ipld_prime/lib/src/traversal/selector/selector.dart#L297)** — Classe 'Condition' possui 1 método(s) do Go pendente(s) no módulo 'go-ipld-prime': Match.
@@ -2911,10 +2915,6 @@
   - *Sugestão:* `Avaliar paridade e implementação de: Equals`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/host/host.dart:24`](packages/transpiled_libp2p/lib/src/core/host/host.dart#L24)** — Classe 'Host' possui 12 método(s) do Go pendente(s) no módulo 'go-libp2p': PeerID, Serve, SetHTTPHandler, SetHTTPHandlerAtPath....
   - *Sugestão:* `Avaliar paridade e implementação de: PeerID, Serve, SetHTTPHandler, SetHTTPHandlerAtPath, NamespaceRoundTripper, NamespacedClient, RoundTrip, NewConstrainedRoundTripper, SetPeerMetadata, AddPeerMetadata, GetPeerMetadata, RemovePeerMetadata`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:226`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L226)** — Classe 'StreamError' possui 3 método(s) do Go pendente(s) no módulo 'go-libp2p': Error, Is, Unwrap.
-  - *Sugestão:* `Avaliar paridade e implementação de: Error, Is, Unwrap`
-- ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:267`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L267)** — Classe 'ConnError' possui 3 método(s) do Go pendente(s) no módulo 'go-libp2p': Error, Is, Unwrap.
-  - *Sugestão:* `Avaliar paridade e implementação de: Error, Is, Unwrap`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:436`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L436)** — Classe 'Dialer' possui 2 método(s) do Go pendente(s) no módulo 'go-libp2p': Dial, DialContext.
   - *Sugestão:* `Avaliar paridade e implementação de: Dial, DialContext`
 - ℹ️ `[INFO]` **[`packages/transpiled_libp2p/lib/src/core/network/network.dart:464`](packages/transpiled_libp2p/lib/src/core/network/network.dart#L464)** — Classe 'Conn' possui 44 método(s) do Go pendente(s) no módulo 'go-libp2p': As, Close, CloseWithError, IsClosed....

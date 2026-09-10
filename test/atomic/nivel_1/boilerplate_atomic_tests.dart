@@ -4,6 +4,7 @@
 import 'dart:typed_data';
 import 'package:boilerplate/fixed_types/golang.dart' as Golang;
 import 'package:boilerplate/fixed_types/golang/src/integer_float.dart';
+import 'package:boilerplate/internal_poll/golang.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -1399,7 +1400,91 @@ void main() {
     });
   });
 
+  group('FdMutex [Atomic Audit]', () {
+    test('close() - fecha e so tem efeito na primeira vez', () {
+      final mu = FdMutex();
+      expect(mu.close(), isTrue);
+      expect(mu.close(), isFalse);
+    });
+
+    test('rwlock() - adquire trava e recusa quando fechado', () async {
+      final mu = FdMutex();
+      expect(await mu.rwlock(true), isTrue);
+      expect(await mu.rwlock(false), isTrue);
+      mu.close();
+      expect(await mu.rwlock(true), isFalse);
+    });
+
+    test('rwunlock() - libera a trava e desperta um esperador', () async {
+      final mu = FdMutex();
+      await mu.rwlock(false);
+      var despertou = false;
+      // ignore: unawaited_futures
+      mu.rwlock(false).then((_) => despertou = true);
+      await Future<void>.delayed(Duration.zero);
+      expect(despertou, isFalse);
+      mu.rwunlock(false);
+      await Future<void>.delayed(Duration.zero);
+      expect(despertou, isTrue);
+    });
+
+    test('isClosed - reflete o fechamento do descritor', () {
+      final mu = FdMutex();
+      expect(mu.isClosed, isFalse);
+      mu.close();
+      expect(mu.isClosed, isTrue);
+    });
+
+    test('readWaiters - conta esperas pendentes pela trava de leitura',
+        () async {
+      final mu = FdMutex();
+      await mu.rwlock(true);
+      expect(mu.readWaiters, 0);
+      // ignore: unawaited_futures
+      mu.rwlock(true).then((_) {});
+      await Future<void>.delayed(Duration.zero);
+      expect(mu.readWaiters, 1);
+    });
+
+    test('writeWaiters - conta esperas pendentes pela trava de escrita',
+        () async {
+      final mu = FdMutex();
+      await mu.rwlock(false);
+      expect(mu.writeWaiters, 0);
+      // ignore: unawaited_futures
+      mu.rwlock(false).then((_) {});
+      await Future<void>.delayed(Duration.zero);
+      expect(mu.writeWaiters, 1);
+    });
+  });
+
+  group('NetClosingException [Atomic Audit]', () {
+    test('toString() - preserva o texto exigido pelo upstream', () {
+      expect(
+        const NetClosingException().toString(),
+        'use of closed network connection',
+      );
+    });
+  });
+
+  group('FileClosingException [Atomic Audit]', () {
+    test('toString() - preserva o texto do upstream', () {
+      expect(const FileClosingException().toString(), 'use of closed file');
+    });
+  });
+
+  group('DeadlineExceededException [Atomic Audit]', () {
+    test('toString() - preserva o texto do upstream', () {
+      expect(const DeadlineExceededException().toString(), 'i/o timeout');
+    });
+  });
+
   group('Top-Level Functions [Atomic Audit]', () {
+    test('errClosing() - escolhe o sentinela conforme arquivo ou rede', () {
+      expect(errClosing(isFile: false), isA<NetClosingException>());
+      expect(errClosing(isFile: true), isA<FileClosingException>());
+    });
+
     test('integerToFloat() - arredonda BigInt para precisao float com desempate par', () {
       // Valor pequeno que cabe na precisao
       expect(integerToFloat(BigInt.from(100), 24), equals(100.0));

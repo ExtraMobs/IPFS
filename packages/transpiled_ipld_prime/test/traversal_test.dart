@@ -12,11 +12,11 @@ void main() {
     'b': SimpleNode.ofString('three'),
   });
 
-  test('WalkLocal is depth-first, reports paths, and SkipMe stops a subtree', () {
+  test('WalkLocal is depth-first, reports paths, and SkipMeException stops a subtree', () {
     final seen = <String>[];
     walkLocal(tree, (progress, node) {
       seen.add('${progress.path}:${node.kind()}');
-      if (progress.path.toString() == 'a') throw const SkipMe();
+      if (progress.path.toString() == 'a') throw const SkipMeException();
     });
     expect(seen, ['${Path.empty}:map', 'a:list', 'b:string']);
   });

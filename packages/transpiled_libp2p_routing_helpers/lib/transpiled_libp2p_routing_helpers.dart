@@ -14,7 +14,7 @@ export 'src/composable.dart'
         SequentialRouter;
 export 'src/compose.dart' show Compose;
 export 'src/limited_value_store.dart' show LimitedValueStore;
-export 'src/multi_error.dart' show MultiError, appendError, combineErrors;
+export 'src/multi_error.dart' show MultiException, appendError, combineErrors;
 export 'src/null_router.dart' show NullRouter;
 export 'src/parallel.dart' show Closable, Parallel;
 export 'src/tiered.dart' show Tiered;

@@ -222,22 +222,22 @@ class StreamResetException implements Exception {
 
 const errReset = StreamResetException();
 
-/// Details of a stream reset, equivalent to Go's `StreamError`.
-final class StreamError implements Exception {
-  factory StreamError({
+/// Details of a stream reset, equivalent to Go's `StreamException`.
+final class StreamException implements Exception {
+  factory StreamException({
     required StreamErrorCode errorCode,
     required bool remote,
     Object? transportError,
   }) {
     _validateCode(errorCode);
-    return StreamError._(
+    return StreamException._(
       errorCode: errorCode,
       remote: remote,
       transportError: transportError,
     );
   }
 
-  StreamError._({
+  StreamException._({
     required this.errorCode,
     required this.remote,
     this.transportError,
@@ -247,7 +247,7 @@ final class StreamError implements Exception {
   final bool remote;
   final Object? transportError;
 
-  bool matches(StreamError other) =>
+  bool matches(StreamException other) =>
       errorCode == other.errorCode && remote == other.remote;
 
   List<Object> get causes => [errReset, ?transportError];
@@ -263,22 +263,22 @@ final class StreamError implements Exception {
   }
 }
 
-/// Details of a connection close, equivalent to Go's `ConnError`.
-final class ConnError implements Exception {
-  factory ConnError({
+/// Details of a connection close, equivalent to Go's `ConnException`.
+final class ConnException implements Exception {
+  factory ConnException({
     required ConnErrorCode errorCode,
     required bool remote,
     Object? transportError,
   }) {
     _validateCode(errorCode);
-    return ConnError._(
+    return ConnException._(
       errorCode: errorCode,
       remote: remote,
       transportError: transportError,
     );
   }
 
-  ConnError._({
+  ConnException._({
     required this.errorCode,
     required this.remote,
     this.transportError,
@@ -288,7 +288,7 @@ final class ConnError implements Exception {
   final bool remote;
   final Object? transportError;
 
-  bool matches(ConnError other) =>
+  bool matches(ConnException other) =>
       errorCode == other.errorCode && remote == other.remote;
 
   List<Object> get causes => [errReset, ?transportError];

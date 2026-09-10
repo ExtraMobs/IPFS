@@ -1430,42 +1430,42 @@ group('NoiseHandshakeAuthException [Atomic Audit]', () {
     });
   });
 
-  group('StreamError [Atomic Audit]', () {
+  group('StreamException [Atomic Audit]', () {
     test('matches() - matches errorCode and side', () {
-      final e1 = StreamError(errorCode: 1, remote: true);
-      final e2 = StreamError(errorCode: 1, remote: true);
-      final e3 = StreamError(errorCode: 2, remote: true);
+      final e1 = StreamException(errorCode: 1, remote: true);
+      final e2 = StreamException(errorCode: 1, remote: true);
+      final e3 = StreamException(errorCode: 2, remote: true);
       expect(e1.matches(e2), isTrue);
       expect(e1.matches(e3), isFalse);
     });
 
     test('causes - exposes causes chain', () {
-      final e = StreamError(errorCode: 1, remote: false);
+      final e = StreamException(errorCode: 1, remote: false);
       expect(e.causes, isNotEmpty);
     });
 
     test('toString() - formats stream error representation', () {
-      final e = StreamError(errorCode: 1, remote: false);
+      final e = StreamException(errorCode: 1, remote: false);
       expect(e.toString(), contains('stream reset'));
     });
   });
 
-  group('ConnError [Atomic Audit]', () {
+  group('ConnException [Atomic Audit]', () {
     test('matches() - matches errorCode and side', () {
-      final e1 = ConnError(errorCode: 1, remote: true);
-      final e2 = ConnError(errorCode: 1, remote: true);
-      final e3 = ConnError(errorCode: 2, remote: true);
+      final e1 = ConnException(errorCode: 1, remote: true);
+      final e2 = ConnException(errorCode: 1, remote: true);
+      final e3 = ConnException(errorCode: 2, remote: true);
       expect(e1.matches(e2), isTrue);
       expect(e1.matches(e3), isFalse);
     });
 
     test('causes - exposes connection causes chain', () {
-      final e = ConnError(errorCode: 1, remote: false);
+      final e = ConnException(errorCode: 1, remote: false);
       expect(e.causes, isNotEmpty);
     });
 
     test('toString() - formats connection error string', () {
-      final e = ConnError(errorCode: 1, remote: false);
+      final e = ConnException(errorCode: 1, remote: false);
       expect(e.toString(), contains('connection closed'));
     });
   });

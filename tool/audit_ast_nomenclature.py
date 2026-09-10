@@ -433,7 +433,7 @@ def strip_generics(s: str) -> str:
 
 
 class DartAuditSymbol:
-    def __init__(self, kind: str, name: str, file_path: str, line: int, parent_type: Optional[str] = None, is_deprecated: bool = False, deprecation_msg: str = '', return_type: str = ''):
+    def __init__(self, kind: str, name: str, file_path: str, line: int, parent_type: Optional[str] = None, is_deprecated: bool = False, deprecation_msg: str = '', return_type: str = '', supertypes: str = ''):
         self.kind = kind  # class, mixin, enum, extension, extension_type, typedef, method, field, getter, setter, function, constructor
         self.name = name
         self.file_path = file_path
@@ -442,6 +442,9 @@ class DartAuditSymbol:
         self.is_deprecated = is_deprecated
         self.deprecation_msg = deprecation_msg
         self.return_type = return_type
+        # Clausula 'extends/implements/with' crua da declaracao, usada pela Regra 13
+        # para reconhecer excecoes pelo que elas SAO e nao pelo nome que tem.
+        self.supertypes = supertypes
 
     def is_public(self) -> bool:
         if self.name.startswith('_'):
@@ -587,7 +590,8 @@ class AstNomenclatureAuditor:
                         kind = type_m.group(1).replace(' ', '_')
                         name = type_m.group(2)
                         is_dep, msg = check_deprecation_near(decl_pos)
-                        self.dart_symbols.append(DartAuditSymbol(kind, name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg))
+                        supers = sig[type_m.end():]
+                        self.dart_symbols.append(DartAuditSymbol(kind, name, rel_path, sig_line, is_deprecated=is_dep, deprecation_msg=msg, supertypes=supers))
 
                         # Scan class body
                         depth = 1
@@ -1458,6 +1462,13 @@ class AstNomenclatureAuditor:
                                     if sfx in ('Exception', 'Error'):
                                         names_to_try.add(f'Err{stem}')
                                         names_to_try.add(f'err{stem}')
+                                        # Go tem duas convenções para erro: o valor
+                                        # sentinela `ErrX` e o tipo `XError`. A Regra 13
+                                        # obriga o sufixo 'Exception' em Dart, então um
+                                        # `XException` pode corresponder a qualquer uma
+                                        # das duas no upstream.
+                                        names_to_try.add(f'{stem}Error')
+                                        names_to_try.add(f'{stem}error')
                                         for pfx in KNOWN_PREFIXES:
                                             names_to_try.add(f'{pfx}Err{stem}')
                                             names_to_try.add(f'Err{pfx}{stem}')
@@ -1486,10 +1497,21 @@ class AstNomenclatureAuditor:
                                     'suggested': f"Tornar privado com prefixo '_{sym.name}' ou documentar adaptação"
                                 })
 
-            # REGRA 13: Nomenclatura e Padrão de Exceções Dart (sem prefixo Err do Go)
-            if sym.kind in ('class', 'mixin') and sym.is_public() and not in_boilerplate:
+            # REGRA 13: Nomenclatura e Padrão de Exceções Dart.
+            #
+            # Vale em QUALQUER pasta, boilerplate incluído: o sufixo 'Exception'
+            # é idioma da linguagem de destino, e boilerplate é justamente onde
+            # o código deve ser Dart idiomático em vez de Go traduzido.
+            #
+            # O gatilho principal é estrutural — a classe declara 'implements
+            # Exception' ou 'extends' de uma exceção — e não um palpite pelo
+            # nome. O prefixo 'Err' segue vetado à parte, porque uma classe pode
+            # carregar o idioma do Go mesmo sem declarar a interface.
+            if sym.kind in ('class', 'mixin') and sym.is_public():
                 if target_rule is None or target_rule == 'RULE_EXCEPTION_NAMING':
-                    if sym.name.startswith('Err') and len(sym.name) > 3 and sym.name[3].isupper():
+                    tem_err = sym.name.startswith('Err') and len(sym.name) > 3 and sym.name[3].isupper()
+                    eh_excecao = bool(re.search(r'\b(?:implements|extends|with)\b[^{]*\bException\b', sym.supertypes or ''))
+                    if tem_err:
                         suggested = to_upper_camel(sym.name[3:]) + "Exception"
                         self.violations.append({
                             'rule': 'RULE_EXCEPTION_NAMING',
@@ -1499,6 +1521,17 @@ class AstNomenclatureAuditor:
                             'line': sym.line,
                             'symbol': sym.name,
                             'suggested': f"Renomear para '{suggested}' e adicionar 'implements Exception'"
+                        })
+                    elif eh_excecao and not sym.name.endswith('Exception'):
+                        suggested = to_upper_camel(re.sub(r'(?:Error|Err|Failure)$', '', sym.name)) + "Exception"
+                        self.violations.append({
+                            'rule': 'RULE_EXCEPTION_NAMING',
+                            'severity': 'ERROR',
+                            'message': f"Classe '{sym.name}' implementa 'Exception' mas não usa o sufixo 'Exception' exigido pelo idioma Dart (ex.: '{suggested}').",
+                            'file': sym.file_path,
+                            'line': sym.line,
+                            'symbol': sym.name,
+                            'suggested': f"Renomear para '{suggested}'"
                         })
 
             # REGRA 14: Veto a Mocks, Dummies e Stubs em Código de Biblioteca

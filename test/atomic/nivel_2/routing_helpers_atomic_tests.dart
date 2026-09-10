@@ -583,9 +583,9 @@ void main() {
     });
   });
 
-  group('MultiError [Atomic Audit]', () {
+  group('MultiException [Atomic Audit]', () {
     test('toString() - formata multiplos erros separados por ponto e virgula', () {
-      final err = MultiError([Exception('err1'), const FormatException('err2')]);
+      final err = MultiException([Exception('err1'), const FormatException('err2')]);
       final str = err.toString();
       expect(str, contains('err1'));
       expect(str, contains('err2'));
@@ -806,25 +806,25 @@ void main() {
       expect(appendError(null, err2), same(err2));
 
       final combined = appendError(err1, err2);
-      expect(combined, isA<MultiError>());
-      final me = combined as MultiError;
+      expect(combined, isA<MultiException>());
+      final me = combined as MultiException;
       expect(me.errors, equals([err1, err2]));
 
       final err3 = Exception('e3');
       final accumulated = appendError(combined, err3);
-      expect(accumulated, isA<MultiError>());
-      expect((accumulated as MultiError).errors, equals([err1, err2, err3]));
+      expect(accumulated, isA<MultiException>());
+      expect((accumulated as MultiException).errors, equals([err1, err2, err3]));
     });
 
-    test('combineErrors() - consolida lista de erros retornando nulo unico ou MultiError', () {
+    test('combineErrors() - consolida lista de erros retornando nulo unico ou MultiException', () {
       expect(combineErrors([]), isNull);
       final err1 = Exception('e1');
       expect(combineErrors([err1]), same(err1));
 
       final err2 = Exception('e2');
       final combined = combineErrors([err1, err2]);
-      expect(combined, isA<MultiError>());
-      expect((combined as MultiError).errors, equals([err1, err2]));
+      expect(combined, isA<MultiException>());
+      expect((combined as MultiException).errors, equals([err1, err2]));
     });
   });
 }

@@ -13,10 +13,10 @@ void main() {
       expect(combineErrors([e]), same(e));
     });
 
-    test('combines multiple errors into a MultiError', () {
+    test('combines multiple errors into a MultiException', () {
       final combined = combineErrors([Exception('a'), Exception('b')]);
-      expect(combined, isA<MultiError>());
-      expect((combined as MultiError).errors, hasLength(2));
+      expect(combined, isA<MultiException>());
+      expect((combined as MultiException).errors, hasLength(2));
     });
   });
 
@@ -33,14 +33,14 @@ void main() {
 
     test('combines two non-null errors', () {
       final result = appendError(Exception('a'), Exception('b'));
-      expect(result, isA<MultiError>());
+      expect(result, isA<MultiException>());
     });
 
-    test('accumulates into an existing MultiError rather than nesting', () {
+    test('accumulates into an existing MultiException rather than nesting', () {
       final first = appendError(Exception('a'), Exception('b'));
       final second = appendError(first, Exception('c'));
-      expect(second, isA<MultiError>());
-      expect((second as MultiError).errors, hasLength(3));
+      expect(second, isA<MultiException>());
+      expect((second as MultiException).errors, hasLength(3));
     });
   });
 }
